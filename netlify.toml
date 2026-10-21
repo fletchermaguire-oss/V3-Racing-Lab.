@@ -1,11 +1,13 @@
 [build]
   publish = "."
-  functions = "functions"
-
-[functions]
-  node_bundler = "esbuild"
+  functions = "netlify/functions"
 
 [[redirects]]
-  from = "/api/v1/*"
-  to = "/.netlify/functions/racing-api/:splat"
+  from = "/api/v1/snapshot"
+  to = "/.netlify/functions/snapshot"
   status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cache-Control = "no-cache, must-revalidate"
