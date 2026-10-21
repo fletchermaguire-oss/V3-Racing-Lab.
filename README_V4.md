@@ -38,3 +38,4 @@ Run `node tests/snapshot.test.js` and `node tests/site-regression.test.js`.
 **Do not deploy this package as a live Saturday publisher yet.** It requires a verified Netlify Functions deployment and a publication pointer that can change without rebuilding the site. The existing `PUBLISHED_FORECAST_VERSION` environment variable is fixed until changed through Netlify configuration.
 
 Before deployment, obtain the exact existing Netlify deployment method (Git-connected or manual), then verify server functions and real Airtable records in a staging site. Never place the PAT in frontend code or share it in chat.
+V4 staging deployment test — October 2026
