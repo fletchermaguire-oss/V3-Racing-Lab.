@@ -1,6 +1,7 @@
 [build]
   publish = "."
   functions = "netlify/functions"
+  command = "node build-v5.js"
 
 [[redirects]]
   from = "/api/v1/snapshot"
