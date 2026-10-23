@@ -1,0 +1,1 @@
+const fs=require('fs');const p='saturday-v5.html',s=fs.readFileSync(p,'utf8'),amp=String.fromCharCode(38);const dict={amp:amp,lt:String.fromCharCode(60),gt:String.fromCharCode(62),quot:'"',apos:"'",'#39':"'"};fs.writeFileSync(p,s.replace(new RegExp(amp+'(amp|lt|gt|quot|apos|#39);','g'),function(m,k){return dict[k]||m}),'utf8');
