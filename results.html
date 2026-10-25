@@ -1,43 +1,179 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Racing Lab — Results & Historical Performance</title>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Racing Lab | Results & History</title>
 <style>
-:root{color-scheme:dark;font-family:Inter,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;--bg:#080d14;--card:#12232d;--line:#2b404b;--ink:#eaf5f3;--muted:#93a9b5;--green:#77f0c0}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink)}main{max-width:1200px;margin:auto;padding:24px 16px 70px}a{color:var(--green)}header{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:18px}h1{font-size:clamp(25px,5vw,37px);margin:20px 0 6px;letter-spacing:-.04em}h2{font-size:17px;margin:0 0 12px}p,.sub{color:var(--muted);line-height:1.55}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:22px 0}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}.metric{font-size:clamp(24px,4vw,34px);font-weight:850;color:var(--green);margin:7px 0}.label{font-size:12px;color:var(--muted)}.controls{display:flex;gap:10px;flex-wrap:wrap;align-items:end}.controls label{display:flex;flex-direction:column;gap:6px;font-size:12px;color:var(--muted)}select,input,button{background:#142430;color:var(--ink);border:1px solid #344d58;border-radius:9px;padding:10px;font:inherit}button{cursor:pointer}button:hover{border-color:var(--green)}.tablewrap{overflow:auto}table{border-collapse:collapse;width:100%;min-width:760px;font-size:13px}th,td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--line)}th{color:var(--muted);font-size:11px;text-transform:uppercase}.win{color:#77f0c0;font-weight:800}.loss{color:#ffb4ab}.pending{color:#f7c67b}.note{border-left:3px solid #f7c67b;padding:10px 14px;background:#29251c;margin:15px 0;color:#f5d3a5;font-size:12px}.muted{color:var(--muted)}.wide{margin-top:16px}.bar{height:10px;background:#273b46;border-radius:10px;overflow:hidden}.bar>span{display:block;height:100%;background:#77f0c0}.footer{font-size:12px;color:var(--muted);margin-top:20px}
-@media(max-width:750px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.card{padding:14px}}
-</style></head><body><main>
-<header><div><strong style="color:var(--green)">◈ RACING LAB</strong><span class="muted"> · Historical performance</span></div><a href="/">← Back to Racing Lab</a></header>
-<h1>Results & Model Accuracy</h1><p>Compare saved pre-race predictions against verified race outcomes. Unverified or missing results are never counted as wins or losses.</p>
-<div class="note" id="status">Loading results. The dashboard will remain unscored until verified historical records are provided.</div>
-<section class="controls card"><label>Meeting date<select id="date"><option value="ALL">All dates</option></select></label><label>Meeting<select id="meeting"><option value="ALL">All meetings</option></select></label><label>Model version<select id="model"><option value="ALL">All versions</option></select></label><label>Selection group<select id="group"><option value="ALL">All selections</option></select></label><button id="refresh">Refresh results</button><button id="export">Export scored CSV</button></section>
-<section class="grid">
-<div class="card"><div class="label">Win rate (verified only)</div><div class="metric" id="winRate">—</div><div class="label" id="winCount">0 / 0 verified</div></div>
-<div class="card"><div class="label">Top 3 finish rate</div><div class="metric" id="placeRate">—</div><div class="label" id="placeCount">0 / 0 verified</div></div>
-<div class="card"><div class="label">Awaiting results</div><div class="metric" id="pending">0</div><div class="label">Not included in accuracy</div></div>
-<div class="card"><div class="label">Average predicted win %</div><div class="metric" id="forecast">—</div><div class="label">Verified selections only</div></div>
+:root{color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:#080e16;color:#edf5f6;font-family:system-ui,-apple-system,sans-serif}
+main{max-width:1100px;margin:auto;padding:20px 15px 80px}
+a{color:#73e8bc}
+header{display:flex;justify-content:space-between;gap:12px;align-items:center}
+h1{font-size:29px;margin:30px 0 5px}
+p,.muted{color:#9bb0bd}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:20px 0}
+.card,.panel{background:#13232e;border:1px solid #30424d;border-radius:15px;padding:15px}
+.label{color:#9bb0bd;font-size:12px}
+.value{font-size:clamp(23px,5vw,37px);font-weight:800;margin-top:6px}
+.green{color:#78e9b8}
+.panel{margin:15px 0}
+h2{font-size:17px;margin:0 0 14px}
+canvas{display:block;width:100%;height:290px}
+.controls{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0}
+select,button{background:#1b303e;color:white;border:1px solid #405767;border-radius:9px;padding:11px;font:inherit}
+button{cursor:pointer}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{text-align:left;padding:11px 9px;border-bottom:1px solid #30424d}
+th{color:#9bb0bd}
+.tablewrap{overflow-x:auto}
+.good{color:#78e9b8;font-weight:700}
+.bad{color:#ffaaa5}
+.wait{color:#ffd17c}
+small{color:#9bb0bd}
+@media(max-width:550px){main{padding:16px 10px 65px}.card{padding:10px}.value{font-size:25px}canvas{height:260px}}
+</style>
+</head>
+<body>
+<main>
+<header>
+<strong class="green">◈ RACING LAB</strong>
+<a href="/">← Back to Racing Lab</a>
+</header>
+<h1>Results & History</h1>
+<p>How many of our selections have actually won?</p>
+
+<div class="cards">
+<div class="card"><div class="label">Completed races</div><div class="value" id="races">—</div></div>
+<div class="card"><div class="label">Winning selections</div><div class="value green" id="wins">—</div></div>
+<div class="card"><div class="label">Win rate</div><div class="value" id="rate">—</div></div>
+</div>
+
+<section class="panel">
+<h2>Winning selections over time</h2>
+<div class="controls">
+<select id="dateFilter"><option value="all">All Saturdays</option></select>
+<select id="meetingFilter"><option value="all">All meetings</option></select>
+</div>
+<canvas id="graph"></canvas>
+<small>Each win increases the line by one. Losses leave it flat. Scratched and pending races are excluded.</small>
 </section>
-<section class="card wide"><h2>Win rate by race day</h2><div id="byDate" class="sub">No verified results yet.</div></section>
-<section class="card wide"><h2>Selection-by-selection results</h2><div class="tablewrap"><table><thead><tr><th>Date</th><th>Meeting / race</th><th>Selection</th><th>Model</th><th>Predicted win</th><th>Finish</th><th>Result</th><th>SP</th></tr></thead><tbody id="rows"></tbody></table></div></section>
-<p class="footer">Data source: /results-history.json. Predictions should be frozen before racing. Results must be checked against an official source. No betting profitability is inferred without independently recorded odds and stakes.</p>
-</main><script>
-'use strict';
+
+<section class="panel">
+<h2>Race-by-race selections</h2>
+<div class="tablewrap">
+<table>
+<thead><tr><th>Date</th><th>Meeting</th><th>Race</th><th>Our selection</th><th>Result</th></tr></thead>
+<tbody id="rows"></tbody>
+</table>
+</div>
+</section>
+<p class="muted" id="status">Loading saved results…</p>
+</main>
+<script>
 let records=[];
 const $=id=>document.getElementById(id);
-const escapeHTML=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const num=x=>Number.isFinite(Number(x))?Number(x):null;
-const valid=r=>r&&typeof r==='object'&&typeof r.date==='string'&&typeof r.meeting==='string'&&typeof r.horse==='string'&&typeof r.model==='string'&&typeof r.group==='string'&&Number.isFinite(Number(r.predicted_win_pct))&&Number(r.predicted_win_pct)>=0&&Number(r.predicted_win_pct)<=100&&(!r.verified||Number.isInteger(Number(r.finish_position))&&Number(r.finish_position)>=1&&typeof r.result_source==='string'&&r.result_source.trim().length>0);
-function filtered(){return records.filter(r=>['date','meeting','model','group'].every(k=>$(k).value==='ALL'||String(r[k])===$(k).value))}
-function options(key){let sel=$(key),current=sel.value,vals=[...new Set(records.map(r=>String(r[key])))].sort();sel.innerHTML='<option value="ALL">All '+({date:'dates',meeting:'meetings',model:'versions',group:'selections'}[key])+'</option>'+vals.map(v=>'<option value="'+escapeHTML(v)+'">'+escapeHTML(v)+'</option>').join('');sel.value=vals.includes(current)?current:'ALL'}
-function draw(){let data=filtered(),done=data.filter(r=>r.verified===true),wins=done.filter(r=>Number(r.finish_position)===1).length,top3=done.filter(r=>Number(r.finish_position)<=3).length,n=done.length;
-$('winRate').textContent=n?(100*wins/n).toFixed(2)+'%':'—';$('winCount').textContent=wins+' / '+n+' verified';
-$('placeRate').textContent=n?(100*top3/n).toFixed(2)+'%':'—';$('placeCount').textContent=top3+' / '+n+' verified';
-$('pending').textContent=data.length-n;
-$('forecast').textContent=n?(done.reduce((s,r)=>s+Number(r.predicted_win_pct),0)/n).toFixed(2)+'%':'—';
-let dates=[...new Set(data.map(r=>r.date))].sort().reverse();
-$('byDate').innerHTML=dates.length?dates.map(d=>{let all=data.filter(r=>r.date===d),v=all.filter(r=>r.verified),w=v.filter(r=>Number(r.finish_position)===1).length,p=v.length?100*w/v.length:0;return '<div style="margin:14px 0"><div style="display:flex;justify-content:space-between;margin-bottom:7px"><strong>'+escapeHTML(d)+'</strong><span>'+(v.length?w+'/'+v.length+' · '+p.toFixed(2)+'%':'Awaiting verified results')+'</span></div><div class="bar"><span style="width:'+p+'%"></span></div><small class="muted">'+(all.length-v.length)+' pending</small></div>'}).join(''):'No selections recorded.';
-$('rows').innerHTML=data.length?data.map(r=>{let done=r.verified===true,won=done&&Number(r.finish_position)===1;return '<tr><td>'+escapeHTML(r.date)+'</td><td>'+escapeHTML(r.meeting)+' R'+escapeHTML(r.race)+'</td><td><strong>'+escapeHTML(r.horse)+'</strong><div class="muted">'+escapeHTML(r.group)+'</div></td><td>'+escapeHTML(r.model)+'</td><td>'+Number(r.predicted_win_pct).toFixed(2)+'%</td><td>'+(done?escapeHTML(r.finish_position):'—')+'</td><td class="'+(done?(won?'win':'loss'):'pending')+'">'+(done?(won?'WIN':'LOSS'):'PENDING')+'</td><td>'+(done&&num(r.starting_price)!==null?Number(r.starting_price).toFixed(2):'—')+'</td></tr>'}).join(''):'<tr><td colspan="8">No selections match these filters.</td></tr>'}
-async function load(){try{let response=await fetch('/results-history.json?ts='+Date.now(),{cache:'no-store'});if(!response.ok)throw Error('HTTP '+response.status);let body=await response.json();if(!Array.isArray(body.records))throw Error('Missing records array');if(!body.records.every(valid))throw Error('Invalid or unverifiable result data');let keys=new Set();for(let r of body.records){let key=[r.date,r.meeting,r.race,r.horse,r.model,r.group].join('|');if(keys.has(key))throw Error('Duplicate selection: '+key);keys.add(key)}records=body.records;['date','meeting','model','group'].forEach(options);$('status').textContent=records.length?records.length+' saved selections loaded. '+records.filter(r=>r.verified).length+' have verified results.':'No historical selections imported yet. Add frozen selections and verified outcomes to results-history.json.';draw()}catch(e){$('status').textContent='Results data unavailable: '+e.message+'. No performance percentages will be invented.';records=[];draw()}}
-function csvCell(x){return '"'+String(x??'').replace(/"/g,'""')+'"'}
-$('export').addEventListener('click',()=>{let cols=['date','meeting','race','horse','model','group','predicted_win_pct','verified','finish_position','starting_price','result_source'],csv=[cols.join(','),...filtered().map(r=>cols.map(k=>csvCell(r[k])).join(','))].join('\r\n'),a=document.createElement('a'),url=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.href=url;a.download='racing-lab-results.csv';a.click();URL.revokeObjectURL(url)});
-$('refresh').addEventListener('click',load);['date','meeting','model','group'].forEach(k=>$(k).addEventListener('change',draw));load();
-</script></body></html>
+
+function verified(r){
+return r.verified===true &&
+Number.isInteger(Number(r.finish_position)) &&
+Number(r.finish_position)>0 &&
+r.finish_position!==null;
+}
+function filtered(){
+return records.filter(r=>
+($('dateFilter').value==='all'||r.date===$('dateFilter').value)&&
+($('meetingFilter').value==='all'||r.meeting===$('meetingFilter').value));
+}
+function drawGraph(data){
+const canvas=$('graph');
+const width=canvas.clientWidth;
+const height=canvas.clientHeight;
+const dpr=window.devicePixelRatio||1;
+canvas.width=width*dpr;
+canvas.height=height*dpr;
+const ctx=canvas.getContext('2d');
+ctx.scale(dpr,dpr);
+ctx.clearRect(0,0,width,height);
+const pad={left:36,right:12,top:20,bottom:35};
+const W=width-pad.left-pad.right;
+const H=height-pad.top-pad.bottom;
+const wins=data.reduce((n,r)=>n+(Number(r.finish_position)===1?1:0),0);
+const maxY=Math.max(1,wins);
+const x=n=>pad.left+(n/Math.max(1,data.length))*W;
+const y=n=>pad.top+H-(n/maxY)*H;
+ctx.font='11px system-ui';
+ctx.strokeStyle='#334652';
+ctx.fillStyle='#9bb0bd';
+ctx.lineWidth=1;
+for(let i=0;i<=4;i++){
+const value=maxY*i/4;
+const yy=y(value);
+ctx.beginPath();ctx.moveTo(pad.left,yy);ctx.lineTo(width-pad.right,yy);ctx.stroke();
+ctx.fillText(String(Math.round(value)),5,yy+4);
+}
+ctx.fillText('0',pad.left,height-12);
+ctx.fillText(String(data.length)+' races',Math.max(pad.left,width-76),height-12);
+ctx.strokeStyle='#78e9b8';
+ctx.lineWidth=3;
+ctx.lineJoin='round';
+ctx.beginPath();
+ctx.moveTo(x(0),y(0));
+let count=0;
+data.forEach((r,i)=>{
+if(Number(r.finish_position)===1)count++;
+ctx.lineTo(x(i+1),y(count));
+});
+ctx.stroke();
+ctx.fillStyle='#78e9b8';
+ctx.beginPath();
+ctx.arc(x(data.length),y(count),4,0,Math.PI*2);
+ctx.fill();
+}
+function render(){
+const all=filtered().sort((a,b)=>
+a.date.localeCompare(b.date)||
+a.meeting.localeCompare(b.meeting)||
+Number(a.race)-Number(b.race));
+const completed=all.filter(verified);
+const wins=completed.filter(r=>Number(r.finish_position)===1).length;
+$('races').textContent=completed.length;
+$('wins').textContent=wins;
+$('rate').textContent=completed.length?
+(wins/completed.length*100).toFixed(1)+'%':'—';
+drawGraph(completed);
+$('rows').innerHTML=all.map(r=>{
+const done=verified(r);
+const won=done&&Number(r.finish_position)===1;
+const label=done?(won?'WIN':'Lost · '+r.finish_position):
+'Pending / unverified';
+const cls=done?(won?'good':'bad'):'wait';
+const link=r.result_source?
+'<a href="'+r.result_source+'" target="_blank" rel="noopener">Source</a>':'';
+return '<tr><td>'+r.date+'</td><td>'+r.meeting+
+'</td><td>R'+r.race+'</td><td>'+r.horse+
+'</td><td class="'+cls+'">'+label+' '+link+'</td></tr>';
+}).join('');
+$('status').textContent=
+'Showing '+completed.length+' completed selections and '+
+(all.length-completed.length)+' pending or unverified entries.';
+}
+fetch('/results-history.json?cache='+Date.now())
+.then(r=>{if(!r.ok)throw Error('Results file unavailable');return r.json()})
+.then(data=>{
+records=data.records||[];
+const dates=[...new Set(records.map(r=>r.date))].sort();
+const meetings=[...new Set(records.map(r=>r.meeting))].sort();
+dates.forEach(v=>$('dateFilter').add(new Option(v,v)));
+meetings.forEach(v=>$('meetingFilter').add(new Option(v,v)));
+$('dateFilter').onchange=render;
+$('meetingFilter').onchange=render;
+window.onresize=render;
+render();
+})
+.catch(err=>$('status').textContent='Unable to load results: '+err.message);
+</script>
+</body>
+</html>
