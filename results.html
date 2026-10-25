@@ -54,7 +54,14 @@ small{color:#9bb0bd}
 <section class="panel">
 <h2>Winning selections over time</h2>
 <div class="controls">
-<select id="dateFilter"><option value="all">All Saturdays</option></select>
+
+<select id="tierFilter">
+  <option value="10">Top 10 — Main Record</option>
+  <option value="5">Top 5</option>
+  <option value="15">Top 15</option>
+  <option value="all">All Races</option>
+</select>
+  <select id="dateFilter"><option value="all">All Saturdays</option></select>
 <select id="meetingFilter"><option value="all">All meetings</option></select>
 </div>
 <canvas id="graph"></canvas>
