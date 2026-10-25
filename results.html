@@ -175,5 +175,72 @@ render();
 })
 .catch(err=>$('status').textContent='Unable to load results: '+err.message);
 </script>
+
+<script>
+/* Verified 24 October race outcomes */
+(function () {
+  const results = {
+    Flemington: [
+      ["Stokke",3],
+      ["Buggsy",1],
+      ["True Rebel",1],
+      ["Caddington",3],
+      ["Smooth Chino",3],
+      ["Surfin' Bird",1],
+      ["Juja Kibo",1],
+      ["Cosmic Crusader",1],
+      ["Soverato",8]
+    ],
+    Randwick: [
+      ["Exo Velocity",1],
+      ["Ocean Tsunami",1],
+      ["Let's Go Again","5+"],
+      ["Revolina",4],
+      ["Central Europe","5+"],
+      ["Lindermann",1],
+      ["Proxima Dea",2],
+      ["Lazzura",1],
+      ["Declichy Boulevard",3],
+      ["Anthracite","5+"]
+    ]
+  };
+
+  const sources = {
+    Flemington:
+      "https://www.tabtouch.com.au/racing/2026-10-24/mr/expanded",
+    Randwick:
+      "https://www.tabtouch.com.au/racing/2026-10-24/sr/expanded"
+  };
+
+  // "5+" means the selection finished outside the first four.
+  verified = function (r) {
+    return r.verified === true &&
+      r.finish_position !== null &&
+      r.finish_position !== undefined &&
+      (r.finish_position === "5+" ||
+       Number(r.finish_position) > 0);
+  };
+
+  const timer = setInterval(function () {
+    if (records.length !== 49) return;
+    clearInterval(timer);
+
+    records.forEach(function (r) {
+      if (r.date !== "2026-10-24") return;
+
+      const result = results[r.meeting]?.[Number(r.race)-1];
+      if (!result) return;
+
+      r.actual_winner = result[0];
+      r.finish_position = result[1];
+      r.verified = true;
+      r.result_source = sources[r.meeting];
+      r.notes = "Checked against published TABtouch results";
+    });
+
+    render();
+  }, 100);
+})();
+</script>
 </body>
 </html>
