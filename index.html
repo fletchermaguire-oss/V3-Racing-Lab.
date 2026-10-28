@@ -275,4 +275,7 @@ window.DATA = DATA;
 window.getRaces = getRaces;
 try{validate(DATA);render();document.documentElement.classList.add('ready');scheduleWeather();loadPublishedBoard().then(published=>{if(!published)return syncBackend({silent:true})}).then(()=>syncCalibration({silent:true}));setInterval(()=>{if(document.visibilityState==='visible'&&S.page!=='simulator'&&S.page!=='multi')syncBackend({silent:true})},15*60*1000);setInterval(()=>{if(document.visibilityState==='visible')syncCalibration({silent:true})},30*60*1000)}catch(err){console.error('V3 PRO V3 initialisation error:',err)}
 })();
-</script><script src="/results-nav.js" defer></script></body></html>
+</script><script src="/results-nav.js" defer></script>
+<script src="/race-intelligence.js" defer></script>
+<script src="/race-intelligence-bridge.js" defer></script>
+</body></html>
