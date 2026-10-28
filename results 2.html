@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Racing Lab | Results & History</title>
+<style>
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#080e16;color:#edf5f6;font-family:system-ui,-apple-system,sans-serif}main{max-width:1100px;margin:auto;padding:20px 15px 80px}a{color:#73e8bc}header{display:flex;justify-content:space-between;gap:12px;align-items:center}h1{font-size:29px;margin:30px 0 5px}p,.muted{color:#9bb0bd}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:20px 0}.card,.panel{background:#13232e;border:1px solid #30424d;border-radius:15px;padding:15px}.label{color:#9bb0bd;font-size:12px}.value{font-size:clamp(23px,5vw,37px);font-weight:800;margin-top:6px}.green{color:#78e9b8}.panel{margin:15px 0}h2{font-size:17px;margin:0 0 14px}canvas{display:block;width:100%;height:290px}.controls{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0}select{background:#1b303e;color:white;border:1px solid #405767;border-radius:9px;padding:11px;font:inherit}table{border-collapse:collapse;width:100%;font-size:13px}th,td{text-align:left;padding:11px 9px;border-bottom:1px solid #30424d}th{color:#9bb0bd}.tablewrap{overflow-x:auto}.good{color:#78e9b8;font-weight:700}.bad{color:#ffaaa5}.wait{color:#ffd17c}small{color:#9bb0bd}@media(max-width:550px){main{padding:16px 10px 65px}.card{padding:10px}.value{font-size:25px}canvas{height:260px}}
+</style></head><body><main>
+<header><strong class="green">◈ RACING LAB</strong><a href="/">← Back to Racing Lab</a></header>
+<h1>Results & History <small>V4.1 analytics</small></h1><p>How many of our selections have actually won?</p>
+<div class="cards"><div class="card"><div class="label">Completed selections</div><div class="value" id="races">—</div></div><div class="card"><div class="label">Winning selections</div><div class="value green" id="wins">—</div></div><div class="card"><div class="label">Win rate</div><div class="value" id="rate">—</div></div></div>
+<section class="panel"><h2>Winning selections over time</h2><div class="controls">
+<select id="tierFilter"><option value="10">Top 10 — Main Record</option><option value="5">Top 5</option><option value="15">Top 15</option><option value="all">All Races</option></select>
+<select id="dateFilter"><option value="all">All Saturdays</option></select><select id="meetingFilter"><option value="all">All meetings</option></select>
+</div><canvas id="graph"></canvas><small>Historical Top 5/10/15 rankings are reconstructed using saved model probabilities, not confirmed pre-race locked lists. Each win increases the line by one; losses leave it flat. Scratchings and unverified races are excluded.</small></section>
+<section class="panel">
+<h2>Selection performance comparison</h2>
+<p class="muted">Retrospective rankings from saved model probabilities. These are not pre-race locked records.</p>
+<div class="tablewrap"><table><thead><tr><th>Group</th><th>Wins</th><th>Completed</th><th>Strike rate</th></tr></thead><tbody id="comparisonRows"></tbody></table></div>
+</section>
+<section class="panel"><h2>Model confidence audit</h2>
+<p class="muted">Compare the average predicted win chance with the observed strike rate. Small samples are noisy and historical forecasts are retrospective.</p>
+<div id="calibration"></div>
+</section>
+<section class="panel"><h2>Race-by-race selections</h2><div class="tablewrap"><table><thead><tr><th>Date</th><th>Meeting</th><th>Race</th><th>Our selection</th><th>Result</th></tr></thead><tbody id="rows"></tbody></table></div></section><p class="muted" id="status">Loading saved results…</p>
+</main><script>
+let records=[];const $=id=>document.getElementById(id);
+function verified(r){return r.verified===true&&r.finish_position!==null&&r.finish_position!==undefined&&(r.finish_position==='5+'||(Number.isInteger(Number(r.finish_position))&&Number(r.finish_position)>0));}
+function rankedByDay(tier) {
+ if(tier==='all') return records.slice();
+ const days=[...new Set(records.map(r=>r.date))];
+ return days.flatMap(date=>records.filter(r=>r.date===date)
+  .sort((a,b)=>Number(b.predicted_win_pct||0)-Number(a.predicted_win_pct||0)||a.meeting.localeCompare(b.meeting)||Number(a.race)-Number(b.race))
+  .slice(0,Number(tier)));
+}
+function renderComparison(){
+ const date=$('dateFilter').value, meeting=$('meetingFilter').value;
+ const scope=rs=>rs.filter(r=>(date==='all'||r.date===date)&&(meeting==='all'||r.meeting===meeting));
+ $('comparisonRows').innerHTML=['5','10','15','all'].map(tier=>{
+  const rs=scope(rankedByDay(tier)).filter(verified);
+  const wins=rs.filter(r=>Number(r.finish_position)===1).length;
+  return '<tr><td>'+ (tier==='all'?'All races':'Top '+tier) +'</td><td>'+wins+'</td><td>'+rs.length+'</td><td>'+(rs.length?(100*wins/rs.length).toFixed(1)+'%':'—')+'</td></tr>';
+ }).join('');
+ const rs=scope(rankedByDay($('tierFilter').value)).filter(verified).filter(r=>Number.isFinite(Number(r.predicted_win_pct)));
+ const expected=rs.reduce((n,r)=>n+Number(r.predicted_win_pct)/100,0);
+ const observed=rs.filter(r=>Number(r.finish_position)===1).length;
+ const avg=rs.length?100*expected/rs.length:0;
+ $('calibration').textContent=rs.length?'Average forecast: '+avg.toFixed(1)+'% · Actual win rate: '+(100*observed/rs.length).toFixed(1)+'% · '+rs.length+' completed selections':'No completed selections in this filter.';
+}
+function filtered(){
+ const selected=rankedByDay($('tierFilter').value);
+ return selected.filter(r=>($('dateFilter').value==='all'||r.date===$('dateFilter').value)&&($('meetingFilter').value==='all'||r.meeting===$('meetingFilter').value));
+}
+function drawGraph(data){
+ const canvas=$('graph'),width=canvas.clientWidth,height=canvas.clientHeight,dpr=window.devicePixelRatio||1;
+ canvas.width=width*dpr;canvas.height=height*dpr;const ctx=canvas.getContext('2d');ctx.scale(dpr,dpr);ctx.clearRect(0,0,width,height);
+ const pad={left:36,right:12,top:20,bottom:35},W=width-pad.left-pad.right,H=height-pad.top-pad.bottom;
+ const wins=data.reduce((n,r)=>n+(Number(r.finish_position)===1?1:0),0),maxY=Math.max(1,wins),x=n=>pad.left+(n/Math.max(1,data.length))*W,y=n=>pad.top+H-(n/maxY)*H;
+ ctx.font='11px system-ui';ctx.strokeStyle='#334652';ctx.fillStyle='#9bb0bd';ctx.lineWidth=1;
+ for(let i=0;i<=4;i++){const value=maxY*i/4,yy=y(value);ctx.beginPath();ctx.moveTo(pad.left,yy);ctx.lineTo(width-pad.right,yy);ctx.stroke();ctx.fillText(String(Math.round(value)),5,yy+4);}
+ ctx.fillText('0',pad.left,height-12);ctx.fillText(String(data.length)+' races',Math.max(pad.left,width-76),height-12);
+ ctx.strokeStyle='#78e9b8';ctx.lineWidth=3;ctx.lineJoin='round';ctx.beginPath();ctx.moveTo(x(0),y(0));let count=0;
+ data.forEach((r,i)=>{if(Number(r.finish_position)===1)count++;ctx.lineTo(x(i+1),y(count));});ctx.stroke();ctx.fillStyle='#78e9b8';ctx.beginPath();ctx.arc(x(data.length),y(count),4,0,Math.PI*2);ctx.fill();
+}
+function render(){
+ const all=filtered().sort((a,b)=>a.date.localeCompare(b.date)||a.meeting.localeCompare(b.meeting)||Number(a.race)-Number(b.race));
+ const completed=all.filter(verified),wins=completed.filter(r=>Number(r.finish_position)===1).length;
+ $('races').textContent=completed.length;$('wins').textContent=wins;$('rate').textContent=completed.length?(wins/completed.length*100).toFixed(1)+'%':'—';drawGraph(completed);renderComparison();
+ $('rows').innerHTML=all.map(r=>{const done=verified(r),won=done&&Number(r.finish_position)===1,label=done?(won?'WIN':'Lost · '+r.finish_position):'Pending / unverified',cls=done?(won?'good':'bad'):'wait',link=r.result_source?'<a href="'+r.result_source+'" target="_blank" rel="noopener">Source</a>':'';
+ return '<tr><td>'+r.date+'</td><td>'+r.meeting+'</td><td>R'+r.race+'</td><td>'+r.horse+'</td><td class="'+cls+'">'+label+' '+link+'</td></tr>';}).join('');
+ $('status').textContent='Showing '+completed.length+' completed selections and '+(all.length-completed.length)+' pending or unverified entries.';
+}
+const outcomes={Flemington:[["Stokke",3],["Buggsy",1],["True Rebel",1],["Caddington",3],["Smooth Chino",3],["Surfin' Bird",1],["Juja Kibo",1],["Cosmic Crusader",1],["Soverato",8]],Randwick:[["Exo Velocity",1],["Ocean Tsunami",1],["Let's Go Again","5+"],["Revolina",4],["Central Europe","5+"],["Lindermann",1],["Proxima Dea",2],["Lazzura",1],["Declichy Boulevard",3],["Anthracite","5+"]]};
+const sources={Flemington:'https://www.tabtouch.com.au/racing/2026-10-24/mr/expanded',Randwick:'https://www.tabtouch.com.au/racing/2026-10-24/sr/expanded'};
+fetch('/results-history.json?cache='+Date.now()).then(r=>{if(!r.ok)throw Error('Results file unavailable');return r.json()}).then(data=>{
+ records=data.records||[];
+ // Preserve the existing October 24 results overlay, without modifying the underlying JSON.
+ records.forEach(r=>{if(r.date!=='2026-10-24')return;const result=outcomes[r.meeting]?.[Number(r.race)-1];if(!result)return;r.actual_winner=result[0];r.finish_position=result[1];r.verified=true;r.result_source=sources[r.meeting];r.notes='Checked against published TABtouch results';});
+ [...new Set(records.map(r=>r.date))].sort().forEach(v=>$('dateFilter').add(new Option(v,v)));
+ [...new Set(records.map(r=>r.meeting))].sort().forEach(v=>$('meetingFilter').add(new Option(v,v)));
+ $('tierFilter').onchange=render;$('dateFilter').onchange=render;$('meetingFilter').onchange=render;window.onresize=render;render();
+}).catch(err=>$('status').textContent='Unable to load results: '+err.message);
+</script></body></html>
