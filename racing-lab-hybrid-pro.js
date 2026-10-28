@@ -1421,3 +1421,544 @@ const obs=new MutationObserver(()=>{if(scheduled)return;scheduled=true;requestAn
 
   schedule();
 })();
+
+/* RACING LAB — ELITE TRADER V5 */
+(() => {
+  "use strict";
+  if (window.__ELITE_TRADER_V5__) return;
+  window.__ELITE_TRADER_V5__ = true;
+
+  const css = document.createElement("style");
+  css.textContent = `
+    :root {
+      --et-bg:#050b11;
+      --et-panel:#0b1922;
+      --et-border:#23414a;
+      --et-green:#35e9a9;
+      --et-text:#e9f8f5;
+    }
+
+    body,.app,.shell,.page {
+      background:var(--et-bg)!important;
+    }
+
+    .et-terminal {
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      width:100%;
+      min-width:0;
+      color:var(--et-text);
+    }
+
+    .et-hero {
+      display:flex;
+      justify-content:space-between;
+      gap:18px;
+      padding:24px;
+      border:1px solid #286c57;
+      border-radius:12px;
+      background:
+        radial-gradient(circle at 85% 0%,
+          #15584366,transparent 55%),
+        linear-gradient(120deg,#102a30,#07131c);
+    }
+
+    .et-eyebrow {
+      color:var(--et-green);
+      font-size:10px;
+      letter-spacing:.2em;
+      font-weight:900;
+      margin-bottom:9px;
+    }
+
+    .et-hero h1 {
+      margin:0 0 10px;
+      font-size:clamp(28px,4vw,46px);
+      letter-spacing:-.05em;
+      line-height:1;
+      color:white;
+    }
+
+    .et-hero p {
+      margin:0;
+      font-size:12px;
+      color:#a6c5c5;
+      line-height:1.5;
+    }
+
+    .et-status {
+      align-self:flex-start;
+      padding:9px 12px;
+      border-radius:7px;
+      border:1px solid #74572d;
+      background:#2a2118;
+      color:#eac58b;
+      font-size:10px;
+      font-weight:850;
+      white-space:nowrap;
+    }
+
+    .et-tabs {
+      display:flex;
+      gap:5px;
+      padding:5px;
+      background:#091720;
+      border:1px solid var(--et-border);
+      border-radius:8px;
+      overflow-x:auto;
+    }
+
+    .et-tabs button {
+      border:0;
+      background:transparent;
+      color:#a6bfc2;
+      border-radius:5px;
+      padding:12px 15px;
+      white-space:nowrap;
+      font-size:11px;
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    .et-tabs button.selected {
+      color:white;
+      background:#0b624d;
+      box-shadow:inset 0 0 0 1px #2be5a5;
+    }
+
+    .et-layout {
+      display:grid;
+      grid-template-columns:
+        minmax(0,1.8fr) minmax(270px,.85fr);
+      gap:12px;
+      align-items:start;
+    }
+
+    .et-column {
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      min-width:0;
+    }
+
+    .et-panel {
+      background:linear-gradient(140deg,#0c2029,#08141d);
+      border:1px solid var(--et-border);
+      border-radius:9px;
+      overflow:hidden;
+      min-width:0;
+    }
+
+    .et-panel-head {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:13px 15px;
+      border-bottom:1px solid var(--et-border);
+      background:#0b2529;
+    }
+
+    .et-panel-head strong {
+      font-size:11px;
+      letter-spacing:.09em;
+      color:#edfff8;
+      text-transform:uppercase;
+    }
+
+    .et-panel-head small {
+      font-size:9px;
+      font-weight:800;
+      color:var(--et-green);
+    }
+
+    .et-panel-body {
+      padding:14px;
+      min-width:0;
+    }
+
+    .et-panel .tablewrap {
+      overflow-x:auto;
+      width:100%;
+    }
+
+    .et-panel table {
+      width:100%;
+      border-collapse:collapse;
+    }
+
+    .et-panel table th {
+      color:#93b1b5!important;
+      font-size:10px!important;
+      text-transform:uppercase;
+      padding:12px 10px!important;
+      border-bottom:1px solid #27534a;
+    }
+
+    .et-panel table td {
+      padding:12px 10px!important;
+      border-bottom:1px solid #1b3940!important;
+      font-size:12px;
+    }
+
+    .et-panel table tbody tr:hover {
+      background:#17463855;
+    }
+
+    .et-panel .strongnum {
+      color:var(--et-green)!important;
+    }
+
+    .et-race-selector .race-grid {
+      display:grid!important;
+      grid-template-columns:
+        repeat(auto-fill,minmax(150px,1fr))!important;
+      gap:8px!important;
+    }
+
+    .et-race-selector .race-tile {
+      border-radius:7px!important;
+      background:#0c242d!important;
+      border:1px solid #27505a!important;
+      padding:12px!important;
+    }
+
+    .et-race-selector .race-tile.active {
+      border-color:var(--et-green)!important;
+      background:#123b34!important;
+    }
+
+    .et-metrics {
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:8px;
+    }
+
+    .et-metric {
+      padding:14px;
+      border-radius:8px;
+      background:#0b232b;
+      border:1px solid #25464a;
+      min-width:0;
+    }
+
+    .et-metric small {
+      display:block;
+      color:#87a8ad;
+      font-size:9px;
+      font-weight:850;
+      margin-bottom:8px;
+    }
+
+    .et-metric strong {
+      display:block;
+      color:var(--et-green);
+      font-size:clamp(16px,2vw,25px);
+      font-weight:950;
+      overflow-wrap:anywhere;
+    }
+
+    .et-metric span {
+      display:block;
+      color:#91afb3;
+      font-size:10px;
+      margin-top:6px;
+    }
+
+    .et-shortcuts {
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:8px;
+    }
+
+    .et-shortcuts button {
+      padding:15px 10px;
+      border-radius:7px;
+      border:1px solid #27554e;
+      background:#0d2b30;
+      color:#e2f9f2;
+      font-size:10px;
+      font-weight:850;
+      text-align:left;
+      cursor:pointer;
+    }
+
+    .et-shortcuts button:hover {
+      border-color:var(--et-green);
+    }
+
+    .et-panel-body .grid.two {
+      grid-template-columns:1fr!important;
+    }
+
+    .et-note {
+      padding:13px;
+      border-radius:8px;
+      border:1px solid #6d522b;
+      background:#292016;
+      color:#e4c38c;
+      font-size:11px;
+      line-height:1.6;
+    }
+
+    @media(max-width:1050px) {
+      .et-layout {
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media(max-width:650px) {
+      .et-hero {
+        flex-direction:column;
+        padding:18px;
+      }
+
+      .et-metrics {
+        grid-template-columns:repeat(3,minmax(0,1fr));
+      }
+
+      .et-metric {
+        padding:10px 8px;
+      }
+
+      .et-metric strong {
+        font-size:16px;
+      }
+
+      .et-panel-body {
+        padding:10px;
+      }
+    }
+  `;
+  document.head.appendChild(css);
+
+  const make = (tag, className, text) => {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text !== undefined) node.textContent = text;
+    return node;
+  };
+
+  function panel(name, meta) {
+    const outer = make("section", "et-panel");
+    const head = make("div", "et-panel-head");
+    head.append(
+      make("strong", "", name),
+      make("small", "", meta)
+    );
+    const body = make("div", "et-panel-body");
+    outer.append(head, body);
+    return {outer,body};
+  }
+
+  function navigate(page) {
+    const button = document.querySelector(
+      '.sidebar [data-page="' + page + '"]'
+    );
+    if (button) button.click();
+  }
+
+  function metric(name, value, subtitle) {
+    const box = make("div", "et-metric");
+    box.append(
+      make("small", "", name),
+      make("strong", "", value),
+      make("span", "", subtitle)
+    );
+    return box;
+  }
+
+  function currentPage() {
+    return document.querySelector(
+      '.sidebar [data-page].active'
+    )?.dataset.page;
+  }
+
+  function build() {
+    const screen = document.getElementById("screen");
+    if (!screen || currentPage() !== "races") return;
+    if (screen.querySelector(".et-terminal")) return;
+
+    const form = screen.querySelector(":scope > .formrow");
+    const grid = screen.querySelector(":scope > .race-grid");
+    const detail = screen.querySelector(":scope > #race-detail");
+
+    if (!form || !grid || !detail) return;
+
+    const heading = detail.querySelector(
+      ":scope > .section-row"
+    );
+    const cards = detail.querySelector(
+      ":scope > .grid.two"
+    );
+
+    const remaining = Array.from(detail.children)
+      .filter(x => x !== heading && x !== cards);
+
+    const terminal = make("div", "et-terminal");
+
+    const hero = make("header", "et-hero");
+    const heroCopy = make("div");
+    heroCopy.append(
+      make("div","et-eyebrow","RACING LAB / ELITE TRADER"),
+      make("h1","","RACE INTELLIGENCE"),
+      make("p","",
+        "Professional research terminal · V3 model data")
+    );
+    hero.append(
+      heroCopy,
+      make("div","et-status","ARCHIVED · NOT LIVE ODDS")
+    );
+
+    const tabs = make("nav","et-tabs");
+    [
+      ["Race Board","races"],
+      ["Selections","daily"],
+      ["Simulator","simulator"],
+      ["Comparisons","compare"],
+      ["Weather","weather"],
+      ["Model Quality","quality"]
+    ].forEach(([label,page]) => {
+      const button = make(
+        "button",
+        page === "races" ? "selected" : "",
+        label
+      );
+      button.type = "button";
+      button.addEventListener("click",()=>navigate(page));
+      tabs.appendChild(button);
+    });
+
+    const layout = make("div","et-layout");
+    const left = make("div","et-column");
+    const right = make("div","et-column");
+
+    const raceInfo = panel("Selected Race","RACE PROFILE");
+    if (heading) raceInfo.body.appendChild(heading);
+
+    const probabilities = panel(
+      "Runner Probability Board","V3 FORECAST"
+    );
+
+    if (cards) {
+      const originalCards = Array.from(cards.children);
+
+      if (originalCards[0]) {
+        probabilities.body.appendChild(originalCards[0]);
+      }
+
+      if (originalCards[1]) {
+        const intelligence = panel(
+          "Race Intelligence","MODEL EVIDENCE"
+        );
+        intelligence.body.appendChild(originalCards[1]);
+        right.appendChild(intelligence.outer);
+      }
+
+      originalCards.slice(2).forEach(card => {
+        const extra = panel("Research","SOURCE DATA");
+        extra.body.appendChild(card);
+        right.appendChild(extra.outer);
+      });
+    }
+
+    const selector = panel("Race Selector","ALL RACES");
+    selector.outer.classList.add("et-race-selector");
+    selector.body.append(form,grid);
+
+    const selected = grid.querySelector(".race-tile.active");
+    const raceName =
+      selected?.querySelector("h3")?.textContent?.trim()
+      || "Select race";
+    const leader =
+      selected?.querySelector(".leader")?.textContent?.trim()
+      || "—";
+    const chance =
+      selected?.querySelector(".pct")?.textContent?.trim()
+      || "—";
+
+    const metrics = make("div","et-metrics");
+    metrics.append(
+      metric("SELECTED RACE",raceName,"Saved field"),
+      metric("MODEL LEADER",leader,"Ranked first"),
+      metric("MODEL WIN %",chance,"Uncalibrated")
+    );
+
+    const tools = panel("Trading Tools","WORKSPACE");
+    const shortcuts = make("div","et-shortcuts");
+
+    [
+      ["RACE SIMULATOR","simulator"],
+      ["COMPARISONS","compare"],
+      ["DAILY RANKINGS","daily"],
+      ["TRACK WEATHER","weather"],
+      ["QUALITY AUDIT","quality"],
+      ["CALIBRATION","calibration"]
+    ].forEach(([label,page]) => {
+      const button = make("button","",label);
+      button.type = "button";
+      button.addEventListener("click",()=>navigate(page));
+      shortcuts.appendChild(button);
+    });
+
+    tools.body.appendChild(shortcuts);
+
+    const research = panel(
+      "Extended Form & Research","ORIGINAL DATA"
+    );
+    remaining.forEach(node => research.body.appendChild(node));
+
+    left.append(
+      raceInfo.outer,
+      metrics,
+      probabilities.outer,
+      research.outer
+    );
+
+    right.prepend(
+      selector.outer,
+      tools.outer,
+      make(
+        "div",
+        "et-note",
+        "Saved V3 research snapshot. Probabilities " +
+        "are provisional and uncalibrated. " +
+        "Live market odds and current scratchings " +
+        "are not verified."
+      )
+    );
+
+    layout.append(left,right);
+    terminal.append(hero,tabs,layout);
+
+    const oldHeading = screen.querySelector(
+      ":scope > .page-head"
+    );
+    if (oldHeading) oldHeading.remove();
+
+    screen.prepend(terminal);
+  }
+
+  let pending = false;
+
+  function schedule() {
+    if (pending) return;
+    pending = true;
+    requestAnimationFrame(() => {
+      pending = false;
+      try {
+        build();
+      } catch (error) {
+        console.error("Elite Trader V5:",error);
+      }
+    });
+  }
+
+  new MutationObserver(schedule).observe(
+    document.body,
+    {childList:true,subtree:true}
+  );
+
+  schedule();
+})();
