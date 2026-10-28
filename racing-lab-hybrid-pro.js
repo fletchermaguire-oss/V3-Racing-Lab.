@@ -2161,3 +2161,111 @@ const obs=new MutationObserver(()=>{if(scheduled)return;scheduled=true;requestAn
 
   schedule();
 })();
+
+/* RACING LAB — HYBRID ULTIMATE V1 | additive interface, no model mutations */
+(()=>{'use strict';
+if(window.__RL_HYBRID_ULTIMATE__)return;
+window.__RL_HYBRID_ULTIMATE__=true;
+const css=`
+/* Hybrid Ultimate: mobile-first density and consistent hierarchy */
+:root{--hu-accent:#39e9ad;--hu-ink:#e9faf6;--hu-muted:#96b6ba}
+#screen .hu-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 15px;background:linear-gradient(110deg,#102d32,#091720);border:1px solid #296359;border-radius:12px;margin-bottom:12px}
+#screen .hu-brand{font-size:10px;letter-spacing:.15em;color:var(--hu-accent);font-weight:900}
+#screen .hu-title{font-size:clamp(18px,3vw,25px);font-weight:900;line-height:1.2;color:white;margin:3px 0}
+#screen .hu-meta{font-size:11px;color:var(--hu-muted)}
+#screen .hu-actions{display:flex;gap:7px;flex-shrink:0}
+#screen .hu-btn{background:#14343a;border:1px solid #31615e;border-radius:8px;color:#e9faf6;padding:10px 12px;font-weight:800;font-size:11px;cursor:pointer}
+#screen .hu-btn.primary{background:#106e55;border-color:#2cd99e;color:white}
+#screen .hu-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:12px}
+#screen .hu-stat{min-width:0;padding:12px;background:#10262e;border:1px solid #24454d;border-radius:10px}
+#screen .hu-stat small{display:block;font-size:9px;letter-spacing:.06em;color:#98b9bc;font-weight:800;margin-bottom:6px}
+#screen .hu-stat strong{display:block;font-size:clamp(13px,2.2vw,19px);line-height:1.2;color:#39e9ad;overflow-wrap:anywhere}
+#screen .hu-stat span{display:block;font-size:10px;color:#8caab0;margin-top:5px}
+#screen .hu-board{background:#0b1d26;border:1px solid #2a4d54;border-radius:12px;padding:14px;margin-bottom:12px}
+#screen .hu-board-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:12px}
+#screen .hu-board-head b{color:white;font-size:14px}
+#screen .hu-board-head small{font-size:10px;color:#39e9ad;text-align:right}
+#screen .hu-runner{display:grid;grid-template-columns:24px minmax(0,1fr) 72px;align-items:center;gap:10px;padding:10px 0;border-top:1px solid #1c3941}
+#screen .hu-rank{color:#91afb5;font-size:12px}
+#screen .hu-name{font-size:12px;color:#ecf8f5;font-weight:750;overflow-wrap:anywhere}
+#screen .hu-track{height:5px;background:#203b43;border-radius:10px;overflow:hidden;margin-top:7px}
+#screen .hu-fill{height:100%;background:linear-gradient(90deg,#148e77,#40e7ae);border-radius:10px}
+#screen .hu-pct{text-align:right;color:#3ce9b0;font-size:13px;font-weight:900;font-variant-numeric:tabular-nums}
+#screen .hu-foot{font-size:10px;color:#a0b9bc;line-height:1.5;margin-top:10px}
+#screen .hu-shortcuts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:12px}
+#screen .hu-shortcuts button{background:#10352f;border:1px solid #276b57;border-radius:9px;color:#d9fff0;padding:12px 6px;font-size:11px;font-weight:850;cursor:pointer}
+#screen .hu-selector{background:#0d232b;border:1px solid #2a4d54;border-radius:12px;padding:12px;margin-bottom:12px}
+#screen .hu-selector label{display:block;color:#a8c3c5;font-size:10px;font-weight:800;margin-bottom:6px}
+#screen .hu-selector select{width:100%;min-width:0;background:#0a1820;color:#e8faf5;border:1px solid #2b5659;border-radius:7px;padding:10px;font-size:13px}
+#screen .hu-quant{border:1px solid #4c485b;background:#171d2a;border-radius:11px;padding:13px;margin:12px 0}
+#screen .hu-quant h3{color:#e9edff;margin:0 0 8px;font-size:14px}
+#screen .hu-quant p{color:#adb7c8;margin:5px 0;font-size:11px;line-height:1.5}
+#screen .hu-quant strong{color:#d2b9ff}
+#screen .hu-original{margin-top:12px}
+#screen .hu-original>summary{cursor:pointer;background:#102932;color:#c5f6e5;padding:13px;border:1px solid #2a5457;border-radius:9px;font-size:12px;font-weight:800}
+#screen .hu-original[open]>summary{margin-bottom:12px}
+#screen .hu-original .et-panel,#screen .hu-original .et-panel-body{min-width:0}
+#screen .hu-original .tablewrap{overflow-x:auto;max-width:100%}
+#screen .hu-original table{min-width:580px}
+#screen .hu-hide{display:none!important}
+@media(max-width:800px){
+ #screen .et-terminal{gap:10px}
+ #screen .et-hero{display:none!important}
+ #screen .et-tabs{display:none!important}
+ #screen .et-layout{display:flex!important;flex-direction:column!important;gap:10px!important}
+ #screen .et-column{width:100%!important;min-width:0!important}
+ #screen .et-metrics{display:none!important}
+ #screen .et-column>.et-panel{min-width:0}
+ #screen .hu-summary{gap:6px}
+ #screen .hu-stat{padding:9px}
+ #screen .hu-stat strong{font-size:12px}
+ #screen .hu-shortcuts button{font-size:10px}
+ #screen .hu-bar{padding:12px}
+ #screen .hu-btn{padding:9px}
+ #screen .hu-original .et-panel-head{padding:10px}
+ #screen .hu-original .et-panel-body{padding:9px}
+}
+`;
+const style=document.createElement('style');style.textContent=css;document.head.appendChild(style);
+const make=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e};
+const nav=page=>document.querySelector('.sidebar [data-page="'+page+'"]')?.click();
+const data=()=>window.RacingLabApp?.data||window.DATA||null;
+const races=()=>window.RacingLabApp?.getRaces?.()||window.getRaces?.()||[];
+const raceId=()=>document.querySelector('[data-change="race-jump"]')?.value||null;
+const modelField=id=>(data()?.records||[]).filter(h=>h.race===id&&Number.isFinite(h.p)).sort((a,b)=>b.p-a.p);
+function activate(){
+ const screen=document.getElementById('screen');
+ if(!screen||!screen.querySelector('.et-terminal')||screen.querySelector('.hu-bar'))return;
+ const terminal=screen.querySelector('.et-terminal');
+ const id=raceId();const race=races().find(r=>r.id===id);const f=modelField(id);const total=f.reduce((a,h)=>a+h.p,0);
+ const ok=f.length>1&&Math.abs(total-100)<.16;
+ const base=data();const date=base?.date||'Unknown';
+ const bar=make('section','hu-bar');const left=make('div');left.append(make('div','hu-brand','RACING LAB / HYBRID ULTIMATE'),make('div','hu-title',id?String(id).replace('_R',' · R').replaceAll('_',' '):'Race Centre'),make('div','hu-meta',(race?.distance||'—')+'m · '+date+' · Archived model'));
+ const acts=make('div','hu-actions');const prev=make('button','hu-btn','◀');const next=make('button','hu-btn primary','Next ▶');
+ const ids=races().map(r=>r.id);const pos=ids.indexOf(id);
+ for(const [b,step] of [[prev,-1],[next,1]]){b.type='button';b.onclick=()=>{const target=ids[(pos+step+ids.length)%ids.length];const jump=document.querySelector('[data-change="race-jump"]');if(jump&&target){jump.value=target;jump.dispatchEvent(new Event('change',{bubbles:true}))}}}
+ acts.append(prev,next);bar.append(left,acts);
+ const selector=make('div','hu-selector');const label=make('label','','Jump to race');const select=make('select');
+ for(const r of races()){const opt=document.createElement('option');opt.value=r.id;opt.textContent=r.id.replace('_R',' · R').replaceAll('_',' ')+(r.name?' — '+r.name:'');opt.selected=r.id===id;select.append(opt)}
+ select.onchange=()=>{const jump=document.querySelector('[data-change="race-jump"]');if(jump){jump.value=select.value;jump.dispatchEvent(new Event('change',{bubbles:true}))}};selector.append(label,select);
+ const summary=make('div','hu-summary');
+ for(const [label,value,note] of [['MODEL LEADER',f[0]?.name||'—','Archived ranking'],['WIN SHARE',f[0]?f[0].p.toFixed(2)+'%':'—','Uncalibrated'],['FIELD TOTAL',total.toFixed(2)+'%',ok?'Mathematical check':'Review required']]){const card=make('div','hu-stat');card.append(make('small','',label),make('strong','',value),make('span','',note));summary.append(card)}
+ const board=make('section','hu-board');const head=make('div','hu-board-head');head.append(make('b','','Runner probability board'),make('small','',ok?'ARCHIVED BASE · 100%':'INCOMPLETE · REVIEW'));board.append(head);
+ const max=Math.max(1,...f.map(h=>h.p));
+ f.forEach((h,i)=>{const row=make('div','hu-runner');const center=make('div');center.append(make('div','hu-name',h.name||'Unnamed runner'));const track=make('div','hu-track');const fill=make('div','hu-fill');fill.style.width=Math.max(0,Math.min(100,100*h.p/max))+'%';track.append(fill);center.append(track);row.append(make('span','hu-rank',String(i+1)),center,make('span','hu-pct',h.p.toFixed(2)+'%'));board.append(row)});
+ if(!f.length)board.append(make('p','hu-foot','No archived runner forecasts found for this race.'));
+ board.append(make('p','hu-foot','Base model snapshot only. Scratch-adjusted and Friday revisions may differ. These figures are not calibrated win probabilities or live market odds.'));
+ const shortcuts=make('div','hu-shortcuts');for(const [name,page] of [['Simulator','simulator'],['Top 10','daily'],['Quant / Quality','quality']]){const b=make('button','',name);b.type='button';b.onclick=()=>nav(page);shortcuts.append(b)}
+ const quant=make('section','hu-quant');quant.append(make('h3','','Quant research / forecast integrity'),make('p','','Snapshot: '+date+' · '+f.length+' saved runners · '+(ok?'Field total validated':'Field incomplete or invalid')));
+ quant.append(make('p','','Structural validation is not predictive calibration. Compare model accuracy only after verified historical results are imported.'));
+ const original=make('details','hu-original');const sum=make('summary','','Full original analysis, form & race tools');original.append(sum);
+ // Move existing V5 layout, preserving event listeners, data and simulator links.
+ const layout=terminal.querySelector('.et-layout');if(layout)original.append(layout);
+ const tabs=terminal.querySelector('.et-tabs');if(tabs)tabs.classList.add('hu-hide');
+ const hero=terminal.querySelector('.et-hero');if(hero)hero.classList.add('hu-hide');
+ terminal.prepend(bar,selector,summary,board,shortcuts,quant,original);
+ // Keep original controls available inside expanded research; no forecast changes.
+}
+let pending=false;function schedule(){if(pending)return;pending=true;requestAnimationFrame(()=>{pending=false;try{activate()}catch(e){console.error('Hybrid Ultimate:',e)}})}
+new MutationObserver(schedule).observe(document.body,{childList:true,subtree:true});schedule();
+})();
