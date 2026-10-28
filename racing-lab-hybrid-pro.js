@@ -1962,3 +1962,202 @@ const obs=new MutationObserver(()=>{if(scheduled)return;scheduled=true;requestAn
 
   schedule();
 })();
+
+/* RACING LAB — FORECAST INTEGRITY V1
+   Read-only: does not change model predictions.
+*/
+(function () {
+  "use strict";
+
+  if (window.RacingLabIntegrity) return;
+
+  function audit(records, races, options = {}) {
+    const grouped = new Map();
+
+    for (const horse of Array.isArray(records) ? records : []) {
+      if (!horse || typeof horse.race !== "string") continue;
+
+      if (!grouped.has(horse.race)) {
+        grouped.set(horse.race, []);
+      }
+
+      grouped.get(horse.race).push(horse);
+    }
+
+    const raceIds = new Set([
+      ...grouped.keys(),
+      ...(Array.isArray(races) ? races : [])
+        .map(r => r.id)
+        .filter(Boolean)
+    ]);
+
+    return [...raceIds].map(id => {
+      const field = grouped.get(id) || [];
+      const issues = [];
+      const names = new Set();
+      let total = 0;
+
+      for (const horse of field) {
+        const name = String(horse.name || "").trim();
+
+        if (!name) {
+          issues.push("Missing runner name");
+        }
+
+        if (names.has(name)) {
+          issues.push("Duplicate runner: " + name);
+        }
+
+        names.add(name);
+
+        if (
+          typeof horse.p !== "number" ||
+          !Number.isFinite(horse.p) ||
+          horse.p < 0 ||
+          horse.p > 100
+        ) {
+          issues.push("Invalid probability: " + name);
+        } else {
+          total += horse.p;
+        }
+      }
+
+      if (field.length < 2) {
+        issues.push("Insufficient runner forecasts");
+      }
+
+      if (Math.abs(total - 100) >= 0.16) {
+        issues.push("Field total differs from 100%");
+      }
+
+      const race = (Array.isArray(races) ? races : [])
+        .find(r => r.id === id);
+
+      if (
+        race &&
+        Number.isFinite(Number(race.n)) &&
+        Number(race.n) > field.length
+      ) {
+        issues.push(
+          "Missing runner forecasts: " +
+          (Number(race.n) - field.length)
+        );
+      }
+
+      return {
+        race: id,
+        model: options.model || "V3-H3-S3 provisional",
+        date: options.date || null,
+        scenario: "archived-base",
+        runners: field.length,
+        total: Math.round(total * 10000) / 10000,
+        complete: issues.length === 0,
+        issues: [...new Set(issues)]
+      };
+    });
+  }
+
+  window.RacingLabIntegrity = Object.freeze({ audit });
+
+  function getAppData() {
+    try {
+      return Function(
+        "return typeof DATA !== 'undefined' ? DATA : null"
+      )();
+    } catch {
+      return null;
+    }
+  }
+
+  function getAppRaces() {
+    try {
+      return Function(
+        "return typeof getRaces === 'function' ? getRaces() : []"
+      )();
+    } catch {
+      return [];
+    }
+  }
+
+  function paint() {
+    const screen = document.getElementById("screen");
+    if (!screen) return;
+
+    const activePage = document.querySelector(
+      '.navbtn.active[data-page]'
+    );
+
+    if (activePage?.dataset.page !== "quality") return;
+
+    if (screen.querySelector("[data-integrity-report]")) return;
+
+    const data = getAppData();
+
+    if (!data || !Array.isArray(data.records)) return;
+
+    const rows = audit(
+      data.records,
+      getAppRaces(),
+      { date: data.date }
+    );
+
+    const flagged = rows.filter(r => !r.complete);
+
+    const section = document.createElement("section");
+    section.className = "card section-space";
+    section.dataset.integrityReport = "true";
+
+    const heading = document.createElement("h2");
+    heading.textContent = "Forecast Integrity";
+    section.appendChild(heading);
+
+    const summary = document.createElement("p");
+    summary.textContent =
+      rows.length + " races checked · " +
+      flagged.length + " flagged · " +
+      "Archived base forecast · Read-only";
+
+    section.appendChild(summary);
+
+    for (const race of flagged) {
+      const line = document.createElement("p");
+
+      line.textContent =
+        race.race + " · " +
+        race.total.toFixed(2) + "% · " +
+        race.issues.join("; ");
+
+      section.appendChild(line);
+    }
+
+    if (flagged.length === 0) {
+      const success = document.createElement("p");
+      success.textContent =
+        "No structural issues detected. " +
+        "Predictive accuracy and calibration remain unverified.";
+
+      section.appendChild(success);
+    }
+
+    screen.appendChild(section);
+  }
+
+  let scheduled = false;
+
+  function schedule() {
+    if (scheduled) return;
+    scheduled = true;
+
+    queueMicrotask(() => {
+      scheduled = false;
+      paint();
+    });
+  }
+
+  new MutationObserver(schedule).observe(
+    document.body,
+    { childList: true, subtree: true }
+  );
+
+  schedule();
+})();
