@@ -1,0 +1,135 @@
+name: Racing Lab V5 - Saturday Control Centre
+on:
+  schedule:
+    # Brisbane Sat 06:30, 07:00, 07:20, 07:30 (Friday UTC)
+    - cron: '30 20 * * 5'
+    - cron: '0 21 * * 5'
+    - cron: '20 21 * * 5'
+    - cron: '30 21 * * 5'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: racing-lab-v5
+  cancel-in-progress: false
+jobs:
+  race-day:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check sources, validate board, prepare Top 10, and lock if scheduled
+        env:
+          SCHEDULE: ${{ github.event.schedule }}
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          node <<'NODE'
+          const fs=require('node:fs'),crypto=require('node:crypto');
+          const parts=new Intl.DateTimeFormat('en-CA',{timeZone:'Australia/Brisbane',weekday:'short',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
+          const t=Object.fromEntries(parts.map(x=>[x.type,x.value]));
+          const today=`${t.year}-${t.month}-${t.day}`;
+          const report={schema_version:1,checked_at_utc:new Date().toISOString(),brisbane_date:today,stage:process.env.SCHEDULE||'manual',sources:[],issues:[],status:'CHECKING',note:'Source connectivity only; this does not download live scratchings, verify track conditions or automatically approve forecasts.'};
+          const sources=[
+            ['Racing Australia scratchings','https://www.racingaustralia.horse/FreeFields/Scratchings.aspx'],
+            ['Racing Queensland open data','https://www.racingqueensland.com.au/about/reports-and-data/open-data'],
+            ['Bureau of Meteorology','https://www.bom.gov.au/']
+          ];
+          async function run(){
+            for(const [name,url] of sources){
+              try{
+                const res=await fetch(url,{signal:AbortSignal.timeout(9000),headers:{'User-Agent':'RacingLabResearch/1.0'}});
+                report.sources.push({name,http_status:res.status,reachable:res.ok});
+              }catch(e){report.sources.push({name,reachable:false,error:String(e.message)});}
+            }
+            let board;
+            try{board=JSON.parse(fs.readFileSync('published-board.json','utf8'));}
+            catch(e){report.issues.push('Cannot read published-board.json: '+e.message);}
+            if(t.weekday!=='Sat')report.issues.push('Not Brisbane Saturday');
+            if(board){
+              const p=board.publication||{};
+              if(p.date!==today)report.issues.push('Board date is not this Saturday');
+              if(p.status!=='PUBLISHED'||p.reviewed!==true||p.frozen!==true)report.issues.push('Board is not published, reviewed and frozen');
+              if(!p.finalFieldCheckAt)report.issues.push('Missing final field-check timestamp');
+              if(!Array.isArray(board.races)||!Array.isArray(board.records))report.issues.push('Runner-level forecasts unavailable');
+              if(Array.isArray(board.races)&&Array.isArray(board.records)){
+                const byRace=new Map();
+                for(const r of board.records){
+                  if(r.status!=='ACTIVE')continue;
+                  if(!r.race||!r.name||!Number.isFinite(Number(r.p))||Number(r.p)<=0||Number(r.p)>100){
+                    report.issues.push('Invalid active runner record');continue;
+                  }
+                  const a=byRace.get(r.race)||[];a.push(r);byRace.set(r.race,a);
+                }
+                const picks=[];
+                if(board.races.length<10)report.issues.push('Fewer than ten races');
+                for(const race of board.races){
+                  const runners=byRace.get(race.id)||[];
+                  if(race.fieldVerified!==true)report.issues.push(`${race.id}: field not verified`);
+                  if(runners.length<2||runners.length!==race.declaredActiveCount)report.issues.push(`${race.id}: runner count mismatch`);
+                  const total=runners.reduce((s,r)=>s+Number(r.p),0);
+                  if(Math.abs(total-100)>0.15)report.issues.push(`${race.id}: probabilities do not sum to 100`);
+                  const m=/^(.+)_R(\d+)$/.exec(race.id||'');
+                  if(!m)report.issues.push(`${race.id}: invalid race ID`);
+                  if(m&&runners.length){
+                    const leader=[...runners].sort((a,b)=>Number(b.p)-Number(a.p))[0];
+                    picks.push({meeting:m[1],race:Number(m[2]),horse:leader.name,model:board.model||'unspecified',predicted_win_pct:Number(leader.p),reliability:null,warning_flags:[]});
+                  }
+                }
+                if(report.issues.length===0){
+                  picks.sort((a,b)=>b.predicted_win_pct-a.predicted_win_pct||a.meeting.localeCompare(b.meeting)||a.race-b.race);
+                  board.selections=picks.slice(0,10);
+                  report.top10=board.selections;
+                  report.status='READY_FOR_LOCK';
+                  // Only scheduled 07:30 UTC-Friday execution may lock; manual runs are QA-only.
+                  if(process.env.EVENT_NAME==='schedule'&&process.env.SCHEDULE==='30 21 * * 5'){
+                    const dest=`locked-selections/${today}.json`;
+                    if(fs.existsSync(dest)){report.status='ALREADY_LOCKED';}
+                    else{
+                      fs.writeFileSync('published-board.json',JSON.stringify(board,null,2)+'\n');
+                      fs.mkdirSync('locked-selections',{recursive:true});
+                      const source=fs.readFileSync('published-board.json');
+                      const snapshot={schema_version:1,date:today,locked_at_utc:new Date().toISOString(),lock_time_zone:'Australia/Brisbane',model_source:'published-board.json',source_sha256:crypto.createHash('sha256').update(source).digest('hex'),status:'LOCKED',retrospective:false,selections:board.selections};
+                      fs.writeFileSync(dest,JSON.stringify(snapshot,null,2)+'\n',{flag:'wx'});
+                      report.status='LOCKED';
+                    }
+                  }
+                }
+              }
+            }
+            try{
+              const history=JSON.parse(fs.readFileSync('results-history.json','utf8'));
+              const records=Array.isArray(history.records)?history.records:[];
+              const verified=records.filter(r=>r.verified===true&&Number.isInteger(Number(r.finish_position))&&Number(r.finish_position)>0);
+              report.historical_retrospective={verified_selections:verified.length,wins:verified.filter(r=>Number(r.finish_position)===1).length,note:'Historical records are retrospective; do not combine with genuine pre-race locked hit rate.'};
+            }catch(e){report.historical_retrospective={error:e.message};}
+            if(report.status==='CHECKING')report.status='BLOCKED';
+            fs.writeFileSync('racing-lab-v5-report.json',JSON.stringify(report,null,2)+'\n');
+            console.log(JSON.stringify(report,null,2));
+            if(report.status==='BLOCKED')process.exitCode=1;
+          }
+          run().catch(e=>{
+            report.status='ERROR';report.issues.push(e.message);
+            fs.writeFileSync('racing-lab-v5-report.json',JSON.stringify(report,null,2)+'\n');
+            console.error(e);process.exitCode=1;
+          });
+          NODE
+      - name: Upload consolidated QA report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: racing-lab-v5-report
+          path: racing-lab-v5-report.json
+          if-no-files-found: warn
+      - name: Commit immutable approved snapshot
+        if: success() && github.event_name == 'schedule' && github.event.schedule == '30 21 * * 5'
+        run: |
+          if [[ -n "$(git status --porcelain -- published-board.json locked-selections/)" ]]; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add published-board.json locked-selections/
+            git commit -m "Lock Saturday Top 10 V5"
+            git push
+          fi
