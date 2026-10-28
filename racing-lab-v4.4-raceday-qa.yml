@@ -1,0 +1,61 @@
+name: V4.4 Saturday race-day QA
+on:
+  schedule:
+    # Brisbane Saturday 06:30, 07:00, 07:20 (Friday UTC)
+    - cron: '30 20 * * 5'
+    - cron: '0 21 * * 5'
+    - cron: '20 21 * * 5'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate Saturday publication and runner data
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const board = JSON.parse(fs.readFileSync('published-board.json','utf8'));
+          const p = board.publication || {};
+          const parts = new Intl.DateTimeFormat('en-CA',{timeZone:'Australia/Brisbane',year:'numeric',month:'2-digit',day:'2-digit',weekday:'short'}).formatToParts(new Date());
+          const f = Object.fromEntries(parts.map(x=>[x.type,x.value]));
+          const today = `${f.year}-${f.month}-${f.day}`;
+          const issues=[];
+          if(f.weekday!=='Sat') issues.push('Not Brisbane Saturday');
+          if(p.date!==today) issues.push('Publication date not current Saturday');
+          if(p.status!=='PUBLISHED'||p.reviewed!==true||p.frozen!==true) issues.push('Publication not explicitly approved');
+          if(!Array.isArray(board.races)||!Array.isArray(board.records)) issues.push('Runner-level forecasts missing');
+          if(!p.finalFieldCheckAt) issues.push('No final field-check timestamp');
+          if(!issues.length){
+            const byRace=new Map();
+            for(const r of board.records){
+              if(r.status!=='ACTIVE')continue;
+              if(!r.race||!r.name||!Number.isFinite(Number(r.p))||Number(r.p)<=0||Number(r.p)>100){issues.push('Invalid active runner');continue;}
+              const a=byRace.get(r.race)||[];a.push(r);byRace.set(r.race,a);
+            }
+            for(const race of board.races){
+              const runners=byRace.get(race.id)||[];
+              if(race.fieldVerified!==true)issues.push(`${race.id}: field unverified`);
+              if(runners.length!==race.declaredActiveCount||runners.length<2)issues.push(`${race.id}: runner count mismatch`);
+              if(Math.abs(runners.reduce((s,r)=>s+Number(r.p),0)-100)>0.15)issues.push(`${race.id}: probabilities not 100%`);
+            }
+            if(board.races.length<10)issues.push('Fewer than ten races');
+          }
+          const report={checked_at_utc:new Date().toISOString(),brisbane_date:today,status:issues.length?'BLOCKED':'READY_FOR_LOCK',issues};
+          fs.writeFileSync('raceday-qa-report.json',JSON.stringify(report,null,2)+'\n');
+          console.log(JSON.stringify(report,null,2));
+          if(issues.length)process.exitCode=1;
+          NODE
+      - name: Upload QA report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: race-day-qa-report
+          path: raceday-qa-report.json
+          if-no-files-found: warn
