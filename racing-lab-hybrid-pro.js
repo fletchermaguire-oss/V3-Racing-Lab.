@@ -50,3 +50,170 @@ input,select{background:#0e2730!important;border:1px solid #24605c!important;bor
 function install(){if(document.getElementById('racing-lab-hybrid-pro-style'))return;const style=document.createElement('style');style.id='racing-lab-hybrid-pro-style';style.textContent=CSS;document.head.appendChild(style);const mount=()=>{const bar=document.querySelector('.topbar-right');if(bar&&!bar.querySelector('.hp-mode-chip')){const chip=document.createElement('span');chip.className='hp-mode-chip';chip.textContent='HYBRID PRO';chip.title='Visual makeover active; data and simulations unchanged';bar.prepend(chip)}};mount();const observer=new MutationObserver(()=>{if(!document.body.isConnected)return;mount()});observer.observe(document.body,{childList:true,subtree:true});}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install,{once:true});else install();
 })();
+
+/* HYBRID PRO — COMMAND CENTRE V2 */
+(() => {
+  const css = `
+    .hp-command {
+      display: grid;
+      grid-template-columns: 1.7fr 1fr;
+      gap: 14px;
+      margin: 18px 0 24px;
+    }
+    .hp-main {
+      min-height: 320px;
+      padding: 32px;
+      border-radius: 16px;
+      border: 1px solid #188c70;
+      background:
+        radial-gradient(circle at 85% 20%,
+          #167b6155, transparent 55%),
+        linear-gradient(120deg, #071820, #103e3a);
+      box-shadow: 0 20px 50px #0008;
+    }
+    .hp-kicker {
+      color: #38f2b3;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 3px;
+    }
+    .hp-main h2 {
+      font-size: clamp(40px, 5vw, 70px);
+      line-height: 1;
+      letter-spacing: -3px;
+      margin: 28px 0 18px;
+      color: white;
+    }
+    .hp-main h2 span { color: #39efb1; }
+    .hp-main p {
+      color: #aacbc5;
+      max-width: 460px;
+      line-height: 1.7;
+      font-size: 13px;
+    }
+    .hp-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 25px;
+    }
+    .hp-actions button {
+      padding: 13px 17px;
+      border-radius: 7px;
+      border: 1px solid #32eab1;
+      background: #2be5a8;
+      color: #05231c;
+      font-weight: 900;
+      cursor: pointer;
+    }
+    .hp-actions button + button {
+      background: #10332f;
+      color: #baffdf;
+    }
+    .hp-side {
+      display: grid;
+      gap: 14px;
+    }
+    .hp-panel {
+      padding: 22px;
+      border-radius: 14px;
+      border: 1px solid #21665a;
+      background: linear-gradient(140deg,
+        #123533, #091923);
+    }
+    .hp-panel small {
+      color: #43efb7;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+    .hp-panel h3 {
+      color: #f0fff9;
+      font-size: 21px;
+      margin: 18px 0 8px;
+    }
+    .hp-panel p {
+      color: #a5c6bf;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+    @media (max-width: 850px) {
+      .hp-command { grid-template-columns: 1fr; }
+      .hp-main { padding: 24px; }
+      .hp-side { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 550px) {
+      .hp-side { grid-template-columns: 1fr; }
+      .hp-main h2 { font-size: 44px; }
+    }
+  `;
+
+  const style = document.createElement("style");
+  style.textContent = css;
+  document.head.appendChild(style);
+
+  function enhance() {
+    const screen = document.querySelector("#screen");
+    if (!screen) return;
+
+    const home = document.querySelector(
+      '.navbtn[data-page="home"].active'
+    );
+    if (!home) return;
+    if (screen.querySelector(".hp-command")) return;
+
+    const panel = document.createElement("section");
+    panel.className = "hp-command";
+    panel.innerHTML = `
+      <div class="hp-main">
+        <div class="hp-kicker">
+          RACING LAB / HYBRID PRO
+        </div>
+        <h2>THE RACE.<br><span>DECODED.</span></h2>
+        <p>
+          Professional racing intelligence.
+          Explore whole-field probabilities,
+          runner comparisons and race simulations.
+        </p>
+        <div class="hp-actions">
+          <button data-page="races">
+            EXPLORE RACES ↗
+          </button>
+          <button data-page="simulator">
+            LAUNCH SIMULATOR ◉
+          </button>
+        </div>
+      </div>
+      <div class="hp-side">
+        <div class="hp-panel">
+          <small>01 / ANALYSIS DESK</small>
+          <h3>ELITE TRADER</h3>
+          <p>Race forecasts, rankings,
+          quality checks and runner comparisons.</p>
+        </div>
+        <div class="hp-panel">
+          <small>02 / RACE ENGINE</small>
+          <h3>IMMERSIVE RACE VIEW</h3>
+          <p>Visual race simulation,
+          runner tracking and replay controls.</p>
+        </div>
+      </div>
+    `;
+
+    screen.prepend(panel);
+    panel.querySelectorAll("[data-page]")
+      .forEach(button => {
+        button.addEventListener("click", () => {
+          document.querySelector(
+            `.sidebar .navbtn[data-page="${button.dataset.page}"]`
+          )?.click();
+        });
+      });
+  }
+
+  const observer = new MutationObserver(enhance);
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+  enhance();
+})();
