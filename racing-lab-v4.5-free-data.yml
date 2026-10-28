@@ -1,0 +1,49 @@
+name: V4.5 Free race-day data checks
+on:
+  schedule:
+    - cron: '15 20 * * 5'
+    - cron: '45 20 * * 5'
+    - cron: '15 21 * * 5'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check publicly accessible official racing pages
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const urls = [
+            {name:'Racing Australia scratchings',url:'https://www.racingaustralia.horse/FreeFields/Scratchings.aspx'},
+            {name:'Racing Queensland open data',url:'https://www.racingqueensland.com.au/about/reports-and-data/open-data'},
+            {name:'Bureau of Meteorology',url:'https://www.bom.gov.au/'}
+          ];
+          (async()=>{
+            const checks=[];
+            for(const item of urls){
+              try{
+                const res=await fetch(item.url,{signal:AbortSignal.timeout(12000),headers:{'User-Agent':'RacingLabPersonalResearch/1.0'}});
+                checks.push({name:item.name,url:item.url,http_status:res.status,reachable:res.ok,checked_at:new Date().toISOString()});
+              }catch(e){checks.push({name:item.name,url:item.url,reachable:false,error:String(e.message),checked_at:new Date().toISOString()});}
+            }
+            const board=JSON.parse(fs.readFileSync('published-board.json','utf8'));
+            const report={schema_version:1,checked_at:new Date().toISOString(),note:'Connectivity checks only. Does NOT ingest runner data, confirm scratchings, approve forecasts or change probabilities.',publication_status:board.publication?.status??'UNKNOWN',checks};
+            fs.writeFileSync('free-data-check-report.json',JSON.stringify(report,null,2)+'\n');
+            console.log(JSON.stringify(report,null,2));
+          })().catch(e=>{console.error(e);process.exitCode=1});
+          NODE
+      - name: Save data-source check report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v45-free-data-check
+          path: free-data-check-report.json
+          if-no-files-found: warn
