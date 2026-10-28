@@ -2269,3 +2269,306 @@ function activate(){
 let pending=false;function schedule(){if(pending)return;pending=true;requestAnimationFrame(()=>{pending=false;try{activate()}catch(e){console.error('Hybrid Ultimate:',e)}})}
 new MutationObserver(schedule).observe(document.body,{childList:true,subtree:true});schedule();
 })();
+
+/* RACING LAB — TOP 3 CONTENDER INTELLIGENCE V1 */
+(() => {
+  "use strict";
+
+  if (window.__RL_TOP3_INTELLIGENCE__) return;
+  window.__RL_TOP3_INTELLIGENCE__ = true;
+
+  const style = document.createElement("style");
+  style.textContent = `
+    #screen .hu-board > .hu-runner,
+    #screen .hu-board > .hu-foot {
+      display: none !important;
+    }
+
+    #screen .ri-card {
+      background: #11232c;
+      border: 1px solid #31515a;
+      border-radius: 14px;
+      padding: 15px;
+      margin: 12px 0;
+      color: #dce9eb;
+    }
+
+    #screen .ri-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+    }
+
+    #screen .ri-head b {
+      color: white;
+      font-size: 17px;
+    }
+
+    #screen .ri-pct {
+      color: #5be5bd;
+      font-weight: 800;
+      font-size: 22px;
+      white-space: nowrap;
+    }
+
+    #screen .ri-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    #screen .ri-note {
+      background: #1a3039;
+      padding: 11px;
+      border-radius: 9px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    #screen .ri-note strong {
+      display: block;
+      color: white;
+      margin-bottom: 4px;
+    }
+
+    #screen .ri-all summary {
+      color: #5be5bd;
+      cursor: pointer;
+      padding: 12px 0;
+      font-weight: 700;
+    }
+
+    #screen .ri-row {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #31515a;
+      padding: 7px 0;
+      font-size: 13px;
+    }
+
+    #screen .ri-muted {
+      color: #9fb5ba;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 480px) {
+      #screen .ri-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+
+  function make(tag, className, content) {
+    const element = document.createElement(tag);
+    if (className) element.className = className;
+    if (content !== undefined) {
+      element.textContent = content;
+    }
+    return element;
+  }
+
+  function render() {
+    const board = document.querySelector("#screen .hu-board");
+
+    if (!board || board.querySelector(".ri-root")) return;
+
+    const raceId = document.querySelector(
+      '[data-change="race-jump"]'
+    )?.value;
+
+    const data = window.RacingLabApp?.data || window.DATA;
+
+    const field = (data?.records || [])
+      .filter(h => h.race === raceId && Number.isFinite(h.p))
+      .sort((a, b) => b.p - a.p);
+
+    if (!field.length) return;
+
+    const root = make("div", "ri-root");
+
+    root.appendChild(
+      make("h3", "", "TOP 3 CONTENDERS · RACE INTELLIGENCE")
+    );
+
+    const overview = make("section", "ri-card");
+    overview.appendChild(
+      make("b", "", "Race Map & Scenario Analysis")
+    );
+
+    const overviewGrid = make("div", "ri-grid");
+
+    const overviewItems = [
+      [
+        "Model leader",
+        field[0].name + " · " + field[0].p.toFixed(2) + "%"
+      ],
+      [
+        "Separation",
+        field.length > 1
+          ? (field[0].p - field[1].p).toFixed(2) +
+            " percentage points"
+          : "Unavailable"
+      ],
+      [
+        "Likely pace",
+        "Unverified. Speed maps and previous settling " +
+        "positions are needed for a reliable projection."
+      ],
+      [
+        "What changes the rankings?",
+        "Scratchings, tempo, barriers, track bias and " +
+        "new form evidence could change the outcome."
+      ]
+    ];
+
+    overviewItems.forEach(([heading, body]) => {
+      const note = make("div", "ri-note");
+      note.appendChild(make("strong", "", heading));
+      note.appendChild(make("span", "", body));
+      overviewGrid.appendChild(note);
+    });
+
+    overview.appendChild(overviewGrid);
+    root.appendChild(overview);
+
+    field.slice(0, 3).forEach((horse, index) => {
+      const card = make("article", "ri-card");
+      const header = make("div", "ri-head");
+      const name = make("div", "");
+
+      const rankLabel = [
+        "#1 · MODEL LEADER",
+        "#2 · MAIN DANGER",
+        "#3 · THIRD CONTENDER"
+      ][index];
+
+      name.appendChild(make("small", "", rankLabel));
+      name.appendChild(document.createElement("br"));
+      name.appendChild(make("b", "", horse.name));
+
+      header.appendChild(name);
+      header.appendChild(
+        make("div", "ri-pct", horse.p.toFixed(2) + "%")
+      );
+
+      card.appendChild(header);
+
+      const grid = make("div", "ri-grid");
+
+      const positives =
+        "Ranked #" + (index + 1) +
+        " by the saved forecasting model." +
+        (Number.isFinite(horse.barrier)
+          ? " Recorded barrier: " + horse.barrier + "."
+          : "") +
+        " Specific form strengths require verified evidence.";
+
+      const negatives = index === 0
+        ? "The rest of the field collectively holds " +
+          (100 - horse.p).toFixed(2) +
+          "% of the saved probability. The leader is not a certainty."
+        : "Higher-ranked rivals have stronger model forecasts. " +
+          "Specific weaknesses still require form verification.";
+
+      const notes = [
+        ["✓ Positives", positives],
+        ["! Risks & negatives", negatives],
+        [
+          "Winning run & pace scenario",
+          "A horse-specific winning run cannot be reliably " +
+          "projected until its running style, early speed and " +
+          "sectional history are verified."
+        ],
+        [
+          "Why this percentage?",
+          "Saved model probability: " +
+          horse.p.toFixed(2) + "%." +
+          (Number.isFinite(horse.rating)
+            ? " Model rating: " + horse.rating + "."
+            : "") +
+          " Detailed factor contributions are not yet available."
+        ]
+      ];
+
+      notes.forEach(([heading, body]) => {
+        const note = make("div", "ri-note");
+        note.appendChild(make("strong", "", heading));
+        note.appendChild(make("span", "", body));
+        grid.appendChild(note);
+      });
+
+      card.appendChild(grid);
+      root.appendChild(card);
+    });
+
+    const fullField = make("details", "ri-all");
+
+    fullField.appendChild(
+      make(
+        "summary",
+        "",
+        "View full field · " + field.length + " runners"
+      )
+    );
+
+    field.forEach((horse, index) => {
+      const row = make("div", "ri-row");
+
+      row.appendChild(
+        make("span", "", (index + 1) + ". " + horse.name)
+      );
+
+      row.appendChild(
+        make("b", "", horse.p.toFixed(2) + "%")
+      );
+
+      fullField.appendChild(row);
+    });
+
+    root.appendChild(fullField);
+
+    const total = field.reduce(
+      (sum, horse) => sum + horse.p,
+      0
+    );
+
+    root.appendChild(
+      make(
+        "p",
+        "ri-muted",
+        "Archived forecast · Field total " +
+        total.toFixed(2) +
+        "%. Original simulator and stored forecasts are unchanged."
+      )
+    );
+
+    board.appendChild(root);
+  }
+
+  let scheduled = false;
+
+  new MutationObserver(() => {
+    if (scheduled) return;
+
+    scheduled = true;
+
+    requestAnimationFrame(() => {
+      scheduled = false;
+
+      try {
+        render();
+      } catch (error) {
+        console.error("Racing Lab Top 3:", error);
+      }
+    });
+  }).observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+
+  render();
+})();
