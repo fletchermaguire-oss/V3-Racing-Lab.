@@ -371,3 +371,528 @@ function decorate(){
 }
 const obs=new MutationObserver(()=>{if(scheduled)return;scheduled=true;requestAnimationFrame(decorate)});if(document.body)obs.observe(document.body,{childList:true,subtree:true});decorate();
 })();
+
+/* RACING LAB V4 — STRUCTURAL DASHBOARD REBUILD */
+(() => {
+  "use strict";
+
+  if (window.__RACING_LAB_V4__) return;
+  window.__RACING_LAB_V4__ = true;
+
+  const style = document.createElement("style");
+  style.id = "racing-lab-v4-layout";
+
+  style.textContent = `
+    /* Main application */
+    body {
+      background: #050a10 !important;
+    }
+
+    .app {
+      background: #050a10 !important;
+    }
+
+    #screen {
+      max-width: 1900px !important;
+      margin: 0 auto !important;
+    }
+
+    /* New structural dashboard */
+    .v4-workspace {
+      display: grid;
+      grid-template-columns: minmax(0, 1.8fr) minmax(290px, 1fr);
+      gap: 18px;
+      align-items: start;
+      margin-top: 20px;
+    }
+
+    .v4-main,
+    .v4-aside {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .v4-main > *,
+    .v4-aside > * {
+      min-width: 0;
+    }
+
+    .v4-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      padding: 28px;
+      border-radius: 20px;
+      background:
+        radial-gradient(circle at 85% 0%,
+          rgba(47, 234, 172, .14), transparent 42%),
+        linear-gradient(125deg, #102a35, #09131e 75%);
+      border: 1px solid rgba(58, 237, 183, .28);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .v4-header::after {
+      content: "";
+      position: absolute;
+      width: 270px;
+      height: 270px;
+      border: 1px solid rgba(65, 242, 185, .12);
+      border-radius: 50%;
+      right: -90px;
+      top: -150px;
+      pointer-events: none;
+    }
+
+    .v4-eyebrow {
+      color: #48eab9;
+      font-size: 10px;
+      letter-spacing: .23em;
+      font-weight: 900;
+      margin-bottom: 11px;
+    }
+
+    .v4-title {
+      font-size: clamp(32px, 4.3vw, 64px);
+      line-height: .98;
+      font-weight: 950;
+      letter-spacing: -.07em;
+      color: #f2fffb;
+      margin: 0 0 12px;
+    }
+
+    .v4-title span {
+      color: #40e9b2;
+    }
+
+    .v4-description {
+      font-size: 13px;
+      color: #9cb7bd;
+      max-width: 510px;
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    .v4-header-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      min-width: 175px;
+      z-index: 1;
+    }
+
+    .v4-action {
+      appearance: none;
+      border: 1px solid #34636b;
+      background: #142b38;
+      color: #eafff8;
+      border-radius: 11px;
+      padding: 13px 17px;
+      cursor: pointer;
+      font-weight: 850;
+      font-size: 12px;
+      text-align: left;
+    }
+
+    .v4-action.primary {
+      background: linear-gradient(110deg, #38efb2, #19b9bb);
+      border-color: transparent;
+      color: #05222a;
+    }
+
+    .v4-action:hover {
+      filter: brightness(1.12);
+    }
+
+    .v4-panel {
+      border: 1px solid rgba(130, 183, 200, .19);
+      border-radius: 18px;
+      background: linear-gradient(155deg, #101f2e, #09141f);
+      overflow: hidden;
+      min-width: 0;
+    }
+
+    .v4-panel-heading {
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(130, 183, 200, .16);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .v4-panel-heading strong {
+      font-size: 11px;
+      font-weight: 900;
+      color: #e8fcf7;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .v4-panel-heading small {
+      color: #43dbae;
+      font-size: 9px;
+      letter-spacing: .1em;
+      font-weight: 800;
+    }
+
+    .v4-panel-body {
+      padding: 15px;
+      min-width: 0;
+    }
+
+    .v4-panel-body > .grid {
+      width: 100%;
+    }
+
+    .v4-panel-body > .kpis {
+      display: grid !important;
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+
+    .v4-panel-body .card {
+      margin: 0;
+    }
+
+    .v4-panel-body .grid.two,
+    .v4-panel-body .grid.three {
+      grid-template-columns: 1fr !important;
+    }
+
+    .v4-aside .v4-panel {
+      position: relative;
+    }
+
+    .v4-status {
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      border-radius: 13px;
+      background: #0e2830;
+      border: 1px solid #25595b;
+      color: #a9d7d1;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .v4-status-dot {
+      width: 8px;
+      height: 8px;
+      background: #3be8b1;
+      border-radius: 50%;
+      box-shadow: 0 0 13px #3be8b1;
+      flex-shrink: 0;
+    }
+
+    .v4-quicklinks {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 9px;
+    }
+
+    .v4-quicklinks button {
+      padding: 16px 12px;
+      background: #102533;
+      border: 1px solid #28515d;
+      color: #d7f4ef;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .v4-quicklinks button:hover {
+      border-color: #3ce6b2;
+      background: #173842;
+    }
+
+    /* Hide the old injected promotional hero on the new homepage */
+    #screen[data-v4-home="true"] > .hp-command {
+      display: none !important;
+    }
+
+    /* More usable race and simulator workspaces */
+    #screen[data-hp3-page="races"] .race-grid {
+      grid-template-columns: repeat(
+        auto-fit, minmax(180px, 1fr)
+      ) !important;
+    }
+
+    #screen[data-hp3-page="simulator"] .s3-stage {
+      min-height: 370px;
+    }
+
+    #screen[data-hp3-page="simulator"] .s3-stage-layout {
+      gap: 20px !important;
+    }
+
+    @media (max-width: 1050px) {
+      .v4-workspace {
+        grid-template-columns: 1fr;
+      }
+
+      .v4-aside {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: start;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .v4-header {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 23px 19px;
+      }
+
+      .v4-header-actions {
+        flex-direction: row;
+        min-width: 0;
+      }
+
+      .v4-action {
+        flex: 1;
+        padding: 12px 10px;
+        font-size: 11px;
+      }
+
+      .v4-workspace {
+        grid-template-columns: 1fr;
+        gap: 13px;
+      }
+
+      .v4-aside {
+        display: flex;
+      }
+
+      .v4-panel-body {
+        padding: 11px;
+      }
+
+      .v4-title {
+        font-size: 37px;
+      }
+
+      .v4-quicklinks {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  `;
+
+  document.head.appendChild(style);
+
+  const panel = (name, tag = "INTELLIGENCE") => {
+    const section = document.createElement("section");
+    section.className = "v4-panel";
+
+    const heading = document.createElement("div");
+    heading.className = "v4-panel-heading";
+
+    const title = document.createElement("strong");
+    title.textContent = name;
+
+    const meta = document.createElement("small");
+    meta.textContent = tag;
+
+    heading.append(title, meta);
+
+    const body = document.createElement("div");
+    body.className = "v4-panel-body";
+
+    section.append(heading, body);
+    return { section, body };
+  };
+
+  function navigate(page) {
+    const button = document.querySelector(
+      '.sidebar .navbtn[data-page="' + page + '"]'
+    );
+
+    if (button) button.click();
+  }
+
+  function action(label, page, primary = false) {
+    const button = document.createElement("button");
+    button.className = "v4-action" + (primary ? " primary" : "");
+    button.textContent = label;
+    button.addEventListener("click", () => navigate(page));
+    return button;
+  }
+
+  function build() {
+    const screen = document.getElementById("screen");
+    if (!screen) return;
+
+    const active = document.querySelector(
+      '.sidebar .navbtn.active[data-page]'
+    );
+
+    if (!active || active.dataset.page !== "home") {
+      screen.removeAttribute("data-v4-home");
+      return;
+    }
+
+    if (screen.querySelector(".v4-workspace")) return;
+
+    // Collect the original dashboard content without cloning it.
+    // Moving existing DOM nodes preserves their event listeners.
+    const original = Array.from(screen.children).filter(el => {
+      return !el.matches(
+        ".hp-command, .hp3-terminal-strip, .v4-header, .v4-workspace"
+      );
+    });
+
+    const header = document.createElement("section");
+    header.className = "v4-header";
+
+    const copy = document.createElement("div");
+    copy.innerHTML = `
+      <div class="v4-eyebrow">
+        RACING LAB / HYBRID PRO V4
+      </div>
+      <h1 class="v4-title">
+        THE RACE.<br><span>DECODED.</span>
+      </h1>
+      <p class="v4-description">
+        Your complete racing research command centre.
+        Analyse saved model forecasts, compare runners,
+        inspect race conditions and explore simulations.
+      </p>
+    `;
+
+    const actions = document.createElement("div");
+    actions.className = "v4-header-actions";
+    actions.append(
+      action("EXPLORE RACES →", "races", true),
+      action("LAUNCH SIMULATOR →", "simulator")
+    );
+
+    header.append(copy, actions);
+
+    const workspace = document.createElement("div");
+    workspace.className = "v4-workspace";
+
+    const main = document.createElement("div");
+    main.className = "v4-main";
+
+    const aside = document.createElement("div");
+    aside.className = "v4-aside";
+
+    const overview = panel("Performance Overview", "SAVED MODEL");
+    const raceCentre = panel("Race Intelligence", "MEETINGS");
+    const research = panel("Research Workspace", "ANALYSIS");
+
+    const rankings = panel("Selection Intelligence", "RANKINGS");
+    const secondary = panel("Additional Intelligence", "RESEARCH");
+
+    // Reuse the original elements so actual data and actions remain.
+    original.forEach(el => {
+      if (el.classList.contains("page-head")) {
+        research.body.appendChild(el);
+      } else if (
+        el.classList.contains("kpis") ||
+        el.querySelector(".kpis")
+      ) {
+        overview.body.appendChild(el);
+      } else if (
+        el.classList.contains("race-grid") ||
+        el.classList.contains("three") ||
+        el.querySelector(".race-grid") ||
+        el.querySelector(".track-card")
+      ) {
+        raceCentre.body.appendChild(el);
+      } else if (
+        el.classList.contains("two") ||
+        el.querySelector(".mini-race")
+      ) {
+        rankings.body.appendChild(el);
+      } else {
+        secondary.body.appendChild(el);
+      }
+    });
+
+    if (overview.body.children.length) main.append(overview.section);
+    if (raceCentre.body.children.length) main.append(raceCentre.section);
+    if (research.body.children.length) main.append(research.section);
+    if (rankings.body.children.length) aside.append(rankings.section);
+    if (secondary.body.children.length) aside.append(secondary.section);
+
+    const quick = panel("Quick Access", "NAVIGATION");
+
+    const links = document.createElement("div");
+    links.className = "v4-quicklinks";
+
+    [
+      ["DAILY TOP 10", "daily"],
+      ["MULTI LAB", "multi"],
+      ["COMPARE", "compare"],
+      ["TRACK WEATHER", "weather"],
+      ["MODEL QUALITY", "quality"],
+      ["CALIBRATION", "calibration"]
+    ].forEach(([label, page]) => {
+      const button = document.createElement("button");
+      button.textContent = label + " ↗";
+      button.addEventListener("click", () => navigate(page));
+      links.appendChild(button);
+    });
+
+    quick.body.appendChild(links);
+    aside.prepend(quick.section);
+
+    const status = document.createElement("div");
+    status.className = "v4-status";
+
+    const dot = document.createElement("span");
+    dot.className = "v4-status-dot";
+
+    const message = document.createElement("span");
+    message.textContent =
+      "Saved research snapshot — verify current conditions";
+
+    status.append(dot, message);
+    aside.prepend(status);
+
+    workspace.append(main, aside);
+
+    const strip = screen.querySelector(
+      ":scope > .hp3-terminal-strip"
+    );
+
+    if (strip) {
+      strip.after(header, workspace);
+    } else {
+      screen.prepend(header, workspace);
+    }
+
+    screen.setAttribute("data-v4-home", "true");
+  }
+
+  // Observe the original app's page replacements.
+  // Schedule at most one rebuild per animation frame.
+  let pending = false;
+
+  function schedule() {
+    if (pending) return;
+
+    pending = true;
+
+    requestAnimationFrame(() => {
+      pending = false;
+      build();
+    });
+  }
+
+  const observer = new MutationObserver(schedule);
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+
+  schedule();
+})();
