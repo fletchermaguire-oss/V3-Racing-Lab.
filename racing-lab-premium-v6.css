@@ -1,0 +1,66 @@
+/* RACING LAB — PREMIUM VISUAL SKIN V6.1
+   Presentation-only override. Existing HTML, data, scripts and model logic remain untouched. */
+:root{
+ --bg:#070b11;--sidebar:#0a111b;--surface:#101923;--surface2:#14222d;--surface3:#1a2a36;
+ --line:#30404d;--line2:#223440;--ink:#f2f8f8;--muted:#a0b3bf;--dim:#788e9b;
+ --accent:#80efbd;--accent2:#42c6a6;--gold:#ffcf83;--danger:#ffaaa8;--blue:#9cbaff;
+ --purple:#c8b5ff;--radius:16px;--shadow:0 16px 50px #0008;
+ font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif
+}
+html{background:#070b11}
+body{background:radial-gradient(ellipse at 66% -16%,#13463b5c,transparent 44%),radial-gradient(ellipse at 100% 60%,#11263b33,transparent 42%),#070b11!important;letter-spacing:-.006em}
+::selection{background:#57e3b077;color:#fff}
+::-webkit-scrollbar{width:9px;height:9px}::-webkit-scrollbar-track{background:#0b131c}::-webkit-scrollbar-thumb{background:#344b54;border:2px solid #0b131c;border-radius:20px}
+.sidebar{background:linear-gradient(165deg,#0d1a24,#080f18 74%)!important;border-right:1px solid #273844!important;box-shadow:10px 0 50px #0002}
+.brand{padding-bottom:33px!important}
+.brand-mark{border-radius:14px!important;box-shadow:0 6px 24px #54daaa33!important}
+.brand-title{font-size:19px!important;letter-spacing:-.055em!important}
+.brand-sub{letter-spacing:.22em!important;font-size:9px!important}
+.nav-group{color:#738e9b!important;letter-spacing:.2em!important;margin-top:7px}
+.navbtn{border:1px solid transparent!important;border-radius:11px!important;transition:background .18s,color .18s,border-color .18s,transform .18s}
+.navbtn:hover{background:#172d37!important;color:#fff!important;transform:translateX(2px)}
+.navbtn.active{background:linear-gradient(90deg,#174638,#17333a)!important;color:#9cfbd0!important;border-color:#2a6657!important;box-shadow:inset 3px 0 #7ef1bc,0 5px 18px #0002}
+.sidebar-foot{background:linear-gradient(145deg,#102b27,#10202a)!important;border-color:#2b594b!important}
+.shell{padding-left:clamp(16px,2.3vw,36px)!important;padding-right:clamp(16px,2.3vw,36px)!important}
+.topbar{height:80px!important;border-bottom-color:#263946!important;backdrop-filter:blur(16px)}
+.eyebrow{letter-spacing:.22em!important;color:#80efbd!important}
+.topbar-left strong{font-size:17px!important}
+.topdate{color:#b2c1cb!important}
+.page{max-width:1640px!important}
+.page-head{margin-bottom:25px!important}
+.page-head h1{font-size:clamp(30px,3.5vw,45px)!important;letter-spacing:-.065em!important;line-height:1.06!important;font-weight:850!important}
+.lede{font-size:13px!important;color:#a7bac5!important}
+button,a,input,select{transition:border-color .18s,background-color .18s,color .18s,box-shadow .18s}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #8af6c4!important;outline-offset:3px}
+button:not(:disabled):active{transform:scale(.985)}
+.pill,.status{border-radius:30px!important;padding:6px 11px!important;font-size:10px!important;letter-spacing:.03em!important}
+.pill.green,.status.good{background:#123a2e!important;color:#a3ffd4!important;border-color:#397c61!important}
+.pill.orange,.status.warn{background:#382a1b!important;color:#ffdb9e!important}
+.pill.red,.status.bad{background:#382323!important;color:#ffb6b3!important}
+:where(.card,.panel,.stat,.metric-card,.race-card,.horse-card,.tile,.widget){border-radius:16px}
+:where(.card,.panel,.stat,.metric-card,.race-card,.horse-card,.tile,.widget){box-shadow:0 8px 28px #0002;transition:box-shadow .2s,border-color .2s,transform .2s}
+:where(.card,.panel,.stat,.metric-card,.race-card,.horse-card,.tile,.widget):hover{border-color:#3c5a61;box-shadow:0 14px 32px #0004}
+table{border-collapse:separate;border-spacing:0;width:100%}
+th{color:#8ca6b4!important;letter-spacing:.1em}
+td{border-bottom-color:#283c48!important}
+tbody tr{transition:background .15s}tbody tr:hover{background:#1b343a66}
+input,select,textarea{background-color:#132632;color:#f1f8f8;border-color:#35505b;border-radius:10px}
+input:focus,select:focus,textarea:focus{border-color:#6be9b7!important;box-shadow:0 0 0 3px #6be9b71c}
+button{border-radius:10px}
+canvas,svg{max-width:100%}
+:where(.modal,.dialog,[role="dialog"]){backdrop-filter:blur(18px);box-shadow:0 30px 90px #000b}
+:where(.chart,.chart-wrap,.chart-container){border-radius:12px}
+a:hover{color:#b4ffdb}
+@media(min-width:1000px){.sidebar{width:232px}.app{grid-template-columns:232px minmax(0,1fr)}}
+@media(max-width:760px){
+ .shell{padding-left:13px!important;padding-right:13px!important;padding-bottom:95px!important}
+ .page{padding-top:19px!important}
+ .page-head{gap:12px!important}
+ .page-head h1{font-size:clamp(28px,7vw,37px)!important}
+ .topbar{height:68px!important}
+ .mobile-nav{background:#0c1822ed!important;backdrop-filter:blur(18px);border-top:1px solid #2d4851!important;box-shadow:0 -12px 32px #0007}
+ .mobile-nav button{min-height:43px}
+ :where(.card,.panel,.stat,.metric-card,.race-card,.horse-card,.tile,.widget){border-radius:13px}
+ th,td{padding-top:11px;padding-bottom:11px}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
