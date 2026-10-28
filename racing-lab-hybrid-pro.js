@@ -1781,7 +1781,7 @@ const obs=new MutationObserver(()=>{if(scheduled)return;scheduled=true;requestAn
     if (screen.querySelector(".et-terminal")) return;
 
     const form = screen.querySelector(":scope > .formrow");
-    const grid = screen.querySelector(":scope > .race-grid");
+    const grid = screen.querySelector(".race-grid");
     const detail = screen.querySelector(":scope > #race-detail");
 
     if (!form || !grid || !detail) return;
