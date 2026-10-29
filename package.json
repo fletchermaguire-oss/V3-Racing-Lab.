@@ -1,1 +1,11 @@
-{"name":"v3-racing-lab-live","private":true,"version":"3.1.0","type":"commonjs","engines":{"node":">=18"}}
+{
+  "name": "v3-racing-lab-live",
+  "private": true,
+  "version": "3.1.0",
+  "type": "commonjs",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "test": "node --test v5/model.qa.cjs && node scratchings-engine.test.js && node test-manual-scratch.js",
+    "check": "node scripts/v5-safe-build.cjs"
+  }
+}
