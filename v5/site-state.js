@@ -19,9 +19,13 @@ function recordedGoingStamp(source){
 }
 function canonical(x){return String(x||'').toUpperCase().replace(/\([^)]*\)/g,'').replace(/[^A-Z0-9]/g,'');}
 function applyOfficialOverlay(input,overlay){
-  if(!overlay||overlay.schema!=='racing-lab-friday-field-overlay/v1')throw Error('Unverified or missing official field overlay');
+  if(!overlay||!['racing-lab-friday-field-overlay/v1','racing-lab-racecard-overlay/v2'].includes(overlay.schema))throw Error('Unverified or missing official field overlay');
   if(overlay.race_date!==input.date)throw Error('Field overlay date mismatch');
-  if(!/^\d{4}-\d{2}-\d{2}$/.test(overlay.checked_date)||overlay.checked_date>=input.date)throw Error('Invalid pre-race overlay date');
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(overlay.checked_date)||overlay.checked_date>input.date)throw Error('Invalid racecard overlay date');
+  if(overlay.checked_date===input.date&&
+     (typeof overlay.checked_at!=='string'||!/^\d{4}-\d{2}-\d{2}T\d\d:\d\d:\d\d(?:\.\d+)?[+-]\d\d:\d\d$/.test(overlay.checked_at)||
+      overlay.checked_at.slice(0,10)!==input.date||!Number.isFinite(Date.parse(overlay.checked_at))))
+    throw Error('Race-day overlay requires a timestamp with local timezone');
   if(overlay.publication_approved!==false)throw Error('A research overlay cannot grant publication approval');
   var next=clone(input),seen=new Set(),index=new Map();
   next.runners.forEach(function(h){
@@ -37,7 +41,7 @@ function applyOfficialOverlay(input,overlay){
   }
   Object.keys(overlay.scratchings||{}).forEach(function(race){
     (overlay.scratchings[race]||[]).forEach(function(horse){
-      var h=resolve(race,horse);h.status='SCRATCHED — 30 October dated official scratching sheet';h.emergency_activated=false;
+      var h=resolve(race,horse);h.status='SCRATCHED — official sheet '+overlay.checked_date;h.emergency_activated=false;
     });
   });
   Object.keys(overlay.emergency_order||{}).forEach(function(race){
@@ -50,7 +54,7 @@ function applyOfficialOverlay(input,overlay){
       h.emergency_activated=i<count;
     });
   });
-  next.official_check_at=overlay.checked_date;
+  next.official_check_at=overlay.checked_at||overlay.checked_date;
   next.official_overlay_notice=overlay.notice;
   next.official_overlay_sources=overlay.source_documents;
   next.publication=Object.assign({},next.publication,{approved:false,model_probabilities_published:false,status:'RESEARCH_ONLY'});
@@ -86,9 +90,12 @@ function create(input,options){
     Curated.validate(checkpoint,data);
     try{
       var saved=storage&&JSON.parse(storage.getItem(archiveKey)||'null');
-      if(saved&&saved.checkpoint_at===checkpoint.as_of&&saved.version===Curated.VERSION){
-        overrides=saved.overrides&&typeof saved.overrides==='object'?saved.overrides:{};
-        history=Array.isArray(saved.history)?saved.history.slice(-60):[];
+      if(saved&&saved.version===Curated.VERSION){
+        history=Array.isArray(saved.history)?saved.history.slice(-59):[];
+        if(saved.checkpoint_at===checkpoint.as_of)overrides=saved.overrides&&typeof saved.overrides==='object'?saved.overrides:{};
+        else history.push({at:new Date().toISOString(),reason:'ARCHIVED_RESEARCH_CHECKPOINT_REPLACED',
+          previous_checkpoint:saved.checkpoint_at,new_checkpoint:checkpoint.as_of,
+          changes:[],source:'NEW_FILE_REVISION',approval:'RESEARCH_ONLY'});
       }
     }catch(e){overrides={};history=[];}
     curated=Curated.assemble(checkpoint,data,board,going,overrides);
@@ -309,11 +316,11 @@ function load(fetcher){
    return r.json();
   }).then(function(data){
    if(data.date!=='2026-10-31')return {data:data,going:null};
-   return f('/v5/official-snapshot-20261030.json',{cache:'no-store'}).then(function(r){
+   return f('/v5/official-latest.json',{cache:'no-store'}).then(function(r){
     if(!r.ok)throw Error('Official snapshot HTTP '+r.status+' (saved board withheld)');
     return r.json();
    }).then(function(overlay){
-    return f('/v5/shortlists/2026-10-30-independent-top10.json',{cache:'no-store'}).then(function(r){
+    return f('/v5/shortlists/current.json',{cache:'no-store'}).then(function(r){
        if(!r.ok)throw Error('Frozen researched Top 10 unavailable: '+r.status);
        return r.json();
       }).then(function(checkpoint){
