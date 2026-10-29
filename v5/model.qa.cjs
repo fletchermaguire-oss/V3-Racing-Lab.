@@ -312,3 +312,27 @@ test('L5 changes remain market-blind, preserve all race sums and expose strength
  const w=b.baseline.records.find(x=>x.horse==='Western Miss');
  assert.ok(sheza.p>w.p,'Cross-race model order now reflects stronger G1 evidence on this dossier');
 });
+
+test('October 24 archived Friday prose form is parsed without allowing future starts',()=>{
+ const d=fixture();
+ d.runners[0].form='Previous Friday source-snapshot race form (not refreshed against Saturday): '+
+ '2nd of 12 30/1/2027 CAULFIELD Margin 0.2 Lengths Distance 1200m SOT G RST OPEN Group G1 Race Foo Prize $10,000 '+
+ ' | 1st of 9 15/1/2027 FLEMINGTON Margin 2.8 Lengths Distance 1400m SOT S RST OPEN Group G3 Race Bar Prize $5,000';
+ d.runners[0].statistics='Career: 3-2-6; Good: 2-1-4; Soft: 1-1-2';
+ const before=M.calculate(d,'Good 4').records.find(x=>x.id==='h0');
+ assert.equal(before.form_audit.accepted,2);
+ assert.equal(before.input_issues.includes('MISSING_PARSEABLE_RECENT_FORM'),false);
+ assert.ok(before.grade_quality>0);
+ assert.ok(before.features.career>0);
+ d.runners[0].form+=' | 1st of 12 13/2/2027 RANDWICK Margin 10 Lengths Distance 1200m SOT G RST OPEN Group G1 Race Future Prize $1';
+ const after=M.calculate(d,'Good 4').records.find(x=>x.id==='h0');
+ assert.equal(after.form_audit.ignored_future,1);
+ assert.equal(after.p_exact,before.p_exact);
+});
+test('non-snapshot prose cannot smuggle dated wins into parsed form',()=>{
+ const d=fixture();
+ d.runners[0].form='Rumour: 1st of 12 30/1/2027 RANDWICK Margin 10 Lengths Distance 1200m SOT G RST OPEN Group G1 Race fabricated';
+ const x=M.calculate(d,'Good 4').records.find(x=>x.id==='h0');
+ assert.equal(x.form_audit.accepted,0);
+ assert.equal(x.grade_quality,0);
+});
