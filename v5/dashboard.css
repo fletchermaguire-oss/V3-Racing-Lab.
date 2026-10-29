@@ -116,3 +116,12 @@ body{background:radial-gradient(ellipse at 65% -23%,#1a3b3a55,transparent 44%),v
 .v5-more-item.active{border-color:#79e9bd;background:#24423e}
 .v5-more-item svg{width:18px;height:18px;flex-shrink:0}
 }
+
+
+/* CRITICAL FIX 2026-10-29: legacy V3/V5 CSS hid the entire V5 application.
+   The restored V5 shell uses .app and <main class="page"> without
+   the old html.ready or per-page .active toggles.
+   Keep these AFTER legacy declarations to make all sections visible. */
+html body .app{display:grid!important}
+html body .app > .shell > main.page{display:block!important;visibility:visible!important;opacity:1!important}
+@media(max-width:780px){html body .app{display:block!important}}
