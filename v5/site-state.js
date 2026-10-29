@@ -1,9 +1,10 @@
 /* One versioned board for the original site and the V5 studio. */
 (function(root,factory){
-  var api=factory(typeof module==='object'&&module.exports?require('./model.js'):root.RacingLabV5Model);
+  var api=factory(typeof module==='object'&&module.exports?require('./model.js'):root.RacingLabV5Model,
+   typeof module==='object'&&module.exports?require('./curated.js'):root.RacingLabV5Curated);
   if(typeof module==='object'&&module.exports)module.exports=api;
   else root.RacingLabV5State=api;
-})(typeof window!=='undefined'?window:globalThis,function(M){
+})(typeof window!=='undefined'?window:globalThis,function(M,Curated){
 'use strict';
 function clone(x){return JSON.parse(JSON.stringify(x));}
 function datedGoing(source,meeting){
@@ -65,8 +66,9 @@ function create(input,options){
   if(!M)throw Error('Formula failed to load');
   options=options||{};
   var source=clone(input),data=clone(source),going={},local=new Set(),listeners=[],live=null,lastError='',lastChange=null;
+  var checkpoint=options.checkpoint||null,overrides={},history=[],curated=null;
   data.races.forEach(function(r){going[r.meeting]=options.going&&options.going[r.meeting]||datedGoing(source,r.meeting);});
-  var storage=options.storage,settingsKey='racing-lab-v5-settings:'+data.date,sourceStamp=recordedGoingStamp(source)+'|'+String(source.official_check_at||'');
+  var storage=options.storage,settingsKey='racing-lab-v5-settings:'+data.date,archiveKey='racing-lab-v5-research:'+data.date,sourceStamp=recordedGoingStamp(source)+'|'+String(source.official_check_at||'');
   try{
     var settings=storage&&JSON.parse(storage.getItem(settingsKey)||'null');
     if(settings&&settings.sourceSavedAt===sourceStamp){
@@ -78,8 +80,64 @@ function create(input,options){
     }
   }catch(e){data=clone(source);local.clear();data.races.forEach(function(r){going[r.meeting]=options.going&&options.going[r.meeting]||datedGoing(source,r.meeting);});}
   var board=M.board(data,{going:going}),key=revision(data,going);
+  if(checkpoint){
+    if(!Curated)throw Error('Research ranking module missing');
+    Curated.validate(checkpoint,data);
+    try{
+      var saved=storage&&JSON.parse(storage.getItem(archiveKey)||'null');
+      if(saved&&saved.checkpoint_at===checkpoint.as_of&&saved.version===Curated.VERSION){
+        overrides=saved.overrides&&typeof saved.overrides==='object'?saved.overrides:{};
+        history=Array.isArray(saved.history)?saved.history.slice(-60):[];
+      }
+    }catch(e){overrides={};history=[];}
+    curated=Curated.assemble(checkpoint,data,board,going,overrides);
+  }
+  function keepArchive(){
+    try{if(storage&&checkpoint)storage.setItem(archiveKey,JSON.stringify({
+      checkpoint_at:checkpoint.as_of,version:Curated.VERSION,overrides:overrides,history:history.slice(-60)}));}catch(e){}
+  }
+  function researchChange(reason,previous){
+    if(!checkpoint)return;
+    const before=previous||curated;
+    curated=Curated.assemble(checkpoint,data,board,going,overrides);
+    if(!before)return;
+    const old=new Map(before.entries.map(x=>[x.id,x]));
+    const changes=[];
+    curated.entries.forEach(x=>{
+      const prior=old.get(x.id);
+      if(!prior)return;
+      const differs=prior.eligible!==x.eligible||prior.form_tier!==x.form_tier||
+        prior.rank!==x.rank||prior.race_day_assessment!==x.race_day_assessment||
+        prior.model_pct!==x.model_pct||prior.track_current!==x.track_current;
+      if(differs)changes.push({horse:x.horse,race_id:x.race_id,
+        old_rank:prior.rank,new_rank:x.rank,old_grade:prior.form_tier,new_grade:x.form_tier,
+        old_status:prior.race_day_assessment,new_status:x.race_day_assessment,
+        old_model_pct:prior.model_pct,new_model_pct:x.model_pct});
+    });
+    if(changes.length){
+      history.push({at:new Date().toISOString(),reason:reason,previous_revision:key,
+        changes:changes,source:'LOCAL_SITE_SESSION_OR_AIRTABLE',approval:'RESEARCH_ONLY'});
+      history=history.slice(-60);
+    }
+    keepArchive();
+  }
+  function setResearchOverride(runnerId,fields){
+    if(!checkpoint||!curated)throw Error('No archived research list loaded');
+    const current=curated.entries.find(x=>x.id===runnerId);
+    if(!current)throw Error('Runner not on the researched list');
+    const entry=Curated.edit(curated,runnerId,{
+      tier:fields&&fields.tier||current.form_tier,
+      rank:fields&&fields.rank!==undefined?fields.rank:current.rank,
+      reason:fields&&fields.reason
+    });
+    const previous=curated;
+    overrides[runnerId]=entry;
+    researchChange('MANUAL_RESEARCH_OVERRIDE: '+entry.reason,previous);
+    notify();
+  }
   function notify(){
     try{if(storage)storage.setItem(settingsKey,JSON.stringify({sourceSavedAt:sourceStamp,going:going,localIds:Array.from(local)}));}catch(e){}
+    keepArchive();
     listeners.slice().forEach(function(fn){fn(api);});
   }
   function noteChange(reason,previous,next){
@@ -99,7 +157,7 @@ function create(input,options){
   function commit(next,nextGoing,reason){
     var result=M.board(next,{going:nextGoing});
     noteChange(reason||'SCENARIO_CHANGE',board,result);
-    data=next;going=nextGoing;board=result;key=revision(data,going);notify();
+    data=next;going=nextGoing;board=result;key=revision(data,going);researchChange(reason||'SCENARIO_CHANGE');notify();
   }
   function setGoing(meeting,value){
     if(!Object.hasOwn(going,meeting))throw Error('Unknown meeting');
@@ -114,7 +172,7 @@ function create(input,options){
     var result=M.board(next,{going:going});
     noteChange(value?'LOCAL_SCRATCHING':'LOCAL_REINSTATEMENT',board,result);
     if(value)local.add(id);else local.delete(id);
-    data=next;board=result;key=revision(data,going);notify();
+    data=next;board=result;key=revision(data,going);researchChange(value?'LOCAL_SCRATCHING':'LOCAL_REINSTATEMENT');notify();
   }
   function applyEvidence(q){
     if(!q||q.status!=='LIVE_RESEARCH_ONLY'||q.truncated||q.publication_approved!==false||!Array.isArray(q.records)||q.records.length!==source.runners.length)
@@ -139,7 +197,7 @@ function create(input,options){
     next.runners.forEach(function(h){if(local.has(h.id))h.status='SCRATCHED — local scenario';});
     var result=M.board(next,{going:going});
     noteChange('AIRTABLE_EVIDENCE_UPDATE',board,result);
-    source=nextSource;data=next;board=result;key=revision(data,going);live={as_of:q.as_of};lastError='';notify();
+    source=nextSource;data=next;board=result;key=revision(data,going);live={as_of:q.as_of};lastError='';researchChange('AIRTABLE_EVIDENCE_UPDATE');notify();
   }
   function rows(race){return board.baseline.records.filter(function(h){return h.race_id===race;});}
   function legacySnapshot(){
@@ -165,7 +223,9 @@ function create(input,options){
       };}),publication:{status:'PROVISIONAL_UNCALIBRATED',approved:false},model_revision:key};
   }
   var api={get data(){return data;},get board(){return board;},get going(){return Object.assign({},going);},
-    get revision(){return key;},get live(){return live;},get error(){return lastError;},get lastChange(){return lastChange;},get localScratchCount(){return local.size;},
+    get revision(){return key;},get live(){return live;},get error(){return lastError;},get lastChange(){return lastChange;},
+    get curated(){return curated;},get researchHistory(){return history.slice();},get researchCheckpoint(){return checkpoint;},
+    setResearchOverride:setResearchOverride,get localScratchCount(){return local.size;},
     get model(){return M;},subscribe:function(fn){listeners.push(fn);return function(){listeners=listeners.filter(function(x){return x!==fn;});};},
     setGoing:setGoing,setLocalScratch:setLocalScratch,isLocalScratch:function(id){return local.has(id);},applyEvidence:applyEvidence,
     reportError:function(message){lastError=message;notify();},rows:rows,
@@ -186,11 +246,16 @@ function load(fetcher){
     if(!r.ok)throw Error('Official snapshot HTTP '+r.status+' (saved board withheld)');
     return r.json();
    }).then(function(overlay){
-    return {data:applyOfficialOverlay(data,overlay),going:overlay.going};
+    return f('/v5/shortlists/2026-10-30-independent-top10.json',{cache:'no-store'}).then(function(r){
+       if(!r.ok)throw Error('Frozen researched Top 10 unavailable: '+r.status);
+       return r.json();
+      }).then(function(checkpoint){
+       return {data:applyOfficialOverlay(data,overlay),going:overlay.going,checkpoint:checkpoint};
+      });
    });
   }).then(function(part){
    var storage;try{storage=typeof localStorage!=='undefined'?localStorage:null;}catch(e){}
-   return create(part.data,{storage:storage,going:part.going});
+   return create(part.data,{storage:storage,going:part.going,checkpoint:part.checkpoint||null});
   }).catch(function(e){pending=null;throw e;});
  }
  return pending;
