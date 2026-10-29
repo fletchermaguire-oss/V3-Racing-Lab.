@@ -1,23 +1,41 @@
-RACING LAB — TOP THREE INTELLIGENCE V3
+RACING LAB — MANUAL SCRATCHINGS & FINAL FIELD REVIEW (v1.0)
 
-This is an additive, evidence-led upgrade for your existing site. It preserves your existing UI, forecasts and simulator.
+INSTALL (one file + one line):
+1. Unzip this package.
+2. Upload racing-lab-manual-scratch.js to the ROOT of the GitHub repository.
+3. Open index.html and insert this line immediately BEFORE </body>:
+   <script src="/racing-lab-manual-scratch.js" defer></script>
+4. Commit. Netlify should deploy if automatic deployment is configured.
 
-INSTALL (2 ACTIONS):
-1. Upload racing-lab-intelligence-v3.js to the ROOT of your GitHub repository (same folder as index.html).
-2. Edit index.html and insert this ONE tag immediately after the existing racing-lab-live-research.js script tag:
-
-<script src="/racing-lab-intelligence-v3.js" defer></script>
-
-Commit changes. Netlify should deploy automatically if connected.
+HOW TO USE:
+- Open Racing Lab > Races and choose a race.
+- At the top of the race details, tick horses to mark as scratched.
+- Tap Apply scratchings. The page reloads to clear any previous simulator run.
+- Confirm the remaining field with Confirm field reviewed.
+- For multi selections, go to Multi Lab; a Final Selection Checkpoint appears.
+  The reviewed selection sheet can be saved only when every selected race is confirmed.
+- To restore a horse, untick it, tap Apply scratchings, and confirm the field again.
 
 WHAT IT DOES:
-- Upgrades the existing top-three cards with specific evidence vs risks and conditional run scenarios.
-- Shows saved model separation, historical settling references and dossier coverage.
-- Uses only evidence actually saved in the site; does not invent form or confidence.
-- Leaves existing simulator and stored forecasts completely unchanged.
+- Excludes manually scratched horses from the in-memory race records, top-three
+  rankings, daily selections and simulator; updates adjusted percentages across
+  remaining runners when the ORIGINAL full field totals approximately 100%.
+- Leaves source snapshots, published files and Airtable untouched.
+- Automatically clears previously saved multi selections for horses you scratch.
+- Records a per-race manual confirmation and allows a reviewed selection sheet.
 
-LIMITATIONS:
-- The current embedded model snapshot is dated 17 October 2026.
-- Only runners with stored research dossiers receive runner-specific findings.
-- This is NOT a new probability model, current form importer, live scratching feed or verified pace map.
-- Evidence coverage 0–6 measures data presence, not quality, probability or confidence.
+IMPORTANT LIMITATIONS:
+- Manual changes are saved in this browser only (localStorage), NOT to GitHub,
+  Airtable, Netlify, or other devices. Clearing browser storage removes them.
+- This is NOT a live scratching feed and does NOT check whether horses are
+  officially scratched. Verify all manual changes against official race data.
+- Conditional probability redistribution is NOT a fresh model or pace rerun.
+- The existing site's original download/export controls are unchanged;
+  the NEW 'Save reviewed selections' checkpoint is gated on manual review.
+- The October 17 archive is still an archive until new meeting data is imported.
+- A race with incomplete original probabilities is NOT normalized; its simulator
+  may remain unavailable. At least two active runners are required.
+- The old October 17 historical R4/R6 variants are recalculated separately where
+  their own original field totals support it.
+
+ROLLBACK: Remove the new script tag from index.html. Original site logic is unchanged.
