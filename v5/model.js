@@ -1,11 +1,11 @@
-/* Racing Lab V5-L0 · independent whole-field evidence model · 29 Oct research snapshot.
+/* Racing Lab V5-L2 · independent whole-field evidence model · 29 Oct research snapshot.
  * EXPERIMENTAL, UNCALIBRATED. All displayed probabilities are conditional on the
  * Thursday PDF-listed fields, Good 4 working scenario and recorded dossier facts.
  * No market prices, original qualitative picks, or synthetic historical validation.
  */
 (function(global){
 'use strict';
-const VERSION='V5-L1-20261029';
+const VERSION='V5-L2-20261029';
 function clamp(x,a,b){return Math.max(a,Math.min(b,x));}
 function num(x,fallback){var v=Number(x);return Number.isFinite(v)?v:fallback;}
 function parseStats(h){
@@ -62,7 +62,7 @@ function mapPosition(h){
  return median(vals.slice(0,5));
 }
 function median(nums){nums=nums.filter(Number.isFinite).sort(function(a,b){return a-b});return nums.length?nums[Math.floor(nums.length/2)]:0;}
-function runnerFeatures(h,r,scenario,medWeight,medBarrier){
+function runnerFeatures(h,r,scenario,medWeight,medBarrier,gradeFactor){
  var st=parseStats(h),start=parseStarts(h),asOf=Date.UTC(2026,9,31);
  var n=Math.max(2,num(r.field_count,0)||0);
  var prior=1/n,career=rate(st.career,prior),trip=rate(st.distance,prior),track=rate(st.course,prior);
@@ -89,7 +89,7 @@ function runnerFeatures(h,r,scenario,medWeight,medBarrier){
  var barrier=straight?0:-0.015*Math.max(0,num(h.barrier,medBarrier)-Math.max(6,medBarrier+2));
  var weight=0.025*clamp(medWeight-num(h.weight_kg,medWeight),-6,6);
  var full={career:0.24*careerScore,recency:0.76*form,distance:0.19*distScore,surface:0.22*surfaceScore,
-    course:0.12*trackScore,class:0.55*bestClass,barrier:barrier,weight:weight,layoff:layoff};
+    course:0.12*trackScore,class:(gradeFactor==null?0.55:gradeFactor)*bestClass,barrier:barrier,weight:weight,layoff:layoff};
  var score=Object.keys(full).reduce(function(s,k){return s+full[k];},0);
  var completeness=(st.career?0.22:0)+(st.distance?0.13:0)+(st[scenario==='Soft 5'?'soft':'good']?0.13:0)+
    (st.course?0.08:0)+Math.min(0.34,start.length*0.07)+
@@ -109,7 +109,7 @@ function normalize(items){
  if(error){var ix=rounded.indexOf(Math.max.apply(null,rounded));rounded[ix]=+(rounded[ix]+error/100).toFixed(2);}
  return rounded;
 }
-function calculate(d,scenario){
+function calculate(d,scenario,gradeFactor){
  if(!d||d.date!=='2026-10-31'||!Array.isArray(d.races)||d.races.length!==29||!Array.isArray(d.runners)||d.runners.length!==408)throw Error('Full 31 October inventory required');
  var result=[],raceBoards=[],allIds={};
  d.races.forEach(function(r){
@@ -118,7 +118,7 @@ function calculate(d,scenario){
   var used=new Set();horses.forEach(function(h){if(!h.id||used.has(h.id)||allIds[h.id])throw Error('Runner ID duplicate '+h.id);used.add(h.id);allIds[h.id]=true;});
   var mw=median(horses.map(function(h){return num(h.weight_kg,NaN);}));
   var mb=median(horses.map(function(h){return num(h.barrier,NaN);}));
-  var entries=horses.map(function(h){return runnerFeatures(h,Object.assign({},r,{field_count:horses.length}),scenario,mw,mb);});
+  var entries=horses.map(function(h){return runnerFeatures(h,Object.assign({},r,{field_count:horses.length}),scenario,mw,mb,gradeFactor);});
   var ps=normalize(entries),sortRaw=entries.map(function(x){return x.raw;}).sort(function(a,b){return b-a;});
   entries.forEach(function(x,i){
    x.p=ps[i];x.model_score=+clamp(50+18*(x.raw-median(entries.map(function(z){return z.raw;}))),1,99).toFixed(1);
@@ -147,15 +147,58 @@ function calculate(d,scenario){
    records:result,races:raceBoards};
 }
 function board(d){
- var good=calculate(d,'Good 4'),soft=calculate(d,'Soft 5'),s=new Map(soft.records.map(function(x){return [x.id,x];}));
- good.records.forEach(function(x){var alt=s.get(x.id);x.soft_p=alt.p;x.surface_swing=+(x.p-alt.p).toFixed(2);
-    x.model_range=[Math.min(x.p,alt.p),Math.max(x.p,alt.p)];});
+ // Four independently scored conditions: two surfaces and two weights on
+ // recorded class performance. Original qualitative selections do not enter.
+ // Model sensitivity is NOT a confidence interval or statistical calibration.
+ var good=calculate(d,'Good 4',0.55),
+     soft=calculate(d,'Soft 5',0.55),
+     goodConservative=calculate(d,'Good 4',0.28),
+     softConservative=calculate(d,'Soft 5',0.28);
+ var scenarios=[good,soft,goodConservative,softConservative],
+     maps=scenarios.map(function(x){return new Map(x.records.map(function(y){return [y.id,y];}));}),
+     goodRace=new Map(good.races.map(function(r){return [r.id,r];}));
+ good.records.forEach(function(x){
+  var alt=maps[1].get(x.id);
+  var values=maps.map(function(m){return m.get(x.id).p;});
+  var ranks=maps.map(function(m){return m.get(x.id).rank;});
+  x.soft_p=alt.p;
+  x.surface_swing=+(x.p-alt.p).toFixed(2);
+  x.model_range=[Math.min.apply(null,values),Math.max.apply(null,values)];
+  x.robust_floor=+Math.min.apply(null,values).toFixed(2);
+  x.robust_spread=+(Math.max.apply(null,values)-Math.min.apply(null,values)).toFixed(2);
+  x.top1_scenarios=ranks.filter(function(n){return n===1;}).length;
+  x.top3_scenarios=ranks.filter(function(n){return n<=3;}).length;
+  x.rank_scenarios=ranks;
+  // A race-dependent separation is needed; a raw probability advantage in
+  // a small field is not independent proof of a strong edge.
+  x.gap=+(x.p-(good.records.filter(function(y){return y.race_id===x.race_id&&y.id!==x.id;})
+                .reduce(function(z,y){return Math.max(z,y.p);},0))).toFixed(2);
+  x.field_quality=goodRace.get(x.race_id).field_quality;
+  x.field_chaos=goodRace.get(x.race_id).chaos;
+  x.quality_flags=[];
+  if(x.completeness<0.70)x.quality_flags.push('LIMITED_DOSSIER');
+  if(x.robust_spread>=6)x.quality_flags.push('SCENARIO_SENSITIVE');
+  if(x.top1_scenarios<3)x.quality_flags.push('UNSTABLE_RACE_LEAD');
+  if(x.field_chaos>=90)x.quality_flags.push('CROWDED_RACE');
+  x.research_status=x.quality_flags.length?'HIGH_UNCERTAINTY':'PROVISIONAL';
+ });
+ // All 408, not only the Good 4 winners: the robust leader may be a different
+ // horse from the baseline pick and is chosen on its LOWER four-scenario estimate.
+ var robustLeaders=d.races.map(function(r){
+  var rs=good.records.filter(function(x){return x.race_id===r.id;});
+  rs.sort(function(a,b){return b.robust_floor-a.robust_floor||b.top1_scenarios-a.top1_scenarios||b.p-a.p;});
+  return rs[0];
+ }).sort(function(a,b){return b.robust_floor-a.robust_floor||b.top1_scenarios-a.top1_scenarios;});
+ var leaders=good.records.filter(function(x){return x.rank===1;}).sort(function(a,b){return b.p-a.p;});
+ if(good.records.length!==408||robustLeaders.length!==29||
+    scenarios.some(function(s){return s.races.length!==29||s.races.some(function(r){return r.sum!==100;});}))
+    throw Error('V5-L2 scenario integrity check failed');
  return {version:VERSION,date:d.date,status:'PROVISIONAL_UNCALIBRATED',
-  assumption:'Good 4 working scenario; full Thursday PDF fields, scratches unverified',
+  assumption:'Good 4 working scenario; all 408 Thursday PDF runners; scratches and final track unverified',
   sourceCount:d.runners.length,raceCount:d.races.length,baseline:good,soft:soft,
-  leaders:good.records.filter(function(x){return x.rank===1}).sort(function(a,b){return b.p-a.p;}),
-  robustLeaders:good.records.filter(function(x){return x.rank===1}).sort(function(a,b){return Math.min(b.p,b.soft_p)-Math.min(a.p,a.soft_p);}),
-  top10:good.records.filter(function(x){return x.rank===1}).sort(function(a,b){return b.p-a.p;}).slice(0,10)};
+  stress:{goodClassConservative:goodConservative,softClassConservative:softConservative},
+  model_variants:['Good 4 · base class','Soft 5 · base class','Good 4 · conservative class','Soft 5 · conservative class'],
+  leaders:leaders,robustLeaders:robustLeaders,top10:robustLeaders.slice(0,10)};
 }
 global.RacingLabV5Model={VERSION:VERSION,board:board,calculate:calculate};
 })(typeof window==='undefined'?globalThis:window);
