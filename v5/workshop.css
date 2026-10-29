@@ -1,0 +1,48 @@
+/* Racing Lab V5 functional workshop modules · style complements original 2026 layout */
+.workshop-lead{margin:8px 0 18px;color:#b3d8cb;line-height:1.55;font-size:13px}
+.workshop-note{padding:12px 14px;color:#d5e7dc;background:#17302c;border-left:3px solid #56ba8e;border-radius:8px;font-size:12px;line-height:1.6}
+.workshop-controls{display:flex;gap:12px;align-items:end;flex-wrap:wrap;margin:15px 0 21px}
+.workshop-field{display:flex;flex-direction:column;gap:7px;min-width:152px;flex:1}
+.workshop-field>span{color:#bbd6cb;font-size:11px;font-weight:750;text-transform:uppercase;letter-spacing:.06em}
+.workshop-select{max-width:100%;width:100%;appearance:auto;background:#10232a;border:1px solid #346058;border-radius:10px;padding:11px 10px;color:#e5f6ee;font:inherit;font-size:12px;min-height:42px}
+.workshop-panel{margin:16px 0;padding:17px}
+.workshop-panel h3{margin:0 0 10px;color:#e6fff3;font-size:17px}
+.workshop-candidates{display:grid;gap:8px;grid-template-columns:1fr 1fr;margin-top:15px}
+.workshop-candidate{display:flex;justify-content:space-between;align-items:center;gap:10px;background:#11232a;border:1px solid #294b43;border-radius:10px;padding:10px;min-width:0}
+.workshop-candidate-text{display:flex;flex-direction:column;min-width:0;flex:1;gap:4px}
+.workshop-candidate-text strong{font-size:13px;line-height:1.35;color:#f0fff6}
+.workshop-candidate-text small{color:#a9c5bc;font-size:10px;line-height:1.45;overflow-wrap:anywhere}
+.workshop-candidate .btn{font-size:11px;padding:9px;flex-shrink:0}
+.workshop-candidate .btn:disabled{opacity:.45;cursor:not-allowed}
+.workshop-leg{padding:12px 0 14px;border-bottom:1px solid #2b4b45}
+.workshop-leg-top{display:flex;align-items:center;flex-wrap:wrap;gap:12px}
+.workshop-leg-top b{font-size:16px}
+.workshop-leg p{font-size:12px;line-height:1.55;margin:7px 0;color:#c5e6d6}
+.workshop-leg p.workshop-risk{color:#eab7aa}
+.workshop-chip{font-size:11px;border:1px solid #356b5c;border-radius:30px;padding:5px 9px;color:#99e5c6}
+.workshop-minirow{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px 3px;border-bottom:1px solid #234039;font-size:12px}
+.workshop-minirow span{color:#a8cfc1}.workshop-minirow .btn{font-size:10px;padding:7px}
+.sim-stage{background:linear-gradient(160deg,#10272d,#101c25);overflow:hidden}
+.workshop-actions{display:flex;gap:10px;align-items:end;flex-wrap:wrap;margin:14px 0}
+.workshop-actions .workshop-field{max-width:170px;min-width:130px}
+.workshop-track{border:2px solid #5ca879;border-radius:15px;background:repeating-linear-gradient(180deg,#1a4a38 0,#1a4a38 29px,#1d503b 29px,#1d503b 58px);padding:12px 11px;display:flex;flex-direction:column;gap:5px;position:relative;overflow:hidden;box-shadow:inset 0 0 26px #061e1799}
+.workshop-track:before{content:'';position:absolute;left:46%;top:0;bottom:0;border-left:1px dashed #e9f7db55;pointer-events:none}
+.workshop-track:after{content:'FINISH';position:absolute;right:5.5%;top:0;bottom:0;display:grid;place-items:center;writing-mode:vertical-rl;font-size:9px;color:#fff9;letter-spacing:.22em;border-left:3px dashed #fff8;pointer-events:none}
+.workshop-lane{min-height:28px;display:grid;grid-template-columns:minmax(92px,155px) 1fr 38px;gap:9px;align-items:center;position:relative;z-index:1}
+.workshop-lane-label{font-size:10px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#f0fff5;text-shadow:0 1px 2px #001}
+.workshop-lane-rail{height:23px;position:relative;border:1px solid #ffffff30;border-radius:10px;background:#09191466;overflow:hidden}
+.workshop-lane-progress{height:100%;width:0%;display:flex;justify-content:flex-end;align-items:center;background:linear-gradient(90deg,#80dbba3c,#48db9a6e);border-right:2px solid #bbf1d9;border-radius:10px;transition:none}
+.workshop-horse-dot{position:relative;display:inline-grid;place-items:center;width:23px;height:23px;font-size:18px;line-height:1;color:#f4e8d0;text-shadow:0 1px 5px #08170b}
+.workshop-pct{font-size:10px;color:#d6f5de;font-variant-numeric:tabular-nums;text-align:right}
+.workshop-standings{margin-top:15px;font-size:13px}
+.workshop-standings h4{margin:5px 0 9px}.workshop-finish-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:6px;color:#ddf7e5}
+.workshop-finish-list div{padding:10px;border:1px solid #325d4f;border-radius:9px;background:#152b29}
+@media(max-width:760px){
+ .workshop-controls{gap:8px}.workshop-field{min-width:136px}
+ .workshop-candidates{grid-template-columns:1fr}
+ .workshop-candidate{padding:11px}
+ .workshop-lane{grid-template-columns:88px 1fr 26px;gap:5px}
+ .workshop-lane-label{font-size:9px}
+ .workshop-track{padding:9px 7px}
+ .workshop-pct{font-size:9px}
+}
