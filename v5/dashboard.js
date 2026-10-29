@@ -92,14 +92,14 @@ function overview(){var hero=add(e('div','hero'),e('div','eyebrow',D.date+' · '
  add(app(),hero,metrics(),scenarios(),changeNotice(),head('Independent Top 10 · tracked','Original researched grades and positions, with scratching and track-review flags.'),aTierSummary(),toplist(),head('Track scenarios','Saved observations and assumptions are shown separately.'),venueCards());
 }
 function curatedSet(){
- return C.curated?C.curated.entries.filter(function(h){return S.top==='ALL'||h.meeting===S.top;}).slice(0,S.topN):[];
+ return C.curated?C.curated.entries.slice(0,S.topN).filter(function(h){return S.top==='ALL'||h.meeting===S.top;}):[];
 }
 function topSet(){
  var candidates=S.topMode==='MODEL'?C.board.leaders:C.board.winFirst.priority.map(function(a){
   var h=model(a.runner_id);
   return Object.assign({},h,{_screen_status:a.status,_floor:a.robust_floor,_screen_reasons:a.reasons});
  });
- return candidates.filter(function(h){return S.top==='ALL'||h.meeting===S.top;}).slice(0,S.topN);
+ return candidates.slice(0,S.topN).filter(function(h){return S.top==='ALL'||h.meeting===S.top;});
 }
 function toplist(){
  if(S.topMode==='RESEARCH'&&C.curated){
@@ -191,7 +191,8 @@ function top10(){
   if(!source)app().append(note('Frozen research checkpoint unavailable. Strict model priorities shown separately; the independent top ten cannot be reconstructed from a model score.'));
   else{
    app().append(note('Frozen form ranking '+source.checkpoint_at+' · '+source.active_count+'/'+source.count+
-     ' researched runners still in the provisional field. A scratched runner leaves a vacant slot; no silent replacement. Track/gear changes flag for review.'));
+     ' researched runners remain in the provisional field. '+(S.topN>source.count?'Only '+source.count+' of requested Top '+S.topN+' have an independently researched ranking; '+(S.topN-source.count)+' slots intentionally remain vacant. ':'')+
+     'A scratched runner keeps its historical position but cannot count as an active pick. No silent replacement.'));
    app().append(aTierSummary());
   }
  }else if(S.topMode==='WIN_FIRST'){
