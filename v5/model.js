@@ -308,7 +308,9 @@ function board(d,options={}){
   {label:'Baseline going; fast pace',going:baselineGoing,classWeight:CONFIG.weights.class,pace:1},
   {label:'Baseline going; slow pace',going:baselineGoing,classWeight:CONFIG.weights.class,pace:-1},
   {label:'Baseline going; inside draw sensitivity',going:baselineGoing,classWeight:CONFIG.weights.class,drawBias:1},
-  {label:'Baseline going; outside draw sensitivity',going:baselineGoing,classWeight:CONFIG.weights.class,drawBias:-1}
+  {label:'Baseline going; outside draw sensitivity',going:baselineGoing,classWeight:CONFIG.weights.class,drawBias:-1},
+  {label:'Good 4; base class',going:'Good 4',classWeight:CONFIG.weights.class},
+  {label:'Good 4; conservative class',going:'Good 4',classWeight:CONFIG.conservativeClass}
  ];
  const scenarios=variants.map(v=>calculate(d,v.going,v.classWeight,{pace:v.pace,drawBias:v.drawBias,cutoffDate:options.cutoffDate}));
  const good=scenarios[0],maps=scenarios.map(s=>new Map(s.records.map(x=>[x.id,x]))),byRace=new Map();
@@ -321,11 +323,17 @@ function board(d,options={}){
   x.top1_scenarios=ranks.filter(n=>n===1).length;x.top3_scenarios=ranks.filter(n=>n<=3).length;x.rank_scenarios=ranks;
   x.scenario_probabilities=scenarios.map((s,i)=>({label:variants[i].label,p:maps[i].get(x.id).p,rank:ranks[i]}));
   x.gap=round(x.p-Math.max.apply(null,field.filter(h=>h.id!==x.id).map(h=>h.p)));
+  // Both possible goings must be checked even when Soft 5 is the baseline.
+  x.good4_p=maps[8].get(x.id).p;
+  x.good4_rank=maps[8].get(x.id).rank;
+  x.soft5_rank=ranks[1];
+  x.going_dependent_lead=x.rank===1&&x.good4_rank!==x.soft5_rank;
   const r=good.races.find(r=>r.id===x.race_id);x.field_quality=r.field_quality;x.field_chaos=r.chaos;
   x.quality_flags=[];
   if(x.completeness<0.70)x.quality_flags.push('LIMITED_DOSSIER');
   if(x.input_issues.length)x.quality_flags.push('INPUT_REVIEW_REQUIRED');
   if(x.robust_spread>=6)x.quality_flags.push('SCENARIO_SENSITIVE');
+  if(x.going_dependent_lead)x.quality_flags.push('GOING_DEPENDENT_LEAD');
   if(x.top1_scenarios<Math.ceil(variants.length*0.75))x.quality_flags.push('UNSTABLE_RACE_LEAD');
   if(x.field_chaos>=90)x.quality_flags.push('CROWDED_RACE');
   x.publication_flags=['UNCALIBRATED_MODEL'];
@@ -353,7 +361,7 @@ function board(d,options={}){
   leaders:leaders,robustLeaders:robustLeaders,qualifiedLeaders:qualified,eliteLeaders:leaders.filter(x=>x.elite_form),
   top5:leaders.slice(0,5),top10:leaders.slice(0,10),top15:leaders.slice(0,15),
   screen:{description:'Evidence and sensitivity screen; no price or horse override; not a calibration or hit-rate claim.',
-   rules:{completeAtLeast:0.70,scenarioSwingBelow:6,top1InScenariosAtLeast:Math.ceil(variants.length*0.75),chaosBelow:90},
+   rules:{completeAtLeast:0.70,scenarioSwingBelow:6,top1InScenariosAtLeast:Math.ceil(variants.length*0.75),chaosBelow:90,goingIndependentLeader:true},
    qualifiedRaceCount:qualified.length,totalRaceCount:leaders.length,shortlistCount:Math.min(10,leaders.length)}};
 }
 function validateRows(rows){
