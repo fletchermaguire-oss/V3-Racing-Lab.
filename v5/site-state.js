@@ -225,6 +225,7 @@ function create(input,options){
   var api={get data(){return data;},get board(){return board;},get going(){return Object.assign({},going);},
     get revision(){return key;},get live(){return live;},get error(){return lastError;},get lastChange(){return lastChange;},
     get curated(){return curated;},get researchHistory(){return history.slice();},get researchCheckpoint(){return checkpoint;},
+    get curatedGradeOptions(){return Curated?Curated.GRADES.slice():[];},
     setResearchOverride:setResearchOverride,get localScratchCount(){return local.size;},
     get model(){return M;},subscribe:function(fn){listeners.push(fn);return function(){listeners=listeners.filter(function(x){return x!==fn;});};},
     setGoing:setGoing,setLocalScratch:setLocalScratch,isLocalScratch:function(id){return local.has(id);},applyEvidence:applyEvidence,
