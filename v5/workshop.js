@@ -29,8 +29,10 @@ function multiPage(ctx){
  stop();var C=ctx.C,S=ctx.S,B=C.board,app=ctx.app();S.multiSize=S.multiSize===3?3:2;sanitize(C,S);
  put(app,ctx.head('Multi Lab','Two or three legs from distinct races, using the same conditional field probabilities. Auto-fill uses ONLY the win-first priority list.'),ctx.scenarios(),raceControls(ctx,'multi'));
  var selection=el('section','panel workshop-panel'),actions=el('div','workshop-actions');
+ var auto=button('Use win-first '+S.multiSize,function(){S.multi=B.winFirst.priority.slice(0,S.multiSize).map(function(x){return x.runner_id;});save(C,S);ctx.render();},'primary');
+ auto.disabled=B.winFirst.priority.length<S.multiSize;
  put(actions,control('Legs',select([{value:'2',text:'2 legs'},{value:'3',text:'3 legs'}],String(S.multiSize),function(v){S.multiSize=+v;sanitize(C,S);ctx.render();})),
-  button('Use win-first '+S.multiSize,function(){S.multi=B.winFirst.priority.slice(0,S.multiSize).map(function(x){return x.runner_id;});save(C,S);ctx.render();},'primary'),
+  auto,
   button('Clear',function(){S.multi=[];save(C,S);ctx.render();},'ghost'));
  put(selection,el('h3','','Selected legs · '+S.multi.length+'/'+S.multiSize),actions);
  if(B.winFirst.priority.length<S.multiSize)note(selection,'There are not enough qualified research priorities for an automatic '+S.multiSize+'-leg selection. No replacement horse will be invented.');
