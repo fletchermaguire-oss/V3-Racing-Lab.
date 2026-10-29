@@ -2,7 +2,7 @@
 (function(){
 'use strict';
 var D=null,live=false,liveAsOf='',S={page:'overview',meeting:'RANDWICK',race:'2026-10-31_RANDWICK_R01',runner:null,top:'ALL',multi:[],compareA:null,compareB:null,search:''};
-var PAGES=[['overview','Overview'],['top10','Daily Top 10'],['races','Race Centre'],['pros','Pros & Cons'],['multi','Multi Lab'],['sim','Simulator'],['compare','Compare'],['qa','Model QA'],['cal','Calibration'],['weather','Weather & Tracks'],['sync','Data & Sync'],['results','Results & History']];
+var PAGES=[['overview','Overview'],['top10','Daily Top 10'],['races','Race Centre'],['multi','Multi Lab'],['sim','Simulator'],['compare','Compare'],['qa','Model QA'],['cal','Calibration'],['weather','Weather & Tracks'],['sync','Data & Sync'],['results','Results & History']];
 var VENUES=['RANDWICK','FLEMINGTON','ASCOT'];
 function e(tag,cls,txt){var x=document.createElement(tag);if(cls)x.className=cls;if(txt!==undefined&&txt!==null)x.textContent=String(txt);return x;}
 function app(){return document.getElementById('workspace');}
@@ -17,7 +17,7 @@ function raceOf(id){return D.races.find(function(x){return x.id===id;});}
 function runners(id){return D.runners.filter(function(x){return x.race_id===id;}).sort(function(a,b){return Number(b.original_pick)-Number(a.original_pick)||Number(a.tab)-Number(b.tab);});}
 function leader(r){return D.runners.find(function(h){return h.race_id===r.id&&h.original_pick;});}
 function code(r){return r.meeting+' R'+r.race;}
-function go(page){S.page=page;render();window.scrollTo(0,0);}
+function go(page){if(S.page==='sim'&&page!=='sim'&&window.RacingLabWorkshop)window.RacingLabWorkshop.stop();S.page=page;render();window.scrollTo(0,0);}
 function selectRace(rid,horse,page){S.race=rid;S.meeting=raceOf(rid).meeting;S.runner=horse||null;go(page||'races');}
 function setField(label,options,selected,onchange){var l=e('label','field');add(l,e('span','',label));var s=e('select');options.forEach(function(o){var opt=e('option','',o.text);opt.value=o.value;if(o.value===selected)opt.selected=true;s.append(opt);});s.addEventListener('change',function(){onchange(s.value);});l.append(s);return l;}
 function nav(){
@@ -47,7 +47,7 @@ b.type='button';b.innerHTML=icon(id)+'<span>'+it[1]+'</span>';
 b.addEventListener('click',function(){go(id);});
 return b;
 }
-var main=['overview','races','top10','multi','sim','compare','pros'];
+var main=['overview','races','top10','multi','sim','compare'];
 var second=['results','qa','cal','weather','sync'];
 side.append(e('div','nav-group','RACING STUDIO'));
 main.forEach(function(id){side.append(makeButton(id,'navbtn'));});
@@ -56,8 +56,8 @@ second.forEach(function(id){side.append(makeButton(id,'navbtn'));});
 var foot=e('div','sidebar-foot');
 add(foot,e('strong','','◉ 31 OCTOBER RESEARCH'),e('p','','29 races · 408 runner dossiers. Saved qualitative picks are not approved V5 winning probabilities.'),link('Original Racing Lab ↗','/',''));
 side.append(foot);
-var mobileShort={overview:'Home',races:'Races',top10:'Top 10',multi:'Multi',sim:'Simulator',pros:'Pros / Cons'};
-['overview','races','top10','multi','sim','pros'].forEach(function(id){var b=makeButton(id,'');b.querySelector('span').textContent=mobileShort[id];mobile.append(b);});
+var mobileShort={overview:'Home',races:'Races',top10:'Top 10',multi:'Multi',sim:'Simulator'};
+['overview','races','top10','multi','sim'].forEach(function(id){var b=makeButton(id,'');b.querySelector('span').textContent=mobileShort[id];mobile.append(b);});
 var previous=document.getElementById('v5-more-popup');if(previous)previous.remove();
 var popup=e('div','v5-more-menu');popup.id='v5-more-popup';popup.hidden=true;
 var phead=e('div','v5-more-head','MORE RACING LAB SECTIONS');popup.append(phead);
@@ -74,17 +74,13 @@ function metrics(){var v=e('div','grid stats');[['29','31 Oct races'],['408','PD
 function venueCards(){var g=e('div','grid');VENUES.forEach(function(v){var m=D.meetings.find(function(x){return x.meeting===v;});var r=D.races.filter(function(x){return x.meeting===v;});var c=e('div','panel track');add(c,e('div','venue',v),e('h3','',r.length+' races · '+D.runners.filter(function(h){return h.race_id.includes('_'+v+'_');}).length+' runners'),e('p','','Working Saturday: Good 4 · 29 Oct observed: '+m.official_29_oct),e('p','','Rail: '+m.rail),action('View race cards',function(){S.meeting=v;S.race=r[0].id;S.runner=null;go('races');},'primary'));g.append(c);});return g;}
 function overview(){
 var hero=e('div','hero');
-add(hero,e('div','eyebrow','SATURDAY 31 OCTOBER 2026 · PRO V5'),e('h2','','Your racing command centre.'),e('p','','Original Racing Lab layout · 29 races · every runner researched. Race Centre, Top 10, Multi Lab, Pros & Cons and Compare are all in the familiar studio.'));
+add(hero,e('div','eyebrow','SATURDAY 31 OCTOBER 2026 · PRO V5'),e('h2','','Your racing command centre.'),e('p','','Original Racing Lab layout · 29 races · every runner researched. Race Centre, Top 10, a working Simulator, Multi Lab, Results & History and Compare are in the familiar studio.'));
 var buttons=e('div','heroActions');
-add(buttons,action('Daily Top 10',function(){go('top10');},'primary'),action('Race Centre',function(){go('races');}),link('Results & History · Top 5/10/15','/results.html'),action('Pros & Cons',function(){go('pros');}),link('Original Simulator','/'));
+add(buttons,action('Daily Top 10',function(){go('top10');},'primary'),action('Race Centre',function(){go('races');}),link('Results & History · Top 5/10/15','/results.html'),action('Simulator',function(){go('sim');}));
 hero.append(buttons);
-add(app(),hero,metrics(),note('31 OCTOBER RESEARCH ONLY: The saved original qualitative selections are preserved. Saturday starters and independent V5 winning probabilities are not yet verified; no invented rankings or percentages.'),head('Daily Top 10 · saved review queue','Familiar Top 10 layout. These ten slots are not ranked by winning chance until the complete V5 model is verified.'),toplist(),head('Track intelligence','Good 4 is our working Saturday scenario, not a final certified condition.'),venueCards(),head('Strong research profiles','Open individual source-backed strengths, weaknesses and form.'));
-var grid=e('div','grid');
-allLeaders().filter(function(h){return ['RANDWICK_R08','FLEMINGTON_R06','FLEMINGTON_R08','RANDWICK_R07','RANDWICK_R06','FLEMINGTON_R05'].some(function(z){return h.race_id.endsWith(z);});}).forEach(function(h){var c=box(h.horse,shortRace(h.race_id)),f=facts(h);
-add(c,e('p','small','PRO: '+(f.pros[0]||'See saved evidence')),e('p','muted small','RISK: '+(f.cons[0]||'Raceday conditions pending')),action('Read full pros & cons',function(){selectRace(h.race_id,h.id,'pros');}));
-grid.append(c);});
-app().append(grid);
+add(app(),hero,metrics(),note('31 OCTOBER RESEARCH ONLY: The saved original qualitative selections are preserved. Saturday starters and independent V5 winning probabilities are not yet verified; no invented rankings or percentages.'),head('Daily Top 10 · saved review queue','Familiar Top 10 layout. These ten slots are not ranked by winning chance until the complete V5 model is verified.'),toplist(),head('Track intelligence','Good 4 is our working Saturday scenario, not a final certified condition.'),venueCards());
 }
+
 function shortRace(id){var r=raceOf(id);return r?code(r)+' · '+r.title:'';}
 function allLeaders(){return D.runners.filter(function(h){return h.original_pick;}).sort(function(a,b){var x=raceOf(a.race_id),y=raceOf(b.race_id);return VENUES.indexOf(x.meeting)-VENUES.indexOf(y.meeting)||x.race-y.race;});}
 function firstStrength(h){return (h.strengths||'').replace(/^PDF-sourced:\s*/,'').split(';').slice(0,2).join(';').slice(0,180)||'Research dossier available';}
@@ -132,14 +128,8 @@ var section=e('details','evidencebox');section.append(e('summary','','Race shape
 }
 function racesPage(){add(app(),head('Race Centre','All 29 races, all 408 named runners, source-backed detail and two-sided analysis.'));raceNav().forEach(function(x){app().append(x);});racePanel();}
 function prosPage(){add(app(),head('Runner Pros & Cons','Your proper evidence-based strengths versus vulnerabilities view, for EVERY horse—not generic praise.'));raceNav().forEach(function(x){app().append(x);});racePanel();}
-function multiPage(){add(app(),head('Multi Lab','Build a research watchlist of 2–3 runner profiles. This does not make selections or calculate joint probabilities.'),note('No approved V5 probabilities = no genuine multi hit probability. The earlier published model is archived, not recalculated for Saturday.'));
-var top=allLeaders(),p=e('div','panel');add(p,e('h3','','Saved watchlist ('+S.multi.length+'/3)'),para(S.multi.length?'These are research notes, not a wager recommendation.':'Select up to three original race leaders to compare their evidence.'));
-S.multi.forEach(function(id){var h=D.runners.find(function(x){return x.id===id;});if(!h)return;var div=e('div','toprow');add(div,e('b','',h.horse),e('small','',shortRace(h.race_id)),action('Remove',function(){S.multi=S.multi.filter(function(x){return x!==id;});render();},'ghost'));p.append(div);});app().append(p);
-var f=e('div','grid');top.forEach(function(h){var c=box(h.horse,shortRace(h.race_id));c.append(action(S.multi.includes(h.id)?'Added':'Add to watchlist',function(){if(S.multi.includes(h.id))return;if(S.multi.length>=3)return;S.multi.push(h.id);render();},S.multi.includes(h.id)?'ghost':'primary'));f.append(c);});app().append(f);
-}
-function simPage(){add(app(),head('Simulator','The original race visualisation was NOT deleted.'),note('The legacy simulator uses older saved race data; it must not be presented as a 31 October V5 simulation. A credible 31 October simulation requires verified fields, runner pace modelling and frozen full-field probabilities.'));
-var c=box('Original Racing Lab simulator','The original site and all of its sections remain at the root website. This V5 research release leaves it untouched.');add(c,link('Open original Racing Lab','/','btn primary'),para('In the original interface, choose Simulator. Do not confuse archived model runners with the new V5 racing dates.'));app().append(c);
-}
+function multiPage(){if(!window.RacingLabWorkshop){app().append(note('Multi tools could not load. Reload to retry.'));return;}window.RacingLabWorkshop.multiPage({D:D,S:S,app:app,head:head,facts:facts,render:render});}
+function simPage(){if(!window.RacingLabWorkshop){app().append(note('Simulator tools could not load. Reload to retry.'));return;}window.RacingLabWorkshop.simPage({D:D,S:S,app:app,head:head,facts:facts,render:render});}
 function comparePage(){add(app(),head('Compare runners','Compare any two documented horses in the same race. Facts and risks are shown side-by-side.'));raceNav().forEach(function(x){app().append(x);});var hs=runners(S.race);var filter=e('div','filters');
 if(!hs.some(function(h){return h.id===S.compareA;}))S.compareA=hs[0]?.id;
 if(!hs.some(function(h){return h.id===S.compareB;}))S.compareB=hs[1]?.id||hs[0]?.id;
@@ -156,7 +146,7 @@ function weatherPage(){add(app(),head('Weather & Tracks','Recorded Thursday obse
 function syncPage(){add(app(),head('Data & Sync','Where your V5 research really lives'),metrics());var b=box('Live evidence bridge',live?'Airtable API responded and matching runner evidence was loaded: '+liveAsOf:'Static snapshot is intact. Secure Airtable response is not confirmed for this browser session.');add(b,link('Airtable evidence endpoint','/api/v5/evidence'),link('GitHub code','https://github.com/fletchermaguire-oss/V3-Racing-Lab.'),link('Static research JSON','/v5/research.json'));app().append(b,note('The site does not automatically publish approved predictions, recalculate probabilities, verify scratchings or update its simulator from Airtable evidence. Those functions remain gated.'));
 }
 function resultsPage(){add(app(),head('Results & History · Top 5 / 10 / 15','Original results tracking restored without modifying past selections or outcomes.'),box('Existing Results & History','Your dedicated page contains a cumulative winners chart, filters for Top 5, Top 10, Top 15 or all races, historical win-rate comparisons and individual finishing results. Historic rankings reconstructed from saved probabilities are NOT confirmed pre-race locked rankings; keep this distinction when interpreting the strike rate.'),link('Open Results & History','/results.html','btn primary'));}
-function render(){if(!D)return;nav();app().replaceChildren();if(S.page==='overview')overview();else if(S.page==='top10')top10();else if(S.page==='races')racesPage();else if(S.page==='pros')prosPage();else if(S.page==='multi')multiPage();else if(S.page==='sim')simPage();else if(S.page==='compare')comparePage();else if(S.page==='qa')qaPage();else if(S.page==='cal')calPage();else if(S.page==='weather')weatherPage();else if(S.page==='sync')syncPage();else if(S.page==='results')resultsPage();app().append(e('div','footer','31 October 2026 · Research snapshot 29 October · Evidence sourced from Feature Form PDFs and connected Airtable · Original qualitative leaders preserved · No V5 win probability approval'));}
+function render(){if(!D)return;nav();app().replaceChildren();if(S.page==='overview')overview();else if(S.page==='top10')top10();else if(S.page==='races')racesPage();else if(S.page==='multi')multiPage();else if(S.page==='sim')simPage();else if(S.page==='compare')comparePage();else if(S.page==='qa')qaPage();else if(S.page==='cal')calPage();else if(S.page==='weather')weatherPage();else if(S.page==='sync')syncPage();else if(S.page==='results')resultsPage();app().append(e('div','footer','31 October 2026 · Research snapshot 29 October · Evidence sourced from Feature Form PDFs and connected Airtable · Original qualitative leaders preserved · No V5 win probability approval'));}
 function liveUpdate(){fetch('/api/v5/evidence',{cache:'no-store'}).then(function(r){if(!r.ok)throw Error('HTTP '+r.status);return r.json();}).then(function(q){if(q.status!=='LIVE_RESEARCH_ONLY'||q.truncated||q.publication_approved!==false||!Array.isArray(q.records)||q.records.length!==408)throw Error('Not a complete live research snapshot');var map=new Map();q.records.forEach(function(x){var f=x.fields||{};map.set(String(f.fld4BGD5iAcZcGfaN)+'|'+String(f.fldll7dYIGf28MAKA),f);});if(D.runners.some(function(h){return !map.has(h.race_id+'|'+h.horse);}))throw Error('Runner inventory mismatch');D.runners.forEach(function(h){var f=map.get(h.race_id+'|'+h.horse);[['form','fldb2TMkMV0aeCuTQ'],['statistics','fldgSikt2WARtdwk8'],['strengths','fldwVqrxsNeuNQiLP'],['risks','fldj14UmWVhZY8Mgi'],['historical_map','fldoYxB5oh5AuF56e'],['outstanding','fldddV1wq9EL0f2zy']].forEach(function(pair){if(f[pair[1]])h[pair[0]]=String(f[pair[1]]);});});live=true;liveAsOf=q.as_of||'time unknown';render();}).catch(function(){/* Keep complete dated static source, never overwrite picks. */});}
 fetch('/v5/research.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw Error('Research HTTP '+r.status);return r.json();}).then(function(v){if(v.date!=='2026-10-31'||v.publication?.approved!==false||v.races.length!==29||v.runners.length!==408||v.runners.filter(function(h){return h.original_pick;}).length!==19)throw Error('V5 integrity check failed');D=v;render();liveUpdate();}).catch(function(err){app().replaceChildren(note('Research load failed: '+err.message),link('Open original Racing Lab','/'));});
 })();
