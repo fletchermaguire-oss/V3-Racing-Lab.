@@ -76,11 +76,20 @@ function scenarios(){var wrap=e('div','model-scenarios'),controls=e('div','filte
  Object.keys(C.going).forEach(function(meeting){controls.append(setField(meeting+' scenario',['Good 4','Soft 5','Soft 6','Heavy 8'].map(function(v){return {value:v,text:v};}),C.going[meeting],function(value){C.setGoing(meeting,value);}));});
  return add(wrap,note('Provisional model estimates · final fields and going unverified · research '+D.saved_at+(C.localScratchCount?' · '+C.localScratchCount+' local exclusion(s)':'')),controls);
 }
+function changeNotice(){
+ var v=C.lastChange;
+ if(!v)return null;
+ var panel=box('BOARD CHANGE · '+v.reason,v.notice);
+ v.changed_selections.forEach(function(x){panel.append(e('p','muted small',x.race_id+': '+x.previous+' → '+x.current));});
+ if(!v.changed_selections.length&&v.raw_leader_changes.length)panel.append(e('p','muted small',
+  v.raw_leader_changes.length+' raw race leaders changed, but the win-first selection list did not.'));
+ return panel;
+}
 function metrics(){var grid=e('div','grid stats');[[C.board.raceCount,'Races'],[C.board.sourceCount,'Source dossiers'],[C.board.activeCount,'Included runners'],[C.board.excludedCount,'Excluded runners']].forEach(function(m){grid.append(add(e('div','panel metric'),e('div','number',m[0]),e('div','label',m[1])));});return grid;}
 function venueCards(){var g=e('div','grid');Object.keys(C.going).forEach(function(v){var m=(D.meetings||[]).find(function(x){return x.meeting===v;})||{},r=D.races.filter(function(x){return x.meeting===v;});g.append(add(e('div','panel track'),e('div','venue',v),e('h3','',r.length+' races'),e('p','','Model scenario: '+C.going[v]),e('p','','Saved observation '+D.saved_at+': '+(m.official_29_oct||'Not verified')),e('p','','Rail: '+(m.rail||'Not verified')),action('View races',function(){selectRace(r[0].id);},'primary')));});return g;}
 function overview(){var hero=add(e('div','hero'),e('div','eyebrow',D.date+' · '+C.board.version),e('h2','','Your racing command centre.'),e('p','','One formula across the rankings, whole fields, simulator and Multi Lab.'));
  hero.append(add(e('div','heroActions'),action('Daily Top 10',function(){go('top10');},'primary'),action('Race Centre',function(){go('races');}),link('Results · Top 5/10/15','/results.html'),action('Simulator',function(){go('sim');})));
- add(app(),hero,metrics(),scenarios(),head('Win-first research priorities','Only stable, sufficiently researched leaders; unreliable races are withheld.'),toplist(),head('Track scenarios','Saved observations and assumptions are shown separately.'),venueCards());
+ add(app(),hero,metrics(),scenarios(),changeNotice(),head('Win-first research priorities','Only stable, sufficiently researched leaders; unreliable races are withheld.'),toplist(),head('Track scenarios','Saved observations and assumptions are shown separately.'),venueCards());
 }
 function topSet(){
  var candidates=S.topMode==='MODEL'?C.board.leaders:C.board.winFirst.priority.map(function(a){
@@ -111,6 +120,7 @@ function top10(){
   setField('Selections',[5,10,15].map(function(n){return {value:String(n),text:'Top '+n};}),String(S.topN),function(v){S.topN=+v;render();}),
   setField('Meeting',[{value:'ALL',text:'All meetings'}].concat(Object.keys(C.going).map(function(v){return {value:v,text:v};})),S.top,function(v){S.top=v;render();}));
  app().append(controls);
+ if(C.lastChange)app().append(changeNotice());
  if(S.topMode==='WIN_FIRST'){
   var rows=C.board.winFirst.priority.filter(function(h){return S.top==='ALL'||h.meeting===S.top;});
   app().append(note(rows.length+' qualified research priorities; '+topSet().length+' displayed of requested '+S.topN+'. No Ascot/Randwick/Flemington quota, no price-driven ranking, no padding. Status: provisional.'));
