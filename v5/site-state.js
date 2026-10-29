@@ -16,6 +16,46 @@ function recordedGoingStamp(source){
     return x.meeting+':'+datedGoing(source,x.meeting);
   }).sort().join('|');
 }
+function canonical(x){return String(x||'').toUpperCase().replace(/\([^)]*\)/g,'').replace(/[^A-Z0-9]/g,'');}
+function applyOfficialOverlay(input,overlay){
+  if(!overlay||overlay.schema!=='racing-lab-friday-field-overlay/v1')throw Error('Unverified or missing official field overlay');
+  if(overlay.race_date!==input.date)throw Error('Field overlay date mismatch');
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(overlay.checked_date)||overlay.checked_date>=input.date)throw Error('Invalid pre-race overlay date');
+  if(overlay.publication_approved!==false)throw Error('A research overlay cannot grant publication approval');
+  var next=clone(input),seen=new Set(),index=new Map();
+  next.runners.forEach(function(h){
+    var key=h.race_id+'|'+canonical(h.horse);
+    if(index.has(key))throw Error('Duplicated runner identity in source');
+    index.set(key,h);
+  });
+  function resolve(race,horse){
+    var id=input.date+'_'+race+'|'+canonical(horse),h=index.get(id);
+    if(!h)throw Error('Official overlay references unknown runner: '+race+' '+horse);
+    if(seen.has(id))throw Error('Official overlay duplicates a runner: '+race+' '+horse);
+    seen.add(id);return h;
+  }
+  Object.keys(overlay.scratchings||{}).forEach(function(race){
+    (overlay.scratchings[race]||[]).forEach(function(horse){
+      var h=resolve(race,horse);h.status='SCRATCHED — 30 October dated official scratching sheet';h.emergency_activated=false;
+    });
+  });
+  Object.keys(overlay.emergency_order||{}).forEach(function(race){
+    var names=overlay.emergency_order[race],count=(overlay.projected_promotions||{})[race]||0;
+    if(!Array.isArray(names)||!Number.isInteger(count)||count<0||count>names.length)throw Error('Invalid projected emergency count');
+    names.forEach(function(horse,i){
+      var h=resolve(race,horse);
+      if(!M.isEligible(h))throw Error('Officially scratched runner cannot be promoted');
+      h.status='EMERGENCY — provisional field projection';
+      h.emergency_activated=i<count;
+    });
+  });
+  next.official_check_at=overlay.checked_date;
+  next.official_overlay_notice=overlay.notice;
+  next.official_overlay_sources=overlay.source_documents;
+  next.publication=Object.assign({},next.publication,{approved:false,model_probabilities_published:false,status:'RESEARCH_ONLY'});
+  M.board(next,{going:overlay.going}); // Atomic inventory and scenario validation before accepting the overlay.
+  return next;
+}
 function revision(data,going){
   var text=JSON.stringify([M.VERSION,data,going]),hash=2166136261;
   for(var i=0;i<text.length;i++)hash=Math.imul(hash^text.charCodeAt(i),16777619)>>>0;
@@ -25,8 +65,8 @@ function create(input,options){
   if(!M)throw Error('Formula failed to load');
   options=options||{};
   var source=clone(input),data=clone(source),going={},local=new Set(),listeners=[],live=null,lastError='';
-  data.races.forEach(function(r){going[r.meeting]=datedGoing(source,r.meeting);});
-  var storage=options.storage,settingsKey='racing-lab-v5-settings:'+data.date,sourceStamp=recordedGoingStamp(source);
+  data.races.forEach(function(r){going[r.meeting]=options.going&&options.going[r.meeting]||datedGoing(source,r.meeting);});
+  var storage=options.storage,settingsKey='racing-lab-v5-settings:'+data.date,sourceStamp=recordedGoingStamp(source)+'|'+String(source.official_check_at||'');
   try{
     var settings=storage&&JSON.parse(storage.getItem(settingsKey)||'null');
     if(settings&&settings.sourceSavedAt===sourceStamp){
@@ -36,7 +76,7 @@ function create(input,options){
       next.runners.forEach(function(h){if(ids.includes(h.id)&&M.isEligible(h)){h.status='SCRATCHED — local scenario';local.add(h.id);}});
       M.board(next,{going:candidate});data=next;going=candidate;
     }
-  }catch(e){data=clone(source);local.clear();data.races.forEach(function(r){going[r.meeting]=datedGoing(source,r.meeting);});}
+  }catch(e){data=clone(source);local.clear();data.races.forEach(function(r){going[r.meeting]=options.going&&options.going[r.meeting]||datedGoing(source,r.meeting);});}
   var board=M.board(data,{going:going}),key=revision(data,going);
   function notify(){
     try{if(storage)storage.setItem(settingsKey,JSON.stringify({sourceSavedAt:sourceStamp,going:going,localIds:Array.from(local)}));}catch(e){}
@@ -118,10 +158,25 @@ function create(input,options){
 }
 var pending=null;
 function load(fetcher){
-  if(!pending)pending=(fetcher||fetch)('/v5/research.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw Error('Research HTTP '+r.status);return r.json();})
-    .then(function(data){var storage;try{storage=typeof localStorage!=='undefined'?localStorage:null;}catch(e){}return create(data,{storage:storage});})
-    .catch(function(e){pending=null;throw e;});
-  return pending;
+ if(!pending){
+  var f=fetcher||fetch;
+  pending=f('/v5/research.json',{cache:'no-store'}).then(function(r){
+   if(!r.ok)throw Error('Research HTTP '+r.status);
+   return r.json();
+  }).then(function(data){
+   if(data.date!=='2026-10-31')return {data:data,going:null};
+   return f('/v5/official-snapshot-20261030.json',{cache:'no-store'}).then(function(r){
+    if(!r.ok)throw Error('Official snapshot HTTP '+r.status+' (saved board withheld)');
+    return r.json();
+   }).then(function(overlay){
+    return {data:applyOfficialOverlay(data,overlay),going:overlay.going};
+   });
+  }).then(function(part){
+   var storage;try{storage=typeof localStorage!=='undefined'?localStorage:null;}catch(e){}
+   return create(part.data,{storage:storage,going:part.going});
+  }).catch(function(e){pending=null;throw e;});
+ }
+ return pending;
 }
-return {create:create,load:load};
+return {create:create,load:load,applyOfficialOverlay:applyOfficialOverlay};
 });
