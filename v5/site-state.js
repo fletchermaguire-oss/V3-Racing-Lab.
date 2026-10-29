@@ -64,7 +64,7 @@ function revision(data,going){
 function create(input,options){
   if(!M)throw Error('Formula failed to load');
   options=options||{};
-  var source=clone(input),data=clone(source),going={},local=new Set(),listeners=[],live=null,lastError='';
+  var source=clone(input),data=clone(source),going={},local=new Set(),listeners=[],live=null,lastError='',lastChange=null;
   data.races.forEach(function(r){going[r.meeting]=options.going&&options.going[r.meeting]||datedGoing(source,r.meeting);});
   var storage=options.storage,settingsKey='racing-lab-v5-settings:'+data.date,sourceStamp=recordedGoingStamp(source)+'|'+String(source.official_check_at||'');
   try{
@@ -82,13 +82,28 @@ function create(input,options){
     try{if(storage)storage.setItem(settingsKey,JSON.stringify({sourceSavedAt:sourceStamp,going:going,localIds:Array.from(local)}));}catch(e){}
     listeners.slice().forEach(function(fn){fn(api);});
   }
-  function commit(next,nextGoing){
+  function noteChange(reason,previous,next){
+    var prior=new Map(previous.winFirst.byRace.map(function(x){return [x.race_id,x];}));
+    var changed=[];
+    next.winFirst.byRace.forEach(function(x){
+      var old=prior.get(x.race_id)||{},prev=old.runner_id||null,current=x.runner_id||null;
+      if(prev!==current)changed.push({race_id:x.race_id,previous:old.horse||'NO SELECTION',
+       current:x.horse||'NO SELECTION',reason:reason});
+    });
+    var previousRaw=new Map(previous.baseline.races.map(function(x){return [x.id,x.leader];}));
+    var rawMoves=next.baseline.races.filter(function(x){return previousRaw.get(x.id)!==x.leader;})
+      .map(function(x){return {race_id:x.id,previous:previousRaw.get(x.id),current:x.leader};});
+    lastChange={reason:reason,previous_revision:key,changed_selections:changed,raw_leader_changes:rawMoves,
+      notice:changed.length?'Selection identities changed: see race explanations.':'No win-first selection changed; raw rankings may have changed.'};
+  }
+  function commit(next,nextGoing,reason){
     var result=M.board(next,{going:nextGoing});
+    noteChange(reason||'SCENARIO_CHANGE',board,result);
     data=next;going=nextGoing;board=result;key=revision(data,going);notify();
   }
   function setGoing(meeting,value){
     if(!Object.hasOwn(going,meeting))throw Error('Unknown meeting');
-    var next=Object.assign({},going);next[meeting]=value;commit(clone(data),next);
+    var next=Object.assign({},going);next[meeting]=value;commit(clone(data),next,'TRACK_GOING_'+meeting);
   }
   function setLocalScratch(id,value){
     var original=source.runners.find(function(h){return h.id===id;});
@@ -97,6 +112,7 @@ function create(input,options){
     var next=clone(data),runner=next.runners.find(function(h){return h.id===id;});
     runner.status=value?'SCRATCHED — local scenario':original.status;
     var result=M.board(next,{going:going});
+    noteChange(value?'LOCAL_SCRATCHING':'LOCAL_REINSTATEMENT',board,result);
     if(value)local.add(id);else local.delete(id);
     data=next;board=result;key=revision(data,going);notify();
   }
@@ -122,6 +138,7 @@ function create(input,options){
     var nextSource=clone(next);
     next.runners.forEach(function(h){if(local.has(h.id))h.status='SCRATCHED — local scenario';});
     var result=M.board(next,{going:going});
+    noteChange('AIRTABLE_EVIDENCE_UPDATE',board,result);
     source=nextSource;data=next;board=result;key=revision(data,going);live={as_of:q.as_of};lastError='';notify();
   }
   function rows(race){return board.baseline.records.filter(function(h){return h.race_id===race;});}
@@ -148,7 +165,7 @@ function create(input,options){
       };}),publication:{status:'PROVISIONAL_UNCALIBRATED',approved:false},model_revision:key};
   }
   var api={get data(){return data;},get board(){return board;},get going(){return Object.assign({},going);},
-    get revision(){return key;},get live(){return live;},get error(){return lastError;},get localScratchCount(){return local.size;},
+    get revision(){return key;},get live(){return live;},get error(){return lastError;},get lastChange(){return lastChange;},get localScratchCount(){return local.size;},
     get model(){return M;},subscribe:function(fn){listeners.push(fn);return function(){listeners=listeners.filter(function(x){return x!==fn;});};},
     setGoing:setGoing,setLocalScratch:setLocalScratch,isLocalScratch:function(id){return local.has(id);},applyEvidence:applyEvidence,
     reportError:function(message){lastError=message;notify();},rows:rows,
