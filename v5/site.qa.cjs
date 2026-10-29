@@ -129,10 +129,10 @@ test('entrypoints consume the screened board and Multi Lab auto-use cannot draw 
 test('loading the date-matched overlay is fail-closed, and applies the saved Friday official scenario',async()=>{
  const checkpoint=require('./shortlists/2026-10-30-independent-top10.json');
  const seen=[],fetcher=async(path)=>{seen.push(path);return {ok:true,json:async()=>
-  path.includes('official-snapshot')?clone(Official):path.includes('independent-top10')?clone(checkpoint):clone(D)};};
+  path.includes('official-latest')?clone(Official):path.includes('/shortlists/current.json')?clone(checkpoint):clone(D)};};
  const C=await State.load(fetcher);
- assert.deepEqual(seen,['/v5/research.json','/v5/official-snapshot-20261030.json',
-  '/v5/shortlists/2026-10-30-independent-top10.json']);
+ assert.deepEqual(seen,['/v5/research.json','/v5/official-latest.json',
+  '/v5/shortlists/current.json']);
  assert.equal(C.board.activeCount,372);
  assert.equal(C.going.ASCOT,'Soft 5');
  assert.equal(C.board.winFirst.priority.length,3);
@@ -153,4 +153,17 @@ test('every update explains leader moves, and the live board never silently swap
  assert.equal(C.lastChange.reason,'LOCAL_SCRATCHING');
  assert.ok(C.lastChange.changed_selections.some(x=>x.race_id===h.race_id));
  assert.ok(!C.board.winFirst.priority.some(x=>x.runner_id===h.runner_id));
+});
+
+
+test('Saturday timestamped overlay can replace Friday snapshot; un-timestamped or future overlays fail closed',()=>{
+ const latest=clone(Official);latest.schema='racing-lab-racecard-overlay/v2';
+ latest.checked_date='2026-10-31';latest.checked_at='2026-10-31T07:35:00+11:00';
+ const C=State.create(State.applyOfficialOverlay(D,latest),{going:latest.going});
+ assert.equal(C.data.official_check_at,'2026-10-31T07:35:00+11:00');
+ assert.equal(C.board.publication_blocked,true);
+ const noStamp=clone(latest);delete noStamp.checked_at;
+ assert.throws(()=>State.applyOfficialOverlay(D,noStamp),/requires a timestamp/);
+ const future=clone(latest);future.checked_date='2026-11-01';
+ assert.throws(()=>State.applyOfficialOverlay(D,future),/date/);
 });
