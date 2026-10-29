@@ -190,6 +190,10 @@ function board(d){
   return rs[0];
  }).sort(function(a,b){return b.robust_floor-a.robust_floor||b.top1_scenarios-a.top1_scenarios;});
  var leaders=good.records.filter(function(x){return x.rank===1;}).sort(function(a,b){return b.p-a.p;});
+ // Explicit data-quality screen. An excluded horse still appears on the raw
+ // and all-races robustness boards. This is not proof of profitable selection.
+ var qualified=robustLeaders.filter(function(x){return x.quality_flags.length===0;});
+
  if(good.records.length!==408||robustLeaders.length!==29||
     scenarios.some(function(s){return s.races.length!==29||s.races.some(function(r){return r.sum!==100;});}))
     throw Error('V5-L2 scenario integrity check failed');
@@ -198,7 +202,10 @@ function board(d){
   sourceCount:d.runners.length,raceCount:d.races.length,baseline:good,soft:soft,
   stress:{goodClassConservative:goodConservative,softClassConservative:softConservative},
   model_variants:['Good 4 · base class','Soft 5 · base class','Good 4 · conservative class','Soft 5 · conservative class'],
-  leaders:leaders,robustLeaders:robustLeaders,top10:robustLeaders.slice(0,10)};
+  leaders:leaders,robustLeaders:robustLeaders,qualifiedLeaders:qualified,top10:qualified.slice(0,10),
+  screen:{description:'Grade/going sensitivity, Thursday form completeness and race competitiveness check; research filter only',
+    rules:{completeAtLeast:0.70,scenarioSwingBelow:6,top1InScenariosAtLeast:3,chaosBelow:90},
+    qualifiedRaceCount:qualified.length,totalRaceCount:robustLeaders.length}};
 }
 global.RacingLabV5Model={VERSION:VERSION,board:board,calculate:calculate};
 })(typeof window==='undefined'?globalThis:window);
