@@ -131,3 +131,18 @@ test('loading the date-matched overlay is fail-closed, and applies the saved Fri
  assert.equal(C.going.ASCOT,'Soft 5');
  assert.equal(C.board.winFirst.priority.length,3);
 });
+
+
+test('every update explains leader moves, and the live board never silently swaps a shortlist horse on going changes',()=>{
+ const C=officialController(),ids=()=>C.board.winFirst.priority.map(x=>x.runner_id);
+ const before=ids();C.setGoing('ASCOT','Good 4');
+ assert.deepEqual(ids(),before);
+ assert.equal(C.lastChange.reason,'TRACK_GOING_ASCOT');
+ assert.equal(C.lastChange.changed_selections.length,0);
+ assert.ok(C.lastChange.raw_leader_changes.length>=1);
+ const h=C.board.winFirst.priority[0];
+ C.setLocalScratch(h.runner_id,true);
+ assert.equal(C.lastChange.reason,'LOCAL_SCRATCHING');
+ assert.ok(C.lastChange.changed_selections.some(x=>x.race_id===h.race_id));
+ assert.ok(!C.board.winFirst.priority.some(x=>x.runner_id===h.runner_id));
+});
