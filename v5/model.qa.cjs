@@ -92,7 +92,7 @@ test('wider winning margin helps rather than being treated as a beaten margin',(
  const after=M.calculate(d,'Good 4');
  const a=before.records.find(x=>x.id==='h0'),b=after.records.find(x=>x.id==='h0');
  assert.ok(b.p_exact>a.p_exact);assert.ok(b.features.recency>a.features.recency);
- assert.equal(b.features.class,a.features.class);
+ assert.ok(b.features.class>a.features.class,'Stronger Group 1 winning margin improves graded performance evidence');
 });
 test('larger losing margins hurt; a better maiden performance improves the class contribution',()=>{
  const d=fixture();d.runners[0].form='30/1/2027 TEST 1200m (G), MDN: 8/10, PDF margin 8L';
@@ -271,4 +271,44 @@ test('browser and Node use the same model; V3 layout and historical results rema
  assert.ok(html.includes('window.RacingLabApp'));
  assert.ok(html.includes('/v5/reader.js'));
  assert.equal(Object.isFrozen(M.CONFIG),true);assert.equal(Object.isFrozen(M.CONFIG.weights),true);
+});
+
+test('L5 class labels reward proven high-class form without invented historical-opponent ratings',()=>{
+ const d=fixture();
+ d.runners[0].form='30/1/2027 TEST 1200m (G), OPEN Group G1: 2/12, PDF margin 0.2L';
+ d.runners[1].form='30/1/2027 TEST 1200m (G), MDN: 1/12, PDF margin 1.5L';
+ d.runners[2].form='30/1/2027 TEST 1200m (G), BM68: 1/12, PDF margin 1L';
+ const b=M.calculate(d,'Good 4'),a=b.records.find(x=>x.id==='h0'),m=b.records.find(x=>x.id==='h1');
+ assert.ok(a.grade_quality>m.grade_quality,'A narrow G1 placing outranks a maiden win on class');
+ assert.ok(a.opposition_class_edge>m.opposition_class_edge);
+ assert.ok(a.features.class>m.features.class);
+ assert.ok(a.p_exact>m.p_exact,'Qualified elite performance should be correctly compared with low-level opposition');
+ assert.equal(M.historicalRaceLevel('unparseable grade'),null);
+ assert.equal(M.classQuality([]),0);
+});
+test('L5 opponent class edge reacts to an opposing runner form change',()=>{
+ const d=fixture();
+ d.runners[0].form='30/1/2027 TEST 1200m (G), OPEN Group G1: 1/12, PDF margin 0.6L';
+ d.runners[1].form='30/1/2027 TEST 1200m (G), MDN: 1/12, PDF margin 1L';
+ d.runners[2].form='30/1/2027 TEST 1200m (G), BM68: 2/12, PDF margin 0.5L';
+ const before=M.calculate(d,'Good 4'),a=before.records.find(x=>x.id==='h0');
+ d.runners[1].form='30/1/2027 TEST 1200m (G), OPEN Group G1: 1/12, PDF margin 1L';
+ const after=M.calculate(d,'Good 4'),b=after.records.find(x=>x.id==='h0');
+ assert.ok(b.opposition_class_anchor>a.opposition_class_anchor);
+ assert.ok(b.opposition_class_edge<a.opposition_class_edge);
+ assert.ok(b.p_exact<a.p_exact,'A stronger rival reduces the contender win share');
+});
+test('L5 changes remain market-blind, preserve all race sums and expose strength context',()=>{
+ const b=M.board(D,{going:{RANDWICK:'Good 4',FLEMINGTON:'Good 4',ASCOT:'Soft 5'}});
+ assert.equal(b.baseline.races.length,29);assert.ok(b.baseline.races.every(x=>x.sum===100));
+ for(const r of b.baseline.records){
+  assert.ok(Number.isFinite(r.opposition_class_anchor));
+  assert.ok(Number.isFinite(r.opposition_class_edge));
+  assert.ok(Number.isFinite(r.grade_quality));
+ }
+ const sheza=b.baseline.records.find(x=>x.horse==='Sheza Alibi');
+ assert.equal(sheza.rank,1);
+ assert.ok(sheza.p>25,'The high-grade record must be represented, without name-specific promotion');
+ const w=b.baseline.records.find(x=>x.horse==='Western Miss');
+ assert.ok(sheza.p>w.p,'Cross-race model order now reflects stronger G1 evidence on this dossier');
 });
