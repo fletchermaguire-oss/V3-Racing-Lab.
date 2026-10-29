@@ -18,3 +18,9 @@
   to = "/.netlify/functions/v5-evidence"
   status = 200
   force = true
+
+[[redirects]]
+  from = "/api/v5/official"
+  to = "/.netlify/functions/v5-official"
+  status = 200
+  force = true
