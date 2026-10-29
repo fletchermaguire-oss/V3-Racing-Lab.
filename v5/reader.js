@@ -39,8 +39,37 @@ var selected=hs.find(function(x){return x.id===activeHorse;})||hs.find(function(
 }
 function setRaces(choose){race.replaceChildren();var venue=meet.value;data.races.filter(function(r){return r.meeting===venue;}).forEach(function(r){var op=el("option",null,"Race "+r.race+" · "+r.title);op.value=r.id;race.append(op);});if(choose)race.value=choose;if(!race.value&&race.options.length)race.selectedIndex=0;search.value="";activeHorse=null;render();}
 function populate(){meet.replaceChildren();["RANDWICK","FLEMINGTON","ASCOT"].forEach(function(k){var op=el("option",null,k[0]+k.slice(1).toLowerCase());op.value=k;meet.append(op);});meet.value="RANDWICK";setRaces();}
+
+/* Update evidence from the authenticated Netlify function. Never alter original picks,
+   inject betting probabilities, or claim Saturday starters have been verified. */
+async function refreshLiveEvidence(){
+  try{
+    var response=await fetch("/api/v5/evidence",{cache:"no-store"});
+    if(!response.ok)return;
+    var live=await response.json();
+    if(!data||live.status!=="LIVE_RESEARCH_ONLY"||live.truncated||live.publication_approved!==false||!Array.isArray(live.records)||live.records.length!==408)return;
+    var byKey=new Map();
+    live.records.forEach(function(record){var f=record.fields||{};byKey.set(String(f.fld4BGD5iAcZcGfaN||"")+"|"+String(f.fldll7dYIGf28MAKA||""),f);});
+    var matched=data.runners.map(function(h){return byKey.get(h.race_id+"|"+h.horse);});
+    if(matched.some(function(f){return !f;}))return;
+    data.runners.forEach(function(h,i){
+      var f=matched[i];
+      if(f.fldb2TMkMV0aeCuTQ)h.form=String(f.fldb2TMkMV0aeCuTQ);
+      if(f.fldgSikt2WARtdwk8)h.statistics=String(f.fldgSikt2WARtdwk8);
+      if(f.fldwVqrxsNeuNQiLP)h.strengths=String(f.fldwVqrxsNeuNQiLP);
+      if(f.fldj14UmWVhZY8Mgi)h.risks=String(f.fldj14UmWVhZY8Mgi);
+      if(f.fldoYxB5oh5AuF56e)h.historical_map=String(f.fldoYxB5oh5AuF56e);
+      if(f.fldddV1wq9EL0f2zy)h.outstanding=String(f.fldddV1wq9EL0f2zy);
+      var status=f.fldsSdoQPBOyW0AOJ;
+      if(status)h.status=typeof status==="string"?status:(status.name||h.status);
+    });
+    foot.textContent="LIVE AIRTABLE RESEARCH · 408 runner evidence records refreshed "+String(live.as_of||"")+". Original research selections unchanged. Forecasts remain unapproved; official raceday fields, track and scratchings must be checked.";
+    if(activeRace)render();
+  }catch(_){/* static dated evidence remains independently usable */}
+}
+
 async function getData(){if(data)return data;if(loading)return loading;
-loading=fetch(DATA,{cache:"no-store"}).then(function(r){if(!r.ok)throw Error("Research download HTTP "+r.status);return r.json();}).then(function(v){if(!v||v.publication?.approved!==false||!Array.isArray(v.races)||!Array.isArray(v.runners)||v.races.length!==29||v.runners.length!==408)throw Error("Research publication guard or inventory check failed");data=v;populate();return v;});return loading;
+loading=fetch(DATA,{cache:"no-store"}).then(function(r){if(!r.ok)throw Error("Research download HTTP "+r.status);return r.json();}).then(function(v){if(!v||v.publication?.approved!==false||!Array.isArray(v.races)||!Array.isArray(v.runners)||v.races.length!==29||v.runners.length!==408)throw Error("Research publication guard or inventory check failed");data=v;populate();refreshLiveEvidence();return v;});return loading;
 }
 launcher.addEventListener("click",function(){show(true);if(!data){setWaiting("Loading 408 documented runners…");getData().catch(function(e){setWaiting("Research not available: "+e.message);loading=null;});}});
 close.addEventListener("click",function(){show(false);});
