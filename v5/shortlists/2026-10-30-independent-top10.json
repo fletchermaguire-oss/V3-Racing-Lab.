@@ -23,7 +23,9 @@
       "tier": "A",
       "reason": "Three recent Group 1 wins, five consecutive top-two Group 1 finishes and elite Randwick form",
       "risk": "Strong Golden Eagle field, 1500m after 2000m, traffic and pace",
-      "ranking_basis": "Qualitative competitive chance and strength of observed form, not sorted uncalibrated model_pct"
+      "ranking_basis": "Qualitative competitive chance and strength of observed form, not sorted uncalibrated model_pct",
+      "original_form_tier": "A+",
+      "condition_note": "Earlier three-horse A-tier board retained; strong elite Group 1 form."
     },
     {
       "rank": 2,
@@ -34,7 +36,9 @@
       "tier": "A-",
       "reason": "Third in Group 1 Thousand Guineas then drops to Group 3 Vanity at proven 1400m; legitimate class relief",
       "risk": "Only four career runs; Pin Up Sheila and I Am Aria are credible rivals",
-      "ranking_basis": "Qualitative competitive chance and strength of observed form, not sorted uncalibrated model_pct"
+      "ranking_basis": "Qualitative competitive chance and strength of observed form, not sorted uncalibrated model_pct",
+      "original_form_tier": "A",
+      "condition_note": "Earlier three-horse A-tier board retained; class drop but small sample."
     },
     {
       "rank": 3,
@@ -111,7 +115,9 @@
       "tier": "C+",
       "reason": "Seven wins in eight starts, unbeaten from three Ascot runs and drawn inside",
       "risk": "Untried Soft 5, Playin'it Sweet receives 2.5kg better relative terms, Bonjoy a proven stakes rival",
-      "ranking_basis": "Qualitative competitive chance and strength of observed form, not sorted uncalibrated model_pct"
+      "ranking_basis": "Qualitative competitive chance and strength of observed form, not sorted uncalibrated model_pct",
+      "original_form_tier": "A",
+      "condition_note": "Earlier form assessment A; Soft 5 unproven and race-day outlook requires review, distinct from form grade."
     },
     {
       "rank": 10,
@@ -133,5 +139,6 @@
     "https://www.tab.co.nz/punters/2026/10/2026-victoria-derby-day-tips-preview-flemington-saturday-31-october/",
     "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/flemington/2026-10-31/race-tips",
     "https://fanverse.com.au/race-books/ascot-2026-10-31/"
-  ]
+  ],
+  "tier_policy": "original_form_tier keeps historical A-grade form assessments distinct from provisional race-day suitability, wet-track uncertainty and model percentages. No horse is automatically upgraded by price, scratching or user scenario."
 }
