@@ -47,7 +47,7 @@ var f=e('div','filters');f.append(setField('Show leaders',[{value:'ALL',text:'Bo
 }
 function raceNav(){var all=D.races.filter(function(r){return r.meeting===S.meeting;});var filter=e('div','filters');filter.append(setField('Meeting',VENUES.map(function(x){return {value:x,text:x};}),S.meeting,function(v){S.meeting=v;S.race=D.races.find(function(r){return r.meeting===v;}).id;S.runner=null;render();}));
 filter.append(setField('Race',all.map(function(r){return {value:r.id,text:'R'+r.race+' · '+r.title};}),S.race,function(v){S.race=v;S.runner=null;render();}));
-var grid=e('div','racechips');all.forEach(function(r){var b=e('button','racechip'+(r.id===S.race?' active':''));add(b,e('b','','Race '+r.race),e('small','',r.distance_m+'m · '+r.original_pick||'No leader'));b.addEventListener('click',function(){S.race=r.id;S.runner=null;render();});grid.append(b);});return [filter,grid];}
+var grid=e('div','racechips');all.forEach(function(r){var b=e('button','racechip'+(r.id===S.race?' active':''));add(b,e('b','','Race '+r.race),e('small','',r.distance_m+'m · '+(r.original_pick||'No leader')));b.addEventListener('click',function(){S.race=r.id;S.runner=null;render();});grid.append(b);});return [filter,grid];}
 function facts(h){var result={pros:[],cons:[]},pos=result.pros,neg=result.cons;var stat=h.statistics||'',form=h.form||'',last=form.split('\n').find(function(t){return /^\d{1,2}\/\d{1,2}\/\d{4}/.test(t.trim());})||'';
 var stats=function(k){var mt=stat.match(new RegExp('\\b'+k+'\\s+(\\d+)-(\\d+)-(\\d+)','i'));return mt?{w:+mt[1],place:+mt[2],n:+mt[3]}:null;};
 var c=stats('Career'),dist=stats('distance'),course=stats('course'),good=stats('Good'),soft=stats('Soft');
@@ -69,7 +69,7 @@ risk.slice(0,2).forEach(function(s){if(!neg.some(function(n){return n.toLowerCas
 var strengths=(h.strengths||'').split(';').map(function(s){return s.trim();}).filter(function(s){return /sourced .*comment|trainer .*says|stewards|gear change|trial|blinkers|first up/i.test(s)&&!/PDF-sourced:/i.test(s)&&!/https?:/i.test(s);});strengths.slice(0,1).forEach(function(s){pos.push('Context (not an assumed benefit): '+s+'.');});
 if(pos.length===0)pos.push('No sufficiently specific positive could be extracted automatically. Open the source dossier before assessing this runner.');
 if(neg.length===0)neg.push('No specific material negative verified in the saved record; that is NOT evidence the runner is risk-free.');
-if(!/verified/i.test(h.status||''))neg.push('Saturday starter, scratchings and actual track/rail remain unverified.');
+if(/not verified|unverified/i.test(h.status||''))neg.push('Saturday starter, scratchings and actual track/rail remain unverified.');
 return result;}
 function bulletCard(cls,title,items){var c=e('div','factcard '+cls);c.append(e('h4','',title));var ul=e('ul');items.forEach(function(s){ul.append(e('li','',s));});c.append(ul);return c;}
 function horseDetail(h){var root=e('div','panel detail');add(root,e('div','eyebrow',h.original_pick?'ORIGINAL RACE LEADER · NOT A FINAL V5 FORECAST':'FULL RUNNER RESEARCH'),e('h3','',h.horse),e('p','muted small','No. '+h.tab+' · Barrier '+h.barrier+' · '+h.weight_kg+'kg · '+h.trainer+' / '+h.jockey),e('div','pillrow'));
