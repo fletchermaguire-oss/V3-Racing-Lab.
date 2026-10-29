@@ -1,7 +1,7 @@
 /* Racing Lab V5 dashboard: user-facing research, never a synthetic forecast. */
 (function(){
 'use strict';
-var D=null,B=null,live=false,liveAsOf='',S={topMode:'GOOD',page:'overview',meeting:'RANDWICK',race:'2026-10-31_RANDWICK_R01',runner:null,top:'ALL',multi:[],compareA:null,compareB:null,search:''};
+var D=null,B=null,live=false,liveAsOf='',S={topMode:'QUALIFIED',page:'overview',meeting:'RANDWICK',race:'2026-10-31_RANDWICK_R01',runner:null,top:'ALL',multi:[],compareA:null,compareB:null,search:''};
 var PAGES=[['overview','Overview'],['top10','Daily Top 10'],['races','Race Centre'],['pros','Pros & Cons'],['multi','Multi Lab'],['sim','Simulator'],['compare','Compare'],['qa','Model QA'],['cal','Calibration'],['weather','Weather & Tracks'],['sync','Data & Sync'],['results','Results']];
 var VENUES=['RANDWICK','FLEMINGTON','ASCOT'];
 function e(tag,cls,txt){var x=document.createElement(tag);if(cls)x.className=cls;if(txt!==undefined&&txt!==null)x.textContent=String(txt);return x;}
@@ -78,7 +78,7 @@ add(hero,e('div','eyebrow','SATURDAY 31 OCTOBER 2026 · PRO V5'),e('h2','','Your
 var buttons=e('div','heroActions');
 add(buttons,action('Daily Top 10',function(){go('top10');},'primary'),action('Race Centre',function(){go('races');}),action('Pros & Cons',function(){go('pros');}),link('Original Simulator','/'));
 hero.append(buttons);
-add(app(),hero,metrics(),note('31 OCTOBER RESEARCH ONLY: The saved original qualitative selections are preserved. Saturday starters and independent V5 winning probabilities are not yet verified; no invented rankings or percentages.'),head('Daily Top 10 · saved review queue','Familiar Top 10 layout. These ten slots are not ranked by winning chance until the complete V5 model is verified.'),toplist(),head('Track intelligence','Good 4 is our working Saturday scenario, not a final certified condition.'),venueCards(),head('Strong research profiles','Open individual source-backed strengths, weaknesses and form.'));
+add(app(),hero,metrics(),note('V5-L2 independent full-field probability estimates are provisional and uncalibrated, not official race-day chances. Good 4 is a working condition; Soft 5 and opposition-grade sensitivity are checked. Original analyst selections remain separate.'),head('Daily Top 10 · independent model shortlist','V5-L2 research-screened contenders. Provisional Good 4 probabilities alongside model-score and wet-track sensitivity.'),toplist(),head('Track intelligence','Good 4 is our working Saturday scenario, not a final certified condition.'),venueCards(),head('Strong research profiles','Open individual source-backed strengths, weaknesses and form.'));
 var grid=e('div','grid');
 allLeaders().filter(function(h){return ['RANDWICK_R08','FLEMINGTON_R06','FLEMINGTON_R08','RANDWICK_R07','RANDWICK_R06','FLEMINGTON_R05'].some(function(z){return h.race_id.endsWith(z);});}).forEach(function(h){var c=box(h.horse,shortRace(h.race_id)),f=facts(h);
 add(c,e('p','small','PRO: '+(f.pros[0]||'See saved evidence')),e('p','muted small','RISK: '+(f.cons[0]||'Raceday conditions pending')),action('Read full pros & cons',function(){selectRace(h.race_id,h.id,'pros');}));
@@ -90,21 +90,73 @@ function allLeaders(){return D.runners.filter(function(h){return h.original_pick
 function firstStrength(h){return (h.strengths||'').replace(/^PDF-sourced:\s*/,'').split(';').slice(0,2).join(';').slice(0,180)||'Research dossier available';}
 function modelOf(h){return B&&B.baseline.records.find(function(x){return x.id===h.id;});}
 function modelRace(id){return B&&B.baseline.races.find(function(x){return x.id===id;});}
-function topSet(){if(!B)return [];var rows=S.topMode==='ROBUST'?B.robustLeaders:B.leaders;if(S.top!=='ALL')rows=rows.filter(function(y){return y.meeting===S.top;});return rows.slice(0,10);}
-function toplist(){var list=e('div','toplist model-toplist');if(!B){list.append(note('Full-field model unavailable. No numbers have been invented.'));return list;}
-topSet().forEach(function(m,i){var t=e('button','toprow v5-model-row'),mid=e('div','model-horse'),chance=e('div','model-chance'),score=e('div','model-scorebox'),soft=e('div','model-soft');
-add(mid,e('strong','',m.horse),e('small','',shortRace(m.race_id)),e('small','model-qual',m.original_pick?'Matches saved qualitative leader':'Model differs from saved qualitative leader'));
-var shown=S.topMode==='ROBUST'?Math.min(m.p,m.soft_p):m.p;add(chance,e('strong','',shown.toFixed(2)+'%'),e('small','',S.topMode==='ROBUST'?'LOWER SCENARIO':'GOOD 4 WIN'));
-add(score,e('strong','',m.model_score.toFixed(1)+'/100'),e('small','','MODEL SCORE'));
-add(soft,e('strong','',m.soft_p.toFixed(2)+'%'),e('small','','SOFT 5'));
-var q=modelRace(m.race_id);var meta=e('div','model-meta','Good 4 '+m.p.toFixed(2)+'% · Soft 5 '+m.soft_p.toFixed(2)+'% · Gap '+m.field_gap.toFixed(2)+'pp · Chaos '+m.chaos+'/100 · Field '+m.field_size+' · Rival-grade index '+(q?q.field_quality.toFixed(2):'—')+' (proxy)');
-add(t,e('div','slot',String(i+1).padStart(2,'0')),mid,chance,score,soft,meta);t.addEventListener('click',function(){selectRace(m.race_id,m.id,'races');});list.append(t);});return list;}
-function top10(){add(app(),head('Daily Top 10 · V5-L1 Model','One race leader per race with independent Good 4 forecasts and an alternate Soft 5 robustness ranking.'));
-add(app(),note('V5-L1 EXPERIMENTAL / UNCALIBRATED: All 408 Thursday-listed runners modelled; Saturday scratchings and track are not verified. These are model estimates, not established historical accuracy. Original selections remain unchanged.'));
-var f=e('div','filters');f.append(setField('Ranking',[{value:'GOOD',text:'Good 4 · win estimate'},{value:'ROBUST',text:'Weather robust · lower of Good 4 / Soft 5'}],S.topMode,function(v){S.topMode=v;render();}));f.append(setField('Meeting',[{value:'ALL',text:'All three meetings · Top 10'},{value:'RANDWICK',text:'Randwick · 10 race leaders'},{value:'FLEMINGTON',text:'Flemington · 9 race leaders'},{value:'ASCOT',text:'Ascot · 10 race leaders'}],S.top,function(v){S.top=v;render();}));app().append(f,toplist());
-var p=box('V5-L1 model method','Evidence model: dated form, margins and grade of recent races, career/course/distance/surface records, recency, relative handicap and barrier context. Group and Listed performance carries more weight than in L0. A field rival-grade proxy is shown; it is NOT a certified speed rating. Scores are normalised to 100% per race with 15% field-uniform shrinkage. No market input or original-pick bonus.');
-add(p,e('p','muted small','Model score /100 is a field-relative strength index, not a win percentage. Gap is the lead over second-ranked; chaos measures competitiveness. Robust mode sorts by the LOWER of two scenario estimates, not a statistically validated confidence interval. Historical settling maps are available but full race tempo has not yet been fitted.'),
-e('p','muted small','This is NOT a calibrated or officially published V5 board. Unverified starter fields, final track, horse-specific sectionals and external historical calibration remain outstanding.'));app().append(p);}
+function topSet(){
+ if(!B)return [];
+ var rows=S.topMode==='QUALIFIED'?B.qualifiedLeaders:S.topMode==='ROBUST'?B.robustLeaders:B.leaders;
+ if(S.top!=='ALL')rows=rows.filter(function(x){return x.meeting===S.top;});
+ return rows.slice(0,10);
+}
+function riskTags(m){
+ var names={LIMITED_DOSSIER:'Incomplete form',SCENARIO_SENSITIVE:'Weather/class sensitive',UNSTABLE_RACE_LEAD:'Winner changes with scenario',CROWDED_RACE:'Tightly contested race'};
+ return (m.quality_flags||[]).map(function(x){return names[x]||x;});
+}
+function modelReasons(m){
+ var h=D.runners.find(function(x){return x.id===m.id;});
+ if(!h)return {pro:'Open source dossier',con:'Runner evidence missing'};
+ var f=facts(h),top=f.pros.find(function(s){return /last start|competitive|won|winner|course|distance/i.test(s);})||f.pros[0];
+ var risk=f.cons.find(function(s){return !/scratchings|track\/rail remain unverified/i.test(s);})||f.cons[0];
+ return {pro:top||firstStrength(h),con:risk||'Official Saturday starters not verified'};
+}
+function toplist(){
+ var list=e('div','toplist model-toplist');
+ if(!B){list.append(note('Independent model unavailable. No invented rankings.'));return list;}
+ var selected=topSet();
+ if(!selected.length){list.append(note('No candidate passed the chosen meeting and research screen. Switch to All 29 Race Leaders to see the unfiltered estimates.'));return list;}
+ selected.forEach(function(m,i){
+  var t=e('button','toprow v5-model-row');
+  var mid=e('div','model-horse'),chance=e('div','model-chance'),score=e('div','model-scorebox'),soft=e('div','model-soft');
+  var reason=modelReasons(m),risk=riskTags(m);
+  add(mid,e('strong','',m.horse),e('small','',shortRace(m.race_id)),e('small','model-qual',
+      'Good 4 rank '+m.rank+'/'+m.field_size+' · '+m.top1_scenarios+'/4 scenarios lead'+(m.original_pick?' · original pick agrees':' · independent model')));
+  add(chance,e('strong','',m.p.toFixed(2)+'%'),e('small','','GOOD 4 WIN'));
+  add(score,e('strong','',m.model_score.toFixed(1)+'/100'),e('small','','MODEL SCORE'));
+  add(soft,e('strong','',m.soft_p.toFixed(2)+'%'),e('small','','SOFT 5 WIN'));
+  var q=modelRace(m.race_id);
+  var stats=e('div','model-meta',
+      'Conservative floor '+m.robust_floor.toFixed(2)+'% · four-scenario spread '+m.robust_spread.toFixed(2)+'pp · '+
+      'Good 4 gap '+m.gap.toFixed(2)+'pp · race chaos '+m.field_chaos+'/100 · '+
+      'opposition grade proxy '+(q?q.field_quality.toFixed(2):'—')+
+      (risk.length?' · WATCH: '+risk.join('; '):' · no triggered research-screen flags'));
+  var two=e('div','model-reasons');
+  add(two,e('span','','PRO · '+reason.pro.slice(0,160)),e('span','','RISK · '+reason.con.slice(0,170)));
+  add(t,e('div','slot',String(i+1).padStart(2,'0')),mid,chance,score,soft,stats,two);
+  t.addEventListener('click',function(){selectRace(m.race_id,m.id,'races');});
+  list.append(t);
+ });
+ return list;
+}
+function top10(){
+ add(app(),head('Daily Top 10 · V5-L2','The research-screened shortlist ranks by the lowest model win estimate across four independent class and track scenarios.'));
+ add(app(),note('PROVISIONAL RESEARCH · No calibrated historical hit-rate, confirmed Saturday scratchings or live sectional/pace model. A chance such as 19.99% is a model estimate, not an externally verified probability. Never infer guaranteed winners.'));
+ var f=e('div','filters');
+ f.append(setField('Ranking',[
+ {value:'QUALIFIED',text:'Evidence-screened contenders (default)'},
+ {value:'ROBUST',text:'All 29 races · four-scenario robustness'},
+ {value:'GOOD',text:'All 29 races · Good 4 win probability'}
+ ],S.topMode,function(v){S.topMode=v;render();}));
+ f.append(setField('Meeting',[
+ {value:'ALL',text:'All three meetings'},{value:'RANDWICK',text:'Randwick'},
+ {value:'FLEMINGTON',text:'Flemington'},{value:'ASCOT',text:'Ascot'}
+ ],S.top,function(v){S.top=v;render();}));
+ app().append(f);
+ if(B&&S.topMode==='QUALIFIED')app().append(note('Research screen: '+B.screen.qualifiedRaceCount+' of 29 race leaders meet the published rules. No meeting quotas or original-pick bonuses. Horses with flags remain available in the two unfiltered views.'));
+ app().append(toplist());
+ var p=box('What the Top 10 actually means','Independent V5-L2 evaluates all 408 Thursday PDF-listed horses in each race. It stress-tests Good 4 versus Soft 5 and the importance of opposition grade (4 separate full-field scenarios). Every race sums to 100% in every scenario. The default shortlist ranks candidates by the LOWER of their four estimates, not Good 4 alone.');
+ add(p,e('p','muted small','Screen excludes a race leader when any research risk flag triggers: dossier coverage under 70%, a four-scenario range of 6 percentage points or more, leading fewer than 3/4 scenarios, or race-chaos index 90 or more. These are transparent screening heuristics, NOT scientifically calibrated thresholds; changing them may alter the shortlist.'),
+ e('p','muted small','The unfiltered Good 4 tab preserves the true across-race probability sort, including strong but uncertain Ascot runners. The robust tab includes all 29 races and can select a horse ranked second on Good 4 if it is more resilient across scenarios. No synthetic favourite boosts or arbitrary per-meeting quotas.'),
+ e('p','muted small','Missing: verified final scratching/emergency fields, race-day track, sectional speed, trainer observations, complete dynamic race maps and genuine out-of-sample calibration. All percentages remain experimental and could move substantially.'));
+ app().append(p);
+}
 function raceNav(){var all=D.races.filter(function(r){return r.meeting===S.meeting;});var filter=e('div','filters');filter.append(setField('Meeting',VENUES.map(function(x){return {value:x,text:x};}),S.meeting,function(v){S.meeting=v;S.race=D.races.find(function(r){return r.meeting===v;}).id;S.runner=null;render();}));
 filter.append(setField('Race',all.map(function(r){return {value:r.id,text:'R'+r.race+' · '+r.title};}),S.race,function(v){S.race=v;S.runner=null;render();}));
 var grid=e('div','racechips');all.forEach(function(r){var b=e('button','racechip'+(r.id===S.race?' active':''));add(b,e('b','','Race '+r.race),e('small','',r.distance_m+'m · '+(r.original_pick||'No leader')));b.addEventListener('click',function(){S.race=r.id;S.runner=null;render();});grid.append(b);});return [filter,grid];}
@@ -140,7 +192,7 @@ return root;}
 function racePanel(mode){var r=raceOf(S.race);if(!r){return;}var bar=e('div','racebar');add(bar,e('div','eyebrow',r.meeting+' · RACE '+r.race),e('h3','',r.title+' · '+r.distance_m+'m'),e('p','','Original qualitative leader: '+(r.original_pick||'Unranked')+' · '+runners(r.id).length+' PDF entries · Saturday field unverified'));app().append(bar);
 
 var rm=modelRace(r.id);
-if(rm)app().append(e('div','race-model-summary','V5-L1 · Good 4 whole field = '+rm.sum.toFixed(2)+'% · top '+rm.leader+' '+rm.top_p.toFixed(2)+'% · gap '+rm.gap.toFixed(2)+'pp · chaos '+rm.chaos+'/100'));
+if(rm)app().append(e('div','race-model-summary','V5-L2 · Good 4 whole field = '+rm.sum.toFixed(2)+'% · top '+rm.leader+' '+rm.top_p.toFixed(2)+'% · gap '+rm.gap.toFixed(2)+'pp · chaos '+rm.chaos+'/100'));
 var cols=e('div','cols');
 var l=e('div','panel runnerlist');
 var hs=runners(r.id);
@@ -176,7 +228,7 @@ var opts=hs.map(function(h){return {value:h.id,text:'#'+h.tab+' '+h.horse};});fi
 var c=e('div','compare');[S.compareA,S.compareB].forEach(function(id){var h=hs.find(function(x){return x.id===id;}),p=box(h.horse,'Barrier '+h.barrier+' · '+h.weight_kg+'kg');var f=facts(h);p.append(bulletCard('','Pros',f.pros),bulletCard('risk','Cons',f.cons));c.append(p);});app().append(c);
 }
 function qaPage(){add(app(),head('Model QA','Publication checks and honest model status'),metrics(),note('NOT READY FOR APPROVED V5 RANKINGS. All 408 PDF runners and 29 races are stored, but Thursday acceptances are NOT final Saturday starters. The 31 October dataset has no approved win percentages.'));
-if(B)app().append(note('V5-L1 mathematical checks: '+B.baseline.races.filter(function(x){return x.sum===100;}).length+'/29 Good 4 whole-field sums pass; '+B.soft.races.filter(function(x){return x.sum===100;}).length+'/29 Soft 5 whole-field sums pass; 408 listed runners estimated. This is NOT evidence of predictive calibration.'));var p=box('Checks still required');[['Field and scratches','Pending official Saturday verification'],['Weather / rail','Good 4 working scenario; Ascot observed Soft 5 on 29 Oct'],['Form / tactics','Dated PDFs captured; all replay / sectional / trainer evidence not fully audited'],['Probability sums','No approved V5 per-runner win percentages to score'],['Calibration','Historical retrospective diagnostic only; not out-of-sample V5 calibration']].forEach(function(x){var row=e('div','toprow');add(row,e('strong','',x[0]),e('small','',x[1]));p.append(row);});app().append(p);
+if(B)app().append(note('V5-L2 mathematical checks: '+B.baseline.races.filter(function(x){return x.sum===100;}).length+'/29 Good 4 whole-field sums pass; '+B.soft.races.filter(function(x){return x.sum===100;}).length+'/29 Soft 5 whole-field sums pass; 408 listed runners estimated. This is NOT evidence of predictive calibration.'));var p=box('Checks still required');[['Field and scratches','Pending official Saturday verification'],['Weather / rail','Good 4 working scenario; Ascot observed Soft 5 on 29 Oct'],['Form / tactics','Dated PDFs captured; all replay / sectional / trainer evidence not fully audited'],['Probability sums','No approved V5 per-runner win percentages to score'],['Calibration','Historical retrospective diagnostic only; not out-of-sample V5 calibration']].forEach(function(x){var row=e('div','toprow');add(row,e('strong','',x[0]),e('small','',x[1]));p.append(row);});app().append(p);
 }
 function calPage(){add(app(),head('Calibration','Retrospective checks do not prove future winning probabilities.'),note('An Airtable historical diagnostic scores 30 races from 17 October. It explicitly says this is retrospective and NOT empirically calibrated. One race date is insufficient to claim calibrated V5 probabilities.'),box('Required next step','Freeze pre-race probability boards before racing on multiple independent race days; score verified winners using Brier/log loss and reliability bands; test calibration on held-out dates. No artificial historical hit rate.'));
 }
