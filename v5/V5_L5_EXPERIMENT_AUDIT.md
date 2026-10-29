@@ -55,3 +55,19 @@ In the saved 31 October draft, L5 returns **Sheza Alibi as the cross-meeting pro
 The saved 29 October dossier contains **408 entries** and **12 already marked excluded**. This candidate branch does not assert the 31 October final 7:30am AEDT scratchings or five projected emergency promotions as officially certified. Source status and track ratings require independent race-day reconciliation before any publication.
 
 **Do not merge or deploy automatically.** The user has no available Netlify credits and has asked not to deploy. Preserve original website, existing Results & History, previous V5-L4 baseline, and field-level auditability.
+
+
+## Stable win-first repair — 30 October, second audit
+
+This candidate fixes the leaderboard wiring, not merely the model QA labels:
+
+- The **homepage and Daily Top 5/10/15** now default to the **same winFirst.priority** array. The Top 5/10/15 are nested slices of one fixed ordering, sorted by a conservative fixed four-scenario floor. The unfiltered raw model list is available only in a separately labelled diagnostic view.
+- For each race, only a horse ranked first on both Good 4 and Soft 5 can enter the screen. Two further fixed conservative-class scenarios check model assumptions. If the Good 4 and Soft 5 leaders differ, the race receives NO_SELECTION, with both conditional leaders shown. Weak separation, thin form, crowded fields, unusual sensitivity and short turnaround or layoff result in review-only or no-selection classification.
+- **Swapping the UI between Good 4 and Soft 5 cannot change shortlisted horse identity or order**. The displayed probabilities can respond to the scenario; actual scratchings, official evidence and formula versions may change choices, with an explicit before/after change notice and reason. Untested track grades including Heavy 8 cannot inherit a research-priority label.
+- Multi Lab auto-fill consumes only winFirst.priority and is disabled if too few qualifiers exist. Manual out-of-priority legs are clearly marked.
+- The dated 30 October official overlay is included on this branch: 20 scratched horses, 21 emergency candidates and a **provisional, unconfirmed** five emergency promotions. Conditional model inventory: 408 dossiers, 372 included, 36 excluded over 29 races. This is **not** Saturday final starter certification.
+- Using that provisional 31 October snapshot, the strict screen returns **three priorities** (Western Miss Ascot R7, Satono Glow Flemington R6, Immortal Bliss Ascot R8), **six review-only** (Anthracite, Sheza Alibi, Regal Ambition, Where'stheprofit, Icelady, Bridal Waltz), and **20 no-selection races**. Sheza Alibi is the unfiltered raw probability leader, but its large class sensitivity triggers review-only, without a horse-name exception. Ascot R6 is withheld because Aurum Belle leads on Good 4 while Afireofgidgeecoals leads on Soft 5.
+- These are research-screening hypotheses, **not empirical proof of a better win rate**, and not publication approval. A lower-grade venue is not arbitrarily punished, but regional runners do not fill a Top 10 merely to make the list look complete.
+- **NO merge or Netlify deployment** has occurred. The original main branch and Results & History remain intact. PR #2 is superseded for the overlay and should not be independently merged into the deployed branch.
+
+No accuracy, certainty, final official starters or guaranteed winning record should be inferred from passing the regression tests.
