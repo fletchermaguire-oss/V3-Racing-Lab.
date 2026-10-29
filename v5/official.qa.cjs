@@ -53,7 +53,7 @@ test('atomic official scratchings apply to every consumer and preserve archived 
  const C=State.create(State.applyOfficialOverlay(Data,Official),{going:Official.going,checkpoint:Checkpoint});
  const initial=C.board.activeCount,picks=C.curated.entries.map(x=>x.horse);
  C.applyOfficialSheets(sheets());
- assert.equal(C.board.activeCount,initial-2,'Two newly scratched Flemington horses are removed');
+ assert.equal(C.board.activeCount,initial-1,'Generosity is newly scratched; Estremo was an unactivated emergency and already excluded');
  assert.equal(C.board.baseline.records.some(x=>x.horse==='Estremo'&&x.meeting==='FLEMINGTON'),false);
  assert.equal(C.board.baseline.records.some(x=>x.horse==='Generosity'&&x.meeting==='FLEMINGTON'&&x.race===9),false);
  assert.deepEqual(C.curated.entries.map(x=>x.horse),picks);
