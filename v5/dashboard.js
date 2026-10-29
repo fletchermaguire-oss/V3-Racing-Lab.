@@ -56,7 +56,17 @@ second.forEach(function(id){side.append(makeButton(id,'navbtn'));});
 var foot=e('div','sidebar-foot');
 add(foot,e('strong','','◉ 31 OCTOBER RESEARCH'),e('p','','29 races · 408 runner dossiers. Saved qualitative picks are not approved V5 winning probabilities.'),link('Original Racing Lab ↗','/',''));
 side.append(foot);
-['overview','races','top10','multi','sim','pros','compare','weather','qa','cal','sync','results'].forEach(function(id){mobile.append(makeButton(id,''));});
+var mobileShort={overview:'Home',races:'Races',top10:'Top 10',multi:'Multi',sim:'Simulator',pros:'Pros / Cons'};
+['overview','races','top10','multi','sim','pros'].forEach(function(id){var b=makeButton(id,'');b.querySelector('span').textContent=mobileShort[id];mobile.append(b);});
+var previous=document.getElementById('v5-more-popup');if(previous)previous.remove();
+var popup=e('div','v5-more-menu');popup.id='v5-more-popup';popup.hidden=true;
+var phead=e('div','v5-more-head','MORE RACING LAB SECTIONS');popup.append(phead);
+['compare','weather','qa','cal','sync','results'].forEach(function(id){var b=makeButton(id,'v5-more-item');popup.append(b);});
+document.body.append(popup);
+var more=e('button','v5-more-trigger'+(['compare','weather','qa','cal','sync','results'].includes(S.page)?' active':''));more.type='button';
+more.innerHTML=icon('sync')+'<span>More</span>';
+more.addEventListener('click',function(){popup.hidden=!popup.hidden;more.setAttribute('aria-expanded',String(!popup.hidden));});
+more.setAttribute('aria-expanded','false');more.setAttribute('aria-controls','v5-more-popup');mobile.append(more);
 document.getElementById('pagetitle').textContent=PAGES.find(function(x){return x[0]===S.page;})[1];
 document.getElementById('livebadge').textContent=live?'AIRTABLE RESEARCH LINKED':'V5 RESEARCH ONLY';
 }
