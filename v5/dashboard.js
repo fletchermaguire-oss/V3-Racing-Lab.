@@ -169,7 +169,7 @@ function aTierSummary(){
  var panel=box('Original A-tier form · preserved','A-tier is the established historical form assessment, NOT a guarantee or an automatic A-grade race-day play.');
  C.curated.aTier.forEach(function(x){
   panel.append(e('p','muted small',x.horse+' · '+x.meeting+' R'+x.race+
-    ' · historical form '+x.form_tier+' · '+x.race_day_assessment.replaceAll('_',' ')+
+    ' · original form '+x.archived_form_tier+(x.form_tier!==x.archived_form_tier?' · latest local grade '+x.form_tier:'')+' · '+x.race_day_assessment.replaceAll('_',' ')+
     (x.horse==='Hot And High'?' · Soft 5 record unavailable; race-day confidence conditional':'') ));
  });
  return panel;
