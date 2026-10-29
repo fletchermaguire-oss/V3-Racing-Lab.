@@ -89,3 +89,17 @@ test('unknown official runner, replay, incomplete meetings and mismatched date l
  C.applyOfficialSheets(sheets());
  assert.throws(()=>C.applyOfficialSheets(sheets()),/Stale or invalid/);
 });
+
+
+test('late scratching table is included in counted official field reconciliation',()=>{
+ const doc=html('FLEMINGTON',2,line(5,'1 PERICLES')).replace(
+  '<tr><td>There are no late scratchings</td></tr>',
+  line(9,'2 GENEROSITY'));
+ const sheet=parseOfficial('FLEMINGTON',doc);
+ assert.equal(sheet.scratched_total,2);
+ assert.deepEqual(sheet.scratchings.FLEMINGTON_R05,['PERICLES']);
+ assert.deepEqual(sheet.scratchings.FLEMINGTON_R09,['GENEROSITY']);
+ const invalid=html('FLEMINGTON',2,line(9,'2 GENEROSITY')).replace(
+  '<tr><td>There are no late scratchings</td></tr>',line(9,'2 GENEROSITY'));
+ assert.throws(()=>parseOfficial('FLEMINGTON',invalid),/Duplicate official/);
+});
