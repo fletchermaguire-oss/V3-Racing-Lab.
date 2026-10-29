@@ -1,0 +1,137 @@
+{
+  "status": "FROZEN_RESEARCH_CHECKPOINT_NOT_FINAL",
+  "date": "2026-10-31",
+  "as_of": "2026-10-30",
+  "model": "V5-L5-CANDIDATE-20261030",
+  "track_assumptions": {
+    "RANDWICK": "Good 4",
+    "FLEMINGTON": "Good 4",
+    "ASCOT": "Soft 5"
+  },
+  "selection_method": "Independent form-first qualitative ordering across complete racefields; model percentages included only for traceability and are not calibrated chances. No bookmaker odds used to order. No quotas. Review top ten as candidates; lower tiers not multi-safe.",
+  "scope": "29 races; 408 original runner dossiers; 372 conditionally included, 36 excluded after dated official scratches and unverified emergency projections. Final declarations, rail, track, gear and race-day pattern require further check.",
+  "priority_notes": "Do not treat scenario-sensitive candidates as automatic multi legs. Ascot R6 is withheld despite Afireofgidgeecoals and Aurum Belle both plausible, because Good 4 / Soft 5 changes the modelled leader.",
+  "unverified_calibration": true,
+  "publication_approved": false,
+  "entries": [
+    {
+      "rank": 1,
+      "horse": "Sheza Alibi",
+      "meeting": "RANDWICK",
+      "race": 8,
+      "model_pct": 31.69,
+      "tier": "A",
+      "reason": "Three recent Group 1 wins, five consecutive top-two Group 1 finishes and elite Randwick form",
+      "risk": "Strong Golden Eagle field, 1500m after 2000m, traffic and pace",
+      "ranking_basis": "Qualitative competitive chance and strength of observed form, not sorted uncalibrated model_pct"
+    },
+    {
+      "rank": 2,
+      "horse": "Regal Ambition",
+      "meeting": "FLEMINGTON",
+      "race": 2,
+      "model_pct": 21.7,
+      "tier": "A-",
+      "reason": "Third in Group 1 Thousand Guineas then drops to Group 3 Vanity at proven 1400m; legitimate class relief",
+      "risk": "Only four career runs; Pin Up Sheila and I Am Aria are credible rivals",
+      "ranking_basis": "Qualitative competitive chance and strength of observed form, not sorted uncalibrated model_pct"
+    },
+    {
+      "rank": 3,
+      "horse": "Western Miss",
+      "meeting": "ASCOT",
+      "race": 7,
+      "model_pct": 29.3,
+      "tier": "B+",
+      "reason": "Six top-three outcomes from seven starts, won 1600m and two Soft runs; strong last-start Ascot effort",
+      "risk": "Wider gate 10 and stronger class; Decoration gains gate/relative-weight advantage",
+      "ranking_basis": "Qualitative competitive chance and strength of observed form, not sorted uncalibrated model_pct"
+    },
+    {
+      "rank": 4,
+      "horse": "Lady Shenandoah",
+      "meeting": "FLEMINGTON",
+      "race": 8,
+      "model_pct": 24.04,
+      "tier": "B+",
+      "reason": "Multiple Group 1 wins and recent Toorak victory at the mile with McDonald booked",
+      "risk": "Surfin' Bird, Idle Flyer, Concord Connie and a potentially unhelpful pace",
+      "ranking_basis": "Qualitative competitive chance and strength of observed form, not sorted uncalibrated model_pct"
+    },
+    {
+      "rank": 5,
+      "horse": "Anthracite",
+      "meeting": "RANDWICK",
+      "race": 9,
+      "model_pct": 27.4,
+      "tier": "B",
+      "reason": "Two successive Sydney wins and 2000m form, just 53.5kg and barrier five",
+      "risk": "Seven-day backup, Listed step up, Starzintheireyes and Barrengarry",
+      "ranking_basis": "Qualitative competitive chance and strength of observed form, not sorted uncalibrated model_pct"
+    },
+    {
+      "rank": 6,
+      "horse": "Icelady",
+      "meeting": "FLEMINGTON",
+      "race": 3,
+      "model_pct": 21.81,
+      "tier": "B",
+      "reason": "Group 2 winning form and Group 1 Thousand Guineas second; stepping back to Group 2 Wakeful",
+      "risk": "First test at 2000m; De Armas has stronger-looking staying profile",
+      "ranking_basis": "Qualitative competitive chance and strength of observed form, not sorted uncalibrated model_pct"
+    },
+    {
+      "rank": 7,
+      "horse": "Satono Glow",
+      "meeting": "FLEMINGTON",
+      "race": 6,
+      "model_pct": 22.21,
+      "tier": "B",
+      "reason": "Four wins from five; two wins at Flemington and recent Group 2 Roman Consul win, barrier four",
+      "risk": "First Group 1 versus The Next Episode, St Gotthard and Natural Fling; straight-six pattern",
+      "ranking_basis": "Qualitative competitive chance and strength of observed form, not sorted uncalibrated model_pct"
+    },
+    {
+      "rank": 8,
+      "horse": "Immortal Bliss",
+      "meeting": "ASCOT",
+      "race": 8,
+      "model_pct": 22.87,
+      "tier": "B-",
+      "reason": "Eight lifetime wins including two Listed races; four wins at 1000m and documented wet-track form",
+      "risk": "Last start 5.9 lengths off winner, 58.5kg, Oscar's Fortune and others",
+      "ranking_basis": "Qualitative competitive chance and strength of observed form, not sorted uncalibrated model_pct"
+    },
+    {
+      "rank": 9,
+      "horse": "Hot And High",
+      "meeting": "ASCOT",
+      "race": 9,
+      "model_pct": 19.87,
+      "tier": "C+",
+      "reason": "Seven wins in eight starts, unbeaten from three Ascot runs and drawn inside",
+      "risk": "Untried Soft 5, Playin'it Sweet receives 2.5kg better relative terms, Bonjoy a proven stakes rival",
+      "ranking_basis": "Qualitative competitive chance and strength of observed form, not sorted uncalibrated model_pct"
+    },
+    {
+      "rank": 10,
+      "horse": "Jimmysstar",
+      "meeting": "RANDWICK",
+      "race": 7,
+      "model_pct": 16.34,
+      "tier": "C+",
+      "reason": "Recent Manikato Group 1 winner, three 1300m wins and previous winner of Russell Balding Stakes",
+      "risk": "Gate 16 in crowded Group 2; Ninja, Headwall and Grafterburners strong rivals",
+      "ranking_basis": "Qualitative competitive chance and strength of observed form, not sorted uncalibrated model_pct"
+    }
+  ],
+  "change_policy": "Do not silently reorder. Version every new official scratch/going/form adjustment with before/after change note.",
+  "sources": [
+    "v5/research.json (three Racing and Sports PDF-derived dossiers)",
+    "v5/official-snapshot-20261030.json (dated scratching sheet and provisional emergencies)",
+    "https://www.tab.co.nz/punters/2026/10/2026-golden-eagle-day-tips-preview-randwick-saturday-31-october/",
+    "https://www.tab.co.nz/punters/2026/10/2026-victoria-derby-day-tips-preview-flemington-saturday-31-october/",
+    "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/flemington/2026-10-31/race-tips",
+    "https://fanverse.com.au/race-books/ascot-2026-10-31/"
+  ]
+}
