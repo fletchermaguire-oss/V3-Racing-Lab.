@@ -138,3 +138,14 @@ html body .app > .shell > main.page{display:block!important;visibility:visible!i
 .model-toplist .v5-model-row{display:grid}
 @media(max-width:960px){.v5-model-row{grid-template-columns:30px minmax(105px,1fr) 100px 88px 75px;gap:8px}.model-chance strong{font-size:22px}.model-scorebox strong{font-size:15px}.model-soft strong{font-size:15px}}
 @media(max-width:630px){.v5-model-row{grid-template-columns:25px minmax(0,1fr) 105px;gap:7px;min-height:118px;padding:13px 10px}.model-horse strong{font-size:13px}.model-chance strong{font-size:23px}.model-scorebox{grid-column:2}.model-soft{grid-column:3}.model-scorebox strong,.model-soft strong{font-size:14px}.model-meta{grid-column:2/-1;line-height:1.3}.model-horse .model-qual{font-size:9px}}
+
+/* Full-field probability board and research model evidence */
+.race-model-summary,.horse-model-summary{border-radius:12px;padding:13px 15px;margin:12px 0;background:#17352f;border:1px solid #35735f;color:#d2f6e7;font-size:12px;font-weight:700;line-height:1.55}
+.horse-model-summary{color:#98f4c4;font-size:14px;font-weight:800;border-color:#5ca88b}
+.runrow{position:relative;padding-right:102px!important;min-height:59px}
+.runrow strong{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px}
+.runrow small{display:block;line-height:1.4;margin-top:5px}
+.runner-model-p{position:absolute;right:9px;top:12px;color:#8cf4c5;font-weight:900;font-size:16px;font-variant-numeric:tabular-nums}
+.model-method{margin-top:18px}
+.model-method h3{margin:0 0 8px}
+@media(max-width:640px){.runrow{padding-right:7px!important;padding-bottom:34px!important;min-height:88px}.runner-model-p{top:auto;bottom:8px;left:9px;right:auto;font-size:14px}.runrow small{font-size:9px}.race-model-summary{font-size:11px}}
