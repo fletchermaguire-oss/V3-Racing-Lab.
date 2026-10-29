@@ -27,21 +27,23 @@ function raceControls(ctx,type){
 }
 function multiPage(ctx){
  stop();var C=ctx.C,S=ctx.S,B=C.board,app=ctx.app();S.multiSize=S.multiSize===3?3:2;sanitize(C,S);
- put(app,ctx.head('Multi Lab','Two or three legs from distinct races, using the same probabilities as the rankings.'),ctx.scenarios(),raceControls(ctx,'multi'));
+ put(app,ctx.head('Multi Lab','Two or three legs from distinct races, using the same conditional field probabilities. Auto-fill uses ONLY the win-first priority list.'),ctx.scenarios(),raceControls(ctx,'multi'));
  var selection=el('section','panel workshop-panel'),actions=el('div','workshop-actions');
  put(actions,control('Legs',select([{value:'2',text:'2 legs'},{value:'3',text:'3 legs'}],String(S.multiSize),function(v){S.multiSize=+v;sanitize(C,S);ctx.render();})),
-  button('Use leading '+S.multiSize,function(){S.multi=B.leaders.slice(0,S.multiSize).map(function(x){return x.id;});save(C,S);ctx.render();},'primary'),
+  button('Use win-first '+S.multiSize,function(){S.multi=B.winFirst.priority.slice(0,S.multiSize).map(function(x){return x.runner_id;});save(C,S);ctx.render();},'primary'),
   button('Clear',function(){S.multi=[];save(C,S);ctx.render();},'ghost'));
  put(selection,el('h3','','Selected legs · '+S.multi.length+'/'+S.multiSize),actions);
+ if(B.winFirst.priority.length<S.multiSize)note(selection,'There are not enough qualified research priorities for an automatic '+S.multiSize+'-leg selection. No replacement horse will be invented.');
  S.multi.forEach(function(id){var x=B.baseline.records.find(function(h){return h.id===id;}),h=raw(C,id),line=el('div','workshop-leg');
   put(line,put(el('div','workshop-leg-top'),el('b','',x.horse),el('span','workshop-chip',x.meeting+' R'+x.race+' · '+percent(x.p))),
    el('p','muted small','Scenario range '+percent(x.model_range[0])+'–'+percent(x.model_range[1])+' · model fair odds $'+x.fair_odds.toFixed(2)),
    button('Remove '+h.horse,function(){S.multi=S.multi.filter(function(v){return v!==id;});save(C,S);ctx.render();},'ghost'));
   selection.append(line);
  });
+ if(S.multi.some(function(id){return !B.winFirst.priority.some(function(h){return h.runner_id===id;});}))note(selection,'One or more manually chosen legs are outside the win-first priority list. Joint probabilities remain research-only.');
  if(S.multi.length>=2){var result=C.multi(S.multi);var metric=el('div','model-joint');metric.dataset.jointPct=String(result.baseline_joint_pct);
   put(metric,el('div','eyebrow','COMBINED MODEL CHANCE'),el('strong','model-big',percent(result.baseline_joint_pct)),
-   el('p','muted small','Across the eight scenarios: '+percent(result.scenario_range_pct[0])+'–'+percent(result.scenario_range_pct[1])+'. Assumes independence between races. These are uncalibrated estimates; the range measures sensitivity.'));
+   el('p','muted small','Across the ten scenarios: '+percent(result.scenario_range_pct[0])+'–'+percent(result.scenario_range_pct[1])+'. Assumes independence between races. These are uncalibrated estimates; the range measures sensitivity.'));
   selection.append(metric);
  }else note(selection,'Choose two runners from different races to calculate a combined chance.');
  app.append(selection);
