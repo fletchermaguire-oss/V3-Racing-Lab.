@@ -26,24 +26,31 @@ function parseOfficial(meeting,html){
   publication=pageText.match(/\bScratchings Last Published\s*:\s*((?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)\s+\d{1,2}-[A-Za-z]{3}-\d{2}\s+[\d:]+(?:AM|PM)\s+[A-Z]{3,4})\b/i);
  if(!go||!count||!publication)throw Error('Missing official grade, scratching tally or publication timestamp: '+meeting);
  const grade=go[1].replace(/\s+/g,' ').replace(/^([A-Za-z])([a-z]+)/,(_,a,b)=>a.toUpperCase()+b.toLowerCase());
- const header=/<h([1-6])\b[^>]*>\s*Scratchings\s*<\/h\1\s*>/ig;
- const hm=header.exec(html);if(!hm)throw Error('Official scratchings section missing: '+meeting);
- const after=html.slice(hm.index+hm[0].length),table=/<table\b[^>]*>([\s\S]*?)<\/table\s*>/i.exec(after);
- if(!table)throw Error('Official scratchings table missing: '+meeting);
- const rows=Array.from(table[1].matchAll(/<tr\b[^>]*>([\s\S]*?)<\/tr\s*>/gi));
- const scratchings={},unknown=[],seen=new Set();let current=0;
- for(const row of rows){
-  const cells=Array.from(row[1].matchAll(/<td\b[^>]*>([\s\S]*?)<\/td\s*>/gi)).map(x=>unescapeHtml(x[1]));
-  if(!cells.length)continue;
-  const prefix=cells.join(' '),race=prefix.match(/\bRace\s*(\d{1,2})\s*:/i);
-  if(race)current=+race[1];
-  const last=cells[cells.length-1];
-  const horse=last.match(/^\s*\d{1,2}\s*e?\s+(.+?)\s+\(\d{1,2}\/\d{1,2}\s+[\d:]{3,6}[A-Z]*\)\s*$/i);
-  if(!horse){if(!/There are no scratchings|^-$|^\s*$/.test(last))unknown.push(last);continue;}
-  if(current<1||current>(meeting==='FLEMINGTON'?9:10))throw Error('Scratched runner has invalid race: '+meeting+' '+current);
-  const name=horse[1].trim(),id=meeting+'_R'+String(current).padStart(2,'0'),key=id+'|'+canonical(name);
-  if(seen.has(key))throw Error('Duplicate official scratched runner: '+key);
-  seen.add(key);(scratchings[id]||(scratchings[id]=[])).push(name);
+ const scratchings={},unknown=[],seen=new Set();
+ for(const section of ['Scratchings','Late Scratchings']){
+  const header=new RegExp('<h([1-6])\\b[^>]*>\\s*'+section+'\\s*<\\/h\\1\\s*>','i');
+  const hm=header.exec(html);
+  if(!hm)throw Error('Official '+section+' section missing: '+meeting);
+  const after=html.slice(hm.index+hm[0].length),table=/<table\b[^>]*>([\s\S]*?)<\/table\s*>/i.exec(after);
+  if(!table)throw Error('Official '+section+' table missing: '+meeting);
+  const rows=Array.from(table[1].matchAll(/<tr\b[^>]*>([\s\S]*?)<\/tr\s*>/gi));
+  let current=0;
+  for(const row of rows){
+   const cells=Array.from(row[1].matchAll(/<td\b[^>]*>([\s\S]*?)<\/td\s*>/gi)).map(x=>unescapeHtml(x[1]));
+   if(!cells.length)continue;
+   const prefix=cells.join(' '),race=prefix.match(/\bRace\s*(\d{1,2})\s*:/i);
+   if(race)current=+race[1];
+   const last=cells[cells.length-1];
+   const horse=last.match(/^\s*\d{1,2}\s*e?\s+(.+?)\s+\(\d{1,2}\/\d{1,2}\s+[\d:]{3,6}[A-Z]*\)\s*$/i);
+   if(!horse){
+    if(!/There are no (?:late )?scratchings|^-$|^\s*$/i.test(last))unknown.push(last);
+    continue;
+   }
+   if(current<1||current>(meeting==='FLEMINGTON'?9:10))throw Error('Scratched runner has invalid race: '+meeting+' '+current);
+   const name=horse[1].trim(),id=meeting+'_R'+String(current).padStart(2,'0'),key=id+'|'+canonical(name);
+   if(seen.has(key))throw Error('Duplicate official scratched runner: '+key);
+   seen.add(key);(scratchings[id]||(scratchings[id]=[])).push(name);
+  }
  }
  const parsed=Array.from(seen).length;
  if(parsed!==+count[1]||unknown.length)throw Error('Official scratching count/detail mismatch for '+meeting+': '+parsed+'/'+count[1]);
