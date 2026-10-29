@@ -298,6 +298,69 @@ function calculate(d,scenario,classWeight=CONFIG.weights.class,options={}){
   records:records,races:races,excluded:excluded,runnerAudit:runnerAudit,input_issues:inventory.issues};
 }
 function sortProbability(a,b){return b.p_exact-a.p_exact||b.completeness-a.completeness||b.robust_floor-a.robust_floor||b.gap-a.gap||a.id.localeCompare(b.id);}
+/* Single win-first selection gate. Raw win probabilities remain diagnostics.
+ * Scenarios are fixed Good 4, Soft 5 and both conservative-class variants:
+ * changing the screen's selected track cannot promote a different leader.
+ * Race-level abstention is deliberate; estimates remain uncalibrated.
+ */
+function winFirstBoard(baseline,scenarios){
+ const good=scenarios[8],soft=scenarios[1],goodCon=scenarios[9],softCon=scenarios[3];
+ const datasets=[good,soft,goodCon,softCon],lookups=datasets.map(s=>new Map(s.records.map(x=>[x.id,x])));
+ const priority=[],review=[],avoid=[],byRace=[];
+ baseline.races.forEach(r=>{
+  const pick=s=>s.records.find(x=>x.race_id===r.id&&x.rank===1);
+  const g=pick(good),s=pick(soft);
+  if(!g||!s){
+   const x={race_id:r.id,meeting:r.meeting,race:r.race,status:'NO_SELECTION',reasons:['INCOMPLETE_FIELD']};
+   avoid.push(x);byRace.push(x);return;
+  }
+  if(g.id!==s.id){
+   const x={race_id:r.id,meeting:r.meeting,race:r.race,status:'NO_SELECTION',
+    reasons:['GOING_CHANGES_RACE_LEADER'],good4:g.horse,soft5:s.horse};
+   avoid.push(x);byRace.push(x);return;
+  }
+  const current=baseline.records.find(x=>x.id===g.id);
+  if(!current){
+   const x={race_id:r.id,meeting:r.meeting,race:r.race,status:'NO_SELECTION',reasons:['CANONICAL_LEADER_NOT_IN_CURRENT_FIELD']};
+   avoid.push(x);byRace.push(x);return;
+  }
+  const samples=lookups.map(m=>m.get(g.id)),p=samples.map(x=>x.p),floor=Math.min(...p),ceiling=Math.max(...p);
+  const gap=Math.min(...[good,soft].map(a=>{
+   const rows=a.records.filter(x=>x.race_id===r.id).sort((x,y)=>x.rank-y.rank);
+   return rows.length>=2?rows[0].p-rows[1].p:0;
+  }));
+  const chaos=Math.max(good.races.find(x=>x.id===r.id).chaos,soft.races.find(x=>x.id===r.id).chaos);
+  const reasons=[];
+  if(!samples.every(x=>x.rank===1))reasons.push('CLASS_ASSUMPTION_CHANGES_RANK');
+  if(current.form_audit.accepted<3)reasons.push('LIMITED_RECENT_FORM');
+  if(current.completeness<0.78)reasons.push('INCOMPLETE_DOSSIER');
+  if(current.input_issues.length)reasons.push('FORM_INPUT_ISSUES');
+  if(floor<17)reasons.push('LOW_CONSERVATIVE_CHANCE');
+  if(gap<4)reasons.push('WEAK_FIELD_SEPARATION');
+  if(chaos>89)reasons.push('CROWDED_RACE');
+  if(ceiling-floor>12)reasons.push('WIDE_CLASS_OR_GOING_SENSITIVITY');
+  if(current.days_since_last!==null&&current.days_since_last>70)reasons.push('FITNESS_AFTER_BREAK');
+  if(current.days_since_last!==null&&current.days_since_last<=7)reasons.push('SHORT_BACKUP');
+  const item={runner_id:g.id,horse:g.horse,race_id:r.id,meeting:r.meeting,race:r.race,
+   model_pct:current.p,robust_floor:floor,robust_spread:round(ceiling-floor),min_gap:round(gap),
+   max_chaos:chaos,completeness:current.completeness,dated_starts:current.form_audit.accepted,
+   grade_quality:current.grade_quality,reasons:reasons,good4_pct:g.p,soft5_pct:s.p};
+  if(!reasons.length){item.status='PRIORITY_RESEARCH';priority.push(item);}
+  else if(floor>=13&&gap>=4&&chaos<=89&&current.form_audit.accepted>=3&&
+   current.completeness>=0.78&&!current.input_issues.length){
+   item.status='REVIEW_ONLY';review.push(item);
+  }else{item.status='NO_SELECTION';avoid.push(item);}
+  byRace.push(item);
+ });
+ const rank=(a,b)=>b.robust_floor-a.robust_floor||b.min_gap-a.min_gap||a.race_id.localeCompare(b.race_id);
+ priority.sort(rank);review.sort(rank);
+ const candidates=priority.concat(review);
+ return {status:'RESEARCH_ONLY_UNCALIBRATED',method:'FIXED_GOOD4_SOFT5_PLUS_CONSERVATIVE_CLASS',
+  priority:priority,review:review,avoid:avoid,byRace:byRace,researchCandidates:candidates,
+  top5:candidates.slice(0,5),top10:candidates.slice(0,10),top15:candidates.slice(0,15),
+  caveat:'Only consistent scenario leaders enter the list; review-only horses are NOT research priorities. No padding, frozen approval, or demonstrated win-rate gain.'};
+}
+
 function board(d,options={}){
  const baselineGoing=options.going||'Good 4';
  const variants=[
@@ -359,6 +422,7 @@ function board(d,options={}){
   baseline:good,soft:scenarios[1],marketAudit:audit,publication_blocked:true,publication_reasons:['UNCALIBRATED_MODEL','OFFICIAL_FIELD_AND_TRACK_REVIEW_REQUIRED'],
   stress:{goodClassConservative:scenarios[2],softClassConservative:scenarios[3]},scenarios:scenarios,model_variants:variants.map(v=>v.label),
   leaders:leaders,robustLeaders:robustLeaders,qualifiedLeaders:qualified,eliteLeaders:leaders.filter(x=>x.elite_form),
+  winFirst:winFirstBoard(good,scenarios),
   top5:leaders.slice(0,5),top10:leaders.slice(0,10),top15:leaders.slice(0,15),
   screen:{description:'Evidence and sensitivity screen; no price or horse override; not a calibration or hit-rate claim.',
    rules:{completeAtLeast:0.70,scenarioSwingBelow:6,top1InScenariosAtLeast:Math.ceil(variants.length*0.75),chaosBelow:90,goingIndependentLeader:true},
