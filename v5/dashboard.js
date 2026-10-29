@@ -1,8 +1,8 @@
 /* Racing Lab V5 dashboard: user-facing research, never a synthetic forecast. */
 (function(){
 'use strict';
-var D=null,B=null,live=false,liveAsOf='',S={topMode:'QUALIFIED',page:(window.location&&/(?:^|[?&])tab=top10(?:&|$)/.test(window.location.search)?'top10':'overview'),meeting:'RANDWICK',race:'2026-10-31_RANDWICK_R01',runner:null,top:'ALL',multi:[],compareA:null,compareB:null,search:''};
-var PAGES=[['overview','Overview'],['top10','Daily Top 10'],['races','Race Centre'],['pros','Pros & Cons'],['multi','Multi Lab'],['sim','Simulator'],['compare','Compare'],['qa','Model QA'],['cal','Calibration'],['weather','Weather & Tracks'],['sync','Data & Sync'],['results','Results']];
+var D=null,B=null,live=false,liveAsOf='',S={topMode:'BENCHMARK',page:(window.location&&/(?:^|[?&])tab=top10(?:&|$)/.test(window.location.search)?'top10':'overview'),meeting:'RANDWICK',race:'2026-10-31_RANDWICK_R01',runner:null,top:'ALL',multi:[],compareA:null,compareB:null,search:''};
+var PAGES=[['overview','Overview'],['top10','Daily Top 15'],['races','Race Centre'],['pros','Pros & Cons'],['multi','Multi Lab'],['sim','Simulator'],['compare','Compare'],['qa','Model QA'],['cal','Calibration'],['weather','Weather & Tracks'],['sync','Data & Sync'],['results','Results']];
 var VENUES=['RANDWICK','FLEMINGTON','ASCOT'];
 function e(tag,cls,txt){var x=document.createElement(tag);if(cls)x.className=cls;if(txt!==undefined&&txt!==null)x.textContent=String(txt);return x;}
 function app(){return document.getElementById('workspace');}
@@ -76,9 +76,9 @@ function overview(){
 var hero=e('div','hero');
 add(hero,e('div','eyebrow','SATURDAY 31 OCTOBER 2026 · PRO V5'),e('h2','','Your racing command centre.'),e('p','','Original Racing Lab layout · 29 races · every runner researched. Race Centre, Top 10, Multi Lab, Pros & Cons and Compare are all in the familiar studio.'));
 var buttons=e('div','heroActions');
-add(buttons,action('Daily Top 10',function(){go('top10');},'primary'),action('Race Centre',function(){go('races');}),action('Pros & Cons',function(){go('pros');}),link('Original Simulator','/'));
+add(buttons,action('Daily Top 15',function(){go('top10');},'primary'),action('Race Centre',function(){go('races');}),action('Pros & Cons',function(){go('pros');}),link('Original Simulator','/'));
 hero.append(buttons);
-add(app(),hero,metrics(),note('V5-L3 independent full-field estimates remain provisional and uncalibrated. Elite G1 evidence is reviewed even when a generic crowding flag triggers. Good 4 is a working condition; Soft 5 and opposition-grade sensitivity are checked. Original analyst selections remain separate.'),head('Daily Top 10 · model and elite-form QA','V5-L3 model estimates plus clearly labelled elite Group 1 form review; no false confidence upgrades.'),toplist(),head('Track intelligence','Good 4 is our working Saturday scenario, not a final certified condition.'),venueCards(),head('Strong research profiles','Open individual source-backed strengths, weaknesses and form.'));
+add(app(),hero,metrics(),note('V5-L3 independent full-field estimates remain provisional and uncalibrated. Elite G1 evidence is reviewed even when a generic crowding flag triggers. Good 4 is a working condition; Soft 5 and opposition-grade sensitivity are checked. Original analyst selections remain separate.'),head('Daily Top 15 · market sanity-check','Published 29 October price benchmarks beside independent, uncalibrated V5 model estimates.'),toplist(),head('Track intelligence','Good 4 is our working Saturday scenario, not a final certified condition.'),venueCards(),head('Strong research profiles','Open individual source-backed strengths, weaknesses and form.'));
 var grid=e('div','grid');
 allLeaders().filter(function(h){return ['RANDWICK_R08','FLEMINGTON_R06','FLEMINGTON_R08','RANDWICK_R07','RANDWICK_R06','FLEMINGTON_R05'].some(function(z){return h.race_id.endsWith(z);});}).forEach(function(h){var c=box(h.horse,shortRace(h.race_id)),f=facts(h);
 add(c,e('p','small','PRO: '+(f.pros[0]||'See saved evidence')),e('p','muted small','RISK: '+(f.cons[0]||'Raceday conditions pending')),action('Read full pros & cons',function(){selectRace(h.race_id,h.id,'pros');}));
@@ -90,11 +90,42 @@ function allLeaders(){return D.runners.filter(function(h){return h.original_pick
 function firstStrength(h){return (h.strengths||'').replace(/^PDF-sourced:\s*/,'').split(';').slice(0,2).join(';').slice(0,180)||'Research dossier available';}
 function modelOf(h){return B&&B.baseline.records.find(function(x){return x.id===h.id;});}
 function modelRace(id){return B&&B.baseline.races.find(function(x){return x.id===id;});}
+function benchmarkSet(){
+ if(!D||!Array.isArray(D.market_benchmarks))return [];
+ return D.market_benchmarks.filter(function(x){return S.top==='ALL'||S.top===x.meeting;})
+  .filter(function(x){return !D.runners.some(function(h){return h.race_id===x.race_id&&h.horse===x.horse&&/^SCRATCHED\b/i.test(h.status||'');});})
+  .sort(function(a,b){return a.decimal_odds-b.decimal_odds||VENUES.indexOf(a.meeting)-VENUES.indexOf(b.meeting)||a.race-b.race;}).slice(0,15);
+}
+function benchmarkList(){
+ var list=e('div','toplist model-toplist'),rows=benchmarkSet();
+ if(!rows.length){list.append(note('No sourced public preview prices for this meeting in the 29 October snapshot. Do not invent win chances.'));return list;}
+ rows.forEach(function(q,i){
+  var mm=B&&B.baseline.records.find(function(x){return x.race_id===q.race_id&&x.horse===q.horse;});
+  var h=D.runners.find(function(x){return x.race_id===q.race_id&&x.horse===q.horse;});
+  var diff=mm?+(q.implied_pct-mm.p).toFixed(2):null;
+  var t=e('div','toprow v5-model-row market-top15-row'),mid=e('div','model-horse'),price=e('div','model-chance'),implied=e('div','model-scorebox'),raw=e('div','model-soft');
+  add(mid,e('strong','',q.horse),e('small','',shortRace(q.race_id)),e('small','model-qual',q.quote_type+' · 29 Oct 2026'));
+  add(price,e('strong','','$'+q.decimal_odds.toFixed(2)),e('small','','DATED PRICE'));
+  add(implied,e('strong','',q.implied_pct.toFixed(2)+'%'),e('small','','PRICE IMPLIED'));
+  add(raw,e('strong','',mm?mm.p.toFixed(2)+'%':'—'),e('small','','V5 RAW · UNCALIBRATED'));
+  var meta=e('div','model-meta','NOT a live quote or a fair win probability. '+
+    (mm?'Raw V5 rank '+mm.rank+'/'+mm.field_size+' · difference '+diff.toFixed(2)+'pp.':'Runner model unavailable.')+
+    (mm&&Math.abs(diff)>=15?' CRITICAL: model greatly disagrees with the published benchmark.':''));
+  var links=e('div','market-row-actions'),source=e('a','market-source','See dated price source'),
+      details=e('button','market-open-runner','Open runner dossier');
+  source.href=q.source;source.target='_blank';source.rel='noopener noreferrer';
+  details.type='button';details.addEventListener('click',function(){if(h)selectRace(q.race_id,h.id,'races');});
+  add(links,source,details);
+  add(t,e('div','slot',String(i+1).padStart(2,'0')),mid,price,implied,raw,meta,links);
+  list.append(t);
+ });
+ return list;
+}
 function topSet(){
  if(!B)return [];
  var rows=S.topMode==='QUALIFIED'?B.eliteLeaders.concat(B.qualifiedLeaders.filter(function(x){return !B.eliteLeaders.some(function(z){return z.id===x.id;});})):S.topMode==='ROBUST'?B.robustLeaders:B.leaders;
  if(S.top!=='ALL')rows=rows.filter(function(x){return x.meeting===S.top;});
- return rows.slice(0,10);
+ return rows.slice(0,15);
 }
 function riskTags(m){
  var names={LIMITED_DOSSIER:'Incomplete form',SCENARIO_SENSITIVE:'Weather/class sensitive',UNSTABLE_RACE_LEAD:'Winner changes with scenario',CROWDED_RACE:'Tightly contested race',MODEL_MARKET_DISAGREEMENT:'Critical external audit mismatch'};
@@ -108,6 +139,7 @@ function modelReasons(m){
  return {pro:top||firstStrength(h),con:risk||'Official Saturday starters not verified'};
 }
 function toplist(){
+ if(S.topMode==='BENCHMARK')return benchmarkList();
  var list=e('div','toplist model-toplist');
  if(!B){list.append(note('Independent model unavailable. No invented rankings.'));return list;}
  var selected=topSet();
@@ -136,11 +168,12 @@ function toplist(){
  return list;
 }
 function top10(){
- add(app(),head('Daily Top 10 · V5-L3','Elite Group 1 form standouts are prioritised for model QA. Remaining screened runners are ranked by the lowest of four scenario win estimates.'));
+ add(app(),head('Daily Top 15 · dated market cross-check','Published price-implied percentages are shown separately from the uncalibrated V5 estimates. Neither is an approved independent win forecast.'));
  add(app(),note('PROVISIONAL RESEARCH · No calibrated historical hit-rate, confirmed Saturday scratchings or live sectional/pace model. A chance such as 19.99% is a model estimate, not an externally verified probability. Never infer guaranteed winners.'));
  var f=e('div','filters');
  f.append(setField('Ranking',[
- {value:'QUALIFIED',text:'Elite evidence + screened contenders (default)'},
+ {value:'BENCHMARK',text:'Top 15 · dated price benchmark (default)'},
+ {value:'QUALIFIED',text:'Independent V5 evidence review (uncalibrated)'},
  {value:'ROBUST',text:'All 29 races · four-scenario robustness'},
  {value:'GOOD',text:'All 29 races · Good 4 win probability'}
  ],S.topMode,function(v){S.topMode=v;render();}));
@@ -149,6 +182,7 @@ function top10(){
  {value:'FLEMINGTON',text:'Flemington'},{value:'ASCOT',text:'Ascot'}
  ],S.top,function(v){S.top=v;render();}));
  app().append(f);
+ if(S.topMode==='BENCHMARK')app().append(note('Twenty-one named public price references dated 29 Oct 2026: 20 TAB NZ editorial quotes and one published Ascot favourite price. Top 15 is sorted ONLY within these sourced quotes, not the entire 401-runner field. Unquoted contenders are NOT excluded from the full racing analysis; this is not a final market or a prediction by V5.'));
  if(B&&S.topMode==='QUALIFIED')app().append(note('Elite Group 1 evidence: '+B.eliteLeaders.length+' horse(s) with 2+ recent G1 wins, 3+ G1 top-two finishes and 3/4 scenario leads. Elite comes FIRST for model review, not because V5 assigned the highest probability. '+B.screen.qualifiedRaceCount+' other race leaders pass the screened rules. No market or original-pick bonuses affect predicted probabilities.'));
  app().append(toplist());
  var p=box('What the Top 10 actually means','Independent V5-L3 preserves 408 original source dossiers; 401 are currently not marked scratched and receive full-field model estimates. It stress-tests Good 4 versus Soft 5 and the importance of opposition grade (4 separate full-field scenarios). Every race sums to 100% in every scenario. The default shortlist places strong Group 1 form FIRST as an evidence-review priority, then ranks other quality-screened horses by the LOWER four-scenario estimate. This ordering is NOT a pure model-probability ranking.');
