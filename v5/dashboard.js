@@ -3,7 +3,7 @@
 'use strict';
 var C=null,D=null,target=null,embedded=false,navigate=null;
 var match=global.location&&global.location.search.match(/[?&]tab=(sim|multi|top10|races|results|qa|cal|weather|sync|compare)(?:&|$)/);
-var S={page:match?match[1]:'overview',meeting:'RANDWICK',race:null,runner:null,top:'ALL',topMode:'WIN_FIRST',topN:10,multi:[],compareA:null,compareB:null};
+var S={page:match?match[1]:'overview',meeting:'RANDWICK',race:null,runner:null,top:'ALL',topMode:'RESEARCH',topN:10,multi:[],compareA:null,compareB:null};
 var PAGES=[['overview','Overview'],['top10','Daily Top 5/10/15'],['races','Race Centre'],['multi','Multi Lab'],['sim','Simulator'],['compare','Compare'],['qa','Model QA'],['cal','Calibration'],['weather','Weather & Tracks'],['sync','Data & Sync'],['results','Results & History']];
 function e(tag,cls,txt){var x=document.createElement(tag);if(cls)x.className=cls;if(txt!==undefined&&txt!==null)x.textContent=String(txt);return x;}
 function app(){return target||document.getElementById('workspace');}
@@ -89,7 +89,10 @@ function metrics(){var grid=e('div','grid stats');[[C.board.raceCount,'Races'],[
 function venueCards(){var g=e('div','grid');Object.keys(C.going).forEach(function(v){var m=(D.meetings||[]).find(function(x){return x.meeting===v;})||{},r=D.races.filter(function(x){return x.meeting===v;});g.append(add(e('div','panel track'),e('div','venue',v),e('h3','',r.length+' races'),e('p','','Model scenario: '+C.going[v]),e('p','','Saved observation '+D.saved_at+': '+(m.official_29_oct||'Not verified')),e('p','','Rail: '+(m.rail||'Not verified')),action('View races',function(){selectRace(r[0].id);},'primary')));});return g;}
 function overview(){var hero=add(e('div','hero'),e('div','eyebrow',D.date+' · '+C.board.version),e('h2','','Your racing command centre.'),e('p','','One formula across the rankings, whole fields, simulator and Multi Lab.'));
  hero.append(add(e('div','heroActions'),action('Daily Top 10',function(){go('top10');},'primary'),action('Race Centre',function(){go('races');}),link('Results · Top 5/10/15','/results.html'),action('Simulator',function(){go('sim');})));
- add(app(),hero,metrics(),scenarios(),changeNotice(),head('Win-first research priorities','Only stable, sufficiently researched leaders; unreliable races are withheld.'),toplist(),head('Track scenarios','Saved observations and assumptions are shown separately.'),venueCards());
+ add(app(),hero,metrics(),scenarios(),changeNotice(),head('Independent Top 10 · tracked','Original researched grades and positions, with scratching and track-review flags.'),aTierSummary(),toplist(),head('Track scenarios','Saved observations and assumptions are shown separately.'),venueCards());
+}
+function curatedSet(){
+ return C.curated?C.curated.entries.filter(function(h){return S.top==='ALL'||h.meeting===S.top;}).slice(0,S.topN):[];
 }
 function topSet(){
  var candidates=S.topMode==='MODEL'?C.board.leaders:C.board.winFirst.priority.map(function(a){
@@ -99,49 +102,114 @@ function topSet(){
  return candidates.filter(function(h){return S.top==='ALL'||h.meeting===S.top;}).slice(0,S.topN);
 }
 function toplist(){
+ if(S.topMode==='RESEARCH'&&C.curated){
+  var wrap=e('div','toplist'),items=curatedSet();
+  items.forEach(function(h){
+   var row=e('div','toprow'),mid=e('div'),stat=e('div','model-row-stat');
+   row.dataset.runnerId=h.id;
+   if(h.model_pct!==null)row.dataset.modelPct=String(h.model_pct);
+   add(mid,e('strong','',h.horse),
+    e('small','',h.meeting+' R'+h.race+' · Form grade '+h.form_tier+' · '+(h.eligible?'STARTER PROVISIONAL':'OUT OF FIELD')),
+    e('small','',h.race_day_assessment.replaceAll('_',' ')+' · '+(h.notes.length?h.notes.join(', '):'No new screening flags')));
+   add(stat,e('strong','',h.model_pct===null?'—':pct(h.model_pct)),
+     e('small','','Uncalibrated V5 chance'),e('small','','Original #'+h.original_rank+' · ranked #'+h.rank));
+   var buttons=e('div','workshop-actions'),view=action('View race',function(){selectRace(h.race_id,h.id);},'ghost');
+   buttons.append(view);
+   if(C.setResearchOverride&&h.eligible)buttons.append(action('Edit grade / rank',function(){
+    var form=e('div','panel'),fields=e('div','filters');
+    var grade=e('select');C.curatedGradeOptions.forEach(function(g){var o=e('option','',g);o.value=g;grade.append(o);});grade.value=h.form_tier;
+    var rank=e('select');C.curated.entries.forEach(function(_,i){var o=e('option','',String(i+1));o.value=String(i+1);rank.append(o);});rank.value=String(h.rank);
+    var reason=e('input');reason.type='text';reason.placeholder='Explain form, trainer, scratching or track evidence';reason.maxLength=500;reason.setAttribute('aria-label','Required reason for research change');
+    add(fields,e('span','','Form tier:'),grade,e('span','','Rank:'),rank,reason);
+    add(form,fields,action('Save audited local change',function(){
+     try{C.setResearchOverride(h.id,{tier:grade.value,rank:Number(rank.value),reason:reason.value});}
+     catch(err){reason.setCustomValidity(err.message);reason.reportValidity();}
+    },'primary'));
+    row.append(form);
+    view.disabled=true;
+   },'ghost'));
+   add(row,e('div','slot',String(h.rank).padStart(2,'0')),mid,stat,buttons);
+   wrap.append(row);
+  });
+  if(!items.length)wrap.append(note('No researched selection for this meeting. No replacement horse has been invented.'));
+  return wrap;
+ }
  var list=e('div','toplist'),items=topSet();
- if(!items.length)return add(list,note('No research priority qualifies under these conditions. The model is abstaining rather than inventing a pick.'));
+ if(!items.length)return add(list,note('No research priority qualifies under these conditions. The model is abstaining.'));
  items.forEach(function(h,i){
   var row=e('button','toprow'),mid=e('div'),stat=e('div','model-row-stat');row.type='button';
   row.dataset.runnerId=h.id;row.dataset.modelPct=String(h.p);
   add(mid,e('strong','',h.horse),e('small','',h.meeting+' R'+h.race+' · gap '+h.gap.toFixed(2)+'pp'),
-    e('small','',h._screen_status?'RESEARCH PRIORITY · robust Good 4 / Soft 5 leader':'RAW MODEL ONLY · unfiltered'));
+    e('small','',h._screen_status?'SCREENED RESEARCH PRIORITY':'RAW MODEL ONLY'));
   add(stat,e('strong','',pct(h.p)),e('small','','Provisional model estimate'),
-    e('small','','Fixed-scenario floor '+pct(h._floor===undefined?h.robust_floor:h._floor)));
+    e('small','','Scenario floor '+pct(h._floor===undefined?h.robust_floor:h._floor)));
   add(row,e('div','slot',String(i+1).padStart(2,'0')),mid,stat);
   row.addEventListener('click',function(){selectRace(h.race_id,h.id);});list.append(row);
  });
  return list;
 }
+function researchHistory(){
+ if(!C.curated)return null;
+ var panel=box('Research revisions · what changed','Archived top-ten positions are retained. Local edits have a date, reason and before/after values. Changes stored on this device are not a shared Airtable publication.');
+ var items=C.researchHistory.slice(-10).reverse();
+ if(!items.length)panel.append(e('p','muted small','No changes to the frozen research checkpoint since it was loaded.'));
+ items.forEach(function(entry){
+  panel.append(e('p','muted small',entry.at+' · '+entry.reason+' · '+entry.changes.length+' affected researched runner(s)'));
+  entry.changes.slice(0,4).forEach(function(x){
+   panel.append(e('p','muted small',x.horse+': #'+x.old_rank+' → #'+x.new_rank+
+    ', '+x.old_grade+' → '+x.new_grade+', '+(x.old_model_pct===null?'—':pct(x.old_model_pct))+
+    ' → '+(x.new_model_pct===null?'—':pct(x.new_model_pct))+
+    ' · '+x.old_status+' → '+x.new_status));
+  });
+ });
+ return panel;
+}
+function aTierSummary(){
+ if(!C.curated)return null;
+ var panel=box('Original A-tier form · preserved','A-tier is the established historical form assessment, NOT a guarantee or an automatic A-grade race-day play.');
+ C.curated.aTier.forEach(function(x){
+  panel.append(e('p','muted small',x.horse+' · '+x.meeting+' R'+x.race+
+    ' · historical form '+x.form_tier+' · '+x.race_day_assessment.replaceAll('_',' ')+
+    (x.horse==='Hot And High'?' · Soft 5 record unavailable; race-day confidence conditional':'') ));
+ });
+ return panel;
+}
 function top10(){
- add(app(),head('Daily Top '+S.topN,'Win-first is a selective research list, NOT a guaranteed or calibrated set of bets.'),scenarios());
+ add(app(),head('Daily Top '+S.topN,'Original independent research rankings, live field status and model percentages are distinct.'),scenarios());
  var controls=e('div','filters');
- controls.append(setField('Board view',[{value:'WIN_FIRST',text:'Win-first priorities'},{value:'MODEL',text:'Raw probability audit only'}],S.topMode,function(v){S.topMode=v;render();}),
+ controls.append(setField('Board view',[
+  {value:'RESEARCH',text:'Form-researched Top 10'},
+  {value:'WIN_FIRST',text:'Strict model priorities'},
+  {value:'MODEL',text:'Raw model audit only'}
+ ],S.topMode,function(v){S.topMode=v;render();}),
   setField('Selections',[5,10,15].map(function(n){return {value:String(n),text:'Top '+n};}),String(S.topN),function(v){S.topN=+v;render();}),
   setField('Meeting',[{value:'ALL',text:'All meetings'}].concat(Object.keys(C.going).map(function(v){return {value:v,text:v};})),S.top,function(v){S.top=v;render();}));
  app().append(controls);
  if(C.lastChange)app().append(changeNotice());
- if(S.topMode==='WIN_FIRST'){
-  var rows=C.board.winFirst.priority.filter(function(h){return S.top==='ALL'||h.meeting===S.top;});
-  app().append(note(rows.length+' qualified research priorities; '+topSet().length+' displayed of requested '+S.topN+'. No Ascot/Randwick/Flemington quota, no price-driven ranking, no padding. Status: provisional.'));
- }
- app().append(toplist());
- if(S.topMode==='WIN_FIRST'){
-  var hold=C.board.winFirst.review.filter(function(h){return S.top==='ALL'||h.meeting===S.top;});
-  var panel=box('Review only · NOT shortlisted','Stable across Good 4/Soft 5 but a material concern remains. This is an audit list, not extra ranked selections.');
-  if(!hold.length)panel.append(e('p','muted small','No review-only runners for this filter.'));
-  hold.forEach(function(h){panel.append(add(e('p','muted small'),
-   e('strong','',h.horse+' · '+h.meeting+' R'+h.race+' · floor '+pct(h.robust_floor)),
-   e('span','', ' · '+h.reasons.join(', '))));});
-  app().append(panel);
-  var flips=C.board.winFirst.avoid.filter(function(h){return (S.top==='ALL'||h.meeting===S.top)&&h.reasons.includes('GOING_CHANGES_RACE_LEADER');});
-  if(flips.length){
-   var excluded=box('No-selection races · Good 4 and Soft 5 disagree','These races are withheld from the win-first board until evidence and conditions are resolved.');
-   flips.forEach(function(h){excluded.append(e('p','muted small',h.meeting+' R'+h.race+': Good 4 = '+h.good4+' · Soft 5 = '+h.soft5));});
-   app().append(excluded);
+ if(S.topMode==='RESEARCH'){
+  var source=C.curated;
+  if(!source)app().append(note('Frozen research checkpoint unavailable. Strict model priorities shown separately; the independent top ten cannot be reconstructed from a model score.'));
+  else{
+   app().append(note('Frozen form ranking '+source.checkpoint_at+' · '+source.active_count+'/'+source.count+
+     ' researched runners still in the provisional field. A scratched runner leaves a vacant slot; no silent replacement. Track/gear changes flag for review.'));
+   app().append(aTierSummary());
   }
- }else app().append(note('Raw formula leaders are diagnostic ONLY. They may change with going, scratchings or model version and are not the win-first shortlist.'));
- app().append(e('p','muted small','Top 5/10/15 are nested slices of one ranked list. Model fair odds are derived without bookmaker prices. Scenario floors are sensitivities, not confidence intervals. Revision: '+C.revision));
+ }else if(S.topMode==='WIN_FIRST'){
+  var rows=C.board.winFirst.priority.filter(function(h){return S.top==='ALL'||h.meeting===S.top;});
+  app().append(note(rows.length+' strict model priorities; fewer than '+S.topN+' may qualify. Not the archived human Top 10.'));
+ }
+ if(S.topMode==='RESEARCH'&&!C.curated)app().append(note('Archived research data not loaded.'));
+ else app().append(toplist());
+ if(S.topMode==='RESEARCH'){
+  if(C.curated)app().append(researchHistory());
+ }else if(S.topMode==='WIN_FIRST'){
+  var hold=C.board.winFirst.review.filter(function(h){return S.top==='ALL'||h.meeting===S.top;});
+  var panel=box('Review only · not shortlisted','These runners need further validation before a strict model priority.');
+  hold.forEach(function(h){panel.append(e('p','muted small',h.horse+' · '+h.meeting+' R'+h.race+' · '+h.reasons.join(', ')));});
+  app().append(panel);
+ }else app().append(note('Raw model rankings may change under going or scratchings; do not mistake these for the reviewed Top 10.'));
+ app().append(e('p','muted small','Model percentages are uncalibrated. Current source: '+(D.official_check_at||D.saved_at||'undated')+
+  ' · live final scratching certification: NOT ESTABLISHED · model revision: '+C.revision));
 }
 function raceNav(){var all=D.races.filter(function(r){return r.meeting===S.meeting;}),filter=e('div','filters');filter.append(setField('Meeting',Object.keys(C.going).map(function(x){return {value:x,text:x};}),S.meeting,function(v){S.meeting=v;S.race=D.races.find(function(r){return r.meeting===v;}).id;S.runner=null;render();}),setField('Race',all.map(function(r){return {value:r.id,text:'R'+r.race+' · '+r.title};}),S.race,function(v){S.race=v;S.runner=null;render();}));
  var grid=e('div','racechips');all.forEach(function(r){var x=C.board.baseline.races.find(function(v){return v.id===r.id;}),b=add(e('button','racechip'+(r.id===S.race?' active':'')),e('b','','Race '+r.race),e('small','',r.distance_m+'m · '+(x.leader||'No contest')));b.type='button';b.addEventListener('click',function(){S.race=r.id;S.runner=null;render();});grid.append(b);});return [filter,grid];}
