@@ -6,6 +6,14 @@ const model=fs.readFileSync(path.join(__dirname,'model.js'),'utf8');
 const D=JSON.parse(fs.readFileSync(path.join(__dirname,'research.json'),'utf8'));
 function compute(data){const ctx={window:{}};vm.runInNewContext(model,ctx,{timeout:2000});return ctx.window.RacingLabV5Model.board(data);}
 const B=compute(D);
+assert.equal(D.market_benchmarks.length,21);
+assert.ok(D.market_benchmarks.every(x=>x.source&&x.decimal_odds>1&&x.observed_date==='2026-10-29'));
+const sourceTop15=D.market_benchmarks.slice().sort((a,b)=>a.decimal_odds-b.decimal_odds).slice(0,15);
+assert.equal(sourceTop15.length,15);
+assert.equal(sourceTop15[0].horse,'Sheza Alibi');
+assert.equal(sourceTop15[1].horse,'Hot And High');
+assert.equal(sourceTop15[2].horse,'Bluish Hue');
+
 assert.equal(B.version,'V5-L3-20261029');
 assert.equal(B.sourceCount,408);
 assert.equal(B.baseline.records.length,B.activeCount);
@@ -52,7 +60,7 @@ for(const x of B.leaders){
   const field=B.baseline.records.filter(y=>y.race_id===x.race_id);
   assert.equal(x.p,Math.max(...field.map(y=>y.p)));
 }
-const withoutPrice=JSON.parse(JSON.stringify(D));withoutPrice.market_audit=[];
+const withoutPrice=JSON.parse(JSON.stringify(D));withoutPrice.market_audit=[];withoutPrice.market_benchmarks=[];
 const wNoMarket=compute(withoutPrice);
 assert.deepEqual(B.baseline.records.map(x=>x.id+':'+x.p),wNoMarket.baseline.records.map(x=>x.id+':'+x.p),'Market audit must never influence independent model probabilities');
 const swapped=JSON.parse(JSON.stringify(D));
@@ -68,6 +76,10 @@ const frontend=fs.readFileSync(path.join(__dirname,'dashboard.js'),'utf8');
 assert.ok(frontend.includes('V5-L3'));
 assert.ok(frontend.includes('ROBUST'));
 assert.ok(frontend.includes('QUALIFIED'));
+assert.ok(frontend.includes('BENCHMARK'));
+assert.ok(frontend.includes('Daily Top 15'));
+assert.ok(frontend.includes('benchmarkList'));
+
 assert.ok(frontend.includes('riskTags'));
 assert.equal(B.model_variants.length,4);
 assert.ok(B.robustLeaders.length>B.qualifiedLeaders.length);
