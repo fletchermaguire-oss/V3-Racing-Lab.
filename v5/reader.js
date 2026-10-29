@@ -6,7 +6,7 @@ function el(tag,cls,value){var x=document.createElement(tag);if(cls)x.className=
 function child(p){for(var i=1;i<arguments.length;i++)if(arguments[i])p.appendChild(arguments[i]);return p;}
 function clean(v){return v===undefined||v===null||v===""?"Not verified":String(v);}
 function mount(){
-if(initialized)return;initialized=true;
+if(initialized)return;initialized=true;var fallback=document.getElementById('rlv5-permanent-link');if(fallback)fallback.style.display='none';
 var css=document.createElement("link");css.rel="stylesheet";css.href="/v5/reader.css";document.head.appendChild(css);
 var launcher=el("button","rlv5-launcher","V5 RESEARCH"),shell=el("section","rlv5-shell");shell.hidden=true;
 shell.setAttribute("role","dialog");shell.setAttribute("aria-modal","true");shell.setAttribute("aria-label","Racing Lab V5 research");shell.id="rlv5-research";

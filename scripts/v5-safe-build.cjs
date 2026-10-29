@@ -14,5 +14,6 @@ assert.equal(raw.runners.length,408,'All 408 PDF entries required');
 assert.equal(raw.runners.filter(x=>x.original_pick).length,19,'Must preserve 19 qualitative leaders');
 assert(!raw.runners.some(x=>Object.hasOwn(x,'win_probability')),'Do not publish unapproved win percentages');
 assert.notEqual(board.publication?.status,'APPROVED','Stale previous meeting marked as approved');
+assert(fs.existsSync('v5/index.html'),'Static no-JS research fallback missing');
 assert(fs.existsSync('v5/reader.css')&&fs.existsSync('v5/reader.js'),'Missing V5 resources');
 console.log('PASS: Original racing interface preserved; 29 races; 408 runners; 19 original selections; read-only Good4 research. No forecasts approved.');
