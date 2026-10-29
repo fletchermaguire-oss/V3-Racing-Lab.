@@ -1,7 +1,7 @@
 [build]
   publish = "."
   functions = "netlify/functions"
-  command = "node build-v5.js"
+  command = "node scripts/v5-safe-build.cjs"
 
 [[redirects]]
   from = "/api/v1/snapshot"
@@ -12,3 +12,9 @@
   for = "/*"
   [headers.values]
     Cache-Control = "no-cache, must-revalidate"
+
+[[redirects]]
+  from = "/api/v5/evidence"
+  to = "/.netlify/functions/v5-evidence"
+  status = 200
+  force = true

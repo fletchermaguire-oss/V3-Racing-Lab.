@@ -1,0 +1,34 @@
+/* Namespaced V5 overlay; original app CSS is untouched. */
+.rlv5-open{overflow:hidden!important}
+.rlv5-launcher{position:fixed;right:18px;bottom:18px;z-index:2147483630;border:1px solid #6addaf;border-radius:999px;background:#91eec1;color:#09221a;padding:13px 18px;font:800 12px/1.25 system-ui,sans-serif;letter-spacing:1.25px;box-shadow:0 10px 35px #0009;cursor:pointer}
+.rlv5-shell[hidden]{display:none!important}
+.rlv5-shell{position:fixed;inset:0;z-index:2147483631;overflow:auto;background:#081019;color:#e8f1fb;font:14px/1.55 system-ui,-apple-system,Segoe UI,sans-serif;text-align:left}
+.rlv5-shell *{box-sizing:border-box}
+.rlv5-shell button,.rlv5-shell select,.rlv5-shell input{font:inherit}
+.rlv5-frame{max-width:1380px;margin:auto;padding:25px 22px 80px}
+.rlv5-top{display:flex;align-items:flex-start;justify-content:space-between;gap:18px}
+.rlv5-kicker{font-size:11px;font-weight:800;letter-spacing:.12em;color:#8becc4}
+.rlv5-heading{margin:5px 0;font-size:clamp(23px,4vw,38px);line-height:1.12;letter-spacing:-.04em;color:#f1fbff}
+.rlv5-subtitle,.rlv5-muted,.rlv5-foot{color:#a6bac7;line-height:1.55}
+.rlv5-close{border:1px solid #3b5d68;border-radius:12px;background:#182d38;color:#e7ffff;cursor:pointer;padding:10px 14px}
+.rlv5-guard{margin:23px 0 17px;padding:12px 15px;border:1px solid #51624d;background:#263025;color:#e6dfae;border-radius:12px;font-weight:750;font-size:12px;letter-spacing:.02em}
+.rlv5-filters{display:grid;grid-template-columns:1fr 2fr 1.4fr;gap:12px;margin-bottom:20px}
+.rlv5-filter{display:flex;flex-direction:column;gap:5px;color:#c4d7e2;font-weight:650;font-size:12px}
+.rlv5-filter select,.rlv5-filter input{width:100%;min-width:0;padding:11px;border-radius:10px;border:1px solid #365464;background:#172933;color:#eef5fb;font-size:13px}
+.rlv5-race{margin:0 0 15px;padding:14px 16px;border:1px solid #314b58;background:#11222c;border-radius:14px}
+.rlv5-race h3{margin:0 0 5px;color:#fff;font-size:17px}
+.rlv5-race p{margin:0}
+.rlv5-content{display:grid;grid-template-columns:minmax(190px,.9fr) minmax(0,2.3fr);gap:16px;align-items:start}
+.rlv5-list{border:1px solid #284451;background:#0e1a23;border-radius:14px;max-height:68vh;overflow:auto;padding:8px}
+.rlv5-runner{display:flex;flex-direction:column;gap:3px;width:100%;margin:0 0 5px;padding:12px;text-align:left;background:#152630;color:#eaf3ff;border:1px solid transparent;border-radius:10px;cursor:pointer;font-size:13px;font-weight:750}
+.rlv5-runner small{color:#95adb9;font-weight:450;font-size:11px}
+.rlv5-runner.rlv5-original{border-color:#7e8662;background:#263425}
+.rlv5-runner.rlv5-selected{border-color:#82efd0;background:#21413e}
+.rlv5-detail{border:1px solid #2d4a59;background:#101f2a;border-radius:15px;padding:20px 23px;min-height:380px}
+.rlv5-detail h3{font-size:24px;margin:6px 0 10px;color:#f0fff9}
+.rlv5-detail p{margin:6px 0;white-space:pre-line;overflow-wrap:anywhere}
+.rlv5-fact{padding:16px 0;border-top:1px solid #263d49}
+.rlv5-fact h4{font-size:12px;color:#8ceaca;text-transform:uppercase;letter-spacing:.07em;margin:0 0 7px}
+.rlv5-fact p{font-size:13px;line-height:1.7}
+.rlv5-foot{margin:20px 0;font-size:12px}
+@media(max-width:730px){.rlv5-frame{padding:17px 13px 70px}.rlv5-content{grid-template-columns:1fr}.rlv5-list{max-height:230px}.rlv5-filters{grid-template-columns:1fr 1fr}.rlv5-filters label:last-child{grid-column:1/-1}.rlv5-detail{padding:16px}.rlv5-top{align-items:center}.rlv5-subtitle{font-size:12px}.rlv5-launcher{right:12px;bottom:12px}.rlv5-race h3{font-size:15px}}
