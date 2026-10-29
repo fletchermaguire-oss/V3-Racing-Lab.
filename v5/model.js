@@ -5,7 +5,7 @@
  */
 (function(global){
 'use strict';
-const VERSION='V5-L4-20261030';
+const VERSION='V5-L5-CANDIDATE-20261030';
 const CONFIG=Object.freeze({
  temperature:0.78,uniformReserve:0.15,
  weights:Object.freeze({career:0.24,recency:0.76,distance:0.19,surface:0.22,course:0.12,class:0.55}),
@@ -124,16 +124,38 @@ function classSignal(name){
  if(/\bCL[1-3]\b/.test(n))return -0.22;
  return 0;
 }
+/* Historical class levels are ordinal HYPOTHESES, never empirically
+ * verified rival ratings. A Group 1 near-win beats a low-grade win on
+ * class, but insufficient evidence cannot be turned into certainty.
+ */
+function historicalRaceLevel(name){
+ const n=String(name||'').toUpperCase(),g=n.match(/\bG([123])\b/);
+ if(g)return g[1]==='1'?3.6:g[1]==='2'?2.7:2.1;
+ if(/\bLR\b|\bLISTED\b/.test(n))return 1.65;
+ const bm=n.match(/\bBM(?:0-)?(\d+)/);
+ if(bm)return clamp((+bm[1]-40)/45,0.25,1.5);
+ if(/\b1MW\b|\bNMW1Y\b/.test(n))return 0.76;
+ const cl=n.match(/\bCL([1-6])\b/);
+ if(cl)return 0.23+0.12*+cl[1];
+ if(/\bMDN\b|\bMAIDEN\b/.test(n))return 0.18;
+ if(/\bOPEN\b|\bQLTY\b/.test(n))return 1.35;
+ return null;
+}
 function classQuality(starts){
- const values=starts.map(s=>{
-  const grade=classSignal(s.className),finish=(s.field-s.pos)/(s.field-1);
-  const beaten=s.pos===1?0:s.margin;
-  const quality=(0.28+0.72*finish)*Math.exp(-clamp(beaten,0,20)/13);
-  // Both positive and negative grades improve with a better performance.
-  // A winner's margin is not a losing margin.
-  return grade>=0?grade*quality:grade*(1.5-0.5*quality);
- }).sort((a,b)=>b-a);
- return values.length?0.75*values[0]+0.25*(values[1]===undefined?values[0]:values[1]):0;
+ let weight=0,sum=0;const values=[];
+ starts.slice(0,5).forEach((s,i)=>{
+  const level=historicalRaceLevel(s.className);
+  if(level===null)return; // Unknown grade contributes no invented class signal.
+  const finish=(s.field-s.pos)/(s.field-1);
+  const perf=s.pos===1?1+0.025*clamp(s.margin,0,6):
+   (0.15+0.85*Math.pow(finish,0.85))*Math.exp(-clamp(s.margin,0,24)/18);
+  const adjusted=level*perf,w=Math.pow(0.82,i);
+  sum+=w*adjusted;weight+=w;values.push(adjusted);
+ });
+ if(!values.length)return 0;
+ values.sort((a,b)=>b-a);
+ const high=(values[0]+(values[1]===undefined?values[0]:values[1]))/2;
+ return (0.75*sum/weight+0.25*high)*values.length/(values.length+0.65);
 }
 function settling(h,starts){
  const vals=[],fractions=[];
@@ -160,8 +182,7 @@ function runnerFeatures(h,r,going,medWeight,medBarrier,classWeight,context){
   const fraction=(s.field-s.pos)/(s.field-1);
   // A larger winning margin helps; a larger beaten margin hurts.
   const marginTerm=s.pos===1?0.015*clamp(s.margin,0,6):-0.037*clamp(s.margin,0,16);
-  let perf=(fraction-0.5)*1.65+0.22*(s.pos===1?1:0)+marginTerm+
-   0.30*classSignal(s.className)*clamp((fraction-0.20)*1.2,0.15,1);
+  let perf=(fraction-0.5)*1.65+0.22*(s.pos===1?1:0)+marginTerm;
   perf+=0.10*Math.exp(-Math.abs(s.trip-r.distance_m)/400);
   if(s.surface===going.code)perf+=0.06;
   form+=w*perf;wsum+=w;
@@ -181,7 +202,7 @@ function runnerFeatures(h,r,going,medWeight,medBarrier,classWeight,context){
  const draw=straight||!barrierValid||context.maxBarrier<2?0:context.drawBias*((context.maxBarrier+1)/2-barrierValue)/((context.maxBarrier-1)/2)*0.06;
  const parts={career:CONFIG.weights.career*signal(ratios.career),recency:CONFIG.weights.recency*form,
   distance:CONFIG.weights.distance*signal(ratios.distance),surface:CONFIG.weights.surface*signal(ratios.surface),
-  course:CONFIG.weights.course*signal(ratios.course),class:classWeight*quality,
+  course:CONFIG.weights.course*signal(ratios.course),class:0,
   barrier:barrier,weight:weight,layoff:layoff,pace:pace,draw_sensitivity:draw};
  const completeness=clamp((st.career&&st.career.n>0?0.22:0)+(st.distance&&st.distance.n>0?0.13:0)+
   (st[going.key]&&st[going.key].n>0?0.13:0)+(st.course&&st.course.n>0?0.08:0)+Math.min(0.34,starts.length*0.07)+
@@ -231,6 +252,17 @@ function calculate(d,scenario,classWeight=CONFIG.weights.class,options={}){
   const barriers=horses.map(h=>num(h.barrier)).filter(x=>Number.isSafeInteger(x)&&x>0);
   const context={raceDay:raceDay,cutoff:cutoff,pace:pace,drawBias:drawBias,maxBarrier:barriers.length?Math.max.apply(null,barriers):0};
   const entries=horses.slice().sort((a,b)=>a.id.localeCompare(b.id)).map(h=>runnerFeatures(h,Object.assign({},r,{field_count:horses.length}),going,median(weights),median(barriers),classWeight,context));
+  // Each contender is rated relative to the actual competitors in this race.
+  // The three highest-rated rivals and the median rival determine an anchor.
+  // This is current-field competition, not a historic-opponent database.
+  entries.forEach(x=>{
+   const others=entries.filter(y=>y.h.id!==x.h.id).map(y=>y.classQuality).sort((a,b)=>b-a);
+   const top=others.slice(0,Math.min(3,others.length));
+   const anchor=0.65*top.reduce((s,v)=>s+v,0)/top.length+0.35*median(others);
+   const edge=x.classQuality-anchor,contribution=classWeight*edge;
+   x.parts.class=contribution;x.raw+=contribution;
+   x.oppositionAnchor=anchor;x.oppositionEdge=edge;
+  });
   const p=normalize(entries),mid=median(entries.map(x=>x.raw));
   entries.forEach((x,i)=>{x.p=p.rounded[i];x.pExact=p.exact[i];});
   entries.sort((a,b)=>b.pExact-a.pExact||a.h.id.localeCompare(b.h.id));
@@ -243,6 +275,7 @@ function calculate(d,scenario,classWeight=CONFIG.weights.class,options={}){
     rank:i+1,p:x.p,p_exact:x.pExact,model_score:round(clamp(50+18*(x.raw-mid),1,99),1),
     fair_odds:round(100/x.pExact),field_size:entries.length,field_gap:gap,chaos:chaos,
     completeness:x.completeness,days_since_last:x.daysSinceLast,features:x.parts,grade_quality:round(x.classQuality,3),
+     opposition_class_anchor:round(x.oppositionAnchor,3),opposition_class_edge:round(x.oppositionEdge,3),
     settle_800:x.settle.position,settle_fraction:x.settle.fraction,status:statusOf(x.h),original_pick:!!x.h.original_pick,
     input_issues:x.issues,form_audit:{accepted:x.starts.length,ignored_future:x.formAudit.ignored_future,invalid:x.formAudit.invalid,duplicates:x.formAudit.duplicates},
     g1_wins:x.starts.filter(s=>/\bG1\b/i.test(s.className)&&s.pos===1).length,
@@ -411,7 +444,7 @@ function evaluateFrozen(forecasts,results){
   reliability:reliability,by_model_version:versions.map(v=>{const rows=scored.filter(r=>r.model_version===v);return {model_version:v,races:rows.length,mean_multiclass_brier:mean(rows,'brier'),mean_log_loss:mean(rows,'log_loss')};}),
   calibration_fitted:false,caveat:'Inputs must be independently verified upstream. These diagnostics do not fit coefficients, prove future accuracy, or turn scenario ranges into confidence intervals.'};
 }
-const api={VERSION:VERSION,CONFIG:CONFIG,board:board,calculate:calculate,isEligible:isEligible,statusOf:statusOf,simulateWinners:simulateWinners,multi:multi,evaluateFrozen:evaluateFrozen};
+const api={VERSION:VERSION,CONFIG:CONFIG,historicalRaceLevel:historicalRaceLevel,classQuality:classQuality,board:board,calculate:calculate,isEligible:isEligible,statusOf:statusOf,simulateWinners:simulateWinners,multi:multi,evaluateFrozen:evaluateFrozen};
 global.RacingLabV5Model=Object.freeze(api);
 if(typeof module!=='undefined'&&module.exports)module.exports=global.RacingLabV5Model;
 })(typeof window==='undefined'?globalThis:window);
