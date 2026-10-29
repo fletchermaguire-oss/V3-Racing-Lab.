@@ -222,7 +222,7 @@ function create(input,options){
     });
     q.meetings.forEach(function(sheet){
       if(!sheet||!Object.hasOwn(going,sheet.meeting)||seenMeetings.has(sheet.meeting)||
-         typeof sheet.source_last_published!=='string'||!/^(Good [34]|Soft [567]|Heavy (8|9|10))$/.test(sheet.track_going)||
+         typeof sheet.source_last_published!=='string'||!sheet.source_last_published.trim()||!/^(Good [34]|Soft [567]|Heavy (8|9|10))$/.test(sheet.track_going)||
          !Number.isSafeInteger(sheet.scratched_total)||sheet.scratched_total<0||
          !sheet.scratchings||typeof sheet.scratchings!=='object'||Array.isArray(sheet.scratchings)||
          sheet.confirmed_final_starters!==false||sheet.emergencies_confirmed!==false)
