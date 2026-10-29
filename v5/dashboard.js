@@ -138,7 +138,25 @@ var v=e('div','mini','Historical settling: '+(h.historical_map||'Not documented'
 [['Dated form',h.form],['Surface / distance / course statistics',h.statistics],['Source strengths and trainer notes',h.strengths],['Source risks and counterarguments',h.risks],['Full pace / historical settling',h.historical_map],['Unresolved research and verification',h.outstanding]].forEach(function(part){var details=e('details','evidencebox');details.append(e('summary','',part[0]),e('pre','',part[1]||'Not documented'));root.append(details);});
 return root;}
 function racePanel(mode){var r=raceOf(S.race);if(!r){return;}var bar=e('div','racebar');add(bar,e('div','eyebrow',r.meeting+' · RACE '+r.race),e('h3','',r.title+' · '+r.distance_m+'m'),e('p','','Original qualitative leader: '+(r.original_pick||'Unranked')+' · '+runners(r.id).length+' PDF entries · Saturday field unverified'));app().append(bar);
-var cols=e('div','cols');var l=e('div','panel runnerlist');var hs=runners(r.id);if(!S.runner||!hs.some(function(h){return h.id===S.runner;}))S.runner=hs[0].id;hs.forEach(function(h){var row=e('button','runrow'+(h.id===S.runner?' active':''),'#'+h.tab+' '+h.horse+(h.original_pick?' ★':''));row.append(e('small','',h.original_pick?'Original research leader':'Thursday-listed · verify starter'));row.addEventListener('click',function(){S.runner=h.id;render();});l.append(row);});cols.append(l,horseDetail(hs.find(function(h){return h.id===S.runner;})));app().append(cols);
+
+var rm=modelRace(r.id);
+if(rm)app().append(e('div','race-model-summary','V5-L0 · Good 4 whole field = '+rm.sum.toFixed(2)+'% · top '+rm.leader+' '+rm.top_p.toFixed(2)+'% · gap '+rm.gap.toFixed(2)+'pp · chaos '+rm.chaos+'/100'));
+var cols=e('div','cols');
+var l=e('div','panel runnerlist');
+var hs=runners(r.id);
+if(B)hs.sort(function(x,y){var a=modelOf(x),b=modelOf(y);return (b?b.p:0)-(a?a.p:0);});
+if(!S.runner||!hs.some(function(h){return h.id===S.runner;}))S.runner=hs[0].id;
+hs.forEach(function(h){
+ var m=modelOf(h);
+ var row=e('button','runrow'+(h.id===S.runner?' active':''));
+ row.append(e('strong','','#'+h.tab+' '+h.horse+(h.original_pick?' ★':'')));
+ if(m)row.append(e('span','runner-model-p',m.p.toFixed(2)+'%'),e('small','','Rank '+m.rank+' · Model '+m.model_score.toFixed(1)+'/100'+(h.original_pick?' · Saved original leader':'')));
+ else row.append(e('small','','Research available · model unavailable'));
+ row.addEventListener('click',function(){S.runner=h.id;render();});
+ l.append(row);
+});
+cols.append(l,horseDetail(hs.find(function(h){return h.id===S.runner;})));
+app().append(cols);
 var section=e('details','evidencebox');section.append(e('summary','','Race shape, trainer context and outstanding QA'),e('pre','','Race intelligence: '+(r.source_notes||'Not documented')+'\n\nUnresolved: '+(r.qa_notes||'No completed QA record.')));app().append(section);
 }
 function racesPage(){add(app(),head('Race Centre','All 29 races, all 408 named runners, source-backed detail and two-sided analysis.'));raceNav().forEach(function(x){app().append(x);});racePanel();}
