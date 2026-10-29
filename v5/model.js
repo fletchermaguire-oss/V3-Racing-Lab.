@@ -310,6 +310,10 @@ function winFirstBoard(baseline,scenarios){
  baseline.races.forEach(r=>{
   const pick=s=>s.records.find(x=>x.race_id===r.id&&x.rank===1);
   const g=pick(good),s=pick(soft);
+  if(r.going!=='Good 4'&&r.going!=='Soft 5'){
+   const x={race_id:r.id,meeting:r.meeting,race:r.race,status:'NO_SELECTION',reasons:['TRACK_GRADE_OUTSIDE_TESTED_GOOD4_SOFT5']};
+   avoid.push(x);byRace.push(x);return;
+  }
   if(!g||!s){
    const x={race_id:r.id,meeting:r.meeting,race:r.race,status:'NO_SELECTION',reasons:['INCOMPLETE_FIELD']};
    avoid.push(x);byRace.push(x);return;
