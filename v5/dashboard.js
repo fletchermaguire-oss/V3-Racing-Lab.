@@ -1,7 +1,7 @@
 /* Racing Lab V5 dashboard: user-facing research, never a synthetic forecast. */
 (function(){
 'use strict';
-var D=null,live=false,liveAsOf='',S={page:'overview',meeting:'RANDWICK',race:'2026-10-31_RANDWICK_R01',runner:null,top:'ALL',multi:[],compareA:null,compareB:null,search:''};
+var D=null,live=false,liveAsOf='',S={page:(window.location&&/[?&]tab=(sim|multi|top10|races)(?:&|$)/.test(window.location.search)?RegExp.$1:'overview'),meeting:'RANDWICK',race:'2026-10-31_RANDWICK_R01',runner:null,top:'ALL',multi:[],compareA:null,compareB:null,search:''};
 var PAGES=[['overview','Overview'],['top10','Daily Top 10'],['races','Race Centre'],['multi','Multi Lab'],['sim','Simulator'],['compare','Compare'],['qa','Model QA'],['cal','Calibration'],['weather','Weather & Tracks'],['sync','Data & Sync'],['results','Results & History']];
 var VENUES=['RANDWICK','FLEMINGTON','ASCOT'];
 function e(tag,cls,txt){var x=document.createElement(tag);if(cls)x.className=cls;if(txt!==undefined&&txt!==null)x.textContent=String(txt);return x;}
