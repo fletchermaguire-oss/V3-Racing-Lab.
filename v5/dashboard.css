@@ -149,3 +149,15 @@ html body .app > .shell > main.page{display:block!important;visibility:visible!i
 .model-method{margin-top:18px}
 .model-method h3{margin:0 0 8px}
 @media(max-width:640px){.runrow{padding-right:7px!important;padding-bottom:34px!important;min-height:88px}.runner-model-p{top:auto;bottom:8px;left:9px;right:auto;font-size:14px}.runrow small{font-size:9px}.race-model-summary{font-size:11px}}
+
+/* V5-L2 sourced Top Ten rows: reasons, confidence cautions and mobile widths */
+.v5-model-row .model-reasons{grid-column:2/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;border-top:1px solid #244848;padding-top:7px;font-size:10px;color:#b2d8c8;line-height:1.45}
+.v5-model-row .model-reasons span:last-child{color:#e2b7aa}
+.v5-model-row .model-meta{line-height:1.55;white-space:normal;word-break:normal}
+.v5-model-row .model-horse .model-qual{white-space:normal;line-height:1.3}
+@media(max-width:960px){.v5-model-row .model-reasons{grid-template-columns:1fr}}
+@media(max-width:630px){.v5-model-row{grid-template-columns:25px minmax(0,1fr) 103px}
+.v5-model-row .model-meta{grid-column:2/-1;font-size:10px}
+.v5-model-row .model-reasons{grid-column:2/-1;gap:6px;font-size:10px}
+.model-toplist .v5-model-row{min-height:174px}
+}
