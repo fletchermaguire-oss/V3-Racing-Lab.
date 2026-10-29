@@ -74,7 +74,7 @@ function parseStats(h){
   const label=aliases[k];
   const official=Array.from(s.matchAll(new RegExp('\\b'+label+'\\s+(\\d+):(\\d+)-(\\d+)-(\\d+)','gi')))
    .map(m=>({n:+m[1],w:+m[2],place:+m[3]+ +m[4]}));
-  const legacy=Array.from(s.matchAll(new RegExp('\\b'+label+'\\s+(\\d+)\\s*-\\s*(\\d+)\\s*-\\s*(\\d+)','gi')))
+  const legacy=Array.from(s.matchAll(new RegExp('\\b'+label+'\\s*:?[ \\t]*(\\d+)\\s*-\\s*(\\d+)\\s*-\\s*(\\d+)','gi')))
    .map(m=>({w:+m[1],place:+m[2],n:+m[3]}));
   const records=official.length?official:legacy;
   const valid=records.filter(x=>[x.w,x.place,x.n].every(Number.isSafeInteger)&&x.w>=0&&x.place>=0&&x.w+x.place<=x.n);
@@ -87,18 +87,30 @@ function parseStats(h){
 }
 function parseStarts(h,cutoff){
  const issues=[],rows=[],seen=new Map();let future=0,invalid=0,duplicates=0;
- String(h.form||'').split('\n').forEach(line=>{
+ const source=String(h.form||''),isSnapshot=/^Previous Friday source-snapshot race form \(not refreshed against Saturday\):/.test(source);
+ const entries=isSnapshot?source.split(/\s+\|\s+/):source.split('\n');
+ entries.forEach(line=>{
   const t=line.trim();
-  // A historical start is a dated line, not a number in a narrative summary.
-  if(!/^\d{1,2}\/\d{1,2}\/\d{4}\b/.test(t))return;
-  const m=t.match(/^(\d{1,2}\/\d{1,2}\/\d{4})\s+(.+?)\s+(\d+)m\s+\(([GSH])\),\s*(.+?):\s*(\d+)\/(\d+),\s*PDF margin\s*([\d.]+)L/i);
-  if(!m){invalid++;return;}
-  const date=auDay(m[1]),pos=+m[6],field=+m[7],margin=num(m[8]),trip=+m[3];
+  const dated=/^\d{1,2}\/\d{1,2}\/\d{4}\b/.test(t);
+  const alternate=isSnapshot&&/\d+(?:st|nd|rd|th)\s+of\s+\d+\s+\d{1,2}\/\d{1,2}\/\d{4}/i.test(t);
+  if(!dated&&!alternate)return;
+  let date,pos,field,margin,trip,venue,surface,className;
+  if(dated){
+   const m=t.match(/^(\d{1,2}\/\d{1,2}\/\d{4})\s+(.+?)\s+(\d+)m\s+\(([GSH])\),\s*(.+?):\s*(\d+)\/(\d+),\s*PDF margin\s*([\d.]+)L/i);
+   if(!m){invalid++;return;}
+   date=auDay(m[1]);venue=m[2].trim();trip=+m[3];surface=m[4].toUpperCase();className=m[5];
+   pos=+m[6];field=+m[7];margin=num(m[8]);
+  }else{
+   // Explicit archived Friday form format. Do NOT parse narrative "1st of"
+   // fragments unless the record identifies the historical snapshot format.
+   const m=t.match(/(\d+)(?:st|nd|rd|th)\s+of\s+(\d+)\s+(\d{1,2}\/\d{1,2}\/\d{4})\s+(.+?)\s+Margin\s+([\d.]+)\s+Lengths?\s+Distance\s+(\d+)m\s+SOT\s+([GSH])\s+RST\s+(.+?)\s+Race\b/i);
+   if(!m){invalid++;return;}
+   pos=+m[1];field=+m[2];date=auDay(m[3]);venue=m[4].trim();margin=num(m[5]);trip=+m[6];
+   surface=m[7].toUpperCase();className=m[8].trim();
+  }
   if(date===null||field<2||pos<1||pos>field||trip<=0||margin===null||margin<0){invalid++;return;}
   if(date>=cutoff){future++;return;}
-  const row={date:date,venue:m[2].trim(),trip:trip,surface:m[4],className:m[5],pos:pos,field:field,margin:margin};
-  // One start per horse per day. Identical repeats do not increase evidence;
-  // conflicting repeats are removed instead of choosing the favourable line.
+  const row={date:date,venue:venue,trip:trip,surface:surface,className:className,pos:pos,field:field,margin:margin};
   const key=String(date),signature=JSON.stringify(row);
   if(seen.has(key)){
    duplicates++;const prev=seen.get(key);
