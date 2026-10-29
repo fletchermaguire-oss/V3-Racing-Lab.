@@ -1,13 +1,24 @@
 'use strict';
-/* V5-L2 offline QA. Run: node v5/model.qa.cjs */
+/* V5-L3 offline QA. Run: node v5/model.qa.cjs */
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
 const root=path.resolve(__dirname,'..');
 const model=fs.readFileSync(path.join(__dirname,'model.js'),'utf8');
 const D=JSON.parse(fs.readFileSync(path.join(__dirname,'research.json'),'utf8'));
 function compute(data){const ctx={window:{}};vm.runInNewContext(model,ctx,{timeout:2000});return ctx.window.RacingLabV5Model.board(data);}
 const B=compute(D);
-assert.equal(B.version,'V5-L2-20261029');
-assert.equal(B.baseline.records.length,408);
+assert.equal(B.version,'V5-L3-20261029');
+assert.equal(B.sourceCount,408);
+assert.equal(B.baseline.records.length,B.activeCount);
+assert.equal(B.activeCount,401);
+assert.equal(B.excludedCount,7);
+assert.ok(B.publication_blocked);
+assert.equal(B.marketAudit.length,1);
+assert.equal(B.marketAudit[0].severity,'CRITICAL_MODEL_DISAGREEMENT');
+assert.equal(B.eliteLeaders.length,1);
+assert.equal(B.eliteLeaders[0].horse,'Sheza Alibi');
+assert.equal(B.top10[0].horse,'Sheza Alibi');
+assert.equal(B.baseline.races.find(x=>x.id==='2026-10-31_RANDWICK_R08').field,16);
+assert.ok(!B.baseline.records.some(x=>x.race_id==='2026-10-31_RANDWICK_R08'&&(x.horse==='Barrengarry'||x.horse==='Federalist')));
 assert.equal(B.baseline.races.length,29);
 assert.equal(B.soft.records.length,408);
 assert.equal(B.soft.races.length,29);
@@ -41,6 +52,9 @@ for(const x of B.leaders){
   const field=B.baseline.records.filter(y=>y.race_id===x.race_id);
   assert.equal(x.p,Math.max(...field.map(y=>y.p)));
 }
+const withoutPrice=JSON.parse(JSON.stringify(D));withoutPrice.market_audit=[];
+const wNoMarket=compute(withoutPrice);
+assert.deepEqual(B.baseline.records.map(x=>x.id+':'+x.p),wNoMarket.baseline.records.map(x=>x.id+':'+x.p),'Market audit must never influence independent model probabilities');
 const swapped=JSON.parse(JSON.stringify(D));
 swapped.runners.forEach(h=>{h.original_pick=!h.original_pick;});
 const unpicked=compute(swapped);
@@ -51,10 +65,12 @@ const site=fs.readFileSync(path.join(root,'index.html'),'utf8');
 assert.equal(site.includes("official:'Heavy 8'"),false,'Outdated 16 Oct Randwick official rating is appearing as current');
 assert.ok(site.includes("Good 4 (working, 31 Oct)"));
 const frontend=fs.readFileSync(path.join(__dirname,'dashboard.js'),'utf8');
-assert.ok(frontend.includes('V5-L2'));
+assert.ok(frontend.includes('V5-L3'));
 assert.ok(frontend.includes('ROBUST'));
 assert.ok(frontend.includes('QUALIFIED'));
 assert.ok(frontend.includes('riskTags'));
 assert.equal(B.model_variants.length,4);
 assert.ok(B.robustLeaders.length>B.qualifiedLeaders.length);
-console.log('PASS V5-L2: 29 races / 408 runners, four scenario totals 100%, robust leader scans all runners, qualitative picks independent, stale Randwick weather guarded.');
+assert.ok(B.eliteLeaders.every(x=>x.g1_wins>=2&&x.g1_top2>=3));
+assert.ok(B.top10.length<=10);
+console.log('PASS V5-L3: 29 races / 408 runners, four scenario totals 100%, robust leader scans all runners, qualitative picks independent, stale Randwick weather guarded.');
