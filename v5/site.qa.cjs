@@ -60,3 +60,74 @@ test('going and local exclusions persist across both entrypoints without carryin
  const restored=State.create(D,{storage});assert.equal(restored.going.RANDWICK,'Soft 5');assert.equal(restored.isLocalScratch(id),true);assert.deepEqual(view(restored),view(C));
  const changed=clone(D);changed.saved_at='2026-10-30';const fresh=State.create(changed,{storage});assert.equal(fresh.going.RANDWICK,'Good 4');assert.equal(fresh.localScratchCount,0);
 });
+
+
+const Official=require('./official-snapshot-20261030.json');
+function officialController(){return State.create(State.applyOfficialOverlay(D,Official),{going:Official.going});}
+test('official Friday overlay and fixed-scenario win-first reconcile whole fields and abstain rather than pad',()=>{
+ const before=clone(D),adjusted=State.applyOfficialOverlay(D,Official),C=State.create(adjusted,{going:Official.going}),b=C.board;
+ assert.deepEqual(D,before,'official overlay must never mutate the saved source');
+ assert.equal(b.sourceCount,408);assert.equal(b.activeCount,372);assert.equal(b.excludedCount,36);
+ assert.equal(b.raceCount,29);assert.ok(b.baseline.races.every(r=>r.sum===100));
+ assert.equal(adjusted.publication.approved,false);
+ assert.ok(b.baseline.excluded.some(x=>x.horse==='Noahquintilly'));
+ assert.ok(b.baseline.excluded.some(x=>x.horse==='Whateley'));
+ assert.ok(b.baseline.excluded.some(x=>x.horse==='Perisher'&&x.race_id.endsWith('R09')));
+ assert.ok(b.baseline.records.some(x=>x.horse==='Amarone'&&x.race_id.endsWith('R02')));
+ assert.equal(b.winFirst.status,'RESEARCH_ONLY_UNCALIBRATED');
+ assert.equal(b.winFirst.priority.length,3);assert.equal(b.winFirst.review.length,6);
+ assert.equal(b.winFirst.avoid.length,20);
+ assert.equal(b.winFirst.researchCandidates.length,9);
+ assert.equal(b.winFirst.top15.length,9,'The Top 15 cannot be padded with unsupported choices');
+ assert.deepEqual(b.winFirst.top5,b.winFirst.top10.slice(0,5));
+ assert.deepEqual(b.winFirst.top10,b.winFirst.top15.slice(0,10));
+ assert.equal(b.winFirst.priority.some(x=>x.race_id.endsWith('_ASCOT_R06')),false);
+ const flip=b.winFirst.avoid.find(x=>x.race_id.endsWith('_ASCOT_R06'));
+ assert.equal(flip.good4,'Aurum Belle');assert.equal(flip.soft5,'Afireofgidgeecoals');
+ assert.ok(b.winFirst.review.some(x=>x.horse==='Sheza Alibi'&&x.reasons.includes('WIDE_CLASS_OR_GOING_SENSITIVITY')));
+ assert.ok(b.winFirst.priority.every(x=>x.dated_starts>=3&&x.min_gap>=4&&x.completeness>=0.78));
+ assert.ok(b.winFirst.priority.every(x=>!b.baseline.excluded.some(y=>y.id===x.runner_id)));
+});
+test('changing Good 4 to Soft 5 never swaps win-first selections, although raw race leaders may change',()=>{
+ const C=officialController(),ids=()=>C.board.winFirst.researchCandidates.map(x=>x.runner_id),initial=ids();
+ C.setGoing('ASCOT','Good 4');assert.deepEqual(ids(),initial);
+ C.setGoing('RANDWICK','Soft 5');assert.deepEqual(ids(),initial);
+ C.setGoing('FLEMINGTON','Soft 5');assert.deepEqual(ids(),initial);
+ C.setGoing('ASCOT','Soft 5');assert.deepEqual(ids(),initial);
+ assert.equal(new Set(C.board.winFirst.byRace.map(x=>x.race_id)).size,29);
+ assert.equal(C.board.winFirst.byRace.length,29);
+ C.setGoing('ASCOT','Heavy 8');
+ assert.ok(C.board.winFirst.priority.every(x=>x.meeting!=='ASCOT'),'Heavy cannot inherit a Good 4 / Soft 5 priority label');
+ assert.ok(C.board.winFirst.avoid.some(x=>x.reasons.includes('TRACK_GRADE_OUTSIDE_TESTED_GOOD4_SOFT5')));
+});
+test('scratchings invalidate affected selections; invalid overlays preserve the source',()=>{
+ const C=officialController(),pick=C.board.winFirst.priority[0],old=C.revision;
+ C.setLocalScratch(pick.runner_id,true);
+ assert.notEqual(C.revision,old);
+ assert.equal(C.board.baseline.records.some(x=>x.id===pick.runner_id),false);
+ assert.equal(C.board.winFirst.priority.some(x=>x.runner_id===pick.runner_id),false);
+ assert.equal(C.board.baseline.races.find(x=>x.id===pick.race_id).sum,100);
+ const invalid=clone(Official);invalid.scratchings.RANDWICK_R02.push('Unknown Horse');
+ assert.throws(()=>State.applyOfficialOverlay(D,invalid),/unknown runner/i);
+ const duplicate=clone(Official);duplicate.scratchings.RANDWICK_R02.push('WHATELEY');
+ assert.throws(()=>State.applyOfficialOverlay(D,duplicate),/duplicates/i);
+ const wrong=clone(Official);wrong.race_date='2026-11-07';
+ assert.throws(()=>State.applyOfficialOverlay(D,wrong),/date mismatch/i);
+});
+test('entrypoints consume the screened board and Multi Lab auto-use cannot draw from raw leaders',()=>{
+ const dashboard=fs.readFileSync(require.resolve('./dashboard.js'),'utf8');
+ const workshop=fs.readFileSync(require.resolve('./workshop.js'),'utf8');
+ assert.ok(dashboard.includes("topMode:'WIN_FIRST'"));
+ assert.ok(dashboard.includes("C.board.winFirst.priority.map"));
+ assert.ok(dashboard.includes("C.board.winFirst.review.filter"));
+ assert.ok(workshop.includes("B.winFirst.priority.slice(0,S.multiSize)"));
+ assert.equal(workshop.includes("B.leaders.slice(0,S.multiSize)"),false);
+});
+test('loading the date-matched overlay is fail-closed, and applies the saved Friday official scenario',async()=>{
+ const seen=[],fetcher=async(path)=>{seen.push(path);return {ok:true,json:async()=>path.endsWith('.json')&&path.includes('official-snapshot')?clone(Official):clone(D)};};
+ const C=await State.load(fetcher);
+ assert.deepEqual(seen,['/v5/research.json','/v5/official-snapshot-20261030.json']);
+ assert.equal(C.board.activeCount,372);
+ assert.equal(C.going.ASCOT,'Soft 5');
+ assert.equal(C.board.winFirst.priority.length,3);
+});
