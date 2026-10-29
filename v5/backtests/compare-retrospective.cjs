@@ -1,69 +1,61 @@
 'use strict';
-/* Audits a retrospectively rebuilt 17 October card. Source records were
- * not proven frozen before racing. This MUST NOT set calibration flags. */
-const fs=require('node:fs'),path=require('node:path');
-const M=require('../model.js');
-const hist=require('./2026-10-17-retrospective.json');
-const baseline=require('./2026-10-17-L4-baseline.json');
-function compare(){
- if(hist.backtest_eligible!==false||hist.status!=='RETROSPECTIVE_RESEARCH_DIAGNOSTIC_ONLY')
-  throw Error('Historical fixture must remain marked retrospective');
- if(hist.input.date!==baseline.date)throw Error('Historical date mismatch');
- const next=M.board(hist.input,{going:hist.going}),old=new Map(baseline.records.map(x=>[x.id,x]));
- if(next.activeCount!==307||next.raceCount!==30||next.baseline.records.length!==old.size)
-  throw Error('Historical field integrity mismatch');
- const winners=new Map(),official=new Map();
- hist.results.forEach(r=>{
-  if(!r.verified)return;
-  if(r.won){
-   if(winners.has(r.race_id))throw Error('Multiple winners for '+r.race_id);
-   winners.set(r.race_id,r.id);
-   official.set(r.race_id,r.url);
-  }
- });
- const races=next.baseline.races.map(r=>{
-  const rows=next.baseline.records.filter(x=>x.race_id===r.id);
-  const winner=winners.get(r.id),won=rows.find(x=>x.id===winner);
-  if(!winner||!won||!/^https:\/\//.test(official.get(r.id)||'')||
-     rows.some(x=>!old.has(x.id)))throw Error('Missing verified winner or race mismatch '+r.id);
-  function metric(rowp){
-   const top=rowp.slice().sort((a,b)=>b.p-a.p||a.id.localeCompare(b.id))[0];
-   const wp=rowp.find(x=>x.id===winner).p/100;
-   return {top1_won:top.id===winner,brier:rowp.reduce((s,x)=>s+(x.p/100-(x.id===winner?1:0))**2,0),
-    log_loss:-Math.log(Math.max(1e-15,wp))};
-  }
-  return {race_id:r.id,meeting:r.meeting,winner,old:metric(rows.map(x=>({id:x.id,p:old.get(x.id).p}))),
-   candidate:metric(rows.map(x=>({id:x.id,p:x.p_exact}))),uniform_brier:1-1/rows.length};
- });
- const mean=(a,fn)=>a.reduce((s,x)=>s+fn(x),0)/a.length;
- const oldSummary={wins:races.filter(x=>x.old.top1_won).length,brier:mean(races,x=>x.old.brier),
-  log_loss:mean(races,x=>x.old.log_loss)};
- const newSummary={wins:races.filter(x=>x.candidate.top1_won).length,brier:mean(races,x=>x.candidate.brier),
-  log_loss:mean(races,x=>x.candidate.log_loss)};
- // Deterministic race-resampling uncertainty; descriptive only because the
- // race-day form was not frozen and this is just one date.
- let seed=21764;function rng(){seed^=seed<<13;seed^=seed>>>17;seed^=seed<<5;return (seed>>>0)/4294967296;}
- const deltas=[];for(let i=0;i<2000;i++){
-  let total=0;
-  for(let j=0;j<races.length;j++){const x=races[Math.floor(rng()*races.length)];total+=x.old.brier-x.candidate.brier;}
-  deltas.push(total/races.length);
- }
- deltas.sort((a,b)=>a-b);
- return {status:'RETROSPECTIVE_DIAGNOSTIC_ONLY_NOT_CALIBRATION',date:hist.date,
-  model_version:M.VERSION,source_model_baseline:baseline.model_version,
-  races:races.length,verified_finishers:next.activeCount,verified_winners:winners.size,
-  old:oldSummary,candidate:newSummary,uniform_brier:mean(races,x=>x.uniform_brier),
-  mean_brier_gain:oldSummary.brier-newSummary.brier,
-  bootstrap_95pct_brier_gain:[deltas[49],deltas[1949]],
-  verified_pre_race_frozen_snapshots:0,production_calibration_allowed:false,
-  reasons:['Single historical date','Aggregate form research may have changed after races',
-   'Not proven frozen or independent','Ordinal class coefficients and probability temperature not fitted or validated'],
-  tracks:Object.entries(Object.groupBy(races,x=>x.meeting)).map(([meeting,x])=>({
-    meeting,races:x.length,L4_wins:x.filter(z=>z.old.top1_won).length,
-    L5_wins:x.filter(z=>z.candidate.top1_won).length,
-    L4_brier:mean(x,z=>z.old.brier),L5_brier:mean(x,z=>z.candidate.brier)
-  }))};
+/* Paired audit of two retrospectively reconstructed meetings. The form
+ * snapshots are NOT proven frozen before racing: this is neither a
+ * prospective hit-rate result nor fitted probability calibration. */
+const assert=require('node:assert/strict'),M=require('../model.js');
+const cases=[
+ {hist:require('./2026-10-17-retrospective.json'),base:require('./2026-10-17-L4-baseline.json')},
+ {hist:require('./2026-10-24-retrospective.json'),base:require('./2026-10-24-L4-parser-matched-baseline.json')}
+];
+const mean=(a,fn)=>a.length?a.reduce((s,x)=>s+fn(x),0)/a.length:null;
+function raceMetrics(rows,winner,prob){
+ const p=rows.map(x=>({id:x.id,p:prob(x)}));
+ const w=p.find(x=>x.id===winner),top=p.slice().sort((a,b)=>b.p-a.p||a.id.localeCompare(b.id))[0];
+ assert.ok(w,'No winner probability available');assert.ok(Math.abs(p.reduce((s,x)=>s+x.p,0)-100)<0.00001,'Race probabilities must total 100');
+ return {top1_won:top.id===winner,brier:p.reduce((s,x)=>s+(x.p/100-(x.id===winner?1:0))**2,0),
+  log_loss:-Math.log(Math.max(1e-15,w.p/100)),leader:top.id};
 }
-const result=compare();
-if(require.main===module)process.stdout.write(JSON.stringify(result,null,2)+'\n');
+function evaluateOne({hist,base}){
+ assert.equal(hist.status,'RETROSPECTIVE_RESEARCH_DIAGNOSTIC_ONLY');
+ assert.equal(hist.backtest_eligible,false);
+ assert.equal(hist.date,base.date);
+ const b=M.board(hist.input,{going:hist.going}),prior=new Map(base.records.map(x=>[x.id,x.p]));
+ assert.equal(b.baseline.records.length,prior.size,'Baseline and candidate must use identical finishing fields');
+ const win=new Map();
+ hist.results.filter(r=>r.verified===true&&r.won===true).forEach(r=>{
+  assert.ok(!win.has(r.race_id),'Duplicate race winner');
+  assert.ok(/^https:\/\//.test(r.url),'Missing official results link');
+  win.set(r.race_id,r.id);
+ });
+ const races=b.baseline.races.map(r=>{
+  const rows=b.baseline.records.filter(x=>x.race_id===r.id),winner=win.get(r.id);
+  assert.ok(rows.length>1&&winner&&rows.some(x=>x.id===winner)&&rows.every(x=>prior.has(x.id)),'Incomplete retrospective result '+r.id);
+  const old=raceMetrics(rows,winner,x=>prior.get(x.id)),candidate=raceMetrics(rows,winner,x=>x.p_exact);
+  return {race_id:r.id,date:hist.date,meeting:r.meeting,winner,old,candidate,uniform_brier:1-1/rows.length};
+ });
+ assert.equal(win.size,races.length,'Every sampled race needs a verified winner');
+ return races;
+}
+function summary(rows){
+ return {races:rows.length,old_top1:rows.filter(x=>x.old.top1_won).length,
+  L5_top1:rows.filter(x=>x.candidate.top1_won).length,
+  old_brier:mean(rows,x=>x.old.brier),L5_brier:mean(rows,x=>x.candidate.brier),
+  old_log_loss:mean(rows,x=>x.old.log_loss),L5_log_loss:mean(rows,x=>x.candidate.log_loss),
+  uniform_brier:mean(rows,x=>x.uniform_brier),
+  improved_brier_pp:mean(rows,x=>x.old.brier-x.candidate.brier),
+  leader_disagreements:rows.filter(x=>x.old.leader!==x.candidate.leader).length};
+}
+function compare(){
+ const groups=cases.map(evaluateOne),all=groups.flat();
+ const output={status:'RETROSPECTIVE_ONLY_NO_FITTED_CALIBRATION',model_version:M.VERSION,
+  dates:groups.map(a=>({date:a[0].date,...summary(a)})),overall:summary(all),
+  winners_verified:all.length,finishers_verified:cases.reduce((s,x)=>s+x.hist.results.filter(y=>y.verified).length,0),
+  eligible_pre_race_frozen_dates:0,
+  calibration_fitted:false,deploy_approved:false,
+  note:'No formula coefficients were fitted to these results. Sources may have been amended post-race. Comparing two dates retrospectively cannot establish improvement in future win rate. Archived 24 Oct has 15 starters with no machine-readable recent form and lacks career totals for many others.',
+  source_provenance:cases.map(x=>({date:x.hist.date,official_result_urls:x.hist.official_result_urls})),
+  race_summaries:all.map(x=>({id:x.race_id,winner:x.winner,old_top1:x.old.top1_won,new_top1:x.candidate.top1_won}))};
+ return output;
+}
+if(require.main===module)process.stdout.write(JSON.stringify(compare(),null,2)+'\n');
 module.exports={compare};
