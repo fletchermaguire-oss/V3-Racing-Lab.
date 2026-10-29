@@ -150,6 +150,7 @@ function simulatorPage(ctx){
   var baseline=seeded.reduce(function(a,v){return a+v.score;},0)/Math.max(1,seeded.length);
   var participants=vis.map(function(v){
    var z=v.item,style=z.style;
+   z.u=Math.random(); // Each run is a new illustrative scenario; rerun is not deterministic.
    // Randomness is deliberately visible; a recorded historical settling tendency only affects
    // *illustrative* early pacing. It is not a verified jockey instruction.
    var finish=1.03-(z.score-baseline)*0.0030+(z.u-0.5)*0.23;
