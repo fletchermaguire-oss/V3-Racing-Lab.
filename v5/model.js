@@ -5,7 +5,7 @@
  */
 (function(global){
 'use strict';
-const VERSION='V5-L2-20261029';
+const VERSION='V5-L3-20261029';
 function clamp(x,a,b){return Math.max(a,Math.min(b,x));}
 function num(x,fallback){var v=Number(x);return Number.isFinite(v)?v:fallback;}
 function parseStats(h){
@@ -111,9 +111,11 @@ function normalize(items){
 }
 function calculate(d,scenario,gradeFactor){
  if(!d||d.date!=='2026-10-31'||!Array.isArray(d.races)||d.races.length!==29||!Array.isArray(d.runners)||d.runners.length!==408)throw Error('Full 31 October inventory required');
- var result=[],raceBoards=[],allIds={};
+ var result=[],raceBoards=[],allIds={},excluded=0;
  d.races.forEach(function(r){
-  var horses=d.runners.filter(function(h){return h.race_id===r.id;});
+  var listed=d.runners.filter(function(h){return h.race_id===r.id;});
+  var horses=listed.filter(function(h){return !/^SCRATCHED\b/i.test(h.status||'');});
+  excluded+=listed.length-horses.length;
   if(horses.length<2)throw Error('Empty or incomplete race '+r.id);
   var used=new Set();horses.forEach(function(h){if(!h.id||used.has(h.id)||allIds[h.id])throw Error('Runner ID duplicate '+h.id);used.add(h.id);allIds[h.id]=true;});
   var mw=median(horses.map(function(h){return num(h.weight_kg,NaN);}));
@@ -138,10 +140,10 @@ function calculate(d,scenario,gradeFactor){
   });
   var quality=entries.map(function(x){return x.classQuality;}).sort(function(a,b){return b-a;});
   var qIndex=quality.slice(0,Math.max(2,Math.ceil(entries.length/3))).reduce(function(z,n){return z+n;},0)/Math.max(2,Math.ceil(entries.length/3));
-  raceBoards.push({id:r.id,meeting:r.meeting,race:r.race,title:r.title,field:entries.length,
+  raceBoards.push({id:r.id,meeting:r.meeting,race:r.race,title:r.title,listed_field:listed.length,excluded:listed.length-horses.length,field:entries.length,
     field_quality:+qIndex.toFixed(2),leader:entries[0].h.horse,top_p:top,gap:gap,chaos:chaos,sum:+entries.reduce(function(s,x){return s+x.p;},0).toFixed(2)});
  });
- if(result.length!==408||raceBoards.some(function(x){return Math.abs(x.sum-100)>0.0001}))throw Error('Full-field probability QA failed');
+ if(result.length!==d.runners.length-excluded||raceBoards.some(function(x){return Math.abs(x.sum-100)>0.0001}))throw Error('Full-field probability QA failed');
  return {version:VERSION,scenario:scenario,status:'PROVISIONAL_UNCALIBRATED',asOf:'29 October 2026 runner research; working 31 October scenario',
    caveat:'Conditional estimates, NOT externally calibrated probabilities or verified raceday starter fields; no market input.',
    records:result,races:raceBoards};
@@ -175,6 +177,17 @@ function board(d){
                 .reduce(function(z,y){return Math.max(z,y.p);},0))).toFixed(2);
   x.field_quality=goodRace.get(x.race_id).field_quality;
   x.field_chaos=goodRace.get(x.race_id).chaos;
+  x.g1_wins=0;x.g1_top2=0;
+  var horse=d.runners.find(function(h){return h.id===x.id;});
+  if(horse){
+   String(horse.form||'').split('\n').forEach(function(line){
+    if(/\bGroup G1:\s*\d+\/\d+/i.test(line)){
+      var place=line.match(/\bGroup G1:\s*(\d+)\/\d+/i);
+      if(place){if(+place[1]===1)x.g1_wins++;if(+place[1]<=2)x.g1_top2++;}
+    }
+   });
+  }
+  x.elite_form=x.g1_wins>=2&&x.g1_top2>=3&&x.top1_scenarios>=3;
   x.quality_flags=[];
   if(x.completeness<0.70)x.quality_flags.push('LIMITED_DOSSIER');
   if(x.robust_spread>=6)x.quality_flags.push('SCENARIO_SENSITIVE');
@@ -182,7 +195,22 @@ function board(d){
   if(x.field_chaos>=90)x.quality_flags.push('CROWDED_RACE');
   x.research_status=x.quality_flags.length?'HIGH_UNCERTAINTY':'PROVISIONAL';
  });
- // All 408, not only the Good 4 winners: the robust leader may be a different
+ // External market is deliberately applied AFTER all independent full-field
+ // forecasts are computed. It does not affect probabilities or ranking scores.
+ // A large discrepancy blocks approval rather than being silently backfitted.
+ var audit=(d.market_audit||[]).map(function(a){
+  var h=good.records.find(function(x){return x.race_id===a.race_id&&x.horse===a.horse;});
+  var price=+a.decimal_odds,implied=price>1?+(100/price).toFixed(2):null;
+  return {race_id:a.race_id,horse:a.horse,observed_at:a.observed_at,source:a.source,
+    price:price,implied_p:implied,model_p:h?h.p:null,
+    gap_pp:h&&implied!==null?+(implied-h.p).toFixed(2):null,
+    severity:h&&implied!==null&&Math.abs(implied-h.p)>=20?'CRITICAL_MODEL_DISAGREEMENT':'REVIEW'};
+ });
+ audit.forEach(function(a){if(a.severity==='CRITICAL_MODEL_DISAGREEMENT'){
+  var h=good.records.find(function(x){return x.race_id===a.race_id&&x.horse===a.horse;});
+  if(h){h.market_audit=a;h.quality_flags.push('MODEL_MARKET_DISAGREEMENT');h.research_status='CRITICAL_QA';}
+ }});
+ // All active, not only the Good 4 winners: the robust leader may be a different
  // horse from the baseline pick and is chosen on its LOWER four-scenario estimate.
  var robustLeaders=d.races.map(function(r){
   var rs=good.records.filter(function(x){return x.race_id===r.id;});
@@ -193,19 +221,26 @@ function board(d){
  // Explicit data-quality screen. An excluded horse still appears on the raw
  // and all-races robustness boards. This is not proof of profitable selection.
  var qualified=robustLeaders.filter(function(x){return x.quality_flags.length===0;});
+ // Highest-certainty race form is a separate evidence gate, not a probability
+ // adjustment. Requires 2+ G1 wins, 3+ G1 top-twos in dated recent starts,
+ // and the same race winner in at least 3 of 4 variants.
+ var elite=leaders.filter(function(x){return x.elite_form;})
+   .sort(function(a,b){return b.g1_wins-a.g1_wins||b.g1_top2-a.g1_top2||b.robust_floor-a.robust_floor;});
+ var shortlist=elite.concat(qualified.filter(function(x){return !elite.some(function(z){return z.id===x.id;});})).slice(0,10);
 
- if(good.records.length!==408||robustLeaders.length!==29||
+ if(good.records.length!==d.runners.filter(function(x){return !/^SCRATCHED\b/i.test(x.status||'');}).length||robustLeaders.length!==29||
     scenarios.some(function(s){return s.races.length!==29||s.races.some(function(r){return r.sum!==100;});}))
     throw Error('V5-L2 scenario integrity check failed');
  return {version:VERSION,date:d.date,status:'PROVISIONAL_UNCALIBRATED',
-  assumption:'Good 4 working scenario; all 408 Thursday PDF runners; scratches and final track unverified',
-  sourceCount:d.runners.length,raceCount:d.races.length,baseline:good,soft:soft,
+  assumption:'Good 4 working scenario; 408 original Thursday PDF runners; verified race-specific exclusions remove scratched runners from each scenario',
+  sourceCount:d.runners.length,activeCount:good.records.length,excludedCount:d.runners.length-good.records.length,raceCount:d.races.length,baseline:good,soft:soft,
+  marketAudit:audit,publication_blocked:audit.some(function(a){return a.severity==='CRITICAL_MODEL_DISAGREEMENT';}),
   stress:{goodClassConservative:goodConservative,softClassConservative:softConservative},
   model_variants:['Good 4 · base class','Soft 5 · base class','Good 4 · conservative class','Soft 5 · conservative class'],
-  leaders:leaders,robustLeaders:robustLeaders,qualifiedLeaders:qualified,top10:qualified.slice(0,10),
+  leaders:leaders,robustLeaders:robustLeaders,qualifiedLeaders:qualified,eliteLeaders:elite,top10:shortlist,
   screen:{description:'Grade/going sensitivity, Thursday form completeness and race competitiveness check; research filter only',
     rules:{completeAtLeast:0.70,scenarioSwingBelow:6,top1InScenariosAtLeast:3,chaosBelow:90},
-    qualifiedRaceCount:qualified.length,totalRaceCount:robustLeaders.length}};
+    qualifiedRaceCount:qualified.length,eliteRaceCount:elite.length,shortlistCount:shortlist.length,totalRaceCount:robustLeaders.length}};
 }
 global.RacingLabV5Model={VERSION:VERSION,board:board,calculate:calculate};
 })(typeof window==='undefined'?globalThis:window);
