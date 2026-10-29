@@ -192,7 +192,9 @@ function runnerFeatures(h,r,going,medWeight,medBarrier,classWeight,context){
  if(!starts.length)issues.push('MISSING_PARSEABLE_RECENT_FORM');
  if(!st.career||st.career.n===0)issues.push('MISSING_CAREER_SAMPLE');
  return {h:h,raw:Object.values(parts).reduce((a,b)=>a+b,0),parts:parts,starts:starts,daysSinceLast:days,
-  completeness:round(completeness),classQuality:quality,settle:settle,issues:unique(issues),formAudit:formAudit};
+  completeness:round(completeness),classQuality:quality,settle:settle,issues:unique(issues),formAudit:formAudit,
+   goingStarts:st[going.key]?st[going.key].n:0,distanceStarts:st.distance?st.distance.n:0,
+   nearestRecentTrip:starts.length?Math.min.apply(null,starts.map(s=>Math.abs(s.trip-r.distance_m))):null};
 }
 function normalize(items){
  const max=Math.max.apply(null,items.map(x=>x.raw));
@@ -242,7 +244,9 @@ function calculate(d,scenario,classWeight=CONFIG.weights.class,options={}){
    records.push({id:x.h.id,race_id:r.id,horse:x.h.horse,meeting:r.meeting,race:r.race,
     rank:i+1,p:x.p,p_exact:x.pExact,model_score:round(clamp(50+18*(x.raw-mid),1,99),1),
     fair_odds:round(100/x.pExact),field_size:entries.length,field_gap:gap,chaos:chaos,
-    completeness:x.completeness,days_since_last:x.daysSinceLast,features:x.parts,grade_quality:round(x.classQuality,3),
+    completeness:x.completeness,days_since_last:x.daysSinceLast,race_distance_m:r.distance_m,
+     going_sample_starts:x.goingStarts,distance_sample_starts:x.distanceStarts,nearest_recent_trip_difference_m:x.nearestRecentTrip,
+     features:x.parts,grade_quality:round(x.classQuality,3),
     settle_800:x.settle.position,settle_fraction:x.settle.fraction,status:statusOf(x.h),original_pick:!!x.h.original_pick,
     input_issues:x.issues,form_audit:{accepted:x.starts.length,ignored_future:x.formAudit.ignored_future,invalid:x.formAudit.invalid,duplicates:x.formAudit.duplicates},
     g1_wins:x.starts.filter(s=>/\bG1\b/i.test(s.className)&&s.pos===1).length,
@@ -264,6 +268,51 @@ function calculate(d,scenario,classWeight=CONFIG.weights.class,options={}){
   records:records,races:races,excluded:excluded,runnerAudit:runnerAudit,input_issues:inventory.issues};
 }
 function sortProbability(a,b){return b.p_exact-a.p_exact||b.completeness-a.completeness||b.robust_floor-a.robust_floor||b.gap-a.gap||a.id.localeCompare(b.id);}
+/* Win-first research screen: a deterministic abstention/QA filter, NOT a new probability model.
+ * These thresholds have not been fitted to outcomes. Never present them as
+ * validated predictors of a higher hit rate or a genuine probability uplift.
+ * Original selections, odds and names are deliberately not used.
+ */
+function winFirstScreen(leaders){
+ const rules=Object.freeze({minimumModelPct:17,minimumRobustFloorPct:15,minimumCoverage:0.78,
+   minimumRecentRuns:3,minimumGapPp:4,maxChaos:89,minimumTop1Of8:6,
+   maximumScenarioSpreadPp:6,layoffReviewDays:70,quickBackupReviewDays:7});
+ const assessed=leaders.map(h=>{
+   const reasons=[],context=[];
+   if(h.p_exact<rules.minimumModelPct)reasons.push('LOW_BASELINE_PROBABILITY');
+   if(h.robust_floor<rules.minimumRobustFloorPct)reasons.push('LOW_SCENARIO_FLOOR');
+   if(h.completeness<rules.minimumCoverage)reasons.push('THIN_DOSSIER');
+   if(h.form_audit.accepted<rules.minimumRecentRuns)reasons.push('INSUFFICIENT_DATED_FORM');
+   if(h.gap<rules.minimumGapPp)reasons.push('NO_FIELD_SEPARATION');
+   if(h.field_chaos>rules.maxChaos)reasons.push('HIGH_FIELD_CHAOS');
+   if(h.top1_scenarios<rules.minimumTop1Of8)reasons.push('UNSTABLE_SCENARIO_LEADER');
+   if(h.robust_spread>=rules.maximumScenarioSpreadPp)reasons.push('HIGH_SCENARIO_SENSITIVITY');
+   if(h.input_issues.length)reasons.push('UNRESOLVED_INPUT_ISSUES');
+   if(h.going_sample_starts===0)context.push('NO_DIRECT_GOING_SAMPLE');
+   if(h.distance_sample_starts===0&&h.nearest_recent_trip_difference_m!==null&&
+       h.nearest_recent_trip_difference_m>Math.max(250,h.race_distance_m*0.15))context.push('DISTANCE_STEP_UNPROVEN');
+   if(h.days_since_last!==null&&h.days_since_last>=rules.layoffReviewDays)context.push('FITNESS_AFTER_BREAK');
+   if(h.days_since_last!==null&&h.days_since_last<=rules.quickBackupReviewDays)context.push('SHORT_BACKUP');
+   const fatal=(reasons.includes('HIGH_FIELD_CHAOS')&&reasons.includes('NO_FIELD_SEPARATION')) ||
+     (reasons.includes('UNSTABLE_SCENARIO_LEADER')&&reasons.includes('NO_FIELD_SEPARATION'));
+   const tier=!reasons.length&&!context.length?'PRIORITY_RESEARCH':
+     !fatal&&reasons.length<=1&&context.length<=1?'REVIEW_ONLY':'AVOID_RACE';
+   return {runner_id:h.id,horse:h.horse,race_id:h.race_id,meeting:h.meeting,race:h.race,
+     model_pct:h.p,robust_floor_pct:h.robust_floor,field_gap_pp:h.gap,
+     evidence_coverage:h.completeness,model_version:VERSION,
+     status:tier,screen_reasons:reasons,context_review:context,
+     model_review:h.elite_form?['ELITE_FORM_CLASS_COEFFICIENT_REQUIRES_VALIDATION']:[]};
+ });
+ const weight={PRIORITY_RESEARCH:0,REVIEW_ONLY:1,AVOID_RACE:2};
+ const order=assessed.sort((a,b)=>weight[a.status]-weight[b.status]||
+   b.robust_floor_pct-a.robust_floor_pct||b.model_pct-a.model_pct||a.runner_id.localeCompare(b.runner_id));
+ const eligible=order.filter(x=>x.status!=='AVOID_RACE');
+ return {rules:rules,notice:'Research-only abstention screen; not trained or validated for a higher hit rate. Pending final scratchings and class-model calibration.',
+  priority:order.filter(x=>x.status==='PRIORITY_RESEARCH'),
+  review:order.filter(x=>x.status==='REVIEW_ONLY'),
+  avoid:order.filter(x=>x.status==='AVOID_RACE'),
+  researchCandidates:eligible,top5:eligible.slice(0,5),top10:eligible.slice(0,10),top15:eligible.slice(0,15)};
+}
 function board(d,options={}){
  const baselineGoing=options.going||'Good 4';
  const variants=[
@@ -317,6 +366,7 @@ function board(d,options={}){
   baseline:good,soft:scenarios[1],marketAudit:audit,publication_blocked:true,publication_reasons:['UNCALIBRATED_MODEL','OFFICIAL_FIELD_AND_TRACK_REVIEW_REQUIRED'],
   stress:{goodClassConservative:scenarios[2],softClassConservative:scenarios[3]},scenarios:scenarios,model_variants:variants.map(v=>v.label),
   leaders:leaders,robustLeaders:robustLeaders,qualifiedLeaders:qualified,eliteLeaders:leaders.filter(x=>x.elite_form),
+   winFirst:winFirstScreen(leaders),
   top5:leaders.slice(0,5),top10:leaders.slice(0,10),top15:leaders.slice(0,15),
   screen:{description:'Evidence and sensitivity screen; no price or horse override; not a calibration or hit-rate claim.',
    rules:{completeAtLeast:0.70,scenarioSwingBelow:6,top1InScenariosAtLeast:Math.ceil(variants.length*0.75),chaosBelow:90},
@@ -411,7 +461,7 @@ function evaluateFrozen(forecasts,results){
   reliability:reliability,by_model_version:versions.map(v=>{const rows=scored.filter(r=>r.model_version===v);return {model_version:v,races:rows.length,mean_multiclass_brier:mean(rows,'brier'),mean_log_loss:mean(rows,'log_loss')};}),
   calibration_fitted:false,caveat:'Inputs must be independently verified upstream. These diagnostics do not fit coefficients, prove future accuracy, or turn scenario ranges into confidence intervals.'};
 }
-const api={VERSION:VERSION,CONFIG:CONFIG,board:board,calculate:calculate,isEligible:isEligible,statusOf:statusOf,simulateWinners:simulateWinners,multi:multi,evaluateFrozen:evaluateFrozen};
+const api={VERSION:VERSION,CONFIG:CONFIG,board:board,winFirstScreen:winFirstScreen,calculate:calculate,isEligible:isEligible,statusOf:statusOf,simulateWinners:simulateWinners,multi:multi,evaluateFrozen:evaluateFrozen};
 global.RacingLabV5Model=Object.freeze(api);
 if(typeof module!=='undefined'&&module.exports)module.exports=global.RacingLabV5Model;
 })(typeof window==='undefined'?globalThis:window);
