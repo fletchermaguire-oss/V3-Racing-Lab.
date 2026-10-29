@@ -6,6 +6,16 @@
 })(typeof window!=='undefined'?window:globalThis,function(M){
 'use strict';
 function clone(x){return JSON.parse(JSON.stringify(x));}
+function datedGoing(source,meeting){
+  var row=(source.meetings||[]).find(function(x){return x.meeting===meeting;})||{};
+  var value=String(row.official_29_oct||'').trim();
+  return /^(?:Good [34]|Soft [567]|Heavy (?:8|9|10))$/.test(value)?value:'Good 4';
+}
+function recordedGoingStamp(source){
+  return String(source.saved_at||'')+'|'+(source.meetings||[]).map(function(x){
+    return x.meeting+':'+datedGoing(source,x.meeting);
+  }).sort().join('|');
+}
 function revision(data,going){
   var text=JSON.stringify([M.VERSION,data,going]),hash=2166136261;
   for(var i=0;i<text.length;i++)hash=Math.imul(hash^text.charCodeAt(i),16777619)>>>0;
@@ -15,21 +25,21 @@ function create(input,options){
   if(!M)throw Error('Formula failed to load');
   options=options||{};
   var source=clone(input),data=clone(source),going={},local=new Set(),listeners=[],live=null,lastError='';
-  data.races.forEach(function(r){going[r.meeting]='Good 4';});
-  var storage=options.storage,settingsKey='racing-lab-v5-settings:'+data.date;
+  data.races.forEach(function(r){going[r.meeting]=datedGoing(source,r.meeting);});
+  var storage=options.storage,settingsKey='racing-lab-v5-settings:'+data.date,sourceStamp=recordedGoingStamp(source);
   try{
     var settings=storage&&JSON.parse(storage.getItem(settingsKey)||'null');
-    if(settings&&settings.sourceSavedAt===source.saved_at){
+    if(settings&&settings.sourceSavedAt===sourceStamp){
       var candidate=Object.assign({},going);
       Object.keys(candidate).forEach(function(m){if(settings.going&&Object.hasOwn(settings.going,m))candidate[m]=settings.going[m];});
       var next=clone(source),ids=Array.isArray(settings.localIds)?settings.localIds:[];
       next.runners.forEach(function(h){if(ids.includes(h.id)&&M.isEligible(h)){h.status='SCRATCHED — local scenario';local.add(h.id);}});
       M.board(next,{going:candidate});data=next;going=candidate;
     }
-  }catch(e){data=clone(source);local.clear();data.races.forEach(function(r){going[r.meeting]='Good 4';});}
+  }catch(e){data=clone(source);local.clear();data.races.forEach(function(r){going[r.meeting]=datedGoing(source,r.meeting);});}
   var board=M.board(data,{going:going}),key=revision(data,going);
   function notify(){
-    try{if(storage)storage.setItem(settingsKey,JSON.stringify({sourceSavedAt:source.saved_at,going:going,localIds:Array.from(local)}));}catch(e){}
+    try{if(storage)storage.setItem(settingsKey,JSON.stringify({sourceSavedAt:sourceStamp,going:going,localIds:Array.from(local)}));}catch(e){}
     listeners.slice().forEach(function(fn){fn(api);});
   }
   function commit(next,nextGoing){
