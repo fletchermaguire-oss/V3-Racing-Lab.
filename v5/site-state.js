@@ -130,8 +130,13 @@ function create(input,options){
       rank:fields&&fields.rank!==undefined?fields.rank:current.rank,
       reason:fields&&fields.reason
     });
-    const previous=curated;
-    overrides[runnerId]=entry;
+    const previous=curated,ordered=curated.entries.filter(x=>x.id!==runnerId);
+    ordered.splice(entry.rank-1,0,current);
+    ordered.forEach((x,i)=>{
+      const prior=overrides[x.id]||{};
+      overrides[x.id]=Object.assign({},prior,{rank:i+1});
+    });
+    overrides[runnerId]=Object.assign({},overrides[runnerId],entry,{rank:entry.rank});
     researchChange('MANUAL_RESEARCH_OVERRIDE: '+entry.reason,previous);
     notify();
   }
