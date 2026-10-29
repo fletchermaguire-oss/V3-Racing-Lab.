@@ -34,7 +34,7 @@ assert.equal(B.robustLeaders.length,29);
 assert.equal(B.leaders.length,29);
 assert.equal(B.screen.totalRaceCount,29);
 assert.equal(B.screen.qualifiedRaceCount,B.qualifiedLeaders.length);
-assert.equal(B.top10.length,Math.min(10,B.qualifiedLeaders.length));
+assert.equal(B.top10.length,Math.min(10,B.qualifiedLeaders.length+B.eliteLeaders.filter(x=>!B.qualifiedLeaders.some(y=>y.id===x.id)).length));
 for(const scenario of [B.baseline,B.soft,B.stress.goodClassConservative,B.stress.softClassConservative]){
   for(const r of scenario.races){
     assert.equal(r.sum,100,'Incorrect whole-field race sum: '+r.id);
