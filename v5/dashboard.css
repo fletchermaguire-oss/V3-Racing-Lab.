@@ -165,3 +165,12 @@ html body .app > .shell > main.page{display:block!important;visibility:visible!i
 /* V5-L3 external probability QA · UI warning not a model endorsement */
 .v5-model-row .model-market-alert{grid-column:2/-1;padding:11px 13px;background:#493020;border:1px solid #b7844b;color:#ffd6b0;border-radius:10px;font-size:11px;font-weight:650;line-height:1.45}
 @media(max-width:630px){.v5-model-row .model-market-alert{grid-column:2/-1;padding:10px;font-size:10px}}
+
+/* Top 15 sourced price audit: price implied is visually separate from V5 raw */
+.market-top15-row .market-row-actions{grid-column:2/-1;display:flex;gap:15px;align-items:center;flex-wrap:wrap;font-size:11px;padding:3px 0 8px}
+.market-row-actions a{color:#83e6bc;text-decoration:underline;text-underline-offset:3px}
+.market-row-actions button{padding:7px 10px;border-radius:8px;border:1px solid #376957;background:transparent;color:#d3ebe3;cursor:pointer;font:inherit}
+.market-top15-row .model-scorebox strong{color:#d9e5fa}
+.market-top15-row .model-soft strong{color:#f1b4a4}
+.market-top15-row .model-meta{grid-column:2/-1;white-space:normal}
+@media(max-width:630px){.market-top15-row .market-row-actions{grid-column:2/-1;gap:8px;font-size:10px}.market-top15-row .model-chance,.market-top15-row .model-scorebox,.market-top15-row .model-soft{min-width:85px}}
