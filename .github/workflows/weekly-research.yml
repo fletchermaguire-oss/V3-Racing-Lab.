@@ -3,13 +3,6 @@ name: Racing Lab Weekly Research
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - "incoming/**"
-      - "runners.csv"
-      - "weekly_research.py"
-      - "requirements.txt"
-      - ".github/workflows/weekly-research.yml"
   schedule:
     - cron: "0 21 * * 4"
     - cron: "0 20 * * 5"
@@ -23,49 +16,24 @@ jobs:
     timeout-minutes: 20
 
     steps:
-      - name: Checkout Racing Lab
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-          cache: "pip"
-          cache-dependency-path: requirements.txt
 
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-
-      - name: Prepare research folders
-        run: |
-          mkdir -p scripts incoming generated
-          cp weekly_research.py scripts/weekly_research.py
-          if [ -f runners.csv ] && [ ! -f incoming/runners.csv ]; then
-            cp runners.csv incoming/runners.csv
-          fi
-
-      - name: Process Saturday form PDFs
+      - name: Import verified racing evidence
         env:
           AIRTABLE_PAT: ${{ secrets.AIRTABLE_PAT }}
-          SCRATCHINGS_JSON_URL: ${{ vars.SCRATCHINGS_JSON_URL }}
-        run: |
-          if [ ! -s incoming/runners.csv ]; then
-            echo "No runner manifest available"
-            exit 0
-          fi
+          RACING_DATA_JSON_URL: ${{ vars.RACING_DATA_JSON_URL }}
+        run: python scripts/weekly_pipeline.py
 
-          if [ "$(wc -l < incoming/runners.csv)" -le 1 ]; then
-            echo "No runner entries yet; skipping"
-            exit 0
-          fi
-
-          python scripts/weekly_research.py
-
-      - name: Save research report
+      - name: Save research audit
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: weekly-racing-research
           path: generated/weekly-research.json
           if-no-files-found: ignore
-          retention-days: 14
