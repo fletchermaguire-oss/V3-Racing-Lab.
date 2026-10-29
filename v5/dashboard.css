@@ -161,3 +161,7 @@ html body .app > .shell > main.page{display:block!important;visibility:visible!i
 .v5-model-row .model-reasons{grid-column:2/-1;gap:6px;font-size:10px}
 .model-toplist .v5-model-row{min-height:174px}
 }
+
+/* V5-L3 external probability QA · UI warning not a model endorsement */
+.v5-model-row .model-market-alert{grid-column:2/-1;padding:11px 13px;background:#493020;border:1px solid #b7844b;color:#ffd6b0;border-radius:10px;font-size:11px;font-weight:650;line-height:1.45}
+@media(max-width:630px){.v5-model-row .model-market-alert{grid-column:2/-1;padding:10px;font-size:10px}}
