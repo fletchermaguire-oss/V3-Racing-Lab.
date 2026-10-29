@@ -125,17 +125,6 @@ function parseStarts(h,cutoff){
 function rate(st,prior){
  return !st||st.n===0?prior:(st.w+0.33*st.place+CONFIG.priorStarts*prior)/(st.n+CONFIG.priorStarts);
 }
-function classSignal(name){
- const n=String(name||'').toUpperCase(),g=n.match(/\bG([123])\b/);
- if(g)return g[1]==='1'?1.15:g[1]==='2'?0.85:0.59;
- if(/\bLR\b|LISTED/.test(n))return 0.38;
- if(/\bOPEN\b/.test(n))return 0.15;
- const bm=n.match(/\bBM(?:0-)?(\d+)/);
- if(bm)return clamp((+bm[1]-78)/56,-0.28,0.36);
- if(/\b(?:MDN|MAIDEN)\b/.test(n))return -0.45;
- if(/\bCL[1-3]\b/.test(n))return -0.22;
- return 0;
-}
 /* Historical class levels are ordinal HYPOTHESES, never empirically
  * verified rival ratings. A Group 1 near-win beats a low-grade win on
  * class, but insufficient evidence cannot be turned into certainty.
