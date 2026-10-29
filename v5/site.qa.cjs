@@ -117,19 +117,27 @@ test('scratchings invalidate affected selections; invalid overlays preserve the 
 test('entrypoints consume the screened board and Multi Lab auto-use cannot draw from raw leaders',()=>{
  const dashboard=fs.readFileSync(require.resolve('./dashboard.js'),'utf8');
  const workshop=fs.readFileSync(require.resolve('./workshop.js'),'utf8');
- assert.ok(dashboard.includes("topMode:'WIN_FIRST'"));
+ assert.ok(dashboard.includes("topMode:'RESEARCH'"));
+ assert.ok(dashboard.includes("C.curated.aTier"));
+ assert.ok(dashboard.includes("C.setResearchOverride"));
+ assert.ok(dashboard.includes("C.researchHistory"));
  assert.ok(dashboard.includes("C.board.winFirst.priority.map"));
  assert.ok(dashboard.includes("C.board.winFirst.review.filter"));
  assert.ok(workshop.includes("B.winFirst.priority.slice(0,S.multiSize)"));
  assert.equal(workshop.includes("B.leaders.slice(0,S.multiSize)"),false);
 });
 test('loading the date-matched overlay is fail-closed, and applies the saved Friday official scenario',async()=>{
- const seen=[],fetcher=async(path)=>{seen.push(path);return {ok:true,json:async()=>path.endsWith('.json')&&path.includes('official-snapshot')?clone(Official):clone(D)};};
+ const checkpoint=require('./shortlists/2026-10-30-independent-top10.json');
+ const seen=[],fetcher=async(path)=>{seen.push(path);return {ok:true,json:async()=>
+  path.includes('official-snapshot')?clone(Official):path.includes('independent-top10')?clone(checkpoint):clone(D)};};
  const C=await State.load(fetcher);
- assert.deepEqual(seen,['/v5/research.json','/v5/official-snapshot-20261030.json']);
+ assert.deepEqual(seen,['/v5/research.json','/v5/official-snapshot-20261030.json',
+  '/v5/shortlists/2026-10-30-independent-top10.json']);
  assert.equal(C.board.activeCount,372);
  assert.equal(C.going.ASCOT,'Soft 5');
  assert.equal(C.board.winFirst.priority.length,3);
+ assert.equal(C.curated.entries.length,10);
+ assert.equal(C.curated.aTier.length,3);
 });
 
 
