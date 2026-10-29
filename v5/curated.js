@@ -61,7 +61,7 @@ function assemble(checkpoint,data,board,going,overrides){
   date:data.date,checkpoint_at:checkpoint.as_of||null,baseline_model:checkpoint.model||null,
   count:result.length,active_count:result.filter(x=>x.eligible).length,
   entries:result,top5:result.slice(0,5),top10:result.slice(0,10),top15:result.slice(0,15),
-  aTier:result.filter(x=>/^A[+-]?$/.test(x.form_tier)),
+  aTier:result.filter(x=>/^A[+-]?$/.test(x.archived_form_tier)),
   warnings:['No automatic replacement: an excluded runner leaves a vacant researched position.',
    'An A-grade form profile does not mean an A-grade race-day win probability.',
    'This list is a frozen qualitative checkpoint; recalculations affect displayed model probabilities, not independent research rank.']};
