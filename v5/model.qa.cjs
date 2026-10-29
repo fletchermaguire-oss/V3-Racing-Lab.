@@ -32,7 +32,7 @@ const B=M.board(D);
 test('all 408 source entries are audited; 396 draft rows and 12 exclusions; every scenario totals 100',()=>{
  assert.equal(B.sourceCount,408);assert.equal(B.raceCount,29);
  assert.equal(B.activeCount,396);assert.equal(B.excludedCount,12);
- assert.equal(B.baseline.runnerAudit.length,408);assert.equal(B.model_variants.length,8);
+ assert.equal(B.baseline.runnerAudit.length,408);assert.equal(B.model_variants.length,10);
  for(const s of B.scenarios){
   assert.equal(s.records.length,396);assert.equal(s.excluded.length,12);
   assert.equal(s.races.length,29);
