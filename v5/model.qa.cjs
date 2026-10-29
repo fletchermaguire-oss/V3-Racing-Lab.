@@ -197,6 +197,30 @@ test('input reordering, deterministic ties and repeated calls preserve every run
  assert.equal(rows[0].p,33.34);assert.equal(rows[0].id,'h0');
  assert.equal(rows.reduce((s,x)=>s+x.p,0),100);
 });
+test('conditional race leaders never pass the confidence screen when Good 4 and Soft 5 disagree',()=>{
+ const data=clone(D);
+ for(const surface of ['Good 4','Soft 5']){
+  const b=M.board(data,{going:{RANDWICK:'Good 4',FLEMINGTON:'Good 4',ASCOT:surface}});
+  const g=b.scenarios[b.model_variants.indexOf('Good 4; base class')];
+  const s=b.scenarios[b.model_variants.indexOf('Soft 5; base class')];
+  assert.ok(g&&s);
+  let flips=0;
+  for(const race of data.races.filter(r=>r.meeting==='ASCOT')){
+   const good=g.records.find(x=>x.race_id===race.id&&x.rank===1);
+   const soft=s.records.find(x=>x.race_id===race.id&&x.rank===1);
+   assert.ok(good&&soft);
+   const leader=b.leaders.find(x=>x.race_id===race.id);
+   if(good.id!==soft.id){
+    flips++;
+    assert.equal(leader.going_dependent_lead,true);
+    assert.ok(leader.quality_flags.includes('GOING_DEPENDENT_LEAD'));
+    assert.ok(!b.qualifiedLeaders.some(x=>x.race_id===race.id));
+   }
+  }
+  assert.ok(flips>0,'the data contains at least one contrasting-going leader');
+ }
+});
+
 test('going is explicit per race or meeting; Heavy uses Heavy records, and missing scenarios cannot silently become Good',()=>{
  const d=fixture();d.runners[0].statistics=d.runners[0].statistics.replace('Heavy 0-0-0','Heavy 1-0-1');
  const heavy=M.calculate(d,'Heavy 8').records.find(x=>x.id==='h0');
