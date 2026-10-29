@@ -51,6 +51,8 @@ test('manual grade and rank edits reorder all 10 without duplicate ranks, with a
  C.setResearchOverride(hot.id,{tier:'A-',rank:1,reason:'Verified substantive form reassessment and changed draw'});
  assert.equal(C.curated.entries[0].horse,'Hot And High');
  assert.equal(C.curated.entries[0].form_tier,'A-');
+ assert.deepEqual(C.curated.aTier.map(x=>x.horse),['Hot And High','Sheza Alibi','Regal Ambition']);
+ assert.equal(C.curated.aTier[0].archived_form_tier,'A');
  assert.deepEqual(C.curated.entries.map(x=>x.rank),[1,2,3,4,5,6,7,8,9,10]);
  assert.ok(C.researchHistory.length>=2);
  const again=controller({storage:mem});
