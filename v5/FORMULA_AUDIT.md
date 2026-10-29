@@ -7,7 +7,7 @@ The formula now corrects two performance-sign errors, removes the separate
 elite-selection promotion, handles dates and inventories dynamically, and
 checks whole-field arithmetic and source inputs. It remains an experimental,
 uncalibrated research model. No historical improvement in win rate has been
-established. This change does not approve forecasts or deploy the site.
+established. Displaying these provisional model estimates does not approve forecasts or establish calibration.
 
 ## Scoring
 
@@ -112,9 +112,11 @@ and conserves its run count. It illustrates the model assumptions; it is
 not extra independent evidence. The multi calculator accepts two or three
 unique selections from distinct races in the same versioned board. It
 multiplies the same scenario probabilities and states the independence
-assumption explicitly. The site workshop still has its existing research
-interface; this formula change does not claim that every UI already uses
-these new API functions.
+assumption explicitly. The site now uses one shared board through `site-state.js`. The original
+homepage shell and the V5 studio both load this runtime. Rankings, source
+dossiers, local exclusions, simulator draws and distinct-race multis read
+the same version and probabilities. Per-meeting going changes recalculate
+the shared board; no workshop form-score heuristic remains.
 
 ## Historical diagnostics
 
@@ -153,5 +155,12 @@ formula behaviour, not completion of trainer interviews, replay review,
 individual sectionals, late gear or race-day starter verification.
 
 The existing build preflight, scratchings tests and manual-scratching
-tests also pass. Homepage layout, workshop UI, source research,
-historical selections and results remain byte-for-byte unchanged.
+tests also pass. The original navigation and visual theme are retained. The shared views
+replace the disconnected workshop logic, stale pick queue and legacy DOM
+rewriters. Source research, historical selections, `results.html`, and
+`results-history.json` remain unchanged. Seven additional integration tests
+exercise shared rows, cross-screen scenario/exclusion updates, atomic live
+evidence, saved multi pruning, persisted scenarios across entrypoints and script order. Browser checks
+cover Top 15, two/three-leg calculations, deterministic 10,000-draw totals,
+playback, source exclusions and the existing results page. These checks do
+not certify fresh official scratchings or improve model calibration.
