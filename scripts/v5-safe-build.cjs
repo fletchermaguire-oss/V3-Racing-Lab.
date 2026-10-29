@@ -16,4 +16,8 @@ assert(!raw.runners.some(x=>Object.hasOwn(x,'win_probability')),'Do not publish 
 assert.notEqual(board.publication?.status,'APPROVED','Stale previous meeting marked as approved');
 assert(fs.existsSync('v5/index.html'),'Static no-JS research fallback missing');
 assert(fs.existsSync('v5/reader.css')&&fs.existsSync('v5/reader.js'),'Missing V5 resources');
-console.log('PASS: Original racing interface preserved; 29 races; 408 runners; 19 original selections; read-only Good4 research. No forecasts approved.');
+for(const page of ['index.html','v5/index.html']){
+ const text=fs.readFileSync(page,'utf8');
+ for(const asset of ['model.js','site-state.js','dashboard.js','workshop.js'])assert(text.includes('/v5/'+asset),'Missing shared runtime '+asset+' on '+page);
+}
+console.log('PASS: Existing racing shell and history preserved; shared V5 runtime; 29 races; 408 dossiers. Model estimates remain provisional and unapproved.');

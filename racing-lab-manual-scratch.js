@@ -3,6 +3,8 @@
    or rerun the model. Conditional shares are transparently reweighted.
 */
 (()=>{'use strict';
+// V5 exclusions must rerun the shared formula, rather than reweight one screen.
+if(window.RacingLabV5Enabled)return;
 if(window.__RL_MANUAL_SCRATCH_V1__)return;
 window.__RL_MANUAL_SCRATCH_V1__=true;
 const KEY='racingLab.manualScratch.v1';
