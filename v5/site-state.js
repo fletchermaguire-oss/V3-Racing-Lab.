@@ -65,9 +65,10 @@ function revision(data,going){
 function create(input,options){
   if(!M)throw Error('Formula failed to load');
   options=options||{};
-  var source=clone(input),data=clone(source),going={},local=new Set(),listeners=[],live=null,lastError='',lastChange=null;
+  var source=clone(input),data=clone(source),going={},local=new Set(),listeners=[],live=null,lastError='',lastChange=null,official=null,officialGoing={};
   var checkpoint=options.checkpoint||null,overrides={},history=[],curated=null;
   data.races.forEach(function(r){going[r.meeting]=options.going&&options.going[r.meeting]||datedGoing(source,r.meeting);});
+  officialGoing=Object.assign({},going);
   var storage=options.storage,settingsKey='racing-lab-v5-settings:'+data.date,archiveKey='racing-lab-v5-research:'+data.date,sourceStamp=recordedGoingStamp(source)+'|'+String(source.official_check_at||'');
   try{
     var settings=storage&&JSON.parse(storage.getItem(settingsKey)||'null');
@@ -204,6 +205,65 @@ function create(input,options){
     noteChange('AIRTABLE_EVIDENCE_UPDATE',board,result);
     source=nextSource;data=next;board=result;key=revision(data,going);live={as_of:q.as_of};lastError='';researchChange('AIRTABLE_EVIDENCE_UPDATE');notify();
   }
+  function applyOfficialSheets(q){
+    if(!q||q.schema!=='racing-lab-official-sheets/v1'||q.status!=='OFFICIAL_SHEETS_RECONCILED'||
+       q.race_date!==source.date||q.publication_approved!==false||q.final_fields_verified!==false||
+       !Array.isArray(q.meetings)||q.meetings.length!==Object.keys(going).length)
+      throw Error('Incomplete or mismatched official sheets; saved board retained');
+    var timestamp=Date.parse(q.observed_at);
+    if(!Number.isFinite(timestamp)||(official&&timestamp<=Date.parse(official.observed_at)))
+      throw Error('Stale or invalid official observed timestamp');
+    var nextSource=clone(source),newGoing=Object.assign({},going),nextOfficialGoing=Object.assign({},officialGoing);
+    var index=new Map(),seenMeetings=new Set(),scratches=0;
+    nextSource.runners.forEach(function(h){
+      var key=h.race_id+'|'+canonical(h.horse);
+      if(index.has(key))throw Error('Duplicated source runner identity');
+      index.set(key,h);
+    });
+    q.meetings.forEach(function(sheet){
+      if(!sheet||!Object.hasOwn(going,sheet.meeting)||seenMeetings.has(sheet.meeting)||
+         typeof sheet.source_last_published!=='string'||!/^(Good [34]|Soft [567]|Heavy (8|9|10))$/.test(sheet.track_going)||
+         !Number.isSafeInteger(sheet.scratched_total)||sheet.scratched_total<0||
+         !sheet.scratchings||typeof sheet.scratchings!=='object'||Array.isArray(sheet.scratchings)||
+         sheet.confirmed_final_starters!==false||sheet.emergencies_confirmed!==false)
+         throw Error('Invalid official meeting/source payload; saved board retained');
+      seenMeetings.add(sheet.meeting);
+      if(going[sheet.meeting]===officialGoing[sheet.meeting])newGoing[sheet.meeting]=sheet.track_going;
+      nextOfficialGoing[sheet.meeting]=sheet.track_going;
+      var counted=0,names=new Set();
+      Object.entries(sheet.scratchings).forEach(function(pair){
+        var race=pair[0],horses=pair[1],raceId=source.date+'_'+race;
+        if(!race.startsWith(sheet.meeting+'_R')||!nextSource.races.some(x=>x.id===raceId)||!Array.isArray(horses))
+         throw Error('Official sheet race mismatch: '+race);
+        horses.forEach(function(name){
+          var key=raceId+'|'+canonical(name),h=index.get(key);
+          if(!h||names.has(key))throw Error('Unknown/duplicate official scratching: '+race+' '+name);
+          names.add(key);counted++;
+          h.status='SCRATCHED — verified against official published sheet '+sheet.source_last_published;
+          h.emergency_activated=false;
+        });
+      });
+      if(counted!==sheet.scratched_total)throw Error('Official scratching total does not match named runners: '+sheet.meeting);
+      scratches+=counted;
+    });
+    if(seenMeetings.size!==Object.keys(going).length)throw Error('Official meetings missing');
+    nextSource.official_observed_at=q.observed_at;
+    nextSource.official_sources=q.meetings.map(function(x){return {
+      meeting:x.meeting,url:x.source_url,published:x.source_last_published,going:x.track_going,
+      scratching_count:x.scratched_total
+    };});
+    var next=clone(nextSource);
+    next.runners.forEach(function(h){if(local.has(h.id)&&M.isEligible(h))h.status='SCRATCHED — local scenario';});
+    var result=M.board(next,{going:newGoing});
+    noteChange('OFFICIAL_SCRATCHINGS_AND_TRACK_CHECK',board,result);
+    source=nextSource;data=next;going=newGoing;officialGoing=nextOfficialGoing;
+    board=result;key=revision(data,going);official={observed_at:q.observed_at,
+     meetings:q.meetings.map(function(x){return {meeting:x.meeting,source_last_published:x.source_last_published,
+       source_url:x.source_url,track_going:x.track_going,scratched_total:x.scratched_total};}),
+     final_fields_verified:false,matched_scratchings:scratches};
+    lastError='';researchChange('OFFICIAL_SCRATCHINGS_AND_TRACK_CHECK');notify();
+    return official;
+  }
   function rows(race){return board.baseline.records.filter(function(h){return h.race_id===race;});}
   function legacySnapshot(){
     var raw=new Map(data.runners.map(function(h){return [h.id,h];})),tracks={},research={};
@@ -230,6 +290,7 @@ function create(input,options){
   var api={get data(){return data;},get board(){return board;},get going(){return Object.assign({},going);},
     get revision(){return key;},get live(){return live;},get error(){return lastError;},get lastChange(){return lastChange;},
     get curated(){return curated;},get researchHistory(){return history.slice();},get researchCheckpoint(){return checkpoint;},
+    get official(){return official;},get officialGoing(){return Object.assign({},officialGoing);},applyOfficialSheets:applyOfficialSheets,
     get curatedGradeOptions(){return Curated?Curated.GRADES.slice():[];},
     setResearchOverride:setResearchOverride,get localScratchCount(){return local.size;},
     get model(){return M;},subscribe:function(fn){listeners.push(fn);return function(){listeners=listeners.filter(function(x){return x!==fn;});};},
