@@ -365,8 +365,25 @@ function top10(){
  inner.append(screen);
  advanced.append(inner);root.append(advanced);
 }
-function raceNav(){var all=D.races.filter(function(r){return r.meeting===S.meeting;}),filter=e('div','filters');filter.append(setField('Meeting',Object.keys(C.going).map(function(x){return {value:x,text:x};}),S.meeting,function(v){S.meeting=v;S.race=D.races.find(function(r){return r.meeting===v;}).id;S.runner=null;render();}),setField('Race',all.map(function(r){return {value:r.id,text:'R'+r.race+' · '+r.title};}),S.race,function(v){S.race=v;S.runner=null;render();}));
- var grid=e('div','racechips');all.forEach(function(r){var x=C.board.baseline.races.find(function(v){return v.id===r.id;}),b=add(e('button','racechip'+(r.id===S.race?' active':'')),e('b','','Race '+r.race),e('small','',r.distance_m+'m · '+((C.curated&&C.curated.entries.find(function(h){return h.race_id===r.id;}))?'Research: '+C.curated.entries.find(function(h){return h.race_id===r.id;}).horse' · no researched selection'))));b.type='button';b.addEventListener('click',function(){S.race=r.id;S.runner=null;render();});grid.append(b);});return [filter,grid];}
+function raceNav(){
+ var all=D.races.filter(function(r){return r.meeting===S.meeting;}),filter=e('div','filters');
+ filter.append(setField('Meeting',Object.keys(C.going).map(function(x){return {value:x,text:x};}),S.meeting,function(v){
+  S.meeting=v;S.race=D.races.find(function(r){return r.meeting===v;}).id;S.runner=null;render();
+ }),setField('Race',all.map(function(r){return {value:r.id,text:'R'+r.race+' · '+r.title};}),S.race,function(v){
+  S.race=v;S.runner=null;render();
+ }));
+ var grid=e('div','racechips');
+ all.forEach(function(r){
+  var research=C.curated&&C.curated.entries.find(function(h){return h.race_id===r.id;});
+  var line=r.distance_m+'m · '+(research?'Research: '+research.horse:'No researched selection');
+  var chip=add(e('button','racechip'+(r.id===S.race?' active':'')),
+   e('b','','Race '+r.race),e('small','',line));
+  chip.type='button';
+  chip.addEventListener('click',function(){S.race=r.id;S.runner=null;render();});
+  grid.append(chip);
+ });
+ return [filter,grid];
+}
 function facts(h){var x=model(h.id),names={career:'Career record',recency:'Recent form',distance:'Distance record',surface:'Surface record',course:'Course record',class:'Class performance',weight:'Weight',barrier:'Barrier',layoff:'Layoff',pace:'Pace stress',draw:'Draw stress'};
  function lines(xs){return xs.map(function(v){return (names[v.feature]||v.feature)+': '+(v.contribution>0?'+':'')+v.contribution.toFixed(3)+' score contribution';});}
  return {pros:x?lines(x.positive_drivers):[],cons:x?lines(x.negative_drivers):[]};
