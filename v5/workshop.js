@@ -31,39 +31,66 @@ function raceControls(ctx,type){
   control('Race',select(races.map(function(r){return {value:r.id,text:'R'+r.race+' · '+r.title};}),S[type+'Race'],function(v){S[type+'Race']=v;changed();})));
 }
 function multiPage(ctx){
- stop();var C=ctx.C,S=ctx.S,B=C.board,app=ctx.app();S.multiSize=S.multiSize===3?3:2;sanitize(C,S);
+ stop();var C=ctx.C,S=ctx.S,B=C.board,app=ctx.app();
+ S.multiSize=S.multiSize===3?3:2;sanitize(C,S);
  var safePriorities=B.winFirst.priority.filter(function(h){return confirmedForMulti(C,h.runner_id);});
- put(app,ctx.head('Multi Lab','Two or three legs from distinct races, using the same conditional field probabilities. Auto-fill uses ONLY the win-first priority list.'),ctx.scenarios(),raceControls(ctx,'multi'));
- var selection=el('section','panel workshop-panel'),actions=el('div','workshop-actions');
- var auto=button('Use win-first '+S.multiSize,function(){S.multi=safePriorities.slice(0,S.multiSize).map(function(x){return x.runner_id;});save(C,S);ctx.render();},'primary');
- auto.disabled=safePriorities.length<S.multiSize;
- put(actions,control('Legs',select([{value:'2',text:'2 legs'},{value:'3',text:'3 legs'}],String(S.multiSize),function(v){S.multiSize=+v;sanitize(C,S);ctx.render();})),
-  auto,
-  button('Clear',function(){S.multi=[];save(C,S);ctx.render();},'ghost'));
- put(selection,el('h3','','Selected legs · '+S.multi.length+'/'+S.multiSize),actions);
- if(safePriorities.length<S.multiSize)note(selection,'There are not enough qualified, confirmed non-emergency research priorities for an automatic '+S.multiSize+'-leg selection. No unverified reserve will be auto-filled.');
+ var researched=(C.curated?C.curated.entries.filter(function(h){
+  return h.research_lane==='TOP10_RESEARCH'&&h.eligible&&confirmedForMulti(C,h.id);
+ }):[]);
+ var suggested=researched.length?researched.map(function(h){return h.id;}):safePriorities.map(function(h){return h.runner_id;});
+ var label=researched.length?'researched':'strict screened';
+ put(app,ctx.head('Multi Builder','Keep it simple: two or three horses, one per race. Original research order is preserved; final starters are not yet certified.'));
+ var selection=el('section','panel workshop-panel multi-simple'),actions=el('div','workshop-actions multi-primary-actions');
+ var fill=button('Use '+label+' top '+S.multiSize,function(){
+  S.multi=suggested.slice(0,S.multiSize);save(C,S);ctx.render();
+ },'primary');
+ fill.disabled=suggested.length<S.multiSize;
+ put(actions,control('Legs',select([{value:'2',text:'2 legs'},{value:'3',text:'3 legs'}],String(S.multiSize),function(v){
+  S.multiSize=+v;sanitize(C,S);ctx.render();
+ })),fill,button('Clear',function(){S.multi=[];save(C,S);ctx.render();},'ghost'));
+ put(selection,el('h3','','Your '+S.multiSize+'-leg selection'),actions);
+ if(fill.disabled)note(selection,'Not enough eligible '+label+' contenders for '+S.multiSize+' legs. The builder will not invent replacements.');
+ if(!S.multi.length)note(selection,'No legs added yet. Choose the researched top '+S.multiSize+' or open the manual horse picker below.');
  S.multi.forEach(function(id){var x=B.baseline.records.find(function(h){return h.id===id;}),h=raw(C,id),line=el('div','workshop-leg');
-  put(line,put(el('div','workshop-leg-top'),el('b','',x.horse),el('span','workshop-chip',x.meeting+' R'+x.race+' · '+percent(x.p))),
-   el('p','muted small','Scenario range '+percent(x.model_range[0])+'–'+percent(x.model_range[1])+' · model fair odds $'+x.fair_odds.toFixed(2)),
+  put(line,put(el('div','workshop-leg-top'),el('b','',x.horse),
+   el('span','workshop-chip',x.meeting+' R'+x.race)),
+   el('p','muted small','Individual provisional model chance: '+percent(x.p)),
    button('Remove '+h.horse,function(){S.multi=S.multi.filter(function(v){return v!==id;});save(C,S);ctx.render();},'ghost'));
   selection.append(line);
  });
- if(S.multi.some(function(id){return !B.winFirst.priority.some(function(h){return h.runner_id===id;});}))note(selection,'One or more manually chosen legs are outside the win-first priority list. Joint probabilities remain research-only.');
- if(S.multi.length>=2){var result=C.multi(S.multi);var metric=el('div','model-joint');metric.dataset.jointPct=String(result.baseline_joint_pct);
-  put(metric,el('div','eyebrow','COMBINED MODEL CHANCE'),el('strong','model-big',percent(result.baseline_joint_pct)),
-   el('p','muted small','Across the ten scenarios: '+percent(result.scenario_range_pct[0])+'–'+percent(result.scenario_range_pct[1])+'. Assumes independence between races. These are uncalibrated estimates; the range measures sensitivity.'));
+ if(S.multi.some(function(id){return !researched.some(function(h){return h.id===id;});}))
+  note(selection,'At least one leg is outside the preserved researched Top 10; it is a manual choice, not an automatically certified recommendation.');
+ if(S.multi.length>=2){
+  var result=C.multi(S.multi),metric=el('div','model-joint');metric.dataset.jointPct=String(result.baseline_joint_pct);
+  put(metric,el('div','eyebrow','PROVISIONAL COMBINED MODEL ESTIMATE'),el('strong','model-big',percent(result.baseline_joint_pct)),
+   el('p','muted small','Not a proven win probability or betting guarantee. Depends on uncalibrated individual estimates and independence assumptions.'));
   selection.append(metric);
- }else note(selection,'Choose two runners from different races to calculate a combined chance.');
+ }
  app.append(selection);
- var contenders=el('section','panel workshop-panel');contenders.append(el('h3','','Choose a runner'));
+ var advanced=el('details','workshop-advanced');
+ advanced.open=!!S.multiManualOpen;
+ var toggle=el('summary','workshop-advanced-summary','Choose or replace horses manually');
+ toggle.addEventListener('click',function(){S.multiManualOpen=!S.multiManualOpen;});
+ advanced.append(toggle);
+ var picker=el('div','workshop-picker');
+ picker.append(raceControls(ctx,'multi'));
+ var contenders=el('section','panel workshop-panel');contenders.append(el('h3','','Runners in selected race'));
  var list=el('div','workshop-candidates'),field=C.data.runners.filter(function(h){return h.race_id===S.multiRace;});
  field.sort(function(a,b){var x=B.baseline.records.find(function(r){return r.id===a.id;}),y=B.baseline.records.find(function(r){return r.id===b.id;});return (x?x.rank:999)-(y?y.rank:999)||a.tab-b.tab;});
- field.forEach(function(h){var x=B.baseline.records.find(function(r){return r.id===h.id;}),included=!!x&&confirmedForMulti(C,h.id),selected=S.multi.includes(h.id),conflict=S.multi.some(function(id){return raw(C,id).race_id===h.race_id&&id!==h.id;}),full=S.multi.length>=S.multiSize;
-  var line=el('div','workshop-candidate'),text=put(el('div','workshop-candidate-text'),el('strong','','#'+h.tab+' '+h.horse),el('small','',x?percent(x.p)+' · fair odds $'+x.fair_odds.toFixed(2):C.model.statusOf(h)));
-  var b=button(!included?'Excluded':selected?'Selected':conflict?'Same race':full?'Full':'Add leg',function(){if(!included||selected||conflict||full)return;S.multi.push(h.id);save(C,S);ctx.render();},'primary');b.disabled=!included||selected||conflict||full;
-  put(line,text,b);list.append(line);
- });contenders.append(list);app.append(contenders);
- app.append(el('p','muted small','Board '+C.revision+' · Saved scratchings and local exclusions apply to every screen.'));
+ field.forEach(function(h){var x=B.baseline.records.find(function(r){return r.id===h.id;}),included=!!x&&confirmedForMulti(C,h.id),selected=S.multi.includes(h.id),
+  conflict=S.multi.some(function(id){return raw(C,id).race_id===h.race_id&&id!==h.id;}),full=S.multi.length>=S.multiSize;
+  var line=el('div','workshop-candidate'),info=put(el('div','workshop-candidate-text'),el('strong','','#'+h.tab+' '+h.horse),
+   el('small','',x?'Provisional model: '+percent(x.p):C.model.statusOf(h)));
+  var b=button(!included?'Excluded':selected?'Selected':conflict?'Same race':full?'Full':'Add leg',function(){
+    if(!included||selected||conflict||full)return;S.multi.push(h.id);save(C,S);ctx.render();
+  },'primary');
+  b.disabled=!included||selected||conflict||full;
+  put(line,info,b);list.append(line);
+ });
+ contenders.append(list);picker.append(contenders);
+ var conditions=el('details','workshop-scenario-advanced');conditions.append(el('summary','','Change track scenarios (advanced)'),ctx.scenarios());
+ picker.append(conditions);advanced.append(picker);app.append(advanced);
+ app.append(el('p','muted small','Source: '+C.data.date+' · Rankings are provisional; source scratches and unverified emergencies are excluded. Changes in model percentages do not reorder the preserved independent Top 10.'));
 }
 function stop(){if(sim&&sim.raf&&typeof global.cancelAnimationFrame==='function')global.cancelAnimationFrame(sim.raf);sim=null;}
 function simulatorPage(ctx){
