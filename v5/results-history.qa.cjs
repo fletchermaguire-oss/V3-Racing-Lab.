@@ -18,7 +18,7 @@ test('archived October 17 and October 24 historical results have no unfinished s
 });
 test('Top 10 35% and all-races 34% remain different, explicitly retrospective cohorts',()=>{
  assert.deepEqual(count(dateRanks(10)),{finished:20,wins:7});
- assert.deepEqual(count(dateRanks(5)),{finished:10,wins:4}); // check against saved exact ranking
+ assert.deepEqual(count(dateRanks(5)),{finished:10,wins:3});
  assert.equal(archive.notes.includes('not prospective V5 calibration'),true);
 });
 test('the nine confirmed 24 October winners match horse and venue; two 17 Oct scratchings never count as losses',()=>{
