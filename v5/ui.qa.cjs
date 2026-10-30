@@ -145,3 +145,50 @@ test('race detail explicitly distinguishes preserved independent choice from dyn
  assert.ok(nodes.some(x=>x.startsWith('Live model #1:')));
  assert.ok(nodes.some(x=>x.includes('may change with field data')));
 });
+
+test('command dashboard preserves real research order, shows source status and keeps results pending',()=>{
+ const {C,win}=boot(),root=new Element('main');
+ win.RacingLabV5Dashboard.renderInto(root,'overview',C,()=>{},D.races[0].id);
+ const nodes=flatten(root);
+ assert.ok(nodes.some(n=>n.textContent==='Saturday Command Centre'));
+ assert.ok(nodes.some(n=>n.textContent==='Independent Top 10'));
+ assert.ok(nodes.some(n=>n.textContent==='Sheza Alibi'));
+ assert.ok(nodes.some(n=>n.textContent==='Regal Ambition'));
+ const picks=nodes.filter(n=>String(n.className).includes('rlv5-command-pick')&&n.tag==='button');
+ assert.equal(picks.length,10,'exactly ten unchanged human research ranks');
+ assert.deepEqual(picks.slice(0,3).map(n=>n.dataset.runnerId),
+  C.curated.entries.slice(0,3).map(x=>x.id));
+ assert.ok(nodes.some(n=>n.textContent==='Pre-race published lock: not verified'));
+ assert.ok(nodes.some(n=>n.textContent==='Calibration: not established'));
+ assert.ok(nodes.some(n=>String(n.textContent).includes('model estimates, not verified win probabilities')));
+ assert.ok(nodes.some(n=>String(n.textContent).includes('Official scratching refresh pending')||
+   String(n.textContent).includes('Awaiting official refresh')));
+});
+test('Race Centre is an accessible analyst layout with two honest pick identities and full readable evidence',()=>{
+ const {C,win}=boot(),root=new Element('main');
+ const sheza=D.runners.find(h=>h.horse==='Sheza Alibi');
+ win.RacingLabV5Dashboard.renderInto(root,'races',C,()=>{},sheza.race_id);
+ const nodes=flatten(root);
+ assert.ok(nodes.some(n=>n.textContent==='Race Centre'));
+ assert.ok(nodes.some(n=>n.textContent==='Independent research choice: Sheza Alibi'));
+ assert.ok(nodes.some(n=>String(n.textContent).startsWith('Live model #1:')));
+ assert.ok(nodes.some(n=>n.textContent==='Why it can win'));
+ assert.ok(nodes.some(n=>n.textContent==='What could beat it'));
+ const active=nodes.filter(n=>n.className==='rlv5-runrow active');
+ assert.equal(active.length,1,'single selected horse');
+ assert.equal(active[0].dataset.runnerId,sheza.id,'opens on independent researched pick by default');
+ assert.ok(nodes.some(n=>n.textContent==='Top four · live model, not research picks'));
+ assert.ok(nodes.some(n=>n.textContent==='Open race simulator'));
+ const advanced=nodes.find(n=>n.tag==='details'&&n.className==='rlv5-race-advanced');
+ assert.ok(advanced&&!advanced.open,'track scenario changes should be collapsed by default');
+ const deep=nodes.find(n=>n.tag==='details'&&n.className==='rlv5-horse-technical');
+ assert.ok(deep&&!deep.open,'technical form and local exclusions are optional');
+});
+test('design entrypoints both use the same single CSS and JS revision and do not modify formula',()=>{
+ const home=fs.readFileSync('index.html','utf8'),studio=fs.readFileSync('v5/index.html','utf8');
+ for(const html of [home,studio]){
+  assert.match(html,/\/v5\/site\.css\?v=command-race-20261030/);
+  assert.match(html,/\/v5\/dashboard\.js\?v=command-race-20261030/);
+  assert.match(html,/\/v5\/model\.js\?v=shared-20261030/,'original V5 model is unchanged');
+ }
+});
