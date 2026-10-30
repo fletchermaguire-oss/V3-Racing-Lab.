@@ -281,7 +281,7 @@ window.RacingLabApp = {
       if(!DATA.races.some(r=>r.id===S.race))S.race=DATA.races[0].id;
       W.active=TRACKS[0];LIVE.source='model';LIVE.status='MODEL';S.sim=null;S.simSamples=null;
       document.body.classList.add('v5-model-active');
-      document.querySelector('.topdate')?.replaceChildren(document.createTextNode(DATA.date+' · PROVISIONAL MODEL'));
+      document.querySelector('.topdate')?.replaceChildren(document.createTextNode(DATA.date+' · SATURDAY RESEARCH'));
       const foot=document.querySelector('.sidebar-foot');if(foot){foot.replaceChildren();let strong=document.createElement('strong');strong.textContent='● SHARED V5 FORMULA';let text=document.createElement('p');text.textContent=DATA.date+' · '+V5.board.raceCount+' races · provisional, uncalibrated model.';foot.append(strong,text);}
       render();
     };
