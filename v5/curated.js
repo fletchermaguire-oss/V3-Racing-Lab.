@@ -50,7 +50,8 @@ function assemble(checkpoint,data,board,going,overrides){
   const rank=Number.isSafeInteger(change.rank)&&change.rank>=1&&change.rank<=checkpoint.entries.length?change.rank:x.rank;
   return {id:h.id,horse:h.horse,race_id:raceId,meeting:x.meeting,race:x.race,
    rank:rank,original_rank:x.rank,form_tier:grade,archived_form_tier:formTier,
-   archived_race_day_grade:x.tier,race_day_assessment:current?(notes.length?'CONDITIONAL_REVIEW':'CURRENT_FIELD_INCLUDED'):'SCRATCHED_OR_NOT_CONFIRMED',
+   archived_race_day_grade:x.tier,research_lane:x.research_status==='CONDITIONAL_REVIEW'?'CONDITIONAL_REVIEW':'TOP10_RESEARCH',
+   race_day_assessment:current?(notes.length?'CONDITIONAL_REVIEW':'CURRENT_FIELD_INCLUDED'):'SCRATCHED_OR_NOT_CONFIRMED',
    eligible:!!current,model_pct:current?current.p:null,original_model_pct:x.model_pct,
    model_range:current?current.model_range:null,model_version:board.version,
    reason:x.reason||'',risk:x.risk||'',notes:Array.from(new Set(notes)),
@@ -60,6 +61,8 @@ function assemble(checkpoint,data,board,going,overrides){
  return {version:VERSION,status:'ARCHIVED_HUMAN_RANKING_WITH_LIVE_FIELD_CHECKS_NOT_CALIBRATED',
   date:data.date,checkpoint_at:checkpoint.as_of||null,baseline_model:checkpoint.model||null,
   count:result.length,active_count:result.filter(x=>x.eligible).length,
+  priority_research_count:result.filter(x=>x.research_lane==='TOP10_RESEARCH').length,
+  additional_review_count:result.filter(x=>x.research_lane==='CONDITIONAL_REVIEW').length,
   entries:result,top5:result.slice(0,5),top10:result.slice(0,10),top15:result.slice(0,15),
   aTier:result.filter(x=>/^A[+-]?$/.test(x.archived_form_tier)),
   warnings:['No automatic replacement: an excluded runner leaves a vacant researched position.',
