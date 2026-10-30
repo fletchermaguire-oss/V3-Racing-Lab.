@@ -17,7 +17,11 @@ function recordedGoingStamp(source){
     return x.meeting+':'+datedGoing(source,x.meeting);
   }).sort().join('|');
 }
-function canonical(x){return String(x||'').toUpperCase().replace(/\([^)]*\)/g,'').replace(/[^A-Z0-9]/g,'');}
+// Official source names may arrive HTML-encoded, while saved dossiers use real punctuation.
+function canonical(x){return String(x||'')
+ .replace(/&amp;/gi,'&')
+ .replace(/&(?:rsquo|lsquo|apos|#(?:0*39|0*8217|x0*27|x0*2019));/gi,"'")
+ .normalize('NFKD').toUpperCase().replace(/\([^)]*\)/g,'').replace(/[^A-Z0-9]/g,'');}
 function publishedAt(value){
  var s=String(value||'').trim(),date,year,month,day,hour,minute,zone,weekday;
  var months={Jan:1,Feb:2,Mar:3,Apr:4,May:5,Jun:6,Jul:7,Aug:8,Sep:9,Oct:10,Nov:11,Dec:12};

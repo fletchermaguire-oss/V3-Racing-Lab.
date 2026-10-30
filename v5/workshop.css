@@ -46,3 +46,20 @@
  .workshop-track{padding:9px 7px}
  .workshop-pct{font-size:9px}
 }
+
+/* Simple Multi Builder: advanced choices remain available but collapsed by default. */
+.multi-simple{max-width:880px}
+.multi-simple .workshop-actions{align-items:end}
+.multi-primary-actions>.workshop-field{flex:0 1 145px;min-width:120px}
+.multi-simple .workshop-leg{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.multi-simple .workshop-leg>p{margin:0}
+.multi-simple .model-joint{margin-top:14px}
+.workshop-advanced{max-width:950px;border:1px solid #2b5046;border-radius:12px;background:#0f2228;margin:12px 0 18px;overflow:hidden}
+.workshop-advanced>summary{padding:16px 18px;color:#d7f7e8;font-weight:800;cursor:pointer;list-style:revert}
+.workshop-advanced[open]>summary{border-bottom:1px solid #2b5046}
+.workshop-picker{padding:0 14px 15px}
+.workshop-picker .workshop-controls{margin:15px 0}
+.workshop-scenario-advanced{border-top:1px solid #2b5046;margin-top:14px;padding:12px}
+.workshop-scenario-advanced>summary{color:#acd2c6;cursor:pointer;font-size:12px;font-weight:700}
+.workshop-scenario-advanced .model-scenarios{margin-top:10px}
+@media(max-width:760px){.multi-simple .workshop-actions{gap:8px}.multi-simple .workshop-actions .btn{flex:1 1 auto}.multi-simple .workshop-leg{align-items:flex-start}.workshop-picker{padding:0 8px 12px}}

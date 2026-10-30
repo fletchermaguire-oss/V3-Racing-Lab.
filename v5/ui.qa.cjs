@@ -80,7 +80,7 @@ test('provisionally promoted emergencies cannot be auto-filled into the multi or
  C.board.winFirst.priority.unshift({runner_id:reserve.id,horse:reserve.horse,race_id:reserve.race_id});
  const root=new Element('main');
  win.RacingLabV5Dashboard.renderInto(root,'multi',C,()=>{},D.races[0].id);
- const auto=flatten(root).find(n=>n.tag==='button'&&n.textContent==='Use win-first 2');
+ const auto=flatten(root).find(n=>n.tag==='button'&&n.textContent==='Use researched top 2');
  assert.ok(auto,'Multi auto-fill control must render');
  if(!auto.disabled)auto.listeners.click();
  const chosen=flatten(root).filter(n=>n.className==='workshop-leg-top').flatMap(flatten);
@@ -115,4 +115,33 @@ test('every horse has readable evidence sections in both Race Centre and Compare
  win.RacingLabV5Dashboard.renderInto(root,'compare',C,()=>{},sheza.race_id);
  nodes=flatten(root);
  assert.equal(nodes.filter(x=>x.className==='horse-brief').length,2,'each compared runner gets a clear assessment');
+});
+
+
+test('Multi Builder starts with only 2/3 legs and keeps optional manual selection collapsed',()=>{
+ const {C,win}=boot(),root=new Element('main');
+ win.RacingLabV5Dashboard.renderInto(root,'multi',C,()=>{},D.races[0].id);
+ const nodes=flatten(root);
+ assert.ok(nodes.some(n=>n.textContent==='Multi Builder'));
+ assert.ok(nodes.some(n=>n.textContent==='Your 2-leg selection'));
+ const custom=nodes.find(n=>n.tag==='details'&&n.className==='workshop-advanced');
+ assert.ok(custom,'manual advanced controls should be grouped');
+ assert.equal(custom.open,false,'manual race and horse grids are initially collapsed');
+ assert.ok(flatten(custom).some(n=>n.textContent==='Choose or replace horses manually'));
+ const fill=nodes.find(n=>n.tag==='button'&&n.textContent==='Use researched top 2');
+ assert.ok(fill&&!fill.disabled,'the original #1 and #2 can both appear as research suggestions');
+ fill.listeners.click();
+ const refreshed=flatten(root),legs=refreshed.filter(n=>n.className==='workshop-leg-top').flatMap(flatten);
+ assert.ok(legs.some(n=>n.textContent==='Sheza Alibi'));
+ assert.ok(legs.some(n=>n.textContent==='Regal Ambition'));
+ assert.ok(refreshed.some(n=>String(n.textContent).includes('PROVISIONAL COMBINED MODEL ESTIMATE')));
+});
+test('race detail explicitly distinguishes preserved independent choice from dynamic model leader',()=>{
+ const {C,win}=boot(),root=new Element('main');
+ const sheza=D.runners.find(h=>h.horse==='Sheza Alibi');
+ win.RacingLabV5Dashboard.renderInto(root,'races',C,()=>{},sheza.race_id);
+ const nodes=flatten(root).map(x=>String(x.textContent));
+ assert.ok(nodes.some(x=>x.startsWith('Independent research choice: Sheza Alibi')));
+ assert.ok(nodes.some(x=>x.startsWith('Live model #1:')));
+ assert.ok(nodes.some(x=>x.includes('may change with field data')));
 });
