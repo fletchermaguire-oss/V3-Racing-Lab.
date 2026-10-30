@@ -252,3 +252,61 @@
  .rlv5-command-picks>.rlv5-command-pick{padding:11px 8px;gap:4px 7px}
  .rlv5-command-picks .rlv5-pick-description strong{font-size:13px}
 }
+
+
+/* V5 shortlist: one clean ranked horse card per row. Designed mobile first. */
+.rlv5-shortlist-heading{max-width:900px;padding:4px 0 0}
+.rlv5-shortlist-eyebrow{display:block;font-size:10px;letter-spacing:.12em;font-weight:850;color:#7cdeb4}
+.rlv5-shortlist-heading h2{margin:8px 0 8px;color:#f0fff9;font-size:clamp(25px,3.4vw,32px);line-height:1.2}
+.rlv5-shortlist-heading p,.rlv5-shortlist-intro{font-size:12px;color:#a5c5b9;line-height:1.6;max-width:760px;margin:0 0 14px}
+.rlv5-shortlist-switch{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;max-width:440px;padding:5px;background:#112630;border:1px solid #365649;border-radius:12px;margin:17px 0 13px}
+.rlv5-shortlist-switch>.rlv5-shortlist-tab{width:100%;min-height:42px;font-size:12px;font-weight:850;padding:9px 7px;border:1px solid transparent}
+.rlv5-shortlist-switch>.rlv5-shortlist-tab:not(.active){background:transparent;color:#b0c9bf}
+.rlv5-shortlist-switch>.rlv5-shortlist-tab.active{background:#7ce9bb;color:#062920}
+.rlv5-shortlist-cards{width:100%;max-width:900px;display:flex;flex-direction:column;gap:9px;min-width:0}
+.rlv5-shortlist-card{
+ width:100%;min-width:0;box-sizing:border-box;
+ display:grid;grid-template-columns:39px minmax(0,1fr) minmax(85px,107px);
+ gap:13px;align-items:center;text-align:left;
+ padding:15px 16px;background:#112731;border:1px solid #315149;
+ border-radius:13px;color:#effff6;font:inherit;cursor:pointer
+}
+.rlv5-shortlist-card:hover{background:#1a3837;border-color:#5a9e82}
+.rlv5-shortlist-card:focus-visible{outline:2px solid #7ce9bb;outline-offset:2px}
+.rlv5-shortlist-card.excluded{opacity:.69}
+.rlv5-shortlist-rank{width:38px;height:38px;display:grid;place-items:center;flex-shrink:0;background:#235347;border-radius:10px;color:#95f5c5;font-weight:900;font-size:14px;font-variant-numeric:tabular-nums}
+.rlv5-shortlist-name{min-width:0}
+.rlv5-shortlist-name>strong{display:block;font-size:16px;line-height:1.3;color:#f4fff9;overflow-wrap:anywhere}
+.rlv5-shortlist-details{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-top:4px}
+.rlv5-shortlist-race{font-size:11px;color:#a5c6ba;font-weight:750;letter-spacing:.02em}
+.rlv5-shortlist-extra{font-size:10px;color:#ffe0b1;font-weight:750}
+.rlv5-shortlist-reason{font-size:11px;color:#93b5a9;line-height:1.5;margin:7px 0 0;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;overflow-wrap:anywhere}
+.rlv5-shortlist-grades{display:flex;flex-direction:column;gap:5px;min-width:0;align-items:flex-end;text-align:right}
+.rlv5-shortlist-grade{font-weight:900;color:#9ef0c7;background:#205346;padding:4px 8px;border-radius:6px;min-width:32px;text-align:center;font-size:11px}
+.rlv5-shortlist-percent{font-weight:900;color:#f0fff6;font-size:18px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.rlv5-shortlist-grades>small{font-size:9px;letter-spacing:.055em;color:#8eada5;font-weight:800;white-space:nowrap}
+.rlv5-shortlist-out{font-size:10px;font-weight:800;color:#ffc5b9;white-space:nowrap}
+.rlv5-shortlist-warning{font-size:11px;color:#91b4aa;line-height:1.55;max-width:900px;margin:15px 2px 21px}
+.rlv5-shortlist-advanced{max-width:900px;margin:12px 0 20px;border:1px solid #32554b;background:#10242b;border-radius:11px}
+.rlv5-shortlist-advanced>summary{padding:15px 17px;cursor:pointer;font-weight:800;font-size:12px;color:#bfe4d3}
+.rlv5-shortlist-advanced[open]>summary{border-bottom:1px solid #32554b}
+.rlv5-shortlist-advanced-body{padding:14px;display:grid;gap:13px;min-width:0}
+.rlv5-shortlist-advanced-body>.field{max-width:280px}
+.rlv5-shortlist-advanced-body .toplist{min-width:0}
+@media(max-width:780px){
+ .rlv5-shortlist-heading h2{font-size:27px}
+ .rlv5-shortlist-switch{max-width:none}
+ .rlv5-shortlist-card{grid-template-columns:34px minmax(0,1fr) 80px;gap:10px;padding:13px 10px;border-radius:11px}
+ .rlv5-shortlist-rank{height:34px;width:34px;font-size:12px}
+ .rlv5-shortlist-name>strong{font-size:14px}
+ .rlv5-shortlist-percent{font-size:15px}
+ .rlv5-shortlist-reason{font-size:10px;line-height:1.45}
+ .rlv5-shortlist-grades>small{font-size:8px}
+}
+@media(max-width:360px){
+ .rlv5-shortlist-card{grid-template-columns:31px minmax(0,1fr) 70px;gap:7px;padding:11px 8px}
+ .rlv5-shortlist-rank{width:31px;height:31px}
+ .rlv5-shortlist-name>strong{font-size:13px}
+ .rlv5-shortlist-percent{font-size:14px}
+ .rlv5-shortlist-grades>small{font-size:7px}
+}
