@@ -57,6 +57,8 @@ function applyOfficialOverlay(input,overlay){
   next.official_check_at=overlay.checked_at||overlay.checked_date;
   next.official_overlay_notice=overlay.notice;
   next.official_overlay_sources=overlay.source_documents;
+  next.emergency_review_races=Object.keys(overlay.emergency_order||{}).map(r=>input.date+'_'+r);
+  next.emergencies_certified=false; // Source scratching sheet does NOT certify provisional reserve promotions.
   next.publication=Object.assign({},next.publication,{approved:false,model_probabilities_published:false,status:'RESEARCH_ONLY'});
   M.board(next,{going:overlay.going}); // Atomic inventory and scenario validation before accepting the overlay.
   return next;
