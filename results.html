@@ -4,7 +4,16 @@
 :root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#080e16;color:#edf5f6;font-family:system-ui,-apple-system,sans-serif}main{max-width:1100px;margin:auto;padding:20px 15px 80px}a{color:#73e8bc}header{display:flex;justify-content:space-between;gap:12px;align-items:center}h1{font-size:29px;margin:30px 0 5px}p,.muted{color:#9bb0bd}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:20px 0}.card,.panel{background:#13232e;border:1px solid #30424d;border-radius:15px;padding:15px}.label{color:#9bb0bd;font-size:12px}.value{font-size:clamp(23px,5vw,37px);font-weight:800;margin-top:6px}.green{color:#78e9b8}.panel{margin:15px 0}h2{font-size:17px;margin:0 0 14px}canvas{display:block;width:100%;height:290px}.controls{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0}select{background:#1b303e;color:white;border:1px solid #405767;border-radius:9px;padding:11px;font:inherit}table{border-collapse:collapse;width:100%;font-size:13px}th,td{text-align:left;padding:11px 9px;border-bottom:1px solid #30424d}th{color:#9bb0bd}.tablewrap{overflow-x:auto}.good{color:#78e9b8;font-weight:700}.bad{color:#ffaaa5}.wait{color:#ffd17c}small{color:#9bb0bd}@media(max-width:550px){main{padding:16px 10px 65px}.card{padding:10px}.value{font-size:25px}canvas{height:260px}}
 </style></head><body><main>
 <header><strong class="green">◈ RACING LAB</strong><a href="/">← Back to Racing Lab</a></header>
-<h1>Results & History <small>V4.1 analytics</small></h1><p>How many of our selections have actually won?</p>
+<h1>Results & History <small>Forward tracking + retrospective audit</small></h1>
+<p>Two distinct records: independently locked selections from race-day forward, and older retrospective model reconstructions. Do not combine their hit rates.</p>
+<section class="panel" id="forward-record" aria-live="polite">
+<h2>V5 prospective record — independently locked pre-race picks only</h2>
+<p class="muted" id="forwardStatus">Checking whether any selections have been independently frozen before racing…</p>
+<div class="tablewrap"><table><thead><tr><th>List</th><th>Locked</th><th>Finished</th><th>Won</th><th>Verified strike rate</th></tr></thead><tbody id="forwardRows"></tbody></table></div>
+<small>Strict forward-only record. A GitHub pre-race commit and runner-matched official finish are required; synthetic, retrospective or unverified outcomes never count.</small>
+</section>
+<h2>Historical retrospective comparisons</h2>
+<p class="muted">Older V3/V4 reconstruction — not a verified prediction streak, and not V5 prospective calibration.</p>
 <div class="cards"><div class="card"><div class="label">Completed selections</div><div class="value" id="races">—</div></div><div class="card"><div class="label">Winning selections</div><div class="value green" id="wins">—</div></div><div class="card"><div class="label">Win rate</div><div class="value" id="rate">—</div></div></div>
 <section class="panel"><h2>Winning selections over time</h2><div class="controls">
 <select id="tierFilter"><option value="10">Top 10 — Main Record</option><option value="5">Top 5</option><option value="15">Top 15</option><option value="all">All Races</option></select>
@@ -20,8 +29,22 @@
 <div id="calibration"></div>
 </section>
 <section class="panel"><h2>Race-by-race selections</h2><div class="tablewrap"><table><thead><tr><th>Date</th><th>Meeting</th><th>Race</th><th>Our selection</th><th>Result</th></tr></thead><tbody id="rows"></tbody></table></div></section><p class="muted" id="status">Loading saved results…</p>
-</main><script>
-let records=[];const $=id=>document.getElementById(id);
+</main><script src="/v5/forward.js"></script><script>
+let records=[];
+fetch('/v5/prospective-record.json',{cache:'no-store'}).then(async r=>{
+ if(!r.ok)throw Error('Prospective registry unavailable');
+ const report=window.RacingLabForward.summarize(await r.json());
+ document.getElementById('forwardStatus').textContent=report.warning;
+ const tbody=document.getElementById('forwardRows');
+ report.groups.forEach(row=>{
+  const tr=document.createElement('tr');
+  ['Top '+row.tier,row.frozen,row.completed,row.wins,row.win_rate===null?'—':row.win_rate.toFixed(1)+'%'].forEach(value=>{
+   const td=document.createElement('td');td.textContent=String(value);tr.append(td);
+  });tbody.append(tr);
+ });
+}).catch(err=>{
+ document.getElementById('forwardStatus').textContent='Forward record is unavailable or invalid; no prospective win percentage can be claimed. '+err.message;
+});const $=id=>document.getElementById(id);
 function verified(r){return r.verified===true&&r.finish_position!==null&&r.finish_position!==undefined&&(r.finish_position==='5+'||(Number.isInteger(Number(r.finish_position))&&Number(r.finish_position)>0));}
 function rankedByDay(tier) {
  if(tier==='all') return records.slice();
