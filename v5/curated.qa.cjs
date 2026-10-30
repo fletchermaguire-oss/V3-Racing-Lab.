@@ -78,3 +78,37 @@ test('research archive never sets model probabilities, final fields or calibrati
  assert.equal(C.board.publication_blocked,true);
  assert.equal(C.curated.warnings.length,3);
 });
+
+
+test('new Top15 preserves original ten and cleanly segregates five review candidates',()=>{
+ const Q15=require('./shortlists/current.json');
+ const c=State.create(State.applyOfficialOverlay(Data,Official),{checkpoint:Q15,going:Official.going});
+ assert.equal(c.curated.count,15);assert.equal(c.curated.priority_research_count,10);
+ assert.equal(c.curated.additional_review_count,5);
+ assert.deepEqual(c.curated.entries.slice(0,10).map(x=>x.horse),
+  Checkpoint.entries.map(x=>x.horse));
+ assert.deepEqual(c.curated.entries.slice(10).map(x=>x.horse),
+  ['Bridal Waltz','Afireofgidgeecoals','Anaconda Jones',"Where'stheprofit",'In Confidence']);
+ assert.ok(c.curated.entries.slice(10).every(x=>x.research_lane==='CONDITIONAL_REVIEW'));
+ assert.deepEqual(c.curated.aTier.map(x=>x.horse),['Sheza Alibi','Regal Ambition','Hot And High']);
+ assert.equal(c.curated.top5.length,5);assert.equal(c.curated.top10.length,10);assert.equal(c.curated.top15.length,15);
+});
+test('unverified emergency promotion races have an explicit warning; Top15 never certifies final fields',()=>{
+ const Q15=require('./shortlists/current.json');
+ const c=State.create(State.applyOfficialOverlay(Data,Official),{checkpoint:Q15,going:Official.going});
+ const horse=c.curated.entries.find(x=>x.horse==='Icelady');
+ assert.ok(horse.notes.includes('PROVISIONAL_EMERGENCY_ACTIVATIONS'));
+ assert.equal(c.data.emergencies_certified,false);
+ assert.equal(c.board.publication_blocked,true);
+});
+test('moving to a new independent research checkpoint discards old local ranking overrides but retains audit trail',()=>{
+ const m=storage(),original=controller({storage:m});
+ const h=original.curated.entries.find(x=>x.horse==='Hot And High');
+ original.setResearchOverride(h.id,{tier:'WATCH',rank:1,reason:'Checking official track before new research file'});
+ const Q15=require('./shortlists/current.json');
+ const revised=State.create(State.applyOfficialOverlay(Data,Official),{checkpoint:Q15,going:Official.going,storage:m});
+ assert.equal(revised.curated.count,15);
+ assert.equal(revised.curated.entries[0].horse,'Sheza Alibi');
+ assert.equal(revised.curated.entries.find(x=>x.horse==='Hot And High').form_tier,'A');
+ assert.ok(revised.researchHistory.some(x=>x.reason==='ARCHIVED_RESEARCH_CHECKPOINT_REPLACED'));
+});
