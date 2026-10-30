@@ -219,10 +219,32 @@ function facts(h){var x=model(h.id),names={career:'Career record',recency:'Recen
  return {pros:x?lines(x.positive_drivers):[],cons:x?lines(x.negative_drivers):[]};
 }
 function evidence(title,text){var details=e('details','evidencebox');return add(details,e('summary','',title),e('pre','',text||'Not documented'));}
+function humanAnalysis(h,x){
+ if(!global.RacingLabHorseAnalysis)return note('Readable form analysis unavailable; check the source dossier below.');
+ var source=C.curated&&C.curated.entries.find(function(v){return v.id===h.id;});
+ var r=raceOf(h.race_id),result=global.RacingLabHorseAnalysis.analysis(h,r,x,C.going[r.meeting],source);
+ var section=e('section','horse-brief'),intro=e('p','horse-brief-intro','Based on recorded form and the current track scenario. These are evidence-based reasons, not guaranteed outcomes.');
+ section.append(add(e('div','horse-brief-head'),e('h4','','Runner assessment'),intro));
+ var cards=e('div','horse-brief-grid');
+ [['Why it can win',result.pros,'advantage'],['What could beat it',result.cons,'risk']].forEach(function(part){
+  var card=add(e('section','horse-brief-card '+part[2]),e('h5','',part[0])),ul=e('ul','horse-brief-list');
+  if(!part[1].length)ul.append(e('li','','No verified evidence recorded yet.'));
+  part[1].forEach(function(reason){var item=e('li');add(item,e('strong','',reason.title),e('p','',reason.detail));ul.append(item);});
+  card.append(ul);cards.append(card);
+ });
+ section.append(cards);
+ if(result.unknown.length){
+  var cautions=add(e('section','horse-brief-unknown'),e('h5','','Still to confirm')),ul=e('ul','horse-brief-list');
+  result.unknown.forEach(function(v){ul.append(e('li','',v));});cautions.append(ul);section.append(cautions);
+ }
+ section.append(e('p','muted small',result.source));
+ return section;
+}
 function horseDetail(h){var x=model(h.id),root=add(e('div','panel detail'),e('div','eyebrow',x?'MODEL RANK '+x.rank:C.model.statusOf(h)),e('h3','',h.horse),e('p','muted small','No. '+h.tab+' · Barrier '+(h.barrier??'—')+' · '+(h.weight_kg??'—')+'kg · '+h.trainer+' / '+h.jockey));
  if(x){add(root,e('strong','model-big',pct(x.p)),e('p','muted small','Model fair odds $'+x.fair_odds.toFixed(2)+' · scenario range '+pct(x.model_range[0])+'–'+pct(x.model_range[1])+' · evidence coverage '+Math.round(x.completeness*100)+'% (coverage, not confidence)'));
   root.append(evidence('Source-input QA flags',x.input_issues.join('\n')||'No structural input issue flagged. Final fields, gear and source evidence still require verification.'));
  }
+ root.append(humanAnalysis(h,x));
  var sourceExcluded=!x&&!C.isLocalScratch(h.id),localButton=action(C.isLocalScratch(h.id)?'Undo local exclusion':'Exclude locally',function(){C.setLocalScratch(h.id,!C.isLocalScratch(h.id));},'ghost');localButton.disabled=sourceExcluded;root.append(localButton,e('p','muted small','Local exclusions are what-if scenarios. Saved source scratchings cannot be reinstated here.'));
  [['Dated form',h.form],['Surface / distance / course statistics',h.statistics],['Research notes',h.strengths],['Source risks',h.risks],['Historical settling',h.historical_map],['Outstanding verification',h.outstanding]].forEach(function(p){root.append(evidence(p[0],p[1]));});return root;
 }
