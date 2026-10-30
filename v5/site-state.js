@@ -174,10 +174,18 @@ function create(input,options){
     researchChange('MANUAL_RESEARCH_OVERRIDE: '+entry.reason,previous);
     notify();
   }
-  function notify(){
-    try{if(storage)storage.setItem(settingsKey,JSON.stringify({sourceSavedAt:sourceStamp,going:going,localIds:Array.from(local)}));}catch(e){}
-    keepArchive();
-    listeners.slice().forEach(function(fn){fn(api);});
+  function notify(statusOnly){
+    if(!statusOnly){
+      try{if(storage)storage.setItem(settingsKey,JSON.stringify({sourceSavedAt:sourceStamp,going:going,localIds:Array.from(local)}));}catch(e){}
+      keepArchive();
+    }
+    listeners.slice().forEach(function(fn){fn(api,statusOnly?{statusOnly:true}:null);});
+  }
+  function clearSourceError(label,silent){
+    if(!sourceErrors.has(label))return;
+    sourceErrors.delete(label);
+    lastError=Array.from(sourceErrors.values()).join(' | ');
+    if(!silent)notify(true);
   }
   function noteChange(reason,previous,next){
     var prior=new Map(previous.winFirst.byRace.map(function(x){return [x.race_id,x];}));
@@ -233,14 +241,14 @@ function create(input,options){
       if(typeof status==='string'&&(M.isEligible(h)||!M.isEligible({status:status})))h.status=status;
     });
     if(JSON.stringify(next.runners)===JSON.stringify(source.runners)){
-      live={as_of:q.as_of};lastError='';
+      live={as_of:q.as_of};clearSourceError('AIRTABLE');
       return; // New Airtable request contained no new evidence; preserve simulator and UI state.
     }
     var nextSource=clone(next);
     next.runners.forEach(function(h){if(local.has(h.id)&&M.isEligible(h))h.status='SCRATCHED — local scenario';});
     var result=M.board(next,{going:going});
     noteChange('AIRTABLE_EVIDENCE_UPDATE',board,result);
-    source=nextSource;data=next;board=result;key=revision(data,going);live={as_of:q.as_of};lastError='';researchChange('AIRTABLE_EVIDENCE_UPDATE');notify();
+    source=nextSource;data=next;board=result;key=revision(data,going);live={as_of:q.as_of};clearSourceError('AIRTABLE',true);researchChange('AIRTABLE_EVIDENCE_UPDATE');notify();
   }
   function applyOfficialSheets(q){
     if(!q||q.schema!=='racing-lab-official-sheets/v1'||q.status!=='OFFICIAL_SHEETS_RECONCILED'||
@@ -318,6 +326,7 @@ function create(input,options){
        JSON.stringify(nextSource.official_sources)===JSON.stringify(source.official_sources)&&
        JSON.stringify(newGoing)===JSON.stringify(going)){
       official.observed_at=q.observed_at;official.last_checked_at=q.observed_at;
+      clearSourceError('OFFICIAL');
       return official; // Advance request watermark without re-rendering identical race data.
     }
     var next=clone(nextSource);
@@ -330,7 +339,7 @@ function create(input,options){
        source_url:x.source_url,track_going:x.track_going,scratched_total:x.scratched_total,
        scratchings:clone(x.scratchings)};}),
      final_fields_verified:false,matched_scratchings:scratches};
-    lastError='';researchChange('OFFICIAL_SCRATCHINGS_AND_TRACK_CHECK');notify();
+    clearSourceError('OFFICIAL',true);researchChange('OFFICIAL_SCRATCHINGS_AND_TRACK_CHECK');notify();
     return official;
   }
   function rows(race){return board.baseline.records.filter(function(h){return h.race_id===race;});}
@@ -367,7 +376,7 @@ function create(input,options){
     reportError:function(message){
       var label=String(message).startsWith('Official update')?'OFFICIAL':'AIRTABLE';
       if(sourceErrors.get(label)===message)return;
-      sourceErrors.set(label,message);lastError=Array.from(sourceErrors.values()).join(' | ');notify();
+      sourceErrors.set(label,message);lastError=Array.from(sourceErrors.values()).join(' | ');notify(true);
     },rows:rows,
     multi:function(ids){return M.multi(board,ids);},simulate:function(race,count,seed){return M.simulateWinners(rows(race),count,seed);},
     legacySnapshot:legacySnapshot};
