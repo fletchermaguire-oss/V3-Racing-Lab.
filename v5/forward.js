@@ -1,6 +1,8 @@
 /* V5 prospective record: strict forward-only separation from retrospective form results.
  * True independent freeze verification must occur outside this local parser (GitHub
  * commit timestamp audit and official result matching). Empty ledger = no win record.
+ * A lock file is created before its proof commit. The GitHub commit must occur
+ * at/after the file's lock time AND strictly before the recorded race start.
  */
 (function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.RacingLabForward=api;})(typeof window!=='undefined'?window:globalThis,function(){
 'use strict';
@@ -23,7 +25,7 @@ function check(d){
   if(!idPattern.test(x.runner_id)||!x.runner_id.startsWith(x.race_id+'_')||
    !x.race_id.startsWith(d.meeting_date+'_')||!Number.isSafeInteger(x.rank)||x.rank<1||x.rank>15||
    !utc(x.race_at_utc)||!utc(x.locked_at_utc)||utc(x.locked_at_utc)>=utc(x.race_at_utc)||
-   utc(d.freeze_proof.committed_at_utc)>utc(x.locked_at_utc)||
+   utc(d.freeze_proof.committed_at_utc)<utc(x.locked_at_utc)||
    utc(d.freeze_proof.committed_at_utc)>=utc(x.race_at_utc)||
    seen.has(x.runner_id)||races.has(x.race_id)||ranks.has(x.rank)||
    x.active_at_lock!==true||!/^https:\/\//.test(x.race_start_source||''))
