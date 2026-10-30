@@ -15,6 +15,23 @@ function savedScratchCount(meeting,race){
 function savedSourceNote(meeting){
  return meeting==='ASCOT'?'Ascot uses the Friday official sheet; Saturday not finalised':'Saturday saved racecard; late changes remain possible';
 }
+// Separation is signed against the strongest other modelled runner.
+// The saved independent research order never depends on this diagnostic.
+function researchedModelMargin(h){
+ if(!h||!h.eligible||h.model_pct===null)return {delta:null,label:'No current model separation'};
+ var field=C.board.baseline.records.filter(function(x){return x.race_id===h.race_id;});
+ var runner=field.find(function(x){return x.id===h.id;});
+ if(!runner||field.length<2)return {delta:null,label:'No current model separation'};
+ var rival=field.filter(function(x){return x.id!==runner.id;}).sort(function(a,b){return b.p-a.p;})[0];
+ var delta=Math.round((runner.p-rival.p)*100)/100;
+ return {delta:delta,rival:rival.horse,label:'Sep '+(delta>=0?'+':'')+delta.toFixed(2)+'pp vs '+rival.horse};
+}
+function marginElement(h){
+ var info=researchedModelMargin(h);
+ var node=e('small','rlv5-selection-margin'+(info.delta!==null&&info.delta<0?' is-negative':''),info.label);
+ node.title='Signed percentage-point difference between this research horse and the highest modelled rival. A negative value means the rival has a higher estimate. Uncalibrated.';
+ return node;
+}
 function e(tag,cls,txt){var x=document.createElement(tag);if(cls)x.className=cls;if(txt!==undefined&&txt!==null)x.textContent=String(txt);return x;}
 function app(){return target||document.getElementById('workspace');}
 function add(p){for(var i=1;i<arguments.length;i++)if(arguments[i])p.append(arguments[i]);return p;}
@@ -155,7 +172,7 @@ function overview(){
   research.forEach(function(h){
    var row=e('button','rlv5-command-pick'+(h.eligible?'':' is-unavailable')),desc=e('div','rlv5-pick-description');
    row.type='button';row.dataset.runnerId=h.id;if(h.model_pct!==null)row.dataset.modelPct=String(h.model_pct);
-   add(desc,e('strong','',h.horse),e('small','',h.meeting+' R'+h.race+' · '+(h.reason||'Researched form profile')));
+   add(desc,e('strong','',h.horse),e('small','',h.meeting+' R'+h.race+' · '+(h.reason||'Researched form profile')),marginElement(h));
    add(row,e('span','rlv5-rank',String(h.rank)),desc,e('span','rlv5-grade',h.form_tier),
     e('span','rlv5-pick-pct',h.model_pct===null?'—':pct(h.model_pct)),
     e('span','rlv5-pick-status'+(h.eligible?'':' is-unavailable'),h.eligible?'Reviewed selection':'Out of field'));
@@ -169,7 +186,7 @@ function overview(){
   add(e('div','rlv5-insight-head'),e('span','rlv5-kicker','RESEARCH FOCUS'),e('h3','','Top three researched cases')));
  research.slice(0,3).forEach(function(h){
   var row=add(e('button','rlv5-insight-runner'),e('span','rlv5-rank',String(h.rank)),
-    add(e('span','rlv5-insight-runner-info'),e('strong','',h.horse),e('small','',h.meeting+' R'+h.race)),
+    add(e('span','rlv5-insight-runner-info'),e('strong','',h.horse),e('small','',h.meeting+' R'+h.race),marginElement(h)),
     e('span','rlv5-pick-pct',h.model_pct===null?'—':pct(h.model_pct)));
   row.type='button';row.addEventListener('click',function(){selectRace(h.race_id,h.id);});leaders.append(row);
  });
@@ -241,7 +258,7 @@ function toplist(){
    if(h.model_pct!==null)row.dataset.modelPct=String(h.model_pct);
    add(mid,e('strong','',h.horse),
     e('small','',h.meeting+' R'+h.race+' · '+(h.research_lane==='CONDITIONAL_REVIEW'?'FURTHER REVIEW · ':'TOP 10 · ')+'Form grade '+h.form_tier+' · '+(h.eligible?'IN SAVED FIELD · STARTER NOT CERTIFIED':'OUT OF FIELD')),
-    e('small','',h.race_day_assessment.replaceAll('_',' ')+' · '+(h.notes.length?h.notes.join(', '):'No new screening flags')));
+    e('small','',h.race_day_assessment.replaceAll('_',' ')+' · '+(h.notes.length?h.notes.join(', '):'No new screening flags')),marginElement(h));
    add(stat,e('strong','',h.model_pct===null?'—':pct(h.model_pct)),
      e('small','','Uncalibrated V5 chance'),e('small','','Original #'+h.original_rank+' · ranked #'+h.rank));
    var buttons=e('div','workshop-actions'),view=action('View race',function(){selectRace(h.race_id,h.id);},'ghost');
@@ -345,6 +362,7 @@ function top10(){
   grades.append(e('span','rlv5-shortlist-grade',h.form_tier));
   grades.append(e('strong','rlv5-shortlist-percent',h.model_pct===null?'—':pct(h.model_pct)));
   grades.append(e('small','','MODEL ESTIMATE'));
+   grades.append(marginElement(h));
   if(!h.eligible)grades.append(e('span','rlv5-shortlist-out','Out of field'));
   add(card,e('span','rlv5-shortlist-rank',String(h.rank).padStart(2,'0')),name,grades);
   card.addEventListener('click',function(){selectRace(h.race_id,h.id);});
@@ -488,6 +506,10 @@ function racesPage(){
   e('span','rlv5-kicker','OUR RESEARCHED SELECTION'),
   e('h3','',pickTitle),
   e('p','',reason));
+ if(reviewed&&reviewed.eligible)pickPanel.append(add(e('div','rlv5-selection-metrics'),
+  e('strong','rlv5-selection-model-percent',reviewed.model_pct===null?'—':pct(reviewed.model_pct)),
+  marginElement(reviewed),
+  e('small','','Uncalibrated V5 model estimate; signed percentage-point separation')));
  if(reviewed&&reviewed.eligible&&reviewed.reason)
   pickPanel.append(e('p','rlv5-race-selection-reason',reviewed.reason));
  root.append(pickPanel);
