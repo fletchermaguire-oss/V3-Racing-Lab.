@@ -91,10 +91,12 @@ function create(input,options){
     try{
       var saved=storage&&JSON.parse(storage.getItem(archiveKey)||'null');
       if(saved&&saved.version===Curated.VERSION){
+        var currentArchiveId=checkpoint.revision_id||checkpoint.as_of;
+        var previousArchiveId=saved.checkpoint_revision||saved.checkpoint_at;
         history=Array.isArray(saved.history)?saved.history.slice(-59):[];
-        if(saved.checkpoint_at===checkpoint.as_of)overrides=saved.overrides&&typeof saved.overrides==='object'?saved.overrides:{};
+        if(previousArchiveId===currentArchiveId)overrides=saved.overrides&&typeof saved.overrides==='object'?saved.overrides:{};
         else history.push({at:new Date().toISOString(),reason:'ARCHIVED_RESEARCH_CHECKPOINT_REPLACED',
-          previous_checkpoint:saved.checkpoint_at,new_checkpoint:checkpoint.as_of,
+          previous_checkpoint:previousArchiveId,new_checkpoint:currentArchiveId,
           changes:[],source:'NEW_FILE_REVISION',approval:'RESEARCH_ONLY'});
       }
     }catch(e){overrides={};history=[];}
@@ -102,7 +104,8 @@ function create(input,options){
   }
   function keepArchive(){
     try{if(storage&&checkpoint)storage.setItem(archiveKey,JSON.stringify({
-      checkpoint_at:checkpoint.as_of,version:Curated.VERSION,overrides:overrides,history:history.slice(-60)}));}catch(e){}
+      checkpoint_at:checkpoint.as_of,checkpoint_revision:checkpoint.revision_id||checkpoint.as_of,
+      version:Curated.VERSION,overrides:overrides,history:history.slice(-60)}));}catch(e){}
   }
   function researchChange(reason,previous){
     if(!checkpoint)return;
