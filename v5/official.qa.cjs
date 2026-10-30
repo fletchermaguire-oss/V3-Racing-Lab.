@@ -147,3 +147,29 @@ test('published track grade can change without a newer scratching publication',(
  assert.equal(C.officialGoing.RANDWICK,'Soft 5');
  assert.equal(C.going.RANDWICK,'Soft 5');
 });
+
+
+test('feed failures and recovery remain status-only, independently tracked without restarting simulator',()=>{
+ const C=State.create(State.applyOfficialOverlay(Data,Official),{going:Official.going,checkpoint:Checkpoint});
+ const initial=C.revision;let rerenders=0,statusUpdates=0;
+ C.subscribe((_,event)=>{if(event&&event.statusOnly)statusUpdates++;else rerenders++;});
+ C.reportError('Official update unavailable; saved field retained: timeout');
+ C.reportError('Saved board retained: Airtable timeout');
+ C.reportError('Official update unavailable; saved field retained: timeout');
+ assert.equal(statusUpdates,2);
+ assert.equal(rerenders,0);
+ assert.equal(C.revision,initial);
+ assert.match(C.error,/Official update/);assert.match(C.error,/Airtable/);
+ C.applyOfficialSheets(sheets());
+ assert.equal(rerenders,1,'a real field revision can rebuild the simulator');
+ assert.doesNotMatch(C.error,/Official update/);
+ assert.match(C.error,/Airtable/,'one feed recovery must not hide another feed failure');
+ const latest=C.revision;
+ C.reportError('Official update unavailable; saved field retained: connection');
+ const newRequest=sheets();newRequest.observed_at='2026-10-30T09:49:00Z';
+ C.applyOfficialSheets(newRequest);
+ assert.equal(C.revision,latest);
+ assert.equal(rerenders,1,'unchanged official recovery must not remount the simulator');
+ assert.doesNotMatch(C.error,/Official update/);
+ assert.match(C.error,/Airtable/);
+});
