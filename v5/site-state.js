@@ -302,9 +302,10 @@ function create(input,options){
     source=nextSource;data=next;board=result;key=revision(data,going);live={as_of:q.as_of};clearSourceError('AIRTABLE',true);researchChange('AIRTABLE_EVIDENCE_UPDATE');notify();
   }
   function applyOfficialSheets(q){
-    if(!q||q.schema!=='racing-lab-official-sheets/v1'||q.status!=='OFFICIAL_SHEETS_RECONCILED'||
+    var partial=q&&q.status==='OFFICIAL_SHEETS_PARTIAL';
+    if(!q||q.schema!=='racing-lab-official-sheets/v1'||(!partial&&q.status!=='OFFICIAL_SHEETS_RECONCILED')||
        q.race_date!==source.date||q.publication_approved!==false||q.final_fields_verified!==false||
-       !Array.isArray(q.meetings)||q.meetings.length!==Object.keys(going).length)
+       !Array.isArray(q.meetings)||(partial?(q.meetings.length<1||q.meetings.length>Object.keys(going).length):q.meetings.length!==Object.keys(going).length))
       throw Error('Incomplete or mismatched official sheets; saved board retained');
     var timestamp=Date.parse(q.observed_at);
     if(typeof q.observed_at!=='string'||!/^\d{4}-\d{2}-\d{2}T\d\d:\d\d:\d\d(?:\.\d+)?Z$/.test(q.observed_at)||
@@ -312,6 +313,7 @@ function create(input,options){
       throw Error('Stale or invalid official observed timestamp');
     var nextSource=clone(source),newGoing=Object.assign({},going),nextOfficialGoing=Object.assign({},officialGoing);
     var index=new Map(),seenMeetings=new Set(),scratches=0;
+    var mergedMeetings=new Map((official&&official.meetings||[]).map(function(x){return [x.meeting,clone(x)];}));
     nextSource.runners.forEach(function(h){
       var key=h.race_id+'|'+canonical(h.horse);
       if(index.has(key))throw Error('Duplicated source runner identity');
@@ -366,17 +368,22 @@ function create(input,options){
           throw Error('Conflicting official scratchings at unchanged publication time: '+sheet.meeting);
       }
       scratches+=counted;
+      mergedMeetings.set(sheet.meeting,{meeting:sheet.meeting,source_last_published:sheet.source_last_published,
+       source_url:sheet.source_url,track_going:sheet.track_going,scratched_total:sheet.scratched_total,
+       scratchings:clone(sheet.scratchings)});
     });
-    if(seenMeetings.size!==Object.keys(going).length)throw Error('Official meetings missing');
+    if(seenMeetings.size!==q.meetings.length||(!partial&&seenMeetings.size!==Object.keys(going).length))throw Error('Official meetings missing');
     nextSource.official_observed_at=q.observed_at;
-    nextSource.official_sources=q.meetings.map(function(x){return {
+    nextSource.official_sources=Array.from(mergedMeetings.values()).map(function(x){return {
       meeting:x.meeting,url:x.source_url,published:x.source_last_published,going:x.track_going,
       scratching_count:x.scratched_total
-    };});
+    };}).sort(function(a,b){return a.meeting.localeCompare(b.meeting);});
     if(official&&JSON.stringify(nextSource.runners)===JSON.stringify(source.runners)&&
        JSON.stringify(nextSource.official_sources)===JSON.stringify(source.official_sources)&&
        JSON.stringify(newGoing)===JSON.stringify(going)){
       official.observed_at=q.observed_at;official.last_checked_at=q.observed_at;
+      official.partial=partial||mergedMeetings.size<Object.keys(going).length;
+      official.errors=clone(q.errors||[]);
       clearSourceError('OFFICIAL');
       return official; // Advance request watermark without re-rendering identical race data.
     }
@@ -386,10 +393,9 @@ function create(input,options){
     noteChange('OFFICIAL_SCRATCHINGS_AND_TRACK_CHECK',board,result);
     source=nextSource;data=next;going=newGoing;officialGoing=nextOfficialGoing;
     board=result;key=revision(data,going);official={observed_at:q.observed_at,
-     meetings:q.meetings.map(function(x){return {meeting:x.meeting,source_last_published:x.source_last_published,
-       source_url:x.source_url,track_going:x.track_going,scratched_total:x.scratched_total,
-       scratchings:clone(x.scratchings)};}),
-     final_fields_verified:false,matched_scratchings:scratches};
+     meetings:Array.from(mergedMeetings.values()).sort(function(a,b){return a.meeting.localeCompare(b.meeting);}),
+     partial:partial||mergedMeetings.size<Object.keys(going).length,errors:clone(q.errors||[]),
+     final_fields_verified:false,matched_scratchings:Array.from(mergedMeetings.values()).reduce(function(n,x){return n+x.scratched_total;},0)};
     clearSourceError('OFFICIAL',true);researchChange('OFFICIAL_SCRATCHINGS_AND_TRACK_CHECK');notify();
     return official;
   }
