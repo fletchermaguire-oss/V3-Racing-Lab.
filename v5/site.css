@@ -310,3 +310,6 @@
  .rlv5-shortlist-percent{font-size:14px}
  .rlv5-shortlist-grades>small{font-size:7px}
 }
+
+/* Never silently leave missing rider information blank. */
+.rlv5-rider-alert{margin:12px 0 6px;padding:10px 12px;background:#342a20;border:1px solid #94704c;border-left:3px solid #efb36b;border-radius:8px;color:#f8d9b1;font-size:12px;line-height:1.55}
