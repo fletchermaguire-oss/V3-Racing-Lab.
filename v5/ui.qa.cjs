@@ -166,8 +166,8 @@ test('command dashboard preserves real research order, shows source status and k
  assert.ok(nodes.some(n=>n.textContent==='Pre-race published lock: not verified'));
  assert.ok(nodes.some(n=>n.textContent==='Calibration: not established'));
  assert.ok(nodes.some(n=>String(n.textContent).includes('model estimates, not verified win probabilities')));
- assert.ok(nodes.some(n=>String(n.textContent).includes('Official scratching refresh pending')||
-   String(n.textContent).includes('Awaiting official refresh')));
+ assert.ok(nodes.some(n=>String(n.textContent).includes('33 in saved field across all meetings')));
+ assert.ok(!nodes.some(n=>String(n.textContent).includes('Awaiting official refresh')));
 });
 test('Race Centre shows one research selection and full readable evidence',()=>{
  const {C,win}=boot(),root=new Element('main');
