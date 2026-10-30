@@ -19,3 +19,22 @@
 @media(max-width:900px){.v5-shared-view .grid.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.v5-shared-view .grid:not(.stats){grid-template-columns:1fr}}
 
 .v5-model-active .hero:after{content:'V5'}
+
+/* Human-readable runner assessment; local to the selected horse and Compare view. */
+.v5-shared-view .horse-brief{margin:18px 0;padding:16px;border:1px solid var(--line);border-radius:14px;background:#0c1e26}
+.v5-shared-view .horse-brief-head h4{margin:0;color:var(--ink);font-size:18px}
+.v5-shared-view .horse-brief-intro{color:var(--muted);font-size:12px;line-height:1.55;margin:6px 0 15px}
+.v5-shared-view .horse-brief-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.v5-shared-view .horse-brief-card{border:1px solid var(--line);border-radius:12px;background:#142b32;padding:14px;min-width:0}
+.v5-shared-view .horse-brief-card.advantage{border-left:3px solid #43c6a6}
+.v5-shared-view .horse-brief-card.risk{border-left:3px solid #e6b879}
+.v5-shared-view .horse-brief-card h5{margin:0 0 12px;font-size:15px;color:var(--ink)}
+.v5-shared-view .horse-brief-list{margin:0;padding:0 0 0 17px;display:grid;gap:12px}
+.v5-shared-view .horse-brief-list li{padding-left:3px;font-size:12px;line-height:1.55;color:#d5e7e5;overflow-wrap:anywhere}
+.v5-shared-view .horse-brief-list li strong{display:block;margin-bottom:2px;font-size:13px;color:var(--ink)}
+.v5-shared-view .horse-brief-list p{margin:0;color:#c1d5d5;line-height:1.55}
+.v5-shared-view .horse-brief-unknown{margin-top:12px;padding:12px 14px;border:1px solid #42515d;border-radius:10px;background:#17242c}
+.v5-shared-view .horse-brief-unknown h5{margin:0 0 8px;font-size:12px;color:#d5d9e7}
+.v5-shared-view .horse-brief-unknown .horse-brief-list{gap:5px}
+.v5-shared-view .horse-brief>.muted{margin:11px 0 0}
+@media(max-width:1000px){.v5-shared-view .horse-brief-grid{grid-template-columns:1fr}}

@@ -3,7 +3,7 @@
 'use strict';
 var C=null,D=null,target=null,embedded=false,navigate=null;
 var match=global.location&&global.location.search.match(/[?&]tab=(sim|multi|top10|races|results|qa|cal|weather|sync|compare)(?:&|$)/);
-var S={page:match?match[1]:'overview',meeting:'RANDWICK',race:null,runner:null,top:'ALL',topN:10,multi:[],compareA:null,compareB:null};
+var S={page:match?match[1]:'overview',meeting:'RANDWICK',race:null,runner:null,top:'ALL',topMode:'RESEARCH',topN:10,multi:[],compareA:null,compareB:null};
 var PAGES=[['overview','Overview'],['top10','Daily Top 5/10/15'],['races','Race Centre'],['multi','Multi Lab'],['sim','Simulator'],['compare','Compare'],['qa','Model QA'],['cal','Calibration'],['weather','Weather & Tracks'],['sync','Data & Sync'],['results','Results & History']];
 function e(tag,cls,txt){var x=document.createElement(tag);if(cls)x.className=cls;if(txt!==undefined&&txt!==null)x.textContent=String(txt);return x;}
 function app(){return target||document.getElementById('workspace');}
@@ -74,22 +74,143 @@ document.getElementById('livebadge').textContent=C.live?'AIRTABLE · MODEL UPDAT
 
 function scenarios(){var wrap=e('div','model-scenarios'),controls=e('div','filters');
  Object.keys(C.going).forEach(function(meeting){controls.append(setField(meeting+' scenario',['Good 4','Soft 5','Soft 6','Heavy 8'].map(function(v){return {value:v,text:v};}),C.going[meeting],function(value){C.setGoing(meeting,value);}));});
- return add(wrap,note('Provisional model estimates · final fields and going unverified · research '+D.saved_at+(C.localScratchCount?' · '+C.localScratchCount+' local exclusion(s)':'')),controls);
+ return add(wrap,note('Provisional model estimates · source '+(C.official?C.official.observed_at:(D.official_check_at||D.saved_at))+' · final starters/emergencies NOT confirmed'+(C.localScratchCount?' · '+C.localScratchCount+' local exclusion(s)':'')),controls);
+}
+function changeNotice(){
+ var v=C.lastChange;
+ if(!v)return null;
+ var panel=box('BOARD CHANGE · '+v.reason,v.notice);
+ v.changed_selections.forEach(function(x){panel.append(e('p','muted small',x.race_id+': '+x.previous+' → '+x.current));});
+ if(!v.changed_selections.length&&v.raw_leader_changes.length)panel.append(e('p','muted small',
+  v.raw_leader_changes.length+' raw race leaders changed, but the win-first selection list did not.'));
+ return panel;
 }
 function metrics(){var grid=e('div','grid stats');[[C.board.raceCount,'Races'],[C.board.sourceCount,'Source dossiers'],[C.board.activeCount,'Included runners'],[C.board.excludedCount,'Excluded runners']].forEach(function(m){grid.append(add(e('div','panel metric'),e('div','number',m[0]),e('div','label',m[1])));});return grid;}
 function venueCards(){var g=e('div','grid');Object.keys(C.going).forEach(function(v){var m=(D.meetings||[]).find(function(x){return x.meeting===v;})||{},r=D.races.filter(function(x){return x.meeting===v;});g.append(add(e('div','panel track'),e('div','venue',v),e('h3','',r.length+' races'),e('p','','Model scenario: '+C.going[v]),e('p','','Saved observation '+D.saved_at+': '+(m.official_29_oct||'Not verified')),e('p','','Rail: '+(m.rail||'Not verified')),action('View races',function(){selectRace(r[0].id);},'primary')));});return g;}
 function overview(){var hero=add(e('div','hero'),e('div','eyebrow',D.date+' · '+C.board.version),e('h2','','Your racing command centre.'),e('p','','One formula across the rankings, whole fields, simulator and Multi Lab.'));
  hero.append(add(e('div','heroActions'),action('Daily Top 10',function(){go('top10');},'primary'),action('Race Centre',function(){go('races');}),link('Results · Top 5/10/15','/results.html'),action('Simulator',function(){go('sim');})));
- add(app(),hero,metrics(),scenarios(),head('Leading model chances','One leader per race, ranked by independent win probability.'),toplist(),head('Track scenarios','Saved observations and assumptions are shown separately.'),venueCards());
+ add(app(),hero,metrics(),scenarios(),changeNotice(),head('Independent Top 10 · tracked','Original researched grades and positions, with scratching and track-review flags.'),aTierSummary(),toplist(),head('Track scenarios','Saved observations and assumptions are shown separately.'),venueCards());
 }
-function topSet(){return C.board.leaders.filter(function(h){return S.top==='ALL'||h.meeting===S.top;}).slice(0,S.topN);}
-function toplist(){var list=e('div','toplist');topSet().forEach(function(h,i){var row=e('button','toprow'),mid=e('div'),stat=e('div','model-row-stat');row.type='button';row.dataset.runnerId=h.id;row.dataset.modelPct=String(h.p);
- add(mid,e('strong','',h.horse),e('small','',h.meeting+' R'+h.race+' · gap '+h.gap.toFixed(2)+'pp'));
- add(stat,e('strong','',pct(h.p)),e('small','','Fair $'+h.fair_odds.toFixed(2)),e('small','','Range '+pct(h.model_range[0])+'–'+pct(h.model_range[1])));
- add(row,e('div','slot',String(i+1).padStart(2,'0')),mid,stat);row.addEventListener('click',function(){selectRace(h.race_id,h.id);});list.append(row);});return list;}
-function top10(){add(app(),head('Daily Top '+S.topN,'All three meetings, one race leader per race. Top 5, 10 and 15 share the same probability order.'),scenarios());
- var controls=e('div','filters');controls.append(setField('Selections',[5,10,15].map(function(n){return {value:String(n),text:'Top '+n};}),String(S.topN),function(v){S.topN=+v;render();}),setField('Meeting',[{value:'ALL',text:'All meetings'}].concat(Object.keys(C.going).map(function(v){return {value:v,text:v};})),S.top,function(v){S.top=v;render();}));
- add(app(),controls,toplist(),e('p','muted small','Range = sensitivity across eight scenarios, not a confidence interval. Model fair odds are derived after scoring. Bookmaker prices and original picks do not determine this order.'));
+function curatedSet(){
+ return C.curated?C.curated.entries.slice(0,S.topN).filter(function(h){return S.top==='ALL'||h.meeting===S.top;}):[];
+}
+function topSet(){
+ var candidates=S.topMode==='MODEL'?C.board.leaders:C.board.winFirst.priority.map(function(a){
+  var h=model(a.runner_id);
+  return Object.assign({},h,{_screen_status:a.status,_floor:a.robust_floor,_screen_reasons:a.reasons});
+ });
+ return candidates.slice(0,S.topN).filter(function(h){return S.top==='ALL'||h.meeting===S.top;});
+}
+function toplist(){
+ if(S.topMode==='RESEARCH'&&C.curated){
+  var wrap=e('div','toplist'),items=curatedSet();
+  items.forEach(function(h){
+   var row=e('div','toprow'),mid=e('div'),stat=e('div','model-row-stat');
+   row.dataset.runnerId=h.id;
+   if(h.model_pct!==null)row.dataset.modelPct=String(h.model_pct);
+   add(mid,e('strong','',h.horse),
+    e('small','',h.meeting+' R'+h.race+' · '+(h.research_lane==='CONDITIONAL_REVIEW'?'FURTHER REVIEW · ':'TOP 10 · ')+'Form grade '+h.form_tier+' · '+(h.eligible?'STARTER PROVISIONAL':'OUT OF FIELD')),
+    e('small','',h.race_day_assessment.replaceAll('_',' ')+' · '+(h.notes.length?h.notes.join(', '):'No new screening flags')));
+   add(stat,e('strong','',h.model_pct===null?'—':pct(h.model_pct)),
+     e('small','','Uncalibrated V5 chance'),e('small','','Original #'+h.original_rank+' · ranked #'+h.rank));
+   var buttons=e('div','workshop-actions'),view=action('View race',function(){selectRace(h.race_id,h.id);},'ghost');
+   buttons.append(view);
+   if(C.setResearchOverride&&h.eligible)buttons.append(action('Edit grade / rank',function(){
+    var form=e('div','panel'),fields=e('div','filters');
+    var grade=e('select');C.curatedGradeOptions.forEach(function(g){var o=e('option','',g);o.value=g;grade.append(o);});grade.value=h.form_tier;
+    var rank=e('select');C.curated.entries.forEach(function(_,i){var o=e('option','',String(i+1));o.value=String(i+1);rank.append(o);});rank.value=String(h.rank);
+    var reason=e('input');reason.type='text';reason.placeholder='Explain form, trainer, scratching or track evidence';reason.maxLength=500;reason.setAttribute('aria-label','Required reason for research change');
+    add(fields,e('span','','Form tier:'),grade,e('span','','Rank:'),rank,reason);
+    add(form,fields,action('Save audited local change',function(){
+     try{C.setResearchOverride(h.id,{tier:grade.value,rank:Number(rank.value),reason:reason.value});}
+     catch(err){reason.setCustomValidity(err.message);reason.reportValidity();}
+    },'primary'));
+    row.append(form);
+    view.disabled=true;
+   },'ghost'));
+   add(row,e('div','slot',String(h.rank).padStart(2,'0')),mid,stat,buttons);
+   wrap.append(row);
+  });
+  if(!items.length)wrap.append(note('No researched selection for this meeting. No replacement horse has been invented.'));
+  return wrap;
+ }
+ var list=e('div','toplist'),items=topSet();
+ if(!items.length)return add(list,note('No research priority qualifies under these conditions. The model is abstaining.'));
+ items.forEach(function(h,i){
+  var row=e('button','toprow'),mid=e('div'),stat=e('div','model-row-stat');row.type='button';
+  row.dataset.runnerId=h.id;row.dataset.modelPct=String(h.p);
+  add(mid,e('strong','',h.horse),e('small','',h.meeting+' R'+h.race+' · gap '+h.gap.toFixed(2)+'pp'),
+    e('small','',h._screen_status?'SCREENED RESEARCH PRIORITY':'RAW MODEL ONLY'));
+  add(stat,e('strong','',pct(h.p)),e('small','','Provisional model estimate'),
+    e('small','','Scenario floor '+pct(h._floor===undefined?h.robust_floor:h._floor)));
+  add(row,e('div','slot',String(i+1).padStart(2,'0')),mid,stat);
+  row.addEventListener('click',function(){selectRace(h.race_id,h.id);});list.append(row);
+ });
+ return list;
+}
+function researchHistory(){
+ if(!C.curated)return null;
+ var panel=box('Research revisions · what changed','Archived top-ten positions are retained. Local edits have a date, reason and before/after values. Changes stored on this device are not a shared Airtable publication.');
+ var items=C.researchHistory.slice(-10).reverse();
+ if(!items.length)panel.append(e('p','muted small','No changes to the frozen research checkpoint since it was loaded.'));
+ items.forEach(function(entry){
+  panel.append(e('p','muted small',entry.at+' · '+entry.reason+' · '+entry.changes.length+' affected researched runner(s)'));
+  entry.changes.slice(0,4).forEach(function(x){
+   panel.append(e('p','muted small',x.horse+': #'+x.old_rank+' → #'+x.new_rank+
+    ', '+x.old_grade+' → '+x.new_grade+', '+(x.old_model_pct===null?'—':pct(x.old_model_pct))+
+    ' → '+(x.new_model_pct===null?'—':pct(x.new_model_pct))+
+    ' · '+x.old_status+' → '+x.new_status));
+  });
+ });
+ return panel;
+}
+function aTierSummary(){
+ if(!C.curated)return null;
+ var panel=box('Original A-tier form · preserved','A-tier is the established historical form assessment, NOT a guarantee or an automatic A-grade race-day play.');
+ C.curated.aTier.forEach(function(x){
+  panel.append(e('p','muted small',x.horse+' · '+x.meeting+' R'+x.race+
+    ' · original form '+x.archived_form_tier+(x.form_tier!==x.archived_form_tier?' · latest local grade '+x.form_tier:'')+' · '+x.race_day_assessment.replaceAll('_',' ')+
+    (x.horse==='Hot And High'?' · Soft 5 record unavailable; race-day confidence conditional':'') ));
+ });
+ return panel;
+}
+function top10(){
+ add(app(),head('Daily Top '+S.topN,'Original independent research rankings, live field status and model percentages are distinct.'),scenarios());
+ var controls=e('div','filters');
+ controls.append(setField('Board view',[
+  {value:'RESEARCH',text:'Form-researched Top 10'},
+  {value:'WIN_FIRST',text:'Strict model priorities'},
+  {value:'MODEL',text:'Raw model audit only'}
+ ],S.topMode,function(v){S.topMode=v;render();}),
+  setField('Selections',[5,10,15].map(function(n){return {value:String(n),text:'Top '+n};}),String(S.topN),function(v){S.topN=+v;render();}),
+  setField('Meeting',[{value:'ALL',text:'All meetings'}].concat(Object.keys(C.going).map(function(v){return {value:v,text:v};})),S.top,function(v){S.top=v;render();}));
+ app().append(controls);
+ if(C.lastChange)app().append(changeNotice());
+ if(S.topMode==='RESEARCH'){
+  var source=C.curated;
+  if(!source)app().append(note('Frozen research checkpoint unavailable. Strict model priorities shown separately; the independent top ten cannot be reconstructed from a model score.'));
+  else{
+   app().append(note('Frozen form ranking '+source.checkpoint_at+' · '+source.priority_research_count+' Top 10 original research, '+source.additional_review_count+' conditional Top 15 additions · '+source.active_count+'/'+source.count+
+     ' researched runners remain in the provisional field. '+(S.topN>source.count?'Only '+source.count+' of requested Top '+S.topN+' have an independently researched ranking; '+(S.topN-source.count)+' slots intentionally remain vacant. ':'')+
+     'A scratched runner keeps its historical position but cannot count as an active pick. No silent replacement.'));
+   app().append(aTierSummary());
+  }
+ }else if(S.topMode==='WIN_FIRST'){
+  var rows=C.board.winFirst.priority.filter(function(h){return S.top==='ALL'||h.meeting===S.top;});
+  app().append(note(rows.length+' strict model priorities; fewer than '+S.topN+' may qualify. Not the archived human Top 10.'));
+ }
+ if(S.topMode==='RESEARCH'&&!C.curated)app().append(note('Archived research data not loaded.'));
+ else app().append(toplist());
+ if(S.topMode==='RESEARCH'){
+  if(C.curated)app().append(researchHistory());
+ }else if(S.topMode==='WIN_FIRST'){
+  var hold=C.board.winFirst.review.filter(function(h){return S.top==='ALL'||h.meeting===S.top;});
+  var panel=box('Review only · not shortlisted','These runners need further validation before a strict model priority.');
+  hold.forEach(function(h){panel.append(e('p','muted small',h.horse+' · '+h.meeting+' R'+h.race+' · '+h.reasons.join(', ')));});
+  app().append(panel);
+ }else app().append(note('Raw model rankings may change under going or scratchings; do not mistake these for the reviewed Top 10.'));
+ app().append(e('p','muted small','Model percentages are uncalibrated. Current source: '+(D.official_check_at||D.saved_at||'undated')+
+  ' · live final scratching certification: NOT ESTABLISHED · model revision: '+C.revision));
 }
 function raceNav(){var all=D.races.filter(function(r){return r.meeting===S.meeting;}),filter=e('div','filters');filter.append(setField('Meeting',Object.keys(C.going).map(function(x){return {value:x,text:x};}),S.meeting,function(v){S.meeting=v;S.race=D.races.find(function(r){return r.meeting===v;}).id;S.runner=null;render();}),setField('Race',all.map(function(r){return {value:r.id,text:'R'+r.race+' · '+r.title};}),S.race,function(v){S.race=v;S.runner=null;render();}));
  var grid=e('div','racechips');all.forEach(function(r){var x=C.board.baseline.races.find(function(v){return v.id===r.id;}),b=add(e('button','racechip'+(r.id===S.race?' active':'')),e('b','','Race '+r.race),e('small','',r.distance_m+'m · '+(x.leader||'No contest')));b.type='button';b.addEventListener('click',function(){S.race=r.id;S.runner=null;render();});grid.append(b);});return [filter,grid];}
@@ -98,10 +219,32 @@ function facts(h){var x=model(h.id),names={career:'Career record',recency:'Recen
  return {pros:x?lines(x.positive_drivers):[],cons:x?lines(x.negative_drivers):[]};
 }
 function evidence(title,text){var details=e('details','evidencebox');return add(details,e('summary','',title),e('pre','',text||'Not documented'));}
+function humanAnalysis(h,x){
+ if(!global.RacingLabHorseAnalysis)return note('Readable form analysis unavailable; check the source dossier below.');
+ var source=C.curated&&C.curated.entries.find(function(v){return v.id===h.id;});
+ var r=raceOf(h.race_id),result=global.RacingLabHorseAnalysis.analysis(h,r,x,C.going[r.meeting],source);
+ var section=e('section','horse-brief'),intro=e('p','horse-brief-intro','Based on recorded form and the current track scenario. These are evidence-based reasons, not guaranteed outcomes.');
+ section.append(add(e('div','horse-brief-head'),e('h4','','Runner assessment'),intro));
+ var cards=e('div','horse-brief-grid');
+ [['Why it can win',result.pros,'advantage'],['What could beat it',result.cons,'risk']].forEach(function(part){
+  var card=add(e('section','horse-brief-card '+part[2]),e('h5','',part[0])),ul=e('ul','horse-brief-list');
+  if(!part[1].length)ul.append(e('li','','No verified evidence recorded yet.'));
+  part[1].forEach(function(reason){var item=e('li');add(item,e('strong','',reason.title),e('p','',reason.detail));ul.append(item);});
+  card.append(ul);cards.append(card);
+ });
+ section.append(cards);
+ if(result.unknown.length){
+  var cautions=add(e('section','horse-brief-unknown'),e('h5','','Still to confirm')),ul=e('ul','horse-brief-list');
+  result.unknown.forEach(function(v){ul.append(e('li','',v));});cautions.append(ul);section.append(cautions);
+ }
+ section.append(e('p','muted small',result.source));
+ return section;
+}
 function horseDetail(h){var x=model(h.id),root=add(e('div','panel detail'),e('div','eyebrow',x?'MODEL RANK '+x.rank:C.model.statusOf(h)),e('h3','',h.horse),e('p','muted small','No. '+h.tab+' · Barrier '+(h.barrier??'—')+' · '+(h.weight_kg??'—')+'kg · '+h.trainer+' / '+h.jockey));
  if(x){add(root,e('strong','model-big',pct(x.p)),e('p','muted small','Model fair odds $'+x.fair_odds.toFixed(2)+' · scenario range '+pct(x.model_range[0])+'–'+pct(x.model_range[1])+' · evidence coverage '+Math.round(x.completeness*100)+'% (coverage, not confidence)'));
-  var drivers=facts(h);root.append(evidence('Formula contributions',drivers.pros.concat(drivers.cons).join('\n')),evidence('Input checks',x.input_issues.join('\n')||'No structural input issue flagged. Final fields and source evidence still require verification.'));
+  root.append(evidence('Source-input QA flags',x.input_issues.join('\n')||'No structural input issue flagged. Final fields, gear and source evidence still require verification.'));
  }
+ root.append(humanAnalysis(h,x));
  var sourceExcluded=!x&&!C.isLocalScratch(h.id),localButton=action(C.isLocalScratch(h.id)?'Undo local exclusion':'Exclude locally',function(){C.setLocalScratch(h.id,!C.isLocalScratch(h.id));},'ghost');localButton.disabled=sourceExcluded;root.append(localButton,e('p','muted small','Local exclusions are what-if scenarios. Saved source scratchings cannot be reinstated here.'));
  [['Dated form',h.form],['Surface / distance / course statistics',h.statistics],['Research notes',h.strengths],['Source risks',h.risks],['Historical settling',h.historical_map],['Outstanding verification',h.outstanding]].forEach(function(p){root.append(evidence(p[0],p[1]));});return root;
 }
@@ -115,18 +258,43 @@ function comparePage(){add(app(),head('Compare runners','Model probabilities and
  if(!hs.some(function(h){return h.id===S.compareA;}))S.compareA=hs[0].id;if(!hs.some(function(h){return h.id===S.compareB;}))S.compareB=(hs[1]||hs[0]).id;
  var opts=hs.map(function(h){return {value:h.id,text:h.horse};}),filters=e('div','filters');filters.append(setField('Runner A',opts,S.compareA,function(v){S.compareA=v;render();}),setField('Runner B',opts,S.compareB,function(v){S.compareB=v;render();}));app().append(filters,add(e('div','compare'),horseDetail(hs.find(function(h){return h.id===S.compareA;})),horseDetail(hs.find(function(h){return h.id===S.compareB;}))));
 }
-function qaPage(){add(app(),head('Model QA',C.board.version+' · '+C.revision),metrics(),scenarios(),box('Whole-field checks',C.board.baseline.races.filter(function(r){return r.sum===100;}).length+' races total 100.00%. Exclusions remain in the source audit. A race with fewer than two included runners is withheld.'),box('Model status','Formula regression checks pass. Coefficients remain uncalibrated. The stored dossier does not establish completion of replay, trainer, gear, sectional or race-day field checks.'));}
+function qaPage(){add(app(),head('Model QA',C.board.version+' · '+C.revision),metrics(),scenarios(),officialPanel(),box('Win-first screening',C.board.winFirst.priority.length+' provisional research priorities · '+C.board.winFirst.review.length+' review-only · '+C.board.winFirst.avoid.length+' withheld races. Formula uses fixed Good 4/Soft 5 and conservative-class scenarios; no validated hit-rate gain.'),box('Whole-field checks',C.board.baseline.races.filter(function(r){return r.sum===100;}).length+' races total 100.00%. Exclusions remain in the source audit. A race with fewer than two included runners is withheld.'),box('Model status','Formula regression checks pass. Coefficients remain uncalibrated. The stored dossier does not establish completion of replay, trainer, gear, sectional or race-day field checks.'));}
 function calPage(){add(app(),head('Calibration','Measured accuracy must come from frozen pre-race forecasts and verified results.'),box('Current status','Historical V5 calibration has not been established. Passing formula checks does not establish an improved strike rate. Scenario ranges are sensitivity checks.'),link('Open existing Top 5/10/15 results','/results.html'));}
-function weatherPage(){add(app(),head('Weather & Tracks','Scenarios update the model everywhere. Saved observations remain dated.'),scenarios(),venueCards());}
-function syncPage(){add(app(),head('Data & Sync','One shared board for every screen.'),metrics(),box('Evidence source',C.live?'Complete matching Airtable evidence received '+C.live.as_of+'. This is not official race-day certification.':'Saved snapshot '+D.saved_at+' is loaded. Live Airtable evidence is not confirmed.'),box('Latest refresh',C.error||'No refresh error recorded.'),action('Refresh Airtable evidence',function(){refresh(C);},'primary'),link('Static evidence','/v5/research.json'),link('GitHub code','https://github.com/fletchermaguire-oss/V3-Racing-Lab.'));}
+function weatherPage(){add(app(),head('Weather & Tracks','Scenarios update the model everywhere. Saved observations remain dated.'),scenarios(),officialPanel(),venueCards());}
+function syncPage(){add(app(),head('Data & Sync','One shared board for every screen.'),metrics(),officialPanel(),box('Evidence source',C.live?'Complete matching Airtable evidence received '+C.live.as_of+'. This is not official race-day certification.':'Saved snapshot '+D.saved_at+' is loaded. Live Airtable evidence is not confirmed.'),(function(){var panel=box('Latest refresh',C.error||'No refresh error recorded.');var line=panel.children&&panel.children[1];if(line)line.id='v5-sync-status';return panel;})(),action('Refresh Airtable evidence',function(){refresh(C);},'primary'),link('Static evidence','/v5/research.json'),link('GitHub code','https://github.com/fletchermaguire-oss/V3-Racing-Lab.'));}
 function resultsPage(){add(app(),head('Results & History · Top 5 / 10 / 15','Existing selections and results are preserved.'),box('Historical record','Some historical rankings were reconstructed from saved probabilities rather than frozen pre-race lists. They remain labelled as retrospective.'),link('Open Results & History','/results.html','btn primary'));}
+function statusOnly(){
+ if(!C)return;
+ var badge=document.getElementById('livebadge');
+ if(badge)badge.textContent=C.error?'SYNC WARNING · SAVED BOARD':C.live?'AIRTABLE · MODEL UPDATED':'SAVED MODEL · PROVISIONAL';
+ var status=document.getElementById('v5-sync-status');
+ if(status)status.textContent=C.error||'No refresh error recorded.';
+}
 function render(){if(!C)return;D=C.data;if(!raceOf(S.race)){S.race=D.races[0].id;S.meeting=D.races[0].meeting;}
  if(global.RacingLabWorkshop)global.RacingLabWorkshop.stop();if(!embedded)nav();app().replaceChildren();
  var views={overview:overview,top10:top10,races:racesPage,multi:function(){workshop('multiPage');},sim:function(){workshop('simPage');},compare:comparePage,qa:qaPage,cal:calPage,weather:weatherPage,sync:syncPage,results:resultsPage};(views[S.page]||overview)();app().append(e('div','footer',C.board.version+' · '+C.revision+' · model estimates uncalibrated · source snapshot '+D.saved_at));
 }
+function officialPanel(){
+ var p=box('Official scratchings / track review',C.official?
+  'Observed '+C.official.observed_at+' · published sheets shown below. These are source-backed scratchings and track grades, NOT certified final starters/emergency activations.'
+  :'Saved official-dated snapshot '+(D.official_check_at||'unavailable')+' · automatic refresh not yet confirmed. Final official declarations still outstanding.');
+ if(C.official)C.official.meetings.forEach(function(s){
+  p.append(e('p','muted small',s.meeting+' · '+s.track_going+' · '+s.scratched_total+
+   ' scratched · published '+s.source_last_published));
+ });
+ p.append(action('Check official scratching sheets now',function(){refreshOfficial(C);},'primary'));
+ return p;
+}
+async function refreshOfficial(controller){
+ try{
+  const response=await fetch('/api/v5/official',{cache:'no-store'});
+  if(!response.ok)throw Error('Official sheets HTTP '+response.status);
+  controller.applyOfficialSheets(await response.json());
+ }catch(err){controller.reportError('Official update unavailable; saved field retained: '+err.message);}
+}
 async function refresh(controller){try{var r=await fetch('/api/v5/evidence',{cache:'no-store'});if(!r.ok)throw Error('Airtable HTTP '+r.status);controller.applyEvidence(await r.json());}catch(err){controller.reportError('Saved board retained: '+err.message);}}
-function startRefresh(controller){if(controller.refreshStarted)return;controller.refreshStarted=true;refresh(controller);setInterval(function(){if(document.visibilityState==='visible')refresh(controller);},300000);}
+function startRefresh(controller){if(controller.refreshStarted)return;controller.refreshStarted=true;refresh(controller);refreshOfficial(controller);setInterval(function(){if(document.visibilityState==='visible'){refresh(controller);refreshOfficial(controller);}},300000);}
 function renderInto(container,page,controller,onNavigate,race){embedded=true;target=container;C=controller;navigate=onNavigate;S.page=page;D=C.data;if(race&&raceOf(race)){S.race=race;S.meeting=raceOf(race).meeting;}render();}
- global.RacingLabV5Dashboard={renderInto:renderInto,startRefresh:startRefresh,stop:function(){if(global.RacingLabWorkshop)global.RacingLabWorkshop.stop();}};
- if(document.getElementById('workspace'))global.RacingLabV5State.load().then(function(controller){C=controller;D=C.data;C.subscribe(render);render();startRefresh(C);}).catch(function(err){app().replaceChildren(note('Current formula could not load: '+err.message),link('Results & History','/results.html'));});
+ global.RacingLabV5Dashboard={renderInto:renderInto,startRefresh:startRefresh,showFeedStatus:statusOnly,stop:function(){if(global.RacingLabWorkshop)global.RacingLabWorkshop.stop();}};
+ if(document.getElementById('workspace'))global.RacingLabV5State.load().then(function(controller){C=controller;D=C.data;C.subscribe(function(_,event){if(event&&event.statusOnly)statusOnly();else render();});render();startRefresh(C);}).catch(function(err){app().replaceChildren(note('Current formula could not load: '+err.message),link('Results & History','/results.html'));});
 })(window);

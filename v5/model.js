@@ -5,7 +5,7 @@
  */
 (function(global){
 'use strict';
-const VERSION='V5-L4-20261030';
+const VERSION='V5-L5-CANDIDATE-20261030';
 const CONFIG=Object.freeze({
  temperature:0.78,uniformReserve:0.15,
  weights:Object.freeze({career:0.24,recency:0.76,distance:0.19,surface:0.22,course:0.12,class:0.55}),
@@ -74,7 +74,7 @@ function parseStats(h){
   const label=aliases[k];
   const official=Array.from(s.matchAll(new RegExp('\\b'+label+'\\s+(\\d+):(\\d+)-(\\d+)-(\\d+)','gi')))
    .map(m=>({n:+m[1],w:+m[2],place:+m[3]+ +m[4]}));
-  const legacy=Array.from(s.matchAll(new RegExp('\\b'+label+'\\s+(\\d+)\\s*-\\s*(\\d+)\\s*-\\s*(\\d+)','gi')))
+  const legacy=Array.from(s.matchAll(new RegExp('\\b'+label+'\\s*:?[ \\t]*(\\d+)\\s*-\\s*(\\d+)\\s*-\\s*(\\d+)','gi')))
    .map(m=>({w:+m[1],place:+m[2],n:+m[3]}));
   const records=official.length?official:legacy;
   const valid=records.filter(x=>[x.w,x.place,x.n].every(Number.isSafeInteger)&&x.w>=0&&x.place>=0&&x.w+x.place<=x.n);
@@ -87,18 +87,30 @@ function parseStats(h){
 }
 function parseStarts(h,cutoff){
  const issues=[],rows=[],seen=new Map();let future=0,invalid=0,duplicates=0;
- String(h.form||'').split('\n').forEach(line=>{
+ const source=String(h.form||''),isSnapshot=/^Previous Friday source-snapshot race form \(not refreshed against Saturday\):/.test(source);
+ const entries=isSnapshot?source.split(/\s+\|\s+/):source.split('\n');
+ entries.forEach(line=>{
   const t=line.trim();
-  // A historical start is a dated line, not a number in a narrative summary.
-  if(!/^\d{1,2}\/\d{1,2}\/\d{4}\b/.test(t))return;
-  const m=t.match(/^(\d{1,2}\/\d{1,2}\/\d{4})\s+(.+?)\s+(\d+)m\s+\(([GSH])\),\s*(.+?):\s*(\d+)\/(\d+),\s*PDF margin\s*([\d.]+)L/i);
-  if(!m){invalid++;return;}
-  const date=auDay(m[1]),pos=+m[6],field=+m[7],margin=num(m[8]),trip=+m[3];
+  const dated=/^\d{1,2}\/\d{1,2}\/\d{4}\b/.test(t);
+  const alternate=isSnapshot&&/\d+(?:st|nd|rd|th)\s+of\s+\d+\s+\d{1,2}\/\d{1,2}\/\d{4}/i.test(t);
+  if(!dated&&!alternate)return;
+  let date,pos,field,margin,trip,venue,surface,className;
+  if(dated){
+   const m=t.match(/^(\d{1,2}\/\d{1,2}\/\d{4})\s+(.+?)\s+(\d+)m\s+\(([GSH])\),\s*(.+?):\s*(\d+)\/(\d+),\s*PDF margin\s*([\d.]+)L/i);
+   if(!m){invalid++;return;}
+   date=auDay(m[1]);venue=m[2].trim();trip=+m[3];surface=m[4].toUpperCase();className=m[5];
+   pos=+m[6];field=+m[7];margin=num(m[8]);
+  }else{
+   // Explicit archived Friday form format. Do NOT parse narrative "1st of"
+   // fragments unless the record identifies the historical snapshot format.
+   const m=t.match(/(\d+)(?:st|nd|rd|th)\s+of\s+(\d+)\s+(\d{1,2}\/\d{1,2}\/\d{4})\s+(.+?)\s+Margin\s+([\d.]+)\s+Lengths?\s+Distance\s+(\d+)m\s+SOT\s+([GSH])\s+RST\s+(.+?)\s+Race\b/i);
+   if(!m){invalid++;return;}
+   pos=+m[1];field=+m[2];date=auDay(m[3]);venue=m[4].trim();margin=num(m[5]);trip=+m[6];
+   surface=m[7].toUpperCase();className=m[8].trim();
+  }
   if(date===null||field<2||pos<1||pos>field||trip<=0||margin===null||margin<0){invalid++;return;}
   if(date>=cutoff){future++;return;}
-  const row={date:date,venue:m[2].trim(),trip:trip,surface:m[4],className:m[5],pos:pos,field:field,margin:margin};
-  // One start per horse per day. Identical repeats do not increase evidence;
-  // conflicting repeats are removed instead of choosing the favourable line.
+  const row={date:date,venue:venue,trip:trip,surface:surface,className:className,pos:pos,field:field,margin:margin};
   const key=String(date),signature=JSON.stringify(row);
   if(seen.has(key)){
    duplicates++;const prev=seen.get(key);
@@ -113,27 +125,38 @@ function parseStarts(h,cutoff){
 function rate(st,prior){
  return !st||st.n===0?prior:(st.w+0.33*st.place+CONFIG.priorStarts*prior)/(st.n+CONFIG.priorStarts);
 }
-function classSignal(name){
+/* Historical class levels are ordinal HYPOTHESES, never empirically
+ * verified rival ratings. A Group 1 near-win beats a low-grade win on
+ * class, but insufficient evidence cannot be turned into certainty.
+ */
+function historicalRaceLevel(name){
  const n=String(name||'').toUpperCase(),g=n.match(/\bG([123])\b/);
- if(g)return g[1]==='1'?1.15:g[1]==='2'?0.85:0.59;
- if(/\bLR\b|LISTED/.test(n))return 0.38;
- if(/\bOPEN\b/.test(n))return 0.15;
+ if(g)return g[1]==='1'?3.6:g[1]==='2'?2.7:2.1;
+ if(/\bLR\b|\bLISTED\b/.test(n))return 1.65;
  const bm=n.match(/\bBM(?:0-)?(\d+)/);
- if(bm)return clamp((+bm[1]-78)/56,-0.28,0.36);
- if(/\b(?:MDN|MAIDEN)\b/.test(n))return -0.45;
- if(/\bCL[1-3]\b/.test(n))return -0.22;
- return 0;
+ if(bm)return clamp((+bm[1]-40)/45,0.25,1.5);
+ if(/\b1MW\b|\bNMW1Y\b/.test(n))return 0.76;
+ const cl=n.match(/\bCL([1-6])\b/);
+ if(cl)return 0.23+0.12*+cl[1];
+ if(/\bMDN\b|\bMAIDEN\b/.test(n))return 0.18;
+ if(/\bOPEN\b|\bQLTY\b/.test(n))return 1.35;
+ return null;
 }
 function classQuality(starts){
- const values=starts.map(s=>{
-  const grade=classSignal(s.className),finish=(s.field-s.pos)/(s.field-1);
-  const beaten=s.pos===1?0:s.margin;
-  const quality=(0.28+0.72*finish)*Math.exp(-clamp(beaten,0,20)/13);
-  // Both positive and negative grades improve with a better performance.
-  // A winner's margin is not a losing margin.
-  return grade>=0?grade*quality:grade*(1.5-0.5*quality);
- }).sort((a,b)=>b-a);
- return values.length?0.75*values[0]+0.25*(values[1]===undefined?values[0]:values[1]):0;
+ let weight=0,sum=0;const values=[];
+ starts.slice(0,5).forEach((s,i)=>{
+  const level=historicalRaceLevel(s.className);
+  if(level===null)return; // Unknown grade contributes no invented class signal.
+  const finish=(s.field-s.pos)/(s.field-1);
+  const perf=s.pos===1?1+0.025*clamp(s.margin,0,6):
+   (0.15+0.85*Math.pow(finish,0.85))*Math.exp(-clamp(s.margin,0,24)/18);
+  const adjusted=level*perf,w=Math.pow(0.82,i);
+  sum+=w*adjusted;weight+=w;values.push(adjusted);
+ });
+ if(!values.length)return 0;
+ values.sort((a,b)=>b-a);
+ const high=(values[0]+(values[1]===undefined?values[0]:values[1]))/2;
+ return (0.75*sum/weight+0.25*high)*values.length/(values.length+0.65);
 }
 function settling(h,starts){
  const vals=[],fractions=[];
@@ -160,8 +183,7 @@ function runnerFeatures(h,r,going,medWeight,medBarrier,classWeight,context){
   const fraction=(s.field-s.pos)/(s.field-1);
   // A larger winning margin helps; a larger beaten margin hurts.
   const marginTerm=s.pos===1?0.015*clamp(s.margin,0,6):-0.037*clamp(s.margin,0,16);
-  let perf=(fraction-0.5)*1.65+0.22*(s.pos===1?1:0)+marginTerm+
-   0.30*classSignal(s.className)*clamp((fraction-0.20)*1.2,0.15,1);
+  let perf=(fraction-0.5)*1.65+0.22*(s.pos===1?1:0)+marginTerm;
   perf+=0.10*Math.exp(-Math.abs(s.trip-r.distance_m)/400);
   if(s.surface===going.code)perf+=0.06;
   form+=w*perf;wsum+=w;
@@ -181,7 +203,7 @@ function runnerFeatures(h,r,going,medWeight,medBarrier,classWeight,context){
  const draw=straight||!barrierValid||context.maxBarrier<2?0:context.drawBias*((context.maxBarrier+1)/2-barrierValue)/((context.maxBarrier-1)/2)*0.06;
  const parts={career:CONFIG.weights.career*signal(ratios.career),recency:CONFIG.weights.recency*form,
   distance:CONFIG.weights.distance*signal(ratios.distance),surface:CONFIG.weights.surface*signal(ratios.surface),
-  course:CONFIG.weights.course*signal(ratios.course),class:classWeight*quality,
+  course:CONFIG.weights.course*signal(ratios.course),class:0,
   barrier:barrier,weight:weight,layoff:layoff,pace:pace,draw_sensitivity:draw};
  const completeness=clamp((st.career&&st.career.n>0?0.22:0)+(st.distance&&st.distance.n>0?0.13:0)+
   (st[going.key]&&st[going.key].n>0?0.13:0)+(st.course&&st.course.n>0?0.08:0)+Math.min(0.34,starts.length*0.07)+
@@ -231,6 +253,17 @@ function calculate(d,scenario,classWeight=CONFIG.weights.class,options={}){
   const barriers=horses.map(h=>num(h.barrier)).filter(x=>Number.isSafeInteger(x)&&x>0);
   const context={raceDay:raceDay,cutoff:cutoff,pace:pace,drawBias:drawBias,maxBarrier:barriers.length?Math.max.apply(null,barriers):0};
   const entries=horses.slice().sort((a,b)=>a.id.localeCompare(b.id)).map(h=>runnerFeatures(h,Object.assign({},r,{field_count:horses.length}),going,median(weights),median(barriers),classWeight,context));
+  // Each contender is rated relative to the actual competitors in this race.
+  // The three highest-rated rivals and the median rival determine an anchor.
+  // This is current-field competition, not a historic-opponent database.
+  entries.forEach(x=>{
+   const others=entries.filter(y=>y.h.id!==x.h.id).map(y=>y.classQuality).sort((a,b)=>b-a);
+   const top=others.slice(0,Math.min(3,others.length));
+   const anchor=0.65*top.reduce((s,v)=>s+v,0)/top.length+0.35*median(others);
+   const edge=x.classQuality-anchor,contribution=classWeight*edge;
+   x.parts.class=contribution;x.raw+=contribution;
+   x.oppositionAnchor=anchor;x.oppositionEdge=edge;
+  });
   const p=normalize(entries),mid=median(entries.map(x=>x.raw));
   entries.forEach((x,i)=>{x.p=p.rounded[i];x.pExact=p.exact[i];});
   entries.sort((a,b)=>b.pExact-a.pExact||a.h.id.localeCompare(b.h.id));
@@ -243,6 +276,7 @@ function calculate(d,scenario,classWeight=CONFIG.weights.class,options={}){
     rank:i+1,p:x.p,p_exact:x.pExact,model_score:round(clamp(50+18*(x.raw-mid),1,99),1),
     fair_odds:round(100/x.pExact),field_size:entries.length,field_gap:gap,chaos:chaos,
     completeness:x.completeness,days_since_last:x.daysSinceLast,features:x.parts,grade_quality:round(x.classQuality,3),
+     opposition_class_anchor:round(x.oppositionAnchor,3),opposition_class_edge:round(x.oppositionEdge,3),
     settle_800:x.settle.position,settle_fraction:x.settle.fraction,status:statusOf(x.h),original_pick:!!x.h.original_pick,
     input_issues:x.issues,form_audit:{accepted:x.starts.length,ignored_future:x.formAudit.ignored_future,invalid:x.formAudit.invalid,duplicates:x.formAudit.duplicates},
     g1_wins:x.starts.filter(s=>/\bG1\b/i.test(s.className)&&s.pos===1).length,
@@ -264,6 +298,73 @@ function calculate(d,scenario,classWeight=CONFIG.weights.class,options={}){
   records:records,races:races,excluded:excluded,runnerAudit:runnerAudit,input_issues:inventory.issues};
 }
 function sortProbability(a,b){return b.p_exact-a.p_exact||b.completeness-a.completeness||b.robust_floor-a.robust_floor||b.gap-a.gap||a.id.localeCompare(b.id);}
+/* Single win-first selection gate. Raw win probabilities remain diagnostics.
+ * Scenarios are fixed Good 4, Soft 5 and both conservative-class variants:
+ * changing the screen's selected track cannot promote a different leader.
+ * Race-level abstention is deliberate; estimates remain uncalibrated.
+ */
+function winFirstBoard(baseline,scenarios){
+ const good=scenarios[8],soft=scenarios[1],goodCon=scenarios[9],softCon=scenarios[3];
+ const datasets=[good,soft,goodCon,softCon],lookups=datasets.map(s=>new Map(s.records.map(x=>[x.id,x])));
+ const priority=[],review=[],avoid=[],byRace=[];
+ baseline.races.forEach(r=>{
+  const pick=s=>s.records.find(x=>x.race_id===r.id&&x.rank===1);
+  const g=pick(good),s=pick(soft);
+  if(r.going!=='Good 4'&&r.going!=='Soft 5'){
+   const x={race_id:r.id,meeting:r.meeting,race:r.race,status:'NO_SELECTION',reasons:['TRACK_GRADE_OUTSIDE_TESTED_GOOD4_SOFT5']};
+   avoid.push(x);byRace.push(x);return;
+  }
+  if(!g||!s){
+   const x={race_id:r.id,meeting:r.meeting,race:r.race,status:'NO_SELECTION',reasons:['INCOMPLETE_FIELD']};
+   avoid.push(x);byRace.push(x);return;
+  }
+  if(g.id!==s.id){
+   const x={race_id:r.id,meeting:r.meeting,race:r.race,status:'NO_SELECTION',
+    reasons:['GOING_CHANGES_RACE_LEADER'],good4:g.horse,soft5:s.horse};
+   avoid.push(x);byRace.push(x);return;
+  }
+  const current=baseline.records.find(x=>x.id===g.id);
+  if(!current){
+   const x={race_id:r.id,meeting:r.meeting,race:r.race,status:'NO_SELECTION',reasons:['CANONICAL_LEADER_NOT_IN_CURRENT_FIELD']};
+   avoid.push(x);byRace.push(x);return;
+  }
+  const samples=lookups.map(m=>m.get(g.id)),p=samples.map(x=>x.p),floor=Math.min(...p),ceiling=Math.max(...p);
+  const gap=Math.min(...[good,soft].map(a=>{
+   const rows=a.records.filter(x=>x.race_id===r.id).sort((x,y)=>x.rank-y.rank);
+   return rows.length>=2?rows[0].p-rows[1].p:0;
+  }));
+  const chaos=Math.max(good.races.find(x=>x.id===r.id).chaos,soft.races.find(x=>x.id===r.id).chaos);
+  const reasons=[];
+  if(!samples.every(x=>x.rank===1))reasons.push('CLASS_ASSUMPTION_CHANGES_RANK');
+  if(current.form_audit.accepted<3)reasons.push('LIMITED_RECENT_FORM');
+  if(current.completeness<0.78)reasons.push('INCOMPLETE_DOSSIER');
+  if(current.input_issues.length)reasons.push('FORM_INPUT_ISSUES');
+  if(floor<17)reasons.push('LOW_CONSERVATIVE_CHANCE');
+  if(gap<4)reasons.push('WEAK_FIELD_SEPARATION');
+  if(chaos>89)reasons.push('CROWDED_RACE');
+  if(ceiling-floor>12)reasons.push('WIDE_CLASS_OR_GOING_SENSITIVITY');
+  if(current.days_since_last!==null&&current.days_since_last>70)reasons.push('FITNESS_AFTER_BREAK');
+  if(current.days_since_last!==null&&current.days_since_last<=7)reasons.push('SHORT_BACKUP');
+  const item={runner_id:g.id,horse:g.horse,race_id:r.id,meeting:r.meeting,race:r.race,
+   model_pct:current.p,robust_floor:floor,robust_spread:round(ceiling-floor),min_gap:round(gap),
+   max_chaos:chaos,completeness:current.completeness,dated_starts:current.form_audit.accepted,
+   grade_quality:current.grade_quality,reasons:reasons,good4_pct:g.p,soft5_pct:s.p};
+  if(!reasons.length){item.status='PRIORITY_RESEARCH';priority.push(item);}
+  else if(floor>=13&&gap>=4&&chaos<=89&&current.form_audit.accepted>=3&&
+   current.completeness>=0.78&&!current.input_issues.length){
+   item.status='REVIEW_ONLY';review.push(item);
+  }else{item.status='NO_SELECTION';avoid.push(item);}
+  byRace.push(item);
+ });
+ const rank=(a,b)=>b.robust_floor-a.robust_floor||b.min_gap-a.min_gap||a.race_id.localeCompare(b.race_id);
+ priority.sort(rank);review.sort(rank);
+ const candidates=priority.concat(review);
+ return {status:'RESEARCH_ONLY_UNCALIBRATED',method:'FIXED_GOOD4_SOFT5_PLUS_CONSERVATIVE_CLASS',
+  priority:priority,review:review,avoid:avoid,byRace:byRace,researchCandidates:candidates,
+  top5:candidates.slice(0,5),top10:candidates.slice(0,10),top15:candidates.slice(0,15),
+  caveat:'Only consistent scenario leaders enter the list; review-only horses are NOT research priorities. No padding, frozen approval, or demonstrated win-rate gain.'};
+}
+
 function board(d,options={}){
  const baselineGoing=options.going||'Good 4';
  const variants=[
@@ -274,7 +375,9 @@ function board(d,options={}){
   {label:'Baseline going; fast pace',going:baselineGoing,classWeight:CONFIG.weights.class,pace:1},
   {label:'Baseline going; slow pace',going:baselineGoing,classWeight:CONFIG.weights.class,pace:-1},
   {label:'Baseline going; inside draw sensitivity',going:baselineGoing,classWeight:CONFIG.weights.class,drawBias:1},
-  {label:'Baseline going; outside draw sensitivity',going:baselineGoing,classWeight:CONFIG.weights.class,drawBias:-1}
+  {label:'Baseline going; outside draw sensitivity',going:baselineGoing,classWeight:CONFIG.weights.class,drawBias:-1},
+  {label:'Good 4; base class',going:'Good 4',classWeight:CONFIG.weights.class},
+  {label:'Good 4; conservative class',going:'Good 4',classWeight:CONFIG.conservativeClass}
  ];
  const scenarios=variants.map(v=>calculate(d,v.going,v.classWeight,{pace:v.pace,drawBias:v.drawBias,cutoffDate:options.cutoffDate}));
  const good=scenarios[0],maps=scenarios.map(s=>new Map(s.records.map(x=>[x.id,x]))),byRace=new Map();
@@ -287,11 +390,17 @@ function board(d,options={}){
   x.top1_scenarios=ranks.filter(n=>n===1).length;x.top3_scenarios=ranks.filter(n=>n<=3).length;x.rank_scenarios=ranks;
   x.scenario_probabilities=scenarios.map((s,i)=>({label:variants[i].label,p:maps[i].get(x.id).p,rank:ranks[i]}));
   x.gap=round(x.p-Math.max.apply(null,field.filter(h=>h.id!==x.id).map(h=>h.p)));
+  // Both possible goings must be checked even when Soft 5 is the baseline.
+  x.good4_p=maps[8].get(x.id).p;
+  x.good4_rank=maps[8].get(x.id).rank;
+  x.soft5_rank=ranks[1];
+  x.going_dependent_lead=x.rank===1&&x.good4_rank!==x.soft5_rank;
   const r=good.races.find(r=>r.id===x.race_id);x.field_quality=r.field_quality;x.field_chaos=r.chaos;
   x.quality_flags=[];
   if(x.completeness<0.70)x.quality_flags.push('LIMITED_DOSSIER');
   if(x.input_issues.length)x.quality_flags.push('INPUT_REVIEW_REQUIRED');
   if(x.robust_spread>=6)x.quality_flags.push('SCENARIO_SENSITIVE');
+  if(x.going_dependent_lead)x.quality_flags.push('GOING_DEPENDENT_LEAD');
   if(x.top1_scenarios<Math.ceil(variants.length*0.75))x.quality_flags.push('UNSTABLE_RACE_LEAD');
   if(x.field_chaos>=90)x.quality_flags.push('CROWDED_RACE');
   x.publication_flags=['UNCALIBRATED_MODEL'];
@@ -317,9 +426,10 @@ function board(d,options={}){
   baseline:good,soft:scenarios[1],marketAudit:audit,publication_blocked:true,publication_reasons:['UNCALIBRATED_MODEL','OFFICIAL_FIELD_AND_TRACK_REVIEW_REQUIRED'],
   stress:{goodClassConservative:scenarios[2],softClassConservative:scenarios[3]},scenarios:scenarios,model_variants:variants.map(v=>v.label),
   leaders:leaders,robustLeaders:robustLeaders,qualifiedLeaders:qualified,eliteLeaders:leaders.filter(x=>x.elite_form),
+  winFirst:winFirstBoard(good,scenarios),
   top5:leaders.slice(0,5),top10:leaders.slice(0,10),top15:leaders.slice(0,15),
   screen:{description:'Evidence and sensitivity screen; no price or horse override; not a calibration or hit-rate claim.',
-   rules:{completeAtLeast:0.70,scenarioSwingBelow:6,top1InScenariosAtLeast:Math.ceil(variants.length*0.75),chaosBelow:90},
+   rules:{completeAtLeast:0.70,scenarioSwingBelow:6,top1InScenariosAtLeast:Math.ceil(variants.length*0.75),chaosBelow:90,goingIndependentLeader:true},
    qualifiedRaceCount:qualified.length,totalRaceCount:leaders.length,shortlistCount:Math.min(10,leaders.length)}};
 }
 function validateRows(rows){
@@ -411,7 +521,7 @@ function evaluateFrozen(forecasts,results){
   reliability:reliability,by_model_version:versions.map(v=>{const rows=scored.filter(r=>r.model_version===v);return {model_version:v,races:rows.length,mean_multiclass_brier:mean(rows,'brier'),mean_log_loss:mean(rows,'log_loss')};}),
   calibration_fitted:false,caveat:'Inputs must be independently verified upstream. These diagnostics do not fit coefficients, prove future accuracy, or turn scenario ranges into confidence intervals.'};
 }
-const api={VERSION:VERSION,CONFIG:CONFIG,board:board,calculate:calculate,isEligible:isEligible,statusOf:statusOf,simulateWinners:simulateWinners,multi:multi,evaluateFrozen:evaluateFrozen};
+const api={VERSION:VERSION,CONFIG:CONFIG,historicalRaceLevel:historicalRaceLevel,classQuality:classQuality,board:board,calculate:calculate,isEligible:isEligible,statusOf:statusOf,simulateWinners:simulateWinners,multi:multi,evaluateFrozen:evaluateFrozen};
 global.RacingLabV5Model=Object.freeze(api);
 if(typeof module!=='undefined'&&module.exports)module.exports=global.RacingLabV5Model;
 })(typeof window==='undefined'?globalThis:window);

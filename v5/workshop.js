@@ -10,10 +10,15 @@ function control(label,node){return put(el('label','workshop-field'),el('span','
 function select(opts,value,fn){var s=el('select','workshop-select');opts.forEach(function(x){var o=el('option','',x.text);o.value=x.value;s.append(o);});s.value=value;s.addEventListener('change',function(){fn(s.value);});return s;}
 function percent(v){return Number(v).toFixed(2)+'%';}
 function raw(C,id){return C.data.runners.find(function(x){return x.id===id;});}
+function confirmedForMulti(C,id){
+ var h=raw(C,id);
+ return !!h&&!/^(?:EMERGENCY|RESERVE)\b/i.test(String(h.status||''))&&
+  C.board.baseline.records.some(function(x){return x.id===id;});
+}
 function save(C,S){try{global.localStorage.setItem('racing-lab-v5-multi:'+C.data.date,JSON.stringify(S.multi));}catch(e){}}
 function sanitize(C,S){
  if(S.multiDate!==C.data.date){S.multiDate=C.data.date;S.multi=[];try{var saved=JSON.parse(global.localStorage.getItem('racing-lab-v5-multi:'+C.data.date)||'[]');if(Array.isArray(saved))S.multi=saved;}catch(e){}}
- var seen=new Set();S.multi=(S.multi||[]).filter(function(id){var x=C.board.baseline.records.find(function(h){return h.id===id;});if(!x||seen.has(x.race_id))return false;seen.add(x.race_id);return true;}).slice(0,S.multiSize||2);save(C,S);
+ var seen=new Set();S.multi=(S.multi||[]).filter(function(id){var x=C.board.baseline.records.find(function(h){return h.id===id;});if(!x||!confirmedForMulti(C,id)||seen.has(x.race_id))return false;seen.add(x.race_id);return true;}).slice(0,S.multiSize||2);save(C,S);
 }
 function raceControls(ctx,type){
  var C=ctx.C,S=ctx.S,D=C.data,meetings=Array.from(new Set(D.races.map(function(x){return x.meeting;})));
@@ -27,28 +32,33 @@ function raceControls(ctx,type){
 }
 function multiPage(ctx){
  stop();var C=ctx.C,S=ctx.S,B=C.board,app=ctx.app();S.multiSize=S.multiSize===3?3:2;sanitize(C,S);
- put(app,ctx.head('Multi Lab','Two or three legs from distinct races, using the same probabilities as the rankings.'),ctx.scenarios(),raceControls(ctx,'multi'));
+ var safePriorities=B.winFirst.priority.filter(function(h){return confirmedForMulti(C,h.runner_id);});
+ put(app,ctx.head('Multi Lab','Two or three legs from distinct races, using the same conditional field probabilities. Auto-fill uses ONLY the win-first priority list.'),ctx.scenarios(),raceControls(ctx,'multi'));
  var selection=el('section','panel workshop-panel'),actions=el('div','workshop-actions');
+ var auto=button('Use win-first '+S.multiSize,function(){S.multi=safePriorities.slice(0,S.multiSize).map(function(x){return x.runner_id;});save(C,S);ctx.render();},'primary');
+ auto.disabled=safePriorities.length<S.multiSize;
  put(actions,control('Legs',select([{value:'2',text:'2 legs'},{value:'3',text:'3 legs'}],String(S.multiSize),function(v){S.multiSize=+v;sanitize(C,S);ctx.render();})),
-  button('Use leading '+S.multiSize,function(){S.multi=B.leaders.slice(0,S.multiSize).map(function(x){return x.id;});save(C,S);ctx.render();},'primary'),
+  auto,
   button('Clear',function(){S.multi=[];save(C,S);ctx.render();},'ghost'));
  put(selection,el('h3','','Selected legs · '+S.multi.length+'/'+S.multiSize),actions);
+ if(safePriorities.length<S.multiSize)note(selection,'There are not enough qualified, confirmed non-emergency research priorities for an automatic '+S.multiSize+'-leg selection. No unverified reserve will be auto-filled.');
  S.multi.forEach(function(id){var x=B.baseline.records.find(function(h){return h.id===id;}),h=raw(C,id),line=el('div','workshop-leg');
   put(line,put(el('div','workshop-leg-top'),el('b','',x.horse),el('span','workshop-chip',x.meeting+' R'+x.race+' · '+percent(x.p))),
    el('p','muted small','Scenario range '+percent(x.model_range[0])+'–'+percent(x.model_range[1])+' · model fair odds $'+x.fair_odds.toFixed(2)),
    button('Remove '+h.horse,function(){S.multi=S.multi.filter(function(v){return v!==id;});save(C,S);ctx.render();},'ghost'));
   selection.append(line);
  });
+ if(S.multi.some(function(id){return !B.winFirst.priority.some(function(h){return h.runner_id===id;});}))note(selection,'One or more manually chosen legs are outside the win-first priority list. Joint probabilities remain research-only.');
  if(S.multi.length>=2){var result=C.multi(S.multi);var metric=el('div','model-joint');metric.dataset.jointPct=String(result.baseline_joint_pct);
   put(metric,el('div','eyebrow','COMBINED MODEL CHANCE'),el('strong','model-big',percent(result.baseline_joint_pct)),
-   el('p','muted small','Across the eight scenarios: '+percent(result.scenario_range_pct[0])+'–'+percent(result.scenario_range_pct[1])+'. Assumes independence between races. These are uncalibrated estimates; the range measures sensitivity.'));
+   el('p','muted small','Across the ten scenarios: '+percent(result.scenario_range_pct[0])+'–'+percent(result.scenario_range_pct[1])+'. Assumes independence between races. These are uncalibrated estimates; the range measures sensitivity.'));
   selection.append(metric);
  }else note(selection,'Choose two runners from different races to calculate a combined chance.');
  app.append(selection);
  var contenders=el('section','panel workshop-panel');contenders.append(el('h3','','Choose a runner'));
  var list=el('div','workshop-candidates'),field=C.data.runners.filter(function(h){return h.race_id===S.multiRace;});
  field.sort(function(a,b){var x=B.baseline.records.find(function(r){return r.id===a.id;}),y=B.baseline.records.find(function(r){return r.id===b.id;});return (x?x.rank:999)-(y?y.rank:999)||a.tab-b.tab;});
- field.forEach(function(h){var x=B.baseline.records.find(function(r){return r.id===h.id;}),included=!!x,selected=S.multi.includes(h.id),conflict=S.multi.some(function(id){return raw(C,id).race_id===h.race_id&&id!==h.id;}),full=S.multi.length>=S.multiSize;
+ field.forEach(function(h){var x=B.baseline.records.find(function(r){return r.id===h.id;}),included=!!x&&confirmedForMulti(C,h.id),selected=S.multi.includes(h.id),conflict=S.multi.some(function(id){return raw(C,id).race_id===h.race_id&&id!==h.id;}),full=S.multi.length>=S.multiSize;
   var line=el('div','workshop-candidate'),text=put(el('div','workshop-candidate-text'),el('strong','','#'+h.tab+' '+h.horse),el('small','',x?percent(x.p)+' · fair odds $'+x.fair_odds.toFixed(2):C.model.statusOf(h)));
   var b=button(!included?'Excluded':selected?'Selected':conflict?'Same race':full?'Full':'Add leg',function(){if(!included||selected||conflict||full)return;S.multi.push(h.id);save(C,S);ctx.render();},'primary');b.disabled=!included||selected||conflict||full;
   put(line,text,b);list.append(line);

@@ -16,4 +16,6 @@ jobs:
           node-version: '22'
       - run: npm test
       - run: npm run check
+      - run: npm run research:audit
+      - run: npm run research:class
       - run: git diff --exit-code

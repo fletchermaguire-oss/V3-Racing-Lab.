@@ -1,0 +1,120 @@
+{
+  "schema": "racing-lab-friday-field-overlay/v1",
+  "race_date": "2026-10-31",
+  "checked_date": "2026-10-30",
+  "publication_approved": false,
+  "notice": "Dated official scratching-sheet reconciliation only; not 31 October final declarations. Emergency promotions are conditional projections based on initial race field limits, not certified starters. No forecasts approved.",
+  "going": {
+    "RANDWICK": "Good 4",
+    "FLEMINGTON": "Good 4",
+    "ASCOT": "Soft 5"
+  },
+  "source_documents": {
+    "RANDWICK": {
+      "url": "https://mdata.racingnsw.com.au/FreeFields/Scratchings.aspx?Key=2026Oct31%2CNSW%2CRoyal+Randwick",
+      "last_published": "2026-10-30 06:25 AEDT",
+      "rail": "True"
+    },
+    "FLEMINGTON": {
+      "url": "https://www.racingaustralia.horse/FreeFields/Scratchings.aspx?Key=2026Oct31%2CVIC%2CFlemington",
+      "last_published": "2026-10-29 20:58 AEDT",
+      "rail": "True entire circuit"
+    },
+    "ASCOT": {
+      "url": "https://www.racingaustralia.horse/FreeFields/Scratchings.aspx?Key=2026Oct31%2CWA%2CAscot",
+      "last_published": "2026-10-29 15:12 AEDT",
+      "rail": "+9m entire"
+    }
+  },
+  "scratchings": {
+    "RANDWICK_R02": [
+      "THE TORQUE XPRESS",
+      "WHATELEY"
+    ],
+    "RANDWICK_R04": [
+      "OCTA DE LAGO"
+    ],
+    "RANDWICK_R05": [
+      "MEDATSU",
+      "BARRENGARRY",
+      "SAMARELLE"
+    ],
+    "RANDWICK_R08": [
+      "BARRENGARRY",
+      "FEDERALIST"
+    ],
+    "RANDWICK_R09": [
+      "POUNDING",
+      "PERISHER"
+    ],
+    "RANDWICK_R10": [
+      "COMPENSATION",
+      "POKERJACK"
+    ],
+    "FLEMINGTON_R05": [
+      "PERICLES"
+    ],
+    "FLEMINGTON_R07": [
+      "HIERARCHY"
+    ],
+    "FLEMINGTON_R09": [
+      "TRES MAGNIFIQUE"
+    ],
+    "ASCOT_R02": [
+      "TOO MUCH TALK",
+      "NOAHQUINTILLY"
+    ],
+    "ASCOT_R03": [
+      "SPACE ACADEMY"
+    ],
+    "ASCOT_R06": [
+      "DYNASTIC LASS"
+    ],
+    "ASCOT_R07": [
+      "DEFENDING"
+    ]
+  },
+  "emergency_order": {
+    "RANDWICK_R02": [
+      "BRUTAL ELEGANCE",
+      "AMARONE",
+      "WHISKEY MISS",
+      "EXPLOSIVE TYCOON",
+      "ZIGGY ROSE",
+      "SPREAD THE LOVE"
+    ],
+    "RANDWICK_R04": [
+      "CLANCY",
+      "COSMIC AVENGER",
+      "CRYPTONIC",
+      "CHARLEROI"
+    ],
+    "RANDWICK_R06": [
+      "SYLPH"
+    ],
+    "RANDWICK_R07": [
+      "CHIDIAC",
+      "THEBLADE"
+    ],
+    "FLEMINGTON_R03": [
+      "GIRL WITH A PEARL",
+      "CHOCOLATE FRECKLES",
+      "A RUS IN GRINZING"
+    ],
+    "FLEMINGTON_R05": [
+      "SCHEELITE",
+      "KING ZEPHYR",
+      "ESTREMO"
+    ],
+    "FLEMINGTON_R07": [
+      "MEET THE PRINCE",
+      "LOCKED IN"
+    ]
+  },
+  "projected_promotions": {
+    "RANDWICK_R02": 2,
+    "RANDWICK_R04": 1,
+    "FLEMINGTON_R05": 1,
+    "FLEMINGTON_R07": 1
+  }
+}

@@ -1,8 +1,5 @@
-name: Saturday Top 10 pre-race lock
+name: Saturday approved pre-race lock (manual only)
 on:
-  schedule:
-    # Friday 21:30 UTC = Saturday 07:30 Brisbane time
-    - cron: '30 21 * * 5'
   workflow_dispatch:
 permissions:
   contents: write
@@ -19,70 +16,21 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Convert approved race forecasts into Top 10 selections
-        shell: bash
+      - name: Verify model and research audit
         run: |
-          node <<'NODE'
-          const fs = require('node:fs');
-          const file = 'published-board.json';
-          const board = JSON.parse(fs.readFileSync(file, 'utf8'));
-          const p = board.publication || {};
-          const local = new Intl.DateTimeFormat('en-CA', {
-            timeZone: 'Australia/Brisbane', year: 'numeric', month: '2-digit',
-            day: '2-digit', weekday: 'short'
-          }).formatToParts(new Date());
-          const fields = Object.fromEntries(local.map(x => [x.type, x.value]));
-          const today = `${fields.year}-${fields.month}-${fields.day}`;
-          if (fields.weekday !== 'Sat') throw Error('Only Brisbane Saturdays may be locked');
-          if (p.status !== 'PUBLISHED' || p.reviewed !== true || p.frozen !== true)
-            throw Error('Forecast not explicitly published, reviewed and frozen. No lock created.');
-          if (p.date !== today) throw Error('Forecast is not for this Saturday. No lock created.');
-          if (!Array.isArray(board.races) || !Array.isArray(board.records))
-            throw Error('No verified runner-level race forecasts found');
-          if (board.races.some(r => r.fieldVerified !== true))
-            throw Error('Some race fields are not verified');
-          const byRace = new Map();
-          for (const r of board.records) {
-            if (r.status !== 'ACTIVE') continue;
-            if (!r.race || !r.name || !Number.isFinite(Number(r.p)) || Number(r.p) <= 0 || Number(r.p) > 100)
-              throw Error('Invalid active runner data');
-            const list = byRace.get(r.race) || [];
-            list.push(r);
-            byRace.set(r.race, list);
-          }
-          const picks = [];
-          for (const race of board.races) {
-            const runners = byRace.get(race.id) || [];
-            if (runners.length !== race.declaredActiveCount || runners.length < 2)
-              throw Error('Field count mismatch: ' + race.id);
-            const total = runners.reduce((sum, r) => sum + Number(r.p), 0);
-            if (Math.abs(total - 100) > 0.15)
-              throw Error('Race probabilities do not total 100: ' + race.id);
-            const match = /^(.+)_R(\d+)$/.exec(race.id);
-            if (!match) throw Error('Invalid race identifier: ' + race.id);
-            runners.sort((a, b) => Number(b.p) - Number(a.p));
-            picks.push({
-              meeting: match[1], race: Number(match[2]), horse: runners[0].name,
-              model: board.model || 'unspecified', predicted_win_pct: Number(runners[0].p),
-              reliability: null, warning_flags: []
-            });
-          }
-          if (picks.length < 10) throw Error('Fewer than 10 complete races');
-          picks.sort((a, b) => b.predicted_win_pct - a.predicted_win_pct || a.meeting.localeCompare(b.meeting) || a.race - b.race);
-          board.selections = picks.slice(0, 10);
-          fs.writeFileSync(file, JSON.stringify(board, null, 2) + '\n');
-          console.log('Prepared approved Top 10 for ' + today);
-          NODE
-      - name: Lock Top 10 pre-race snapshot
+          npm test
+          npm run check
+          npm run research:audit
+      - name: Lock only explicitly approved, independently ranked pre-race selections
         run: node scripts/lock-top10.cjs
-      - name: Commit approved board and immutable lock
+      - name: Commit pre-race lock without modifying research selections or published board
         shell: bash
         run: |
-          if [[ -n "$(git status --porcelain -- published-board.json locked-selections/)" ]]; then
+          if [[ -n "$(git status --porcelain -- locked-selections/)" ]]; then
             git config user.name 'github-actions[bot]'
             git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-            git add published-board.json locked-selections/
-            git commit -m 'Lock approved Saturday Top 10 forecasts'
+            git add locked-selections/
+            git commit -m 'Record explicitly approved Saturday pre-race selection lock'
             git push
           else
             echo 'No new snapshot to commit.'
