@@ -85,3 +85,21 @@ test('prospective record refuses non-boolean verification markers and malformed 
  x.official_results[0].verified=true;
  assert.equal(F.summarize(x).completed,1);
 });
+
+
+test('legacy locking automation is manual only and cannot regenerate researched Top 10',()=>{
+ const fs=require('node:fs'),path=require('node:path');
+ const workflow=fs.readFileSync(path.join(__dirname,'..','.github','workflows','saturday-top10-lock.yml'),'utf8');
+ const scriptPath=path.join(__dirname,'..','scripts','lock-top10.cjs');
+ const source=fs.readFileSync(scriptPath,'utf8');
+ require('node:child_process').execFileSync(process.execPath,['--check',scriptPath]);
+ assert.match(workflow,/workflow_dispatch:/);
+ assert.doesNotMatch(workflow,/\b(?:schedule|cron):/);
+ assert.doesNotMatch(workflow,/picks\.sort|board\.selections\s*=/);
+ assert.match(source,/ranks\.has\(r\.rank\)/);
+ assert.match(source,/sort\(\(a,b\)=>a\.rank-b\.rank\)/);
+ assert.match(source,/finalFieldCheckAt/);
+ assert.match(source,/race_start_source/);
+ assert.match(source,/Ascot scratching deadline/);
+ assert.doesNotMatch(source,/valid\.slice\(0,10\)|predicted_win_pct-a\.predicted_win_pct/);
+});
