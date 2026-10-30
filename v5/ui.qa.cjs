@@ -319,11 +319,15 @@ test('races without independently researched contenders explicitly show no selec
 });
 test('when independently researched horse differs from model first, researched pick remains the single visible selection',()=>{
  const {C,win}=boot(),root=new Element('main');
- const diff=C.curated.entries.find(h=>{
-  const r=C.board.baseline.races.find(x=>x.id===h.race_id);
-  return h.eligible&&r&&r.leader&&r.leader.toUpperCase()!==h.horse.toUpperCase();
- });
- assert.ok(diff,'audit must include an independently reviewed model disagreement');
+ // Deliberately simulate a differing live leader; Friday's saved model may
+ // currently agree with every researched Top 10 horse.
+ const diff=C.curated.entries.find(h=>h.eligible&&h.research_lane==='TOP10_RESEARCH');
+ assert.ok(diff,'an eligible human-reviewed contender must exist');
+ const race=C.board.baseline.races.find(x=>x.id===diff.race_id);
+ const alternative=C.data.runners.find(h=>h.race_id===diff.race_id&&h.horse!==diff.horse&&
+  C.board.baseline.records.some(x=>x.id===h.id));
+ assert.ok(race&&alternative,'test requires a different real included runner in this race');
+ race.leader=alternative.horse;
  win.RacingLabV5Dashboard.renderInto(root,'races',C,()=>{},diff.race_id);
  const nodes=flatten(root),pick=nodes.find(n=>n.className==='rlv5-race-selection');
  assert.ok(pick&&flatten(pick).some(n=>n.textContent===diff.horse));
