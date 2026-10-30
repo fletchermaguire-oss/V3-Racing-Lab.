@@ -193,7 +193,7 @@ test('Race Centre shows one research selection and full readable evidence',()=>{
 test('design entrypoints both use the same single CSS and JS revision and do not modify formula',()=>{
  const home=fs.readFileSync('index.html','utf8'),studio=fs.readFileSync('v5/index.html','utf8');
  for(const html of [home,studio]){
-  assert.match(html,/\/v5\/site\.css\?v=single-race-pick-20261030/);
+  assert.match(html,/\/v5\/site\.css\?v=reviewed-separation-20261031/);
   assert.match(html,/\/v5\/dashboard\.js\?v=reviewed-live-20261031/);
   assert.match(html,/\/v5\/model\.js\?v=shared-20261030/,'original V5 model is unchanged');
  }
@@ -219,7 +219,7 @@ test('Top 10 header and 10 horse cards are separate siblings, never grid childre
 test('both entrypoints bust cached UI files without touching the model version',()=>{
  for(const path of ['index.html','v5/index.html']){
   const html=fs.readFileSync(path,'utf8');
-  assert.match(html,/site\.css\?v=single-race-pick-20261030/);
+  assert.match(html,/site\.css\?v=reviewed-separation-20261031/);
   assert.match(html,/dashboard\.js\?v=reviewed-live-20261031/);
   assert.match(html,/model\.js\?v=shared-20261030/);
  }
@@ -382,4 +382,36 @@ test('researched shortlist labels are Reviewed selection, not provisional starte
  nodes=flatten(root);
  assert.ok(nodes.some(x=>String(x.textContent).includes('Reviewed research selection')));
  assert.ok(nodes.some(x=>String(x.textContent).includes('Starter status is based on')));
+});
+
+test('all 15 researched selections expose percentage and signed separation against highest rival',()=>{
+ const {C,win}=boot(),root=new Element('main');
+ win.RacingLabV5Dashboard.renderInto(root,'top10',C,()=>{},D.races[0].id);
+ let nodes=flatten(root);
+ const tab=nodes.find(n=>n.tag==='button'&&n.textContent==='Top 15');
+ assert.ok(tab&&tab.listeners.click);
+ tab.listeners.click();
+ nodes=flatten(root);
+ const cards=nodes.filter(n=>n.className&&n.className.startsWith('rlv5-shortlist-card')&&n.tag==='button');
+ assert.equal(cards.length,15);
+ cards.forEach(card=>{
+  const row=C.curated.entries.find(h=>h.id===card.dataset.runnerId);
+  const all=C.board.baseline.records.filter(x=>x.race_id===row.race_id);
+  const chosen=all.find(x=>x.id===row.id);
+  const rival=all.filter(x=>x.id!==row.id).sort((a,b)=>b.p-a.p)[0];
+  const expected=Math.round((chosen.p-rival.p)*100)/100;
+  const n=flatten(card);
+  assert.ok(n.some(x=>x.className==='rlv5-shortlist-percent'&&x.textContent===chosen.p.toFixed(2)+'%'),row.horse+' percentage');
+  assert.ok(n.some(x=>String(x.textContent).includes('Sep '+(expected>=0?'+':'')+expected.toFixed(2)+'pp vs '+rival.horse)),row.horse+' separation');
+ });
+ win.RacingLabV5Dashboard.renderInto(root,'overview',C,()=>{},D.races[0].id);
+ nodes=flatten(root);
+ assert.equal(nodes.filter(x=>x.className&&String(x.className).startsWith('rlv5-command-pick')&&x.tag==='button').length,10);
+ assert.ok(nodes.filter(x=>x.className==='rlv5-pick-description').every(x=>flatten(x).some(y=>String(y.className).includes('rlv5-selection-margin'))));
+ const sheza=D.runners.find(h=>h.horse==='Sheza Alibi');
+ win.RacingLabV5Dashboard.renderInto(root,'races',C,()=>{},sheza.race_id);
+ nodes=flatten(root);
+ assert.ok(nodes.some(x=>x.className==='rlv5-selection-metrics'));
+ assert.ok(nodes.some(x=>x.className==='rlv5-selection-model-percent'));
+ assert.ok(nodes.some(x=>String(x.className).startsWith('rlv5-selection-margin')));
 });
