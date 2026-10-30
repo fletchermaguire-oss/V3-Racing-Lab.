@@ -280,3 +280,18 @@ test('Enamorada Randwick R6 displays rider not declared without guessing a jocke
  assert.ok(all.includes('Rider not declared'));
  assert.ok(!all.includes('scratched by rider'), 'missing jockey is not an official scratching');
 });
+
+
+test('crowded wide fields show no standout rather than claiming an uncalibrated 9% lock',()=>{
+ const {C,win}=boot(),root=new Element('main');
+ const noStandout=D.races.find(r=>r.meeting==='RANDWICK'&&r.race===4);
+ win.RacingLabV5Dashboard.renderInto(root,'races',C,()=>{},noStandout.id);
+ let nodes=flatten(root);
+ assert.ok(nodes.some(n=>n.className==='rlv5-race-no-standout'));
+ assert.ok(nodes.some(n=>String(n.textContent).includes('No clear model standout')));
+ assert.ok(nodes.some(n=>String(n.textContent).includes('crowded race, not a high-confidence single')));
+ const contrast=D.races.find(r=>r.meeting==='RANDWICK'&&r.race===8);
+ win.RacingLabV5Dashboard.renderInto(root,'races',C,()=>{},contrast.id);
+ nodes=flatten(root);
+ assert.ok(!nodes.some(n=>n.className==='rlv5-race-no-standout'), 'not all race leaders are labelled as crowded');
+});
