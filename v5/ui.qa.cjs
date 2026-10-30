@@ -264,3 +264,19 @@ test('Top 10 mobile layout is separate cards, no multi-column table or overlap-p
  assert.match(js,/var list=e\('div','rlv5-shortlist-cards'\)/);
  assert.doesNotMatch(js.slice(js.indexOf('function top10(){'),js.indexOf('function raceNav(){')),/scenarios\(\)/);
 });
+
+
+test('Enamorada Randwick R6 displays rider not declared without guessing a jockey or scratching',()=>{
+ const {C,win}=boot(),root=new Element('main');
+ const h=D.runners.find(x=>x.horse==='Enamorada'&&x.race_id.endsWith('RANDWICK_R06'));
+ assert.ok(h&&!h.jockey);
+ win.RacingLabV5Dashboard.renderInto(root,'races',C,()=>{},h.race_id);
+ const nodes=flatten(root);
+ const index=nodes.find(n=>n.dataset&&n.dataset.runnerId===h.id);
+ assert.ok(index,'horse still appears in her saved field');
+ const row=nodes.find(n=>String(n.textContent).includes('Rider not declared in saved field'));
+ assert.ok(row&&row.className==='rlv5-rider-alert');
+ const all=nodes.map(n=>String(n.textContent)).join(' ');
+ assert.ok(all.includes('Rider not declared'));
+ assert.ok(!all.includes('scratched by rider'), 'missing jockey is not an official scratching');
+});
