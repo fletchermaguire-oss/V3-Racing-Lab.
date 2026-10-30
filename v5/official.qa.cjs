@@ -233,7 +233,13 @@ test('partial verified sheet cannot reintroduce six Randwick R5 scratchings or r
  const C=State.create(State.applyOfficialOverlay(Data,latest),{going:latest.going,checkpoint:shortlist});
  const before=C.curated.entries.map(x=>x.horse);
  const partial=sheets();partial.status='OFFICIAL_SHEETS_PARTIAL';
- partial.meetings=[publishedSheet('FLEMINGTON',[[5,'ESTREMO'],[9,'GENEROSITY']])];
+ // A real Saturday field contains new scratchings beyond the Friday fixture.
+ // Construct the whole saved Saturday set so the test does not falsely attempt
+ // to reinstate Mister Whiskers, Star of Macedon or other departed runners.
+ const flem=Object.entries(latest.scratchings).filter(([race])=>race.startsWith('FLEMINGTON_R'))
+   .flatMap(([race,names])=>names.map(horse=>[Number(race.split('_R')[1]),horse]));
+ partial.meetings=[parseOfficial('FLEMINGTON',html('FLEMINGTON',flem.length,
+   flem.map(([race,horse])=>line(race,'1 '+horse)).join('')))];
  C.applyOfficialSheets(partial);
  assert.equal(C.official.partial,true);
  assert.equal(C.official.meetings.length,1);
