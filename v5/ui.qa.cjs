@@ -19,7 +19,7 @@ function boot(){
  const C=State.create(State.applyOfficialOverlay(D,O),{checkpoint:Q,going:O.going});
  const doc={createElement:tag=>new Element(tag),getElementById:()=>null,body:new Element('body')};
  const win={location:{search:''},localStorage:{getItem:()=>null,setItem(){}},
-  RacingLabV5Model:Model,RacingLabV5Curated:Curated,
+  RacingLabV5Model:Model,RacingLabV5Curated:Curated,RacingLabHorseAnalysis:require('./horse-analysis.js'),
   RacingLabV5State:State,scrollTo(){},requestAnimationFrame:null};
  const context=vm.createContext({window:win,document:doc,console:console,Set:Set,Map:Map,Promise:Promise});
  for(const file of ['v5/workshop.js','v5/dashboard.js'])vm.runInContext(fs.readFileSync(file,'utf8'),context,{filename:file});
@@ -98,4 +98,21 @@ test('provisionally promoted emergencies cannot be auto-filled into the multi or
  assert.ok(reserveRow,'Projected runner must remain visible as an excluded candidate');
  assert.ok(flatten(reserveRow).some(n=>n.tag==='button'&&n.disabled&&n.textContent==='Excluded'),
   'projected emergency cannot be manually promoted by Multi Lab');
+});
+
+
+test('every horse has readable evidence sections in both Race Centre and Compare',()=>{
+ const {C,win}=boot(),root=new Element('main');
+ const sheza=D.runners.find(x=>x.horse==='Sheza Alibi');
+ win.RacingLabV5Dashboard.renderInto(root,'races',C,()=>{},sheza.race_id);
+ let nodes=flatten(root);
+ assert.ok(nodes.some(x=>x.textContent==='Why it can win'));
+ assert.ok(nodes.some(x=>x.textContent==='What could beat it'));
+ assert.ok(nodes.some(x=>x.textContent==='Still to confirm'));
+ assert.ok(nodes.some(x=>String(x.textContent).includes('Golden Eagle field')));
+ const count=nodes.filter(x=>x.className==='horse-brief').length;
+ assert.equal(count,1,'analysis appears in selected horse panel, not duplicated below the whole race');
+ win.RacingLabV5Dashboard.renderInto(root,'compare',C,()=>{},sheza.race_id);
+ nodes=flatten(root);
+ assert.equal(nodes.filter(x=>x.className==='horse-brief').length,2,'each compared runner gets a clear assessment');
 });
