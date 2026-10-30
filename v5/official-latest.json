@@ -13,15 +13,16 @@
   "source_documents": {
     "RANDWICK": {
       "url": "https://theoverlay.com.au/racing/2026-10-31/randwick-20261031/RAND_311026_5",
-      "last_published": "2026-10-31 08:37 AEDT",
+      "last_published": "2026-10-30 06:25 AEDT",
       "rail": "True",
-      "provenance": "7:37 Brisbane user screenshot (08:37 Sydney time): R5 six scratched. Other races dated public cards; do not claim this is Racing NSW's official publication time."
+      "provenance": "Last archived official publication time is 30 Oct 06:25 AEDT; separate user screenshot at 31 Oct 07:37 Brisbane independently confirms six R5 scratches. Screenshot time is a field check, not an official publication timestamp.",
+      "screenshot_checked_at": "2026-10-31T07:37:00+10:00"
     },
     "FLEMINGTON": {
       "url": "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/flemington/2026-10-31",
-      "last_published": "2026-10-30 21:31 AEDT",
+      "last_published": "2026-10-29 20:58 AEDT",
       "rail": "True entire circuit",
-      "provenance": "30 Oct 21:31 AEDT course report, Saturday scratch names crosschecked on public racecards; NOT certified source publication time."
+      "provenance": "Last archived official publication timestamp 29 Oct 20:58 AEDT; Saturday field changes crosschecked from racecards, whose official-sheet publication time was not established."
     },
     "ASCOT": {
       "url": "https://racingaustralia.horse/FreeFields/Scratchings.aspx?Key=2026Oct31%2CWA%2CAscot",
