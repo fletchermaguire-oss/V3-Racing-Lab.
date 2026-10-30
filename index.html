@@ -285,7 +285,7 @@ window.RacingLabApp = {
       const foot=document.querySelector('.sidebar-foot');if(foot){foot.replaceChildren();let strong=document.createElement('strong');strong.textContent='● SHARED V5 FORMULA';let text=document.createElement('p');text.textContent=DATA.date+' · '+V5.board.raceCount+' races · provisional, uncalibrated model.';foot.append(strong,text);}
       render();
     };
-    controller.subscribe(update);update();
+    controller.subscribe(function(_,event){if(event&&event.statusOnly){if(window.RacingLabV5Dashboard)window.RacingLabV5Dashboard.showFeedStatus();return;}update();});update();
   }
 };
 window.DATA = DATA;
