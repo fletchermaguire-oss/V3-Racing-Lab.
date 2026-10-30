@@ -136,14 +136,19 @@ test('Multi Builder starts with only 2/3 legs and keeps optional manual selectio
  assert.ok(legs.some(n=>n.textContent==='Regal Ambition'));
  assert.ok(refreshed.some(n=>String(n.textContent).includes('PROVISIONAL COMBINED MODEL ESTIMATE')));
 });
-test('race detail explicitly distinguishes preserved independent choice from dynamic model leader',()=>{
+test('Race Centre shows one research selection, with model-only comparison collapsed',()=>{
  const {C,win}=boot(),root=new Element('main');
  const sheza=D.runners.find(h=>h.horse==='Sheza Alibi');
  win.RacingLabV5Dashboard.renderInto(root,'races',C,()=>{},sheza.race_id);
- const nodes=flatten(root).map(x=>String(x.textContent));
- assert.ok(nodes.some(x=>x.startsWith('Independent research choice: Sheza Alibi')));
- assert.ok(nodes.some(x=>x.startsWith('Live model #1:')));
- assert.ok(nodes.some(x=>x.includes('may change with field data')));
+ const nodes=flatten(root);
+ const selections=nodes.filter(x=>x.className==='rlv5-race-selection');
+ assert.equal(selections.length,1,'only one primary pick panel per race');
+ assert.ok(flatten(selections[0]).some(x=>x.textContent==='Sheza Alibi'));
+ assert.ok(!nodes.some(x=>String(x.textContent).startsWith('Live model #1:')),
+  'raw model rank must not appear as a competing recommended selection');
+ const modelNotes=nodes.find(x=>x.tag==='details'&&x.className==='rlv5-model-notes');
+ assert.ok(modelNotes&&!modelNotes.open,'model disagreement must be collapsed by default');
+ assert.ok(flatten(modelNotes).some(x=>String(x.textContent).includes('not a recommendation or an additional top pick')));
 });
 
 test('command dashboard preserves real research order, shows source status and keeps results pending',()=>{
@@ -164,14 +169,15 @@ test('command dashboard preserves real research order, shows source status and k
  assert.ok(nodes.some(n=>String(n.textContent).includes('Official scratching refresh pending')||
    String(n.textContent).includes('Awaiting official refresh')));
 });
-test('Race Centre is an accessible analyst layout with two honest pick identities and full readable evidence',()=>{
+test('Race Centre shows one research selection and full readable evidence',()=>{
  const {C,win}=boot(),root=new Element('main');
  const sheza=D.runners.find(h=>h.horse==='Sheza Alibi');
  win.RacingLabV5Dashboard.renderInto(root,'races',C,()=>{},sheza.race_id);
  const nodes=flatten(root);
  assert.ok(nodes.some(n=>n.textContent==='Race Centre'));
- assert.ok(nodes.some(n=>n.textContent==='Independent research choice: Sheza Alibi'));
- assert.ok(nodes.some(n=>String(n.textContent).startsWith('Live model #1:')));
+ assert.equal(nodes.filter(n=>n.className==='rlv5-race-selection').length,1);
+ assert.ok(nodes.some(n=>n.textContent==='Sheza Alibi'));
+ assert.ok(nodes.some(n=>n.tag==='details'&&n.className==='rlv5-model-notes'&&!n.open));
  assert.ok(nodes.some(n=>n.textContent==='Why it can win'));
  assert.ok(nodes.some(n=>n.textContent==='What could beat it'));
  const active=nodes.filter(n=>n.className==='rlv5-runrow active');
@@ -187,8 +193,8 @@ test('Race Centre is an accessible analyst layout with two honest pick identitie
 test('design entrypoints both use the same single CSS and JS revision and do not modify formula',()=>{
  const home=fs.readFileSync('index.html','utf8'),studio=fs.readFileSync('v5/index.html','utf8');
  for(const html of [home,studio]){
-  assert.match(html,/\/v5\/site\.css\?v=flat-audit-rider-20261030/);
-  assert.match(html,/\/v5\/dashboard\.js\?v=flat-audit-rider-20261030/);
+  assert.match(html,/\/v5\/site\.css\?v=single-race-pick-20261030/);
+  assert.match(html,/\/v5\/dashboard\.js\?v=single-race-pick-20261030/);
   assert.match(html,/\/v5\/model\.js\?v=shared-20261030/,'original V5 model is unchanged');
  }
 });
@@ -213,8 +219,8 @@ test('Top 10 header and 10 horse cards are separate siblings, never grid childre
 test('both entrypoints bust cached UI files without touching the model version',()=>{
  for(const path of ['index.html','v5/index.html']){
   const html=fs.readFileSync(path,'utf8');
-  assert.match(html,/site\.css\?v=flat-audit-rider-20261030/);
-  assert.match(html,/dashboard\.js\?v=flat-audit-rider-20261030/);
+  assert.match(html,/site\.css\?v=single-race-pick-20261030/);
+  assert.match(html,/dashboard\.js\?v=single-race-pick-20261030/);
   assert.match(html,/model\.js\?v=shared-20261030/);
  }
 });
@@ -294,4 +300,56 @@ test('crowded wide fields show no standout rather than claiming an uncalibrated 
  win.RacingLabV5Dashboard.renderInto(root,'races',C,()=>{},contrast.id);
  nodes=flatten(root);
  assert.ok(!nodes.some(n=>n.className==='rlv5-race-no-standout'), 'not all race leaders are labelled as crowded');
+});
+
+
+test('races without independently researched contenders explicitly show no selection, not model No.1 as an automatic pick',()=>{
+ const {C,win}=boot(),root=new Element('main');
+ const without=D.races.find(r=>!C.curated.entries.some(h=>h.race_id===r.id));
+ assert.ok(without);
+ win.RacingLabV5Dashboard.renderInto(root,'races',C,()=>{},without.id);
+ const nodes=flatten(root),panel=nodes.find(n=>n.className==='rlv5-race-selection no-pick');
+ assert.ok(panel,'no-selection state must exist for races outside the Top 15');
+ assert.ok(flatten(panel).some(n=>n.textContent==='No current Top 10 research selection'));
+ const notes=nodes.find(n=>n.tag==='details'&&n.className==='rlv5-model-notes');
+ assert.ok(notes&&!notes.open);
+ assert.ok(!flatten(panel).some(n=>String(n.textContent).includes('Model rank')));
+ const code=fs.readFileSync('v5/dashboard.js','utf8');
+ assert.doesNotMatch(code,/Live model #1:/,'model No.1 is no longer marketed as a second selection');
+});
+test('when independently researched horse differs from model first, researched pick remains the single visible selection',()=>{
+ const {C,win}=boot(),root=new Element('main');
+ // Deliberately simulate a differing live leader; Friday's saved model may
+ // currently agree with every researched Top 10 horse.
+ const diff=C.curated.entries.find(h=>h.eligible&&h.research_lane==='TOP10_RESEARCH');
+ assert.ok(diff,'an eligible human-reviewed contender must exist');
+ const race=C.board.baseline.races.find(x=>x.id===diff.race_id);
+ const alternative=C.data.runners.find(h=>h.race_id===diff.race_id&&h.horse!==diff.horse&&
+  C.board.baseline.records.some(x=>x.id===h.id));
+ assert.ok(race&&alternative,'test requires a different real included runner in this race');
+ race.leader=alternative.horse;
+ win.RacingLabV5Dashboard.renderInto(root,'races',C,()=>{},diff.race_id);
+ const nodes=flatten(root),pick=nodes.find(n=>n.className==='rlv5-race-selection');
+ assert.ok(pick&&flatten(pick).some(n=>n.textContent===diff.horse));
+ const diagnostics=nodes.find(n=>n.tag==='details'&&n.className==='rlv5-model-notes');
+ assert.ok(diagnostics&&!diagnostics.open);
+ assert.ok(flatten(diagnostics).some(n=>String(n.textContent).includes('Model disagrees with the researched horse')));
+ const chip=nodes.filter(n=>n.tag==='button'&&n.className.includes('racechip'));
+ assert.ok(chip.some(n=>flatten(n).some(x=>String(x.textContent).includes('Research: '+diff.horse))));
+});
+
+
+test('additional review ranks 11–15 are not presented as top race selections',()=>{
+ const {C,win}=boot(),root=new Element('main');
+ const watch=C.curated.entries.find(h=>h.research_lane==='CONDITIONAL_REVIEW'&&
+  !C.curated.entries.some(x=>x.race_id===h.race_id&&x.research_lane==='TOP10_RESEARCH'));
+ assert.ok(watch,'at least one review-only runner must be present');
+ win.RacingLabV5Dashboard.renderInto(root,'races',C,()=>{},watch.race_id);
+ const n=flatten(root),pick=n.find(x=>x.className==='rlv5-race-selection no-pick');
+ assert.ok(pick);
+ assert.ok(flatten(pick).some(x=>x.textContent==='No current Top 10 research selection'));
+ assert.ok(!flatten(pick).some(x=>x.textContent===watch.horse));
+ const note=n.find(x=>x.className==='rlv5-model-notes');
+ assert.ok(note&&!note.open);
+ assert.ok(flatten(note).some(x=>String(x.textContent).includes('Additional review candidate: '+watch.horse)));
 });
