@@ -86,7 +86,13 @@ test('provisionally promoted emergencies cannot be auto-filled into the multi or
  const chosen=flatten(root).filter(n=>n.className==='workshop-leg-top').flatMap(flatten);
  assert.ok(chosen.every(n=>!String(n.textContent).includes(reserve.horse)),
   'projected emergency must never appear in an automatically filled multi');
- win.RacingLabV5Dashboard.renderInto(root,'multi',C,()=>{},reserve.race_id);
+ let selects=flatten(root).filter(n=>n.tag==='select');
+ const meeting=selects.find(n=>n.children.some(o=>o.value==='FLEMINGTON'))||selects[1];
+ meeting.value=reserve.race_id.split('_')[1];meeting.listeners.change();
+ selects=flatten(root).filter(n=>n.tag==='select');
+ const raceSelect=selects.find(n=>n.children.some(o=>o.value===reserve.race_id));
+ assert.ok(raceSelect,'Multi Lab must offer the runner’s race');
+ raceSelect.value=reserve.race_id;raceSelect.listeners.change();
  const addButtons=flatten(root).filter(n=>n.className==='workshop-candidate');
  const reserveRow=addButtons.find(n=>flatten(n).some(x=>String(x.textContent).includes(reserve.horse)));
  assert.ok(reserveRow,'Projected runner must remain visible as an excluded candidate');
