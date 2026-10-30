@@ -123,7 +123,9 @@ test('entrypoints consume the screened board and Multi Lab auto-use cannot draw 
  assert.ok(dashboard.includes("C.researchHistory"));
  assert.ok(dashboard.includes("C.board.winFirst.priority.map"));
  assert.ok(dashboard.includes("C.board.winFirst.review.filter"));
- assert.ok(workshop.includes("B.winFirst.priority.slice(0,S.multiSize)"));
+ assert.ok(workshop.includes("B.winFirst.priority.filter(function(h){return confirmedForMulti(C,h.runner_id);})"));
+ assert.ok(workshop.includes("safePriorities.slice(0,S.multiSize)"));
+ assert.ok(workshop.includes("confirmedForMulti(C,id)"));
  assert.equal(workshop.includes("B.leaders.slice(0,S.multiSize)"),false);
 });
 test('loading the date-matched overlay is fail-closed, and applies the saved Friday official scenario',async()=>{
