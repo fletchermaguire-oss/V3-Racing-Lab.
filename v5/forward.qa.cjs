@@ -6,7 +6,7 @@ const sha='a'.repeat(40);
 function verified(){
  const x=JSON.parse(JSON.stringify(Empty));
  x.status='VERIFIED_FORWARD_TRACKING';x.independent_freeze_verified=true;
- x.freeze_proof={sha:sha,url:'https://github.com/user/repository/commit/'+sha,committed_at_utc:'2026-10-31T00:30:00Z'};
+ x.freeze_proof={sha:sha,url:'https://github.com/user/repository/commit/'+sha,committed_at_utc:'2026-10-31T00:41:00Z'};
  x.locked_selections=[{rank:1,race_id:'2026-10-31_RANDWICK_R08',runner_id:'2026-10-31_RANDWICK_R08_06',active_at_lock:true,
   locked_at_utc:'2026-10-31T00:40:00Z',race_at_utc:'2026-10-31T05:00:00Z',
   race_start_source:'https://example.com/races/2026-10-31/8'}];
@@ -102,4 +102,19 @@ test('legacy locking automation is manual only and cannot regenerate researched 
  assert.match(source,/race_start_source/);
  assert.match(source,/Ascot scratching deadline/);
  assert.doesNotMatch(source,/valid\.slice\(0,10\)|predicted_win_pct-a\.predicted_win_pct/);
+});
+
+
+test('GitHub commit proof must follow the snapshot creation and precede the scheduled jump',()=>{
+ const x=verified();
+ assert.equal(F.summarize(x).locked,1,'real workflow creates file before GitHub commits it');
+ const tooEarly=JSON.parse(JSON.stringify(x));
+ tooEarly.freeze_proof.committed_at_utc='2026-10-31T00:39:59Z';
+ assert.throws(()=>F.summarize(tooEarly),/Invalid, duplicated, after-start/,'a proof cannot predate the actual lock content');
+ const tooLate=JSON.parse(JSON.stringify(x));
+ tooLate.freeze_proof.committed_at_utc='2026-10-31T05:00:00Z';
+ assert.throws(()=>F.summarize(tooLate),/Invalid, duplicated, after-start/,'a post-jump proof is not a pre-race forecast');
+ const badLock=JSON.parse(JSON.stringify(x));
+ badLock.locked_selections[0].locked_at_utc='2026-10-31T00:41:01Z';
+ assert.throws(()=>F.summarize(badLock),/Invalid, duplicated, after-start/);
 });
