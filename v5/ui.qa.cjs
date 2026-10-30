@@ -310,7 +310,7 @@ test('races without independently researched contenders explicitly show no selec
  win.RacingLabV5Dashboard.renderInto(root,'races',C,()=>{},without.id);
  const nodes=flatten(root),panel=nodes.find(n=>n.className==='rlv5-race-selection no-pick');
  assert.ok(panel,'no-selection state must exist for races outside the Top 15');
- assert.ok(flatten(panel).some(n=>n.textContent==='No current researched selection'));
+ assert.ok(flatten(panel).some(n=>n.textContent==='No current Top 10 research selection'));
  const notes=nodes.find(n=>n.tag==='details'&&n.className==='rlv5-model-notes');
  assert.ok(notes&&!notes.open);
  assert.ok(!flatten(panel).some(n=>String(n.textContent).includes('Model rank')));
@@ -332,4 +332,20 @@ test('when independently researched horse differs from model first, researched p
  assert.ok(flatten(diagnostics).some(n=>String(n.textContent).includes('Model disagrees with the researched horse')));
  const chip=nodes.filter(n=>n.tag==='button'&&n.className.includes('racechip'));
  assert.ok(chip.some(n=>flatten(n).some(x=>String(x.textContent).includes('Research: '+diff.horse))));
+});
+
+
+test('additional review ranks 11–15 are not presented as top race selections',()=>{
+ const {C,win}=boot(),root=new Element('main');
+ const watch=C.curated.entries.find(h=>h.research_lane==='CONDITIONAL_REVIEW'&&
+  !C.curated.entries.some(x=>x.race_id===h.race_id&&x.research_lane==='TOP10_RESEARCH'));
+ assert.ok(watch,'at least one review-only runner must be present');
+ win.RacingLabV5Dashboard.renderInto(root,'races',C,()=>{},watch.race_id);
+ const n=flatten(root),pick=n.find(x=>x.className==='rlv5-race-selection no-pick');
+ assert.ok(pick);
+ assert.ok(flatten(pick).some(x=>x.textContent==='No current Top 10 research selection'));
+ assert.ok(!flatten(pick).some(x=>x.textContent===watch.horse));
+ const note=n.find(x=>x.className==='rlv5-model-notes');
+ assert.ok(note&&!note.open);
+ assert.ok(flatten(note).some(x=>String(x.textContent).includes('Additional review candidate: '+watch.horse)));
 });
