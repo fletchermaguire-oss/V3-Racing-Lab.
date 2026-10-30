@@ -292,7 +292,7 @@ function create(input,options){
       });
       if(counted!==sheet.scratched_total)throw Error('Official scratching total does not match named runners: '+sheet.meeting);
       var earlier=source.runners.filter(function(h){
-        return h.meeting===sheet.meeting&&/^SCRATCHED/i.test(String(h.status||''));
+        return h.race_id.startsWith(source.date+'_'+sheet.meeting+'_')&&/^SCRATCHED/i.test(String(h.status||''));
       });
       earlier.forEach(function(h){
         if(!names.has(h.race_id+'|'+canonical(h.horse)))
