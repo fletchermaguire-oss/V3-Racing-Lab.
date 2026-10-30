@@ -187,8 +187,8 @@ test('Race Centre is an accessible analyst layout with two honest pick identitie
 test('design entrypoints both use the same single CSS and JS revision and do not modify formula',()=>{
  const home=fs.readFileSync('index.html','utf8'),studio=fs.readFileSync('v5/index.html','utf8');
  for(const html of [home,studio]){
-  assert.match(html,/\/v5\/site\.css\?v=command-race-20261030/);
-  assert.match(html,/\/v5\/dashboard\.js\?v=command-race-20261030/);
+  assert.match(html,/\/v5\/site\.css\?v=mobile-top10-20261030/);
+  assert.match(html,/\/v5\/dashboard\.js\?v=mobile-top10-20261030/);
   assert.match(html,/\/v5\/model\.js\?v=shared-20261030/,'original V5 model is unchanged');
  }
 });
