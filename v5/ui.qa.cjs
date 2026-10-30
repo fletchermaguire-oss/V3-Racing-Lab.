@@ -166,8 +166,8 @@ test('command dashboard preserves real research order, shows source status and k
  assert.ok(nodes.some(n=>n.textContent==='Pre-race published lock: not verified'));
  assert.ok(nodes.some(n=>n.textContent==='Calibration: not established'));
  assert.ok(nodes.some(n=>String(n.textContent).includes('model estimates, not verified win probabilities')));
- assert.ok(nodes.some(n=>String(n.textContent).includes('Official scratching refresh pending')||
-   String(n.textContent).includes('Awaiting official refresh')));
+ assert.ok(nodes.some(n=>String(n.textContent).includes('33 in saved field across all meetings')));
+ assert.ok(!nodes.some(n=>String(n.textContent).includes('Awaiting official refresh')));
 });
 test('Race Centre shows one research selection and full readable evidence',()=>{
  const {C,win}=boot(),root=new Element('main');
@@ -352,4 +352,21 @@ test('additional review ranks 11–15 are not presented as top race selections',
  const note=n.find(x=>x.className==='rlv5-model-notes');
  assert.ok(note&&!note.open);
  assert.ok(flatten(note).some(x=>String(x.textContent).includes('Additional review candidate: '+watch.horse)));
+});
+
+
+test('saved Saturday scratchings show on dashboard and Race Centre without live official service',()=>{
+ const {C,win}=boot(),root=new Element('main');
+ assert.equal(C.official,null);
+ assert.equal(C.data.official_overlay_scratchings.RANDWICK_R05.length,6);
+ win.RacingLabV5Dashboard.renderInto(root,'overview',C,()=>{},D.races[0].id);
+ let nodes=flatten(root);
+ assert.ok(nodes.some(x=>x.textContent==='33 in saved field across all meetings'));
+ assert.ok(!nodes.some(x=>String(x.textContent).includes('Awaiting official refresh')));
+ win.RacingLabV5Dashboard.renderInto(root,'races',C,()=>{},'2026-10-31_RANDWICK_R05');
+ nodes=flatten(root);
+ assert.ok(nodes.some(x=>x.textContent==='Saved race scratchings: 6'));
+ const included=C.board.baseline.records.filter(x=>x.race_id==='2026-10-31_RANDWICK_R05');
+ assert.equal(included.length,6);
+ assert.deepEqual(included.map(x=>x.horse).sort(),['Bestower','Cavalry','Columbus','Koolibah','Steel Blaze','Think Itz You'].sort());
 });

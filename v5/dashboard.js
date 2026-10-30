@@ -5,6 +5,16 @@ var C=null,D=null,target=null,embedded=false,navigate=null;
 var match=global.location&&global.location.search.match(/[?&]tab=(sim|multi|top10|races|results|qa|cal|weather|sync|compare)(?:&|$)/);
 var S={page:match?match[1]:'overview',meeting:'RANDWICK',race:null,runner:null,top:'ALL',topMode:'RESEARCH',topN:10,multi:[],compareA:null,compareB:null};
 var PAGES=[['overview','Overview'],['top10','Daily Top 5/10/15'],['races','Race Centre'],['multi','Multi Lab'],['sim','Simulator'],['compare','Compare'],['qa','Model QA'],['cal','Calibration'],['weather','Weather & Tracks'],['sync','Data & Sync'],['results','Results & History']];
+// Saved verified research field remains displayed even if the live fetch endpoint is offline.
+function savedScratchCount(meeting,race){
+ var saved=D&&D.official_overlay_scratchings||{};
+ return Object.entries(saved).reduce(function(total,pair){
+  return total+((!meeting||pair[0].startsWith(meeting+'_R'))&&(!race||pair[0]===race)?pair[1].length:0);
+ },0);
+}
+function savedSourceNote(meeting){
+ return meeting==='ASCOT'?'Ascot uses the Friday official sheet; Saturday not finalised':'Saturday saved racecard; late changes remain possible';
+}
 function e(tag,cls,txt){var x=document.createElement(tag);if(cls)x.className=cls;if(txt!==undefined&&txt!==null)x.textContent=String(txt);return x;}
 function app(){return target||document.getElementById('workspace');}
 function add(p){for(var i=1;i<arguments.length;i++)if(arguments[i])p.append(arguments[i]);return p;}
@@ -116,14 +126,14 @@ function overview(){
   trackCard.append(add(e('div','rlv5-stat-line'),e('span','',m),e('b','',sheet?sheet.track_going+' · source':C.going[m]+' · scenario')));
  });
  status.append(trackCard);
- var scratches=add(e('div','rlv5-command-stat'),e('span','rlv5-stat-label','PUBLISHED SCRATCHINGS'));
+ var scratches=add(e('div','rlv5-command-stat'),e('span','rlv5-stat-label','SAVED RACE-DAY SCRATCHINGS'));
  if(C.official){
   var total=C.official.meetings.reduce(function(n,x){return n+x.scratched_total;},0);
-  scratches.append(e('strong','',total+' across three meetings'));
-  scratches.append(e('small','','Observed '+sourceTime+' · not final-field certified'));
+  scratches.append(e('strong','',total+' in latest available official sheets'));
+  scratches.append(e('small','','Observed '+sourceTime+' · starter certification pending'));
  }else{
-  scratches.append(e('strong','','Awaiting official refresh'));
-  scratches.append(e('small','','Showing saved field · '+sourceTime));
+  scratches.append(e('strong','',savedScratchCount()+' in saved field across all meetings'));
+  scratches.append(e('small','','Snapshot '+sourceTime+' · Ascot based on Friday sheet; live refresh optional'));
  }
  status.append(scratches);
  status.append(add(e('div','rlv5-command-stat'),
@@ -453,7 +463,7 @@ function racesPage(){
   e('p','',r.distance_m+'m · '+summary.field+' currently included · '+summary.excluded+' excluded'));
  var chips=e('div','rlv5-race-tags');
  add(chips,e('span','',official?'Source track: '+official.track_going:'Model track scenario: '+C.going[r.meeting]),
-  e('span','',official?'Source meeting scratchings: '+official.scratched_total:'Official scratching refresh pending'),
+  e('span','',official?'Source meeting scratchings: '+official.scratched_total:'Saved race scratchings: '+savedScratchCount(r.meeting,r.meeting+'_R'+String(r.race).padStart(2,'0'))),
   e('span','','Current model scenario: '+C.going[r.meeting]));
  hero.append(chips);
  // This is a distribution warning, not a revised pick or a calibrated rating.
@@ -463,7 +473,7 @@ function racesPage(){
  }
  hero.append(e('p','rlv5-race-source',official?
   'Official sheet last published '+official.source_last_published+'. Final starter and emergency status remains unverified.':
-  'Saved research source '+(D.official_check_at||D.saved_at)+'. Final official starters are not verified.'));
+  'Saved field '+(D.official_check_at||D.saved_at)+' · '+savedSourceNote(r.meeting)+'. Live source may be unavailable.'));
  root.append(hero);
  // One primary selection only: the independent human-reviewed shortlist.
  // When no horse is reviewed (or it is out of the field), do not silently
@@ -547,7 +557,7 @@ function resultsPage(){add(app(),head('Results & History · Top 5 / 10 / 15','Ex
 function statusOnly(){
  if(!C)return;
  var badge=document.getElementById('livebadge');
- if(badge)badge.textContent=C.error?'SYNC WARNING · SAVED BOARD':C.live?'AIRTABLE · MODEL UPDATED':'SAVED MODEL · PROVISIONAL';
+ if(badge)badge.textContent=C.error?'SAVED SATURDAY DATA · REFRESH UNAVAILABLE':C.live?'AIRTABLE · MODEL UPDATED':'SAVED SATURDAY DATA';
  var status=document.getElementById('v5-sync-status');
  if(status)status.textContent=C.error||'No refresh error recorded.';
 }
@@ -558,7 +568,7 @@ function render(){if(!C)return;D=C.data;if(!raceOf(S.race)){S.race=D.races[0].id
 function officialPanel(){
  var p=box('Official scratchings / track review',C.official?
   'Observed '+C.official.observed_at+' · published sheets shown below. These are source-backed scratchings and track grades, NOT certified final starters/emergency activations.'
-  :'Saved official-dated snapshot '+(D.official_check_at||'unavailable')+' · automatic refresh not yet confirmed. Final official declarations still outstanding.');
+  :'Saved scratching snapshot '+(D.official_check_at||'unavailable')+' · published field stays accessible if official live sync fails. Ascot still uses Friday source.');
  if(C.official)C.official.meetings.forEach(function(s){
   p.append(e('p','muted small',s.meeting+' · '+s.track_going+' · '+s.scratched_total+
    ' scratched · published '+s.source_last_published));
