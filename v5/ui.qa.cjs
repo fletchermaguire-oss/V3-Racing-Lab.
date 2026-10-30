@@ -194,7 +194,7 @@ test('design entrypoints both use the same single CSS and JS revision and do not
  const home=fs.readFileSync('index.html','utf8'),studio=fs.readFileSync('v5/index.html','utf8');
  for(const html of [home,studio]){
   assert.match(html,/\/v5\/site\.css\?v=single-race-pick-20261030/);
-  assert.match(html,/\/v5\/dashboard\.js\?v=single-race-pick-20261030/);
+  assert.match(html,/\/v5\/dashboard\.js\?v=reviewed-live-20261031/);
   assert.match(html,/\/v5\/model\.js\?v=shared-20261030/,'original V5 model is unchanged');
  }
 });
@@ -220,7 +220,7 @@ test('both entrypoints bust cached UI files without touching the model version',
  for(const path of ['index.html','v5/index.html']){
   const html=fs.readFileSync(path,'utf8');
   assert.match(html,/site\.css\?v=single-race-pick-20261030/);
-  assert.match(html,/dashboard\.js\?v=single-race-pick-20261030/);
+  assert.match(html,/dashboard\.js\?v=reviewed-live-20261031/);
   assert.match(html,/model\.js\?v=shared-20261030/);
  }
 });
