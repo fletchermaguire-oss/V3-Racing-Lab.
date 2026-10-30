@@ -374,8 +374,8 @@ function raceNav(){
  }));
  var grid=e('div','racechips');
  all.forEach(function(r){
-  var research=C.curated&&C.curated.entries.find(function(h){return h.race_id===r.id;});
-  var line=r.distance_m+'m · '+(research?'Research: '+research.horse:'No researched selection');
+  var research=C.curated&&C.curated.entries.find(function(h){return h.race_id===r.id&&h.research_lane==='TOP10_RESEARCH';});
+  var line=r.distance_m+'m · '+(research?'Research: '+research.horse:'No Top 10 research pick');
   var chip=add(e('button','racechip'+(r.id===S.race?' active':'')),
    e('b','','Race '+r.race),e('small','',line));
   chip.type='button';
@@ -416,7 +416,8 @@ function horseDetail(h){
  identity=add(e('div','rlv5-horse-identity'),e('span','rlv5-kicker','HORSE ANALYSIS'),
   e('h3','',h.horse),
   e('p','muted small','No. '+h.tab+' · Barrier '+(h.barrier??'—')+' · '+(h.weight_kg??'—')+'kg · '+(h.trainer||'Trainer not verified')+' / '+(String(h.jockey||'').trim()||'Rider not declared')));
- if(research)identity.append(e('span','rlv5-horse-tag','Independent research #'+research.original_rank));
+ if(research)identity.append(e('span','rlv5-horse-tag',
+  (research.research_lane==='TOP10_RESEARCH'?'Top 10 research #':'Additional review #')+research.original_rank));
  if(x&&x.rank===1)identity.append(e('span','rlv5-horse-tag','Model rank 1 · diagnostic'));
  top.append(identity);
  if(x)top.append(add(e('div','rlv5-horse-score'),e('strong','',pct(x.p)),
@@ -443,7 +444,8 @@ function racesPage(){
  var root=app();root.append(head('Race Centre','One researched selection per race where available. Model rankings are diagnostics, not competing picks.'));
  var navwrap=e('div','rlv5-race-select');raceNav().forEach(function(node){navwrap.append(node);});root.append(navwrap);
  var r=raceOf(S.race),summary=C.board.baseline.races.find(function(x){return x.id===r.id;}),hs=runners(r.id),
-  reviewed=C.curated&&C.curated.entries.find(function(h){return h.race_id===r.id;}),
+  reviewed=C.curated&&C.curated.entries.find(function(h){return h.race_id===r.id&&h.research_lane==='TOP10_RESEARCH';}),
+  reviewOnly=C.curated&&C.curated.entries.find(function(h){return h.race_id===r.id&&h.research_lane==='CONDITIONAL_REVIEW';}),
   official=C.official&&C.official.meetings.find(function(x){return x.meeting===r.meeting;});
  var hero=add(e('section','rlv5-race-hero'),
   e('span','rlv5-kicker',r.meeting+' · RACE '+r.race),
@@ -467,11 +469,11 @@ function racesPage(){
  // When no horse is reviewed (or it is out of the field), do not silently
  // promote the live model leader into a new recommended pick.
  var pickPanel=e('section','rlv5-race-selection'+(reviewed&&reviewed.eligible?'':' no-pick'));
- var pickTitle=reviewed&&reviewed.eligible?reviewed.horse:'No current researched selection';
+ var pickTitle=reviewed&&reviewed.eligible?reviewed.horse:'No current Top 10 research selection';
  var reason=reviewed&&reviewed.eligible?
   'Independent research · original overall rank #'+reviewed.original_rank+'. Provisional until final field certification.':
   reviewed?'Previously researched: '+reviewed.horse+' (out of current field). No automatic replacement selected.':
-  'This race does not have an independently reviewed selection in the saved Top 15.';
+  'This race has no independently confirmed Top 10 research pick. A model leader is not an automatic replacement.';
  pickPanel.append(
   e('span','rlv5-kicker','OUR RESEARCHED SELECTION'),
   e('h3','',pickTitle),
@@ -487,6 +489,8 @@ function racesPage(){
   'Highest raw model estimate: '+(summary.leader||'none')+
   (summary.top_p!==null&&summary.top_p!==undefined?' ('+pct(summary.top_p)+')':'')+
   '. These probabilities are uncalibrated and can change with field and track updates.'));
+ if(reviewOnly)modelBody.append(e('p','',
+  'Additional review candidate: '+reviewOnly.horse+' (overall research rank #'+reviewOnly.original_rank+'). This is not a selected Top 10 horse.'));
  if(reviewed&&summary.leader&&summary.leader.toUpperCase()!==reviewed.horse.toUpperCase())
   modelBody.append(e('p','rlv5-model-disagreement',
    'Model disagrees with the researched horse. Review the form and field before changing any selection; no automatic switch.'));
