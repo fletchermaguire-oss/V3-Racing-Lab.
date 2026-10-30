@@ -63,7 +63,7 @@ test('original homepage and Top5/10/15 present curated names; edit controls rend
  }
  win.RacingLabV5Dashboard.renderInto(root,'top10',C,()=>{},D.races[0].id);
  nodes=flatten(root);
- assert.ok(nodes.some(x=>x.tag==='h2'&&String(x.textContent).includes('Daily Top')));
+ assert.ok(nodes.some(x=>x.tag==='h2'&&String(x.textContent).includes('Top 10 Selections')));
  assert.ok(nodes.some(x=>String(x.textContent).includes('Our researched horses in original rank order')));
  const edit=nodes.find(x=>x.tag==='button'&&x.textContent==='Edit grade / rank');
  assert.ok(edit&&edit.listeners.click);
