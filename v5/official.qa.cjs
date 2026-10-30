@@ -173,3 +173,27 @@ test('feed failures and recovery remain status-only, independently tracked witho
  assert.doesNotMatch(C.error,/Official update/);
  assert.match(C.error,/Airtable/);
 });
+
+test('live Ascot OSCAR apostrophe entities decode to the same archived runner without a false unknown scratching',()=>{
+ const C=State.create(State.applyOfficialOverlay(Data,Official),{going:Official.going,checkpoint:Checkpoint});
+ const prior=C.board.activeCount,picks=C.curated.entries.map(x=>x.horse);
+ for(const token of ['OSCAR&rsquo;S FORTUNE','OSCAR&#8217;S FORTUNE','OSCAR&#x2019;S FORTUNE',"OSCAR'S FORTUNE"]){
+  const sheet=parseOfficial('ASCOT',html('ASCOT',1,line(8,'1 '+token),'Soft 5'));
+  assert.deepEqual(sheet.scratchings.ASCOT_R08,["OSCAR'S FORTUNE"]);
+ }
+ const sample=sheets(),ascot=sample.meetings.find(s=>s.meeting==='ASCOT');
+ ascot.scratchings.ASCOT_R08=['OSCAR&rsquo;S FORTUNE'];
+ ascot.scratched_total++;
+ assert.doesNotThrow(()=>C.applyOfficialSheets(sample));
+ assert.equal(C.board.activeCount,prior-1);
+ assert.ok(!C.board.baseline.records.some(x=>x.horse==="Oscar's Fortune"&&x.race===8));
+ assert.deepEqual(C.curated.entries.map(x=>x.horse),picks,'named research ranks must not be silently replaced');
+ assert.equal(C.curated.entries.find(x=>x.horse==='Immortal Bliss').eligible,true);
+});
+test('unknown HTML entities and duplicate orthographic versions are rejected instead of guessing',()=>{
+ assert.throws(()=>parseOfficial('ASCOT',html('ASCOT',1,line(8,'1 OSCAR&unknown;S FORTUNE'),'Soft 5')),
+  /Unrecognized encoded official horse name/);
+ assert.throws(()=>parseOfficial('ASCOT',html('ASCOT',2,
+  line(8,'1 OSCAR&rsquo;S FORTUNE')+line(8,"1 OSCAR'S FORTUNE",true),'Soft 5')),
+  /Duplicate official/);
+});
