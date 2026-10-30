@@ -187,8 +187,34 @@ test('Race Centre is an accessible analyst layout with two honest pick identitie
 test('design entrypoints both use the same single CSS and JS revision and do not modify formula',()=>{
  const home=fs.readFileSync('index.html','utf8'),studio=fs.readFileSync('v5/index.html','utf8');
  for(const html of [home,studio]){
-  assert.match(html,/\/v5\/site\.css\?v=command-race-20261030/);
-  assert.match(html,/\/v5\/dashboard\.js\?v=command-race-20261030/);
+  assert.match(html,/\/v5\/site\.css\?v=mobile-top10-20261030/);
+  assert.match(html,/\/v5\/dashboard\.js\?v=mobile-top10-20261030/);
   assert.match(html,/\/v5\/model\.js\?v=shared-20261030/,'original V5 model is unchanged');
+ }
+});
+
+test('Top 10 header and 10 horse cards are separate siblings, never grid children of the header',()=>{
+ const {C,win}=boot(),root=new Element('main');
+ win.RacingLabV5Dashboard.renderInto(root,'overview',C,()=>{},D.races[0].id);
+ const lists=flatten(root).filter(n=>n.className==='rlv5-command-picks');
+ assert.equal(lists.length,1,'one Top 10 list wrapper');
+ const items=lists[0].children;
+ assert.equal(items.length,11,'one header plus ten separate rows');
+ assert.equal(items[0].className,'rlv5-command-picks-head');
+ assert.equal(items[0].children.length,5,'header contains ONLY five column labels');
+ const horses=items.slice(1);
+ assert.ok(horses.every(n=>n.tag==='button'&&n.className.startsWith('rlv5-command-pick')));
+ assert.deepEqual(horses.map(n=>n.dataset.runnerId),C.curated.top10.map(x=>x.id),'original ranking unchanged');
+ const css=fs.readFileSync('v5/site.css','utf8');
+ assert.match(css,/\.rlv5-command-picks>\.rlv5-command-pick\{display:grid/);
+ assert.match(css,/grid-template-areas:"rank horse pct" "\. grade status"/);
+ assert.match(css,/\.rlv5-command-picks>\.rlv5-command-picks-head\{display:none\}/);
+});
+test('both entrypoints bust cached UI files without touching the model version',()=>{
+ for(const path of ['index.html','v5/index.html']){
+  const html=fs.readFileSync(path,'utf8');
+  assert.match(html,/site\.css\?v=mobile-top10-20261030/);
+  assert.match(html,/dashboard\.js\?v=mobile-top10-20261030/);
+  assert.match(html,/model\.js\?v=shared-20261030/);
  }
 });

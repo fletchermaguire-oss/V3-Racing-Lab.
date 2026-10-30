@@ -91,6 +91,12 @@ function overview(){
  var root=app(),research=C.curated?C.curated.entries.slice(0,10):[],venues=Object.keys(C.going),
   readOfficial=function(m){return C.official&&C.official.meetings.find(function(x){return x.meeting===m;});},
   sourceTime=C.official?C.official.observed_at:(D.official_check_at||D.saved_at||'Not checked');
+ if(/^\d{4}-\d{2}-\d{2}T/.test(String(sourceTime))){
+  var observed=Date.parse(sourceTime);
+  if(Number.isFinite(observed))sourceTime=new Date(observed).toLocaleString('en-AU',{
+   timeZone:'Australia/Brisbane',day:'numeric',month:'short',hour:'numeric',minute:'2-digit'
+  })+' AEST';
+ }
  var hero=add(e('section','rlv5-command-hero'),
   add(e('div','rlv5-command-title'),e('div','eyebrow','SATURDAY · '+D.date),
    e('h2','','Saturday Command Centre'),
@@ -131,8 +137,11 @@ function overview(){
      e('p','','Original researched order · live model numbers are separate and uncalibrated')),
     action('View Top 15',function(){S.topN=15;go('top10');},'ghost')));
  if(research.length){
-  var list=add(e('div','rlv5-command-picks-head'),
-   e('span','','#'),e('span','','HORSE / RACE'),e('span','','GRADE'),e('span','','MODEL'),e('span','','FIELD'));
+  // Header and data rows must be siblings. Putting horse rows inside the
+  // five-column header grid caused overlapping names and percentages on phones.
+  var list=e('div','rlv5-command-picks');
+  list.append(add(e('div','rlv5-command-picks-head'),
+   e('span','','#'),e('span','','HORSE / RACE'),e('span','','GRADE'),e('span','','MODEL'),e('span','','FIELD')));
   research.forEach(function(h){
    var row=e('button','rlv5-command-pick'+(h.eligible?'':' is-unavailable')),desc=e('div','rlv5-pick-description');
    row.type='button';row.dataset.runnerId=h.id;if(h.model_pct!==null)row.dataset.modelPct=String(h.model_pct);
