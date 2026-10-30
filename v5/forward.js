@@ -29,12 +29,15 @@ function check(d){
    throw Error('Invalid, duplicated, after-start or scratched locked selection');
   seen.add(x.runner_id);races.add(x.race_id);
  });
+ const rankedLock=new Map(d.locked_selections.map(x=>[x.race_id,x]));
  const outcomes=new Set();
  d.official_results.forEach(x=>{
+  const lock=rankedLock.get(x.race_id);
   if(!races.has(x.race_id)||outcomes.has(x.race_id)||x.status!=='OFFICIALLY_VERIFIED'||
    !/^https:\/\//.test(x.official_url||'')||!utc(x.verified_at_utc)||
+   !lock||utc(x.verified_at_utc)<utc(lock.race_at_utc)||
    typeof x.winner_id!=='string'||!x.winner_id.startsWith(x.race_id+'_'))
-   throw Error('Unmatched, duplicated or unverified official finish');
+   throw Error('Unmatched, duplicated, pre-start or unverified official finish');
   outcomes.add(x.race_id);
  });
  return d;
