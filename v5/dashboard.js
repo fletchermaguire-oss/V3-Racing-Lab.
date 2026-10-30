@@ -522,7 +522,9 @@ function racesPage(){
   e('h3','','See the full field model'),
   e('p','', 'Run the existing 10,000-draw simulation. Draws illustrate the model; they cannot establish true winning chances.'));
  simulation.append(action('Open race simulator',function(){go('sim');},'ghost'));
- lower.append(top4,simulation);root.append(lower);
+ // Keep raw model Top 4 inside the optional model audit, never alongside our pick.
+ modelBody.append(top4);
+ lower.append(simulation);root.append(lower);
  var scenariosDetails=e('details','rlv5-race-advanced');
  scenariosDetails.append(e('summary','','Change track scenario · advanced'),scenarios());
  root.append(scenariosDetails);
