@@ -47,3 +47,41 @@ test('post-race lock, missing published Git SHA, unknown race, or duplicate fini
  assert.throws(()=>F.summarize(z),/pre-start/);
  z=copy();z.independent_freeze_verified=false;assert.equal(F.summarize(z).completed,0);
 });
+
+
+test('duplicate research ranks cannot inflate forward Top 5/10/15 records',()=>{
+ const x=verified();
+ x.locked_selections.push({
+  ...x.locked_selections[0],
+  runner_id:'2026-10-31_FLEMINGTON_R02_04',
+  race_id:'2026-10-31_FLEMINGTON_R02',
+  rank:1
+ });
+ assert.throws(()=>F.summarize(x),/Invalid, duplicated/);
+ x.locked_selections[1].rank=2;
+ assert.equal(F.summarize(x).locked,2,'distinct locked ranks across races are permitted');
+});
+test('prospective record refuses non-boolean verification markers and malformed winner identities',()=>{
+ const copy=x=>JSON.parse(JSON.stringify(x));
+ const base=verified();
+ let x=copy(base);
+ x.independent_freeze_verified='true';
+ assert.throws(()=>F.summarize(x),/Unrecognized prospective/);
+ x=copy(base);
+ x.official_results=[{
+  race_id:'2026-10-31_RANDWICK_R08',
+  winner_id:'2026-10-31_RANDWICK_R08_06junk',
+  status:'OFFICIALLY_VERIFIED',
+  official_url:'https://example.com/official-results',
+  verified_at_utc:'2026-10-31T08:00:00Z',
+  verified:true
+ }];
+ assert.throws(()=>F.summarize(x),/Unmatched/);
+ x.official_results[0].winner_id='2026-10-31_RANDWICK_R08_06';
+ x.official_results[0].verified='true';
+ assert.throws(()=>F.summarize(x),/Unmatched/);
+ x.official_results[0].verified=false;
+ assert.throws(()=>F.summarize(x),/Unmatched/);
+ x.official_results[0].verified=true;
+ assert.equal(F.summarize(x).completed,1);
+});
