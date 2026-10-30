@@ -1,0 +1,12 @@
+{
+  "schema": "racing-lab-prospective-record/v1",
+  "meeting_date": "2026-10-31",
+  "status": "AWAITING_VERIFIED_PRE_RACE_LOCK",
+  "created_from": "2026-10-30-independent research",
+  "publication_approved": false,
+  "independent_freeze_verified": false,
+  "freeze_proof": null,
+  "locked_selections": [],
+  "official_results": [],
+  "notice": "No prospective win-rate claim is permitted until a timestamped GitHub pre-race commit exists, start times are verified, and individual official results have been matched. Historical V3/V4 records are retrospective and kept separate."
+}
