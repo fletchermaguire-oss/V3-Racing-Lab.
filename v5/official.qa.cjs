@@ -17,15 +17,21 @@ function html(meeting,count,trs,going='Good 4'){
 }
 const line=(race,horse,blank=false)=>'<tr><td>'+(blank?' ':('Race '+race+':'))+
  '</td><td>'+horse+' (30/10 0810)</td></tr>';
+function publishedSheet(meeting,additional=[],going='Good 4'){
+ const rows=Object.entries(Official.scratchings).filter(([race])=>race.startsWith(meeting+'_R'))
+  .flatMap(([race,names])=>names.map(horse=>[Number(race.split('_R')[1]),horse]))
+  .concat(additional);
+ return parseOfficial(meeting,html(meeting,rows.length,rows.map(([race,horse])=>line(race,'1 '+horse)).join(''),going));
+}
 function sheets(){
  return {
   schema:'racing-lab-official-sheets/v1',status:'OFFICIAL_SHEETS_RECONCILED',
   race_date:'2026-10-31',publication_approved:false,final_fields_verified:false,
   observed_at:'2026-10-30T09:42:00Z',
   meetings:[
-   parseOfficial('RANDWICK',html('RANDWICK',1,line(8,'12 BARRENGARRY'))),
-   parseOfficial('FLEMINGTON',html('FLEMINGTON',2,line(5,'19e ESTREMO')+line(9,'2 GENEROSITY'))),
-   parseOfficial('ASCOT',html('ASCOT',1,line(6,'6 DYNASTIC LASS'),'Soft 5'))
+   publishedSheet('RANDWICK'),
+   publishedSheet('FLEMINGTON',[[5,'ESTREMO'],[9,'GENEROSITY']]),
+   publishedSheet('ASCOT',[],'Soft 5')
   ]
  };
 }
@@ -57,7 +63,7 @@ test('atomic official scratchings apply to every consumer and preserve archived 
  assert.equal(C.board.baseline.records.some(x=>x.horse==='Estremo'&&x.meeting==='FLEMINGTON'),false);
  assert.equal(C.board.baseline.records.some(x=>x.horse==='Generosity'&&x.meeting==='FLEMINGTON'&&x.race===9),false);
  assert.deepEqual(C.curated.entries.map(x=>x.horse),picks);
- assert.equal(C.official.matched_scratchings,4);
+ assert.equal(C.official.matched_scratchings,sheets().meetings.reduce((n,m)=>n+m.scratched_total,0));
  assert.equal(C.official.final_fields_verified,false);
  assert.equal(C.board.publication_blocked,true);
  assert.ok(C.researchHistory.every(x=>x.approval===undefined||x.approval==='RESEARCH_ONLY'));
@@ -102,4 +108,42 @@ test('late scratching table is included in counted official field reconciliation
  const invalid=html('FLEMINGTON',2,line(9,'2 GENEROSITY')).replace(
   '<tr><td>There are no late scratchings</td></tr>',line(9,'2 GENEROSITY'));
  assert.throws(()=>parseOfficial('FLEMINGTON',invalid),/Duplicate official/);
+});
+
+
+test('old source publications, disappearing prior scratchings and same-time conflicting names are rejected',()=>{
+ const C=State.create(State.applyOfficialOverlay(Data,Official),{going:Official.going,checkpoint:Checkpoint});
+ const initial=C.revision;
+ let old=sheets();old.meetings[0].source_last_published='Thu 29-Oct-26 8:10AM AEDT';
+ assert.throws(()=>C.applyOfficialSheets(old),/older published/);
+ let missing=sheets();
+ const r=Object.keys(missing.meetings[0].scratchings)[0];
+ missing.meetings[0].scratchings[r].pop();missing.meetings[0].scratched_total--;
+ assert.throws(()=>C.applyOfficialSheets(missing),/Previously confirmed/);
+ let future=sheets();future.meetings[0].source_last_published='Sat 31-Oct-26 8:10AM AEDT';
+ assert.throws(()=>C.applyOfficialSheets(future),/future or older/);
+ assert.equal(C.revision,initial);
+ C.applyOfficialSheets(sheets());
+ const unchanged=sheets();unchanged.observed_at='2026-10-30T09:47:00Z';
+ const after=C.revision;let updates=0;C.subscribe(()=>updates++);
+ C.applyOfficialSheets(unchanged);
+ assert.equal(C.revision,after);
+ assert.equal(updates,0,'unchanged published feed must not reset simulator');
+ assert.equal(C.official.observed_at,'2026-10-30T09:47:00Z','no-op still advances request watermark');
+ const delayed=sheets();delayed.observed_at='2026-10-30T09:46:00Z';
+ assert.throws(()=>C.applyOfficialSheets(delayed),/Stale or invalid/);
+ const conflict=sheets();conflict.observed_at='2026-10-30T09:50:00Z';
+ conflict.meetings[0].scratchings.RANDWICK_R08.push('SHEZA ALIBI');
+ conflict.meetings[0].scratched_total++;
+ assert.throws(()=>C.applyOfficialSheets(conflict),/Conflicting official/);
+ assert.equal(C.revision,after);
+});
+test('published track grade can change without a newer scratching publication',()=>{
+ const C=State.create(State.applyOfficialOverlay(Data,Official),{going:Official.going,checkpoint:Checkpoint});
+ C.applyOfficialSheets(sheets());
+ const revised=sheets();revised.observed_at='2026-10-30T09:48:00Z';
+ revised.meetings[0].track_going='Soft 5';
+ C.applyOfficialSheets(revised);
+ assert.equal(C.officialGoing.RANDWICK,'Soft 5');
+ assert.equal(C.going.RANDWICK,'Soft 5');
 });
