@@ -18,6 +18,27 @@ function recordedGoingStamp(source){
   }).sort().join('|');
 }
 function canonical(x){return String(x||'').toUpperCase().replace(/\([^)]*\)/g,'').replace(/[^A-Z0-9]/g,'');}
+function publishedAt(value){
+ var s=String(value||'').trim(),date,year,month,day,hour,minute,zone,weekday;
+ var months={Jan:1,Feb:2,Mar:3,Apr:4,May:5,Jun:6,Jul:7,Aug:8,Sep:9,Oct:10,Nov:11,Dec:12};
+ var named=/^(Sun|Mon|Tue|Wed|Thu|Fri|Sat)\s+(\d{1,2})-([A-Za-z]{3})-(\d{2})\s+(\d{1,2}):(\d{2})(AM|PM)\s+(AEDT|AEST|AWST)$/i.exec(s);
+ var numeric=/^(\d{4})-(\d{2})-(\d{2})\s+(\d{1,2}):(\d{2})\s+(AEDT|AEST|AWST)$/i.exec(s);
+ if(named){
+   weekday=named[1];year=2000+Number(named[4]);month=months[named[3][0].toUpperCase()+named[3].slice(1).toLowerCase()];
+   day=Number(named[2]);hour=Number(named[5]);minute=Number(named[6]);zone=named[8].toUpperCase();
+   if(hour<1||hour>12)return NaN;
+   hour=hour%12+(named[7].toUpperCase()==='PM'?12:0);
+ }else if(numeric){
+   year=Number(numeric[1]);month=Number(numeric[2]);day=Number(numeric[3]);
+   hour=Number(numeric[4]);minute=Number(numeric[5]);zone=numeric[6].toUpperCase();
+   if(hour>23)return NaN;
+ }else return NaN;
+ if(!month||day<1||minute>59)return NaN;
+ date=new Date(Date.UTC(year,month-1,day));
+ if(date.getUTCFullYear()!==year||date.getUTCMonth()!==month-1||date.getUTCDate()!==day)return NaN;
+ if(weekday&&['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][date.getUTCDay()]!==weekday[0].toUpperCase()+weekday.slice(1).toLowerCase())return NaN;
+ return Date.UTC(year,month-1,day,hour-({AEDT:11,AEST:10,AWST:8}[zone]),minute);
+}
 function applyOfficialOverlay(input,overlay){
   if(!overlay||!['racing-lab-friday-field-overlay/v1','racing-lab-racecard-overlay/v2'].includes(overlay.schema))throw Error('Unverified or missing official field overlay');
   if(overlay.race_date!==input.date)throw Error('Field overlay date mismatch');
@@ -227,7 +248,8 @@ function create(input,options){
        !Array.isArray(q.meetings)||q.meetings.length!==Object.keys(going).length)
       throw Error('Incomplete or mismatched official sheets; saved board retained');
     var timestamp=Date.parse(q.observed_at);
-    if(!Number.isFinite(timestamp)||(official&&timestamp<=Date.parse(official.observed_at)))
+    if(typeof q.observed_at!=='string'||!/^\d{4}-\d{2}-\d{2}T\d\d:\d\d:\d\d(?:\.\d+)?Z$/.test(q.observed_at)||
+       !Number.isFinite(timestamp)||(official&&timestamp<=Date.parse(official.observed_at)))
       throw Error('Stale or invalid official observed timestamp');
     var nextSource=clone(source),newGoing=Object.assign({},going),nextOfficialGoing=Object.assign({},officialGoing);
     var index=new Map(),seenMeetings=new Set(),scratches=0;
@@ -243,6 +265,15 @@ function create(input,options){
          !sheet.scratchings||typeof sheet.scratchings!=='object'||Array.isArray(sheet.scratchings)||
          sheet.confirmed_final_starters!==false||sheet.emergencies_confirmed!==false)
          throw Error('Invalid official meeting/source payload; saved board retained');
+      var published=publishedAt(sheet.source_last_published);
+      var accepted=official&&official.meetings.find(function(m){return m.meeting===sheet.meeting;});
+      var snapshot=source.official_overlay_sources&&source.official_overlay_sources[sheet.meeting];
+      var previous=accepted?accepted.source_last_published:snapshot&&snapshot.last_published;
+      var previousTime=previous?publishedAt(previous):NaN;
+      if(!Number.isFinite(published)||published>timestamp+300000||
+         (previous&&!Number.isFinite(previousTime))||
+         (Number.isFinite(previousTime)&&published<previousTime))
+        throw Error('Invalid, future or older published official sheet: '+sheet.meeting);
       seenMeetings.add(sheet.meeting);
       if(going[sheet.meeting]===officialGoing[sheet.meeting])newGoing[sheet.meeting]=sheet.track_going;
       nextOfficialGoing[sheet.meeting]=sheet.track_going;
@@ -260,6 +291,21 @@ function create(input,options){
         });
       });
       if(counted!==sheet.scratched_total)throw Error('Official scratching total does not match named runners: '+sheet.meeting);
+      var earlier=source.runners.filter(function(h){
+        return h.meeting===sheet.meeting&&/^SCRATCHED/i.test(String(h.status||''));
+      });
+      earlier.forEach(function(h){
+        if(!names.has(h.race_id+'|'+canonical(h.horse)))
+          throw Error('Previously confirmed official scratching missing: '+sheet.meeting+' '+h.horse);
+      });
+      if(accepted&&published===previousTime){
+        var oldNames=new Set();
+        Object.entries(accepted.scratchings||{}).forEach(function(pair){
+          pair[1].forEach(function(name){oldNames.add(source.date+'_'+pair[0]+'|'+canonical(name));});
+        });
+        if(oldNames.size!==names.size||Array.from(names).some(function(id){return !oldNames.has(id);}))
+          throw Error('Conflicting official scratchings at unchanged publication time: '+sheet.meeting);
+      }
       scratches+=counted;
     });
     if(seenMeetings.size!==Object.keys(going).length)throw Error('Official meetings missing');
@@ -271,8 +317,8 @@ function create(input,options){
     if(official&&JSON.stringify(nextSource.runners)===JSON.stringify(source.runners)&&
        JSON.stringify(nextSource.official_sources)===JSON.stringify(source.official_sources)&&
        JSON.stringify(newGoing)===JSON.stringify(going)){
-      official.last_checked_at=q.observed_at;lastError='';
-      return official; // Identical published sheets must not restart race animation or edits.
+      official.observed_at=q.observed_at;official.last_checked_at=q.observed_at;
+      return official; // Advance request watermark without re-rendering identical race data.
     }
     var next=clone(nextSource);
     next.runners.forEach(function(h){if(local.has(h.id)&&M.isEligible(h))h.status='SCRATCHED — local scenario';});
@@ -281,7 +327,8 @@ function create(input,options){
     source=nextSource;data=next;going=newGoing;officialGoing=nextOfficialGoing;
     board=result;key=revision(data,going);official={observed_at:q.observed_at,
      meetings:q.meetings.map(function(x){return {meeting:x.meeting,source_last_published:x.source_last_published,
-       source_url:x.source_url,track_going:x.track_going,scratched_total:x.scratched_total};}),
+       source_url:x.source_url,track_going:x.track_going,scratched_total:x.scratched_total,
+       scratchings:clone(x.scratchings)};}),
      final_fields_verified:false,matched_scratchings:scratches};
     lastError='';researchChange('OFFICIAL_SCRATCHINGS_AND_TRACK_CHECK');notify();
     return official;
