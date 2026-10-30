@@ -53,4 +53,4 @@ const output={
  note:'None of the tested temperatures/reserves are calibrated. Reconstructed 17/24 October snapshots might contain post-race updates. Changing coefficients to improve these two dates risks overfitting. No model changes approved.'
 };
 if(require.main===module)process.stdout.write(JSON.stringify(output,null,2)+'\n');
-module.exports={remap};
+module.exports={remap,output};
