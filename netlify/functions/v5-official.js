@@ -10,8 +10,18 @@ const URLS=Object.freeze({
  FLEMINGTON:'https://www.racingaustralia.horse/FreeFields/Scratchings.aspx?Key=2026Oct31%2CVIC%2CFlemington',
  ASCOT:'https://www.racingaustralia.horse/FreeFields/Scratchings.aspx?Key=2026Oct31%2CWA%2CAscot'
 });
-const unescapeHtml=s=>String(s).replace(/&nbsp;|&#160;/gi,' ').replace(/&amp;/gi,'&')
- .replace(/&#(?:x([0-9a-f]+)|([0-9]+));/gi,(_,x,d)=>String.fromCodePoint(parseInt(x||d,x?16:10)))
+// Official horse names can contain named HTML punctuation (e.g. OSCAR&rsquo;S).
+// Decode before identity matching, without silently guessing unknown entities.
+const NAMED_ENTITIES=Object.freeze({
+ nbsp:' ',amp:'&',apos:"'",rsquo:"'",lsquo:"'",quot:'"',ldquo:'"',rdquo:'"',
+ ndash:'-',mdash:'-',hellip:'…',eacute:'é',egrave:'è',uuml:'ü'
+});
+const unescapeHtml=s=>String(s)
+ .replace(/&amp;/gi,'&')
+ .replace(/&(?:#x([0-9a-f]+)|#([0-9]+)|([a-z][a-z0-9]+));/gi,(whole,hex,dec,named)=>{
+   if(hex||dec){const cp=parseInt(hex||dec,hex?16:10);return cp>0&&cp<=0x10ffff?String.fromCodePoint(cp):whole;}
+   return Object.hasOwn(NAMED_ENTITIES,named.toLowerCase())?NAMED_ENTITIES[named.toLowerCase()]:whole;
+ })
  .replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim();
 const canonical=s=>String(s).toUpperCase().replace(/\([^)]*\)/g,'').replace(/[^A-Z0-9]/g,'');
 function parseOfficial(meeting,html){
@@ -47,7 +57,10 @@ function parseOfficial(meeting,html){
     continue;
    }
    if(current<1||current>(meeting==='FLEMINGTON'?9:10))throw Error('Scratched runner has invalid race: '+meeting+' '+current);
-   const name=horse[1].trim(),id=meeting+'_R'+String(current).padStart(2,'0'),key=id+'|'+canonical(name);
+   const name=horse[1].trim();
+   if(/&(?:#(?:x[0-9a-f]+|\d+)|[a-z][a-z0-9]+);/i.test(name))
+     throw Error('Unrecognized encoded official horse name: '+meeting+' race '+current);
+   const id=meeting+'_R'+String(current).padStart(2,'0'),key=id+'|'+canonical(name);
    if(seen.has(key))throw Error('Duplicate official scratched runner: '+key);
    seen.add(key);(scratchings[id]||(scratchings[id]=[])).push(name);
   }
