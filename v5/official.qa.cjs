@@ -185,7 +185,7 @@ test('live Ascot OSCAR apostrophe entities decode to the same archived runner wi
  ascot.scratchings.ASCOT_R08=['OSCAR&rsquo;S FORTUNE'];
  ascot.scratched_total++;
  assert.doesNotThrow(()=>C.applyOfficialSheets(sample));
- assert.equal(C.board.activeCount,prior-1);
+ assert.equal(C.board.activeCount,prior-2,'fixture also includes the new Flemington Generosity scratching');
  assert.ok(!C.board.baseline.records.some(x=>x.horse==="Oscar's Fortune"&&x.race===8));
  assert.deepEqual(C.curated.entries.map(x=>x.horse),picks,'named research ranks must not be silently replaced');
  assert.equal(C.curated.entries.find(x=>x.horse==='Immortal Bliss').eligible,true);
