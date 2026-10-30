@@ -71,7 +71,7 @@ function revision(data,going){
 function create(input,options){
   if(!M)throw Error('Formula failed to load');
   options=options||{};
-  var source=clone(input),data=clone(source),going={},local=new Set(),listeners=[],live=null,lastError='',lastChange=null,official=null,officialGoing={};
+  var source=clone(input),data=clone(source),going={},local=new Set(),listeners=[],live=null,lastError='',lastChange=null,official=null,officialGoing={},sourceErrors=new Map();
   var checkpoint=options.checkpoint||null,overrides={},history=[],curated=null;
   data.races.forEach(function(r){going[r.meeting]=options.going&&options.going[r.meeting]||datedGoing(source,r.meeting);});
   officialGoing=Object.assign({},going);
@@ -317,7 +317,11 @@ function create(input,options){
     setResearchOverride:setResearchOverride,get localScratchCount(){return local.size;},
     get model(){return M;},subscribe:function(fn){listeners.push(fn);return function(){listeners=listeners.filter(function(x){return x!==fn;});};},
     setGoing:setGoing,setLocalScratch:setLocalScratch,isLocalScratch:function(id){return local.has(id);},applyEvidence:applyEvidence,
-    reportError:function(message){lastError=message;notify();},rows:rows,
+    reportError:function(message){
+      var label=String(message).startsWith('Official update')?'OFFICIAL':'AIRTABLE';
+      if(sourceErrors.get(label)===message)return;
+      sourceErrors.set(label,message);lastError=Array.from(sourceErrors.values()).join(' | ');notify();
+    },rows:rows,
     multi:function(ids){return M.multi(board,ids);},simulate:function(race,count,seed){return M.simulateWinners(rows(race),count,seed);},
     legacySnapshot:legacySnapshot};
   return api;
