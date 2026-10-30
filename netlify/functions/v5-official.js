@@ -22,6 +22,7 @@ const unescapeHtml=s=>String(s)
    if(hex||dec){const cp=parseInt(hex||dec,hex?16:10);return cp>0&&cp<=0x10ffff?String.fromCodePoint(cp):whole;}
    return Object.hasOwn(NAMED_ENTITIES,named.toLowerCase())?NAMED_ENTITIES[named.toLowerCase()]:whole;
  })
+ .replace(/[‘’]/g,"'").replace(/[“”]/g,'"')
  .replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim();
 const canonical=s=>String(s).toUpperCase().replace(/\([^)]*\)/g,'').replace(/[^A-Z0-9]/g,'');
 function parseOfficial(meeting,html){
