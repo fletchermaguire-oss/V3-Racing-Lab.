@@ -41,5 +41,9 @@ test('post-race lock, missing published Git SHA, unknown race, or duplicate fini
  z=copy();z.official_results=[{race_id:'UNLISTED',winner_id:'none',status:'OFFICIALLY_VERIFIED',
    official_url:'https://example.com/result',verified_at_utc:'2026-10-31T08:00:00Z'}];
  assert.throws(()=>F.summarize(z),/Unmatched/);
+ z=copy();z.official_results=[{race_id:'2026-10-31_RANDWICK_R08',winner_id:'2026-10-31_RANDWICK_R08_06',
+   status:'OFFICIALLY_VERIFIED',official_url:'https://example.com/result',
+   verified_at_utc:'2026-10-31T04:00:00Z'}];
+ assert.throws(()=>F.summarize(z),/pre-start/);
  z=copy();z.independent_freeze_verified=false;assert.equal(F.summarize(z).completed,0);
 });
