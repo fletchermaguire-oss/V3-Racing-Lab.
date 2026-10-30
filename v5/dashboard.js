@@ -366,7 +366,7 @@ function top10(){
  advanced.append(inner);root.append(advanced);
 }
 function raceNav(){var all=D.races.filter(function(r){return r.meeting===S.meeting;}),filter=e('div','filters');filter.append(setField('Meeting',Object.keys(C.going).map(function(x){return {value:x,text:x};}),S.meeting,function(v){S.meeting=v;S.race=D.races.find(function(r){return r.meeting===v;}).id;S.runner=null;render();}),setField('Race',all.map(function(r){return {value:r.id,text:'R'+r.race+' · '+r.title};}),S.race,function(v){S.race=v;S.runner=null;render();}));
- var grid=e('div','racechips');all.forEach(function(r){var x=C.board.baseline.races.find(function(v){return v.id===r.id;}),b=add(e('button','racechip'+(r.id===S.race?' active':'')),e('b','','Race '+r.race),e('small','',r.distance_m+'m · '+((C.curated&&C.curated.entries.find(function(h){return h.race_id===r.id;}))?'Research: '+C.curated.entries.find(function(h){return h.race_id===r.id;}).horse:'Model #1: '+(x.leader||'No contest'))));b.type='button';b.addEventListener('click',function(){S.race=r.id;S.runner=null;render();});grid.append(b);});return [filter,grid];}
+ var grid=e('div','racechips');all.forEach(function(r){var x=C.board.baseline.races.find(function(v){return v.id===r.id;}),b=add(e('button','racechip'+(r.id===S.race?' active':'')),e('b','','Race '+r.race),e('small','',r.distance_m+'m · '+((C.curated&&C.curated.entries.find(function(h){return h.race_id===r.id;}))?'Research: '+C.curated.entries.find(function(h){return h.race_id===r.id;}).horse' · no researched selection'))));b.type='button';b.addEventListener('click',function(){S.race=r.id;S.runner=null;render();});grid.append(b);});return [filter,grid];}
 function facts(h){var x=model(h.id),names={career:'Career record',recency:'Recent form',distance:'Distance record',surface:'Surface record',course:'Course record',class:'Class performance',weight:'Weight',barrier:'Barrier',layoff:'Layoff',pace:'Pace stress',draw:'Draw stress'};
  function lines(xs){return xs.map(function(v){return (names[v.feature]||v.feature)+': '+(v.contribution>0?'+':'')+v.contribution.toFixed(3)+' score contribution';});}
  return {pros:x?lines(x.positive_drivers):[],cons:x?lines(x.negative_drivers):[]};
@@ -400,7 +400,7 @@ function horseDetail(h){
   e('h3','',h.horse),
   e('p','muted small','No. '+h.tab+' · Barrier '+(h.barrier??'—')+' · '+(h.weight_kg??'—')+'kg · '+(h.trainer||'Trainer not verified')+' / '+(String(h.jockey||'').trim()||'Rider not declared')));
  if(research)identity.append(e('span','rlv5-horse-tag','Independent research #'+research.original_rank));
- if(x&&x.rank===1)identity.append(e('span','rlv5-horse-tag','Live model leader'));
+ if(x&&x.rank===1)identity.append(e('span','rlv5-horse-tag','Model rank 1 · diagnostic'));
  top.append(identity);
  if(x)top.append(add(e('div','rlv5-horse-score'),e('strong','',pct(x.p)),
   e('span','','Uncalibrated model'),e('small','','Current race rank #'+x.rank)));
@@ -423,7 +423,7 @@ function horseDetail(h){
 }
 
 function racesPage(){
- var root=app();root.append(head('Race Centre','Every runner, one clear research choice and one separately labelled live model leader.'));
+ var root=app();root.append(head('Race Centre','One researched selection per race where available. Model rankings are diagnostics, not competing picks.'));
  var navwrap=e('div','rlv5-race-select');raceNav().forEach(function(node){navwrap.append(node);});root.append(navwrap);
  var r=raceOf(S.race),summary=C.board.baseline.races.find(function(x){return x.id===r.id;}),hs=runners(r.id),
   reviewed=C.curated&&C.curated.entries.find(function(h){return h.race_id===r.id;}),
@@ -446,16 +446,35 @@ function racesPage(){
   'Official sheet last published '+official.source_last_published+'. Final starter and emergency status remains unverified.':
   'Saved research source '+(D.official_check_at||D.saved_at)+'. Final official starters are not verified.'));
  root.append(hero);
- var picks=e('section','rlv5-race-two-picks');
- var researchCard=add(e('div','rlv5-pick-identity'),
-  e('span','rlv5-kicker','INDEPENDENT RESEARCH'),
-  e('h3','',reviewed?'Independent research choice: '+reviewed.horse:'No independent researched Top 15 pick'),
-  e('p','',reviewed?'Original overall rank #'+reviewed.original_rank+' · '+(reviewed.eligible?'currently included, provisional':'out of current field'):'No replacement has been invented for this race.'));
- var modelCard=add(e('div','rlv5-pick-identity'),
-  e('span','rlv5-kicker','LIVE MODEL · UNCALIBRATED'),
-  e('h3','','Live model #1: '+(summary.leader||'No active leader')),
-  e('p','','This leader may change with field data, track conditions or Airtable updates. It does not replace the independently researched choice.'));
- add(picks,researchCard,modelCard);root.append(picks);
+ // One primary selection only: the independent human-reviewed shortlist.
+ // When no horse is reviewed (or it is out of the field), do not silently
+ // promote the live model leader into a new recommended pick.
+ var pickPanel=e('section','rlv5-race-selection'+(reviewed&&reviewed.eligible?'':' no-pick'));
+ var pickTitle=reviewed&&reviewed.eligible?reviewed.horse:'No current researched selection';
+ var reason=reviewed&&reviewed.eligible?
+  'Independent research · original overall rank #'+reviewed.original_rank+'. Provisional until final field certification.':
+  reviewed?'Previously researched: '+reviewed.horse+' (out of current field). No automatic replacement selected.':
+  'This race does not have an independently reviewed selection in the saved Top 15.';
+ pickPanel.append(
+  e('span','rlv5-kicker','OUR RESEARCHED SELECTION'),
+  e('h3','',pickTitle),
+  e('p','',reason));
+ if(reviewed&&reviewed.eligible&&reviewed.reason)
+  pickPanel.append(e('p','rlv5-race-selection-reason',reviewed.reason));
+ root.append(pickPanel);
+ // Technical comparison remains accessible, but is NOT a second pick card.
+ var modelNotes=e('details','rlv5-model-notes');
+ modelNotes.append(e('summary','','Model check · not another selection'));
+ var modelBody=e('div','rlv5-model-notes-body');
+ modelBody.append(e('p','',
+  'Highest raw model estimate: '+(summary.leader||'none')+
+  (summary.top_p!==null&&summary.top_p!==undefined?' ('+pct(summary.top_p)+')':'')+
+  '. These probabilities are uncalibrated and can change with field and track updates.'));
+ if(reviewed&&summary.leader&&summary.leader.toUpperCase()!==reviewed.horse.toUpperCase())
+  modelBody.append(e('p','rlv5-model-disagreement',
+   'Model disagrees with the researched horse. Review the form and field before changing any selection; no automatic switch.'));
+ modelBody.append(e('p','','This is a calculation for comparison, not a recommendation or an additional top pick.'));
+ modelNotes.append(modelBody);root.append(modelNotes);
  if(!hs.length){root.append(note('No runner dossiers in this race.'));return;}
  if(!hs.some(function(h){return h.id===S.runner;})){
   S.runner=(reviewed&&reviewed.eligible?reviewed.id:null)||(hs.find(function(h){return !!model(h.id);})||hs[0]).id;
@@ -469,7 +488,7 @@ function racesPage(){
   row.type='button';row.dataset.runnerId=h.id;if(x)row.dataset.modelPct=String(x.p);
   add(label,e('strong','',h.horse),e('small','',x?'Model rank #'+x.rank:C.model.statusOf(h)));
   if(reviewed&&reviewed.id===h.id)tags.append(e('span','rlv5-tag research','Research'));
-  if(x&&x.rank===1)tags.append(e('span','rlv5-tag leader','Model #1'));
+  if(x&&x.rank===1)tags.append(e('span','rlv5-tag leader','Model rank 1'));
   if(!x)tags.append(e('span','rlv5-tag unavailable','Out of field'));
   add(row,e('span','rlv5-runner-tab',String(h.tab??'—')),label,
    e('span','rlv5-runner-prob',x?pct(x.p):'—'),tags);
