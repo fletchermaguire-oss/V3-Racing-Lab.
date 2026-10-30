@@ -7,7 +7,7 @@
     "node": ">=18"
   },
   "scripts": {
-    "test": "node --test v5/model.qa.cjs v5/horse-analysis.qa.cjs v5/site.qa.cjs v5/curated.qa.cjs v5/official.qa.cjs v5/ui.qa.cjs v5/forward.qa.cjs v5/results-history.qa.cjs v5/calibration.qa.cjs v5/experiments/neutral-class-qa.cjs && node scratchings-engine.test.js && node test-manual-scratch.js",
+    "test": "node --test v5/model.qa.cjs v5/horse-analysis.qa.cjs v5/site.qa.cjs v5/curated.qa.cjs v5/official.qa.cjs v5/ui.qa.cjs v5/forward.qa.cjs v5/results-history.qa.cjs v5/calibration.qa.cjs v5/experiments/neutral-class-qa.cjs v5/experiments/audit-flat-races.qa.cjs && node scratchings-engine.test.js && node test-manual-scratch.js",
     "check": "node scripts/v5-safe-build.cjs",
     "research:audit": "node v5/backtests/compare-retrospective.cjs",
     "research:class": "node v5/experiments/compare-neutral-class.cjs"
