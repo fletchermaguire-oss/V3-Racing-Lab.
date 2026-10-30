@@ -70,3 +70,26 @@ test('original homepage and Top5/10/15 present curated names; edit controls rend
  assert.doesNotThrow(()=>edit.listeners.click());
  assert.ok(flatten(root).some(x=>x.tag==='input'&&x.placeholder.includes('Explain form')));
 });
+
+
+test('provisionally promoted emergencies cannot be auto-filled into the multi or manually added',()=>{
+ const {C,win}=boot();
+ const reserve=C.data.runners.find(h=>/^EMERGENCY\b/i.test(String(h.status||''))&&h.emergency_activated===true&&
+  C.board.baseline.records.some(x=>x.id===h.id));
+ assert.ok(reserve,'Friday source must contain an included but uncertified projected emergency');
+ C.board.winFirst.priority.unshift({runner_id:reserve.id,horse:reserve.horse,race_id:reserve.race_id});
+ const root=new Element('main');
+ win.RacingLabV5Dashboard.renderInto(root,'multi',C,()=>{},D.races[0].id);
+ const auto=flatten(root).find(n=>n.tag==='button'&&n.textContent==='Use win-first 2');
+ assert.ok(auto,'Multi auto-fill control must render');
+ if(!auto.disabled)auto.listeners.click();
+ const chosen=flatten(root).filter(n=>n.className==='workshop-leg-top').flatMap(flatten);
+ assert.ok(chosen.every(n=>!String(n.textContent).includes(reserve.horse)),
+  'projected emergency must never appear in an automatically filled multi');
+ win.RacingLabV5Dashboard.renderInto(root,'multi',C,()=>{},reserve.race_id);
+ const addButtons=flatten(root).filter(n=>n.className==='workshop-candidate');
+ const reserveRow=addButtons.find(n=>flatten(n).some(x=>String(x.textContent).includes(reserve.horse)));
+ assert.ok(reserveRow,'Projected runner must remain visible as an excluded candidate');
+ assert.ok(flatten(reserveRow).some(n=>n.tag==='button'&&n.disabled&&n.textContent==='Excluded'),
+  'projected emergency cannot be manually promoted by Multi Lab');
+});
