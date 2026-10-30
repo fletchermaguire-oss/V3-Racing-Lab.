@@ -39,6 +39,7 @@ function assemble(checkpoint,data,board,going,overrides){
   const h=listed.get(raceId+'|'+clean(x.horse));
   const current=included.get(h.id),change=edits[h.id]||{},notes=[];
   if(!current)notes.push('NOT_IN_CURRENT_FIELD');
+  if(data.emergencies_certified!==true&&(data.emergency_review_races||[]).includes(raceId))notes.push('PROVISIONAL_EMERGENCY_ACTIVATIONS');
   const baseGoing=checkpoint.track_assumptions&&checkpoint.track_assumptions[x.meeting]||null;
   if(baseGoing&&going[x.meeting]!==baseGoing)notes.push('TRACK_GOING_CHANGED');
   if(current&&current.quality_flags.length)notes.push(...current.quality_flags);
