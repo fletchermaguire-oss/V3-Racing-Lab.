@@ -211,8 +211,12 @@ function create(input,options){
       // A generic listed/unverified label cannot silently reinstate a saved scratch.
       if(typeof status==='string'&&(M.isEligible(h)||!M.isEligible({status:status})))h.status=status;
     });
+    if(JSON.stringify(next.runners)===JSON.stringify(source.runners)){
+      live={as_of:q.as_of};lastError='';
+      return; // New Airtable request contained no new evidence; preserve simulator and UI state.
+    }
     var nextSource=clone(next);
-    next.runners.forEach(function(h){if(local.has(h.id))h.status='SCRATCHED — local scenario';});
+    next.runners.forEach(function(h){if(local.has(h.id)&&M.isEligible(h))h.status='SCRATCHED — local scenario';});
     var result=M.board(next,{going:going});
     noteChange('AIRTABLE_EVIDENCE_UPDATE',board,result);
     source=nextSource;data=next;board=result;key=revision(data,going);live={as_of:q.as_of};lastError='';researchChange('AIRTABLE_EVIDENCE_UPDATE');notify();
@@ -264,6 +268,12 @@ function create(input,options){
       meeting:x.meeting,url:x.source_url,published:x.source_last_published,going:x.track_going,
       scratching_count:x.scratched_total
     };});
+    if(official&&JSON.stringify(nextSource.runners)===JSON.stringify(source.runners)&&
+       JSON.stringify(nextSource.official_sources)===JSON.stringify(source.official_sources)&&
+       JSON.stringify(newGoing)===JSON.stringify(going)){
+      official.last_checked_at=q.observed_at;lastError='';
+      return official; // Identical published sheets must not restart race animation or edits.
+    }
     var next=clone(nextSource);
     next.runners.forEach(function(h){if(local.has(h.id)&&M.isEligible(h))h.status='SCRATCHED — local scenario';});
     var result=M.board(next,{going:newGoing});
