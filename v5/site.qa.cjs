@@ -169,3 +169,47 @@ test('Saturday timestamped overlay can replace Friday snapshot; un-timestamped o
  const future=clone(latest);future.checked_date='2026-11-01';
  assert.throws(()=>State.applyOfficialOverlay(D,future),/date/);
 });
+
+
+test('Saturday replacement is complete, timestamped and retains all Friday scratched runners',()=>{
+ const latest=clone(Official);
+ latest.schema='racing-lab-racecard-overlay/v2';
+ latest.checked_date='2026-10-31';
+ latest.checked_at='2026-10-31T11:30:00+11:00';
+ assert.equal(State.requireCumulativeScratchings(Official,latest),true);
+ assert.equal(State.applyOfficialOverlay(D,latest).date,D.date);
+ const missing=clone(latest);
+ missing.scratchings.RANDWICK_R02.splice(0,1);
+ assert.throws(()=>State.requireCumulativeScratchings(Official,missing),/omits archived Friday scratching/);
+ const oldSheet=clone(latest);
+ oldSheet.source_documents.RANDWICK.last_published='2026-10-29 06:00 AEDT';
+ assert.throws(()=>State.requireCumulativeScratchings(Official,oldSheet),/older than archived Friday/);
+ const absent=clone(latest);delete absent.scratchings;
+ assert.throws(()=>State.applyOfficialOverlay(D,absent),/missing required/);
+ const missingGoing=clone(latest);delete missingGoing.going.ASCOT;
+ assert.throws(()=>State.applyOfficialOverlay(D,missingGoing),/missing meeting source or going/);
+ const missingTimestamp=clone(latest);delete missingTimestamp.checked_at;
+ assert.throws(()=>State.applyOfficialOverlay(D,missingTimestamp),/timestamp/);
+ const oldFormat=clone(latest);oldFormat.schema='racing-lab-friday-field-overlay/v1';
+ assert.throws(()=>State.applyOfficialOverlay(D,oldFormat),/requires v2/);
+});
+test('race-day loader checks immutable Friday archive before allowing revised Top 15 source',async()=>{
+ const latest=clone(Official);latest.schema='racing-lab-racecard-overlay/v2';
+ latest.checked_date='2026-10-31';latest.checked_at='2026-10-31T11:30:00+11:00';
+ const checkpoint=require('./shortlists/current.json');
+ delete require.cache[require.resolve('./site-state.js')];
+ const Fresh=require('./site-state.js');
+ const visited=[];
+ const fetcher=async(path)=>{
+  visited.push(path);
+  return {ok:true,json:async()=>path.endsWith('research.json')?clone(D):
+   path.endsWith('official-latest.json')?clone(latest):
+   path.endsWith('official-snapshot-20261030.json')?clone(Official):clone(checkpoint)};
+ };
+ const C=await Fresh.load(fetcher);
+ assert.equal(C.curated.entries.length,15);
+ assert.deepEqual(visited,[
+  '/v5/research.json','/v5/official-latest.json',
+  '/v5/official-snapshot-20261030.json','/v5/shortlists/current.json'
+ ]);
+});
