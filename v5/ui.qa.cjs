@@ -134,7 +134,7 @@ test('Multi Builder starts with only 2/3 legs and keeps optional manual selectio
  const refreshed=flatten(root),legs=refreshed.filter(n=>n.className==='workshop-leg-top').flatMap(flatten);
  assert.ok(legs.some(n=>n.textContent==='Sheza Alibi'));
  assert.ok(legs.some(n=>n.textContent==='Regal Ambition'));
- assert.ok(refreshed.some(n=>String(n.textContent).includes('PROVISIONAL COMBINED MODEL ESTIMATE')));
+ assert.ok(refreshed.some(n=>String(n.textContent).includes('UNCALIBRATED COMBINED MODEL ESTIMATE')));
 });
 test('Race Centre shows one research selection, with model-only comparison collapsed',()=>{
  const {C,win}=boot(),root=new Element('main');
@@ -369,4 +369,17 @@ test('saved Saturday scratchings show on dashboard and Race Centre without live 
  const included=C.board.baseline.records.filter(x=>x.race_id==='2026-10-31_RANDWICK_R05');
  assert.equal(included.length,6);
  assert.deepEqual(included.map(x=>x.horse).sort(),['Bestower','Cavalry','Columbus','Koolibah','Steel Blaze','Think Itz You'].sort());
+});
+
+test('researched shortlist labels are Reviewed selection, not provisional starter recommendations',()=>{
+ const {C,win}=boot(),root=new Element('main');
+ win.RacingLabV5Dashboard.renderInto(root,'overview',C,()=>{},D.races[0].id);
+ let nodes=flatten(root);
+ assert.ok(nodes.some(x=>x.className==='rlv5-pick-status'&&x.textContent==='Reviewed selection'));
+ assert.ok(!nodes.some(x=>x.className==='rlv5-pick-status'&&x.textContent==='Provisional'));
+ const sheza=D.runners.find(h=>h.horse==='Sheza Alibi');
+ win.RacingLabV5Dashboard.renderInto(root,'races',C,()=>{},sheza.race_id);
+ nodes=flatten(root);
+ assert.ok(nodes.some(x=>String(x.textContent).includes('Reviewed research selection')));
+ assert.ok(nodes.some(x=>String(x.textContent).includes('Starter status is based on')));
 });
