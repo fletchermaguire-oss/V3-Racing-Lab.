@@ -437,6 +437,11 @@ function racesPage(){
   e('span','',official?'Source meeting scratchings: '+official.scratched_total:'Official scratching refresh pending'),
   e('span','','Current model scenario: '+C.going[r.meeting]));
  hero.append(chips);
+ // This is a distribution warning, not a revised pick or a calibrated rating.
+ if(summary.status==='MODELLED_PROVISIONAL'&&summary.field>=10&&summary.chaos>=93&&summary.gap<=2){
+  hero.append(add(e('p','rlv5-race-no-standout'),e('strong','','No clear model standout. '),
+   e('span','','The top runner is '+pct(summary.top_p)+' with just '+pct(summary.gap)+' between first and second. Treat this as a crowded race, not a high-confidence single.')));
+ }
  hero.append(e('p','rlv5-race-source',official?
   'Official sheet last published '+official.source_last_published+'. Final starter and emergency status remains unverified.':
   'Saved research source '+(D.official_check_at||D.saved_at)+'. Final official starters are not verified.'));
