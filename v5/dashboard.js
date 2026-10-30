@@ -402,11 +402,12 @@ function horseDetail(h){
  if(research)identity.append(e('span','rlv5-horse-tag','Independent research #'+research.original_rank));
  if(x&&x.rank===1)identity.append(e('span','rlv5-horse-tag','Live model leader'));
  top.append(identity);
- if(!String(h.jockey||'').trim())root.append(e('p','rlv5-rider-alert','Rider not declared in saved field — check official declaration. This is not confirmation of a scratching.'));
  if(x)top.append(add(e('div','rlv5-horse-score'),e('strong','',pct(x.p)),
   e('span','','Uncalibrated model'),e('small','','Current race rank #'+x.rank)));
  else top.append(e('span','rlv5-horse-unavailable',C.model.statusOf(h)));
- root.append(top,humanAnalysis(h,x));
+ root.append(top);
+ if(!String(h.jockey||'').trim())root.append(e('p','rlv5-rider-alert','Rider not declared in saved field — check official declaration. This is not confirmation of a scratching.'));
+ root.append(humanAnalysis(h,x));
  var deep=e('details','rlv5-horse-technical');
  deep.append(e('summary','','Full form, statistics, model QA and local scenario tools'));
  if(x){
