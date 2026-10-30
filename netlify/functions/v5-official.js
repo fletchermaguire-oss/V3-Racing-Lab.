@@ -52,7 +52,7 @@ function parseOfficial(meeting,html){
    const prefix=cells.join(' '),race=prefix.match(/\bRace\s*(\d{1,2})\s*:/i);
    if(race)current=+race[1];
    const last=cells[cells.length-1];
-   const horse=last.match(/^\s*\d{1,2}\s*e?\s+(.+?)\s+\(\d{1,2}\/\d{1,2}\s+[\d:]{3,6}[A-Z]*\)\s*$/i);
+   const horse=last.match(/^\s*\d{1,2}\s*e?\s+(.+?)\s+\((?:\d{1,2}\/\d{1,2}\s+[\d:]{3,6}[A-Z]*|Eliminated)\)\s*$/i);
    if(!horse){
     if(!/There are no (?:late )?scratchings|^-$|^\s*$/i.test(last))unknown.push(last);
     continue;
