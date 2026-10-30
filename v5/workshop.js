@@ -54,7 +54,7 @@ function multiPage(ctx){
  S.multi.forEach(function(id){var x=B.baseline.records.find(function(h){return h.id===id;}),h=raw(C,id),line=el('div','workshop-leg');
   put(line,put(el('div','workshop-leg-top'),el('b','',x.horse),
    el('span','workshop-chip',x.meeting+' R'+x.race)),
-   el('p','muted small','Individual provisional model chance: '+percent(x.p)),
+   el('p','muted small','Individual uncalibrated model estimate: '+percent(x.p)),
    button('Remove '+h.horse,function(){S.multi=S.multi.filter(function(v){return v!==id;});save(C,S);ctx.render();},'ghost'));
   selection.append(line);
  });
@@ -62,7 +62,7 @@ function multiPage(ctx){
   note(selection,'At least one leg is outside the preserved researched Top 10; it is a manual choice, not an automatically certified recommendation.');
  if(S.multi.length>=2){
   var result=C.multi(S.multi),metric=el('div','model-joint');metric.dataset.jointPct=String(result.baseline_joint_pct);
-  put(metric,el('div','eyebrow','PROVISIONAL COMBINED MODEL ESTIMATE'),el('strong','model-big',percent(result.baseline_joint_pct)),
+  put(metric,el('div','eyebrow','UNCALIBRATED COMBINED MODEL ESTIMATE'),el('strong','model-big',percent(result.baseline_joint_pct)),
    el('p','muted small','Not a proven win probability or betting guarantee. Depends on uncalibrated individual estimates and independence assumptions.'));
   selection.append(metric);
  }
@@ -80,7 +80,7 @@ function multiPage(ctx){
  field.forEach(function(h){var x=B.baseline.records.find(function(r){return r.id===h.id;}),included=!!x&&confirmedForMulti(C,h.id),selected=S.multi.includes(h.id),
   conflict=S.multi.some(function(id){return raw(C,id).race_id===h.race_id&&id!==h.id;}),full=S.multi.length>=S.multiSize;
   var line=el('div','workshop-candidate'),info=put(el('div','workshop-candidate-text'),el('strong','','#'+h.tab+' '+h.horse),
-   el('small','',x?'Provisional model: '+percent(x.p):C.model.statusOf(h)));
+   el('small','',x?'Model estimate: '+percent(x.p):C.model.statusOf(h)));
   var b=button(!included?'Excluded':selected?'Selected':conflict?'Same race':full?'Full':'Add leg',function(){
     if(!included||selected||conflict||full)return;S.multi.push(h.id);save(C,S);ctx.render();
   },'primary');
@@ -90,7 +90,7 @@ function multiPage(ctx){
  contenders.append(list);picker.append(contenders);
  var conditions=el('details','workshop-scenario-advanced');conditions.append(el('summary','','Change track scenarios (advanced)'),ctx.scenarios());
  picker.append(conditions);advanced.append(picker);app.append(advanced);
- app.append(el('p','muted small','Source: '+C.data.date+' · Rankings are provisional; source scratches and unverified emergencies are excluded. Changes in model percentages do not reorder the preserved independent Top 10.'));
+ app.append(el('p','muted small','Source: '+C.data.date+' · The research shortlist is independently reviewed; model estimates are uncalibrated. Scratched and unverified emergency runners are excluded. Changes in model percentages do not reorder the preserved independent Top 10.'));
 }
 function stop(){if(sim&&sim.raf&&typeof global.cancelAnimationFrame==='function')global.cancelAnimationFrame(sim.raf);sim=null;}
 function simulatorPage(ctx){

@@ -75,21 +75,30 @@ async function handler(event,context){
  const headers={'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'};
  const send=(statusCode,obj)=>({statusCode,headers,body:JSON.stringify(obj)});
  if(event.httpMethod!=='GET')return send(405,{error:'GET only'});
- try{
-  const results=await Promise.all(Object.entries(URLS).map(async([meeting,url])=>{
+ // Independently validate each feed: an inaccessible WA sheet must not
+ // discard a verified NSW or VIC update. No fallback is represented as live data.
+ const selected=event.queryStringParameters&&event.queryStringParameters.meeting;
+ if(selected&&!Object.hasOwn(URLS,selected))return send(400,{error:'Unknown meeting'});
+ const pairs=Object.entries(URLS).filter(([meeting])=>!selected||selected===meeting);
+ const checks=await Promise.all(pairs.map(async([meeting,url])=>{
+  try{
    const response=await fetch(url,{headers:{Accept:'text/html'},signal:AbortSignal.timeout(12000)});
-   if(!response.ok)throw Error('Official sheet unavailable: '+meeting+' HTTP '+response.status);
-   return parseOfficial(meeting,await response.text());
-  }));
-  return send(200,{schema:'racing-lab-official-sheets/v1',race_date:EVENT_DATE,
-   status:'OFFICIAL_SHEETS_RECONCILED',observed_at:new Date().toISOString(),
-   publication_approved:false,final_fields_verified:false,
-   notice:'Source-published scratching sheets and track grades only. Late scratches and emergency activations require further verification.',
-   meetings:results});
- }catch(e){
-  return send(503,{status:'OFFICIAL_REFRESH_FAILED',error:String(e.message).slice(0,220),
-   notice:'Saved source remains in place; never silently substitute unverified scratchings.'});
- }
+   if(!response.ok)throw Error('HTTP '+response.status);
+   return {meeting,record:parseOfficial(meeting,await response.text())};
+  }catch(e){
+   return {meeting,error:String(e.message).slice(0,200)};
+  }
+ }));
+ const results=checks.filter(x=>x.record).map(x=>x.record);
+ const errors=checks.filter(x=>x.error).map(x=>({meeting:x.meeting,error:x.error}));
+ const status=results.length===pairs.length?'OFFICIAL_SHEETS_RECONCILED':
+  results.length?'OFFICIAL_SHEETS_PARTIAL':'OFFICIAL_REFRESH_UNAVAILABLE';
+ return send(200,{schema:'racing-lab-official-sheets/v1',race_date:EVENT_DATE,
+  status,observed_at:new Date().toISOString(),
+  publication_approved:false,final_fields_verified:false,
+  notice:results.length?'Only individually validated source sheets may update their meetings; unverified feeds retain saved racecards.':
+   'No official sheet could be validated; saved Saturday snapshot retained, no live update performed.',
+  attempted_meetings:pairs.map(x=>x[0]),errors,meetings:results});
 }
 exports.handler=handler;
 exports.parseOfficial=parseOfficial;

@@ -1,6 +1,6 @@
 'use strict';
 const {test}=require('node:test'),assert=require('node:assert/strict');
-const {parseOfficial}=require('../netlify/functions/v5-official.js');
+const {parseOfficial,handler}=require('../netlify/functions/v5-official.js');
 const State=require('./site-state.js'),Data=require('./research.json');
 const Official=require('./official-snapshot-20261030.json');
 const Checkpoint=require('./shortlists/2026-10-30-independent-top10.json');
@@ -196,4 +196,57 @@ test('unknown HTML entities and duplicate orthographic versions are rejected ins
  assert.throws(()=>parseOfficial('ASCOT',html('ASCOT',2,
   line(8,'1 OSCAR&rsquo;S FORTUNE')+line(8,"1 OSCAR'S FORTUNE",true),'Soft 5')),
   /Duplicate official/);
+});
+
+test('official endpoint retains valid meeting even when other racecourses reject requests',async()=>{
+ const original=global.fetch;
+ try{
+  global.fetch=async url=>{
+   if(String(url).includes('NSW'))return {ok:true,text:async()=>html('RANDWICK',1,line(5,'1 MEDATSU'))};
+   return {ok:false,status:503};
+  };
+  const response=await handler({httpMethod:'GET'});
+  assert.equal(response.statusCode,200);
+  const body=JSON.parse(response.body);
+  assert.equal(body.status,'OFFICIAL_SHEETS_PARTIAL');
+  assert.deepEqual(body.meetings.map(x=>x.meeting),['RANDWICK']);
+  assert.deepEqual(body.errors.map(x=>x.meeting),['FLEMINGTON','ASCOT']);
+  assert.equal(body.final_fields_verified,false);
+  assert.equal(body.publication_approved,false);
+ }finally{global.fetch=original;}
+});
+test('official service has an explicitly unavailable JSON status rather than crashing on three bad feeds',async()=>{
+ const original=global.fetch;
+ try{
+  global.fetch=async()=>{throw Error('upstream blocked');};
+  const response=await handler({httpMethod:'GET'});
+  assert.equal(response.statusCode,200);
+  const body=JSON.parse(response.body);
+  assert.equal(body.status,'OFFICIAL_REFRESH_UNAVAILABLE');
+  assert.equal(body.meetings.length,0);
+  assert.equal(body.errors.length,3);
+  assert.equal(body.final_fields_verified,false);
+ }finally{global.fetch=original;}
+});
+test('partial verified sheet cannot reintroduce six Randwick R5 scratchings or re-rank Top 15',()=>{
+ const latest=require('./official-latest.json'),shortlist=require('./shortlists/current.json');
+ const C=State.create(State.applyOfficialOverlay(Data,latest),{going:latest.going,checkpoint:shortlist});
+ const before=C.curated.entries.map(x=>x.horse);
+ const partial=sheets();partial.status='OFFICIAL_SHEETS_PARTIAL';
+ // A real Saturday field contains new scratchings beyond the Friday fixture.
+ // Construct the whole saved Saturday set so the test does not falsely attempt
+ // to reinstate Mister Whiskers, Star of Macedon or other departed runners.
+ const flem=Object.entries(latest.scratchings).filter(([race])=>race.startsWith('FLEMINGTON_R'))
+   .flatMap(([race,names])=>names.map(horse=>[Number(race.split('_R')[1]),horse]));
+ partial.meetings=[parseOfficial('FLEMINGTON',html('FLEMINGTON',flem.length,
+   flem.map(([race,horse])=>line(race,'1 '+horse)).join('')))];
+ C.applyOfficialSheets(partial);
+ assert.equal(C.official.partial,true);
+ assert.equal(C.official.meetings.length,1);
+ assert.deepEqual(C.curated.entries.map(x=>x.horse),before);
+ assert.equal(C.board.baseline.records.filter(x=>x.race_id==='2026-10-31_RANDWICK_R05').length,6);
+ const bad=sheets();bad.status='OFFICIAL_SHEETS_PARTIAL';bad.meetings=[publishedSheet('RANDWICK')];
+ bad.observed_at='2026-10-30T09:48:00Z';
+ assert.throws(()=>C.applyOfficialSheets(bad),/Previously confirmed official scratching missing/);
+ assert.equal(C.board.baseline.records.filter(x=>x.race_id==='2026-10-31_RANDWICK_R05').length,6);
 });

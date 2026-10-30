@@ -341,3 +341,26 @@
  .rlv5-race-selection h3{font-size:21px}
  .rlv5-model-notes>summary{padding:13px}
 }
+
+/* 31 Oct: every researched entry displays its signed V5 margin beneath its
+ * model percentage. Negative means its strongest rival models higher.
+ * Keep the five-column main board unchanged to avoid mobile overflow. */
+.rlv5-selection-margin{display:block;font-size:10px;line-height:1.4;
+ font-weight:650;color:#a4d9c1;white-space:normal;overflow-wrap:anywhere}
+.rlv5-selection-margin.is-negative{color:#ffd09c}
+.rlv5-pick-description>.rlv5-selection-margin{
+ color:#acd7c0;white-space:normal;overflow:visible;text-overflow:clip;
+ margin-top:4px;font-size:10px
+}
+.rlv5-pick-description>.rlv5-selection-margin.is-negative{color:#ffd09c}
+.rlv5-shortlist-grades>.rlv5-selection-margin{
+ max-width:125px;font-size:10px;text-align:right;letter-spacing:normal;white-space:normal
+}
+.rlv5-selection-metrics{display:flex;align-items:baseline;flex-wrap:wrap;
+ gap:8px 15px;margin:10px 0;padding:10px 12px;background:#0a2420;
+ border:1px solid #3c7160;border-radius:9px}
+.rlv5-selection-metrics .rlv5-selection-model-percent{
+ font-size:20px;font-variant-numeric:tabular-nums;color:#bcf9d9
+}
+.rlv5-selection-metrics .rlv5-selection-margin{font-size:12px}
+.rlv5-selection-metrics>small:last-child{font-size:10px;color:#b3c5bf}
