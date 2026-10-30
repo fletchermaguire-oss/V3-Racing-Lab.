@@ -398,14 +398,16 @@ function horseDetail(h){
  root=e('div','panel detail rlv5-horse-detail'),top=e('div','rlv5-horse-title'),
  identity=add(e('div','rlv5-horse-identity'),e('span','rlv5-kicker','HORSE ANALYSIS'),
   e('h3','',h.horse),
-  e('p','muted small','No. '+h.tab+' · Barrier '+(h.barrier??'—')+' · '+(h.weight_kg??'—')+'kg · '+(h.trainer||'Trainer not verified')+' / '+(h.jockey||'Jockey not verified')));
+  e('p','muted small','No. '+h.tab+' · Barrier '+(h.barrier??'—')+' · '+(h.weight_kg??'—')+'kg · '+(h.trainer||'Trainer not verified')+' / '+(String(h.jockey||'').trim()||'Rider not declared')));
  if(research)identity.append(e('span','rlv5-horse-tag','Independent research #'+research.original_rank));
  if(x&&x.rank===1)identity.append(e('span','rlv5-horse-tag','Live model leader'));
  top.append(identity);
  if(x)top.append(add(e('div','rlv5-horse-score'),e('strong','',pct(x.p)),
   e('span','','Uncalibrated model'),e('small','','Current race rank #'+x.rank)));
  else top.append(e('span','rlv5-horse-unavailable',C.model.statusOf(h)));
- root.append(top,humanAnalysis(h,x));
+ root.append(top);
+ if(!String(h.jockey||'').trim())root.append(e('p','rlv5-rider-alert','Rider not declared in saved field — check official declaration. This is not confirmation of a scratching.'));
+ root.append(humanAnalysis(h,x));
  var deep=e('details','rlv5-horse-technical');
  deep.append(e('summary','','Full form, statistics, model QA and local scenario tools'));
  if(x){
@@ -435,6 +437,11 @@ function racesPage(){
   e('span','',official?'Source meeting scratchings: '+official.scratched_total:'Official scratching refresh pending'),
   e('span','','Current model scenario: '+C.going[r.meeting]));
  hero.append(chips);
+ // This is a distribution warning, not a revised pick or a calibrated rating.
+ if(summary.status==='MODELLED_PROVISIONAL'&&summary.field>=10&&summary.chaos>=93&&summary.gap<=2){
+  hero.append(add(e('p','rlv5-race-no-standout'),e('strong','','No clear model standout. '),
+   e('span','','The top runner is '+pct(summary.top_p)+' with just '+pct(summary.gap)+' between first and second. Treat this as a crowded race, not a high-confidence single.')));
+ }
  hero.append(e('p','rlv5-race-source',official?
   'Official sheet last published '+official.source_last_published+'. Final starter and emergency status remains unverified.':
   'Saved research source '+(D.official_check_at||D.saved_at)+'. Final official starters are not verified.'));

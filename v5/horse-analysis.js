@@ -26,6 +26,8 @@ function clause(s){const t=trim(s);return t?t[0].toUpperCase()+t.slice(1).replac
 function push(arr,title,detail){const clean=clause(detail);if(clean&&!arr.some(a=>a.title===title))arr.push({title,detail:clean});}
 function analysis(h,race,m,going,curated){
  const pros=[],cons=[],unknown=[];
+ if(!String(h.jockey||'').trim())
+  unknown.push('No rider is declared in the saved field. Check the official rider declaration before the race; this does not establish a scratching.');
  const stats=text(h.statistics),record=count(stats,'Career'),course=count(stats,'(?:course|Track)'),dist=count(stats,'(?:distance|Dist)');
  const surface=/^Soft/i.test(going)?count(stats,'Soft'):/^Heavy/i.test(going)?count(stats,'Heavy'):count(stats,'Good');
  const runs=dated(h.form),last=runs[0]||null,ratings=runs.filter(x=>/\bG[123]\b|\bGroup\s+[123]\b|\bLR\b|\bListed\b/i.test(x.grade));
