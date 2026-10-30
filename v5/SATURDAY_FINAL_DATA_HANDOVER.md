@@ -40,3 +40,14 @@ The automatic refresh is conditional on the site being open, with approximately 
 Run `npm test`, `npm run check`, `npm run research:audit`; confirm all three complete successfully, race/runner totals reconcile, review form and track ratings, then obtain the user's approval to merge/deploy. **Netlify deployment credits remain unavailable until the user upgrades.** Do not merge or deploy the experimental draft branch without express authorization.
 
 GitHub draft: https://github.com/fletchermaguire-oss/V3-Racing-Lab./pull/3
+
+## 30 October final engineering changes before Saturday
+
+- The independently researched Top 10 remains archived at `v5/shortlists/2026-10-30-independent-top10.json`.
+- The live candidate `v5/shortlists/current.json` has **15 ranked names**. Ranks 11–15 are Bridal Waltz, Afireofgidgeecoals, Anaconda Jones, Where'stheprofit and In Confidence. They are clearly marked `CONDITIONAL_REVIEW`, not promoted as high-confidence bets. Backup archive: `v5/shortlists/2026-10-30-independent-top15-review.json`.
+- V5 still preserves original Sheza Alibi, Regal Ambition and Hot And High A-tier form grades separately from conditional race-day confidence.
+- Unconfirmed emergency activations are flagged per race. The official scratching feed may remove runners but **does not confirm or automatically promote emergencies**.
+- `v5/prospective-record.json` is **intentionally empty** until a real pre-race GitHub commit and independently checked race times are available. The separate forward-only Results panel must display zero, not extrapolate a winning record from the retrospective 49 races.
+- Do not treat an automatic model refresh as a new pre-race locked selection. Pre-race selected identities and rank must be preserved and versioned before the jump. Individually verified official outcomes can be added only *after* those races.
+- Repeated unchanged Airtable or official-sheet refreshes must not reset the simulator/playback. Model and UI tests cover first-page rendering, simulator draws and ranking integrity.
+- Last code checks run in GitHub Actions: `npm test`, `npm run check`, `npm run research:audit` (all must be green on the newest commit). No live browser/device visual QA or Netlify deploy has been performed.
