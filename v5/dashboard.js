@@ -109,7 +109,7 @@ function toplist(){
    row.dataset.runnerId=h.id;
    if(h.model_pct!==null)row.dataset.modelPct=String(h.model_pct);
    add(mid,e('strong','',h.horse),
-    e('small','',h.meeting+' R'+h.race+' · Form grade '+h.form_tier+' · '+(h.eligible?'STARTER PROVISIONAL':'OUT OF FIELD')),
+    e('small','',h.meeting+' R'+h.race+' · '+(h.research_lane==='CONDITIONAL_REVIEW'?'FURTHER REVIEW · ':'TOP 10 · ')+'Form grade '+h.form_tier+' · '+(h.eligible?'STARTER PROVISIONAL':'OUT OF FIELD')),
     e('small','',h.race_day_assessment.replaceAll('_',' ')+' · '+(h.notes.length?h.notes.join(', '):'No new screening flags')));
    add(stat,e('strong','',h.model_pct===null?'—':pct(h.model_pct)),
      e('small','','Uncalibrated V5 chance'),e('small','','Original #'+h.original_rank+' · ranked #'+h.rank));
@@ -190,7 +190,7 @@ function top10(){
   var source=C.curated;
   if(!source)app().append(note('Frozen research checkpoint unavailable. Strict model priorities shown separately; the independent top ten cannot be reconstructed from a model score.'));
   else{
-   app().append(note('Frozen form ranking '+source.checkpoint_at+' · '+source.active_count+'/'+source.count+
+   app().append(note('Frozen form ranking '+source.checkpoint_at+' · '+source.priority_research_count+' Top 10 original research, '+source.additional_review_count+' conditional Top 15 additions · '+source.active_count+'/'+source.count+
      ' researched runners remain in the provisional field. '+(S.topN>source.count?'Only '+source.count+' of requested Top '+S.topN+' have an independently researched ranking; '+(S.topN-source.count)+' slots intentionally remain vacant. ':'')+
      'A scratched runner keeps its historical position but cannot count as an active pick. No silent replacement.'));
    app().append(aTierSummary());
