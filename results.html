@@ -12,16 +12,17 @@
 <div class="tablewrap"><table><thead><tr><th>List</th><th>Locked</th><th>Finished</th><th>Won</th><th>Verified strike rate</th></tr></thead><tbody id="forwardRows"></tbody></table></div>
 <small>Strict forward-only record. A GitHub pre-race commit and runner-matched official finish are required; synthetic, retrospective or unverified outcomes never count.</small>
 </section>
-<h2>Historical retrospective comparisons</h2>
-<p class="muted">Older V3/V4 reconstruction — not a verified prediction streak, and not V5 prospective calibration.</p>
-<div class="cards"><div class="card"><div class="label">Completed selections</div><div class="value" id="races">—</div></div><div class="card"><div class="label">Winning selections</div><div class="value green" id="wins">—</div></div><div class="card"><div class="label">Win rate</div><div class="value" id="rate">—</div></div></div>
+<h2>Reconstructed historical selections — not a live win record</h2>
+<p class="muted">Older V3/V4 model-ranked race leaders. These are historical reconstructions, not an independently timestamped pre-race shortlist. They must not be combined with V5's future prospective record.</p>
+<section class="panel" id="historic-overview"><h2>Two different historical groups</h2><p class="muted">Top 10 means the ten highest saved model percentages <em>on each historical date</em>, reconstructed after the event. All race leaders includes every recorded started race.</p><div class="cards"><div class="card"><div class="label">Reconstructed Top 10</div><div class="value green" id="historicalTop10">—</div><small id="historicalTop10Rate">Waiting for verified results</small></div><div class="card"><div class="label">All model race leaders</div><div class="value" id="historicalAll">—</div><small id="historicalAllRate">Waiting for verified results</small></div><div class="card"><div class="label">Verified scratchings</div><div class="value" id="historicalScratch">—</div><small>Excluded from win/loss denominator</small></div></div><small id="historicalCoverage">Historical results loading…</small></section>
+<div class="cards"><div class="card"><div class="label">Finished in current filter</div><div class="value" id="races">—</div></div><div class="card"><div class="label">Wins in current filter</div><div class="value green" id="wins">—</div></div><div class="card"><div class="label">Strike rate in current filter</div><div class="value" id="rate">—</div></div></div>
 <section class="panel"><h2>Winning selections over time</h2><div class="controls">
-<select id="tierFilter"><option value="10">Top 10 — Main Record</option><option value="5">Top 5</option><option value="15">Top 15</option><option value="all">All Races</option></select>
+<select id="tierFilter"><option value="10">Top 10 — reconstructed model ranking</option><option value="5">Top 5</option><option value="15">Top 15</option><option value="all">All Races</option></select>
 <select id="dateFilter"><option value="all">All Saturdays</option></select><select id="meetingFilter"><option value="all">All meetings</option></select>
-</div><canvas id="graph"></canvas><small>Historical Top 5/10/15 rankings are reconstructed using saved model probabilities, not confirmed pre-race locked lists. Unverified October 24 outcomes are pending until matched against an individual horse's official result. Each win increases the line by one; losses leave it flat. Scratchings and unverified races are excluded.</small></section>
+</div><canvas id="graph"></canvas><small>Historical Top 5/10/15 are reconstructed from saved model percentages and are not evidence of a frozen pre-race shortlist. All 19 selections for 24 October now have horse-matched finishing positions; the two verified 17 October scratchings are excluded. Each win increases the line by one. Results are not V5 prospective calibration.</small></section>
 <section class="panel">
 <h2>Selection performance comparison</h2>
-<p class="muted">Retrospective rankings from saved model probabilities; neither a frozen pre-race record nor proven calibration. No race-order inferred finishes are counted.</p>
+<p class="muted">Retrospective comparison: completed runner-matched results, not a genuine pre-race frozen record. Scratchings are excluded; winners are matched to the exact runner and race.</p>
 <div class="tablewrap"><table><thead><tr><th>Group</th><th>Wins</th><th>Completed</th><th>Strike rate</th></tr></thead><tbody id="comparisonRows"></tbody></table></div>
 </section>
 <section class="panel"><h2>Model confidence audit</h2>
@@ -45,7 +46,7 @@ fetch('/v5/prospective-record.json',{cache:'no-store'}).then(async r=>{
 }).catch(err=>{
  document.getElementById('forwardStatus').textContent='Forward record is unavailable or invalid; no prospective win percentage can be claimed. '+err.message;
 });const $=id=>document.getElementById(id);
-function verified(r){return r.verified===true&&r.finish_position!==null&&r.finish_position!==undefined&&(r.finish_position==='5+'||(Number.isInteger(Number(r.finish_position))&&Number(r.finish_position)>0));}
+function verified(r){return r.verified===true&&r.scratched!==true&&r.result_status!=='SCRATCHED'&&r.finish_position!==null&&r.finish_position!==undefined&&(r.finish_position==='5+'||(Number.isInteger(Number(r.finish_position))&&Number(r.finish_position)>0));}
 function rankedByDay(tier) {
  if(tier==='all') return records.slice();
  const days=[...new Set(records.map(r=>r.date))];
@@ -83,12 +84,24 @@ function drawGraph(data){
  data.forEach((r,i)=>{if(Number(r.finish_position)===1)count++;ctx.lineTo(x(i+1),y(count));});ctx.stroke();ctx.fillStyle='#78e9b8';ctx.beginPath();ctx.arc(x(data.length),y(count),4,0,Math.PI*2);ctx.fill();
 }
 function render(){
+ const historicalTop=rankedByDay('10').filter(verified),allFinished=records.filter(verified);
+ const countedWins=rows=>rows.filter(r=>Number(r.finish_position)===1).length;
+ const topWins=countedWins(historicalTop),totalWins=countedWins(allFinished);
+ const pctText=(win,n)=>n?(100*win/n).toFixed(1)+'%':'—';
+ const scratched=records.filter(r=>r.scratched===true||r.result_status==='SCRATCHED');
+ $('historicalTop10').textContent=topWins+'/'+historicalTop.length;
+ $('historicalTop10Rate').textContent=pctText(topWins,historicalTop.length)+' · retrospectively ranked, not pre-race locked';
+ $('historicalAll').textContent=totalWins+'/'+allFinished.length;
+ $('historicalAllRate').textContent=pctText(totalWins,allFinished.length)+' · all finished race leaders';
+ $('historicalScratch').textContent=String(scratched.length);
+ $('historicalCoverage').textContent='Coverage: '+records.length+' archived selections across '+new Set(records.map(r=>r.date)).size+' Saturdays · '+allFinished.length+' finished · '+scratched.length+' scratched · '+(records.length-allFinished.length-scratched.length)+' awaiting verification. These records are not V5 forward predictions.';
  const all=filtered().sort((a,b)=>a.date.localeCompare(b.date)||a.meeting.localeCompare(b.meeting)||Number(a.race)-Number(b.race));
  const completed=all.filter(verified),wins=completed.filter(r=>Number(r.finish_position)===1).length;
  $('races').textContent=completed.length;$('wins').textContent=wins;$('rate').textContent=completed.length?(wins/completed.length*100).toFixed(1)+'%':'—';drawGraph(completed);renderComparison();
- $('rows').innerHTML=all.map(r=>{const done=verified(r),won=done&&Number(r.finish_position)===1,label=done?(won?'WIN':'Lost · '+r.finish_position):'Pending / unverified',cls=done?(won?'good':'bad'):'wait',link=r.result_source?'<a href="'+r.result_source+'" target="_blank" rel="noopener">Source</a>':'';
+ $('rows').innerHTML=all.map(r=>{const done=verified(r),won=done&&Number(r.finish_position)===1,scratched=r.scratched===true||r.result_status==='SCRATCHED',label=scratched?'SCRATCHED · did not start':done?(won?'WIN':'Lost · '+r.finish_position):'Pending / unverified',cls=scratched?'wait':done?(won?'good':'bad'):'wait',link=r.result_source?'<a href="'+r.result_source+'" target="_blank" rel="noopener">Source</a>':'';
  return '<tr><td>'+r.date+'</td><td>'+r.meeting+'</td><td>R'+r.race+'</td><td>'+r.horse+'</td><td class="'+cls+'">'+label+' '+link+'</td></tr>';}).join('');
- $('status').textContent='Showing '+completed.length+' completed selections and '+(all.length-completed.length)+' pending or unverified entries.';
+ const noStarts=all.filter(r=>r.scratched===true||r.result_status==='SCRATCHED').length;
+ $('status').textContent='Showing '+completed.length+' finished selections, '+noStarts+' scratched (excluded), and '+(all.length-completed.length-noStarts)+' pending or unverified entries in the selected historical group.';
 }
 fetch('/results-history.json?cache='+Date.now()).then(r=>{if(!r.ok)throw Error('Results file unavailable');return r.json()}).then(data=>{
  records=data.records||[];

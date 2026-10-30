@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-25",
-  "notes": "Top-ranked race selections from connected Airtable. 17 October outcomes verified for 28 of 30 selections. 24 October outcomes pending; 19 races. Historical estimates are not independently calibrated or pre-race frozen.",
+  "updated_at": "2026-10-30",
+  "notes": "Historical V3/V4 selections ranked retrospectively from saved model percentages, NOT independently frozen before racing. 17 October: 28 finished (7 winners), 2 verified scratchings. 24 October: 19 finished (9 winners), individually matched to full-field finishing positions and crosschecked with TABtouch Top 4; no pending race-day results. Reconstructed Top 10 is 7/20 (35.0%); all finished 16/47 (34.0%). These are different cohorts and not prospective V5 calibration.",
   "records": [
     {
       "date": "2026-10-17",
@@ -13,7 +13,7 @@
       "predicted_win_pct": 17.92,
       "verified": true,
       "finish_position": 8,
-      "starting_price": 16.0,
+      "starting_price": 16,
       "result_source": "https://www.racingaustralia.horse/FreeFields/Results.aspx?Key=2026Oct17%2CVIC%2CCaulfield",
       "notes": "Retrospective, not frozen/out-of-sample"
     },
@@ -27,7 +27,7 @@
       "predicted_win_pct": 34.66,
       "verified": true,
       "finish_position": 1,
-      "starting_price": 15.0,
+      "starting_price": 15,
       "result_source": "https://www.racingaustralia.horse/FreeFields/Results.aspx?Key=2026Oct17%2CVIC%2CCaulfield",
       "notes": "Retrospective, not frozen/out-of-sample"
     },
@@ -55,7 +55,7 @@
       "predicted_win_pct": 14.66,
       "verified": true,
       "finish_position": 4,
-      "starting_price": 12.0,
+      "starting_price": 12,
       "result_source": "https://www.racingaustralia.horse/FreeFields/Results.aspx?Key=2026Oct17%2CVIC%2CCaulfield",
       "notes": "Retrospective, not frozen/out-of-sample"
     },
@@ -69,7 +69,7 @@
       "predicted_win_pct": 24.06,
       "verified": true,
       "finish_position": 3,
-      "starting_price": 12.0,
+      "starting_price": 12,
       "result_source": "https://www.racingaustralia.horse/FreeFields/Results.aspx?Key=2026Oct17%2CVIC%2CCaulfield",
       "notes": "Retrospective, not frozen/out-of-sample"
     },
@@ -83,7 +83,7 @@
       "predicted_win_pct": 33.29,
       "verified": true,
       "finish_position": 1,
-      "starting_price": 3.0,
+      "starting_price": 3,
       "result_source": "https://www.racingaustralia.horse/FreeFields/Results.aspx?Key=2026Oct17%2CVIC%2CCaulfield",
       "notes": "Retrospective, not frozen/out-of-sample"
     },
@@ -97,7 +97,7 @@
       "predicted_win_pct": 25.51,
       "verified": true,
       "finish_position": 5,
-      "starting_price": 26.0,
+      "starting_price": 26,
       "result_source": "https://www.racingaustralia.horse/FreeFields/Results.aspx?Key=2026Oct17%2CVIC%2CCaulfield",
       "notes": "Retrospective, not frozen/out-of-sample"
     },
@@ -140,8 +140,10 @@
       "verified": false,
       "finish_position": null,
       "starting_price": null,
-      "result_source": "",
-      "notes": "Retrospective, not frozen/out-of-sample"
+      "result_source": "https://www.tabtouch.com.au/racing/2026-10-17/mr/10",
+      "notes": "Verified scratching in race-day published result; did not start and excluded from completed/race-win denominator. Not a loss.",
+      "result_status": "SCRATCHED",
+      "scratched": true
     },
     {
       "date": "2026-10-17",
@@ -209,7 +211,7 @@
       "predicted_win_pct": 33.57,
       "verified": true,
       "finish_position": 8,
-      "starting_price": 11.0,
+      "starting_price": 11,
       "result_source": "https://www.racingaustralia.horse/FreeFields/Results.aspx?Key=2026Oct17%2CQLD%2CDoomben",
       "notes": "Retrospective, not frozen/out-of-sample"
     },
@@ -223,7 +225,7 @@
       "predicted_win_pct": 29.78,
       "verified": true,
       "finish_position": 6,
-      "starting_price": 19.0,
+      "starting_price": 19,
       "result_source": "https://www.racingaustralia.horse/FreeFields/Results.aspx?Key=2026Oct17%2CQLD%2CDoomben",
       "notes": "Retrospective, not frozen/out-of-sample"
     },
@@ -336,8 +338,10 @@
       "verified": false,
       "finish_position": null,
       "starting_price": null,
-      "result_source": "",
-      "notes": "Retrospective, not frozen/out-of-sample"
+      "result_source": "https://www.wizardofodds.com.au/gallop/2026-10-17/nsw/randwick/186919",
+      "notes": "Verified scratching in race-day published result; did not start and excluded from completed/race-win denominator. Not a loss.",
+      "result_status": "SCRATCHED",
+      "scratched": true
     },
     {
       "date": "2026-10-17",
@@ -430,12 +434,14 @@
       "horse": "Ice Kool",
       "model": "V4.4-19R",
       "group": "Race leader",
-      "predicted_win_pct": 33.0,
-      "verified": false,
-      "finish_position": null,
+      "predicted_win_pct": 33,
+      "verified": true,
+      "finish_position": 3,
       "starting_price": null,
-      "result_source": "",
-      "notes": "24 Oct forecast; official result not verified in Airtable"
+      "result_source": "https://www.tabtouch.com.au/racing/2026-10-24/mr/expanded",
+      "notes": "Retrospective model-ranked selection; published full-field finish matched to horse and race, verified 30 Oct 2026. This is not a pre-race frozen prediction.",
+      "result_status": "FINISHED",
+      "result_detail_source": "https://www.theking.zone/racing/2026-10-24/flemington"
     },
     {
       "date": "2026-10-24",
@@ -445,11 +451,13 @@
       "model": "V4.4-19R",
       "group": "Race leader",
       "predicted_win_pct": 24.5,
-      "verified": false,
-      "finish_position": null,
+      "verified": true,
+      "finish_position": 1,
       "starting_price": null,
-      "result_source": "",
-      "notes": "24 Oct forecast; official result not verified in Airtable"
+      "result_source": "https://www.tabtouch.com.au/racing/2026-10-24/mr/expanded",
+      "notes": "Retrospective model-ranked selection; published full-field finish matched to horse and race, verified 30 Oct 2026. This is not a pre-race frozen prediction.",
+      "result_status": "FINISHED",
+      "result_detail_source": "https://www.theking.zone/racing/2026-10-24/flemington"
     },
     {
       "date": "2026-10-24",
@@ -458,12 +466,14 @@
       "horse": "True Rebel",
       "model": "V4.4-19R",
       "group": "Race leader",
-      "predicted_win_pct": 34.0,
-      "verified": false,
-      "finish_position": null,
+      "predicted_win_pct": 34,
+      "verified": true,
+      "finish_position": 1,
       "starting_price": null,
-      "result_source": "",
-      "notes": "24 Oct forecast; official result not verified in Airtable"
+      "result_source": "https://www.tabtouch.com.au/racing/2026-10-24/mr/expanded",
+      "notes": "Retrospective model-ranked selection; published full-field finish matched to horse and race, verified 30 Oct 2026. This is not a pre-race frozen prediction.",
+      "result_status": "FINISHED",
+      "result_detail_source": "https://www.theking.zone/racing/2026-10-24/flemington"
     },
     {
       "date": "2026-10-24",
@@ -473,11 +483,13 @@
       "model": "V4.4-19R",
       "group": "Race leader",
       "predicted_win_pct": 14.85,
-      "verified": false,
-      "finish_position": null,
+      "verified": true,
+      "finish_position": 3,
       "starting_price": null,
-      "result_source": "",
-      "notes": "24 Oct forecast; official result not verified in Airtable"
+      "result_source": "https://www.tabtouch.com.au/racing/2026-10-24/mr/expanded",
+      "notes": "Retrospective model-ranked selection; published full-field finish matched to horse and race, verified 30 Oct 2026. This is not a pre-race frozen prediction.",
+      "result_status": "FINISHED",
+      "result_detail_source": "https://www.theking.zone/racing/2026-10-24/flemington"
     },
     {
       "date": "2026-10-24",
@@ -487,11 +499,13 @@
       "model": "V4.4-19R",
       "group": "Race leader",
       "predicted_win_pct": 28.99,
-      "verified": false,
-      "finish_position": null,
+      "verified": true,
+      "finish_position": 3,
       "starting_price": null,
-      "result_source": "",
-      "notes": "24 Oct forecast; official result not verified in Airtable"
+      "result_source": "https://www.tabtouch.com.au/racing/2026-10-24/mr/expanded",
+      "notes": "Retrospective model-ranked selection; published full-field finish matched to horse and race, verified 30 Oct 2026. This is not a pre-race frozen prediction.",
+      "result_status": "FINISHED",
+      "result_detail_source": "https://www.theking.zone/racing/2026-10-24/flemington"
     },
     {
       "date": "2026-10-24",
@@ -501,11 +515,13 @@
       "model": "V4.4-19R",
       "group": "Race leader",
       "predicted_win_pct": 29.01,
-      "verified": false,
-      "finish_position": null,
+      "verified": true,
+      "finish_position": 1,
       "starting_price": null,
-      "result_source": "",
-      "notes": "24 Oct forecast; official result not verified in Airtable"
+      "result_source": "https://www.tabtouch.com.au/racing/2026-10-24/mr/expanded",
+      "notes": "Retrospective model-ranked selection; published full-field finish matched to horse and race, verified 30 Oct 2026. This is not a pre-race frozen prediction.",
+      "result_status": "FINISHED",
+      "result_detail_source": "https://www.theking.zone/racing/2026-10-24/flemington"
     },
     {
       "date": "2026-10-24",
@@ -515,11 +531,13 @@
       "model": "V4.4-19R",
       "group": "Race leader",
       "predicted_win_pct": 13.58,
-      "verified": false,
-      "finish_position": null,
+      "verified": true,
+      "finish_position": 1,
       "starting_price": null,
-      "result_source": "",
-      "notes": "24 Oct forecast; official result not verified in Airtable"
+      "result_source": "https://www.tabtouch.com.au/racing/2026-10-24/mr/expanded",
+      "notes": "Retrospective model-ranked selection; published full-field finish matched to horse and race, verified 30 Oct 2026. This is not a pre-race frozen prediction.",
+      "result_status": "FINISHED",
+      "result_detail_source": "https://www.theking.zone/racing/2026-10-24/flemington"
     },
     {
       "date": "2026-10-24",
@@ -529,11 +547,13 @@
       "model": "V4.4-19R",
       "group": "Race leader",
       "predicted_win_pct": 18.32,
-      "verified": false,
-      "finish_position": null,
+      "verified": true,
+      "finish_position": 1,
       "starting_price": null,
-      "result_source": "",
-      "notes": "24 Oct forecast; official result not verified in Airtable"
+      "result_source": "https://www.tabtouch.com.au/racing/2026-10-24/mr/expanded",
+      "notes": "Retrospective model-ranked selection; published full-field finish matched to horse and race, verified 30 Oct 2026. This is not a pre-race frozen prediction.",
+      "result_status": "FINISHED",
+      "result_detail_source": "https://www.theking.zone/racing/2026-10-24/flemington"
     },
     {
       "date": "2026-10-24",
@@ -543,11 +563,13 @@
       "model": "V4.4-19R",
       "group": "Race leader",
       "predicted_win_pct": 19.03,
-      "verified": false,
-      "finish_position": null,
+      "verified": true,
+      "finish_position": 8,
       "starting_price": null,
-      "result_source": "",
-      "notes": "24 Oct forecast; official result not verified in Airtable"
+      "result_source": "https://www.tabtouch.com.au/racing/2026-10-24/mr/expanded",
+      "notes": "Retrospective model-ranked selection; published full-field finish matched to horse and race, verified 30 Oct 2026. This is not a pre-race frozen prediction.",
+      "result_status": "FINISHED",
+      "result_detail_source": "https://www.theking.zone/racing/2026-10-24/flemington"
     },
     {
       "date": "2026-10-24",
@@ -557,11 +579,13 @@
       "model": "V4.4-19R",
       "group": "Race leader",
       "predicted_win_pct": 11.2,
-      "verified": false,
-      "finish_position": null,
+      "verified": true,
+      "finish_position": 1,
       "starting_price": null,
-      "result_source": "",
-      "notes": "24 Oct forecast; official result not verified in Airtable"
+      "result_source": "https://www.tabtouch.com.au/racing/2026-10-24/sr",
+      "notes": "Retrospective model-ranked selection; published full-field finish matched to horse and race, verified 30 Oct 2026. This is not a pre-race frozen prediction.",
+      "result_status": "FINISHED",
+      "result_detail_source": "https://www.theking.zone/racing/2026-10-24/randwick"
     },
     {
       "date": "2026-10-24",
@@ -571,11 +595,13 @@
       "model": "V4.4-19R",
       "group": "Race leader",
       "predicted_win_pct": 12.82,
-      "verified": false,
-      "finish_position": null,
+      "verified": true,
+      "finish_position": 1,
       "starting_price": null,
-      "result_source": "",
-      "notes": "24 Oct forecast; official result not verified in Airtable"
+      "result_source": "https://www.tabtouch.com.au/racing/2026-10-24/sr",
+      "notes": "Retrospective model-ranked selection; published full-field finish matched to horse and race, verified 30 Oct 2026. This is not a pre-race frozen prediction.",
+      "result_status": "FINISHED",
+      "result_detail_source": "https://www.theking.zone/racing/2026-10-24/randwick"
     },
     {
       "date": "2026-10-24",
@@ -585,11 +611,13 @@
       "model": "V4.4-19R",
       "group": "Race leader",
       "predicted_win_pct": 12.13,
-      "verified": false,
-      "finish_position": null,
+      "verified": true,
+      "finish_position": 7,
       "starting_price": null,
-      "result_source": "",
-      "notes": "24 Oct forecast; official result not verified in Airtable"
+      "result_source": "https://www.tabtouch.com.au/racing/2026-10-24/sr",
+      "notes": "Retrospective model-ranked selection; published full-field finish matched to horse and race, verified 30 Oct 2026. This is not a pre-race frozen prediction.",
+      "result_status": "FINISHED",
+      "result_detail_source": "https://www.theking.zone/racing/2026-10-24/randwick"
     },
     {
       "date": "2026-10-24",
@@ -599,11 +627,13 @@
       "model": "V4.4-19R",
       "group": "Race leader",
       "predicted_win_pct": 30.99,
-      "verified": false,
-      "finish_position": null,
+      "verified": true,
+      "finish_position": 4,
       "starting_price": null,
-      "result_source": "",
-      "notes": "24 Oct forecast; official result not verified in Airtable"
+      "result_source": "https://www.tabtouch.com.au/racing/2026-10-24/sr",
+      "notes": "Retrospective model-ranked selection; published full-field finish matched to horse and race, verified 30 Oct 2026. This is not a pre-race frozen prediction.",
+      "result_status": "FINISHED",
+      "result_detail_source": "https://www.theking.zone/racing/2026-10-24/randwick"
     },
     {
       "date": "2026-10-24",
@@ -613,11 +643,13 @@
       "model": "V4.4-19R",
       "group": "Race leader",
       "predicted_win_pct": 14.03,
-      "verified": false,
-      "finish_position": null,
+      "verified": true,
+      "finish_position": 5,
       "starting_price": null,
-      "result_source": "",
-      "notes": "24 Oct forecast; official result not verified in Airtable"
+      "result_source": "https://www.tabtouch.com.au/racing/2026-10-24/sr",
+      "notes": "Retrospective model-ranked selection; published full-field finish matched to horse and race, verified 30 Oct 2026. This is not a pre-race frozen prediction.",
+      "result_status": "FINISHED",
+      "result_detail_source": "https://www.theking.zone/racing/2026-10-24/randwick"
     },
     {
       "date": "2026-10-24",
@@ -627,11 +659,13 @@
       "model": "V4.4-19R",
       "group": "Race leader",
       "predicted_win_pct": 35.01,
-      "verified": false,
-      "finish_position": null,
+      "verified": true,
+      "finish_position": 1,
       "starting_price": null,
-      "result_source": "",
-      "notes": "24 Oct forecast; official result not verified in Airtable"
+      "result_source": "https://www.tabtouch.com.au/racing/2026-10-24/sr",
+      "notes": "Retrospective model-ranked selection; published full-field finish matched to horse and race, verified 30 Oct 2026. This is not a pre-race frozen prediction.",
+      "result_status": "FINISHED",
+      "result_detail_source": "https://www.theking.zone/racing/2026-10-24/randwick"
     },
     {
       "date": "2026-10-24",
@@ -641,11 +675,13 @@
       "model": "V4.4-19R",
       "group": "Race leader",
       "predicted_win_pct": 29.99,
-      "verified": false,
-      "finish_position": null,
+      "verified": true,
+      "finish_position": 2,
       "starting_price": null,
-      "result_source": "",
-      "notes": "24 Oct forecast; official result not verified in Airtable"
+      "result_source": "https://www.tabtouch.com.au/racing/2026-10-24/sr",
+      "notes": "Retrospective model-ranked selection; published full-field finish matched to horse and race, verified 30 Oct 2026. This is not a pre-race frozen prediction.",
+      "result_status": "FINISHED",
+      "result_detail_source": "https://www.theking.zone/racing/2026-10-24/randwick"
     },
     {
       "date": "2026-10-24",
@@ -654,12 +690,14 @@
       "horse": "Lazzura",
       "model": "V4.4-19R",
       "group": "Race leader",
-      "predicted_win_pct": 27.0,
-      "verified": false,
-      "finish_position": null,
+      "predicted_win_pct": 27,
+      "verified": true,
+      "finish_position": 1,
       "starting_price": null,
-      "result_source": "",
-      "notes": "24 Oct forecast; official result not verified in Airtable"
+      "result_source": "https://www.tabtouch.com.au/racing/2026-10-24/sr",
+      "notes": "Retrospective model-ranked selection; published full-field finish matched to horse and race, verified 30 Oct 2026. This is not a pre-race frozen prediction.",
+      "result_status": "FINISHED",
+      "result_detail_source": "https://www.theking.zone/racing/2026-10-24/randwick"
     },
     {
       "date": "2026-10-24",
@@ -669,11 +707,13 @@
       "model": "V4.4-19R",
       "group": "Race leader",
       "predicted_win_pct": 18.31,
-      "verified": false,
-      "finish_position": null,
+      "verified": true,
+      "finish_position": 3,
       "starting_price": null,
-      "result_source": "",
-      "notes": "24 Oct forecast; official result not verified in Airtable"
+      "result_source": "https://www.tabtouch.com.au/racing/2026-10-24/sr",
+      "notes": "Retrospective model-ranked selection; published full-field finish matched to horse and race, verified 30 Oct 2026. This is not a pre-race frozen prediction.",
+      "result_status": "FINISHED",
+      "result_detail_source": "https://www.theking.zone/racing/2026-10-24/randwick"
     },
     {
       "date": "2026-10-24",
@@ -682,12 +722,14 @@
       "horse": "Estadio Mestalla",
       "model": "V4.4-19R",
       "group": "Race leader",
-      "predicted_win_pct": 31.0,
-      "verified": false,
-      "finish_position": null,
+      "predicted_win_pct": 31,
+      "verified": true,
+      "finish_position": 5,
       "starting_price": null,
-      "result_source": "",
-      "notes": "24 Oct forecast; official result not verified in Airtable"
+      "result_source": "https://www.tabtouch.com.au/racing/2026-10-24/sr",
+      "notes": "Retrospective model-ranked selection; published full-field finish matched to horse and race, verified 30 Oct 2026. This is not a pre-race frozen prediction.",
+      "result_status": "FINISHED",
+      "result_detail_source": "https://www.theking.zone/racing/2026-10-24/randwick"
     }
   ]
 }
