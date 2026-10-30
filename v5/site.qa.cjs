@@ -213,3 +213,16 @@ test('race-day loader checks immutable Friday archive before allowing revised To
   '/v5/official-snapshot-20261030.json','/v5/shortlists/current.json'
  ]);
 });
+
+
+test('all Saturday GitHub checkers are read-only and cannot rebuild an approved Top 10',()=>{
+ const root=require('node:path').join(__dirname,'..');
+ const fs=require('node:fs');
+ const a=fs.readFileSync(require('node:path').join(root,'.github/workflows/saturday-top10-lock.yml'),'utf8');
+ const b=fs.readFileSync(require('node:path').join(root,'.github/workflows/racing-lab-v5-consolidated.yml'),'utf8');
+ assert.doesNotMatch(a,/\b(?:schedule|cron):/,'the pre-race selection lock must only run when explicitly dispatched');
+ assert.match(b,/source reachability/i);
+ assert.match(b,/contents: read/,'the scheduled source checker must be read-only');
+ assert.doesNotMatch(b,/board\.selections\s*=|git push|locked-selections\/|fs\.writeFileSync\('published-board\.json'/);
+ assert.match(b,/actual_scratchings_downloaded:false/,'reachability cannot masquerade as real starter verification');
+});
