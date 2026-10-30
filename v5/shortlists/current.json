@@ -1,7 +1,7 @@
 {
-  "status": "SATURDAY_REVIEWED_ASCOT_LAST_FRIDAY_SNAPSHOT",
+  "status": "31_OCT_OFFICIAL_SHEETS_RECONCILED_FINAL_STARTERS_UNCERTIFIED",
   "date": "2026-10-31",
-  "as_of": "2026-10-31T07:37:00+10:00",
+  "as_of": "2026-10-31T08:22:49+10:00",
   "model": "V5-L5-CANDIDATE-20261030",
   "track_assumptions": {
     "RANDWICK": "Good 4",
@@ -9,8 +9,8 @@
     "ASCOT": "Good 4"
   },
   "selection_method": "Independent form-first qualitative ordering across complete racefields; model percentages included only for traceability and are not calibrated chances. No bookmaker odds used to order. No quotas. Review top ten as candidates; lower tiers not multi-safe. Ranks 11–15 were independently cross-checked against rival form and contemporary racecards; they are CONDITIONAL_REVIEW, not promoted A/B priorities. No automatic fill in a scratching.",
-  "scope": "29 races, original 408 horse dossiers; all runner modelled on updated Saturday scratching overlay. WA final official sheet intentionally skipped at user's request.",
-  "priority_notes": "Research Top 10 rank and A-tier form grades retained; Columbus/Koolibah Randwick R5 now 27.17/24.72% experimental model with just six starters, not promoted automatically to research Top 15. Good4 Ascot scenario (Friday latest) with Soft5 weather risk. Prospective probabilities uncalibrated.",
+  "scope": "29 races, 408 dossier entries; 31 October per-meeting official scratching sheets fully reconciled (37 Randwick, 14 Flemington, 8 Ascot), reserves remain provisional.",
+  "priority_notes": "Independent rank unchanged, V5-L5 experimental model updated on validated scratched/eliminated field. All percentages uncalibrated; NO certainty claim. Randwick R5 six starters and Flemington R5 War Machine removed. Late changes may still occur.",
   "unverified_calibration": true,
   "publication_approved": false,
   "entries": [
@@ -47,7 +47,7 @@
       "horse": "Western Miss",
       "meeting": "ASCOT",
       "race": 7,
-      "model_pct": 26.26,
+      "model_pct": 28.45,
       "tier": "B+",
       "reason": "Six top-three outcomes from seven starts, won 1600m and two Soft runs; strong last-start Ascot effort",
       "risk": "Wider gate 10 and stronger class; Decoration gains gate/relative-weight advantage",
@@ -71,7 +71,7 @@
       "horse": "Anthracite",
       "meeting": "RANDWICK",
       "race": 9,
-      "model_pct": 27.4,
+      "model_pct": 29.92,
       "tier": "B",
       "reason": "Two successive Sydney wins and 2000m form, just 53.5kg and barrier five",
       "risk": "Seven-day backup, Listed step up, Starzintheireyes and Barrengarry",
@@ -83,7 +83,7 @@
       "horse": "Icelady",
       "meeting": "FLEMINGTON",
       "race": 3,
-      "model_pct": 21.81,
+      "model_pct": 22.92,
       "tier": "B",
       "reason": "Group 2 winning form and Group 1 Thousand Guineas second; stepping back to Group 2 Wakeful",
       "risk": "First test at 2000m; De Armas has stronger-looking staying profile",
@@ -213,7 +213,7 @@
       "horse": "Where'stheprofit",
       "meeting": "RANDWICK",
       "race": 10,
-      "model_pct": 23.01,
+      "model_pct": 30.14,
       "tier": "C+",
       "research_status": "CONDITIONAL_REVIEW",
       "reason": "Six wins from eleven starts and four wins in four documented 1100m attempts; latest open handicap win by approximately 3.9 lengths.",
@@ -267,12 +267,17 @@
     "https://www.irace.com.sg/form-guide/race-card/?gtag=australia&racedate=2026-10-31&racerefid=80269"
   ],
   "tier_policy": "original_form_tier keeps historical A-grade form assessments distinct from provisional race-day suitability, wet-track uncertainty and model percentages. No horse is automatically upgraded by price, scratching or user scenario.",
-  "revision_id": "2026-10-31-RACE-DAY-DATA-REVIEW-1",
+  "revision_id": "2026-10-31-0850-RACEDAY-OFFICIAL-SHEETS-RECONCILED",
   "change_log": [
     {
       "at": "2026-10-31T07:37:00+10:00",
       "kind": "DATA_ONLY",
       "reason": "Race-day scratched runners corrected; Ascot going updated Good4; independent rank list unchanged; updated displayed experimental model percentages."
+    },
+    {
+      "at": "2026-10-31T08:22:49+10:00",
+      "kind": "OFFICIAL_RACE_DAY_SHEET",
+      "details": "37 NSW, 14 VIC, 8 WA named/excluded from official scratching sheet incl eliminated reserves; preserved historical independent shortlist and reviewed form tiers."
     }
   ]
 }

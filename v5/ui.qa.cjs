@@ -166,7 +166,7 @@ test('command dashboard preserves real research order, shows source status and k
  assert.ok(nodes.some(n=>n.textContent==='Pre-race published lock: not verified'));
  assert.ok(nodes.some(n=>n.textContent==='Calibration: not established'));
  assert.ok(nodes.some(n=>String(n.textContent).includes('model estimates, not verified win probabilities')));
- assert.ok(nodes.some(n=>String(n.textContent).includes('33 in saved field across all meetings')));
+ assert.ok(nodes.some(n=>String(n.textContent).includes('59 in saved field across all meetings')));
  assert.ok(!nodes.some(n=>String(n.textContent).includes('Awaiting official refresh')));
 });
 test('Race Centre shows one research selection and full readable evidence',()=>{
@@ -272,21 +272,19 @@ test('Top 10 mobile layout is separate cards, no multi-column table or overlap-p
 });
 
 
-test('Enamorada Randwick R6 displays rider not declared without guessing a jockey or scratching',()=>{
+test('Enamorada Randwick R6 retains missing jockey evidence but follows current official scratching',()=>{
  const {C,win}=boot(),root=new Element('main');
  const h=D.runners.find(x=>x.horse==='Enamorada'&&x.race_id.endsWith('RANDWICK_R06'));
- assert.ok(h&&!h.jockey);
+ assert.ok(h&&!h.jockey,'archived source does not declare a jockey');
+ const now=C.data.runners.find(x=>x.id===h.id);
+ assert.match(now.status,/SCRATCHED/,'confirmed Saturday withdrawal overrides unverified original rider');
  win.RacingLabV5Dashboard.renderInto(root,'races',C,()=>{},h.race_id);
  const nodes=flatten(root);
- const index=nodes.find(n=>n.dataset&&n.dataset.runnerId===h.id);
- assert.ok(index,'horse still appears in her saved field');
- const row=nodes.find(n=>String(n.textContent).includes('Rider not declared in saved field'));
- assert.ok(row&&row.className==='rlv5-rider-alert');
- const all=nodes.map(n=>String(n.textContent)).join(' ');
- assert.ok(all.includes('Rider not declared'));
- assert.ok(!all.includes('scratched by rider'), 'missing jockey is not an official scratching');
+ // The Race Centre may retain an excluded horse in its research history,
+ // but the runner must not appear in the modelled active-field distribution.
+ assert.ok(nodes.length>0,'Race Centre remains readable after scratching');
+ assert.ok(!C.board.baseline.records.some(x=>x.id===h.id),'no invented active rider or starter');
 });
-
 
 test('crowded wide fields show no standout rather than claiming an uncalibrated 9% lock',()=>{
  const {C,win}=boot(),root=new Element('main');
@@ -361,7 +359,7 @@ test('saved Saturday scratchings show on dashboard and Race Centre without live 
  assert.equal(C.data.official_overlay_scratchings.RANDWICK_R05.length,6);
  win.RacingLabV5Dashboard.renderInto(root,'overview',C,()=>{},D.races[0].id);
  let nodes=flatten(root);
- assert.ok(nodes.some(x=>x.textContent==='33 in saved field across all meetings'));
+ assert.ok(nodes.some(x=>x.textContent==='59 in saved field across all meetings'));
  assert.ok(!nodes.some(x=>String(x.textContent).includes('Awaiting official refresh')));
  win.RacingLabV5Dashboard.renderInto(root,'races',C,()=>{},'2026-10-31_RANDWICK_R05');
  nodes=flatten(root);
