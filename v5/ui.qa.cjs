@@ -53,6 +53,9 @@ test('simulator visibly renders runners and 10,000 draws, and can produce one sa
 });
 test('original homepage and Top5/10/15 present curated names; edit controls render and respond',()=>{
  const {C,win}=boot(),root=new Element('main');
+ assert.equal(C.curated.count,15);
+ assert.equal(C.curated.additional_review_count,5);
+ assert.deepEqual(C.curated.entries.slice(10).map(x=>x.research_lane),Array(5).fill('CONDITIONAL_REVIEW'));
  win.RacingLabV5Dashboard.renderInto(root,'overview',C,()=>{},D.races[0].id);
  let nodes=flatten(root);
  for(const h of ['Sheza Alibi','Regal Ambition','Hot And High']){
@@ -61,6 +64,7 @@ test('original homepage and Top5/10/15 present curated names; edit controls rend
  win.RacingLabV5Dashboard.renderInto(root,'top10',C,()=>{},D.races[0].id);
  nodes=flatten(root);
  assert.ok(nodes.some(x=>x.tag==='h2'&&String(x.textContent).includes('Daily Top')));
+ assert.ok(nodes.some(x=>String(x.textContent).includes('original research, 5 conditional Top 15 additions')));
  const edit=nodes.find(x=>x.tag==='button'&&x.textContent==='Edit grade / rank');
  assert.ok(edit&&edit.listeners.click);
  assert.doesNotThrow(()=>edit.listeners.click());
