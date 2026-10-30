@@ -355,6 +355,14 @@ function top10(){
  inner.append(e('p','muted small','Grade/rank edits stay on this device, need a written reason and do not publish a shared research change.'));
  inner.append(toplist());
  inner.append(researchHistory());
+ var screen=e('details','rlv5-shortlist-model-audit');
+ screen.append(e('summary','','Strict model review · diagnostics only'));
+ var hold=C.board.winFirst.review.filter(function(h){return S.top==='ALL'||h.meeting===S.top;});
+ if(!hold.length)screen.append(e('p','muted small','No additional model-screened candidates awaiting review.'));
+ hold.slice(0,8).forEach(function(h){
+  screen.append(e('p','muted small',h.horse+' · '+h.meeting+' R'+h.race+' · '+h.reasons.join(', ')));
+ });
+ inner.append(screen);
  advanced.append(inner);root.append(advanced);
 }
 function raceNav(){var all=D.races.filter(function(r){return r.meeting===S.meeting;}),filter=e('div','filters');filter.append(setField('Meeting',Object.keys(C.going).map(function(x){return {value:x,text:x};}),S.meeting,function(v){S.meeting=v;S.race=D.races.find(function(r){return r.meeting===v;}).id;S.runner=null;render();}),setField('Race',all.map(function(r){return {value:r.id,text:'R'+r.race+' · '+r.title};}),S.race,function(v){S.race=v;S.runner=null;render();}));
