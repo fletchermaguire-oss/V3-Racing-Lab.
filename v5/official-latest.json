@@ -1,29 +1,34 @@
 {
-  "schema": "racing-lab-friday-field-overlay/v1",
+  "schema": "racing-lab-racecard-overlay/v2",
   "race_date": "2026-10-31",
-  "checked_date": "2026-10-30",
+  "checked_date": "2026-10-31",
+  "checked_at": "2026-10-31T07:37:00+10:00",
   "publication_approved": false,
-  "notice": "Dated official scratching-sheet reconciliation only; not 31 October final declarations. Emergency promotions are conditional projections based on initial race field limits, not certified starters. No forecasts approved.",
+  "notice": "Saturday 31 October V5 pre-race research: six R5 Randwick scratchings from user-supplied 07:37 phone screenshot; others crosschecked against current racecards. Ascot uses latest 30 October Friday verified scratch list at user's request, NOT Saturday WA final. Live source may be stale. Additional late scratchings, weather and emergencies subject to change; provisional model probabilities uncalibrated, ranked human Top 15 unchanged.",
   "going": {
     "RANDWICK": "Good 4",
     "FLEMINGTON": "Good 4",
-    "ASCOT": "Soft 5"
+    "ASCOT": "Good 4"
   },
   "source_documents": {
     "RANDWICK": {
-      "url": "https://mdata.racingnsw.com.au/FreeFields/Scratchings.aspx?Key=2026Oct31%2CNSW%2CRoyal+Randwick",
-      "last_published": "2026-10-30 06:25 AEDT",
-      "rail": "True"
+      "url": "https://theoverlay.com.au/racing/2026-10-31/randwick-20261031/RAND_311026_5",
+      "last_published": "2026-10-31 08:37 AEDT",
+      "rail": "True",
+      "provenance": "7:37 Brisbane user screenshot (08:37 Sydney time): R5 six scratched. Other races dated public cards; do not claim this is Racing NSW's official publication time."
     },
     "FLEMINGTON": {
-      "url": "https://www.racingaustralia.horse/FreeFields/Scratchings.aspx?Key=2026Oct31%2CVIC%2CFlemington",
-      "last_published": "2026-10-29 20:58 AEDT",
-      "rail": "True entire circuit"
+      "url": "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/flemington/2026-10-31",
+      "last_published": "2026-10-30 21:31 AEDT",
+      "rail": "True entire circuit",
+      "provenance": "30 Oct 21:31 AEDT course report, Saturday scratch names crosschecked on public racecards; NOT certified source publication time."
     },
     "ASCOT": {
-      "url": "https://www.racingaustralia.horse/FreeFields/Scratchings.aspx?Key=2026Oct31%2CWA%2CAscot",
-      "last_published": "2026-10-29 15:12 AEDT",
-      "rail": "+9m entire"
+      "url": "https://racingaustralia.horse/FreeFields/Scratchings.aspx?Key=2026Oct31%2CWA%2CAscot",
+      "last_published": "2026-10-30 12:08 AEDT",
+      "rail": "+9m entire",
+      "provenance": "Last published Friday official sheet; user explicitly deferred Saturday WA final check.",
+      "final_wa_saturday_verified": false
     }
   },
   "scratchings": {
@@ -36,8 +41,18 @@
     ],
     "RANDWICK_R05": [
       "MEDATSU",
+      "PERISHER",
       "BARRENGARRY",
-      "SAMARELLE"
+      "SAMARELLE",
+      "BOTANICAL BOY",
+      "MORNINGTON PIER"
+    ],
+    "RANDWICK_R06": [
+      "SYLPH"
+    ],
+    "RANDWICK_R07": [
+      "WANARUAH",
+      "CHIDIAC"
     ],
     "RANDWICK_R08": [
       "BARRENGARRY",
@@ -49,15 +64,22 @@
     ],
     "RANDWICK_R10": [
       "COMPENSATION",
+      "PRIDE TO FOLLOW",
       "POKERJACK"
     ],
+    "FLEMINGTON_R01": [
+      "MISTER WHISKERS",
+      "STAR OF MACEDON"
+    ],
     "FLEMINGTON_R05": [
-      "PERICLES"
+      "PERICLES",
+      "ESTREMO"
     ],
     "FLEMINGTON_R07": [
       "HIERARCHY"
     ],
     "FLEMINGTON_R09": [
+      "GENEROSITY",
       "TRES MAGNIFIQUE"
     ],
     "ASCOT_R02": [
@@ -67,11 +89,17 @@
     "ASCOT_R03": [
       "SPACE ACADEMY"
     ],
+    "ASCOT_R05": [
+      "RAW UMBER"
+    ],
     "ASCOT_R06": [
       "DYNASTIC LASS"
     ],
     "ASCOT_R07": [
       "DEFENDING"
+    ],
+    "ASCOT_R08": [
+      "OSCAR'S FORTUNE"
     ]
   },
   "emergency_order": {
@@ -89,11 +117,7 @@
       "CRYPTONIC",
       "CHARLEROI"
     ],
-    "RANDWICK_R06": [
-      "SYLPH"
-    ],
     "RANDWICK_R07": [
-      "CHIDIAC",
       "THEBLADE"
     ],
     "FLEMINGTON_R03": [
@@ -103,8 +127,7 @@
     ],
     "FLEMINGTON_R05": [
       "SCHEELITE",
-      "KING ZEPHYR",
-      "ESTREMO"
+      "KING ZEPHYR"
     ],
     "FLEMINGTON_R07": [
       "MEET THE PRINCE",
@@ -116,5 +139,11 @@
     "RANDWICK_R04": 1,
     "FLEMINGTON_R05": 1,
     "FLEMINGTON_R07": 1
+  },
+  "emergency_note": "Original Friday emergency projection retained only where not scratched; projections are NOT verified starters.",
+  "verification": {
+    "status": "RESEARCH_PARTIAL",
+    "randwick_r5": "SCREENSHOT_CONFIRMED",
+    "ascot": "FRIDAY_SNAPSHOT_AT_USER_REQUEST"
   }
 }

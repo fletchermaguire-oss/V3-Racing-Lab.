@@ -1,16 +1,16 @@
 {
-  "status": "FROZEN_TOP10_WITH_FIVE_CONDITIONAL_RESEARCH_ADDITIONS_NOT_FINAL",
+  "status": "SATURDAY_REVIEWED_ASCOT_LAST_FRIDAY_SNAPSHOT",
   "date": "2026-10-31",
-  "as_of": "2026-10-30",
+  "as_of": "2026-10-31T07:37:00+10:00",
   "model": "V5-L5-CANDIDATE-20261030",
   "track_assumptions": {
     "RANDWICK": "Good 4",
     "FLEMINGTON": "Good 4",
-    "ASCOT": "Soft 5"
+    "ASCOT": "Good 4"
   },
   "selection_method": "Independent form-first qualitative ordering across complete racefields; model percentages included only for traceability and are not calibrated chances. No bookmaker odds used to order. No quotas. Review top ten as candidates; lower tiers not multi-safe. Ranks 11–15 were independently cross-checked against rival form and contemporary racecards; they are CONDITIONAL_REVIEW, not promoted A/B priorities. No automatic fill in a scratching.",
-  "scope": "29 races; 408 original runner dossiers; 372 conditionally included, 36 excluded after dated official scratches and unverified emergency projections. Final declarations, rail, track, gear and race-day pattern require further check.",
-  "priority_notes": "Do not treat scenario-sensitive candidates as automatic multi legs. Ascot R6 is withheld despite Afireofgidgeecoals and Aurum Belle both plausible, because Good 4 / Soft 5 changes the modelled leader. Lower five are conditional, not automatic multi legs. Do not conflate model rank with researched rank.",
+  "scope": "29 races, original 408 horse dossiers; all runner modelled on updated Saturday scratching overlay. WA final official sheet intentionally skipped at user's request.",
+  "priority_notes": "Research Top 10 rank and A-tier form grades retained; Columbus/Koolibah Randwick R5 now 27.17/24.72% experimental model with just six starters, not promoted automatically to research Top 15. Good4 Ascot scenario (Friday latest) with Soft5 weather risk. Prospective probabilities uncalibrated.",
   "unverified_calibration": true,
   "publication_approved": false,
   "entries": [
@@ -25,7 +25,8 @@
       "risk": "Strong Golden Eagle field, 1500m after 2000m, traffic and pace",
       "ranking_basis": "Qualitative competitive chance and strength of observed form, not sorted uncalibrated model_pct",
       "original_form_tier": "A+",
-      "condition_note": "Earlier three-horse A-tier board retained; strong elite Group 1 form."
+      "condition_note": "Earlier three-horse A-tier board retained; strong elite Group 1 form.",
+      "model_pct_status": "EXPERIMENTAL_UNCALIBRATED"
     },
     {
       "rank": 2,
@@ -38,18 +39,20 @@
       "risk": "Only four career runs; Pin Up Sheila and I Am Aria are credible rivals",
       "ranking_basis": "Qualitative competitive chance and strength of observed form, not sorted uncalibrated model_pct",
       "original_form_tier": "A",
-      "condition_note": "Earlier three-horse A-tier board retained; class drop but small sample."
+      "condition_note": "Earlier three-horse A-tier board retained; class drop but small sample.",
+      "model_pct_status": "EXPERIMENTAL_UNCALIBRATED"
     },
     {
       "rank": 3,
       "horse": "Western Miss",
       "meeting": "ASCOT",
       "race": 7,
-      "model_pct": 29.3,
+      "model_pct": 26.26,
       "tier": "B+",
       "reason": "Six top-three outcomes from seven starts, won 1600m and two Soft runs; strong last-start Ascot effort",
       "risk": "Wider gate 10 and stronger class; Decoration gains gate/relative-weight advantage",
-      "ranking_basis": "Qualitative competitive chance and strength of observed form, not sorted uncalibrated model_pct"
+      "ranking_basis": "Qualitative competitive chance and strength of observed form, not sorted uncalibrated model_pct",
+      "model_pct_status": "EXPERIMENTAL_UNCALIBRATED"
     },
     {
       "rank": 4,
@@ -60,7 +63,8 @@
       "tier": "B+",
       "reason": "Multiple Group 1 wins and recent Toorak victory at the mile with McDonald booked",
       "risk": "Surfin' Bird, Idle Flyer, Concord Connie and a potentially unhelpful pace",
-      "ranking_basis": "Qualitative competitive chance and strength of observed form, not sorted uncalibrated model_pct"
+      "ranking_basis": "Qualitative competitive chance and strength of observed form, not sorted uncalibrated model_pct",
+      "model_pct_status": "EXPERIMENTAL_UNCALIBRATED"
     },
     {
       "rank": 5,
@@ -71,7 +75,8 @@
       "tier": "B",
       "reason": "Two successive Sydney wins and 2000m form, just 53.5kg and barrier five",
       "risk": "Seven-day backup, Listed step up, Starzintheireyes and Barrengarry",
-      "ranking_basis": "Qualitative competitive chance and strength of observed form, not sorted uncalibrated model_pct"
+      "ranking_basis": "Qualitative competitive chance and strength of observed form, not sorted uncalibrated model_pct",
+      "model_pct_status": "EXPERIMENTAL_UNCALIBRATED"
     },
     {
       "rank": 6,
@@ -82,7 +87,8 @@
       "tier": "B",
       "reason": "Group 2 winning form and Group 1 Thousand Guineas second; stepping back to Group 2 Wakeful",
       "risk": "First test at 2000m; De Armas has stronger-looking staying profile",
-      "ranking_basis": "Qualitative competitive chance and strength of observed form, not sorted uncalibrated model_pct"
+      "ranking_basis": "Qualitative competitive chance and strength of observed form, not sorted uncalibrated model_pct",
+      "model_pct_status": "EXPERIMENTAL_UNCALIBRATED"
     },
     {
       "rank": 7,
@@ -93,49 +99,53 @@
       "tier": "B",
       "reason": "Four wins from five; two wins at Flemington and recent Group 2 Roman Consul win, barrier four",
       "risk": "First Group 1 versus The Next Episode, St Gotthard and Natural Fling; straight-six pattern",
-      "ranking_basis": "Qualitative competitive chance and strength of observed form, not sorted uncalibrated model_pct"
+      "ranking_basis": "Qualitative competitive chance and strength of observed form, not sorted uncalibrated model_pct",
+      "model_pct_status": "EXPERIMENTAL_UNCALIBRATED"
     },
     {
       "rank": 8,
       "horse": "Immortal Bliss",
       "meeting": "ASCOT",
       "race": 8,
-      "model_pct": 22.87,
+      "model_pct": 24.42,
       "tier": "B-",
       "reason": "Eight lifetime wins including two Listed races; four wins at 1000m and documented wet-track form",
       "risk": "Last start 5.9 lengths off winner, 58.5kg, Oscar's Fortune and others",
-      "ranking_basis": "Qualitative competitive chance and strength of observed form, not sorted uncalibrated model_pct"
+      "ranking_basis": "Qualitative competitive chance and strength of observed form, not sorted uncalibrated model_pct",
+      "model_pct_status": "EXPERIMENTAL_UNCALIBRATED"
     },
     {
       "rank": 9,
       "horse": "Hot And High",
       "meeting": "ASCOT",
       "race": 9,
-      "model_pct": 19.87,
+      "model_pct": 26.46,
       "tier": "C+",
       "reason": "Seven wins in eight starts, unbeaten from three Ascot runs and drawn inside",
       "risk": "Untried Soft 5, Playin'it Sweet receives 2.5kg better relative terms, Bonjoy a proven stakes rival",
       "ranking_basis": "Qualitative competitive chance and strength of observed form, not sorted uncalibrated model_pct",
       "original_form_tier": "A",
-      "condition_note": "Earlier form assessment A; Soft 5 unproven and race-day outlook requires review, distinct from form grade."
+      "condition_note": "Earlier form assessment A; Soft 5 unproven and race-day outlook requires review, distinct from form grade.",
+      "model_pct_status": "EXPERIMENTAL_UNCALIBRATED"
     },
     {
       "rank": 10,
       "horse": "Jimmysstar",
       "meeting": "RANDWICK",
       "race": 7,
-      "model_pct": 16.34,
+      "model_pct": 17.12,
       "tier": "C+",
       "reason": "Recent Manikato Group 1 winner, three 1300m wins and previous winner of Russell Balding Stakes",
       "risk": "Gate 16 in crowded Group 2; Ninja, Headwall and Grafterburners strong rivals",
-      "ranking_basis": "Qualitative competitive chance and strength of observed form, not sorted uncalibrated model_pct"
+      "ranking_basis": "Qualitative competitive chance and strength of observed form, not sorted uncalibrated model_pct",
+      "model_pct_status": "EXPERIMENTAL_UNCALIBRATED"
     },
     {
       "rank": 11,
       "horse": "Bridal Waltz",
       "meeting": "FLEMINGTON",
       "race": 9,
-      "model_pct": 17.45,
+      "model_pct": 18.07,
       "tier": "B-",
       "research_status": "CONDITIONAL_REVIEW",
       "reason": "Three consecutive Group 3 sprint placings this campaign, two previous Flemington wins, drawn barrier 3 with 55kg; form is proven in Group races.",
@@ -150,14 +160,15 @@
         "https://www.tab.co.nz/punters/2026/10/2026-victoria-derby-day-tips-preview-flemington-saturday-31-october/",
         "https://www.irace.com.sg/form-guide/race-card/?gtag=australia&racedate=2026-10-31&racemeet=AUS&racerefid=80269"
       ],
-      "ranking_basis": "Independent qualitative chance rank, not sorted by uncalibrated model_pct"
+      "ranking_basis": "Independent qualitative chance rank, not sorted by uncalibrated model_pct",
+      "model_pct_status": "EXPERIMENTAL_UNCALIBRATED"
     },
     {
       "rank": 12,
       "horse": "Afireofgidgeecoals",
       "meeting": "ASCOT",
       "race": 6,
-      "model_pct": 26.77,
+      "model_pct": 21.47,
       "tier": "B-",
       "research_status": "CONDITIONAL_REVIEW",
       "reason": "Karrakatta Plate Group 2 winner and close runner-up in 10 October Max Simmonds, on the same 59kg as latest meeting with Aurum Belle; a win and second in two Soft starts.",
@@ -172,14 +183,15 @@
         "https://www.fanverse.com.au/perth-racing-media/race-books/2026-10-31/",
         "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/ascot/2026-10-31/race-tips"
       ],
-      "ranking_basis": "Independent qualitative chance rank, not sorted by uncalibrated model_pct"
+      "ranking_basis": "Independent qualitative chance rank, not sorted by uncalibrated model_pct",
+      "model_pct_status": "EXPERIMENTAL_UNCALIBRATED"
     },
     {
       "rank": 13,
       "horse": "Anaconda Jones",
       "meeting": "ASCOT",
       "race": 5,
-      "model_pct": 17.7,
+      "model_pct": 16.96,
       "tier": "C+",
       "research_status": "CONDITIONAL_REVIEW",
       "reason": "All five career starts placed, recent Belmont 1000m victory by approximately 2.1 lengths, barrier 1 and 55kg at first try 1100m.",
@@ -193,14 +205,15 @@
         "468858.pdf pp22–27, dated 28 Oct 2026",
         "https://www.fanverse.com.au/race-books/ascot-2026-10-31/"
       ],
-      "ranking_basis": "Independent qualitative chance rank, not sorted by uncalibrated model_pct"
+      "ranking_basis": "Independent qualitative chance rank, not sorted by uncalibrated model_pct",
+      "model_pct_status": "EXPERIMENTAL_UNCALIBRATED"
     },
     {
       "rank": 14,
       "horse": "Where'stheprofit",
       "meeting": "RANDWICK",
       "race": 10,
-      "model_pct": 21.46,
+      "model_pct": 23.01,
       "tier": "C+",
       "research_status": "CONDITIONAL_REVIEW",
       "reason": "Six wins from eleven starts and four wins in four documented 1100m attempts; latest open handicap win by approximately 3.9 lengths.",
@@ -215,14 +228,15 @@
         "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/randwick/2026-10-31/R10/neurals",
         "https://www.tabtouch.com.au/racing/2026-10-31/sr/10"
       ],
-      "ranking_basis": "Independent qualitative chance rank, not sorted by uncalibrated model_pct"
+      "ranking_basis": "Independent qualitative chance rank, not sorted by uncalibrated model_pct",
+      "model_pct_status": "EXPERIMENTAL_UNCALIBRATED"
     },
     {
       "rank": 15,
       "horse": "In Confidence",
       "meeting": "ASCOT",
       "race": 4,
-      "model_pct": 24.7,
+      "model_pct": 20.09,
       "tier": "C+",
       "research_status": "CONDITIONAL_REVIEW",
       "reason": "Four wins and two placings from seven; unbeaten in three attempts at 1200m and three wins from four Soft starts; barrier 4 and competitive handicap weight.",
@@ -237,7 +251,8 @@
         "https://www.paddypower.com/horse-racing/ascot/r4-1200m-hcap-2026-10-31/36251016.0548",
         "https://www.gobet.com.au/horse-racing-tips/ascot-october-31-2026/"
       ],
-      "ranking_basis": "Independent qualitative chance rank, not sorted by uncalibrated model_pct"
+      "ranking_basis": "Independent qualitative chance rank, not sorted by uncalibrated model_pct",
+      "model_pct_status": "EXPERIMENTAL_UNCALIBRATED"
     }
   ],
   "change_policy": "Do not silently reorder. Version every new official scratch/going/form adjustment with before/after change note. Top 15 contains Top 10 preserved with five additional conditional-review contenders; do not present lower five as multi-safe.",
@@ -252,5 +267,12 @@
     "https://www.irace.com.sg/form-guide/race-card/?gtag=australia&racedate=2026-10-31&racerefid=80269"
   ],
   "tier_policy": "original_form_tier keeps historical A-grade form assessments distinct from provisional race-day suitability, wet-track uncertainty and model percentages. No horse is automatically upgraded by price, scratching or user scenario.",
-  "revision_id": "2026-10-30-TOP15-INDEPENDENT-REVIEW-1"
+  "revision_id": "2026-10-31-RACE-DAY-DATA-REVIEW-1",
+  "change_log": [
+    {
+      "at": "2026-10-31T07:37:00+10:00",
+      "kind": "DATA_ONLY",
+      "reason": "Race-day scratched runners corrected; Ascot going updated Good4; independent rank list unchanged; updated displayed experimental model percentages."
+    }
+  ]
 }
