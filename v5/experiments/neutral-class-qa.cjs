@@ -61,7 +61,8 @@ test('one rated horse with no rated peers cannot receive invented class superior
  const b=Candidate.calculate(fixture([graded[0],unknown,unknown]),'Good 4');
  exactSum(b);
  assert.ok(b.records.every(x=>x.features.class===0));
- assert.ok(b.records.every(x=>x.opposition_class_anchor===null));
+ assert.equal(b.records.find(x=>x.grade_quality!==null).opposition_class_anchor,null);
+ assert.ok(b.records.filter(x=>x.grade_quality===null).every(x=>x.opposition_class_edge===null));
 });
 test('runner ordering does not change any probability or class evidence',()=>{
  const d=fixture([graded[0],unknown,graded[1]]);
