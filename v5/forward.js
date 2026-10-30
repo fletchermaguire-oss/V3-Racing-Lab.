@@ -9,6 +9,7 @@ const idPattern=/^[0-9]{4}-[0-9]{2}-[0-9]{2}_(RANDWICK|FLEMINGTON|ASCOT)_R[0-9]{
 function utc(s){if(typeof s!=='string'||!/^\d{4}-\d{2}-\d{2}T\d\d:\d\d:\d\d(?:\.\d+)?Z$/.test(s))return null;const d=Date.parse(s);return Number.isFinite(d)?d:null;}
 function check(d){
  if(!d||d.schema!==SCHEMA||!/^2026-10-31$/.test(d.meeting_date)||d.publication_approved!==false||
+  typeof d.independent_freeze_verified!=='boolean'||
   !Array.isArray(d.locked_selections)||!Array.isArray(d.official_results)||
   !['AWAITING_VERIFIED_PRE_RACE_LOCK','PRE_RACE_LOCK_CLAIMED','VERIFIED_FORWARD_TRACKING'].includes(d.status))
   throw Error('Unrecognized prospective record; refuse to classify results');
@@ -17,17 +18,17 @@ function check(d){
  if(!d.freeze_proof||!/^https:\/\/github\.com\/[^/]+\/[^/]+\/commit\/[a-f0-9]{40}$/.test(d.freeze_proof.url||'')||
    !/^[a-f0-9]{40}$/.test(d.freeze_proof.sha||'')||!d.freeze_proof.url.endsWith('/'+d.freeze_proof.sha)||
    !utc(d.freeze_proof.committed_at_utc))throw Error('Missing GitHub commit proof for prospective lock');
- const seen=new Set(),races=new Set();
+ const seen=new Set(),races=new Set(),ranks=new Set();
  d.locked_selections.forEach(x=>{
   if(!idPattern.test(x.runner_id)||!x.runner_id.startsWith(x.race_id+'_')||
    !x.race_id.startsWith(d.meeting_date+'_')||!Number.isSafeInteger(x.rank)||x.rank<1||x.rank>15||
    !utc(x.race_at_utc)||!utc(x.locked_at_utc)||utc(x.locked_at_utc)>=utc(x.race_at_utc)||
    utc(d.freeze_proof.committed_at_utc)>utc(x.locked_at_utc)||
    utc(d.freeze_proof.committed_at_utc)>=utc(x.race_at_utc)||
-   seen.has(x.runner_id)||races.has(x.race_id)||
+   seen.has(x.runner_id)||races.has(x.race_id)||ranks.has(x.rank)||
    x.active_at_lock!==true||!/^https:\/\//.test(x.race_start_source||''))
    throw Error('Invalid, duplicated, after-start or scratched locked selection');
-  seen.add(x.runner_id);races.add(x.race_id);
+  seen.add(x.runner_id);races.add(x.race_id);ranks.add(x.rank);
  });
  const rankedLock=new Map(d.locked_selections.map(x=>[x.race_id,x]));
  const outcomes=new Set();
@@ -36,7 +37,8 @@ function check(d){
   if(!races.has(x.race_id)||outcomes.has(x.race_id)||x.status!=='OFFICIALLY_VERIFIED'||
    !/^https:\/\//.test(x.official_url||'')||!utc(x.verified_at_utc)||
    !lock||utc(x.verified_at_utc)<utc(lock.race_at_utc)||
-   typeof x.winner_id!=='string'||!x.winner_id.startsWith(x.race_id+'_'))
+   (Object.hasOwn(x,'verified')&&(typeof x.verified!=='boolean'||x.verified!==true))||
+   typeof x.winner_id!=='string'||!idPattern.test(x.winner_id)||!x.winner_id.startsWith(x.race_id+'_'))
    throw Error('Unmatched, duplicated, pre-start or unverified official finish');
   outcomes.add(x.race_id);
  });
