@@ -63,8 +63,8 @@ test('original homepage and Top5/10/15 present curated names; edit controls rend
  }
  win.RacingLabV5Dashboard.renderInto(root,'top10',C,()=>{},D.races[0].id);
  nodes=flatten(root);
- assert.ok(nodes.some(x=>x.tag==='h2'&&String(x.textContent).includes('Daily Top')));
- assert.ok(nodes.some(x=>String(x.textContent).includes('original research, 5 conditional Top 15 additions')));
+ assert.ok(nodes.some(x=>x.tag==='h2'&&String(x.textContent).includes('Top 10 Selections')));
+ assert.ok(nodes.some(x=>String(x.textContent).includes('Our researched horses in original rank order')));
  const edit=nodes.find(x=>x.tag==='button'&&x.textContent==='Edit grade / rank');
  assert.ok(edit&&edit.listeners.click);
  assert.doesNotThrow(()=>edit.listeners.click());
@@ -187,8 +187,8 @@ test('Race Centre is an accessible analyst layout with two honest pick identitie
 test('design entrypoints both use the same single CSS and JS revision and do not modify formula',()=>{
  const home=fs.readFileSync('index.html','utf8'),studio=fs.readFileSync('v5/index.html','utf8');
  for(const html of [home,studio]){
-  assert.match(html,/\/v5\/site\.css\?v=mobile-top10-20261030/);
-  assert.match(html,/\/v5\/dashboard\.js\?v=mobile-top10-20261030/);
+  assert.match(html,/\/v5\/site\.css\?v=clean-shortlist-20261030/);
+  assert.match(html,/\/v5\/dashboard\.js\?v=clean-shortlist-20261030/);
   assert.match(html,/\/v5\/model\.js\?v=shared-20261030/,'original V5 model is unchanged');
  }
 });
@@ -213,8 +213,54 @@ test('Top 10 header and 10 horse cards are separate siblings, never grid childre
 test('both entrypoints bust cached UI files without touching the model version',()=>{
  for(const path of ['index.html','v5/index.html']){
   const html=fs.readFileSync(path,'utf8');
-  assert.match(html,/site\.css\?v=mobile-top10-20261030/);
-  assert.match(html,/dashboard\.js\?v=mobile-top10-20261030/);
+  assert.match(html,/site\.css\?v=clean-shortlist-20261030/);
+  assert.match(html,/dashboard\.js\?v=clean-shortlist-20261030/);
   assert.match(html,/model\.js\?v=shared-20261030/);
  }
+});
+
+
+test('Top 10 page has one clean list of stable independent rankings and only three obvious choices',()=>{
+ const {C,win}=boot(),root=new Element('main');
+ win.RacingLabV5Dashboard.renderInto(root,'top10',C,()=>{},D.races[0].id);
+ const nodes=flatten(root),list=nodes.find(n=>n.className==='rlv5-shortlist-cards');
+ assert.ok(nodes.some(n=>n.textContent==='Top 10 Selections'),'short heading');
+ assert.ok(list,'primary shortlist');
+ assert.equal(list.children.length,10,'exactly one visible research card per ranked horse');
+ assert.ok(list.children.every(n=>n.tag==='button'&&n.className.startsWith('rlv5-shortlist-card')));
+ assert.deepEqual(list.children.map(n=>n.dataset.runnerId),C.curated.entries.slice(0,10).map(x=>x.id),
+  'original research order and runner identities are preserved');
+ assert.ok(list.children.every(n=>flatten(n).some(y=>y.textContent==='MODEL ESTIMATE')));
+ assert.ok(list.children.every(n=>flatten(n).some(y=>y.className==='rlv5-shortlist-grade')));
+ const controls=nodes.filter(n=>n.className&&n.className.includes('rlv5-shortlist-tab'));
+ assert.deepEqual(controls.map(n=>n.textContent),['Top 5','Top 10','Top 15']);
+ assert.equal(nodes.filter(n=>n.className==='rlv5-shortlist-warning').length,1);
+ assert.ok(!nodes.some(n=>String(n.textContent).includes('Change track scenario')),
+  'advanced track scenarios should be on the Weather page, not crowd this list');
+ const advanced=nodes.find(n=>n.tag==='details'&&n.className==='rlv5-shortlist-advanced');
+ assert.ok(advanced&&!advanced.open,'audit options stay collapsed');
+ assert.equal(nodes.filter(n=>n.className==='rlv5-shortlist-cards').length,1);
+});
+test('Top 5/15 toggles adjust visible count without changing saved research or formula',()=>{
+ const {C,win}=boot(),root=new Element('main');
+ const original=C.curated.entries.map(h=>[h.id,h.original_rank,h.model_pct]);
+ const render=()=>flatten(root);
+ win.RacingLabV5Dashboard.renderInto(root,'top10',C,()=>{},D.races[0].id);
+ const top5=render().find(n=>n.tag==='button'&&n.textContent==='Top 5');
+ top5.listeners.click();
+ assert.equal(render().find(n=>n.className==='rlv5-shortlist-cards').children.length,5);
+ const top15=render().find(n=>n.tag==='button'&&n.textContent==='Top 15');
+ top15.listeners.click();
+ const list=render().find(n=>n.className==='rlv5-shortlist-cards');
+ assert.equal(list.children.length,15);
+ assert.ok(render().some(n=>String(n.textContent).includes('additional review candidates')));
+ assert.deepEqual(C.curated.entries.map(h=>[h.id,h.original_rank,h.model_pct]),original);
+});
+test('Top 10 mobile layout is separate cards, no multi-column table or overlap-prone nested headers',()=>{
+ const html=fs.readFileSync('v5/site.css','utf8'),js=fs.readFileSync('v5/dashboard.js','utf8');
+ assert.match(html,/\.rlv5-shortlist-cards\{[^}]*display:flex;flex-direction:column/);
+ assert.match(html,/\.rlv5-shortlist-card\{[^}]*grid-template-columns:39px minmax\(0,1fr\) minmax\(85px,107px\)/);
+ assert.match(html,/@media\(max-width:780px\)/);
+ assert.match(js,/var list=e\('div','rlv5-shortlist-cards'\)/);
+ assert.doesNotMatch(js.slice(js.indexOf('function top10(){'),js.indexOf('function raceNav(){')),/scenarios\(\)/);
 });

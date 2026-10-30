@@ -296,42 +296,74 @@ function aTierSummary(){
  return panel;
 }
 function top10(){
- add(app(),head('Daily Top '+S.topN,'Original independent research rankings, live field status and model percentages are distinct.'),scenarios());
- var controls=e('div','filters');
- controls.append(setField('Board view',[
-  {value:'RESEARCH',text:'Form-researched Top 10'},
-  {value:'WIN_FIRST',text:'Strict model priorities'},
-  {value:'MODEL',text:'Raw model audit only'}
- ],S.topMode,function(v){S.topMode=v;render();}),
-  setField('Selections',[5,10,15].map(function(n){return {value:String(n),text:'Top '+n};}),String(S.topN),function(v){S.topN=+v;render();}),
-  setField('Meeting',[{value:'ALL',text:'All meetings'}].concat(Object.keys(C.going).map(function(v){return {value:v,text:v};})),S.top,function(v){S.top=v;render();}));
- app().append(controls);
- if(C.lastChange)app().append(changeNotice());
- if(S.topMode==='RESEARCH'){
-  var source=C.curated;
-  if(!source)app().append(note('Frozen research checkpoint unavailable. Strict model priorities shown separately; the independent top ten cannot be reconstructed from a model score.'));
-  else{
-   app().append(note('Frozen form ranking '+source.checkpoint_at+' · '+source.priority_research_count+' Top 10 original research, '+source.additional_review_count+' conditional Top 15 additions · '+source.active_count+'/'+source.count+
-     ' researched runners remain in the provisional field. '+(S.topN>source.count?'Only '+source.count+' of requested Top '+S.topN+' have an independently researched ranking; '+(S.topN-source.count)+' slots intentionally remain vacant. ':'')+
-     'A scratched runner keeps its historical position but cannot count as an active pick. No silent replacement.'));
-   app().append(aTierSummary());
-  }
- }else if(S.topMode==='WIN_FIRST'){
-  var rows=C.board.winFirst.priority.filter(function(h){return S.top==='ALL'||h.meeting===S.top;});
-  app().append(note(rows.length+' strict model priorities; fewer than '+S.topN+' may qualify. Not the archived human Top 10.'));
+ // The primary shortlist is ALWAYS independently researched; model leaderboards
+ // and local edit controls are optional, collapsed diagnostics below it.
+ var root=app(),research=C.curated,items=curatedSet();
+ var header=add(e('div','rlv5-shortlist-heading'),
+  e('span','rlv5-shortlist-eyebrow','SATURDAY · '+D.date),
+  e('h2','','Top '+S.topN+' Selections'),
+  e('p','','Our researched horses in original rank order — not automatically reordered by the live model.'));
+ root.append(header);
+ var switcher=e('div','rlv5-shortlist-switch');
+ [5,10,15].forEach(function(n){
+  var btn=action('Top '+n,function(){S.topN=n;render();},S.topN===n?'primary':'ghost');
+  btn.className+=' rlv5-shortlist-tab'+(S.topN===n?' active':'');
+  btn.setAttribute('aria-pressed',String(S.topN===n));
+  switcher.append(btn);
+ });
+ root.append(switcher);
+ if(!research){
+  root.append(note('No saved independent research list is available. Live model leaders are not substitutes.'));return;
  }
- if(S.topMode==='RESEARCH'&&!C.curated)app().append(note('Archived research data not loaded.'));
- else app().append(toplist());
- if(S.topMode==='RESEARCH'){
-  if(C.curated)app().append(researchHistory());
- }else if(S.topMode==='WIN_FIRST'){
-  var hold=C.board.winFirst.review.filter(function(h){return S.top==='ALL'||h.meeting===S.top;});
-  var panel=box('Review only · not shortlisted','These runners need further validation before a strict model priority.');
-  hold.forEach(function(h){panel.append(e('p','muted small',h.horse+' · '+h.meeting+' R'+h.race+' · '+h.reasons.join(', ')));});
-  app().append(panel);
- }else app().append(note('Raw model rankings may change under going or scratchings; do not mistake these for the reviewed Top 10.'));
- app().append(e('p','muted small','Model percentages are uncalibrated. Current source: '+(D.official_check_at||D.saved_at||'undated')+
-  ' · live final scratching certification: NOT ESTABLISHED · model revision: '+C.revision));
+ var subtitle=e('p','rlv5-shortlist-intro',S.topN===15?
+  'Ranks 11–15 are additional review candidates, not equal-conviction Top 10 selections.':
+  'Only independently reviewed selections appear here. A scratching does not silently promote another horse.');
+ root.append(subtitle);
+ var list=e('div','rlv5-shortlist-cards');
+ items.forEach(function(h){
+  var card=e('button','rlv5-shortlist-card'+(h.eligible?'':' excluded')),
+   name=e('div','rlv5-shortlist-name'),
+   details=e('div','rlv5-shortlist-details'),
+   grades=e('div','rlv5-shortlist-grades');
+  card.type='button';card.dataset.runnerId=h.id;
+  if(h.model_pct!==null)card.dataset.modelPct=String(h.model_pct);
+  name.append(e('strong','',h.horse));
+  details.append(e('span','rlv5-shortlist-race',h.meeting+' · R'+h.race));
+  if(h.research_lane==='CONDITIONAL_REVIEW')details.append(e('span','rlv5-shortlist-extra','Additional review'));
+  name.append(details);
+  if(h.reason)name.append(e('p','rlv5-shortlist-reason',h.reason));
+  grades.append(e('span','rlv5-shortlist-grade',h.form_tier));
+  grades.append(e('strong','rlv5-shortlist-percent',h.model_pct===null?'—':pct(h.model_pct)));
+  grades.append(e('small','','MODEL ESTIMATE'));
+  if(!h.eligible)grades.append(e('span','rlv5-shortlist-out','Out of field'));
+  add(card,e('span','rlv5-shortlist-rank',String(h.rank).padStart(2,'0')),name,grades);
+  card.addEventListener('click',function(){selectRace(h.race_id,h.id);});
+  list.append(card);
+ });
+ if(!items.length)list.append(note('No reviewed selections for this meeting. Research positions are not automatically replaced.'));
+ root.append(list);
+ root.append(e('p','rlv5-shortlist-warning',
+  'Model percentages are provisional and uncalibrated. Research grades describe form, not guaranteed chances. Final starters are not certified.'));
+ // No forecast, scenario, audit log or alternative algorithm is placed in the main board.
+ // The historical edit workflow is preserved but deliberately hidden by default.
+ var advanced=e('details','rlv5-shortlist-advanced');
+ advanced.append(e('summary','','Filters and research audit (optional)'));
+ var inner=e('div','rlv5-shortlist-advanced-body');
+ inner.append(setField('Meeting',[{value:'ALL',text:'All meetings'}].concat(
+  Object.keys(C.going).map(function(m){return {value:m,text:m};})),S.top,
+  function(v){S.top=v;render();}));
+ inner.append(e('p','muted small','Grade/rank edits stay on this device, need a written reason and do not publish a shared research change.'));
+ inner.append(toplist());
+ inner.append(researchHistory());
+ var screen=e('details','rlv5-shortlist-model-audit');
+ screen.append(e('summary','','Strict model review · diagnostics only'));
+ var hold=C.board.winFirst.review.filter(function(h){return S.top==='ALL'||h.meeting===S.top;});
+ if(!hold.length)screen.append(e('p','muted small','No additional model-screened candidates awaiting review.'));
+ hold.slice(0,8).forEach(function(h){
+  screen.append(e('p','muted small',h.horse+' · '+h.meeting+' R'+h.race+' · '+h.reasons.join(', ')));
+ });
+ inner.append(screen);
+ advanced.append(inner);root.append(advanced);
 }
 function raceNav(){var all=D.races.filter(function(r){return r.meeting===S.meeting;}),filter=e('div','filters');filter.append(setField('Meeting',Object.keys(C.going).map(function(x){return {value:x,text:x};}),S.meeting,function(v){S.meeting=v;S.race=D.races.find(function(r){return r.meeting===v;}).id;S.runner=null;render();}),setField('Race',all.map(function(r){return {value:r.id,text:'R'+r.race+' · '+r.title};}),S.race,function(v){S.race=v;S.runner=null;render();}));
  var grid=e('div','racechips');all.forEach(function(r){var x=C.board.baseline.races.find(function(v){return v.id===r.id;}),b=add(e('button','racechip'+(r.id===S.race?' active':'')),e('b','','Race '+r.race),e('small','',r.distance_m+'m · '+((C.curated&&C.curated.entries.find(function(h){return h.race_id===r.id;}))?'Research: '+C.curated.entries.find(function(h){return h.race_id===r.id;}).horse:'Model #1: '+(x.leader||'No contest'))));b.type='button';b.addEventListener('click',function(){S.race=r.id;S.runner=null;render();});grid.append(b);});return [filter,grid];}
