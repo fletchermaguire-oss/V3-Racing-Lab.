@@ -239,14 +239,17 @@ test('partial verified sheet cannot reintroduce six Randwick R5 scratchings or r
  const flem=Object.entries(latest.scratchings).filter(([race])=>race.startsWith('FLEMINGTON_R'))
    .flatMap(([race,names])=>names.map(horse=>[Number(race.split('_R')[1]),horse]));
  partial.meetings=[parseOfficial('FLEMINGTON',html('FLEMINGTON',flem.length,
-   flem.map(([race,horse])=>line(race,'1 '+horse)).join('')))];
+   flem.map(([race,horse])=>line(race,'1 '+horse)).join(''))
+   .replace('Fri 30-Oct-26 8:10AM AEDT','Sat 31-Oct-26 7:47AM AEDT'))];
+ partial.observed_at='2026-10-31T00:00:00Z';
  C.applyOfficialSheets(partial);
  assert.equal(C.official.partial,true);
  assert.equal(C.official.meetings.length,1);
  assert.deepEqual(C.curated.entries.map(x=>x.horse),before);
  assert.equal(C.board.baseline.records.filter(x=>x.race_id==='2026-10-31_RANDWICK_R05').length,6);
  const bad=sheets();bad.status='OFFICIAL_SHEETS_PARTIAL';bad.meetings=[publishedSheet('RANDWICK')];
- bad.observed_at='2026-10-30T09:48:00Z';
+ bad.observed_at='2026-10-31T00:00:01Z';
+ bad.meetings[0].source_last_published='Sat 31-Oct-26 8:30AM AEDT';
  assert.throws(()=>C.applyOfficialSheets(bad),/Previously confirmed official scratching missing/);
  assert.equal(C.board.baseline.records.filter(x=>x.race_id==='2026-10-31_RANDWICK_R05').length,6);
 });
