@@ -250,3 +250,33 @@ test('partial verified sheet cannot reintroduce six Randwick R5 scratchings or r
  assert.throws(()=>C.applyOfficialSheets(bad),/Previously confirmed official scratching missing/);
  assert.equal(C.board.baseline.records.filter(x=>x.race_id==='2026-10-31_RANDWICK_R05').length,6);
 });
+
+test('eliminated official emergencies count toward source totals without guessing false starters',()=>{
+ const doc=html('FLEMINGTON',3,
+  line(5,'1 WAR MACHINE (NZ)')+
+  '<tr><td>Race 3:</td><td>20e CHOCOLATE FRECKLES (Eliminated)</td></tr>'+
+  '<tr><td> </td><td>21e A RUS IN GRINZING (Eliminated)</td></tr>');
+ const sheet=parseOfficial('FLEMINGTON',doc);
+ assert.equal(sheet.scratched_total,3);
+ assert.deepEqual(sheet.scratchings.FLEMINGTON_R03,['CHOCOLATE FRECKLES','A RUS IN GRINZING']);
+ assert.deepEqual(sheet.scratchings.FLEMINGTON_R05,['WAR MACHINE (NZ)']);
+});
+test('current 31 October official counts and key R5/R10 horse statuses reconcile',()=>{
+ const latest=require('./official-latest.json'),list=require('./shortlists/current.json');
+ const totals=Object.fromEntries(['RANDWICK','FLEMINGTON','ASCOT'].map(m=>
+   [m,Object.entries(latest.scratchings).filter(([r])=>r.startsWith(m+'_'))
+     .reduce((n,[,horses])=>n+horses.length,0)]));
+ assert.deepEqual(totals,{RANDWICK:37,FLEMINGTON:14,ASCOT:8});
+ for(const horse of ['PERISHER','BOTANICAL BOY','SAMARELLE','MORNINGTON PIER'])
+  assert.ok(latest.scratchings.RANDWICK_R05.includes(horse));
+ assert.ok(latest.scratchings.FLEMINGTON_R05.includes('WAR MACHINE'));
+ for(const horse of ["ANNIE'S ROSE",'MERCY ME'])
+  assert.ok(latest.scratchings.RANDWICK_R10.includes(horse));
+ const C=State.create(State.applyOfficialOverlay(Data,latest),{going:latest.going,checkpoint:list});
+ assert.equal(C.board.activeCount+C.board.excludedCount,408);
+ assert.equal(C.board.raceCount,29);
+ assert.equal(C.board.baseline.records.filter(x=>x.race_id==='2026-10-31_RANDWICK_R05').length,6);
+ assert.ok(!C.board.baseline.records.some(x=>x.horse==='War Machine'&&x.meeting==='FLEMINGTON'&&x.race===5));
+ assert.deepEqual(C.curated.entries.map(x=>x.horse),list.entries.map(x=>x.horse));
+ assert.ok(C.board.baseline.races.every(x=>x.sum===100));
+});
