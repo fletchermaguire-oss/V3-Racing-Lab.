@@ -39,6 +39,25 @@ function publishedAt(value){
  if(weekday&&['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][date.getUTCDay()]!==weekday[0].toUpperCase()+weekday.slice(1).toLowerCase())return NaN;
  return Date.UTC(year,month-1,day,hour-({AEDT:11,AEST:10,AWST:8}[zone]),minute);
 }
+function requireCumulativeScratchings(archive,replacement){
+ if(!archive||archive.schema!=='racing-lab-friday-field-overlay/v1'||
+    archive.race_date!==replacement.race_date||archive.checked_date!=='2026-10-30'||
+    replacement.schema!=='racing-lab-racecard-overlay/v2'||
+    !archive.scratchings||!replacement.scratchings)
+   throw Error('Immutable Friday scratching reference missing or mismatched');
+ Object.entries(archive.scratchings).forEach(function(pair){
+   var race=pair[0],prior=pair[1],newNames=new Set((replacement.scratchings[race]||[]).map(canonical));
+   if(!Array.isArray(prior)||prior.some(function(h){return !newNames.has(canonical(h));}))
+     throw Error('Saturday overlay omits archived Friday scratching: '+race);
+ });
+ Object.entries(archive.source_documents||{}).forEach(function(pair){
+   var meeting=pair[0],before=publishedAt(pair[1].last_published);
+   var after=publishedAt(replacement.source_documents[meeting]&&replacement.source_documents[meeting].last_published);
+   if(!Number.isFinite(before)||!Number.isFinite(after)||after<before)
+     throw Error('Saturday official source older than archived Friday sheet: '+meeting);
+ });
+ return true;
+}
 function applyOfficialOverlay(input,overlay){
   if(!overlay||!['racing-lab-friday-field-overlay/v1','racing-lab-racecard-overlay/v2'].includes(overlay.schema))throw Error('Unverified or missing official field overlay');
   if(overlay.race_date!==input.date)throw Error('Field overlay date mismatch');
@@ -48,6 +67,31 @@ function applyOfficialOverlay(input,overlay){
       overlay.checked_at.slice(0,10)!==input.date||!Number.isFinite(Date.parse(overlay.checked_at))))
     throw Error('Race-day overlay requires a timestamp with local timezone');
   if(overlay.publication_approved!==false)throw Error('A research overlay cannot grant publication approval');
+  if((overlay.schema==='racing-lab-racecard-overlay/v2') !== (overlay.checked_date===input.date))
+    throw Error('Race-day replacement requires v2 schema and 31 October check date');
+  function record(x){return x!==null&&typeof x==='object'&&!Array.isArray(x);}
+  if(!record(overlay.scratchings)||!record(overlay.emergency_order)||
+     !record(overlay.projected_promotions)||!record(overlay.source_documents)||
+     !record(overlay.going)||typeof overlay.notice!=='string'||!overlay.notice.trim())
+    throw Error('Official overlay missing required scratching, emergency, source, going or notice fields');
+  var meetings=Array.from(new Set(input.races.map(function(r){return r.meeting;})));
+  if(Object.keys(overlay.going).length!==meetings.length||Object.keys(overlay.source_documents).length!==meetings.length)
+    throw Error('Official overlay missing meeting source or going');
+  meetings.forEach(function(meeting){
+    var doc=overlay.source_documents[meeting];
+    if(!record(doc)||typeof doc.url!=='string'||!/^https:\/\//.test(doc.url)||
+       !Number.isFinite(publishedAt(doc.last_published))||
+       !/^(Good [34]|Soft [567]|Heavy (8|9|10))$/.test(overlay.going[meeting]))
+      throw Error('Official overlay lacks valid source publication or track grade: '+meeting);
+  });
+  Object.entries(overlay.scratchings).forEach(function(pair){
+    if(!Array.isArray(pair[1])||pair[1].some(function(x){return typeof x!=='string'||!x.trim();}))
+      throw Error('Invalid official scratching list for '+pair[0]);
+  });
+  Object.keys(overlay.projected_promotions).forEach(function(race){
+    if(!Object.hasOwn(overlay.emergency_order,race))
+      throw Error('Emergency projection has no verified priority order for '+race);
+  });
   var next=clone(input),seen=new Set(),index=new Map();
   next.runners.forEach(function(h){
     var key=h.race_id+'|'+canonical(h.horse);
@@ -395,12 +439,20 @@ function load(fetcher){
     if(!r.ok)throw Error('Official snapshot HTTP '+r.status+' (saved board withheld)');
     return r.json();
    }).then(function(overlay){
-    return f('/v5/shortlists/current.json',{cache:'no-store'}).then(function(r){
+    var archive=overlay.schema==='racing-lab-racecard-overlay/v2'?
+      f('/v5/official-snapshot-20261030.json',{cache:'no-store'}).then(function(r){
+        if(!r.ok)throw Error('Immutable Friday scratching archive unavailable');
+        return r.json();
+      }):Promise.resolve(null);
+    return archive.then(function(friday){
+      if(friday)requireCumulativeScratchings(friday,overlay);
+      return f('/v5/shortlists/current.json',{cache:'no-store'}).then(function(r){
        if(!r.ok)throw Error('Frozen researched Top 10 unavailable: '+r.status);
        return r.json();
       }).then(function(checkpoint){
        return {data:applyOfficialOverlay(data,overlay),going:overlay.going,checkpoint:checkpoint};
       });
+    });
    });
   }).then(function(part){
    var storage;try{storage=typeof localStorage!=='undefined'?localStorage:null;}catch(e){}
@@ -409,5 +461,5 @@ function load(fetcher){
  }
  return pending;
 }
-return {create:create,load:load,applyOfficialOverlay:applyOfficialOverlay};
+return {create:create,load:load,applyOfficialOverlay:applyOfficialOverlay,requireCumulativeScratchings:requireCumulativeScratchings};
 });
