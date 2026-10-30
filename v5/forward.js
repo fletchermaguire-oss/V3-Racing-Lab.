@@ -5,7 +5,7 @@
 (function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.RacingLabForward=api;})(typeof window!=='undefined'?window:globalThis,function(){
 'use strict';
 const SCHEMA='racing-lab-prospective-record/v1';
-const idPattern=/^[0-9]{4}-[0-9]{2}-[0-9]{2}_(RANDWICK|FLEMINGTON|ASCOT)_R[0-9]{2}\|[A-Z0-9]+$/;
+const idPattern=/^[0-9]{4}-[0-9]{2}-[0-9]{2}_(RANDWICK|FLEMINGTON|ASCOT)_R[0-9]{2}_[0-9]{2}$/;
 function utc(s){if(typeof s!=='string'||!/^\d{4}-\d{2}-\d{2}T\d\d:\d\d:\d\d(?:\.\d+)?Z$/.test(s))return null;const d=Date.parse(s);return Number.isFinite(d)?d:null;}
 function check(d){
  if(!d||d.schema!==SCHEMA||!/^2026-10-31$/.test(d.meeting_date)||d.publication_approved!==false||
@@ -19,7 +19,7 @@ function check(d){
    !utc(d.freeze_proof.committed_at_utc))throw Error('Missing GitHub commit proof for prospective lock');
  const seen=new Set(),races=new Set();
  d.locked_selections.forEach(x=>{
-  if(!idPattern.test(x.runner_id)||!x.runner_id.startsWith(x.race_id+'|')||
+  if(!idPattern.test(x.runner_id)||!x.runner_id.startsWith(x.race_id+'_')||
    !x.race_id.startsWith(d.meeting_date+'_')||!Number.isSafeInteger(x.rank)||x.rank<1||x.rank>15||
    !utc(x.race_at_utc)||!utc(x.locked_at_utc)||utc(x.locked_at_utc)>=utc(x.race_at_utc)||
    utc(d.freeze_proof.committed_at_utc)>utc(x.locked_at_utc)||
@@ -33,7 +33,7 @@ function check(d){
  d.official_results.forEach(x=>{
   if(!races.has(x.race_id)||outcomes.has(x.race_id)||x.status!=='OFFICIALLY_VERIFIED'||
    !/^https:\/\//.test(x.official_url||'')||!utc(x.verified_at_utc)||
-   typeof x.winner_id!=='string'||!x.winner_id.startsWith(x.race_id+'|'))
+   typeof x.winner_id!=='string'||!x.winner_id.startsWith(x.race_id+'_'))
    throw Error('Unmatched, duplicated or unverified official finish');
   outcomes.add(x.race_id);
  });
