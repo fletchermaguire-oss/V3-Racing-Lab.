@@ -398,10 +398,11 @@ function horseDetail(h){
  root=e('div','panel detail rlv5-horse-detail'),top=e('div','rlv5-horse-title'),
  identity=add(e('div','rlv5-horse-identity'),e('span','rlv5-kicker','HORSE ANALYSIS'),
   e('h3','',h.horse),
-  e('p','muted small','No. '+h.tab+' · Barrier '+(h.barrier??'—')+' · '+(h.weight_kg??'—')+'kg · '+(h.trainer||'Trainer not verified')+' / '+(h.jockey||'Jockey not verified')));
+  e('p','muted small','No. '+h.tab+' · Barrier '+(h.barrier??'—')+' · '+(h.weight_kg??'—')+'kg · '+(h.trainer||'Trainer not verified')+' / '+(String(h.jockey||'').trim()||'Rider not declared')));
  if(research)identity.append(e('span','rlv5-horse-tag','Independent research #'+research.original_rank));
  if(x&&x.rank===1)identity.append(e('span','rlv5-horse-tag','Live model leader'));
  top.append(identity);
+ if(!String(h.jockey||'').trim())root.append(e('p','rlv5-rider-alert','Rider not declared in saved field — check official declaration. This is not confirmation of a scratching.'));
  if(x)top.append(add(e('div','rlv5-horse-score'),e('strong','',pct(x.p)),
   e('span','','Uncalibrated model'),e('small','','Current race rank #'+x.rank)));
  else top.append(e('span','rlv5-horse-unavailable',C.model.statusOf(h)));
