@@ -97,7 +97,7 @@ test('Results UI uses one data file and one graph, not split historical and pros
  assert.match(html,/function render\(/);
  assert.match(html,/model_separation_pp/);
  assert.match(html,/selection_method/);
- assert.match(html,/historical model forecasts/);
+ assert.match(html,/reconstructed from saved model forecasts/);
  assert.doesNotMatch(html,/id="forward-record"/);
  assert.doesNotMatch(html,/id="reviewed-results"/);
  assert.doesNotMatch(html,/fetch\('\/results-history\.json'/);
