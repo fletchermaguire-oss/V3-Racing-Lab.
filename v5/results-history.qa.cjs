@@ -46,3 +46,59 @@ test('Results UI names retrospective denominators clearly, and never calls scrat
  assert.match(html,/not V5 forward predictions/);
  assert.match(html,/function rankedByDay/);
 });
+
+
+const publishedV5=require('./shortlists/2026-10-31-results.json');
+const savedV5=require('./shortlists/current.json');
+const strictForward=require('./prospective-record.json');
+test('31 October published research finishes are horse-and-race matched and keep all original 15 ranks',()=>{
+ const d=publishedV5,original=savedV5.entries;
+ assert.equal(d.schema,'racing-lab-31-oct-reviewed-shortlist-results/v1');
+ assert.equal(d.date,'2026-10-31');
+ assert.equal(d.status,'COMPLETE_SAVED_SHORTLIST_RESULT_AUDIT');
+ assert.equal(d.strict_forward_lock_verified,false);
+ assert.equal(d.retrospective_rank_adjustments,false);
+ assert.equal(d.results.length,15);
+ assert.deepEqual(d.results.map(x=>[x.rank,x.horse,x.meeting,x.race,x.model_pct]),
+  original.map(x=>[x.rank,x.horse,x.meeting,x.race,x.model_pct]));
+ const seenRaces=new Set(),seenNames=new Set();
+ for(const r of d.results){
+  assert.ok(Number.isInteger(r.finish_position)&&r.finish_position>=1,r.horse);
+  assert.equal(r.result_status,'FINISHED_VERIFIED',r.horse);
+  assert.equal(r.won,r.finish_position===1,r.horse);
+  assert.ok(Number.isFinite(r.model_separation_pp),r.horse);
+  assert.ok(r.source_url.startsWith('https://www.theking.zone/racing/2026-10-31/'),r.horse);
+  assert.ok(r.corroboration_url.startsWith('https://'),r.horse);
+  assert.ok(!seenNames.has(r.horse)&&!seenRaces.has(r.race_id),r.horse);
+  seenNames.add(r.horse);seenRaces.add(r.race_id);
+ }
+});
+test('31 October Top 5/10/15 published scores are 3/5, 4/10 and 4/15, with zero after-race additions',()=>{
+ const d=publishedV5;
+ assert.deepEqual(d.cohorts.map(c=>[c.top_n,c.completed,c.wins,c.top_three_finishes]),
+  [[5,5,3,3],[10,10,4,6],[15,15,4,8]]);
+ assert.deepEqual(d.results.filter(r=>r.won).map(r=>r.horse),
+  ['Regal Ambition','Western Miss','Lady Shenandoah','Hot And High']);
+ assert.equal(d.results.find(r=>r.horse==='Sheza Alibi').finish_position,11);
+ assert.equal(d.results.find(r=>r.horse==='Satono Glow').finish_position,13);
+ assert.equal(d.results.find(r=>r.horse==='Bridal Waltz').finish_position,16);
+ assert.equal(d.results.find(r=>r.horse==='Afireofgidgeecoals').finish_position,2);
+ assert.equal(d.results.find(r=>r.horse==='In Confidence').finish_position,3);
+ assert.equal(rows.length,49,'unchanged retrospective historical file');
+ assert.equal(strictForward.independent_freeze_verified,false);
+ assert.equal(strictForward.locked_selections.length,0);
+ assert.equal(strictForward.official_results.length,0);
+});
+test('results UI displays V5 published picks above historical reconstructions, without inventing forward certification',()=>{
+ const html=fs.readFileSync(path.join(__dirname,'..','results.html'),'utf8');
+ assert.ok(html.indexOf('id="reviewed-results"')>0);
+ assert.ok(html.indexOf('id="reviewed-results"')<html.indexOf('Reconstructed historical selections'));
+ assert.match(html,/v5\/shortlists\/2026-10-31-results\.json/);
+ assert.match(html,/function validateReviewed/);
+ assert.match(html,/function renderReviewed/);
+ assert.match(html,/id="reviewed5"/);
+ assert.match(html,/id="reviewed10"/);
+ assert.match(html,/id="reviewed15"/);
+ assert.match(html,/model_separation_pp/);
+ assert.match(html,/strict independent forward-lock certification remains separate/);
+});
