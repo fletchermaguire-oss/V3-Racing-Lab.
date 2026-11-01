@@ -1,209 +1,195 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Racing Lab | Results & History</title>
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Racing Lab | Complete Results Record</title>
 <style>
-:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#080e16;color:#edf5f6;font-family:system-ui,-apple-system,sans-serif}main{max-width:1100px;margin:auto;padding:20px 15px 80px}a{color:#73e8bc}header{display:flex;justify-content:space-between;gap:12px;align-items:center}h1{font-size:29px;margin:30px 0 5px}p,.muted{color:#9bb0bd}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:20px 0}.card,.panel{background:#13232e;border:1px solid #30424d;border-radius:15px;padding:15px}.label{color:#9bb0bd;font-size:12px}.value{font-size:clamp(23px,5vw,37px);font-weight:800;margin-top:6px}.green{color:#78e9b8}.panel{margin:15px 0}h2{font-size:17px;margin:0 0 14px}canvas{display:block;width:100%;height:290px}.controls{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0}select{background:#1b303e;color:white;border:1px solid #405767;border-radius:9px;padding:11px;font:inherit}table{border-collapse:collapse;width:100%;font-size:13px}th,td{text-align:left;padding:11px 9px;border-bottom:1px solid #30424d}th{color:#9bb0bd}.tablewrap{overflow-x:auto}.good{color:#78e9b8;font-weight:700}.bad{color:#ffaaa5}.wait{color:#ffd17c}small{color:#9bb0bd}@media(max-width:550px){main{padding:16px 10px 65px}.card{padding:10px}.value{font-size:25px}canvas{height:260px}}
-.resultbar{height:7px;margin:11px 0 0;border-radius:8px;background:#263d48;overflow:hidden}
-.resultbar>span{display:block;height:100%;width:0;background:#72e2b0;border-radius:8px;transition:width .2s ease}
-#reviewed-results .value{font-variant-numeric:tabular-nums}
-#reviewed-results .tablewrap{margin-top:8px}
-#reviewed-results th:nth-child(n+4),#reviewed-results td:nth-child(n+4){text-align:right}
-#reviewed-results td{white-space:nowrap}
-#reviewed-results .result-name{font-weight:700}
-#reviewed-results .result-name small{display:block;font-weight:400}
-#reviewed-results .finish-win{color:#75e9b6;font-weight:800}
-#reviewed-results .finish-place{color:#c1dbee;font-weight:750}
-#reviewed-results .finish-other{color:#ffbeb1}
-#reviewed-results .negative-margin{color:#f1bb9b}
-@media(max-width:550px){#reviewed-results th,#reviewed-results td{padding:9px 7px;font-size:11px}}
-
-</style></head><body><main>
-<header><strong class="green">◈ RACING LAB</strong><a href="/">← Back to Racing Lab</a></header>
-<h1>Results & History <small>Forward tracking + retrospective audit</small></h1>
-<p>Two distinct records: independently locked selections from race-day forward, and older retrospective model reconstructions. Do not combine their hit rates.</p>
-<section class="panel" id="forward-record" aria-live="polite">
-<h2>V5 prospective record — independently locked pre-race picks only</h2>
-<p class="muted" id="forwardStatus">Checking whether any selections have been independently frozen before racing…</p>
-<div class="tablewrap"><table><thead><tr><th>List</th><th>Locked</th><th>Finished</th><th>Won</th><th>Verified strike rate</th></tr></thead><tbody id="forwardRows"></tbody></table></div>
-<small>Strict forward-only record. A GitHub pre-race commit and runner-matched official finish are required; synthetic, retrospective or unverified outcomes never count.</small>
+:root{color-scheme:dark;--bg:#080f17;--surface:#11212a;--line:#2d424a;--ink:#eaf4ef;--muted:#a3b7c0;--mint:#76e7b3;--warm:#ffd08f}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,sans-serif;line-height:1.45}
+main{max-width:1170px;padding:24px 19px 88px;margin:auto}header{display:flex;justify-content:space-between;gap:16px;align-items:center;padding-bottom:20px;border-bottom:1px solid var(--line)}
+a{color:var(--mint);text-underline-offset:3px}header a{font-size:13px}h1{font-size:clamp(26px,4vw,39px);letter-spacing:-.03em;margin:21px 0 7px}
+h2{font-size:17px;margin:0 0 11px}.eyebrow{color:var(--mint);font-size:12px;letter-spacing:.13em;text-transform:uppercase;font-weight:760}
+.subtle,.muted,small{color:var(--muted)}p{margin:6px 0 12px}
+.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:23px 0}
+.card,.panel{background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:17px}
+.card.primary{background:#132c2b;border-color:#35765f}.label{font-size:12px;font-weight:670;color:var(--muted);letter-spacing:.01em}
+.number{font-size:clamp(26px,3.4vw,39px);font-variant-numeric:tabular-nums;font-weight:800;letter-spacing:-.04em;margin:7px 0 0}
+.number.mint{color:var(--mint)}.meta{font-size:12px;color:var(--muted)}.rail{height:7px;margin-top:12px;background:#263f43;border-radius:8px;overflow:hidden}
+.rail span{display:block;height:100%;background:var(--mint);border-radius:8px;width:0;transition:width .2s ease}
+.panel{margin:14px 0}.statstrip{display:flex;flex-wrap:wrap;gap:12px 25px;align-items:center;padding:14px 16px;background:#0e1e25;border-radius:12px;border:1px solid var(--line);margin:18px 0}
+.statstrip strong{color:var(--mint);font-variant-numeric:tabular-nums}
+.linechart{display:block;width:100%;height:270px}
+.filters{display:flex;flex-wrap:wrap;gap:12px;align-items:end;margin:15px 0 7px}
+.filters label{font-size:12px;color:var(--muted);display:grid;gap:6px;font-weight:600}
+.filters select{font:inherit;font-size:14px;background:#1b3038;color:var(--ink);border:1px solid #48616c;border-radius:9px;padding:10px 12px;min-width:142px}
+table{border-collapse:collapse;width:100%;font-size:13px}th,td{text-align:left;border-bottom:1px solid var(--line);padding:11px 9px;white-space:nowrap}
+th{font-size:11px;letter-spacing:.035em;text-transform:uppercase;color:var(--muted);font-weight:730}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}.tablewrap{overflow-x:auto}
+td .source{font-size:12px;color:var(--mint)}.win{color:var(--mint);font-weight:750}.placed{color:#bad7e9}.loss{color:#f0b7ae}.scratch{color:var(--warm)}
+.method{font-size:11px;color:var(--muted);display:block}.hint{padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+#recordStatus{font-size:12px;color:var(--muted)}#error{color:#ffbf9f}
+@media(max-width:750px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.card,.panel{padding:13px}main{padding:16px 11px 70px}.number{font-size:28px}.filters select{min-width:130px}.linechart{height:230px}}
+</style></head>
+<body><main>
+<header><strong style="color:#76e7b3;letter-spacing:.06em">◈ RACING LAB</strong><a href="/">← Back to Racing Lab</a></header>
+<p class="eyebrow">V5 · Results &amp; History</p>
+<h1>One complete results record</h1>
+<p class="subtle">Every recorded selection, every Saturday, one cumulative win rate. Original predictions and finishing positions remain unchanged.</p>
+<div class="statstrip"><span id="headline">Loading complete results record…</span><span id="scratchCount"></span></div>
+<section class="cards" aria-label="Cumulative result statistics">
+<div class="card primary"><div class="label">Overall · All selections</div><div class="number mint" id="allCount">—</div><div class="meta" id="allRate">Checking results…</div><div class="rail"><span id="allBar"></span></div></div>
+<div class="card"><div class="label">Top 5 · each Saturday</div><div class="number" id="top5Count">—</div><div class="meta" id="top5Rate">Checking results…</div><div class="rail"><span id="top5Bar"></span></div></div>
+<div class="card"><div class="label">Top 10 · each Saturday</div><div class="number" id="top10Count">—</div><div class="meta" id="top10Rate">Checking results…</div><div class="rail"><span id="top10Bar"></span></div></div>
+<div class="card"><div class="label">Top 15 · each Saturday</div><div class="number" id="top15Count">—</div><div class="meta" id="top15Rate">Checking results…</div><div class="rail"><span id="top15Bar"></span></div></div>
 </section>
-<section class="panel" id="reviewed-results" aria-live="polite">
-<h2>31 October V5 — published researched Top 5/10/15 results</h2>
-<p class="muted">The originally ranked selections, matched horse by horse to the race results. Top 5, Top 10 and Top 15 overlap. The original grades and pre-race V5 model estimates are unchanged.</p>
-<div class="cards" id="reviewedScorecards">
- <div class="card"><div class="label">Top 5 wins / finished</div><div class="value green" id="reviewed5">—</div><small id="reviewed5Rate">Awaiting audited finishes</small><div class="resultbar"><span id="reviewed5Bar"></span></div></div>
- <div class="card"><div class="label">Top 10 wins / finished</div><div class="value green" id="reviewed10">—</div><small id="reviewed10Rate">Awaiting audited finishes</small><div class="resultbar"><span id="reviewed10Bar"></span></div></div>
- <div class="card"><div class="label">Top 15 wins / finished</div><div class="value green" id="reviewed15">—</div><small id="reviewed15Rate">Awaiting audited finishes</small><div class="resultbar"><span id="reviewed15Bar"></span></div></div>
-</div>
-<p class="muted" id="reviewedStatus">Matching original V5 research ranks to independent race results…</p>
-<div class="controls"><label class="muted" for="reviewedFilter">Show published selections</label>
-<select id="reviewedFilter"><option value="5">Original Top 5</option><option value="10" selected>Original Top 10</option><option value="15">All 15, including review candidates</option></select></div>
-<div class="tablewrap"><table><thead><tr><th>Rank</th><th>Horse</th><th>Meeting / race</th><th>Pre-race model</th><th>Separation</th><th>Finish</th></tr></thead><tbody id="reviewedRows"></tbody></table></div>
-<small>Original selections and model percentages are not retroactively corrected for results. Separation is signed percentage points against the strongest model rival, not a probability of winning. <a id="reviewedCommit" href="https://github.com/fletchermaguire-oss/V3-Racing-Lab." target="_blank" rel="noopener">Published GitHub snapshot</a>. This result audit is separate from the stricter independently certified forward-lock ledger above; it is not combined with older retrospective model rankings below.</small>
-</section>
-<h2>Reconstructed historical selections — not a live win record</h2>
-<p class="muted">Older V3/V4 model-ranked race leaders. These are historical reconstructions, not an independently timestamped pre-race shortlist. They must not be combined with V5's future prospective record.</p>
-<section class="panel" id="historic-overview"><h2>Two different historical groups</h2><p class="muted">Top 10 means the ten highest saved model percentages <em>on each historical date</em>, reconstructed after the event. All race leaders includes every recorded started race.</p><div class="cards"><div class="card"><div class="label">Reconstructed Top 10</div><div class="value green" id="historicalTop10">—</div><small id="historicalTop10Rate">Waiting for verified results</small></div><div class="card"><div class="label">All model race leaders</div><div class="value" id="historicalAll">—</div><small id="historicalAllRate">Waiting for verified results</small></div><div class="card"><div class="label">Verified scratchings</div><div class="value" id="historicalScratch">—</div><small>Excluded from win/loss denominator</small></div></div><small id="historicalCoverage">Historical results loading…</small></section>
-<div class="cards"><div class="card"><div class="label">Finished in current filter</div><div class="value" id="races">—</div></div><div class="card"><div class="label">Wins in current filter</div><div class="value green" id="wins">—</div></div><div class="card"><div class="label">Strike rate in current filter</div><div class="value" id="rate">—</div></div></div>
-<section class="panel"><h2>Winning selections over time</h2><div class="controls">
-<select id="tierFilter"><option value="10">Top 10 — reconstructed model ranking</option><option value="5">Top 5</option><option value="15">Top 15</option><option value="all">All Races</option></select>
-<select id="dateFilter"><option value="all">All Saturdays</option></select><select id="meetingFilter"><option value="all">All meetings</option></select>
-</div><canvas id="graph"></canvas><small>Historical Top 5/10/15 are reconstructed from saved model percentages and are not evidence of a frozen pre-race shortlist. All 19 selections for 24 October now have horse-matched finishing positions; the two verified 17 October scratchings are excluded. Each win increases the line by one. Results are not V5 prospective calibration.</small></section>
 <section class="panel">
-<h2>Selection performance comparison</h2>
-<p class="muted">Retrospective comparison: completed runner-matched results, not a genuine pre-race frozen record. Scratchings are excluded; winners are matched to the exact runner and race.</p>
-<div class="tablewrap"><table><thead><tr><th>Group</th><th>Wins</th><th>Completed</th><th>Strike rate</th></tr></thead><tbody id="comparisonRows"></tbody></table></div>
+<h2>Record across all Saturdays</h2>
+<div id="dateSummary" class="muted" style="font-size:13px">Loading per-date results…</div>
 </section>
-<section class="panel"><h2>Model confidence audit</h2>
-<p class="muted">Compare the average predicted win chance with the observed strike rate. Small samples are noisy and historical forecasts are retrospective.</p>
-<div id="calibration"></div>
+<section class="panel" aria-label="Unified race-by-race result history">
+<h2>Results log &amp; cumulative wins</h2>
+<p class="muted">Choose a group to see one running record—not separate pages or competing totals. The graph and table respond to the same filters.</p>
+<div class="filters">
+<label>Selection group<select id="tierFilter"><option value="all" selected>All recorded selections</option><option value="5">Top 5 per Saturday</option><option value="10">Top 10 per Saturday</option><option value="15">Top 15 per Saturday</option></select></label>
+<label>Date<select id="dateFilter"><option value="all">All Saturdays</option></select></label>
+<label>Meeting<select id="meetingFilter"><option value="all">All meetings</option></select></label>
+<label>Finish<select id="resultFilter"><option value="all">All results</option><option value="win">Wins only</option><option value="nonwin">Other finishes</option><option value="scratch">Scratchings</option></select></label>
+</div>
+<div id="currentStats" style="color:#76e7b3;font-weight:700;margin:16px 0 5px">Loading…</div>
+<canvas id="graph" class="linechart" role="img" aria-label="Cumulative wins for selected result rows"></canvas>
+<div class="tablewrap"><table><thead><tr><th>Rank</th><th>Saturday</th><th>Meeting · Race</th><th>Original selection / source</th><th class="num">Model %</th><th class="num">Separation</th><th class="num">Finish</th></tr></thead><tbody id="resultsRows"></tbody></table></div>
+<p id="recordStatus"></p>
 </section>
-<section class="panel"><h2>Race-by-race selections</h2><div class="tablewrap"><table><thead><tr><th>Date</th><th>Meeting</th><th>Race</th><th>Our selection</th><th>Result</th></tr></thead><tbody id="rows"></tbody></table></div></section><p class="muted" id="status">Loading saved results…</p>
-</main><script src="/v5/forward.js"></script><script>
-let records=[];
-// This is a sourced published-shortlist outcome audit, not the independently
-// freeze-verified forward ledger above or the older retrospective ranking below.
-let reviewedLedger=null;
-const reviewedEl=id=>document.getElementById(id);
-function reviewOrdinal(value){
- const n=Number(value),suffix=n%100>=11&&n%100<=13?'th':n%10===1?'st':n%10===2?'nd':n%10===3?'rd':'th';
- return n+suffix;
-}
-function validateReviewed(d){
- if(!d||d.schema!=='racing-lab-31-oct-reviewed-shortlist-results/v1'||d.date!=='2026-10-31'||
-    d.status!=='COMPLETE_SAVED_SHORTLIST_RESULT_AUDIT'||d.strict_forward_lock_verified!==false||
-    !Array.isArray(d.results)||d.results.length!==15)throw Error('Unrecognized saved shortlist results');
- const seen=new Set(),races=new Set();
- d.results.forEach((r,i)=>{
-  if(r.rank!==i+1||!r.horse||!['RANDWICK','FLEMINGTON','ASCOT'].includes(r.meeting)||
-   !r.race_id.startsWith(d.date+'_'+r.meeting+'_R')||seen.has(r.horse)||races.has(r.race_id)||
-   !Number.isInteger(r.finish_position)||r.finish_position<1||
-   r.result_status!=='FINISHED_VERIFIED'||r.won!==(r.finish_position===1)||
-   !Number.isFinite(r.model_pct)||!Number.isFinite(r.model_separation_pp)||
-   !/^https:\/\//.test(r.source_url))
-   throw Error('Incomplete, duplicated or unverified horse result at rank '+(i+1));
-  seen.add(r.horse);races.add(r.race_id);
- });
- [5,10,15].forEach(n=>{
-  const cohort=d.cohorts&&d.cohorts.find(x=>x.top_n===n);
-  const entries=d.results.filter(x=>x.rank<=n),wins=entries.filter(x=>x.finish_position===1).length;
-  if(!cohort||cohort.completed!==n||cohort.wins!==wins||cohort.top_three_finishes!==entries.filter(x=>x.finish_position<=3).length)
-   throw Error('Saved Top '+n+' results mismatch');
- });
+<section class="panel"><h2>How this cumulative record is calculated</h2>
+<p class="hint" id="recordMethod">Earlier dates may use a different selection method; sources and rankings are preserved.</p>
+<p class="hint">Top 5, Top 10 and Top 15 use each Saturday's recorded ranking and overlap; their counts must not be added together. Scratched runners never count as wins or losses. The older October 17/24 rankings were reconstructed from saved model forecasts, while October 31 uses the published original reviewed shortlist. This single combined outcome ledger is <strong>not</strong> a uniformly pre-race-certified, out-of-sample model accuracy statistic.</p>
+<p class="hint">Underlying source archives remain available for traceability; the live results page uses one file: <code>results-record.json</code>.</p>
+</section><p id="error" role="alert"></p>
+</main><script>'use strict';
+const $=id=>document.getElementById(id);
+let record=null;
+const defs=[['all','All selections'],['top5','Top 5 per date'],['top10','Top 10 per date'],['top15','Top 15 per date']];
+const isFinish=r=>r.status==='FINISHED_VERIFIED'&&!r.scratched&&Number.isInteger(r.finish_position)&&r.finish_position>0;
+const summarize=a=>{
+ const finished=a.filter(isFinish),wins=finished.filter(r=>r.finish_position===1).length;
+ return {entries:a.length,completed:finished.length,wins,scratched:a.filter(r=>r.scratched).length,
+  topThree:finished.filter(r=>r.finish_position<=3).length,rate:finished.length?100*wins/finished.length:null};
+};
+function check(d){
+ if(!d||d.schema!=='racing-lab-unified-results/v1'||!Array.isArray(d.records)||d.records.length!==64)
+  throw Error('Unified historical results file is invalid or unavailable.');
+ const seen=new Set(),dateRanks=new Set();
+ for(const r of d.records){
+  const id=[r.date,r.meeting,r.race].join('|'),rank=[r.date,r.rank].join('|');
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(r.date)||!r.horse||!Number.isInteger(r.rank)||r.rank<1||
+     !Number.isInteger(r.race)||r.race<1||seen.has(id)||dateRanks.has(rank)||
+     !['HISTORICAL_MODEL_RECONSTRUCTION','PUBLISHED_REVIEWED_SHORTLIST'].includes(r.selection_method)||
+     !/^https:\/\//.test(r.source_url)||!Number.isFinite(r.model_pct)||
+     (!r.scratched&&!isFinish(r))||(r.scratched&&r.finish_position!==null))
+   throw Error('Invalid individual finishing record for '+(r.horse||id));
+  seen.add(id);dateRanks.add(rank);
+ }
+ for(const [key,limit] of [['all',null],['top5',5],['top10',10],['top15',15]]){
+  const rows=limit===null?d.records:d.records.filter(r=>r.rank<=limit),actual=summarize(rows);
+  const saved=d.metrics[key];
+  if(!saved||saved.finished!==actual.completed||saved.wins!==actual.wins||
+    saved.scratched!==actual.scratched||saved.entries!==actual.entries)
+   throw Error('Combined strike-rate audit failed for '+key);
+ }
  return d;
 }
-function renderReviewed(d){
- for(const n of [5,10,15]){
-  const c=d.cohorts.find(x=>x.top_n===n);
-  reviewedEl('reviewed'+n).textContent=c.wins+'/'+c.completed;
-  reviewedEl('reviewed'+n+'Rate').textContent=c.win_rate_pct.toFixed(1)+'% win rate · '+c.top_three_finishes+' top-three finishes';
-  reviewedEl('reviewed'+n+'Bar').style.width=(100*c.wins/c.completed).toFixed(2)+'%';
+function prettyDate(x){return new Date(x+'T12:00:00Z').toLocaleDateString('en-AU',{day:'numeric',month:'short',year:'numeric',timeZone:'UTC'});}
+function rankText(n){return Number(n).toFixed(0);}
+function pct(x){return x===null||x===undefined?'—':Number(x).toFixed(1)+'%';}
+function place(r){
+ if(r.scratched)return ['SCRATCHED','scratch'];
+ const n=r.finish_position,suffix=n%100>=11&&n%100<=13?'th':n%10===1?'st':n%10===2?'nd':n%10===3?'rd':'th';
+ return [n+suffix,n===1?'win':n<=3?'placed':'loss'];
+}
+function card(k){
+ const subset=k==='all'?record.records:record.records.filter(r=>r.rank<=Number(k.slice(3)));
+ return summarize(subset);
+}
+function fillCards(){
+ for(const [key] of defs){
+  const m=card(key);
+  $(key+'Count').textContent=m.wins+'/'+m.completed;
+  $(key+'Rate').textContent=pct(m.rate)+' win rate · '+m.topThree+' top-three finishes';
+  $(key+'Bar').style.width=(m.rate===null?0:m.rate)+'%';
  }
- reviewedEl('reviewedCommit').href=d.publication_proof_url;
- const n=Number(reviewedEl('reviewedFilter').value),root=reviewedEl('reviewedRows');
- root.replaceChildren();
- d.results.filter(r=>r.rank<=n).forEach(r=>{
-  const tr=document.createElement('tr'),cells=[
-   String(r.rank),r.horse,r.meeting+' R'+r.race,
-   r.model_pct.toFixed(2)+'%',
-   (r.model_separation_pp>=0?'+':'')+r.model_separation_pp.toFixed(2)+'pp',
-   reviewOrdinal(r.finish_position)
-  ];
-  cells.forEach((value,i)=>{
-   const td=document.createElement('td');
-   if(i===1){
-    const a=document.createElement('a');a.href=r.source_url;a.target='_blank';a.rel='noopener';
-    a.textContent=value;a.className='result-name';td.append(a);
-   }else td.textContent=value;
-   if(i===4&&r.model_separation_pp<0)td.className='negative-margin';
-   if(i===5)td.className=r.finish_position===1?'finish-win':r.finish_position<=3?'finish-place':'finish-other';
-   tr.append(td);
-  });root.append(tr);
- });
- reviewedEl('reviewedStatus').textContent=d.results.length+' of 15 original researched selections matched to named finishers. '+
-  'Four winners: Regal Ambition, Western Miss, Lady Shenandoah, Hot And High. '+
-  'Published rankings kept unchanged; strict independent forward-lock certification remains separate.';
+ const total=card('all');
+ $('headline').textContent=total.wins+' wins from '+total.completed+' finished · '+pct(total.rate)+' total';
+ $('scratchCount').textContent=total.scratched+' scratchings excluded';
+ const days=record.metrics.by_date||[];
+ $('dateSummary').textContent=days.map(x=>prettyDate(x.date)+': '+x.wins+'/'+x.finished).join('  ·  ');
 }
-fetch('/v5/shortlists/2026-10-31-results.json',{cache:'no-store'})
- .then(r=>{if(!r.ok)throw Error('Published shortlist result file unavailable');return r.json();})
- .then(json=>{reviewedLedger=validateReviewed(json);renderReviewed(reviewedLedger);
-  reviewedEl('reviewedFilter').onchange=()=>renderReviewed(reviewedLedger);})
- .catch(err=>{reviewedEl('reviewedStatus').textContent='Unable to verify published shortlist outcomes: '+err.message;});
-fetch('/v5/prospective-record.json',{cache:'no-store'}).then(async r=>{
- if(!r.ok)throw Error('Prospective registry unavailable');
- const report=window.RacingLabForward.summarize(await r.json());
- document.getElementById('forwardStatus').textContent=report.warning;
- const tbody=document.getElementById('forwardRows');
- report.groups.forEach(row=>{
-  const tr=document.createElement('tr');
-  ['Top '+row.tier,row.frozen,row.completed,row.wins,row.win_rate===null?'—':row.win_rate.toFixed(1)+'%'].forEach(value=>{
-   const td=document.createElement('td');td.textContent=String(value);tr.append(td);
-  });tbody.append(tr);
- });
-}).catch(err=>{
- document.getElementById('forwardStatus').textContent='Forward record is unavailable or invalid; no prospective win percentage can be claimed. '+err.message;
-});const $=id=>document.getElementById(id);
-function verified(r){return r.verified===true&&r.scratched!==true&&r.result_status!=='SCRATCHED'&&r.finish_position!==null&&r.finish_position!==undefined&&(r.finish_position==='5+'||(Number.isInteger(Number(r.finish_position))&&Number(r.finish_position)>0));}
-function rankedByDay(tier) {
- if(tier==='all') return records.slice();
- const days=[...new Set(records.map(r=>r.date))];
- return days.flatMap(date=>records.filter(r=>r.date===date)
-  .sort((a,b)=>Number(b.predicted_win_pct||0)-Number(a.predicted_win_pct||0)||a.meeting.localeCompare(b.meeting)||Number(a.race)-Number(b.race))
-  .slice(0,Number(tier)));
+function selectRows(){
+ const n=$('tierFilter').value==='all'?Infinity:Number($('tierFilter').value);
+ const d=$('dateFilter').value,m=$('meetingFilter').value,status=$('resultFilter').value;
+ return record.records.filter(r=>r.rank<=n&&(d==='all'||r.date===d)&&
+   (m==='all'||r.meeting===m)&&(status==='all'||status==='win'&&isFinish(r)&&r.finish_position===1||
+   status==='nonwin'&&isFinish(r)&&r.finish_position!==1||status==='scratch'&&r.scratched));
 }
-function renderComparison(){
- const date=$('dateFilter').value, meeting=$('meetingFilter').value;
- const scope=rs=>rs.filter(r=>(date==='all'||r.date===date)&&(meeting==='all'||r.meeting===meeting));
- $('comparisonRows').innerHTML=['5','10','15','all'].map(tier=>{
-  const rs=scope(rankedByDay(tier)).filter(verified);
-  const wins=rs.filter(r=>Number(r.finish_position)===1).length;
-  return '<tr><td>'+ (tier==='all'?'All races':'Top '+tier) +'</td><td>'+wins+'</td><td>'+rs.length+'</td><td>'+(rs.length?(100*wins/rs.length).toFixed(1)+'%':'—')+'</td></tr>';
- }).join('');
- const rs=scope(rankedByDay($('tierFilter').value)).filter(verified).filter(r=>Number.isFinite(Number(r.predicted_win_pct)));
- const expected=rs.reduce((n,r)=>n+Number(r.predicted_win_pct)/100,0);
- const observed=rs.filter(r=>Number(r.finish_position)===1).length;
- const avg=rs.length?100*expected/rs.length:0;
- $('calibration').textContent=rs.length?'Average forecast: '+avg.toFixed(1)+'% · Actual win rate: '+(100*observed/rs.length).toFixed(1)+'% · '+rs.length+' completed selections':'No completed selections in this filter.';
+function populate(){
+ const ds=[...new Set(record.records.map(r=>r.date))].sort();
+ ds.forEach(date=>{const e=new Option(prettyDate(date),date);$('dateFilter').add(e);});
+ [...new Set(record.records.map(r=>r.meeting))].sort().forEach(m=>$('meetingFilter').add(new Option(m,m)));
 }
-function filtered(){
- const selected=rankedByDay($('tierFilter').value);
- return selected.filter(r=>($('dateFilter').value==='all'||r.date===$('dateFilter').value)&&($('meetingFilter').value==='all'||r.meeting===$('meetingFilter').value));
-}
-function drawGraph(data){
- const canvas=$('graph'),width=canvas.clientWidth,height=canvas.clientHeight,dpr=window.devicePixelRatio||1;
- canvas.width=width*dpr;canvas.height=height*dpr;const ctx=canvas.getContext('2d');ctx.scale(dpr,dpr);ctx.clearRect(0,0,width,height);
- const pad={left:36,right:12,top:20,bottom:35},W=width-pad.left-pad.right,H=height-pad.top-pad.bottom;
- const wins=data.reduce((n,r)=>n+(Number(r.finish_position)===1?1:0),0),maxY=Math.max(1,wins),x=n=>pad.left+(n/Math.max(1,data.length))*W,y=n=>pad.top+H-(n/maxY)*H;
- ctx.font='11px system-ui';ctx.strokeStyle='#334652';ctx.fillStyle='#9bb0bd';ctx.lineWidth=1;
- for(let i=0;i<=4;i++){const value=maxY*i/4,yy=y(value);ctx.beginPath();ctx.moveTo(pad.left,yy);ctx.lineTo(width-pad.right,yy);ctx.stroke();ctx.fillText(String(Math.round(value)),5,yy+4);}
- ctx.fillText('0',pad.left,height-12);ctx.fillText(String(data.length)+' races',Math.max(pad.left,width-76),height-12);
- ctx.strokeStyle='#78e9b8';ctx.lineWidth=3;ctx.lineJoin='round';ctx.beginPath();ctx.moveTo(x(0),y(0));let count=0;
- data.forEach((r,i)=>{if(Number(r.finish_position)===1)count++;ctx.lineTo(x(i+1),y(count));});ctx.stroke();ctx.fillStyle='#78e9b8';ctx.beginPath();ctx.arc(x(data.length),y(count),4,0,Math.PI*2);ctx.fill();
+function plot(rows){
+ const canvas=$('graph'),width=Math.max(250,canvas.clientWidth),height=canvas.clientHeight||250,
+   dpr=window.devicePixelRatio||1;
+ canvas.width=Math.ceil(width*dpr);canvas.height=Math.ceil(height*dpr);
+ const ctx=canvas.getContext('2d');if(!ctx)return;
+ ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,width,height);
+ const pad={l:41,r:14,t:18,b:32},W=width-pad.l-pad.r,H=height-pad.t-pad.b;
+ const done=rows.filter(isFinish),wins=done.filter(r=>r.finish_position===1).length,
+   maxY=Math.max(1,wins),X=i=>pad.l+(i/Math.max(1,done.length))*W,Y=i=>pad.t+H-(i/maxY)*H;
+ ctx.strokeStyle='#34505a';ctx.fillStyle='#a3b7c0';ctx.font='11px system-ui';
+ for(let i=0;i<=4;i++){
+  const n=maxY*i/4,y=Y(n);ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(width-pad.r,y);ctx.stroke();
+  ctx.fillText(String(Math.round(n)),8,y+4);
+ }
+ ctx.fillText('0',pad.l,height-9);ctx.fillText(String(done.length)+' finished',Math.max(pad.l,width-90),height-9);
+ ctx.beginPath();ctx.strokeStyle='#76e7b3';ctx.lineWidth=3;ctx.lineJoin='round';ctx.moveTo(X(0),Y(0));
+ let cur=0;done.forEach((r,i)=>{if(r.finish_position===1)cur++;ctx.lineTo(X(i+1),Y(cur));});ctx.stroke();
+ ctx.fillStyle='#76e7b3';ctx.beginPath();ctx.arc(X(done.length),Y(cur),4,0,2*Math.PI);ctx.fill();
 }
 function render(){
- const historicalTop=rankedByDay('10').filter(verified),allFinished=records.filter(verified);
- const countedWins=rows=>rows.filter(r=>Number(r.finish_position)===1).length;
- const topWins=countedWins(historicalTop),totalWins=countedWins(allFinished);
- const pctText=(win,n)=>n?(100*win/n).toFixed(1)+'%':'—';
- const scratched=records.filter(r=>r.scratched===true||r.result_status==='SCRATCHED');
- $('historicalTop10').textContent=topWins+'/'+historicalTop.length;
- $('historicalTop10Rate').textContent=pctText(topWins,historicalTop.length)+' · retrospectively ranked, not pre-race locked';
- $('historicalAll').textContent=totalWins+'/'+allFinished.length;
- $('historicalAllRate').textContent=pctText(totalWins,allFinished.length)+' · all finished race leaders';
- $('historicalScratch').textContent=String(scratched.length);
- $('historicalCoverage').textContent='Coverage: '+records.length+' archived selections across '+new Set(records.map(r=>r.date)).size+' Saturdays · '+allFinished.length+' finished · '+scratched.length+' scratched · '+(records.length-allFinished.length-scratched.length)+' awaiting verification. These records are not V5 forward predictions.';
- const all=filtered().sort((a,b)=>a.date.localeCompare(b.date)||a.meeting.localeCompare(b.meeting)||Number(a.race)-Number(b.race));
- const completed=all.filter(verified),wins=completed.filter(r=>Number(r.finish_position)===1).length;
- $('races').textContent=completed.length;$('wins').textContent=wins;$('rate').textContent=completed.length?(wins/completed.length*100).toFixed(1)+'%':'—';drawGraph(completed);renderComparison();
- $('rows').innerHTML=all.map(r=>{const done=verified(r),won=done&&Number(r.finish_position)===1,scratched=r.scratched===true||r.result_status==='SCRATCHED',label=scratched?'SCRATCHED · did not start':done?(won?'WIN':'Lost · '+r.finish_position):'Pending / unverified',cls=scratched?'wait':done?(won?'good':'bad'):'wait',link=r.result_source?'<a href="'+r.result_source+'" target="_blank" rel="noopener">Source</a>':'';
- return '<tr><td>'+r.date+'</td><td>'+r.meeting+'</td><td>R'+r.race+'</td><td>'+r.horse+'</td><td class="'+cls+'">'+label+' '+link+'</td></tr>';}).join('');
- const noStarts=all.filter(r=>r.scratched===true||r.result_status==='SCRATCHED').length;
- $('status').textContent='Showing '+completed.length+' finished selections, '+noStarts+' scratched (excluded), and '+(all.length-completed.length-noStarts)+' pending or unverified entries in the selected historical group.';
+ if(!record)return;
+ const rows=selectRows(),m=summarize(rows),body=$('resultsRows');
+ body.replaceChildren();
+ for(const r of rows){
+  const tr=document.createElement('tr'),flag=place(r);
+  const columns=[r.rank,prettyDate(r.date),r.meeting+' R'+r.race,r.horse,
+   r.model_pct.toFixed(2)+'%',r.model_separation_pp===null?'—':
+     (r.model_separation_pp>=0?'+':'')+r.model_separation_pp.toFixed(2)+'pp',flag[0]];
+  columns.forEach((item,i)=>{
+   const td=document.createElement('td');
+   if([0,4,5,6].includes(i))td.classList.add('num');
+   if(i===3){
+    const a=document.createElement('a');a.href=r.source_url;a.target='_blank';a.rel='noopener';a.textContent=String(item);
+    td.append(a);
+    const detail=document.createElement('span');detail.className='method';
+    detail.textContent=r.selection_method==='PUBLISHED_REVIEWED_SHORTLIST'?'Published reviewed V5 shortlist':'Historical model reconstruction';
+    td.append(detail);
+   }else td.textContent=String(item);
+   if(i===6)td.classList.add(flag[1]);
+   tr.append(td);
+  });
+  body.append(tr);
+ }
+ $('currentStats').textContent=m.wins+'/'+m.completed+' wins · '+pct(m.rate)+' · '+m.scratched+' scratched · '+m.topThree+' top-three finishes';
+ $('recordStatus').textContent='Showing '+rows.length+' rows across '+new Set(rows.map(r=>r.date)).size+' Saturday(s), in the single results ledger.';
+ plot(rows);
 }
-fetch('/results-history.json?cache='+Date.now()).then(r=>{if(!r.ok)throw Error('Results file unavailable');return r.json()}).then(data=>{
- records=data.records||[];
- // Never manufacture completion from race-order guesses. Only per-runner verified records count.
- [...new Set(records.map(r=>r.date))].sort().forEach(v=>$('dateFilter').add(new Option(v,v)));
- [...new Set(records.map(r=>r.meeting))].sort().forEach(v=>$('meetingFilter').add(new Option(v,v)));
- $('tierFilter').onchange=render;$('dateFilter').onchange=render;$('meetingFilter').onchange=render;window.onresize=render;render();
-}).catch(err=>$('status').textContent='Unable to load results: '+err.message);
+async function load(){
+ try{
+  const resp=await fetch('/results-record.json',{cache:'no-store'});
+  if(!resp.ok)throw Error('HTTP '+resp.status);
+  record=check(await resp.json());populate();fillCards();render();
+  ['tierFilter','dateFilter','meetingFilter','resultFilter'].forEach(id=>$(id).addEventListener('change',render));
+  window.addEventListener('resize',render);
+  $('recordMethod').textContent=record.reporting_note;
+ }catch(e){$('error').textContent='Results could not be validated: '+e.message;}
+}
+load();
 </script></body></html>

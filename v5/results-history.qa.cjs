@@ -35,70 +35,74 @@ test('the nine confirmed 24 October winners match horse and venue; two 17 Oct sc
  assert.deepEqual(rows.filter(r=>r.scratched).map(r=>r.horse).sort(),['Gold Medallist','Juja Kibo']);
  assert.ok(rows.filter(r=>r.scratched).every(r=>r.finish_position===null&&!r.verified));
 });
-test('Results UI names retrospective denominators clearly, and never calls scratchings pending or losses',()=>{
- const html=fs.readFileSync(path.join(__dirname,'..','results.html'),'utf8');
- assert.match(html,/Reconstructed Top 10/);
- assert.match(html,/All model race leaders/);
- assert.match(html,/historicalTop10/);
- assert.match(html,/historicalAll/);
- assert.match(html,/SCRATCHED · did not start/);
- assert.match(html,/r\.scratched!==true/);
- assert.match(html,/not V5 forward predictions/);
- assert.match(html,/function rankedByDay/);
-});
 
-
-const publishedV5=require('./shortlists/2026-10-31-results.json');
-const savedV5=require('./shortlists/current.json');
-const strictForward=require('./prospective-record.json');
-test('31 October published research finishes are horse-and-race matched and keep all original 15 ranks',()=>{
- const d=publishedV5,original=savedV5.entries;
- assert.equal(d.schema,'racing-lab-31-oct-reviewed-shortlist-results/v1');
- assert.equal(d.date,'2026-10-31');
- assert.equal(d.status,'COMPLETE_SAVED_SHORTLIST_RESULT_AUDIT');
- assert.equal(d.strict_forward_lock_verified,false);
- assert.equal(d.retrospective_rank_adjustments,false);
- assert.equal(d.results.length,15);
- assert.deepEqual(d.results.map(x=>[x.rank,x.horse,x.meeting,x.race,x.model_pct]),
-  original.map(x=>[x.rank,x.horse,x.meeting,x.race,x.model_pct]));
- const seenRaces=new Set(),seenNames=new Set();
- for(const r of d.results){
-  assert.ok(Number.isInteger(r.finish_position)&&r.finish_position>=1,r.horse);
-  assert.equal(r.result_status,'FINISHED_VERIFIED',r.horse);
-  assert.equal(r.won,r.finish_position===1,r.horse);
-  assert.ok(Number.isFinite(r.model_separation_pp),r.horse);
-  assert.ok(r.source_url.startsWith('https://www.theking.zone/racing/2026-10-31/'),r.horse);
-  assert.ok(r.corroboration_url.startsWith('https://'),r.horse);
-  assert.ok(!seenNames.has(r.horse)&&!seenRaces.has(r.race_id),r.horse);
-  seenNames.add(r.horse);seenRaces.add(r.race_id);
+const unified=require('../results-record.json');
+function unifiedScore(a){
+ const done=a.filter(r=>r.status==='FINISHED_VERIFIED'&&!r.scratched&&Number.isInteger(r.finish_position));
+ const wins=done.filter(r=>r.finish_position===1).length;
+ return {entries:a.length,finished:done.length,wins,scratched:a.filter(r=>r.scratched).length};
+}
+test('one unified results file combines every historical and published pick without overwriting the archived source',()=>{
+ const all=unified.records;
+ assert.equal(unified.schema,'racing-lab-unified-results/v1');
+ assert.equal(all.length,64);
+ assert.deepEqual(unifiedScore(all),{entries:64,finished:62,wins:20,scratched:2});
+ assert.equal(new Set(all.map(r=>r.date+'|'+r.meeting+'|'+r.race)).size,64);
+ assert.deepEqual([...new Set(all.map(r=>r.date))],['2026-10-17','2026-10-24','2026-10-31']);
+ const sourceDays=all.filter(r=>r.date!=='2026-10-31');
+ assert.equal(sourceDays.length,archive.records.length);
+ for(const original of archive.records){
+  const matched=sourceDays.find(r=>r.date===original.date&&r.meeting===original.meeting.toUpperCase()&&r.race===original.race);
+  assert.ok(matched,original.horse);
+  assert.equal(matched.horse,original.horse);
+  assert.equal(matched.finish_position,original.scratched?null:original.finish_position);
+  assert.equal(matched.selection_method,'HISTORICAL_MODEL_RECONSTRUCTION');
+ }
+ const published=require('./shortlists/2026-10-31-results.json').results;
+ for(const original of published){
+  const matched=all.find(r=>r.date==='2026-10-31'&&r.rank===original.rank);
+  assert.ok(matched,original.horse);
+  assert.equal(matched.horse,original.horse);
+  assert.equal(matched.finish_position,original.finish_position);
+  assert.equal(matched.model_pct,original.model_pct);
+  assert.equal(matched.model_separation_pp,original.model_separation_pp);
+  assert.equal(matched.selection_method,'PUBLISHED_REVIEWED_SHORTLIST');
  }
 });
-test('31 October Top 5/10/15 published scores are 3/5, 4/10 and 4/15, with zero after-race additions',()=>{
- const d=publishedV5;
- assert.deepEqual(d.cohorts.map(c=>[c.top_n,c.completed,c.wins,c.top_three_finishes]),
-  [[5,5,3,3],[10,10,4,6],[15,15,4,8]]);
- assert.deepEqual(d.results.filter(r=>r.won).map(r=>r.horse),
-  ['Regal Ambition','Western Miss','Lady Shenandoah','Hot And High']);
- assert.equal(d.results.find(r=>r.horse==='Sheza Alibi').finish_position,11);
- assert.equal(d.results.find(r=>r.horse==='Satono Glow').finish_position,13);
- assert.equal(d.results.find(r=>r.horse==='Bridal Waltz').finish_position,16);
- assert.equal(d.results.find(r=>r.horse==='Afireofgidgeecoals').finish_position,2);
- assert.equal(d.results.find(r=>r.horse==='In Confidence').finish_position,3);
- assert.equal(rows.length,49,'unchanged retrospective historical file');
- assert.equal(strictForward.independent_freeze_verified,false);
- assert.equal(strictForward.locked_selections.length,0);
- assert.equal(strictForward.official_results.length,0);
+test('one cumulative strike-rate for all rows and top5/10/15 by each Saturday rank, with scratchings excluded',()=>{
+ const ranks=[['all',Infinity,64,62,20,2],['top5',5,15,15,6,0],
+              ['top10',10,30,30,11,0],['top15',15,45,44,13,1]];
+ ranks.forEach(([key,n,entries,finished,wins,scratched])=>{
+  const selected=unified.records.filter(r=>r.rank<=n),actual=unifiedScore(selected);
+  assert.deepEqual(actual,{entries,finished,wins,scratched});
+  assert.equal(unified.metrics[key].wins,wins);
+  assert.equal(unified.metrics[key].finished,finished);
+  assert.equal(unified.metrics[key].win_rate_pct,+(100*wins/finished).toFixed(2));
+ });
+ assert.deepEqual(unified.metrics.by_date.map(x=>[x.date,x.finished,x.wins,x.scratched]),
+ [['2026-10-17',28,7,2],['2026-10-24',19,9,0],['2026-10-31',15,4,0]]);
+ assert.equal(archive.records.length,49);
+ const strict=require('./prospective-record.json');
+ assert.equal(strict.independent_freeze_verified,false);
+ assert.equal(strict.official_results.length,0);
 });
-test('results UI displays V5 published picks above historical reconstructions, without inventing forward certification',()=>{
+test('Results UI uses one data file and one graph, not split historical and prospective results screens',()=>{
  const html=fs.readFileSync(path.join(__dirname,'..','results.html'),'utf8');
- assert.ok(html.indexOf('id="reviewed-results"')>0);
- assert.ok(html.indexOf('id="reviewed-results"')<html.indexOf('Reconstructed historical selections'));
- assert.match(html,/v5\/shortlists\/2026-10-31-results\.json/);
- assert.match(html,/function validateReviewed/);
- assert.match(html,/function renderReviewed/);
- assert.match(html,/id="reviewed5"/);
- assert.match(html,/id="reviewed10"/);
- assert.match(html,/id="reviewed15"/);
+ assert.match(html,/One complete results record/);
+ assert.match(html,/fetch\('\/results-record\.json'/);
+ assert.match(html,/id="allCount"/);
+ assert.match(html,/id="top5Count"/);
+ assert.match(html,/id="top10Count"/);
+ assert.match(html,/id="top15Count"/);
+ assert.match(html,/function render\(/);
  assert.match(html,/model_separation_pp/);
- assert.match(html,/strict independent forward-lock certification remains separate/);
+ assert.match(html,/selection_method/);
+ assert.match(html,/reconstructed from saved model forecasts/);
+ assert.doesNotMatch(html,/id="forward-record"/);
+ assert.doesNotMatch(html,/id="reviewed-results"/);
+ assert.doesNotMatch(html,/fetch\('\/results-history\.json'/);
+ assert.doesNotMatch(html,/fetch\('\/v5\/prospective-record\.json'/);
+ const scripts=[...html.matchAll(/<script[^>]*>([\s\S]*?)<\/script>/g)].map(m=>m[1]).filter(Boolean);
+ assert.equal(scripts.length,1);
+ assert.doesNotThrow(()=>new Function(scripts[0]));
 });
