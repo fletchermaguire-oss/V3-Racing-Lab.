@@ -2,6 +2,20 @@
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Racing Lab | Results & History</title>
 <style>
 :root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#080e16;color:#edf5f6;font-family:system-ui,-apple-system,sans-serif}main{max-width:1100px;margin:auto;padding:20px 15px 80px}a{color:#73e8bc}header{display:flex;justify-content:space-between;gap:12px;align-items:center}h1{font-size:29px;margin:30px 0 5px}p,.muted{color:#9bb0bd}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:20px 0}.card,.panel{background:#13232e;border:1px solid #30424d;border-radius:15px;padding:15px}.label{color:#9bb0bd;font-size:12px}.value{font-size:clamp(23px,5vw,37px);font-weight:800;margin-top:6px}.green{color:#78e9b8}.panel{margin:15px 0}h2{font-size:17px;margin:0 0 14px}canvas{display:block;width:100%;height:290px}.controls{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0}select{background:#1b303e;color:white;border:1px solid #405767;border-radius:9px;padding:11px;font:inherit}table{border-collapse:collapse;width:100%;font-size:13px}th,td{text-align:left;padding:11px 9px;border-bottom:1px solid #30424d}th{color:#9bb0bd}.tablewrap{overflow-x:auto}.good{color:#78e9b8;font-weight:700}.bad{color:#ffaaa5}.wait{color:#ffd17c}small{color:#9bb0bd}@media(max-width:550px){main{padding:16px 10px 65px}.card{padding:10px}.value{font-size:25px}canvas{height:260px}}
+.resultbar{height:7px;margin:11px 0 0;border-radius:8px;background:#263d48;overflow:hidden}
+.resultbar>span{display:block;height:100%;width:0;background:#72e2b0;border-radius:8px;transition:width .2s ease}
+#reviewed-results .value{font-variant-numeric:tabular-nums}
+#reviewed-results .tablewrap{margin-top:8px}
+#reviewed-results th:nth-child(n+4),#reviewed-results td:nth-child(n+4){text-align:right}
+#reviewed-results td{white-space:nowrap}
+#reviewed-results .result-name{font-weight:700}
+#reviewed-results .result-name small{display:block;font-weight:400}
+#reviewed-results .finish-win{color:#75e9b6;font-weight:800}
+#reviewed-results .finish-place{color:#c1dbee;font-weight:750}
+#reviewed-results .finish-other{color:#ffbeb1}
+#reviewed-results .negative-margin{color:#f1bb9b}
+@media(max-width:550px){#reviewed-results th,#reviewed-results td{padding:9px 7px;font-size:11px}}
+
 </style></head><body><main>
 <header><strong class="green">◈ RACING LAB</strong><a href="/">← Back to Racing Lab</a></header>
 <h1>Results & History <small>Forward tracking + retrospective audit</small></h1>
@@ -11,6 +25,20 @@
 <p class="muted" id="forwardStatus">Checking whether any selections have been independently frozen before racing…</p>
 <div class="tablewrap"><table><thead><tr><th>List</th><th>Locked</th><th>Finished</th><th>Won</th><th>Verified strike rate</th></tr></thead><tbody id="forwardRows"></tbody></table></div>
 <small>Strict forward-only record. A GitHub pre-race commit and runner-matched official finish are required; synthetic, retrospective or unverified outcomes never count.</small>
+</section>
+<section class="panel" id="reviewed-results" aria-live="polite">
+<h2>31 October V5 — published researched Top 5/10/15 results</h2>
+<p class="muted">The originally ranked selections, matched horse by horse to the race results. Top 5, Top 10 and Top 15 overlap. The original grades and pre-race V5 model estimates are unchanged.</p>
+<div class="cards" id="reviewedScorecards">
+ <div class="card"><div class="label">Top 5 wins / finished</div><div class="value green" id="reviewed5">—</div><small id="reviewed5Rate">Awaiting audited finishes</small><div class="resultbar"><span id="reviewed5Bar"></span></div></div>
+ <div class="card"><div class="label">Top 10 wins / finished</div><div class="value green" id="reviewed10">—</div><small id="reviewed10Rate">Awaiting audited finishes</small><div class="resultbar"><span id="reviewed10Bar"></span></div></div>
+ <div class="card"><div class="label">Top 15 wins / finished</div><div class="value green" id="reviewed15">—</div><small id="reviewed15Rate">Awaiting audited finishes</small><div class="resultbar"><span id="reviewed15Bar"></span></div></div>
+</div>
+<p class="muted" id="reviewedStatus">Matching original V5 research ranks to independent race results…</p>
+<div class="controls"><label class="muted" for="reviewedFilter">Show published selections</label>
+<select id="reviewedFilter"><option value="5">Original Top 5</option><option value="10" selected>Original Top 10</option><option value="15">All 15, including review candidates</option></select></div>
+<div class="tablewrap"><table><thead><tr><th>Rank</th><th>Horse</th><th>Meeting / race</th><th>Pre-race model</th><th>Separation</th><th>Finish</th></tr></thead><tbody id="reviewedRows"></tbody></table></div>
+<small>Original selections and model percentages are not retroactively corrected for results. Separation is signed percentage points against the strongest model rival, not a probability of winning. <a id="reviewedCommit" href="https://github.com/fletchermaguire-oss/V3-Racing-Lab." target="_blank" rel="noopener">Published GitHub snapshot</a>. This result audit is separate from the stricter independently certified forward-lock ledger above; it is not combined with older retrospective model rankings below.</small>
 </section>
 <h2>Reconstructed historical selections — not a live win record</h2>
 <p class="muted">Older V3/V4 model-ranked race leaders. These are historical reconstructions, not an independently timestamped pre-race shortlist. They must not be combined with V5's future prospective record.</p>
@@ -32,6 +60,74 @@
 <section class="panel"><h2>Race-by-race selections</h2><div class="tablewrap"><table><thead><tr><th>Date</th><th>Meeting</th><th>Race</th><th>Our selection</th><th>Result</th></tr></thead><tbody id="rows"></tbody></table></div></section><p class="muted" id="status">Loading saved results…</p>
 </main><script src="/v5/forward.js"></script><script>
 let records=[];
+// This is a sourced published-shortlist outcome audit, not the independently
+// freeze-verified forward ledger above or the older retrospective ranking below.
+let reviewedLedger=null;
+const reviewedEl=id=>document.getElementById(id);
+function reviewOrdinal(value){
+ const n=Number(value),suffix=n%100>=11&&n%100<=13?'th':n%10===1?'st':n%10===2?'nd':n%10===3?'rd':'th';
+ return n+suffix;
+}
+function validateReviewed(d){
+ if(!d||d.schema!=='racing-lab-31-oct-reviewed-shortlist-results/v1'||d.date!=='2026-10-31'||
+    d.status!=='COMPLETE_SAVED_SHORTLIST_RESULT_AUDIT'||d.strict_forward_lock_verified!==false||
+    !Array.isArray(d.results)||d.results.length!==15)throw Error('Unrecognized saved shortlist results');
+ const seen=new Set(),races=new Set();
+ d.results.forEach((r,i)=>{
+  if(r.rank!==i+1||!r.horse||!['RANDWICK','FLEMINGTON','ASCOT'].includes(r.meeting)||
+   !r.race_id.startsWith(d.date+'_'+r.meeting+'_R')||seen.has(r.horse)||races.has(r.race_id)||
+   !Number.isInteger(r.finish_position)||r.finish_position<1||
+   r.result_status!=='FINISHED_VERIFIED'||r.won!==(r.finish_position===1)||
+   !Number.isFinite(r.model_pct)||!Number.isFinite(r.model_separation_pp)||
+   !/^https:\/\//.test(r.source_url))
+   throw Error('Incomplete, duplicated or unverified horse result at rank '+(i+1));
+  seen.add(r.horse);races.add(r.race_id);
+ });
+ [5,10,15].forEach(n=>{
+  const cohort=d.cohorts&&d.cohorts.find(x=>x.top_n===n);
+  const entries=d.results.filter(x=>x.rank<=n),wins=entries.filter(x=>x.finish_position===1).length;
+  if(!cohort||cohort.completed!==n||cohort.wins!==wins||cohort.top_three_finishes!==entries.filter(x=>x.finish_position<=3).length)
+   throw Error('Saved Top '+n+' results mismatch');
+ });
+ return d;
+}
+function renderReviewed(d){
+ for(const n of [5,10,15]){
+  const c=d.cohorts.find(x=>x.top_n===n);
+  reviewedEl('reviewed'+n).textContent=c.wins+'/'+c.completed;
+  reviewedEl('reviewed'+n+'Rate').textContent=c.win_rate_pct.toFixed(1)+'% win rate · '+c.top_three_finishes+' top-three finishes';
+  reviewedEl('reviewed'+n+'Bar').style.width=(100*c.wins/c.completed).toFixed(2)+'%';
+ }
+ reviewedEl('reviewedCommit').href=d.publication_proof_url;
+ const n=Number(reviewedEl('reviewedFilter').value),root=reviewedEl('reviewedRows');
+ root.replaceChildren();
+ d.results.filter(r=>r.rank<=n).forEach(r=>{
+  const tr=document.createElement('tr'),cells=[
+   String(r.rank),r.horse,r.meeting+' R'+r.race,
+   r.model_pct.toFixed(2)+'%',
+   (r.model_separation_pp>=0?'+':'')+r.model_separation_pp.toFixed(2)+'pp',
+   reviewOrdinal(r.finish_position)
+  ];
+  cells.forEach((value,i)=>{
+   const td=document.createElement('td');
+   if(i===1){
+    const a=document.createElement('a');a.href=r.source_url;a.target='_blank';a.rel='noopener';
+    a.textContent=value;a.className='result-name';td.append(a);
+   }else td.textContent=value;
+   if(i===4&&r.model_separation_pp<0)td.className='negative-margin';
+   if(i===5)td.className=r.finish_position===1?'finish-win':r.finish_position<=3?'finish-place':'finish-other';
+   tr.append(td);
+  });root.append(tr);
+ });
+ reviewedEl('reviewedStatus').textContent=d.results.length+' of 15 original researched selections matched to named finishers. '+
+  'Four winners: Regal Ambition, Western Miss, Lady Shenandoah, Hot And High. '+
+  'Published rankings kept unchanged; strict independent forward-lock certification remains separate.';
+}
+fetch('/v5/shortlists/2026-10-31-results.json',{cache:'no-store'})
+ .then(r=>{if(!r.ok)throw Error('Published shortlist result file unavailable');return r.json();})
+ .then(json=>{reviewedLedger=validateReviewed(json);renderReviewed(reviewedLedger);
+  reviewedEl('reviewedFilter').onchange=()=>renderReviewed(reviewedLedger);})
+ .catch(err=>{reviewedEl('reviewedStatus').textContent='Unable to verify published shortlist outcomes: '+err.message;});
 fetch('/v5/prospective-record.json',{cache:'no-store'}).then(async r=>{
  if(!r.ok)throw Error('Prospective registry unavailable');
  const report=window.RacingLabForward.summarize(await r.json());
