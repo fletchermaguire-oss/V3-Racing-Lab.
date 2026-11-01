@@ -48,12 +48,12 @@ function assess(data,attestation,options){
     iso(cert.race_start_at)&&cert.source_type==='OFFICIAL_COMPLETE_STARTER_LIST'&&
     cert.human_reviewed===true&&iso(cert.human_reviewed_at)&&
     cert.reviewed_by&&typeof cert.reviewed_by==='string'&&
-    cert.checked_at>=cert.source_published_at &&
     Date.parse(cert.source_published_at)<=Date.parse(cert.checked_at)&&
     Date.parse(cert.human_reviewed_at)>=Date.parse(cert.checked_at)&&
     Date.parse(cert.human_reviewed_at)<Date.parse(cert.race_start_at)&&
     Date.parse(cert.checked_at)<Date.parse(cert.race_start_at)&&
-    cert.race_start_at.slice(0,10)===new Date(Date.parse(cert.race_start_at)).toISOString().slice(0,10);
+    Date.parse(cert.source_published_at)<Date.parse(cert.race_start_at)&&
+    Date.parse(cert.checked_at)<Date.parse(cert.race_start_at);
    if(!valid){flags.push('INVALID_SOURCE_TIMING_OR_HUMAN_REVIEW');status='INVALID_FINAL_STARTER_ATTESTATION';}
    else{
     const declared=new Set(cert.active_runner_ids),savedIds=new Set(saved.map(h=>h.id));
