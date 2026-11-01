@@ -504,3 +504,15 @@ test('Both site entrypoints load automatic entire-field challenge scanner before
   assert.ok(html.indexOf('/v5/auto-challenge.js')<html.indexOf('/v5/dashboard.js'));
  }
 });
+
+test('Top 5/10/15 keeps original research ranks but shows automatic caution alongside flagged runners',()=>{
+ const {C,win}=boot(),root=new Element('main');
+ win.RacingLabV5Dashboard.renderInto(root,'top10',C,()=>{},'2026-10-31_FLEMINGTON_R06');
+ let nodes=flatten(root);
+ assert.ok(nodes.some(x=>String(x.textContent).includes('Whole-field evidence check')));
+ const satono=nodes.find(x=>x.tag==='button'&&x.dataset.runnerId==='2026-10-31_FLEMINGTON_R06_13');
+ assert.ok(satono,'original Satono Glow card remains unchanged');
+ assert.ok(flatten(satono).some(x=>String(x.textContent).includes('priority challenger review')));
+ assert.equal(C.curated.entries.find(x=>x.horse==='Satono Glow').original_rank,7);
+ assert.equal(C.curated.entries.find(x=>x.horse==='Lady Shenandoah').original_rank,4);
+});
