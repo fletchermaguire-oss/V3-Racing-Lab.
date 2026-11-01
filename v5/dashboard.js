@@ -520,6 +520,16 @@ function challengePanel(r,reviewed,hs){
     e('p','muted small','Saved pre-race research ranks and model coefficients remain unchanged. No post-race result or market price enters this assessment.'));
    var audit=e('details','rlv5-challenge-export');audit.append(e('summary','','View timestamped challenge JSON'),
     e('pre','',JSON.stringify(report,null,2)));result.append(audit);
+   // Save only evidence review metadata to this browser, never to runner
+   // scores, forecasts, or the independently reviewed Top 15.
+   if(report.review_timing!=='AFTER_RACE_DAY_HISTORICAL_REPLAY'){
+    try{
+     var key='rlv5-challenges-'+C.data.date,prior=JSON.parse(global.localStorage.getItem(key)||'[]');
+     if(!Array.isArray(prior))prior=[];
+     prior.push(report);global.localStorage.setItem(key,JSON.stringify(prior.slice(-100)));
+     result.append(e('p','muted small','Timestamped review saved locally in this browser (not an approved pick or cloud backup).'));
+    }catch(storageError){result.append(e('p','muted small','Local review save unavailable; the JSON remains visible above.'));}
+   }
   }catch(err){result.replaceChildren(e('p','rlv5-race-no-standout','Challenge validation failed: '+err.message));}
  },'primary');
  root.append(reviewButton,result);
@@ -629,7 +639,13 @@ function comparePage(){add(app(),head('Compare runners','Model probabilities and
  if(!hs.some(function(h){return h.id===S.compareA;}))S.compareA=hs[0].id;if(!hs.some(function(h){return h.id===S.compareB;}))S.compareB=(hs[1]||hs[0]).id;
  var opts=hs.map(function(h){return {value:h.id,text:h.horse};}),filters=e('div','filters');filters.append(setField('Runner A',opts,S.compareA,function(v){S.compareA=v;render();}),setField('Runner B',opts,S.compareB,function(v){S.compareB=v;render();}));app().append(filters,add(e('div','compare'),horseDetail(hs.find(function(h){return h.id===S.compareA;})),horseDetail(hs.find(function(h){return h.id===S.compareB;}))));
 }
-function qaPage(){add(app(),head('Model QA',C.board.version+' · '+C.revision),metrics(),scenarios(),officialPanel(),box('Win-first screening',C.board.winFirst.priority.length+' model-screened research priorities · '+C.board.winFirst.review.length+' review-only · '+C.board.winFirst.avoid.length+' withheld races. Formula uses fixed Good 4/Soft 5 and conservative-class scenarios; no validated hit-rate gain.'),box('Whole-field checks',C.board.baseline.races.filter(function(r){return r.sum===100;}).length+' races total 100.00%. Exclusions remain in the source audit. A race with fewer than two included runners is withheld.'),box('Model status','Formula regression checks pass. Coefficients remain uncalibrated. The stored dossier does not establish completion of replay, trainer, gear, sectional or race-day field checks.'));}
+function qaPage(){add(app(),head('Model QA',C.board.version+' · '+C.revision),metrics(),scenarios(),officialPanel(),box('Win-first screening',C.board.winFirst.priority.length+' model-screened research priorities · '+C.board.winFirst.review.length+' review-only · '+C.board.winFirst.avoid.length+' withheld races. Formula uses fixed Good 4/Soft 5 and conservative-class scenarios; no validated hit-rate gain.'),box('Whole-field checks',C.board.baseline.races.filter(function(r){return r.sum===100;}).length+' races total 100.00%. Exclusions remain in the source audit. A race with fewer than two included runners is withheld.'),box('Model status','Formula regression checks pass. Coefficients remain uncalibrated. The stored dossier does not establish completion of replay, trainer, gear, sectional or race-day field checks.'));
+ if(D.date==='2026-10-31'){
+  app().append(box('31 October post-race evidence audit',
+   '29 completed races. Original saved Good 4 leaders won 7/29. Retrospective actual-going rerun gives 9/29, which is NOT the original pre-race record. Seven racefields differed from the final starter lists. No coefficient changes made or 60% guarantee claimed.'),
+   link('Open race-by-race errors and starter mismatches','/v5/audits/2026-10-31-postrace-review.json','btn ghost'));
+ }
+}
 function calPage(){add(app(),head('Calibration','Measured accuracy must come from frozen pre-race forecasts and verified results.'),box('Current status','Historical V5 calibration has not been established. Passing formula checks does not establish an improved strike rate. Scenario ranges are sensitivity checks.'),link('Open existing Top 5/10/15 results','/results.html'));}
 function weatherPage(){add(app(),head('Weather & Tracks','Scenarios update the model everywhere. Saved observations remain dated.'),scenarios(),officialPanel(),venueCards());}
 function syncPage(){add(app(),head('Data & Sync','One shared board for every screen.'),metrics(),officialPanel(),box('Evidence source',C.live?'Complete matching Airtable evidence received '+C.live.as_of+'. This is not official race-day certification.':'Saved snapshot '+D.saved_at+' is loaded. Live Airtable evidence is not confirmed.'),(function(){var panel=box('Latest refresh',C.error||'No refresh error recorded.');var line=panel.children&&panel.children[1];if(line)line.id='v5-sync-status';return panel;})(),action('Refresh Airtable evidence',function(){refresh(C);},'primary'),link('Static evidence','/v5/research.json'),link('GitHub code','https://github.com/fletchermaguire-oss/V3-Racing-Lab.'));}
