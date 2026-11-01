@@ -52,21 +52,26 @@ function scan(data,options){
   if(!history.known||!wetA.known)flags.push('WET_HISTORY_INCOMPLETE');
   if(going.startsWith('Soft ')&&going!=='Soft 5')
    flags.push('SOFT_GRADES_SHARE_AN_UNCALIBRATED_SURFACE_BUCKET');
-  const review=flags.some(f=>/CHALLENGER_HAS|RELATIVE_SCENARIO|LEAD_COLLAPSES|NOW_MODELS/.test(f));
+  const material=flags.filter(f=>/CHALLENGER_HAS|RELATIVE_SCENARIO|LEAD_COLLAPSES|NOW_MODELS/.test(f));
+  const review=material.length>0,priority=material.length>=2;
   // Rank changes on scenarios alone do not automatically replace the
   // independent original research candidate.
   return {runner_id:b.id,horse:b.horse,model_good4_rank:b.rank,model_scenario_rank:alt.rank,
    model_good4_pct:b.p,model_scenario_pct:alt.p,scenario_gap_to_incumbent_pp:round(original.p-alt.p),
    relative_scenario_uplift_pp:relative,wet_form:{starts:history.starts,wins:history.wins,known:history.known},
-   flags,status:review?'REASSESSMENT_REQUIRED':'NO_MATERIAL_REVIEW_TRIGGER',review_required:review};
+   flags,review_strength:priority?'PRIORITY_REVIEW':review?'SECONDARY_REVIEW':'NO_MATERIAL_TRIGGER',
+   material_flag_count:material.length,status:review?'REASSESSMENT_REQUIRED':'NO_MATERIAL_REVIEW_TRIGGER',
+   priority_review:priority,review_required:review};
  });
- challengers.sort((a,b)=>Number(b.review_required)-Number(a.review_required)||
+ challengers.sort((a,b)=>Number(b.priority_review)-Number(a.priority_review)||
+    Number(b.review_required)-Number(a.review_required)||
     b.flags.filter(f=>f!=='WET_HISTORY_INCOMPLETE').length-a.flags.filter(f=>f!=='WET_HISTORY_INCOMPLETE').length||
     b.model_scenario_pct-a.model_scenario_pct||a.runner_id.localeCompare(b.runner_id));
  return {schema:VERSION,race_date:data.date,race_id:raceId,meeting:r.meeting,scenario:going,comparison:'Good 4',
   research_incumbent:{runner_id:leader.id,horse:leader.horse,good4_pct:leader.p,scenario_pct:original.p,
    wet_form:wetA,model_rank:leader.rank},
   total_other_included_runners:challengers.length,review_count:challengers.filter(x=>x.review_required).length,
+  priority_review_count:challengers.filter(x=>x.priority_review).length,
   pending_reviews:challengers.filter(x=>x.review_required),all_rivals:challengers,
   source_status:'SAVED_DOSSIER_SCENARIO_ONLY',final_starters_verified:false,
   outcomes_used:false,model_modified:false,shortlist_modified:false,
@@ -86,7 +91,7 @@ function scanCard(data,shortlist,options){
   const report=scan(data,{race_id:race.id,incumbent_id:selected[0].id,reported_going:(options&&options.going&&options.going[race.meeting])||'Soft 5'});
   out.push({race_id:race.id,reviewed_horse:entry.horse,rank:entry.rank,
    status:report.review_count?'CHALLENGER_REVIEW_REQUIRED':'NO_MATERIAL_CHALLENGER',
-   review_count:report.review_count,flagged_rivals:report.pending_reviews.map(x=>x.horse)});
+   review_count:report.review_count,priority_review_count:report.priority_review_count,flagged_rivals:report.pending_reviews.map(x=>x.horse)});
  }
  return {schema:VERSION,race_date:data.date,research_races:out.length,
   challenged_races:out.filter(x=>x.status==='CHALLENGER_REVIEW_REQUIRED').length,
