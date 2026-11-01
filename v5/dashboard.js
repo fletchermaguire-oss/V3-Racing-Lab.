@@ -535,6 +535,21 @@ function challengePanel(r,reviewed,hs){
  root.append(reviewButton,result);
  return root;
 }
+function fieldReleaseWarning(r,pick){
+ if(!global.RacingLabV5FieldGate)return note('Final-starter gate unavailable — selections are NOT verified for pre-race release.');
+ var gate=global.RacingLabV5FieldGate.assess(C.data,C.data.final_starter_attestation||null,{
+  selected:pick&&pick.eligible?[{id:pick.id,race_id:r.id}]:[]
+ });
+ var info=gate.races.find(function(x){return x.race_id===r.id;});
+ if(!info||info.release_eligible)return add(e('p','rlv5-race-source'),
+  e('strong','','DOCUMENTED starter match. '),
+  e('span','','Human-reviewed manifest matched the saved included field. This does not imply an independently verified selection or calibrated probability.'));
+ var n=e('p','rlv5-race-no-standout');
+ n.append(e('strong','','FINAL FIELD NOT CLEARED. '));
+ n.append(e('span','','Saved research can be viewed, but this race is withheld from any certified pre-race shortlist or automatic multi: '+
+  info.flags.join(', ').replaceAll('_',' ').toLowerCase()+'. An official scratching list alone does not confirm every starter or promoted reserve.'));
+ return n;
+}
 function racesPage(){
  var root=app();root.append(head('Race Centre','One researched selection per race where available. Model rankings are diagnostics, not competing picks.'));
  var navwrap=e('div','rlv5-race-select');raceNav().forEach(function(node){navwrap.append(node);});root.append(navwrap);
@@ -580,6 +595,7 @@ function racesPage(){
  if(reviewed&&reviewed.eligible&&reviewed.reason)
   pickPanel.append(e('p','rlv5-race-selection-reason',reviewed.reason));
  root.append(pickPanel);
+ root.append(fieldReleaseWarning(r,reviewed||reviewOnly));
  if(hs.length>=2)root.append(challengePanel(r,reviewed,hs));
  // Technical comparison remains accessible, but is NOT a second pick card.
  var modelNotes=e('details','rlv5-model-notes');
@@ -640,6 +656,13 @@ function comparePage(){add(app(),head('Compare runners','Model probabilities and
  var opts=hs.map(function(h){return {value:h.id,text:h.horse};}),filters=e('div','filters');filters.append(setField('Runner A',opts,S.compareA,function(v){S.compareA=v;render();}),setField('Runner B',opts,S.compareB,function(v){S.compareB=v;render();}));app().append(filters,add(e('div','compare'),horseDetail(hs.find(function(h){return h.id===S.compareA;})),horseDetail(hs.find(function(h){return h.id===S.compareB;}))));
 }
 function qaPage(){add(app(),head('Model QA',C.board.version+' · '+C.revision),metrics(),scenarios(),officialPanel(),box('Win-first screening',C.board.winFirst.priority.length+' model-screened research priorities · '+C.board.winFirst.review.length+' review-only · '+C.board.winFirst.avoid.length+' withheld races. Formula uses fixed Good 4/Soft 5 and conservative-class scenarios; no validated hit-rate gain.'),box('Whole-field checks',C.board.baseline.races.filter(function(r){return r.sum===100;}).length+' races total 100.00%. Exclusions remain in the source audit. A race with fewer than two included runners is withheld.'),box('Model status','Formula regression checks pass. Coefficients remain uncalibrated. The stored dossier does not establish completion of replay, trainer, gear, sectional or race-day field checks.'));
+ if(global.RacingLabV5FieldGate){
+  var gate=global.RacingLabV5FieldGate.assess(C.data,C.data.final_starter_attestation||null);
+  app().append(box('Final-starter publication gate',
+   gate.release_eligible_races+'/'+gate.races.length+' races have fully documented exact starter-list matches and pre-jump human reviews; '+
+   gate.withheld_races+' withheld from certified release. Scratchings sheets alone are insufficient. Historical published picks remain archived. '+
+   'No data or model estimates have been retrospectively altered.'));
+ }
  if(D.date==='2026-10-31'){
   app().append(box('31 October post-race evidence audit',
    '29 completed races. Original saved Good 4 leaders won 7/29. Retrospective actual-going rerun gives 9/29, which is NOT the original pre-race record. Seven racefields differed from the final starter lists. No coefficient changes made or 60% guarantee claimed.'),
