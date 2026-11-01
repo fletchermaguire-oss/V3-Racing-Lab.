@@ -19,7 +19,7 @@ function boot(){
  const C=State.create(State.applyOfficialOverlay(D,O),{checkpoint:Q,going:O.going});
  const doc={createElement:tag=>new Element(tag),getElementById:()=>null,body:new Element('body')};
  const win={location:{search:''},localStorage:{getItem:()=>null,setItem(){}},
-  RacingLabV5Model:Model,RacingLabV5Curated:Curated,RacingLabHorseAnalysis:require('./horse-analysis.js'),RacingLabV5Challenge:require('./challenge.js'),RacingLabV5FieldGate:require('./field-gate.js'),
+  RacingLabV5Model:Model,RacingLabV5Curated:Curated,RacingLabHorseAnalysis:require('./horse-analysis.js'),RacingLabV5Challenge:require('./challenge.js'),RacingLabV5FieldGate:require('./field-gate.js'),RacingLabV5PaceClass:require('./pace-class.js'),
   RacingLabV5State:State,scrollTo(){},requestAnimationFrame:null};
  const context=vm.createContext({window:win,document:doc,console:console,Set:Set,Map:Map,Promise:Promise});
  for(const file of ['v5/workshop.js','v5/dashboard.js'])vm.runInContext(fs.readFileSync(file,'utf8'),context,{filename:file});
@@ -463,5 +463,25 @@ test('both entrypoints include immutable field-attestation gates before dashboar
   const source=fs.readFileSync(name,'utf8');
   assert.match(source,/v5\/field-gate\.js\?v=full-starters-20261101/);
   assert.ok(source.indexOf('/v5/field-gate.js')<source.indexOf('/v5/dashboard.js'));
+ }
+});
+
+test('Race Centre reveals pace/class stress diagnostics without replacing researched selection',()=>{
+ const {C,win}=boot(),root=new Element('main');
+ for(const id of ['2026-10-31_FLEMINGTON_R06','2026-10-31_FLEMINGTON_R08','2026-10-31_ASCOT_R08']){
+  win.RacingLabV5Dashboard.renderInto(root,'races',C,()=>{},id);
+  const nodes=flatten(root),panel=nodes.find(x=>x.className==='rlv5-pace-class');
+  assert.ok(panel,'Missing pace and class panel '+id);
+  assert.ok(flatten(panel).some(x=>String(x.textContent).includes('Class assessment')));
+  assert.ok(flatten(panel).some(x=>String(x.textContent).includes('No automatic changes')));
+  assert.ok(nodes.some(x=>String(x.className).startsWith('rlv5-race-selection')));
+ }
+ assert.equal(C.curated.entries.find(x=>x.horse==='Lady Shenandoah').original_rank,4);
+});
+test('Both site entrypoints load pace/class diagnostic before dashboard',()=>{
+ for(const path of ['index.html','v5/index.html']){
+  const s=fs.readFileSync(path,'utf8');
+  assert.match(s,/v5\/pace-class\.js\?v=pace-research-20261101/);
+  assert.ok(s.indexOf('/v5/pace-class.js')<s.indexOf('/v5/dashboard.js'));
  }
 });
