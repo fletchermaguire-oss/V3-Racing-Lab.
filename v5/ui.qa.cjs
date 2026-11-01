@@ -495,7 +495,7 @@ test('Race Centre automatically shows The Next Episode as priority rival without
  assert.ok(flatten(details).some(x=>String(x.textContent).includes('The Next Episode')));
  assert.ok(flatten(details).some(x=>String(x.textContent).includes('Historical replay only')));
  assert.equal(C.curated.entries.find(x=>x.horse==='Satono Glow').original_rank,7);
- assert.ok(flatten(root).some(x=>x.className.includes('rlv5-race-selection')));
+ assert.ok(flatten(root).some(x=>String(x.className).includes('rlv5-race-selection')));
 });
 test('Both site entrypoints load automatic entire-field challenge scanner before shared dashboard',()=>{
  for(const path of ['index.html','v5/index.html']){
