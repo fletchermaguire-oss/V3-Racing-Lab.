@@ -73,3 +73,24 @@ test('source-grade uncertainty is visible on Soft 6, which has the same experime
  assert.equal(a.incumbent.scenario_pct,20.08);
  assert.equal(a.challenger.scenario_pct,10.98);
 });
+
+
+test('29-race result diagnostics stay outside forecast code and preserve the actual historical Good/Soft distinction',()=>{
+ const report=require('./audits/2026-10-31-postrace-review.json');
+ assert.equal(report.records.length,29);
+ assert.equal(report.summary.archived_pre_race_scenario.raw_model_leader_wins,7);
+ assert.equal(report.summary.realized_going_scenario.raw_model_leader_wins,9);
+ assert.equal(report.summary.archived_pre_race_scenario.winners_top3,17);
+ assert.equal(report.summary.archived_pre_race_scenario.winners_top5,22);
+ assert.equal(report.mismatches.length,7);
+ assert.ok(report.mismatches.some(x=>x.meeting==='FLEMINGTON'&&x.race===6&&x.modeled_but_not_a_starter.includes('Doubt Time')));
+ assert.ok(report.mismatches.some(x=>x.meeting==='ASCOT'&&x.race===6&&x.modeled_but_not_a_starter.includes('Aurum Belle')));
+ assert.ok(report.mismatches.some(x=>x.meeting==='FLEMINGTON'&&x.race===3&&x.started_but_missing_from_model.includes('Girl With A Pearl')));
+ assert.equal(report.recorded_result_going.FLEMINGTON,'Good 4');
+ assert.equal(report.recorded_result_going.ASCOT,'Soft 5');
+ const fs=require('node:fs');
+ const model=fs.readFileSync(__dirname+'/model.js','utf8');
+ const challenge=fs.readFileSync(__dirname+'/challenge.js','utf8');
+ assert.doesNotMatch(model,/postrace-review\.json|result_winner|2026-10-31-postrace/);
+ assert.doesNotMatch(challenge,/postrace-review\.json|result_winner|2026-10-31-postrace/);
+});
