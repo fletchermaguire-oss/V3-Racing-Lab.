@@ -544,7 +544,7 @@ function fieldReleaseWarning(r,pick){
  if(!info||info.release_eligible)return add(e('p','rlv5-race-source'),
   e('strong','','DOCUMENTED starter match. '),
   e('span','','Human-reviewed manifest matched the saved included field. This does not imply an independently verified selection or calibrated probability.'));
- var n=e('p','rlv5-race-no-standout');
+ var n=e('p','rlv5-final-field-warning');
  n.append(e('strong','','FINAL FIELD NOT CLEARED. '));
  n.append(e('span','','Saved research can be viewed, but this race is withheld from any certified pre-race shortlist or automatic multi: '+
   info.flags.join(', ').replaceAll('_',' ').toLowerCase()+'. An official scratching list alone does not confirm every starter or promoted reserve.'));
