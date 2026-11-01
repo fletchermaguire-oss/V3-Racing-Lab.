@@ -17,14 +17,14 @@ function valid(data){
  if(!Model||typeof Model.calculate!=='function'||!Challenge||typeof Challenge.wetHistory!=='function')throw Error('Original V5 model and evidence rules required');
  if(!data||!Array.isArray(data.runners)||!Array.isArray(data.races)||!data.date)throw Error('Dated saved original racecard required');
 }
-function scan(data,options){
+function scan(data,options,shared){
  valid(data);
  const o=options||{},raceId=o.race_id,going=o.reported_going||'Soft 5';
  const r=data.races.find(r=>r.id===raceId);
  if(!r)throw Error('Unknown race');
  if(!['Good 4','Soft 5','Soft 6','Soft 7','Heavy 8','Heavy 9','Heavy 10'].includes(going))throw Error('Unsupported scenario');
- const first=Model.calculate(data,{default:'Good 4'});
- const scenario=going==='Good 4'?first:Model.calculate(data,{default:going});
+ const first=shared&&shared.good4||Model.calculate(data,{default:'Good 4'});
+ const scenario=going==='Good 4'?first:shared&&shared.scenario||Model.calculate(data,{default:going});
  const base=first.records.filter(x=>x.race_id===raceId).sort((a,b)=>a.rank-b.rank);
  const scenarioRows=scenario.records.filter(x=>x.race_id===raceId);
  const lookup=new Map(scenarioRows.map(x=>[x.id,x]));
@@ -82,13 +82,17 @@ function scanCard(data,shortlist,options){
  const indexed=new Map((shortlist&&Array.isArray(shortlist.entries)?shortlist.entries:[]).filter(e=>e.eligible!==false)
   .map(e=>[e.meeting+'|'+e.race,e]));
  const out=[];
+ const good4=Model.calculate(data,{default:'Good 4'});
+ const cache=new Map([['Good 4',good4]]);
  for(const race of data.races){
   const entry=indexed.get(race.meeting+'|'+race.race);
   if(!entry)continue;
   const selected=data.runners.filter(h=>h.race_id===race.id&&h.horse.toUpperCase()===entry.horse.toUpperCase());
   if(selected.length!==1||!Model.isEligible(selected[0])){out.push({race_id:race.id,
    reviewed_horse:entry.horse,status:'ORIGINAL_HORSE_OUT_OF_FIELD',review_count:null});continue;}
-  const report=scan(data,{race_id:race.id,incumbent_id:selected[0].id,reported_going:(options&&options.going&&options.going[race.meeting])||'Soft 5'});
+  const going=(options&&options.going&&options.going[race.meeting])||'Soft 5';
+  if(!cache.has(going))cache.set(going,Model.calculate(data,{default:going}));
+  const report=scan(data,{race_id:race.id,incumbent_id:selected[0].id,reported_going:going},{good4:good4,scenario:cache.get(going)});
   out.push({race_id:race.id,reviewed_horse:entry.horse,rank:entry.rank,
    status:report.review_count?'CHALLENGER_REVIEW_REQUIRED':'NO_MATERIAL_CHALLENGER',
    review_count:report.review_count,priority_review_count:report.priority_review_count,flagged_rivals:report.pending_reviews.map(x=>x.horse)});
