@@ -1,0 +1,577 @@
+{
+  "schema": "racing-lab-postrace-diagnostics/v1",
+  "date": "2026-10-31",
+  "audit_date": "2026-11-01",
+  "purpose": "Post-race analysis only: no winner, finishing position or market input is permitted in any pre-race forecasting code.",
+  "frozen_source_going": {
+    "RANDWICK": "Good 4",
+    "FLEMINGTON": "Good 4",
+    "ASCOT": "Good 4"
+  },
+  "recorded_result_going": {
+    "RANDWICK": "Good 4",
+    "FLEMINGTON": "Good 4",
+    "ASCOT": "Soft 5"
+  },
+  "source_quality": "29 winner identities and seven starter-list mismatches checked against published 31 October complete racing results. The pre-race dataset is a preserved conditional racecard; rankings are NOT recomputed with corrected finishers.",
+  "summary": {
+    "archived_pre_race_scenario": {
+      "races": 29,
+      "raw_model_leader_wins": 7,
+      "winners_top3": 17,
+      "winners_top5": 22
+    },
+    "realized_going_scenario": {
+      "races": 29,
+      "raw_model_leader_wins": 9,
+      "winners_top3": 17,
+      "winners_top5": 22
+    },
+    "field_mismatch_races": 7,
+    "published_top15": {
+      "entries": 15,
+      "wins": 4,
+      "model_expected_wins": 3.557
+    },
+    "model_gap_discriminator_test": {
+      "below_4pp": 16,
+      "at_least_8pp": 9,
+      "winners_with_8pp_gap": 3
+    }
+  },
+  "mismatches": [
+    {
+      "meeting": "RANDWICK",
+      "race": 2,
+      "model_field": 13,
+      "result_field": 14,
+      "modeled_but_not_a_starter": [],
+      "started_but_missing_from_model": [
+        "Explosive Tycoon"
+      ],
+      "source": "https://www.theking.zone/racing/2026-10-31/randwick"
+    },
+    {
+      "meeting": "RANDWICK",
+      "race": 7,
+      "model_field": 14,
+      "result_field": 15,
+      "modeled_but_not_a_starter": [],
+      "started_but_missing_from_model": [
+        "Theblade"
+      ],
+      "source": "https://www.theking.zone/racing/2026-10-31/randwick"
+    },
+    {
+      "meeting": "FLEMINGTON",
+      "race": 3,
+      "model_field": 17,
+      "result_field": 17,
+      "modeled_but_not_a_starter": [
+        "Anglais"
+      ],
+      "started_but_missing_from_model": [
+        "Girl With A Pearl"
+      ],
+      "source": "https://www.theking.zone/racing/2026-10-31/flemington"
+    },
+    {
+      "meeting": "FLEMINGTON",
+      "race": 5,
+      "model_field": 15,
+      "result_field": 16,
+      "modeled_but_not_a_starter": [],
+      "started_but_missing_from_model": [
+        "King Zephyr"
+      ],
+      "source": "https://www.theking.zone/racing/2026-10-31/flemington"
+    },
+    {
+      "meeting": "FLEMINGTON",
+      "race": 6,
+      "model_field": 14,
+      "result_field": 13,
+      "modeled_but_not_a_starter": [
+        "Doubt Time"
+      ],
+      "started_but_missing_from_model": [],
+      "source": "https://www.theking.zone/racing/2026-10-31/flemington"
+    },
+    {
+      "meeting": "ASCOT",
+      "race": 6,
+      "model_field": 8,
+      "result_field": 7,
+      "modeled_but_not_a_starter": [
+        "Aurum Belle"
+      ],
+      "started_but_missing_from_model": [],
+      "source": "https://www.theking.zone/racing/2026-10-31/ascot"
+    },
+    {
+      "meeting": "ASCOT",
+      "race": 10,
+      "model_field": 12,
+      "result_field": 11,
+      "modeled_but_not_a_starter": [
+        "Prince Of Dala"
+      ],
+      "started_but_missing_from_model": [],
+      "source": "https://www.theking.zone/racing/2026-10-31/ascot"
+    }
+  ],
+  "case_studies": [
+    {
+      "race": "FLEMINGTON R6",
+      "saved_pick": "Satono Glow",
+      "actual_finishing_position": 13,
+      "independently_flagged_challenger": "The Next Episode",
+      "actual_winner": "The Next Episode",
+      "note": "Strong historic wet form plus greater scenario uplift merited independent review. Actual race rating Good 4; cannot attribute winner to rain. V5 missed one late scratching, Doubt Time."
+    },
+    {
+      "race": "FLEMINGTON R8",
+      "saved_pick": "Lady Shenandoah",
+      "actual_finishing_position": 1,
+      "independently_flagged_challenger": "Unleeshing",
+      "challenger_finishing_position": 10,
+      "note": "Wet record alone does not justify automatic replacement; stronger Group 1 form won on recorded Good 4."
+    },
+    {
+      "race": "RANDWICK R8",
+      "saved_pick": "Sheza Alibi",
+      "actual_finishing_position": 11,
+      "saved_lead_gap_pp": 18.64,
+      "note": "Huge model separation can fail: check class extrapolation, traffic, race setup, data quality and actual late running without retrospectively adjusting chance."
+    }
+  ],
+  "hypotheses_to_test_prospectively": [
+    "Check final starters/emergency activations and late scratches first; seven of 29 fields differed.",
+    "Track-specific surface, actual moisture and expected wind should be independent evidence with as-of timestamps, not just a single Good/Soft/Heavy token.",
+    "Check pace maps, race-day rail/lane bias, sectional figures and expected settling position on prior races, especially Flemington straight.",
+    "Check recent class transitions and grade of historical opposition while guarding against dominant uncalibrated class coefficients.",
+    "Use win-first abstention rather than forcing top 10; validate candidate selection changes using future frozen cards and Brier/log-loss.",
+    "No retuning on these 29 races; test all proposed weights on future Saturdays."
+  ],
+  "records": [
+    {
+      "meeting": "RANDWICK",
+      "race": 1,
+      "race_id": "2026-10-31_RANDWICK_R01",
+      "winner": "Agent Zero",
+      "source_url": "https://www.theking.zone/racing/2026-10-31/randwick",
+      "saved_model_rank": 5,
+      "actual_going_scenario_rank": 5,
+      "saved_model_leader": "Force March",
+      "saved_lead_gap_pp": 3.34,
+      "saved_chaos": 91,
+      "saved_model_field_count": 8
+    },
+    {
+      "meeting": "RANDWICK",
+      "race": 2,
+      "race_id": "2026-10-31_RANDWICK_R02",
+      "winner": "Bluish Hue",
+      "source_url": "https://www.theking.zone/racing/2026-10-31/randwick",
+      "saved_model_rank": 2,
+      "actual_going_scenario_rank": 2,
+      "saved_model_leader": "Party Boss",
+      "saved_lead_gap_pp": 0.9,
+      "saved_chaos": 96,
+      "saved_model_field_count": 13,
+      "confirmed_result_field_count": 14,
+      "saved_model_nonstarters": [],
+      "actual_starters_missing_from_model": [
+        "Explosive Tycoon"
+      ]
+    },
+    {
+      "meeting": "RANDWICK",
+      "race": 3,
+      "race_id": "2026-10-31_RANDWICK_R03",
+      "winner": "Ruination",
+      "source_url": "https://www.theking.zone/racing/2026-10-31/randwick",
+      "saved_model_rank": 5,
+      "actual_going_scenario_rank": 5,
+      "saved_model_leader": "Arapawa",
+      "saved_lead_gap_pp": 1.77,
+      "saved_chaos": 94,
+      "saved_model_field_count": 10
+    },
+    {
+      "meeting": "RANDWICK",
+      "race": 4,
+      "race_id": "2026-10-31_RANDWICK_R04",
+      "winner": "Stand My Ground",
+      "source_url": "https://www.theking.zone/racing/2026-10-31/randwick",
+      "saved_model_rank": 18,
+      "actual_going_scenario_rank": 18,
+      "saved_model_leader": "Cuban Cigar",
+      "saved_lead_gap_pp": 0.05,
+      "saved_chaos": 98,
+      "saved_model_field_count": 18
+    },
+    {
+      "meeting": "RANDWICK",
+      "race": 5,
+      "race_id": "2026-10-31_RANDWICK_R05",
+      "winner": "Columbus",
+      "source_url": "https://www.theking.zone/racing/2026-10-31/randwick",
+      "saved_model_rank": 1,
+      "actual_going_scenario_rank": 1,
+      "saved_model_leader": "Columbus",
+      "saved_lead_gap_pp": 2.45,
+      "saved_chaos": 90,
+      "saved_model_field_count": 6
+    },
+    {
+      "meeting": "RANDWICK",
+      "race": 6,
+      "race_id": "2026-10-31_RANDWICK_R06",
+      "winner": "Chix",
+      "source_url": "https://www.theking.zone/racing/2026-10-31/randwick",
+      "saved_model_rank": 3,
+      "actual_going_scenario_rank": 3,
+      "saved_model_leader": "Nova Centauri",
+      "saved_lead_gap_pp": 1.59,
+      "saved_chaos": 96,
+      "saved_model_field_count": 12
+    },
+    {
+      "meeting": "RANDWICK",
+      "race": 7,
+      "race_id": "2026-10-31_RANDWICK_R07",
+      "winner": "Pericles",
+      "source_url": "https://www.theking.zone/racing/2026-10-31/randwick",
+      "saved_model_rank": 9,
+      "actual_going_scenario_rank": 9,
+      "saved_model_leader": "Jimmysstar",
+      "saved_lead_gap_pp": 3.87,
+      "saved_chaos": 88,
+      "saved_model_field_count": 14,
+      "confirmed_result_field_count": 15,
+      "saved_model_nonstarters": [],
+      "actual_starters_missing_from_model": [
+        "Theblade"
+      ]
+    },
+    {
+      "meeting": "RANDWICK",
+      "race": 8,
+      "race_id": "2026-10-31_RANDWICK_R08",
+      "winner": "Skyhook",
+      "source_url": "https://www.theking.zone/racing/2026-10-31/randwick",
+      "saved_model_rank": 2,
+      "actual_going_scenario_rank": 2,
+      "saved_model_leader": "Sheza Alibi",
+      "saved_lead_gap_pp": 18.64,
+      "saved_chaos": 66,
+      "saved_model_field_count": 16
+    },
+    {
+      "meeting": "RANDWICK",
+      "race": 9,
+      "race_id": "2026-10-31_RANDWICK_R09",
+      "winner": "Travolta",
+      "source_url": "https://www.theking.zone/racing/2026-10-31/randwick",
+      "saved_model_rank": 4,
+      "actual_going_scenario_rank": 4,
+      "saved_model_leader": "Anthracite",
+      "saved_lead_gap_pp": 10.13,
+      "saved_chaos": 74,
+      "saved_model_field_count": 11
+    },
+    {
+      "meeting": "RANDWICK",
+      "race": 10,
+      "race_id": "2026-10-31_RANDWICK_R10",
+      "winner": "Better Late",
+      "source_url": "https://www.theking.zone/racing/2026-10-31/randwick",
+      "saved_model_rank": 6,
+      "actual_going_scenario_rank": 6,
+      "saved_model_leader": "Where'stheprofit",
+      "saved_lead_gap_pp": 16.91,
+      "saved_chaos": 71,
+      "saved_model_field_count": 9
+    },
+    {
+      "meeting": "FLEMINGTON",
+      "race": 1,
+      "race_id": "2026-10-31_FLEMINGTON_R01",
+      "winner": "The Roaring Sun",
+      "source_url": "https://www.theking.zone/racing/2026-10-31/flemington",
+      "saved_model_rank": 8,
+      "actual_going_scenario_rank": 8,
+      "saved_model_leader": "Strong Tempo",
+      "saved_lead_gap_pp": 0.43,
+      "saved_chaos": 97,
+      "saved_model_field_count": 9
+    },
+    {
+      "meeting": "FLEMINGTON",
+      "race": 2,
+      "race_id": "2026-10-31_FLEMINGTON_R02",
+      "winner": "Regal Ambition",
+      "source_url": "https://www.theking.zone/racing/2026-10-31/flemington",
+      "saved_model_rank": 1,
+      "actual_going_scenario_rank": 1,
+      "saved_model_leader": "Regal Ambition",
+      "saved_lead_gap_pp": 9.03,
+      "saved_chaos": 80,
+      "saved_model_field_count": 13
+    },
+    {
+      "meeting": "FLEMINGTON",
+      "race": 3,
+      "race_id": "2026-10-31_FLEMINGTON_R03",
+      "winner": "De Armas",
+      "source_url": "https://www.theking.zone/racing/2026-10-31/flemington",
+      "saved_model_rank": 2,
+      "actual_going_scenario_rank": 2,
+      "saved_model_leader": "Icelady",
+      "saved_lead_gap_pp": 9.21,
+      "saved_chaos": 78,
+      "saved_model_field_count": 17,
+      "confirmed_result_field_count": 17,
+      "saved_model_nonstarters": [
+        "Anglais"
+      ],
+      "actual_starters_missing_from_model": [
+        "Girl With A Pearl"
+      ]
+    },
+    {
+      "meeting": "FLEMINGTON",
+      "race": 4,
+      "race_id": "2026-10-31_FLEMINGTON_R04",
+      "winner": "Ndola",
+      "source_url": "https://www.theking.zone/racing/2026-10-31/flemington",
+      "saved_model_rank": 1,
+      "actual_going_scenario_rank": 1,
+      "saved_model_leader": "Ndola",
+      "saved_lead_gap_pp": 0.85,
+      "saved_chaos": 95,
+      "saved_model_field_count": 19
+    },
+    {
+      "meeting": "FLEMINGTON",
+      "race": 5,
+      "race_id": "2026-10-31_FLEMINGTON_R05",
+      "winner": "Private Eye",
+      "source_url": "https://www.theking.zone/racing/2026-10-31/flemington",
+      "saved_model_rank": 3,
+      "actual_going_scenario_rank": 3,
+      "saved_model_leader": "Warnie",
+      "saved_lead_gap_pp": 2.75,
+      "saved_chaos": 90,
+      "saved_model_field_count": 15,
+      "confirmed_result_field_count": 16,
+      "saved_model_nonstarters": [],
+      "actual_starters_missing_from_model": [
+        "King Zephyr"
+      ]
+    },
+    {
+      "meeting": "FLEMINGTON",
+      "race": 6,
+      "race_id": "2026-10-31_FLEMINGTON_R06",
+      "winner": "The Next Episode",
+      "source_url": "https://www.theking.zone/racing/2026-10-31/flemington",
+      "saved_model_rank": 5,
+      "actual_going_scenario_rank": 5,
+      "saved_model_leader": "Satono Glow",
+      "saved_lead_gap_pp": 9.53,
+      "saved_chaos": 79,
+      "saved_model_field_count": 14,
+      "confirmed_result_field_count": 13,
+      "saved_model_nonstarters": [
+        "Doubt Time"
+      ],
+      "actual_starters_missing_from_model": []
+    },
+    {
+      "meeting": "FLEMINGTON",
+      "race": 7,
+      "race_id": "2026-10-31_FLEMINGTON_R07",
+      "winner": "Stormy Marco",
+      "source_url": "https://www.theking.zone/racing/2026-10-31/flemington",
+      "saved_model_rank": 5,
+      "actual_going_scenario_rank": 5,
+      "saved_model_leader": "Quick Finish",
+      "saved_lead_gap_pp": 1.04,
+      "saved_chaos": 94,
+      "saved_model_field_count": 16
+    },
+    {
+      "meeting": "FLEMINGTON",
+      "race": 8,
+      "race_id": "2026-10-31_FLEMINGTON_R08",
+      "winner": "Lady Shenandoah",
+      "source_url": "https://www.theking.zone/racing/2026-10-31/flemington",
+      "saved_model_rank": 1,
+      "actual_going_scenario_rank": 1,
+      "saved_model_leader": "Lady Shenandoah",
+      "saved_lead_gap_pp": 4.87,
+      "saved_chaos": 84,
+      "saved_model_field_count": 11
+    },
+    {
+      "meeting": "FLEMINGTON",
+      "race": 9,
+      "race_id": "2026-10-31_FLEMINGTON_R09",
+      "winner": "Flying For Fun",
+      "source_url": "https://www.theking.zone/racing/2026-10-31/flemington",
+      "saved_model_rank": 2,
+      "actual_going_scenario_rank": 2,
+      "saved_model_leader": "Bridal Waltz",
+      "saved_lead_gap_pp": 7.86,
+      "saved_chaos": 81,
+      "saved_model_field_count": 16
+    },
+    {
+      "meeting": "ASCOT",
+      "race": 1,
+      "race_id": "2026-10-31_ASCOT_R01",
+      "winner": "I Love Ya Money",
+      "source_url": "https://www.theking.zone/racing/2026-10-31/ascot",
+      "saved_model_rank": 1,
+      "actual_going_scenario_rank": 1,
+      "saved_model_leader": "I Love Ya Money",
+      "saved_lead_gap_pp": 5.83,
+      "saved_chaos": 87,
+      "saved_model_field_count": 8
+    },
+    {
+      "meeting": "ASCOT",
+      "race": 2,
+      "race_id": "2026-10-31_ASCOT_R02",
+      "winner": "Linchpin",
+      "source_url": "https://www.theking.zone/racing/2026-10-31/ascot",
+      "saved_model_rank": 2,
+      "actual_going_scenario_rank": 1,
+      "saved_model_leader": "Bondi's Future",
+      "saved_lead_gap_pp": 2.93,
+      "saved_chaos": 89,
+      "saved_model_field_count": 8
+    },
+    {
+      "meeting": "ASCOT",
+      "race": 3,
+      "race_id": "2026-10-31_ASCOT_R03",
+      "winner": "Alaskan",
+      "source_url": "https://www.theking.zone/racing/2026-10-31/ascot",
+      "saved_model_rank": 6,
+      "actual_going_scenario_rank": 6,
+      "saved_model_leader": "Admire Astra",
+      "saved_lead_gap_pp": 2.81,
+      "saved_chaos": 91,
+      "saved_model_field_count": 12
+    },
+    {
+      "meeting": "ASCOT",
+      "race": 4,
+      "race_id": "2026-10-31_ASCOT_R04",
+      "winner": "Cinque Stelle",
+      "source_url": "https://www.theking.zone/racing/2026-10-31/ascot",
+      "saved_model_rank": 3,
+      "actual_going_scenario_rank": 3,
+      "saved_model_leader": "Like Clockwork",
+      "saved_lead_gap_pp": 4.72,
+      "saved_chaos": 85,
+      "saved_model_field_count": 9
+    },
+    {
+      "meeting": "ASCOT",
+      "race": 5,
+      "race_id": "2026-10-31_ASCOT_R05",
+      "winner": "First Beach",
+      "source_url": "https://www.theking.zone/racing/2026-10-31/ascot",
+      "saved_model_rank": 10,
+      "actual_going_scenario_rank": 10,
+      "saved_model_leader": "Anaconda Jones",
+      "saved_lead_gap_pp": 1.64,
+      "saved_chaos": 94,
+      "saved_model_field_count": 10
+    },
+    {
+      "meeting": "ASCOT",
+      "race": 6,
+      "race_id": "2026-10-31_ASCOT_R06",
+      "winner": "Levati Dimezzo",
+      "source_url": "https://www.theking.zone/racing/2026-10-31/ascot",
+      "saved_model_rank": 6,
+      "actual_going_scenario_rank": 6,
+      "saved_model_leader": "Aurum Belle",
+      "saved_lead_gap_pp": 3.23,
+      "saved_chaos": 88,
+      "saved_model_field_count": 8,
+      "confirmed_result_field_count": 7,
+      "saved_model_nonstarters": [
+        "Aurum Belle"
+      ],
+      "actual_starters_missing_from_model": []
+    },
+    {
+      "meeting": "ASCOT",
+      "race": 7,
+      "race_id": "2026-10-31_ASCOT_R07",
+      "winner": "Western Miss",
+      "source_url": "https://www.theking.zone/racing/2026-10-31/ascot",
+      "saved_model_rank": 1,
+      "actual_going_scenario_rank": 1,
+      "saved_model_leader": "Western Miss",
+      "saved_lead_gap_pp": 14.36,
+      "saved_chaos": 73,
+      "saved_model_field_count": 10
+    },
+    {
+      "meeting": "ASCOT",
+      "race": 8,
+      "race_id": "2026-10-31_ASCOT_R08",
+      "winner": "Talkanco",
+      "source_url": "https://www.theking.zone/racing/2026-10-31/ascot",
+      "saved_model_rank": 2,
+      "actual_going_scenario_rank": 3,
+      "saved_model_leader": "Immortal Bliss",
+      "saved_lead_gap_pp": 9.41,
+      "saved_chaos": 79,
+      "saved_model_field_count": 10
+    },
+    {
+      "meeting": "ASCOT",
+      "race": 9,
+      "race_id": "2026-10-31_ASCOT_R09",
+      "winner": "Hot And High",
+      "source_url": "https://www.theking.zone/racing/2026-10-31/ascot",
+      "saved_model_rank": 1,
+      "actual_going_scenario_rank": 1,
+      "saved_model_leader": "Hot And High",
+      "saved_lead_gap_pp": 8.36,
+      "saved_chaos": 77,
+      "saved_model_field_count": 11
+    },
+    {
+      "meeting": "ASCOT",
+      "race": 10,
+      "race_id": "2026-10-31_ASCOT_R10",
+      "winner": "Rock Fest",
+      "source_url": "https://www.theking.zone/racing/2026-10-31/ascot",
+      "saved_model_rank": 2,
+      "actual_going_scenario_rank": 1,
+      "saved_model_leader": "Prince Of Dala",
+      "saved_lead_gap_pp": 1.1,
+      "saved_chaos": 94,
+      "saved_model_field_count": 12,
+      "confirmed_result_field_count": 11,
+      "saved_model_nonstarters": [
+        "Prince Of Dala"
+      ],
+      "actual_starters_missing_from_model": []
+    }
+  ],
+  "caveats": [
+    "9/29 using hindsight track condition is not the original result: saved Good 4 scenario was 7/29.",
+    "No sampling inference or proof of a 60% hit rate is possible from a single meeting day.",
+    "Final source pages confirm 29 named winners, but may contain changes or missing runners versus saved pre-race cards."
+  ]
+}
