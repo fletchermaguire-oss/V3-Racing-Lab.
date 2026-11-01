@@ -19,7 +19,7 @@ function boot(){
  const C=State.create(State.applyOfficialOverlay(D,O),{checkpoint:Q,going:O.going});
  const doc={createElement:tag=>new Element(tag),getElementById:()=>null,body:new Element('body')};
  const win={location:{search:''},localStorage:{getItem:()=>null,setItem(){}},
-  RacingLabV5Model:Model,RacingLabV5Curated:Curated,RacingLabHorseAnalysis:require('./horse-analysis.js'),
+  RacingLabV5Model:Model,RacingLabV5Curated:Curated,RacingLabHorseAnalysis:require('./horse-analysis.js'),RacingLabV5Challenge:require('./challenge.js'),
   RacingLabV5State:State,scrollTo(){},requestAnimationFrame:null};
  const context=vm.createContext({window:win,document:doc,console:console,Set:Set,Map:Map,Promise:Promise});
  for(const file of ['v5/workshop.js','v5/dashboard.js'])vm.runInContext(fs.readFileSync(file,'utf8'),context,{filename:file});
@@ -412,4 +412,34 @@ test('all 15 researched selections expose percentage and signed separation again
  assert.ok(nodes.some(x=>x.className==='rlv5-selection-metrics'));
  assert.ok(nodes.some(x=>x.className==='rlv5-selection-model-percent'));
  assert.ok(nodes.some(x=>String(x.className).startsWith('rlv5-selection-margin')));
+});
+
+test('Race Centre has an active challenger review: same saved rank, traceable scenario changes and no auto-swap',()=>{
+ const {C,win}=boot(),root=new Element('main');
+ const r='2026-10-31_FLEMINGTON_R06';
+ const original=C.curated.entries.map(x=>[x.original_rank,x.horse]);
+ win.RacingLabV5Dashboard.renderInto(root,'races',C,()=>{},r);
+ const nodes=flatten(root);
+ assert.ok(nodes.some(x=>x.className==='rlv5-challenge-panel'));
+ const filters=nodes.filter(x=>x.tag==='select');
+ assert.ok(filters.length>=3);
+ const challenger=filters.find(x=>(x.children||[]).some(y=>y.textContent==='The Next Episode'));
+ assert.ok(challenger,'challenger must be selectable');
+ challenger.listeners.change('2026-10-31_FLEMINGTON_R06_01');
+ const run=nodes.find(x=>x.tag==='button'&&x.textContent==='Run evidence reassessment');
+ assert.ok(run&&run.listeners.click);
+ run.listeners.click();
+ const after=flatten(root);
+ assert.ok(after.some(x=>String(x.textContent).includes('CHALLENGE FLAGGED')));
+ assert.ok(after.some(x=>String(x.textContent).includes('Relative scenario change')));
+ assert.ok(after.some(x=>String(x.textContent).includes('HISTORICAL WHAT-IF ONLY')));
+ assert.deepEqual(C.curated.entries.map(x=>[x.original_rank,x.horse]),original);
+});
+test('both site entrypoints include the evidence challenge module without replacing the market-blind model',()=>{
+ for(const name of ['index.html','v5/index.html']){
+  const html=fs.readFileSync(name,'utf8');
+  assert.match(html,/v5\/challenge\.js\?v=evidence-review-20261101/);
+  assert.ok(html.indexOf('/v5/challenge.js')<html.indexOf('/v5/dashboard.js'));
+  assert.match(html,/v5\/model\.js\?v=shared-20261030/);
+ }
 });
