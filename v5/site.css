@@ -381,3 +381,5 @@
 .rlv5-challenge-export pre{max-height:260px;overflow:auto;white-space:pre-wrap;
  overflow-wrap:anywhere;font-size:11px;color:#d4e9e3;border:1px solid #355b61;border-radius:9px;padding:11px
 }
+
+.rlv5-final-field-warning{padding:12px 14px;margin:12px 0;border:1px solid #8b6b3b;background:rgba(123,85,35,.10);color:#e9d2a5;border-radius:10px;font-size:13px;line-height:1.5}
