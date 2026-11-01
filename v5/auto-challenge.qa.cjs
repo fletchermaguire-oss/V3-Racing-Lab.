@@ -65,7 +65,6 @@ test('same material flags as the existing human challenge for the named runners'
 });
 test('every available challenger is assessed once, no 3-runner shortcut and no same-race second selection',()=>{
  const x=check('2026-10-31_FLEMINGTON_R06','Satono Glow');
- const base=Model.calculate(data,{default:'Good 4'}).records.filter(x=>x.race_id===x?.race_id);
  const ids=x.all_rivals.map(h=>h.runner_id);
  assert.equal(new Set(ids).size,ids.length);
  assert.ok(!ids.includes(x.research_incumbent.runner_id));
