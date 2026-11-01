@@ -19,7 +19,7 @@ function boot(){
  const C=State.create(State.applyOfficialOverlay(D,O),{checkpoint:Q,going:O.going});
  const doc={createElement:tag=>new Element(tag),getElementById:()=>null,body:new Element('body')};
  const win={location:{search:''},localStorage:{getItem:()=>null,setItem(){}},
-  RacingLabV5Model:Model,RacingLabV5Curated:Curated,RacingLabHorseAnalysis:require('./horse-analysis.js'),RacingLabV5Challenge:require('./challenge.js'),
+  RacingLabV5Model:Model,RacingLabV5Curated:Curated,RacingLabHorseAnalysis:require('./horse-analysis.js'),RacingLabV5Challenge:require('./challenge.js'),RacingLabV5FieldGate:require('./field-gate.js'),
   RacingLabV5State:State,scrollTo(){},requestAnimationFrame:null};
  const context=vm.createContext({window:win,document:doc,console:console,Set:Set,Map:Map,Promise:Promise});
  for(const file of ['v5/workshop.js','v5/dashboard.js'])vm.runInContext(fs.readFileSync(file,'utf8'),context,{filename:file});
@@ -444,5 +444,24 @@ test('both site entrypoints include the evidence challenge module without replac
   assert.match(html,/v5\/challenge\.js\?v=evidence-review-20261101/);
   assert.ok(html.indexOf('/v5/challenge.js')<html.indexOf('/v5/dashboard.js'));
   assert.match(html,/v5\/model\.js\?v=shared-20261030/);
+ }
+});
+
+test('Race Centre explicitly withholds 31 October selections from final-starter certification, while keeping research visible',()=>{
+ const {C,win}=boot(),root=new Element('main');
+ win.RacingLabV5Dashboard.renderInto(root,'races',C,()=>{},'2026-10-31_FLEMINGTON_R06');
+ const nodes=flatten(root);
+ assert.ok(nodes.some(x=>String(x.textContent).includes('FINAL FIELD NOT CLEARED')));
+ assert.ok(nodes.some(x=>String(x.textContent).includes('Satono Glow')));
+ const cert=C.data.final_starter_attestation;
+ assert.equal(cert,undefined);
+ const qa=new Element('main');win.RacingLabV5Dashboard.renderInto(qa,'qa',C,()=>{},'2026-10-31_FLEMINGTON_R06');
+ assert.ok(flatten(qa).some(x=>String(x.textContent).includes('29 withheld')));
+});
+test('both entrypoints include immutable field-attestation gates before dashboard',()=>{
+ for(const name of ['index.html','v5/index.html']){
+  const source=fs.readFileSync(name,'utf8');
+  assert.match(source,/v5\/field-gate\.js\?v=full-starters-20261101/);
+  assert.ok(source.indexOf('/v5/field-gate.js')<source.indexOf('/v5/dashboard.js'));
  }
 });
