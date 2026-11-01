@@ -535,6 +535,39 @@ function challengePanel(r,reviewed,hs){
  root.append(reviewButton,result);
  return root;
 }
+function paceClassResearch(r,reviewed){
+ var panel=e('details','rlv5-pace-class');
+ panel.append(e('summary','','Pace, class and straight-course stress · research diagnostics'));
+ if(!global.RacingLabV5PaceClass){panel.append(e('p','muted small','Pre-race stress diagnostic unavailable.'));return panel;}
+ try{
+  var horse=reviewed&&reviewed.eligible?reviewed.id:
+   (C.board.baseline.records.find(function(h){return h.race_id===r.id&&h.rank===1;})||{}).id;
+  if(!horse)return panel;
+  var z=global.RacingLabV5PaceClass.inspect(C.data,{race_id:r.id,runner_id:horse,going:C.going[r.meeting]});
+  panel.append(e('p','muted small','Runner: '+z.horse+
+   (reviewed&&reviewed.eligible?' · original researched horse':' · model leader only; not a researched selection')+
+   '. No results enter this analysis.'));
+  panel.append(e('p','','Historical pace evidence: '+z.pressure.known_runners+'/'+z.pressure.modelled_runners+
+   ' with dated settling data. '+z.pressure.status.replaceAll('_',' ').toLowerCase()+
+   '. Possible early leaders: '+(z.pressure.historical_potential_leaders.join(', ')||'not established')+'.'));
+  panel.append(e('p','','Class assessment: '+z.class.grade_quality.toFixed(3)+
+   ' historic graded-form score; '+(z.class.opposition_class_edge>=0?'+':'')+
+   z.class.opposition_class_edge.toFixed(3)+' vs estimated rivals. Grades are proxies, not independently assessed opponent ability.'));
+  if(z.straight.applies){
+   var t=z.straight.history;
+   panel.append(e('p','','Flemington straight record: '+t.wins+'/'+t.starts+' wins · '+t.top3+
+    '/'+t.starts+' top-three finishes from documented <=1200m starts. Lane advantage and wind remain unverified.'));
+  }
+  var stress=e('div','rlv5-pace-stress');
+  z.stress.forEach(function(x){stress.append(add(e('div','rlv5-pace-stress-row'),
+   e('span','',x.label),e('strong','',pct(x.pct)+' · rank '+x.rank),
+   e('small','','Gap against closest rival: '+(x.separation_pp>=0?'+':'')+x.separation_pp.toFixed(2)+'pp')));});
+  panel.append(stress);
+  if(z.flags.length)panel.append(e('p','rlv5-pace-flags','Review flags: '+z.flags.join(' · ').replaceAll('_',' ').toLowerCase()));
+  panel.append(e('p','muted small','Uncalibrated sensitivity tests, not confirmed race-day pace or a new selection. No automatic changes to the original ranking; final starters and actual lanes need independent verification.'));
+ }catch(err){panel.append(e('p','muted small','Diagnostic withheld: '+err.message));}
+ return panel;
+}
 function fieldReleaseWarning(r,pick){
  if(!global.RacingLabV5FieldGate)return note('Final-starter gate unavailable — selections are NOT verified for pre-race release.');
  var gate=global.RacingLabV5FieldGate.assess(C.data,C.data.final_starter_attestation||null,{
@@ -597,6 +630,7 @@ function racesPage(){
  root.append(pickPanel);
  root.append(fieldReleaseWarning(r,reviewed||reviewOnly));
  if(hs.length>=2)root.append(challengePanel(r,reviewed,hs));
+ root.append(paceClassResearch(r,reviewed));
  // Technical comparison remains accessible, but is NOT a second pick card.
  var modelNotes=e('details','rlv5-model-notes');
  modelNotes.append(e('summary','','Model check · not another selection'));
