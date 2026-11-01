@@ -118,3 +118,16 @@ test('GitHub commit proof must follow the snapshot creation and precede the sche
  badLock.locked_selections[0].locked_at_utc='2026-10-31T00:41:01Z';
  assert.throws(()=>F.summarize(badLock),/Invalid, duplicated, after-start/);
 });
+
+test('forward record parser supports a future Saturday instead of hardcoding 31 October',()=>{
+ const x=verified();
+ x.meeting_date='2026-11-07';
+ x.freeze_proof.committed_at_utc='2026-11-06T23:30:00Z';
+ x.locked_selections[0].runner_id='2026-11-07_EAGLEFARM_R08_06';
+ x.locked_selections[0].race_id='2026-11-07_EAGLEFARM_R08';
+ x.locked_selections[0].locked_at_utc='2026-11-06T23:29:00Z';
+ x.locked_selections[0].race_at_utc='2026-11-07T05:00:00Z';
+ assert.equal(F.summarize(x).locked,1);
+ x.meeting_date='2026-11-08';
+ assert.throws(()=>F.summarize(x),/Invalid, duplicated, after-start/);
+});
