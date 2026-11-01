@@ -19,7 +19,7 @@ function boot(){
  const C=State.create(State.applyOfficialOverlay(D,O),{checkpoint:Q,going:O.going});
  const doc={createElement:tag=>new Element(tag),getElementById:()=>null,body:new Element('body')};
  const win={location:{search:''},localStorage:{getItem:()=>null,setItem(){}},
-  RacingLabV5Model:Model,RacingLabV5Curated:Curated,RacingLabHorseAnalysis:require('./horse-analysis.js'),RacingLabV5Challenge:require('./challenge.js'),RacingLabV5FieldGate:require('./field-gate.js'),RacingLabV5PaceClass:require('./pace-class.js'),
+  RacingLabV5Model:Model,RacingLabV5Curated:Curated,RacingLabHorseAnalysis:require('./horse-analysis.js'),RacingLabV5Challenge:require('./challenge.js'),RacingLabV5FieldGate:require('./field-gate.js'),RacingLabV5PaceClass:require('./pace-class.js'),RacingLabV5AutoChallenge:require('./auto-challenge.js'),
   RacingLabV5State:State,scrollTo(){},requestAnimationFrame:null};
  const context=vm.createContext({window:win,document:doc,console:console,Set:Set,Map:Map,Promise:Promise});
  for(const file of ['v5/workshop.js','v5/dashboard.js'])vm.runInContext(fs.readFileSync(file,'utf8'),context,{filename:file});
@@ -484,4 +484,35 @@ test('Both site entrypoints load pace/class diagnostic before dashboard',()=>{
   assert.match(s,/v5\/pace-class\.js\?v=pace-research-20261101/);
   assert.ok(s.indexOf('/v5/pace-class.js')<s.indexOf('/v5/dashboard.js'));
  }
+});
+
+test('Race Centre automatically shows The Next Episode as priority rival without changing Satono Glow',()=>{
+ const {C,win}=boot(),root=new Element('main');
+ win.RacingLabV5Dashboard.renderInto(root,'races',C,()=>{},'2026-10-31_FLEMINGTON_R06');
+ const nodes=flatten(root),details=nodes.find(x=>x.className==='rlv5-all-runner-challenge');
+ assert.ok(details,'Whole field scan section missing');
+ assert.ok(flatten(details).some(x=>String(x.textContent).includes('Automatic challenger scan · 1 priority')));
+ assert.ok(flatten(details).some(x=>String(x.textContent).includes('The Next Episode')));
+ assert.ok(flatten(details).some(x=>String(x.textContent).includes('Historical replay only')));
+ assert.equal(C.curated.entries.find(x=>x.horse==='Satono Glow').original_rank,7);
+ assert.ok(flatten(root).some(x=>String(x.className).includes('rlv5-race-selection')));
+});
+test('Both site entrypoints load automatic entire-field challenge scanner before shared dashboard',()=>{
+ for(const path of ['index.html','v5/index.html']){
+  const html=fs.readFileSync(path,'utf8');
+  assert.match(html,/v5\/auto-challenge\.js\?v=all-runner-review-20261101/);
+  assert.ok(html.indexOf('/v5/auto-challenge.js')<html.indexOf('/v5/dashboard.js'));
+ }
+});
+
+test('Top 5/10/15 keeps original research ranks but shows automatic caution alongside flagged runners',()=>{
+ const {C,win}=boot(),root=new Element('main');
+ win.RacingLabV5Dashboard.renderInto(root,'top10',C,()=>{},'2026-10-31_FLEMINGTON_R06');
+ let nodes=flatten(root);
+ assert.ok(nodes.some(x=>String(x.textContent).includes('Whole-field evidence check')));
+ const satono=nodes.find(x=>x.tag==='button'&&x.dataset.runnerId==='2026-10-31_FLEMINGTON_R06_13');
+ assert.ok(satono,'original Satono Glow card remains unchanged');
+ assert.ok(flatten(satono).some(x=>String(x.textContent).includes('priority challenger review')));
+ assert.equal(C.curated.entries.find(x=>x.horse==='Satono Glow').original_rank,7);
+ assert.equal(C.curated.entries.find(x=>x.horse==='Lady Shenandoah').original_rank,4);
 });

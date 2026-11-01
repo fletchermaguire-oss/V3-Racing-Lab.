@@ -393,3 +393,17 @@
 .rlv5-pace-stress-row strong,.rlv5-pace-stress-row small{text-align:right;font-variant-numeric:tabular-nums}
 .rlv5-pace-flags{color:#efc28c}
 @media(max-width:630px){.rlv5-pace-stress-row{grid-template-columns:1fr 112px}.rlv5-pace-stress-row small{grid-column:1 / -1;text-align:left}}
+
+/* Automatic whole-field QA remains collapsed; never competes with the researched selection. */
+.rlv5-all-runner-challenge{margin:12px 0 16px;border:1px solid #42616a;border-radius:12px;padding:13px;background:#101f28}
+.rlv5-all-runner-challenge>summary{cursor:pointer;font-weight:740}
+.rlv5-all-runner-challenge-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:10px;margin:12px 0}
+.rlv5-all-runner-challenge-item{border:1px solid #294650;background:#091820;border-radius:10px;padding:12px}
+.rlv5-all-runner-challenge-item.priority{border-color:#b39458}
+.rlv5-all-runner-challenge-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.rlv5-all-runner-challenge-head>span{font-size:10px;color:#ddc18e;text-align:right}
+.rlv5-all-runner-challenge-item p{line-height:1.45;margin:9px 0;font-size:12px}
+
+.rlv5-shortlist-review-summary{margin:8px 0 12px;font-size:12px;line-height:1.5;color:#b3d8d2}
+.rlv5-shortlist-auto-alert{color:#e5c48d;font-size:12px;font-weight:650;margin:7px 0 0}
+.rlv5-shortlist-auto-alert.subdued{color:#a5cad0;font-weight:500}

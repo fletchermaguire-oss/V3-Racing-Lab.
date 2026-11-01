@@ -322,6 +322,20 @@ function aTierSummary(){
  });
  return panel;
 }
+var ALL_RUNNER_CACHE=null;
+function allResearchFlags(){
+ if(!global.RacingLabV5AutoChallenge||!C.curated)return null;
+ var key=C.revision+'|'+C.data.date+'|'+JSON.stringify(C.going);
+ if(ALL_RUNNER_CACHE&&ALL_RUNNER_CACHE.key===key&&ALL_RUNNER_CACHE.data===C.data&&
+    ALL_RUNNER_CACHE.ranks===C.curated.entries)return ALL_RUNNER_CACHE.value;
+ try{
+  var value=global.RacingLabV5AutoChallenge.scanCard(C.data,{entries:C.curated.entries},{
+   going:Object.fromEntries(Object.keys(C.going).map(function(m){return [m,'Soft 5'];}))
+  });
+  ALL_RUNNER_CACHE={key:key,data:C.data,ranks:C.curated.entries,value:value};
+  return value;
+ }catch(err){return null;}
+}
 function top10(){
  // The primary shortlist is ALWAYS independently researched; model leaderboards
  // and local edit controls are optional, collapsed diagnostics below it.
@@ -346,6 +360,10 @@ function top10(){
   'Ranks 11–15 are additional review candidates, not equal-conviction Top 10 selections.':
   'Only independently reviewed selections appear here. A scratching does not silently promote another horse.');
  root.append(subtitle);
+ var automatic=allResearchFlags();
+ if(automatic)root.append(e('p','rlv5-shortlist-review-summary',
+  'Whole-field evidence check: '+automatic.challenged_races+'/'+automatic.research_races+
+  ' researched races have at least one Soft 5 scenario challenger. Open a flagged runner to inspect evidence; no horses are automatically replaced.'));
  var list=e('div','rlv5-shortlist-cards');
  items.forEach(function(h){
   var card=e('button','rlv5-shortlist-card'+(h.eligible?'':' excluded')),
@@ -364,6 +382,13 @@ function top10(){
   grades.append(e('small','','MODEL ESTIMATE'));
    grades.append(marginElement(h));
   if(!h.eligible)grades.append(e('span','rlv5-shortlist-out','Out of field'));
+  if(automatic&&h.eligible){
+   var alert=automatic.results.find(function(x){return x.race_id===h.race_id;});
+   if(alert&&alert.priority_review_count>0)name.append(e('p','rlv5-shortlist-auto-alert',
+    alert.priority_review_count+' priority challenger review'+(alert.priority_review_count===1?'':'s')+' · scenario only'));
+   else if(alert&&alert.review_count>0)name.append(e('p','rlv5-shortlist-auto-alert subdued',
+    alert.review_count+' secondary challenger check'+(alert.review_count===1?'':'s')+' · scenario only'));
+  }
   add(card,e('span','rlv5-shortlist-rank',String(h.rank).padStart(2,'0')),name,grades);
   card.addEventListener('click',function(){selectRace(h.race_id,h.id);});
   list.append(card);
@@ -468,6 +493,49 @@ function horseDetail(h){
  root.append(deep);return root;
 }
 
+function autoChallengePanel(r,reviewed){
+ if(!reviewed||!reviewed.eligible)return null;
+ var p=e('details','rlv5-all-runner-challenge');
+ if(!global.RacingLabV5AutoChallenge){
+  p.append(e('summary','','All-runner challenge scan unavailable'));return p;
+ }
+ try{
+  var report=global.RacingLabV5AutoChallenge.scan(C.data,{
+   race_id:r.id,incumbent_id:reviewed.id,reported_going:'Soft 5'
+  });
+  p.append(e('summary','','Automatic challenger scan · '+report.priority_review_count+
+   ' priority / '+report.review_count+' total review flags'));
+  p.append(e('p','muted small','Scans all '+report.total_other_included_runners+
+   ' eligible opponents against our researched horse ('+report.research_incumbent.horse+
+   '), using the Good 4 → Soft 5 scenario. These are NOT revised selections or verified track conditions.'));
+  if(Date.parse(C.data.date+'T23:59:59+10:00')<Date.now())
+   p.append(e('p','muted small','Historical replay only: this race has already occurred. These flags cannot count as an earlier recommendation or change the published result.'));
+  var list=e('div','rlv5-all-runner-challenge-list');
+  if(report.review_count===0)list.append(e('p','muted small','No material wet-form or scenario challenges detected in the saved field. This is not proof of a safe favourite.'));
+  report.pending_reviews.forEach(function(x){
+   var strong=x.priority_review;
+   var item=e('div','rlv5-all-runner-challenge-item'+(strong?' priority':''));
+   item.append(add(e('div','rlv5-all-runner-challenge-head'),
+    e('strong','',x.horse),
+    e('span','',strong?'PRIORITY REVIEW':'Secondary review')));
+   item.append(e('p','muted small',
+    'Good 4 '+pct(x.model_good4_pct)+' (rank '+x.model_good4_rank+') · Soft 5 '+
+    pct(x.model_scenario_pct)+' (rank '+x.model_scenario_rank+') · Relative change '+
+    (x.relative_scenario_uplift_pp>=0?'+':'')+x.relative_scenario_uplift_pp.toFixed(2)+'pp'));
+   item.append(e('p','muted small','Documented wet record: '+(x.wet_form.known?
+    x.wet_form.wins+'/'+x.wet_form.starts+' wins':'unknown')+
+    ' · Evidence: '+x.flags.filter(function(f){return f!=='WET_HISTORY_INCOMPLETE';}).map(function(f){
+     return f.replaceAll('_',' ').toLowerCase();}).join(', ')));
+   item.append(action('Inspect runner',function(){S.runner=x.runner_id;render();},'ghost'));
+   list.append(item);
+  });
+  p.append(list,e('p','muted small','One-flag reviews are deliberately secondary; stronger warnings require at least two independent material review triggers. A flagged horse is NOT automatically preferred. Validate actual starters, class and race shape before revising anything.'));
+ }catch(error){
+  p.append(e('summary','','Automatic challenger scan · evidence unavailable'),
+   e('p','muted small','Screen withheld: '+error.message));
+ }
+ return p;
+}
 function challengePanel(r,reviewed,hs){
  var root=e('section','panel rlv5-challenge-panel');
  root.append(e('span','rlv5-kicker','PRE-RACE EVIDENCE CHALLENGE'),
@@ -629,6 +697,7 @@ function racesPage(){
   pickPanel.append(e('p','rlv5-race-selection-reason',reviewed.reason));
  root.append(pickPanel);
  root.append(fieldReleaseWarning(r,reviewed||reviewOnly));
+ root.append(autoChallengePanel(r,reviewed||reviewOnly));
  if(hs.length>=2)root.append(challengePanel(r,reviewed,hs));
  root.append(paceClassResearch(r,reviewed));
  // Technical comparison remains accessible, but is NOT a second pick card.
