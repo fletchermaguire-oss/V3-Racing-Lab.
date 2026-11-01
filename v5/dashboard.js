@@ -322,6 +322,20 @@ function aTierSummary(){
  });
  return panel;
 }
+var ALL_RUNNER_CACHE=null;
+function allResearchFlags(){
+ if(!global.RacingLabV5AutoChallenge||!C.curated)return null;
+ var key=C.revision+'|'+C.data.date+'|'+JSON.stringify(C.going);
+ if(ALL_RUNNER_CACHE&&ALL_RUNNER_CACHE.key===key&&ALL_RUNNER_CACHE.data===C.data&&
+    ALL_RUNNER_CACHE.ranks===C.curated.entries)return ALL_RUNNER_CACHE.value;
+ try{
+  var value=global.RacingLabV5AutoChallenge.scanCard(C.data,{entries:C.curated.entries},{
+   going:Object.fromEntries(Object.keys(C.going).map(function(m){return [m,'Soft 5'];}))
+  });
+  ALL_RUNNER_CACHE={key:key,data:C.data,ranks:C.curated.entries,value:value};
+  return value;
+ }catch(err){return null;}
+}
 function top10(){
  // The primary shortlist is ALWAYS independently researched; model leaderboards
  // and local edit controls are optional, collapsed diagnostics below it.
@@ -346,6 +360,10 @@ function top10(){
   'Ranks 11–15 are additional review candidates, not equal-conviction Top 10 selections.':
   'Only independently reviewed selections appear here. A scratching does not silently promote another horse.');
  root.append(subtitle);
+ var automatic=allResearchFlags();
+ if(automatic)root.append(e('p','rlv5-shortlist-review-summary',
+  'Whole-field evidence check: '+automatic.challenged_races+'/'+automatic.research_races+
+  ' researched races have at least one Soft 5 scenario challenger. Open a flagged runner to inspect evidence; no horses are automatically replaced.'));
  var list=e('div','rlv5-shortlist-cards');
  items.forEach(function(h){
   var card=e('button','rlv5-shortlist-card'+(h.eligible?'':' excluded')),
@@ -364,6 +382,13 @@ function top10(){
   grades.append(e('small','','MODEL ESTIMATE'));
    grades.append(marginElement(h));
   if(!h.eligible)grades.append(e('span','rlv5-shortlist-out','Out of field'));
+  if(automatic&&h.eligible){
+   var alert=automatic.results.find(function(x){return x.race_id===h.race_id;});
+   if(alert&&alert.priority_review_count>0)name.append(e('p','rlv5-shortlist-auto-alert',
+    alert.priority_review_count+' priority challenger review'+(alert.priority_review_count===1?'':'s')+' · scenario only'));
+   else if(alert&&alert.review_count>0)name.append(e('p','rlv5-shortlist-auto-alert subdued',
+    alert.review_count+' secondary challenger check'+(alert.review_count===1?'':'s')+' · scenario only'));
+  }
   add(card,e('span','rlv5-shortlist-rank',String(h.rank).padStart(2,'0')),name,grades);
   card.addEventListener('click',function(){selectRace(h.race_id,h.id);});
   list.append(card);
