@@ -433,7 +433,7 @@ test('Race Centre has an active challenger review: same saved rank, traceable sc
  assert.ok(run&&run.listeners.click);
  run.listeners.click();
  const after=flatten(root);
- assert.ok(after.some(x=>String(x.textContent).includes('CHALLENGE FLAGGED')));
+ assert.ok(after.some(x=>String(x.textContent).includes('CHALLENGE FLAGGED')),after.filter(x=>x.textContent).map(x=>x.textContent).slice(-38).join(' | '));
  assert.ok(after.some(x=>String(x.textContent).includes('Relative scenario change')));
  assert.ok(after.some(x=>String(x.textContent).includes('HISTORICAL WHAT-IF ONLY')));
  assert.deepEqual(C.curated.entries.map(x=>[x.original_rank,x.horse]),original);
