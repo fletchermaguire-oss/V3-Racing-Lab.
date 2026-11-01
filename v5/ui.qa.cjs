@@ -425,10 +425,10 @@ test('Race Centre has an active challenger review: same saved rank, traceable sc
  assert.ok(filters.length>=3);
  const challenger=filters.find(x=>(x.children||[]).some(y=>y.textContent==='The Next Episode'));
  assert.ok(challenger,'challenger must be selectable');
- challenger.listeners.change('2026-10-31_FLEMINGTON_R06_01');
+ challenger.value='2026-10-31_FLEMINGTON_R06_01';challenger.listeners.change();
  const going=filters.find(x=>(x.children||[]).some(y=>y.textContent==='Soft 5'));
  assert.ok(going,'scenario selector must exist');
- going.listeners.change('Soft 5');
+ going.value='Soft 5';going.listeners.change();
  const run=nodes.find(x=>x.tag==='button'&&x.textContent==='Run evidence reassessment');
  assert.ok(run&&run.listeners.click);
  run.listeners.click();
