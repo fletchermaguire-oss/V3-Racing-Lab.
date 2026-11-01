@@ -7,10 +7,10 @@
 (function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.RacingLabForward=api;})(typeof window!=='undefined'?window:globalThis,function(){
 'use strict';
 const SCHEMA='racing-lab-prospective-record/v1';
-const idPattern=/^[0-9]{4}-[0-9]{2}-[0-9]{2}_(RANDWICK|FLEMINGTON|ASCOT)_R[0-9]{2}_[0-9]{2}$/;
+const idPattern=/^\d{4}-\d{2}-\d{2}_[A-Z][A-Z0-9]*_R\d{2}_\d{2,3}$/;
 function utc(s){if(typeof s!=='string'||!/^\d{4}-\d{2}-\d{2}T\d\d:\d\d:\d\d(?:\.\d+)?Z$/.test(s))return null;const d=Date.parse(s);return Number.isFinite(d)?d:null;}
 function check(d){
- if(!d||d.schema!==SCHEMA||!/^2026-10-31$/.test(d.meeting_date)||d.publication_approved!==false||
+ if(!d||d.schema!==SCHEMA||!/^\d{4}-\d{2}-\d{2}$/.test(d.meeting_date)||!Number.isFinite(Date.parse(d.meeting_date+'T00:00:00Z'))||d.publication_approved!==false||
   typeof d.independent_freeze_verified!=='boolean'||
   !Array.isArray(d.locked_selections)||!Array.isArray(d.official_results)||
   !['AWAITING_VERIFIED_PRE_RACE_LOCK','PRE_RACE_LOCK_CLAIMED','VERIFIED_FORWARD_TRACKING'].includes(d.status))
@@ -60,7 +60,7 @@ function summarize(data){
  });
  return {status:eligible?'INDEPENDENTLY_VERIFIED_FORWARD_ONLY':'NOT_YET_ELIGIBLE_FOR_FORWARD_STRIKE_RATE',
   freeze_verified:eligible,groups:groups,locked:eligible?ranked.length:0,completed:eligible?groups[2].completed:0,
-  warning:eligible?'Only official runner-matched results and pre-race locked selections counted.':'No independently verified prospective lock; retrospective 17/49 cannot be used as forward V5 performance.'};
+  warning:eligible?'Only official runner-matched results and pre-race locked selections counted.':'No independently verified prospective lock; mixed historical research is not genuine out-of-sample forward V5 performance.'};
 }
 return {check:check,summarize:summarize};
 });
