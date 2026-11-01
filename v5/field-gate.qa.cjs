@@ -47,9 +47,11 @@ test('an unaccounted emergency or missing runner blocks clearance even if select
  a=Gate.assess(data,b);
  assert.equal(a.release_eligible_races,0);
  assert.ok(a.races.find(x=>x.race_id===raceId).flags.includes('OFFICIAL_STARTER_NOT_IN_SAVED_DOSSIERS'));
- assert.ok(excluded.length>0);
- const c=report();c.races[0].active_runner_ids.push(excluded[0].id);
- a=Gate.assess(data,c);
+ const changed=clone(data);
+ const newlyExcluded=changed.runners.find(h=>h.id===eligible[0].id);
+ newlyExcluded.status='SCRATCHED — official test-only example';
+ const c=report();
+ a=Gate.assess(changed,c);
  assert.ok(a.races.find(x=>x.race_id===raceId).flags.includes('SAVED_EXCLUSION_ACTUALLY_STARTING'));
 });
 test('after-jump, undocumented, missing review or wrong-day certificates never clear a field',()=>{
