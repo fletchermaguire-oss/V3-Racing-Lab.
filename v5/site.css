@@ -364,3 +364,20 @@
 }
 .rlv5-selection-metrics .rlv5-selection-margin{font-size:12px}
 .rlv5-selection-metrics>small:last-child{font-size:10px;color:#b3c5bf}
+
+/* Evidence review is a diagnostic, not a second selection card */
+.rlv5-challenge-panel{margin:13px 0 20px;border:1px solid #375a5e;background:#0b2228}
+.rlv5-challenge-panel h3{font-size:17px;margin:5px 0}
+.rlv5-challenge-panel .rlv5-challenge-fields{display:flex;flex-wrap:wrap;gap:12px}
+.rlv5-challenge-panel .rlv5-challenge-fields .field{flex:1 1 160px;min-width:135px}
+.rlv5-challenge-panel .rlv5-challenge-fields input{
+ box-sizing:border-box;width:100%;background:#172d36;border:1px solid #3e6172;
+ border-radius:8px;padding:10px;color:#e5f7f0;font:inherit;font-size:13px
+}
+.rlv5-challenge-outcome{margin-top:12px}
+.rlv5-challenge-outcome>strong{color:#bceccd}
+.rlv5-challenge-outcome>p{margin:7px 0}
+.rlv5-challenge-export summary{cursor:pointer;font-size:12px}
+.rlv5-challenge-export pre{max-height:260px;overflow:auto;white-space:pre-wrap;
+ overflow-wrap:anywhere;font-size:11px;color:#d4e9e3;border:1px solid #355b61;border-radius:9px;padding:11px
+}
