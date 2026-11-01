@@ -420,12 +420,15 @@ test('Race Centre has an active challenger review: same saved rank, traceable sc
  const original=C.curated.entries.map(x=>[x.original_rank,x.horse]);
  win.RacingLabV5Dashboard.renderInto(root,'races',C,()=>{},r);
  const nodes=flatten(root);
- assert.ok(nodes.some(x=>x.className==='rlv5-challenge-panel'));
+ assert.ok(nodes.some(x=>String(x.className).includes('rlv5-challenge-panel')));
  const filters=nodes.filter(x=>x.tag==='select');
  assert.ok(filters.length>=3);
  const challenger=filters.find(x=>(x.children||[]).some(y=>y.textContent==='The Next Episode'));
  assert.ok(challenger,'challenger must be selectable');
  challenger.listeners.change('2026-10-31_FLEMINGTON_R06_01');
+ const going=filters.find(x=>(x.children||[]).some(y=>y.textContent==='Soft 5'));
+ assert.ok(going,'scenario selector must exist');
+ going.listeners.change('Soft 5');
  const run=nodes.find(x=>x.tag==='button'&&x.textContent==='Run evidence reassessment');
  assert.ok(run&&run.listeners.click);
  run.listeners.click();
