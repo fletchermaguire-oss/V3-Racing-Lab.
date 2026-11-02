@@ -1,0 +1,227 @@
+{
+  "schema": "racing-lab-v5-official-pre-race-overlay/v1",
+  "race_date": "2026-11-03",
+  "checked_at": "2026-11-02T18:00:00+11:00",
+  "publication_approved": false,
+  "final_starters_verified": false,
+  "notice": "Monday 2 November official racecard scratchings observed before the Tuesday 07:30 AEDT close. These withdrawals are verified as published, but final field, reserve activations and final track conditions remain unverified. PDF-listed remaining 294 differs from official sheet starter totals incl emergencies 154 Flemington and 143 Randwick. Do NOT publish a certified Top10 or multi.",
+  "meetings": {
+    "FLEMINGTON": {
+      "track_condition": "Good 4",
+      "rail": "Out 3m Entire Circuit",
+      "weather": "Showers",
+      "source_published_at": "2026-11-02T15:19:00+11:00",
+      "source_url": "https://www.racingaustralia.horse/FreeFields/Scratchings.aspx?Key=2026Nov03%2CVIC%2CFlemington",
+      "scratched_total": 13,
+      "source_total_including_emergencies": 154,
+      "expected_pdf_remaining": 152
+    },
+    "RANDWICK": {
+      "track_condition": "Good 4",
+      "rail": "+2m Entire",
+      "weather": "Overcast",
+      "source_published_at": "2026-11-02T17:45:00+11:00",
+      "source_url": "https://mdata.racingnsw.com.au/FreeFields/Scratchings.aspx?Key=2026Nov03%2CNSW%2CRoyal+Randwick",
+      "scratched_total": 26,
+      "source_total_including_emergencies": 143,
+      "expected_pdf_remaining": 142
+    }
+  },
+  "scratchings": {
+    "FLEMINGTON_R02": [
+      [
+        9,
+        "UNSEEN RULER"
+      ],
+      [
+        17,
+        "TERRORTORIAN"
+      ]
+    ],
+    "FLEMINGTON_R03": [
+      [
+        3,
+        "TRUE TONE"
+      ],
+      [
+        11,
+        "STAR JE TAIME"
+      ]
+    ],
+    "FLEMINGTON_R04": [
+      [
+        14,
+        "SOUTHERN SWAY"
+      ]
+    ],
+    "FLEMINGTON_R06": [
+      [
+        3,
+        "TAVI TIME"
+      ],
+      [
+        12,
+        "REAL CLASS"
+      ]
+    ],
+    "FLEMINGTON_R08": [
+      [
+        4,
+        "BEAUTIFUL YOU"
+      ],
+      [
+        6,
+        "HIGH FALLS"
+      ],
+      [
+        11,
+        "AUTUMN LOVER"
+      ]
+    ],
+    "FLEMINGTON_R09": [
+      [
+        16,
+        "YOU SEXY THING"
+      ]
+    ],
+    "FLEMINGTON_R10": [
+      [
+        5,
+        "SURF’S UP"
+      ],
+      [
+        10,
+        "MAN OF WORTH"
+      ]
+    ],
+    "RANDWICK_R02": [
+      [
+        2,
+        "VEECEE"
+      ],
+      [
+        11,
+        "NEVERMISTA"
+      ],
+      [
+        13,
+        "HOME SIREN"
+      ],
+      [
+        18,
+        "TOMMY’S GIRL"
+      ]
+    ],
+    "RANDWICK_R03": [
+      [
+        2,
+        "EXTRA HEIGHTS"
+      ],
+      [
+        9,
+        "SKY DECK"
+      ],
+      [
+        12,
+        "ROLLING HOME"
+      ],
+      [
+        13,
+        "MENSHEVIK"
+      ],
+      [
+        15,
+        "SKIRMISH"
+      ]
+    ],
+    "RANDWICK_R04": [
+      [
+        10,
+        "SUPER HELPFUL"
+      ],
+      [
+        12,
+        "ACHESON"
+      ]
+    ],
+    "RANDWICK_R05": [
+      [
+        13,
+        "MIGHTY ULYSSES"
+      ]
+    ],
+    "RANDWICK_R06": [
+      [
+        1,
+        "CHIDIAC"
+      ],
+      [
+        3,
+        "SO YOU PENCE"
+      ],
+      [
+        13,
+        "BON HOLLER"
+      ],
+      [
+        16,
+        "LOVE SHUCK"
+      ],
+      [
+        17,
+        "ROSE AYE"
+      ]
+    ],
+    "RANDWICK_R07": [
+      [
+        7,
+        "FLYING FROM ABOVE"
+      ],
+      [
+        11,
+        "MICHELANGELO"
+      ],
+      [
+        12,
+        "DANCES WITH HOOVES"
+      ],
+      [
+        20,
+        "MICRO MIKKI"
+      ]
+    ],
+    "RANDWICK_R08": [
+      [
+        1,
+        "MAHARBA"
+      ]
+    ],
+    "RANDWICK_R09": [
+      [
+        2,
+        "POWER OF THE BRAVE"
+      ],
+      [
+        3,
+        "BENEVAC"
+      ]
+    ],
+    "RANDWICK_R10": [
+      [
+        1,
+        "THEBLADE"
+      ],
+      [
+        13,
+        "WHO BUT ROO"
+      ]
+    ]
+  },
+  "source_notes": [
+    "Racing Australia 2 Nov 3:19pm AEDT: 13 Flemington scratches",
+    "Racing NSW 2 Nov 5:45pm AEDT: 26 Randwick scratches",
+    "The separate original 333-runner PDF research file and original analysis remain unchanged. This overlay does not certify emergency activation.",
+    "Final scratch close Tuesday 3 Nov 7:30am AEDT (6:30am Brisbane); check again then.",
+    "26+13 include published Monday withdrawn emergencies where listed; no emergency promoted."
+  ]
+}

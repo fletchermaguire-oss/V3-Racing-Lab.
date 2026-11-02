@@ -27,6 +27,28 @@ function modelImportList(limit,allMeetings){
  });
  return list;
 }
+function importedOfficialPanel(){
+ var o=D&&D.official_pre_race;
+ if(!o)return box('Official field checkpoint','No date-matched official source is available; field verification withheld.');
+ var dates=Object.entries(o.meetings).map(function(pair){
+  var m=pair[0],v=pair[1];
+  return m+': '+v.track_condition+' · rail '+v.rail+' · '+v.scratched_total+' scratches · last published '+v.source_published_at;
+ });
+ var panel=box('2 November official scratchings · NOT FINAL',dates.join(' | '));
+ panel.append(e('p','muted small','39 published withdrawals applied; '+C.board.activeCount+' PDF-listed runners remain modelled, '+C.board.excludedCount+' excluded. Official sheet totals including emergencies (154 Flemington / 143 Randwick) differ from 152 / 142 PDF-minus-scratches. No final starter or reserve certification.'));
+ panel.append(e('p','muted small','Final scratchings close Tuesday 3 November 7:30am AEDT (6:30am Brisbane). Flemington has showers and potential Soft-track sensitivity; Randwick published Good 4. This is a timestamped research checkpoint, not final publication.'));
+ Object.keys(o.meetings).forEach(function(m){panel.append(link(m+' official scratching sheet',o.meetings[m].source_url));});
+ return panel;
+}
+function importedStrictScreen(){
+ var w=C.board.winFirst,priority=w.priority,review=w.review;
+ var p=box('Strict V5 win-first screening',priority.length+' priority candidates; '+review.length+' conditional reviews; '+w.avoid.length+' races without qualifying selection. No pre-race shortlist has been independently approved.');
+ if(priority.length)p.append(e('p','',priority.map(function(x){return x.horse+' ('+x.meeting+' R'+x.race+')';}).join(', ')+' · research priority only, not certified'));
+ if(review.length)p.append(e('p','',review.map(function(x){return x.horse+' ('+x.meeting+' R'+x.race+', model '+pct(x.model_pct)+', sensitivity floor '+pct(x.robust_floor)+')';}).join(', ')+' · conditional review only'));
+ else p.append(e('p','muted small','No candidate currently clears even the conditional review screen.'));
+ p.append(e('p','muted small','Top 5/10/15 below remain raw independent-of-market model diagnostics, not the final human-reviewed selection order or safe multi legs.'));
+ return p;
+}
 function importedOverview(){
  var hero=add(e('section','rlv5-command-hero'),
   add(e('div','rlv5-command-title'),e('div','eyebrow',cardDay().toUpperCase()+' · '+D.date),e('h2','','V5 Race Centre'),
@@ -34,7 +56,7 @@ function importedOverview(){
  hero.append(add(e('div','rlv5-command-actions'),action('Explore races',function(){go('races');},'primary'),
   action('Model Top 5 / 10 / 15',function(){go('top10');},'ghost')));
  add(app(),hero,metrics(),scenarios());
- app().append(note('PDF import complete. Good 4 is a comparison scenario; current official track ratings, scratchings and reserves remain unverified. Model ranks are separate from independently reviewed selections.'));
+ app().append(importedOfficialPanel(),importedStrictScreen(),note('PDF source retained. Official Monday 2 November scratchings and Good 4 ratings applied to the 3 November model; final starters and reserves remain unverified. Model leaders are not an approved independent shortlist.'));
  var main=box('V5 model Top 10','One model leader per race, ordered by its uncalibrated estimate. Separation and scenario sensitivity are shown for every runner.');
  main.append(modelImportList(10,true));app().append(main,venueCards());
  app().append(link('31 October board and results','/v5/?card=2026-10-31','btn ghost'));
@@ -44,7 +66,7 @@ function importedTop10(){
  var controls=e('div','filters');
  [5,10,15].forEach(function(n){controls.append(action('Top '+n,function(){S.topN=n;render();},S.topN===n?'primary':'ghost'));});
  controls.append(setField('Meeting',[{value:'ALL',text:'All meetings'}].concat(Object.keys(C.going).map(function(m){return {value:m,text:m};})),S.top,function(v){S.top=v;render();}));
- add(app(),controls,scenarios(),modelImportList(),note('Model estimates are uncalibrated. Scenario ranges measure sensitivity, not confidence intervals. PDF-listed entries include unverified reserves and cross-entries.'));
+ add(app(),importedOfficialPanel(),importedStrictScreen(),controls,scenarios(),modelImportList(),note('Model estimates are uncalibrated. Scenario ranges measure sensitivity, not confidence intervals. PDF-listed entries include unverified reserves and cross-entries.'));
 }
 // Saved verified research field remains displayed even if the live fetch endpoint is offline.
 function savedScratchCount(meeting,race){
@@ -54,7 +76,7 @@ function savedScratchCount(meeting,race){
  },0);
 }
 function savedSourceNote(meeting){
- if(importedCard())return 'PDF-listed field; current official starters and scratchings not checked';
+ if(importedCard())return D.official_pre_race?'Official Monday 2 Nov scratchings applied; final Tuesday starters and reserves not certified':'PDF-listed field; final official starters not checked';
  return meeting==='ASCOT'?'Ascot uses the Friday official sheet; Saturday not finalised':'Saturday saved racecard; late changes remain possible';
 }
 // Separation is signed against the strongest other modelled runner.
@@ -161,7 +183,7 @@ function changeNotice(){
  return panel;
 }
 function metrics(){var grid=e('div','grid stats');[[C.board.raceCount,'Races'],[C.board.sourceCount,'Source dossiers'],[C.board.activeCount,'Included runners'],[C.board.excludedCount,'Excluded runners']].forEach(function(m){grid.append(add(e('div','panel metric'),e('div','number',m[0]),e('div','label',m[1])));});return grid;}
-function venueCards(){var g=e('div','grid');Object.keys(C.going).forEach(function(v){var m=(D.meetings||[]).find(function(x){return x.meeting===v;})||{},r=D.races.filter(function(x){return x.meeting===v;});g.append(add(e('div','panel track'),e('div','venue',v),e('h3','',r.length+' races'),e('p','','Model scenario: '+C.going[v]),e('p','','Saved observation '+D.saved_at+': '+(m.official_29_oct||'Not verified')),e('p','','Rail: '+(m.rail||'Not verified')),action('View races',function(){selectRace(r[0].id);},'primary')));});return g;}
+function venueCards(){var g=e('div','grid');Object.keys(C.going).forEach(function(v){var m=(D.meetings||[]).find(function(x){return x.meeting===v;})||{},r=D.races.filter(function(x){return x.meeting===v;});g.append(add(e('div','panel track'),e('div','venue',v),e('h3','',r.length+' races'),e('p','','Model scenario: '+C.going[v]),e('p','','Official dated observation: '+(m.official_going||m.official_29_oct||'Not verified')),e('p','','Rail: '+(m.rail||'Not verified')),action('View races',function(){selectRace(r[0].id);},'primary')));});return g;}
 function overview(){
  if(importedCard())return importedOverview();
  var root=app(),research=C.curated?C.curated.entries.slice(0,10):[],venues=Object.keys(C.going),
@@ -836,8 +858,8 @@ function syncPage(){
  if(importedCard()){
   add(app(),head('Data & Sync','PDF form imported '+D.saved_at+' for '+D.date+'.'),metrics(),officialPanel(),
    box('Source coverage',D.source_import.sources.map(function(s){return s.file+' · '+s.pages+' pages · '+s.races+' races · '+s.runners+' entries';}).join(' | ')),
-   box('Current feeds','This dated PDF card does not use the 31 October Airtable or official-scratching endpoints. Current official verification is pending.'),
-   link('Imported form',global.RacingLabV5Card.research_url),link('Whole-field analysis',global.RacingLabV5Card.analysis_url));return;
+   box('Current feeds',D.official_pre_race?'Monday 2 November official 39 scratching records and Good 4/rail reports are saved and applied locally. The final 3 November starters and reserve engagement are not certified; October feeds are isolated.':'The full Tuesday official source is unavailable; field verification withheld.'),
+   link('Imported form',global.RacingLabV5Card.research_url),link('Original unadjusted PDF analysis',global.RacingLabV5Card.analysis_url),link('Monday official scratch overlay',global.RacingLabV5Card.official_overlay_url));return;
  }
  add(app(),head('Data & Sync','One shared board for every screen.'),metrics(),officialPanel(),box('Evidence source',C.live?'Complete matching Airtable evidence received '+C.live.as_of+'. This is not official race-day certification.':'Saved snapshot '+D.saved_at+' is loaded. Live Airtable evidence is not confirmed.'),(function(){var panel=box('Latest refresh',C.error||'No refresh error recorded.');var line=panel.children&&panel.children[1];if(line)line.id='v5-sync-status';return panel;})(),action('Refresh Airtable evidence',function(){refresh(C);},'primary'),link('Static evidence','/v5/research.json'),link('GitHub code','https://github.com/fletchermaguire-oss/V3-Racing-Lab.'));
 }
