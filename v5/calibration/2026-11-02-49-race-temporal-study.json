@@ -1,0 +1,107 @@
+{
+  "schema": "racing-lab-v5-calibration-study/v1",
+  "created_date": "2026-11-02",
+  "model_version": "V5-L5-CANDIDATE-20261030",
+  "status": "REJECTED_OUT_OF_SAMPLE_NO_PRODUCTION_CALIBRATION",
+  "eligible_to_publish": false,
+  "source_dates": [
+    {
+      "date": "2026-10-17",
+      "reconstructed_races": 30,
+      "pre_race_frozen": false,
+      "provenance": "RETROSPECTIVE_RESEARCH_DIAGNOSTIC_ONLY"
+    },
+    {
+      "date": "2026-10-24",
+      "reconstructed_races": 19,
+      "pre_race_frozen": false,
+      "provenance": "RETROSPECTIVE_RESEARCH_DIAGNOSTIC_ONLY"
+    }
+  ],
+  "method": "Single-parameter full-field power/temperature transform, q_i=(p_i)^(1/T)/SUM_j (p_j)^(1/T). Fit temperature only to training date log loss across 0.50 to 6.50 step 0.01. Validate held-out date; reverse dates as instability check. No win-rank changes from temperature.",
+  "forward_test": {
+    "train_date": "2026-10-17",
+    "holdout_date": "2026-10-24",
+    "fitted_temperature": 0.62,
+    "training_raw": {
+      "races": 30,
+      "top1_winners": 13,
+      "top1_hit_rate": 0.43333333333333335,
+      "mean_multiclass_brier": 0.8078141476452626,
+      "mean_log_loss": 1.9896897515351897,
+      "uniform_mean_brier": 0.8941564454064453
+    },
+    "training_candidate": {
+      "races": 30,
+      "top1_winners": 13,
+      "top1_hit_rate": 0.43333333333333335,
+      "mean_multiclass_brier": 0.7813777829767901,
+      "mean_log_loss": 1.9423530935200495,
+      "uniform_mean_brier": 0.8941564454064453
+    },
+    "holdout_raw": {
+      "races": 19,
+      "top1_winners": 4,
+      "top1_hit_rate": 0.21052631578947367,
+      "mean_multiclass_brier": 0.8970575051513878,
+      "mean_log_loss": 2.2754022854663205,
+      "uniform_mean_brier": 0.8984801017695754
+    },
+    "holdout_candidate": {
+      "races": 19,
+      "top1_winners": 4,
+      "top1_hit_rate": 0.21052631578947367,
+      "mean_multiclass_brier": 0.9256067957518223,
+      "mean_log_loss": 2.3783907307561245,
+      "uniform_mean_brier": 0.8984801017695754
+    }
+  },
+  "reverse_test": {
+    "train_date": "2026-10-24",
+    "holdout_date": "2026-10-17",
+    "fitted_temperature": 1.5,
+    "holdout_raw": {
+      "races": 30,
+      "top1_winners": 13,
+      "top1_hit_rate": 0.43333333333333335,
+      "mean_multiclass_brier": 0.8078141476452626,
+      "mean_log_loss": 1.9896897515351897,
+      "uniform_mean_brier": 0.8941564454064453
+    },
+    "holdout_candidate": {
+      "races": 30,
+      "top1_winners": 13,
+      "top1_hit_rate": 0.43333333333333335,
+      "mean_multiclass_brier": 0.8329514613570257,
+      "mean_log_loss": 2.0582161663094922,
+      "uniform_mean_brier": 0.8941564454064453
+    }
+  },
+  "in_sample_diagnostic_only": {
+    "fitted_temperature": 0.81,
+    "raw": {
+      "races": 49,
+      "top1_winners": 17,
+      "top1_hit_rate": 0.3469387755102041,
+      "mean_multiclass_brier": 0.8424187148415154,
+      "mean_log_loss": 2.1004762442839957,
+      "uniform_mean_brier": 0.8958329652207199
+    },
+    "optimistically_fitted": {
+      "races": 49,
+      "top1_winners": 17,
+      "top1_hit_rate": 0.3469387755102041,
+      "mean_multiclass_brier": 0.8374555086940627,
+      "mean_log_loss": 2.093287069078244,
+      "uniform_mean_brier": 0.8958329652207199
+    }
+  },
+  "safety_decision": "Reject temperature calibration: forward and reverse both worsen held-out Brier and log loss; 0 independently frozen eligible historical dates. Keep existing V5 coefficients and probabilities explicitly uncalibrated.",
+  "required_for_real_world_calibration": [
+    "independently verifiable pre-jump frozen whole-field win probabilities, race timestamps and model version",
+    "official matched final starter/result outcomes and transparent exclusions",
+    "multiple chronological calibration-training dates and later untouched validation dates",
+    "reliability diagrams, class/field-size/going slices with uncertainty bands",
+    "held-out log-loss AND multiclass Brier improvement, no leakage, locked audit before any deployment"
+  ]
+}
