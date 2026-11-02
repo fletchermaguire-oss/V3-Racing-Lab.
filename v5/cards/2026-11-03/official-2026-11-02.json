@@ -1,0 +1,225 @@
+{
+  "schema": "racing-lab-v5-20261103-official-snapshot/v1",
+  "race_date": "2026-11-03",
+  "checked_date": "2026-11-02",
+  "publication_approved": false,
+  "final_starters_verified": false,
+  "source_type": "OFFICIAL_SCRATCHINGS_AND_TRACK_INSPECTION_NOT_FINAL_STARTER_ATTESTATION",
+  "meetings": {
+    "FLEMINGTON": {
+      "official_url": "https://www.racingaustralia.horse/FreeFields/Scratchings.aspx?Key=2026Nov03%2CVIC%2CFlemington",
+      "last_published": "Mon 02-Nov-26 3:19PM AEDT",
+      "going": "Good 4",
+      "rail": "Out 3m Entire Circuit",
+      "weather": "Showers",
+      "total_scratchings": 13,
+      "official_starters_including_emergencies": 154
+    },
+    "RANDWICK": {
+      "official_url": "https://mdata.racingnsw.com.au/FreeFields/Scratchings.aspx?Key=2026Nov03%2CNSW%2CRoyal+Randwick",
+      "last_published": "Mon 02-Nov-26 5:45PM AEDT",
+      "going": "Good 4",
+      "rail": "+2m Entire",
+      "weather": "Overcast",
+      "total_scratchings": 26,
+      "official_starters_including_emergencies": 143
+    }
+  },
+  "scratchings": {
+    "2026-11-03_FLEMINGTON_R02": [
+      {
+        "tab": 9,
+        "horse": "UNSEEN RULER (NZ)"
+      },
+      {
+        "tab": 17,
+        "horse": "TERRORTORIAN"
+      }
+    ],
+    "2026-11-03_FLEMINGTON_R03": [
+      {
+        "tab": 3,
+        "horse": "TRUE TONE"
+      },
+      {
+        "tab": 11,
+        "horse": "STAR JE TAIME"
+      }
+    ],
+    "2026-11-03_FLEMINGTON_R04": [
+      {
+        "tab": 14,
+        "horse": "SOUTHERN SWAY"
+      }
+    ],
+    "2026-11-03_FLEMINGTON_R06": [
+      {
+        "tab": 3,
+        "horse": "TAVI TIME (NZ)"
+      },
+      {
+        "tab": 12,
+        "horse": "REAL CLASS (NZ)"
+      }
+    ],
+    "2026-11-03_FLEMINGTON_R08": [
+      {
+        "tab": 4,
+        "horse": "BEAUTIFUL YOU (NZ)"
+      },
+      {
+        "tab": 6,
+        "horse": "HIGH FALLS"
+      },
+      {
+        "tab": 11,
+        "horse": "AUTUMN LOVER"
+      }
+    ],
+    "2026-11-03_FLEMINGTON_R09": [
+      {
+        "tab": 16,
+        "horse": "YOU SEXY THING"
+      }
+    ],
+    "2026-11-03_FLEMINGTON_R10": [
+      {
+        "tab": 5,
+        "horse": "SURF’S UP"
+      },
+      {
+        "tab": 10,
+        "horse": "MAN OF WORTH (IRE)"
+      }
+    ],
+    "2026-11-03_RANDWICK_R02": [
+      {
+        "tab": 2,
+        "horse": "VEECEE"
+      },
+      {
+        "tab": 11,
+        "horse": "NEVERMISTA"
+      },
+      {
+        "tab": 13,
+        "horse": "HOME SIREN"
+      },
+      {
+        "tab": 18,
+        "horse": "TOMMY’S GIRL"
+      }
+    ],
+    "2026-11-03_RANDWICK_R03": [
+      {
+        "tab": 2,
+        "horse": "EXTRA HEIGHTS"
+      },
+      {
+        "tab": 9,
+        "horse": "SKY DECK"
+      },
+      {
+        "tab": 12,
+        "horse": "ROLLING HOME"
+      },
+      {
+        "tab": 13,
+        "horse": "MENSHEVIK"
+      },
+      {
+        "tab": 15,
+        "horse": "SKIRMISH"
+      }
+    ],
+    "2026-11-03_RANDWICK_R04": [
+      {
+        "tab": 10,
+        "horse": "SUPER HELPFUL"
+      },
+      {
+        "tab": 12,
+        "horse": "ACHESON"
+      }
+    ],
+    "2026-11-03_RANDWICK_R05": [
+      {
+        "tab": 13,
+        "horse": "MIGHTY ULYSSES (GB)"
+      }
+    ],
+    "2026-11-03_RANDWICK_R06": [
+      {
+        "tab": 1,
+        "horse": "CHIDIAC"
+      },
+      {
+        "tab": 3,
+        "horse": "SO YOU PENCE"
+      },
+      {
+        "tab": 13,
+        "horse": "BON HOLLER"
+      },
+      {
+        "tab": 16,
+        "horse": "LOVE SHUCK"
+      },
+      {
+        "tab": 17,
+        "horse": "ROSE AYE"
+      }
+    ],
+    "2026-11-03_RANDWICK_R07": [
+      {
+        "tab": 7,
+        "horse": "FLYING FROM ABOVE"
+      },
+      {
+        "tab": 11,
+        "horse": "MICHELANGELO"
+      },
+      {
+        "tab": 12,
+        "horse": "DANCES WITH HOOVES"
+      },
+      {
+        "tab": 20,
+        "horse": "MICRO MIKKI"
+      }
+    ],
+    "2026-11-03_RANDWICK_R08": [
+      {
+        "tab": 1,
+        "horse": "MAHARBA"
+      }
+    ],
+    "2026-11-03_RANDWICK_R09": [
+      {
+        "tab": 2,
+        "horse": "POWER OF THE BRAVE"
+      },
+      {
+        "tab": 3,
+        "horse": "BENEVAC"
+      }
+    ],
+    "2026-11-03_RANDWICK_R10": [
+      {
+        "tab": 1,
+        "horse": "THEBLADE"
+      },
+      {
+        "tab": 13,
+        "horse": "WHO BUT ROO"
+      }
+    ]
+  },
+  "discrepancy": "PDF listed 333 - official 39 scratched = 294 provisionally included, whereas official published total including emergencies = 297 (3 difference). Do not certify all 294 as final starters or infer three emergency activations. Full starter attestation and Tuesday 3 Nov 7:30am AEDT deadline remain outstanding.",
+  "uncertainty": "Flemington wet-weather sensitivity (Soft 5/6) requires refreshed official going; do not silently change from currently observed Good 4.",
+  "warnings": [
+    "No 3 November final-starter attestation",
+    "Unconfirmed emergency promotions/dual engagements",
+    "V5 model estimates are experimental and have no accepted out-of-sample probability calibration"
+  ]
+}
