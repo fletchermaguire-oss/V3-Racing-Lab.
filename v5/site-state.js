@@ -440,6 +440,56 @@ function create(input,options){
     legacySnapshot:legacySnapshot};
   return api;
 }
+function applyTuesdayOfficial(input,overlay){
+ if(!input||input.date!=='2026-11-03'||!Array.isArray(input.runners)||input.runners.length!==333||
+    !Array.isArray(input.races)||input.races.length!==20)throw Error('Unexpected Tuesday source inventory');
+ if(!overlay||overlay.schema!=='racing-lab-v5-official-pre-race-overlay/v1'||
+    overlay.race_date!==input.date||overlay.publication_approved!==false||
+    overlay.final_starters_verified!==false||
+    !overlay.scratchings||!overlay.meetings)throw Error('Invalid Tuesday official overlay');
+ var next=clone(input),index=new Map(),keys=new Set(),totals={FLEMINGTON:0,RANDWICK:0};
+ next.runners.forEach(function(h){
+  var key=h.race_id+'|'+String(h.tab);
+  if(index.has(key))throw Error('Duplicate PDF tab in '+h.race_id);
+  index.set(key,h);
+ });
+ Object.entries(overlay.scratchings).forEach(function(pair){
+  var race=pair[0],entries=pair[1],meeting=race.split('_')[0];
+  if(!Object.hasOwn(totals,meeting)||!Array.isArray(entries))throw Error('Invalid Tuesday race in scratching snapshot: '+race);
+  if(!next.races.some(function(r){return r.id===input.date+'_'+race;}))throw Error('Unexpected Tuesday race '+race);
+  entries.forEach(function(item){
+   var tab=item&&item[0],name=item&&item[1],key=input.date+'_'+race+'|'+tab,h=index.get(key);
+   if(!Number.isSafeInteger(tab)||tab<1||typeof name!=='string'||!h||
+       canonical(h.horse)!==canonical(name)||keys.has(key))
+    throw Error('Unmatched official scratch: '+race+' #'+tab+' '+name);
+   keys.add(key);h.status='SCRATCHED — official 2 Nov 2026 publication';totals[meeting]++;
+  });
+ });
+ Object.entries(totals).forEach(function(pair){
+  var meeting=pair[0],total=pair[1],doc=overlay.meetings[meeting];
+  if(!doc||doc.scratched_total!==total||!/^https:\/\//.test(doc.source_url)||
+     !/^(Good [34]|Soft [567]|Heavy (?:8|9|10))$/.test(doc.track_condition)||
+     !Number.isFinite(Date.parse(doc.source_published_at)))throw Error('Invalid official meeting metadata '+meeting);
+  var listed=next.runners.filter(function(h){return h.race_id.includes('_'+meeting+'_');}).length;
+  if(listed-total!==doc.expected_pdf_remaining||
+      doc.source_total_including_emergencies===doc.expected_pdf_remaining)
+   throw Error('Unreconciled official summary '+meeting);
+  (next.meetings||[]).filter(function(m){return m.meeting===meeting;}).forEach(function(m){
+   m.official_going=doc.track_condition;m.rail=doc.rail;
+   m.official_source_url=doc.source_url;m.official_published_at=doc.source_published_at;
+  });
+ });
+ if(keys.size!==39||next.runners.filter(function(h){return /^SCRATCHED\b/i.test(h.status);}).length!==39)
+  throw Error('Tuesday scratching count mismatch');
+ next.official_pre_race=clone(overlay);
+ next.official_check_at=overlay.checked_at;
+ next.official_overlay_scratchings=Object.fromEntries(Object.entries(overlay.scratchings).map(function(p){
+  return [p[0],p[1].map(function(x){return x[1];})];
+ }));
+ next.publication=Object.assign({},next.publication,{approved:false,model_probabilities_published:false,status:'RESEARCH_ONLY'});
+ M.board(next,{going:{FLEMINGTON:overlay.meetings.FLEMINGTON.track_condition,RANDWICK:overlay.meetings.RANDWICK.track_condition}});
+ return next;
+}
 var pending=null;
 function load(fetcher){
  if(!pending){
@@ -453,6 +503,16 @@ function load(fetcher){
    return r.json();
   }).then(function(data){
    if(Card&&data.date!==Card.date)throw Error('Selected V5 source has the wrong race date');
+   if(data.date==='2026-11-03'&&Card&&Card.official_overlay_url){
+    return f(Card.official_overlay_url,{cache:'no-store'}).then(function(r){
+     if(!r.ok)throw Error('Tuesday official overlay HTTP '+r.status+'; 333-runner uncorrected board withheld');
+     return r.json();
+    }).then(function(official){
+     var corrected=applyTuesdayOfficial(data,official);
+     return {data:corrected,going:{FLEMINGTON:official.meetings.FLEMINGTON.track_condition,
+      RANDWICK:official.meetings.RANDWICK.track_condition}};
+    });
+   }
    if(data.date!=='2026-10-31')return {data:data,going:null};
    return f('/v5/official-latest.json',{cache:'no-store'}).then(function(r){
     if(!r.ok)throw Error('Official snapshot HTTP '+r.status+' (saved board withheld)');
@@ -480,5 +540,5 @@ function load(fetcher){
  }
  return pending;
 }
-return {create:create,load:load,applyOfficialOverlay:applyOfficialOverlay,requireCumulativeScratchings:requireCumulativeScratchings};
+return {create:create,load:load,applyOfficialOverlay:applyOfficialOverlay,applyTuesdayOfficial:applyTuesdayOfficial,requireCumulativeScratchings:requireCumulativeScratchings};
 });
