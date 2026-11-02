@@ -867,7 +867,7 @@ function resultsPage(){add(app(),head('Results & History · Top 5 / 10 / 15','Ex
 function statusOnly(){
  if(!C)return;
  var badge=document.getElementById('livebadge');
- if(badge)badge.textContent=C.error?'SAVED SATURDAY DATA · FEED CHECK':C.official&&C.official.partial?'LIVE SHEETS PARTIAL · SAVED DATA':C.live?'AIRTABLE · MODEL UPDATED':'SAVED SATURDAY RESEARCH';
+ if(badge)badge.textContent=importedCard()?(D.official_pre_race?'MONDAY OFFICIAL CHECK · PRE-FINAL':'IMPORTED FORM · PRE-FINAL'):C.error?'SAVED SATURDAY DATA · FEED CHECK':C.official&&C.official.partial?'LIVE SHEETS PARTIAL · SAVED DATA':C.live?'AIRTABLE · MODEL UPDATED':'SAVED SATURDAY RESEARCH';
  var status=document.getElementById('v5-sync-status');
  if(status)status.textContent=C.error||'No refresh error recorded.';
 }
@@ -876,7 +876,7 @@ function render(){if(!C)return;D=C.data;if(!raceOf(S.race)){S.race=D.races[0].id
  var views={overview:overview,top10:top10,races:racesPage,multi:function(){workshop('multiPage');},sim:function(){workshop('simPage');},compare:comparePage,qa:qaPage,cal:calPage,weather:weatherPage,sync:syncPage,results:resultsPage};(views[S.page]||overview)();app().append(e('div','footer',C.board.version+' · '+C.revision+' · model estimates uncalibrated · source snapshot '+D.saved_at));
 }
 function officialPanel(){
- if(importedCard())return box('Official field check pending','The PDFs confirm the listed source inventory. They do not independently confirm current scratchings, reserve promotions, rail positions or track ratings for '+D.date+'.');
+ if(importedCard())return importedOfficialPanel();
  var p=box('Official scratchings / track review',C.official?
   'Observed '+C.official.observed_at+' · '+C.official.meetings.length+' individually validated meeting feed(s). Missing sources retain saved fields. Starters and reserves are not certified.'
   :'Saved scratching snapshot '+(D.official_check_at||'unavailable')+' · published field stays accessible if official live sync fails. Ascot still uses Friday source.');
