@@ -4,6 +4,7 @@ const fs=require('node:fs'),vm=require('node:vm'),crypto=require('node:crypto');
 const Model=require('./model.js'),State=require('./site-state.js'),Curated=require('./curated.js');
 const Card=require('./active-card.js'),D=require('./cards/2026-11-03/research.json');
 const B=Model.board(D),clone=x=>JSON.parse(JSON.stringify(x));
+const OfficialNov3=require('./cards/2026-11-03/official-20261102.json');
 test('both PDF inventories reconcile, with valid provenance for every detailed horse',()=>{
  assert.equal(D.date,'2026-11-03');assert.equal(D.races.length,20);assert.equal(D.runners.length,333);
  assert.deepEqual(D.source_import.sources.map(s=>[s.meeting,s.pages,s.races,s.runners]),[['RANDWICK',89,10,168],['FLEMINGTON',82,10,165]]);
@@ -74,8 +75,17 @@ function freshLoader(card){
 }
 test('selected PDF card loads without old scratching, shortlist or Airtable requests',async()=>{
  const calls=[],loader=freshLoader(Card);
- const C=await loader.load(async url=>{calls.push(url);assert.equal(url,Card.research_url);return {ok:true,json:async()=>D};});
- assert.deepEqual(calls,[Card.research_url]);assert.equal(C.data.date,D.date);assert.equal(C.board.raceCount,20);assert.equal(C.curated,null);
+ const C=await loader.load(async url=>{
+  calls.push(url);
+  if(url===Card.research_url)return {ok:true,json:async()=>D};
+  if(url===Card.official_overlay_url)return {ok:true,json:async()=>OfficialNov3};
+  throw Error('Unexpected dated request '+url);
+ });
+ assert.deepEqual(calls,[Card.research_url,Card.official_overlay_url]);
+ assert.equal(C.data.date,D.date);assert.equal(C.board.raceCount,20);assert.equal(C.curated,null);
+ assert.equal(C.board.activeCount,294);
+ assert.equal(C.board.excludedCount,39);
+ assert.equal(C.going.FLEMINGTON,'Good 4');
  await assert.rejects(freshLoader(Card).load(async()=>({ok:true,json:async()=>require('./research.json')})),/wrong race date/);
  await assert.rejects(freshLoader({...Card,research_url:'https://other.test/card.json'}).load(),/Invalid dated/);
 });
@@ -87,4 +97,25 @@ test('generated analysis matches the source hash, whole-field model and ten scen
  assert.equal(A.field_gate.final_fields_approved,false);
  assert.deepEqual(A.records.map(h=>[h.id,h.p]),B.baseline.records.map(h=>[h.id,h.p]));
  assert.ok(A.races.every(r=>r.top_three.length===3&&r.top_three.every(h=>h.assessment.pros&&h.assessment.cons)));
+});
+
+test('dated Monday official overlay verifies all published scratches and preserves 31 October and raw 333',()=>{
+ const before=clone(D),edited=State.applyTuesdayOfficial(D,OfficialNov3);
+ assert.deepEqual(D,before,'original PDF source must remain immutable');
+ assert.equal(edited.official_pre_race.publication_approved,false);
+ assert.equal(edited.official_pre_race.final_starters_verified,false);
+ assert.equal(edited.official_overlay_scratchings.FLEMINGTON_R02.length,2);
+ assert.equal(edited.official_overlay_scratchings.RANDWICK_R06.length,5);
+ const board=Model.board(edited,{going:{FLEMINGTON:'Good 4',RANDWICK:'Good 4'}});
+ assert.equal(board.sourceCount,333);assert.equal(board.activeCount,294);assert.equal(board.excludedCount,39);
+ assert.equal(board.raceCount,20);
+ assert.equal(board.winFirst.priority.length,0);
+ assert.deepEqual(board.winFirst.review.map(x=>x.horse),['Shadhavar']);
+ assert(board.baseline.races.every(r=>r.sum===100),'each field sums 100');
+ const wrong=clone(OfficialNov3);wrong.scratchings.RANDWICK_R03[0][1]='UNRELATED HORSE';
+ assert.throws(()=>State.applyTuesdayOfficial(D,wrong),/Unmatched official scratch/);
+ const incomplete=clone(OfficialNov3);incomplete.scratchings.FLEMINGTON_R02.pop();
+ assert.throws(()=>State.applyTuesdayOfficial(D,incomplete),/Invalid official meeting metadata|count mismatch/);
+ const mistaken=clone(OfficialNov3);mistaken.race_date='2026-10-31';
+ assert.throws(()=>State.applyTuesdayOfficial(D,mistaken),/Invalid Tuesday official overlay/);
 });
