@@ -1,15 +1,16 @@
 /* One versioned board for the original site and the V5 studio. */
 (function(root,factory){
   var api=factory(typeof module==='object'&&module.exports?require('./model.js'):root.RacingLabV5Model,
-   typeof module==='object'&&module.exports?require('./curated.js'):root.RacingLabV5Curated);
+   typeof module==='object'&&module.exports?require('./curated.js'):root.RacingLabV5Curated,
+   root.RacingLabV5Card||null);
   if(typeof module==='object'&&module.exports)module.exports=api;
   else root.RacingLabV5State=api;
-})(typeof window!=='undefined'?window:globalThis,function(M,Curated){
+})(typeof window!=='undefined'?window:globalThis,function(M,Curated,Card){
 'use strict';
 function clone(x){return JSON.parse(JSON.stringify(x));}
 function datedGoing(source,meeting){
   var row=(source.meetings||[]).find(function(x){return x.meeting===meeting;})||{};
-  var value=String(row.official_29_oct||'').trim();
+  var value=String(row.official_going||row.scenario_going||row.official_29_oct||'').trim();
   return /^(?:Good [34]|Soft [567]|Heavy (?:8|9|10))$/.test(value)?value:'Good 4';
 }
 function recordedGoingStamp(source){
@@ -414,7 +415,7 @@ function create(input,options){
     return {date:data.date,version:M.VERSION,tracks:tracks,research:research,
       races:data.races.map(function(r){var s=board.baseline.races.find(function(x){return x.id===r.id;});return {
         id:r.meeting+'_R'+String(r.race).padStart(2,'0'),name:r.title,distance:r.distance_m,
-        class:r.class||'Saved research',time:r.time||'Time unverified',n:s.field,fieldVerified:false
+        class:r.class||r.race_class||'Saved research',time:r.time||r.scheduled_local||'Time unverified',n:s.field,fieldVerified:false
       };}),
       records:board.baseline.records.map(function(x){var h=raw.get(x.id);return {
         runnerId:x.id,modelId:x.id,race:x.meeting+'_R'+String(x.race).padStart(2,'0'),name:x.horse,
@@ -442,11 +443,16 @@ function create(input,options){
 var pending=null;
 function load(fetcher){
  if(!pending){
+  var path=Card&&Card.research_url||'/v5/research.json';
+  if(Card&&(!/^\d{4}-\d{2}-\d{2}$/.test(Card.date)||
+    !(path==='/v5/research.json'&&Card.date==='2026-10-31'||path==='/v5/cards/'+Card.date+'/research.json')))
+    return Promise.reject(Error('Invalid dated V5 source selection'));
   var f=fetcher||fetch;
-  pending=f('/v5/research.json',{cache:'no-store'}).then(function(r){
+  pending=f(path,{cache:'no-store'}).then(function(r){
    if(!r.ok)throw Error('Research HTTP '+r.status);
    return r.json();
   }).then(function(data){
+   if(Card&&data.date!==Card.date)throw Error('Selected V5 source has the wrong race date');
    if(data.date!=='2026-10-31')return {data:data,going:null};
    return f('/v5/official-latest.json',{cache:'no-store'}).then(function(r){
     if(!r.ok)throw Error('Official snapshot HTTP '+r.status+' (saved board withheld)');

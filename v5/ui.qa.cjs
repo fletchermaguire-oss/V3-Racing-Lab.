@@ -15,16 +15,30 @@ class Element{
  getAttribute(name){return this[name];}
 }
 function flatten(el){return [el,...(el.children||[]).flatMap(flatten)];}
-function boot(){
- const C=State.create(State.applyOfficialOverlay(D,O),{checkpoint:Q,going:O.going});
+function boot(input){
+ const data=input||D;
+ const C=input?State.create(data):State.create(State.applyOfficialOverlay(D,O),{checkpoint:Q,going:O.going});
  const doc={createElement:tag=>new Element(tag),getElementById:()=>null,body:new Element('body')};
  const win={location:{search:''},localStorage:{getItem:()=>null,setItem(){}},
   RacingLabV5Model:Model,RacingLabV5Curated:Curated,RacingLabHorseAnalysis:require('./horse-analysis.js'),RacingLabV5Challenge:require('./challenge.js'),RacingLabV5FieldGate:require('./field-gate.js'),RacingLabV5PaceClass:require('./pace-class.js'),RacingLabV5AutoChallenge:require('./auto-challenge.js'),
   RacingLabV5State:State,scrollTo(){},requestAnimationFrame:null};
+ if(input)win.RacingLabV5Card=require('./active-card.js');
  const context=vm.createContext({window:win,document:doc,console:console,Set:Set,Map:Map,Promise:Promise});
  for(const file of ['v5/workshop.js','v5/dashboard.js'])vm.runInContext(fs.readFileSync(file,'utf8'),context,{filename:file});
  return {C,win};
 }
+test('3 November PDF card renders all views and distinguishes raw model ranks from independent picks',()=>{
+ const data=require('./cards/2026-11-03/research.json'),{C,win}=boot(data);
+ for(const page of ['overview','top10','races','multi','sim','compare','qa','cal','weather','sync','results']){
+  const root=new Element('main');
+  assert.doesNotThrow(()=>win.RacingLabV5Dashboard.renderInto(root,page,C,()=>{},data.races[0].id),page);
+  const nodes=flatten(root);assert.ok(nodes.length>5,page);assert.ok(nodes.some(x=>x.tag==='h2'),page);
+  if(page==='top10'){
+   assert.ok(nodes.some(x=>x.textContent==='V5 model Top 10'));
+   assert.equal(nodes.filter(x=>x.dataset.runnerId&&x.dataset.modelPct).length,10);
+  }
+ }
+});
 test('original-shell embedded studio opens every page without a blank screen or exceptions',()=>{
  const {C,win}=boot();
  for(const page of ['overview','top10','races','multi','sim','compare','qa','cal','weather','sync','results']){

@@ -21,3 +21,15 @@ for(const page of ['index.html','v5/index.html']){
  for(const asset of ['model.js','site-state.js','dashboard.js','workshop.js'])assert(text.includes('/v5/'+asset),'Missing shared runtime '+asset+' on '+page);
 }
 console.log('PASS: Existing racing shell and history preserved; shared V5 runtime; 29 races; 408 dossiers. Model estimates remain provisional and unapproved.');
+const active=require('../v5/active-card.js');
+if(active.date!=='2026-10-31'){
+ const source=JSON.parse(fs.readFileSync('.'+active.research_url,'utf8'));
+ assert.equal(source.date,active.date,'Active-card date mismatch');
+ const model=require('../v5/model.js').board(source);
+ assert.equal(model.raceCount,source.expected_inventory.races);
+ assert.equal(model.activeCount,source.expected_inventory.runners);
+ assert(model.scenarios.every(s=>s.races.every(r=>r.sum===100)),'Active-card scenario distributions must total 100');
+ assert.equal(source.publication.approved,false);
+ for(const page of ['index.html','v5/index.html'])assert(fs.readFileSync(page,'utf8').includes('/v5/active-card.js'),'Dated source selector missing');
+ console.log('PASS: Active '+source.date+' card; '+model.raceCount+' races; '+model.activeCount+' listed entries; ten full-field scenarios.');
+}

@@ -17,3 +17,9 @@ This package is NOT a live scratching feed and NOT a pace/model rerun. It shows 
 ```
 
 The example must not be published as genuine. Race IDs must match the actual board. The board still contains Oct 17 data until new Oct 31 fields and model forecasts are published. The bridge will not silently update the simulator; conditional probabilities are explicitly labeled and only affect the displayed runner board and top-three percentages. Re-ranking top three, re-running pace, sourcing live scratchings, and auto-publishing still need implementation.
+# Active V5 card
+
+The supplied 3 November 2026 Feature Form PDFs are applied to the dated V5 card:
+20 Randwick/Flemington races and 333 listed entries. See
+[the import and validation notes](v5/cards/2026-11-03/README.md).
+The 31 October archive remains available through `/v5/?card=2026-10-31`.
