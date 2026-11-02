@@ -1,0 +1,669 @@
+{
+  "schema": "racing-lab-v5-3nov-provisional-research/v1",
+  "date": "2026-11-03",
+  "source_checked_date": "2026-11-02",
+  "model": "V5-L5-CANDIDATE-20261030",
+  "source": "v5/racecards/2026-11-03-research-scratchings.json",
+  "publish_status": "RESEARCH_ONLY_UNCALIBRATED_NOT_FINAL",
+  "publication_approved": false,
+  "official_scratches": {
+    "FLEMINGTON": 13,
+    "RANDWICK": 26
+  },
+  "scenario": {
+    "FLEMINGTON": "Good 4",
+    "RANDWICK": "Good 4",
+    "FLEMINGTON_ALTERNATIVE": "Soft 5"
+  },
+  "listed": 333,
+  "excluded": 39,
+  "modelled": 294,
+  "formula_qa": {
+    "whole_field_sums_100": true,
+    "alternative_sums_100": true
+  },
+  "win_first": {
+    "priority": [
+      {
+        "runner_id": "2026-11-03_RANDWICK_R04_06",
+        "horse": "Man Of Worth",
+        "race_id": "2026-11-03_RANDWICK_R04",
+        "meeting": "RANDWICK",
+        "race": 4,
+        "model_pct": 21.57,
+        "robust_floor": 19.41,
+        "robust_spread": 2.16,
+        "min_gap": 4.02,
+        "max_chaos": 89,
+        "completeness": 0.94,
+        "dated_starts": 5,
+        "grade_quality": 0.623,
+        "reasons": [],
+        "good4_pct": 21.57,
+        "soft5_pct": 19.96,
+        "status": "PRIORITY_RESEARCH"
+      }
+    ],
+    "review": [
+      {
+        "runner_id": "2026-11-03_FLEMINGTON_R09_02",
+        "horse": "Shadhavar",
+        "race_id": "2026-11-03_FLEMINGTON_R09",
+        "meeting": "FLEMINGTON",
+        "race": 9,
+        "model_pct": 20.7,
+        "robust_floor": 15.12,
+        "robust_spread": 5.58,
+        "min_gap": 6.33,
+        "max_chaos": 82,
+        "completeness": 0.86,
+        "dated_starts": 5,
+        "grade_quality": 1.747,
+        "reasons": [
+          "LOW_CONSERVATIVE_CHANCE"
+        ],
+        "good4_pct": 20.7,
+        "soft5_pct": 18.66,
+        "status": "REVIEW_ONLY"
+      },
+      {
+        "runner_id": "2026-11-03_FLEMINGTON_R02_07",
+        "horse": "Johnich",
+        "race_id": "2026-11-03_FLEMINGTON_R02",
+        "meeting": "FLEMINGTON",
+        "race": 2,
+        "model_pct": 16.86,
+        "robust_floor": 13.71,
+        "robust_spread": 3.15,
+        "min_gap": 5.56,
+        "max_chaos": 85,
+        "completeness": 0.94,
+        "dated_starts": 5,
+        "grade_quality": 0.745,
+        "reasons": [
+          "LOW_CONSERVATIVE_CHANCE"
+        ],
+        "good4_pct": 16.86,
+        "soft5_pct": 14.66,
+        "status": "REVIEW_ONLY"
+      }
+    ],
+    "abstained_races": 17,
+    "ranked_research_candidates": 3
+  },
+  "top10_model_diagnostic": [
+    {
+      "race_id": "2026-11-03_FLEMINGTON_R01",
+      "meeting": "FLEMINGTON",
+      "race": 1,
+      "horse": "Royal Press",
+      "model_pct": 34.31,
+      "model_rank": 1,
+      "model_gap_pctpoints": 25.89,
+      "robust_range": [
+        24.83,
+        34.31
+      ],
+      "chaos": 66,
+      "completeness": 0.59,
+      "dated_starts": 1,
+      "soft5_flemington_leader": "Royal Press",
+      "form_status": "PDF_PROFILE_EXTRACTED",
+      "research_status": "MODEL_ONLY_NOT_INDEPENDENT_PICK"
+    },
+    {
+      "race_id": "2026-11-03_RANDWICK_R04",
+      "meeting": "RANDWICK",
+      "race": 4,
+      "horse": "Man Of Worth",
+      "model_pct": 21.57,
+      "model_rank": 1,
+      "model_gap_pctpoints": 8,
+      "robust_range": [
+        19.41,
+        22.5
+      ],
+      "chaos": 82,
+      "completeness": 0.94,
+      "dated_starts": 5,
+      "soft5_flemington_leader": "Man Of Worth",
+      "form_status": "PDF_PROFILE_EXTRACTED",
+      "research_status": "MODEL_ONLY_NOT_INDEPENDENT_PICK"
+    },
+    {
+      "race_id": "2026-11-03_FLEMINGTON_R08",
+      "meeting": "FLEMINGTON",
+      "race": 8,
+      "horse": "Ranarsson",
+      "model_pct": 21.27,
+      "model_rank": 1,
+      "model_gap_pctpoints": 9.03,
+      "robust_range": [
+        15.42,
+        22.98
+      ],
+      "chaos": 80,
+      "completeness": 0.66,
+      "dated_starts": 2,
+      "soft5_flemington_leader": "Ranarsson",
+      "form_status": "PDF_PROFILE_EXTRACTED",
+      "research_status": "MODEL_ONLY_NOT_INDEPENDENT_PICK"
+    },
+    {
+      "race_id": "2026-11-03_FLEMINGTON_R09",
+      "meeting": "FLEMINGTON",
+      "race": 9,
+      "horse": "Shadhavar",
+      "model_pct": 20.7,
+      "model_rank": 1,
+      "model_gap_pctpoints": 9.52,
+      "robust_range": [
+        15.12,
+        21.86
+      ],
+      "chaos": 77,
+      "completeness": 0.86,
+      "dated_starts": 5,
+      "soft5_flemington_leader": "Shadhavar",
+      "form_status": "PDF_PROFILE_EXTRACTED",
+      "research_status": "MODEL_ONLY_NOT_INDEPENDENT_PICK"
+    },
+    {
+      "race_id": "2026-11-03_RANDWICK_R08",
+      "meeting": "RANDWICK",
+      "race": 8,
+      "horse": "Polyglot",
+      "model_pct": 20.54,
+      "model_rank": 1,
+      "model_gap_pctpoints": 1.19,
+      "robust_range": [
+        19.15,
+        20.88
+      ],
+      "chaos": 94,
+      "completeness": 0.94,
+      "dated_starts": 5,
+      "soft5_flemington_leader": "Polyglot",
+      "form_status": "PDF_PROFILE_EXTRACTED",
+      "research_status": "MODEL_ONLY_NOT_INDEPENDENT_PICK"
+    },
+    {
+      "race_id": "2026-11-03_FLEMINGTON_R03",
+      "meeting": "FLEMINGTON",
+      "race": 3,
+      "horse": "Mister Whiskers",
+      "model_pct": 20.06,
+      "model_rank": 1,
+      "model_gap_pctpoints": 4.64,
+      "robust_range": [
+        15.4,
+        21.39
+      ],
+      "chaos": 88,
+      "completeness": 0.53,
+      "dated_starts": 2,
+      "soft5_flemington_leader": "Fringilla",
+      "form_status": "PDF_PROFILE_EXTRACTED",
+      "research_status": "MODEL_ONLY_NOT_INDEPENDENT_PICK"
+    },
+    {
+      "race_id": "2026-11-03_RANDWICK_R09",
+      "meeting": "RANDWICK",
+      "race": 9,
+      "horse": "Compensation",
+      "model_pct": 19.93,
+      "model_rank": 1,
+      "model_gap_pctpoints": 2.18,
+      "robust_range": [
+        19.09,
+        21.04
+      ],
+      "chaos": 90,
+      "completeness": 0.88,
+      "dated_starts": 4,
+      "soft5_flemington_leader": "Compensation",
+      "form_status": "PDF_PROFILE_EXTRACTED",
+      "research_status": "MODEL_ONLY_NOT_INDEPENDENT_PICK"
+    },
+    {
+      "race_id": "2026-11-03_FLEMINGTON_R06",
+      "meeting": "FLEMINGTON",
+      "race": 6,
+      "horse": "St Lawrence",
+      "model_pct": 17.59,
+      "model_rank": 1,
+      "model_gap_pctpoints": 1.7,
+      "robust_range": [
+        17.08,
+        17.65
+      ],
+      "chaos": 92,
+      "completeness": 0.94,
+      "dated_starts": 5,
+      "soft5_flemington_leader": "Wymark",
+      "form_status": "PDF_PROFILE_EXTRACTED",
+      "research_status": "MODEL_ONLY_NOT_INDEPENDENT_PICK"
+    },
+    {
+      "race_id": "2026-11-03_FLEMINGTON_R02",
+      "meeting": "FLEMINGTON",
+      "race": 2,
+      "horse": "Johnich",
+      "model_pct": 16.86,
+      "model_rank": 1,
+      "model_gap_pctpoints": 7.26,
+      "robust_range": [
+        13.71,
+        17.19
+      ],
+      "chaos": 82,
+      "completeness": 0.94,
+      "dated_starts": 5,
+      "soft5_flemington_leader": "Johnich",
+      "form_status": "PDF_PROFILE_EXTRACTED",
+      "research_status": "MODEL_ONLY_NOT_INDEPENDENT_PICK"
+    },
+    {
+      "race_id": "2026-11-03_RANDWICK_R02",
+      "meeting": "RANDWICK",
+      "race": 2,
+      "horse": "What A Scandal",
+      "model_pct": 16.82,
+      "model_rank": 1,
+      "model_gap_pctpoints": 3.72,
+      "robust_range": [
+        10.98,
+        17.81
+      ],
+      "chaos": 87,
+      "completeness": 0.86,
+      "dated_starts": 5,
+      "soft5_flemington_leader": "What A Scandal",
+      "form_status": "PDF_PROFILE_EXTRACTED",
+      "research_status": "MODEL_ONLY_NOT_INDEPENDENT_PICK"
+    }
+  ],
+  "by_race_model_diagnostic": [
+    {
+      "race_id": "2026-11-03_FLEMINGTON_R01",
+      "meeting": "FLEMINGTON",
+      "race": 1,
+      "horse": "Royal Press",
+      "model_pct": 34.31,
+      "model_rank": 1,
+      "model_gap_pctpoints": 25.89,
+      "robust_range": [
+        24.83,
+        34.31
+      ],
+      "chaos": 66,
+      "completeness": 0.59,
+      "dated_starts": 1,
+      "soft5_flemington_leader": "Royal Press",
+      "form_status": "PDF_PROFILE_EXTRACTED",
+      "research_status": "MODEL_ONLY_NOT_INDEPENDENT_PICK"
+    },
+    {
+      "race_id": "2026-11-03_RANDWICK_R04",
+      "meeting": "RANDWICK",
+      "race": 4,
+      "horse": "Man Of Worth",
+      "model_pct": 21.57,
+      "model_rank": 1,
+      "model_gap_pctpoints": 8,
+      "robust_range": [
+        19.41,
+        22.5
+      ],
+      "chaos": 82,
+      "completeness": 0.94,
+      "dated_starts": 5,
+      "soft5_flemington_leader": "Man Of Worth",
+      "form_status": "PDF_PROFILE_EXTRACTED",
+      "research_status": "MODEL_ONLY_NOT_INDEPENDENT_PICK"
+    },
+    {
+      "race_id": "2026-11-03_FLEMINGTON_R08",
+      "meeting": "FLEMINGTON",
+      "race": 8,
+      "horse": "Ranarsson",
+      "model_pct": 21.27,
+      "model_rank": 1,
+      "model_gap_pctpoints": 9.03,
+      "robust_range": [
+        15.42,
+        22.98
+      ],
+      "chaos": 80,
+      "completeness": 0.66,
+      "dated_starts": 2,
+      "soft5_flemington_leader": "Ranarsson",
+      "form_status": "PDF_PROFILE_EXTRACTED",
+      "research_status": "MODEL_ONLY_NOT_INDEPENDENT_PICK"
+    },
+    {
+      "race_id": "2026-11-03_FLEMINGTON_R09",
+      "meeting": "FLEMINGTON",
+      "race": 9,
+      "horse": "Shadhavar",
+      "model_pct": 20.7,
+      "model_rank": 1,
+      "model_gap_pctpoints": 9.52,
+      "robust_range": [
+        15.12,
+        21.86
+      ],
+      "chaos": 77,
+      "completeness": 0.86,
+      "dated_starts": 5,
+      "soft5_flemington_leader": "Shadhavar",
+      "form_status": "PDF_PROFILE_EXTRACTED",
+      "research_status": "MODEL_ONLY_NOT_INDEPENDENT_PICK"
+    },
+    {
+      "race_id": "2026-11-03_RANDWICK_R08",
+      "meeting": "RANDWICK",
+      "race": 8,
+      "horse": "Polyglot",
+      "model_pct": 20.54,
+      "model_rank": 1,
+      "model_gap_pctpoints": 1.19,
+      "robust_range": [
+        19.15,
+        20.88
+      ],
+      "chaos": 94,
+      "completeness": 0.94,
+      "dated_starts": 5,
+      "soft5_flemington_leader": "Polyglot",
+      "form_status": "PDF_PROFILE_EXTRACTED",
+      "research_status": "MODEL_ONLY_NOT_INDEPENDENT_PICK"
+    },
+    {
+      "race_id": "2026-11-03_FLEMINGTON_R03",
+      "meeting": "FLEMINGTON",
+      "race": 3,
+      "horse": "Mister Whiskers",
+      "model_pct": 20.06,
+      "model_rank": 1,
+      "model_gap_pctpoints": 4.64,
+      "robust_range": [
+        15.4,
+        21.39
+      ],
+      "chaos": 88,
+      "completeness": 0.53,
+      "dated_starts": 2,
+      "soft5_flemington_leader": "Fringilla",
+      "form_status": "PDF_PROFILE_EXTRACTED",
+      "research_status": "MODEL_ONLY_NOT_INDEPENDENT_PICK"
+    },
+    {
+      "race_id": "2026-11-03_RANDWICK_R09",
+      "meeting": "RANDWICK",
+      "race": 9,
+      "horse": "Compensation",
+      "model_pct": 19.93,
+      "model_rank": 1,
+      "model_gap_pctpoints": 2.18,
+      "robust_range": [
+        19.09,
+        21.04
+      ],
+      "chaos": 90,
+      "completeness": 0.88,
+      "dated_starts": 4,
+      "soft5_flemington_leader": "Compensation",
+      "form_status": "PDF_PROFILE_EXTRACTED",
+      "research_status": "MODEL_ONLY_NOT_INDEPENDENT_PICK"
+    },
+    {
+      "race_id": "2026-11-03_FLEMINGTON_R06",
+      "meeting": "FLEMINGTON",
+      "race": 6,
+      "horse": "St Lawrence",
+      "model_pct": 17.59,
+      "model_rank": 1,
+      "model_gap_pctpoints": 1.7,
+      "robust_range": [
+        17.08,
+        17.65
+      ],
+      "chaos": 92,
+      "completeness": 0.94,
+      "dated_starts": 5,
+      "soft5_flemington_leader": "Wymark",
+      "form_status": "PDF_PROFILE_EXTRACTED",
+      "research_status": "MODEL_ONLY_NOT_INDEPENDENT_PICK"
+    },
+    {
+      "race_id": "2026-11-03_FLEMINGTON_R02",
+      "meeting": "FLEMINGTON",
+      "race": 2,
+      "horse": "Johnich",
+      "model_pct": 16.86,
+      "model_rank": 1,
+      "model_gap_pctpoints": 7.26,
+      "robust_range": [
+        13.71,
+        17.19
+      ],
+      "chaos": 82,
+      "completeness": 0.94,
+      "dated_starts": 5,
+      "soft5_flemington_leader": "Johnich",
+      "form_status": "PDF_PROFILE_EXTRACTED",
+      "research_status": "MODEL_ONLY_NOT_INDEPENDENT_PICK"
+    },
+    {
+      "race_id": "2026-11-03_RANDWICK_R02",
+      "meeting": "RANDWICK",
+      "race": 2,
+      "horse": "What A Scandal",
+      "model_pct": 16.82,
+      "model_rank": 1,
+      "model_gap_pctpoints": 3.72,
+      "robust_range": [
+        10.98,
+        17.81
+      ],
+      "chaos": 87,
+      "completeness": 0.86,
+      "dated_starts": 5,
+      "soft5_flemington_leader": "What A Scandal",
+      "form_status": "PDF_PROFILE_EXTRACTED",
+      "research_status": "MODEL_ONLY_NOT_INDEPENDENT_PICK"
+    },
+    {
+      "race_id": "2026-11-03_RANDWICK_R10",
+      "meeting": "RANDWICK",
+      "race": 10,
+      "horse": "Enamorada",
+      "model_pct": 16.51,
+      "model_rank": 1,
+      "model_gap_pctpoints": 2.27,
+      "robust_range": [
+        16.21,
+        16.75
+      ],
+      "chaos": 92,
+      "completeness": 0.88,
+      "dated_starts": 4,
+      "soft5_flemington_leader": "Enamorada",
+      "form_status": "PDF_PROFILE_EXTRACTED",
+      "research_status": "MODEL_ONLY_NOT_INDEPENDENT_PICK"
+    },
+    {
+      "race_id": "2026-11-03_RANDWICK_R01",
+      "meeting": "RANDWICK",
+      "race": 1,
+      "horse": "Cabbucio",
+      "model_pct": 16.3,
+      "model_rank": 1,
+      "model_gap_pctpoints": 2.01,
+      "robust_range": [
+        15.4,
+        20.32
+      ],
+      "chaos": 92,
+      "completeness": 0.94,
+      "dated_starts": 5,
+      "soft5_flemington_leader": "Cabbucio",
+      "form_status": "PDF_PROFILE_EXTRACTED",
+      "research_status": "MODEL_ONLY_NOT_INDEPENDENT_PICK"
+    },
+    {
+      "race_id": "2026-11-03_RANDWICK_R03",
+      "meeting": "RANDWICK",
+      "race": 3,
+      "horse": "Graffiti Tycoon",
+      "model_pct": 15.49,
+      "model_rank": 1,
+      "model_gap_pctpoints": 1.35,
+      "robust_range": [
+        12.25,
+        16.45
+      ],
+      "chaos": 92,
+      "completeness": 0.8,
+      "dated_starts": 4,
+      "soft5_flemington_leader": "Graffiti Tycoon",
+      "form_status": "PDF_PROFILE_EXTRACTED",
+      "research_status": "MODEL_ONLY_NOT_INDEPENDENT_PICK"
+    },
+    {
+      "race_id": "2026-11-03_FLEMINGTON_R10",
+      "meeting": "FLEMINGTON",
+      "race": 10,
+      "horse": "Buccleuch",
+      "model_pct": 15.09,
+      "model_rank": 1,
+      "model_gap_pctpoints": 2.3,
+      "robust_range": [
+        14.03,
+        19.2
+      ],
+      "chaos": 93,
+      "completeness": 0.94,
+      "dated_starts": 5,
+      "soft5_flemington_leader": "Buccleuch",
+      "form_status": "PDF_PROFILE_EXTRACTED",
+      "research_status": "MODEL_ONLY_NOT_INDEPENDENT_PICK"
+    },
+    {
+      "race_id": "2026-11-03_FLEMINGTON_R07",
+      "meeting": "FLEMINGTON",
+      "race": 7,
+      "horse": "Juja Kibo",
+      "model_pct": 14.78,
+      "model_rank": 1,
+      "model_gap_pctpoints": 2.84,
+      "robust_range": [
+        11.39,
+        19.45
+      ],
+      "chaos": 88,
+      "completeness": 0.94,
+      "dated_starts": 5,
+      "soft5_flemington_leader": "Juja Kibo",
+      "form_status": "PDF_PROFILE_EXTRACTED",
+      "research_status": "MODEL_ONLY_NOT_INDEPENDENT_PICK"
+    },
+    {
+      "race_id": "2026-11-03_FLEMINGTON_R04",
+      "meeting": "FLEMINGTON",
+      "race": 4,
+      "horse": "The Speed Machine",
+      "model_pct": 13.77,
+      "model_rank": 1,
+      "model_gap_pctpoints": 1.48,
+      "robust_range": [
+        8.62,
+        13.77
+      ],
+      "chaos": 94,
+      "completeness": 0.88,
+      "dated_starts": 4,
+      "soft5_flemington_leader": "Parcae",
+      "form_status": "PDF_PROFILE_EXTRACTED",
+      "research_status": "MODEL_ONLY_NOT_INDEPENDENT_PICK"
+    },
+    {
+      "race_id": "2026-11-03_RANDWICK_R06",
+      "meeting": "RANDWICK",
+      "race": 6,
+      "horse": "Lord Remlap",
+      "model_pct": 12.71,
+      "model_rank": 1,
+      "model_gap_pctpoints": 2.17,
+      "robust_range": [
+        10.6,
+        13.28
+      ],
+      "chaos": 92,
+      "completeness": 0.94,
+      "dated_starts": 5,
+      "soft5_flemington_leader": "Lord Remlap",
+      "form_status": "PDF_PROFILE_EXTRACTED",
+      "research_status": "MODEL_ONLY_NOT_INDEPENDENT_PICK"
+    },
+    {
+      "race_id": "2026-11-03_RANDWICK_R07",
+      "meeting": "RANDWICK",
+      "race": 7,
+      "horse": "I've Bean Tryin'",
+      "model_pct": 12.11,
+      "model_rank": 1,
+      "model_gap_pctpoints": 0.01,
+      "robust_range": [
+        10.22,
+        12.13
+      ],
+      "chaos": 96,
+      "completeness": 0.94,
+      "dated_starts": 5,
+      "soft5_flemington_leader": "I've Bean Tryin'",
+      "form_status": "PDF_PROFILE_EXTRACTED",
+      "research_status": "MODEL_ONLY_NOT_INDEPENDENT_PICK"
+    },
+    {
+      "race_id": "2026-11-03_RANDWICK_R05",
+      "meeting": "RANDWICK",
+      "race": 5,
+      "horse": "Formal Display",
+      "model_pct": 10.67,
+      "model_rank": 1,
+      "model_gap_pctpoints": 0.16,
+      "robust_range": [
+        9.81,
+        12.45
+      ],
+      "chaos": 96,
+      "completeness": 0.94,
+      "dated_starts": 5,
+      "soft5_flemington_leader": "Formal Display",
+      "form_status": "PDF_PROFILE_EXTRACTED",
+      "research_status": "MODEL_ONLY_NOT_INDEPENDENT_PICK"
+    },
+    {
+      "race_id": "2026-11-03_FLEMINGTON_R05",
+      "meeting": "FLEMINGTON",
+      "race": 5,
+      "horse": "Autumnheat",
+      "model_pct": 10.2,
+      "model_rank": 1,
+      "model_gap_pctpoints": 0.91,
+      "robust_range": [
+        9.28,
+        10.64
+      ],
+      "chaos": 95,
+      "completeness": 0.75,
+      "dated_starts": 4,
+      "soft5_flemington_leader": "Jennivamoose",
+      "form_status": "PDF_PROFILE_EXTRACTED",
+      "research_status": "MODEL_ONLY_NOT_INDEPENDENT_PICK"
+    }
+  ],
+  "disclaimer": "Raw model race leaders are not independent research picks and are not necessarily win-first priorities; probabilities are uncalibrated. Current field is not officially certified, PDF only 302/333 complete profiles. No final multi or betting board approved."
+}
