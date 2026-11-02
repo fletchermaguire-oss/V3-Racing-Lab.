@@ -23,14 +23,14 @@ table{border-collapse:collapse;width:100%;font-size:13px}th{text-align:left;back
 <div class="strip" id="stats"><div class="tile">Loading dated source…</div></div>
 <div class="actions"><label>Flemington track scenario<select id="going"><option value="Good 4">Published Good 4</option><option value="Soft 5">Soft 5 rainfall test</option><option value="Soft 6">Soft 6 rainfall test</option></select></label><label>Research list size<select id="count"><option value="5">Top 5</option><option selected value="10">Top 10</option><option value="15">Top 15</option></select></label></div>
 <h2>V5 win-first research screen</h2><p class="muted">One candidate per race; only runners meeting the V5 stability and dossier-quality gate appear. There is no forced 10th selection. Independent human Top 10 approval and final scratches remain outstanding.</p>
-<div id="top" class="cards"></div><h2>All 20 races · whole-field estimates</h2>
+<div id="top" class="cards"></div><h2>Provisional Top 10 research queue</h2><p class="muted">Human-reviewed investigation order; only the V5 screen above can designate a priority. Research-queue entries failing that screen are NOT selections. Rank will not silently change with a scenario.</p><div id="review" class="cards"></div><h2>All 20 races · whole-field estimates</h2>
 <p class="muted">Every modelled race is normalised to 100%; these are diagnostics, not automatically the final independent picks. Scratched runners are displayed separately and excluded from the calculation.</p>
 <div class="actions"><label>Meeting<select id="meeting"><option value="ALL">Both meetings</option><option value="FLEMINGTON">Flemington</option><option value="RANDWICK">Randwick</option></select></label><label>Horse or trainer search<input id="search" type="search" placeholder="Search runner"></label></div>
 <div id="races"></div>
 <div class="foot">Official source checks: <a href="https://www.racingaustralia.horse/FreeFields/Scratchings.aspx?Key=2026Nov03%2CVIC%2CFlemington">Flemington scratchings / track</a> · <a href="https://mdata.racingnsw.com.au/FreeFields/Scratchings.aspx?Key=2026Nov03%2CNSW%2CRoyal+Randwick">Randwick scratchings / track</a>. Snapshot at 2 Nov 3:19pm (Flemington) and 5:45pm (Randwick), AEDT. Current declared Good 4 and rails out 3m / +2m respectively. This page does not auto-certify official starters or approve a multi.</div></main>
 <script>
 'use strict';
-let data,board;const $=id=>document.getElementById(id);
+let data,board,queue;const $=id=>document.getElementById(id);
 const element=(tag,txt,cls)=>{const x=document.createElement(tag);if(txt!==undefined)x.textContent=String(txt);if(cls)x.className=cls;return x};
 const nfmt=n=>Number.isFinite(Number(n))?Number(n).toFixed(2):'—';
 const pct=n=>nfmt(n)+'%';
@@ -44,7 +44,26 @@ function screen(){
  $('top').replaceChildren();
  const picks=x.researchCandidates.slice(0,Number($('count').value));if(!picks.length)$('top').append(element('p','No candidates cleared the V5 win-first screen. No fallback leaders will be added.','muted'));
  picks.forEach((h,i)=>{const c=element('div',undefined,'choice');c.append(element('div','#'+(i+1)+' · '+h.meeting+' R'+h.race,'tag'),element('h3',h.horse),element('div','V5 model '+pct(h.model_pct)+' · stress-tested floor '+pct(h.robust_floor)));c.append(element('p',h.status==='PRIORITY_RESEARCH'?'PRIORITY RESEARCH — not final':'REVIEW ONLY — not final'));c.append(element('p','Separation at least '+nfmt(h.min_gap)+' pp · historical starts '+h.dated_starts+' · flags '+(h.reasons.length?h.reasons.join(', ').replaceAll('_',' '):'none from standard screen')));$('top').append(c)});
- renderRaces();
+ renderQueue();renderRaces();
+}
+function renderQueue(){
+ const host=$('review');host.replaceChildren();
+ if(!queue){host.append(element('p','Dated review queue missing; no independent shortlist is published.','muted'));return;}
+ const limit=Number($('count').value), lookup=new Map(board.baseline.records.map(h=>[h.id,h]));
+ queue.entries.slice(0,limit).forEach(h=>{
+  const rid=data.date+'_'+h.meeting+'_R'+String(h.race).padStart(2,'0');
+  const saved=data.runners.find(x=>x.race_id===rid&&x.horse.toUpperCase()===h.horse.toUpperCase());
+  const current=saved&&lookup.get(saved.id);
+  const gate=board.winFirst.byRace.find(x=>x.race_id===rid);
+  const box=element('div',undefined,'choice');
+  box.append(element('div','#'+h.rank+' · '+h.meeting+' R'+h.race,'tag'));
+  box.append(element('h3',h.horse));
+  box.append(element('div',current?'Raw V5 diagnostic '+pct(current.p)+' · scenario low '+pct(current.robust_floor):'OUT OF FIELD','tag'));
+  const passed=gate&&(gate.status==='PRIORITY_RESEARCH'||gate.status==='REVIEW_ONLY')&&current;
+  box.append(element('p',passed?('Strict screen: '+gate.status.replaceAll('_',' ')):'NOT V5-CLEARED · NOT FINAL'));
+  box.append(element('p',h.note));
+  host.append(box);
+ });
 }
 function renderRaces(){
  if(!board)return;const host=$('races'),meet=$('meeting').value,q=$('search').value.trim().toLowerCase();host.replaceChildren();
@@ -68,9 +87,13 @@ function renderRaces(){
  if(!host.children.length)host.append(element('p','No matching horses.','muted'));
 }
 window.addEventListener('DOMContentLoaded',()=>Promise.resolve().then(async()=>{
- const resp=await fetch('/v5/racecards/2026-11-03-research-scratchings.json',{cache:'no-store'});
- if(!resp.ok)throw Error('Tuesday research HTTP '+resp.status);
- data=await resp.json();
+ const [resp,rankResp]=await Promise.all([
+  fetch('/v5/racecards/2026-11-03-research-scratchings.json',{cache:'no-store'}),
+  fetch('/v5/shortlists/2026-11-03-review-queue.json',{cache:'no-store'})
+ ]);
+ if(!resp.ok||!rankResp.ok)throw Error('Dated research/review source unavailable');
+ data=await resp.json();queue=await rankResp.json();
+ if(queue.date!==data.date||queue.publication_approved!==false||queue.entries.length!==10||queue.entries.some(x=>x.not_a_final_selection!==true))throw Error('Tuesday review queue validation failed');
  if(data.date!=='2026-11-03'||data.runners.length!==333||data.races.length!==20||data.official_20261102.scratching_count.FLEMINGTON!==13||data.official_20261102.scratching_count.RANDWICK!==26)throw Error('Research snapshot mismatch');
  if(!window.RacingLabV5Model)throw Error('Original V5 model is unavailable');
  screen();
