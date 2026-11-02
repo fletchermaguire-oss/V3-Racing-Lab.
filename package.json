@@ -12,6 +12,6 @@
     "research:audit": "node v5/backtests/compare-retrospective.cjs",
     "research:pace-class": "node v5/experiments/pace-class-shadow.cjs",
     "research:class": "node v5/experiments/compare-neutral-class.cjs",
-    "check:tuesday": "node v5/racecards/2026-11-03.qa.cjs && node v5/racecards/2026-11-03-research.qa.cjs"
+    "check:tuesday": "node v5/racecards/2026-11-03.qa.cjs && node v5/racecards/2026-11-03-research.qa.cjs && node v5/racecards/2026-11-03-review.qa.cjs"
   }
 }
