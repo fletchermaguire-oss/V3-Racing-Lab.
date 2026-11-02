@@ -67,13 +67,13 @@ function renderRaces(){
  }
  if(!host.children.length)host.append(element('p','No matching horses.','muted'));
 }
-Promise.resolve().then(async()=>{
+window.addEventListener('DOMContentLoaded',()=>Promise.resolve().then(async()=>{
  const resp=await fetch('/v5/racecards/2026-11-03-research-scratchings.json',{cache:'no-store'});
  if(!resp.ok)throw Error('Tuesday research HTTP '+resp.status);
  data=await resp.json();
  if(data.date!=='2026-11-03'||data.runners.length!==333||data.races.length!==20||data.official_20261102.scratching_count.FLEMINGTON!==13||data.official_20261102.scratching_count.RANDWICK!==26)throw Error('Research snapshot mismatch');
  if(!window.RacingLabV5Model)throw Error('Original V5 model is unavailable');
  screen();
-}).catch(e=>{$('top').replaceChildren(element('div','V5 research could not load: '+e.message,'warn'));$('stats').replaceChildren()});
+}).catch(e=>{$('top').replaceChildren(element('div','V5 research could not load: '+e.message,'warn'));$('stats').replaceChildren()}));
 $('going').addEventListener('change',screen);$('count').addEventListener('change',screen);$('meeting').addEventListener('change',renderRaces);$('search').addEventListener('input',renderRaces);
 </script></body></html>
