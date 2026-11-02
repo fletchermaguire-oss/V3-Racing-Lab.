@@ -852,7 +852,17 @@ function qaPage(){add(app(),head('Model QA',C.board.version+' · '+C.revision),m
    link('Open race-by-race errors and starter mismatches','/v5/audits/2026-10-31-postrace-review.json','btn ghost'));
  }
 }
-function calPage(){add(app(),head('Calibration','Measured accuracy must come from frozen pre-race forecasts and verified results.'),box('Current status','Historical V5 calibration has not been established. Passing formula checks does not establish an improved strike rate. Scenario ranges are sensitivity checks.'),link('Open existing Top 5/10/15 results','/results.html'));}
+function calPage(){
+ add(app(),
+  head('Calibration','Historical accuracy and production probability status are different checks.'),
+  box('PRODUCTION STATUS · NOT CALIBRATED','The 3 November V5 probabilities are experimental, market-blind, and normalised to 100% per race. Neither that arithmetic nor the scenario robustness band constitutes empirical probability calibration. No automatic coefficient or probability corrections were authorised.'),
+  box('Historical diagnostic · 49 races','V5-L5 placed the recorded winner first in 17 of 49 retrospectively reconstructed races (34.7%). The dossiers were not proven frozen before those races, so this is NOT a certified prospective hit rate.'),
+  box('Out-of-date fit rejected · proper chronological test','Fitting temperature 0.62 on 17 October worsened 24 October hold-out log loss from 2.2754 to 2.3784 and multiclass Brier from 0.8971 to 0.9256. Reverse fitting on 24 October also worsened the earlier-date hold-out. No correction passed validation.'),
+  box('What would establish calibration','Keep complete independently timestamped pre-jump predictions, exact starter inventories and official winning results over at least eight separate dates (minimum six/120 races for training plus two/40 later races for validation). Then evaluate Brier score, log loss, calibration bands and out-of-sample stability. Never mix post-race edited dossiers into training.'),
+  link('Open dated calibration audit','/v5/calibration/2026-11-02-49-race-temporal-study.json'),
+  link('Open existing Top 5/10/15 results','/results.html')
+ );
+}
 function weatherPage(){add(app(),head('Weather & Tracks','Scenarios update the model everywhere. Saved observations remain dated.'),scenarios(),officialPanel(),venueCards());}
 function syncPage(){
  if(importedCard()){
