@@ -1,0 +1,30 @@
+'use strict';
+const fs=require('node:fs'),assert=require('node:assert/strict'),vm=require('node:vm');
+const M=require('../model.js');
+const source=JSON.parse(fs.readFileSync('v5/racecards/2026-11-03-research-scratchings.json','utf8'));
+const queue=JSON.parse(fs.readFileSync('v5/shortlists/2026-11-03-review-queue.json','utf8'));
+const html=fs.readFileSync('v5/racecards/2026-11-03-v5.html','utf8');
+assert.equal(source.date,'2026-11-03');assert.equal(queue.date,source.date);
+assert.equal(queue.publication_approved,false);assert.equal(queue.entries.length,10);
+assert.equal(source.runners.filter(h=>h.statistic_extraction_status==='PDF_TABLE_VALIDATED').length,302);
+assert.equal(source.runners.filter(h=>h.status.startsWith('SCRATCHED')).length,39);
+assert(source.official_20261102.inventory_warning.includes('differs'));
+const b=M.board(source,{going:source.official_20261102.going});
+assert.equal(b.winFirst.priority.length,1);assert.equal(b.winFirst.review.length,2);
+assert.equal(b.winFirst.priority[0].horse,'Man Of Worth');
+assert.deepEqual(b.winFirst.review.map(x=>x.horse),['Shadhavar','Johnich']);
+assert(queue.entries.every(x=>x.not_a_final_selection===true));
+const ids=new Set();
+for(const [i,entry] of queue.entries.entries()){
+ assert.equal(entry.rank,i+1);assert(!ids.has(entry.race_id));ids.add(entry.race_id);
+ assert(b.baseline.records.some(r=>r.race_id===entry.race_id&&r.horse===entry.horse),'unlisted or scratched review candidate '+entry.horse);
+ const v=b.baseline.records.find(r=>r.race_id===entry.race_id&&r.horse===entry.horse);
+ assert(Math.abs(v.p-entry.model_pct)<0.011,'outdated model percentage '+entry.horse);
+}
+const inline=html.match(/<script>([\s\S]*?)<\/script>/);
+assert(inline,'Tuesday V5 interactive script missing');new vm.Script(inline[1],{filename:'2026-11-03-v5.html'});
+assert(html.includes('Provisional Top 10 research queue'));assert(html.includes('NOT V5-CLEARED'));
+assert(html.includes('/v5/model.js'));assert(html.includes('2026-11-03-research-scratchings.json'));
+const archive=JSON.parse(fs.readFileSync('v5/research.json','utf8'));
+assert.equal(archive.date,'2026-10-31');assert.equal(archive.runners.length,408);
+console.log('PASS: Tuesday QA: official Monday 39 scratchings; 302 detailed stats; whole-field V5; 1 screened priority, 2 reviews; 10 separate unapproved review queue; historic research preserved.');
