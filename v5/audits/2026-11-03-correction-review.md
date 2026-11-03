@@ -1,27 +1,24 @@
-# V5-L6 candidate — 3 November 2026 model integrity correction
+# V5 3 November review — missing-class evidence reliability gate
 
-**Status:** Code review / test candidate only. This is a mathematical missing-data repair, **not a demonstrated increase in real win strike rate**. Do not modify the immutable October 17/24/31 result files, the archived 3 November research, independently reviewed selections, or the public site until an independent forward review.
+**Status:** Draft quality-control fix, not a model improvement or production deployment.
 
-## Issue fixed
-Prior V5-L5 `classQuality()` returned numeric zero when no historical class label could be parsed. In a field with recognised graded rivals, class-relative scoring then applied `classWeight*(0 - peerAnchor)` — a negative rating that asserted poor ability for horses with *unknown* race class. This is a systematic unverified inference.
+## The verified modelling defect
+The existing V5-L5 model maps *unrecognised race class* to a numeric quality of zero and compares that zero with positive observed rivals. This can produce an unjustified negative class component. It is a **data interpretation defect**, not proof that the horse should be upgraded. The source backtests are not independent enough to justify altering win probabilities after reviewing winners.
 
-The V5-L6 candidate represents unrecognised graded class as `null`, computes rival benchmarks exclusively from observed graded peers, and sets the unknown horse's class contribution to **zero** (neither bonus nor penalty). If there is no observed rival peer, the class edge is also unknown, not fabricated. It does not alter temperatures, existing coefficients, source form, market policy, or previously frozen published results.
+## What this branch actually fixes
+- Keep the original L5 numerical scoring and model version completely unchanged so saved October and 3 November comparisons, historical Top 15, and race source archive remain reproducible.
+- Flag model leaders with no recognised graded class evidence as `UNKNOWN_GRADED_CLASS` and **exclude them from the win-first priority and conditional-review lists**; no automatic replacement horse is invented.
+- Explain the unrecognised grade and resulting uncertainty in the Race Centre instead of presenting the legacy zero as a verified poor-quality class rating.
+- Add automated QA for the unknown-class status, no priority promotion, unchanged 100% whole-field accounting and unchanged calibration status.
 
-The strict research filter now disqualifies a runner with no recognised graded evidence from both the priority and conditional review lists. Raw model estimates are still available for diagnosis but never certified as true probabilities. Race-detail display handles absent class evidence without throwing an error.
+## Why not change coefficients now?
+Existing isolated `v5/experiments/model-neutral-class.cjs` was assessed on 49 reconstructed October races. It changed **zero leaders** (17/49 correct both) and made the total Brier and log loss slightly worse (see `v5/experiments/NEUTRAL_CLASS_RESULT_2026-10-30.md`). The source reconstructions lack independent pre-race freeze proof, so even improvement would not demonstrate a genuine future increase. The newer temperature audit also found worse holdout performance. A prospective challenge and sufficient new days are needed before promoting any alternative.
 
-## Accuracy and leakage controls
-- Current baseline: V5-L5, `V5-L5-CANDIDATE-20261030`, must remain available as the archived research comparator, including `v5/cards/2026-11-03/analysis.json` and `v5/backtests/*`.
-- Corrected code: V5-L6 candidate, `v5/model.js` on this review branch; no merge or deployment to the live site.
-- Isolated neutral-class experiment already exists at `v5/experiments/model-neutral-class.cjs`; the fixture QA checks matching results, neutral missing-class scoring, finite whole-field probabilities, ordering invariance, and no race winner leakage.
-- Retrospective 17/24 October studies do not establish real-world superiority: these source reconstructions do not have pre-jump freeze proof. The open temperature audit PR #23 reported worsened holdout Brier and log loss when refitting temperature.
-- No 3 November winners or market odds were consulted when choosing **any** class coefficient, scoring constant, or runner-specific override. This correction follows the semantic distinction between *unknown* and *poor*.
-- Production acceptance still requires passing full CI, complete official starter fields, new pre-jump locked forecasts, several independent forward race days, and a meaningful improvement on both accuracy and calibrated forecast metrics.
+## Remaining tasks to raise true win rate
+1. Complete official starter and reserve validation and independently dated historical class form before any new recommendation release.
+2. Identify low-evidence runners and improve source extraction **before the race**, rather than penalising or rewarding unknown data arbitrarily.
+3. Run original L5 and isolated neutral-class candidate in parallel using exactly the same pre-race locked fields and track scenarios.
+4. Score unmodified raw top-one per race, stricter win-first selections and coverage, plus Brier/log loss on later officially verified results.
+5. Only change production probability weights or graduate a model with genuinely independent holdout/forward evidence.
 
-## Reproducibility
-```
-npm test
-npm run check
-npm run research:class
-```
-
-Decision: **do not claim 60%**, do not auto-generate a 10/15-leg selection list from unqualified race leaders, and never mix retrospective historical backtests with true prospective hit rates.
+**No altered historical results, selection ranks, source dossiers, probability coefficients or original model version. No approval or live-site deployment.**
