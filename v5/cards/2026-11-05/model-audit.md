@@ -1,5 +1,7 @@
 # V5-L5 source-locked preliminary board — 5 November 2026 Flemington
 
+> **Newer provisional pace-adjusted research (3 Nov):** See [dated pace shadow and Good4/Soft5 board](./PACE_CONDITIONAL_2026-11-03.md) and [whole-field conditional percentages](./pace-conditional-20261103.json). The table below is the **immutable original PDF-field baseline** and must not be confused with the latest conditional research, verified final starters, or published live selections. No live model or site has been replaced.
+
 **Status: MODEL GENERATED / SOURCE QA PASSED / FINAL PUBLICATION BLOCKED.** Model version: `V5-L5-CANDIDATE-20261030`. As-of 2026-11-03. The exact 149-runner PDF source and 9 races have been processed with the unchanged V5 engine in this isolated branch. All 90 race/scenario whole-field probability totals equal 100%. Neither these raw estimates nor their scenario ranges are calibrated win probabilities or confidence intervals.
 
 Scenario: **Flemington Good 4 comparison only**; it is NOT an official race-day going observation. Every one of the nine races is awaiting a complete, attested official final-starter list. The Crown Oaks PDF lists 20 including potential reserves/emergencies, so the final-publish figures must be recalculated with the actual starting field.
