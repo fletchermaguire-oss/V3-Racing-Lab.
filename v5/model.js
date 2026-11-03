@@ -5,7 +5,7 @@
  */
 (function(global){
 'use strict';
-const VERSION='V5-L5-CANDIDATE-20261030';
+const VERSION='V5-L6-MISSING-CLASS-NEUTRAL-20261103';
 const CONFIG=Object.freeze({
  temperature:0.78,uniformReserve:0.15,
  weights:Object.freeze({career:0.24,recency:0.76,distance:0.19,surface:0.22,course:0.12,class:0.55}),
@@ -153,7 +153,7 @@ function classQuality(starts){
   const adjusted=level*perf,w=Math.pow(0.82,i);
   sum+=w*adjusted;weight+=w;values.push(adjusted);
  });
- if(!values.length)return 0;
+ if(!values.length)return null; // Missing graded evidence is unknown, not low ability.
  values.sort((a,b)=>b-a);
  const high=(values[0]+(values[1]===undefined?values[0]:values[1]))/2;
  return (0.75*sum/weight+0.25*high)*values.length/(values.length+0.65);
@@ -257,10 +257,14 @@ function calculate(d,scenario,classWeight=CONFIG.weights.class,options={}){
   // The three highest-rated rivals and the median rival determine an anchor.
   // This is current-field competition, not a historic-opponent database.
   entries.forEach(x=>{
-   const others=entries.filter(y=>y.h.id!==x.h.id).map(y=>y.classQuality).sort((a,b)=>b-a);
+   // Only recognised graded form can supply a class comparison.
+   // An unknown entrant receives neither a fabricated bonus nor penalty.
+   const others=entries.filter(y=>y.h.id!==x.h.id&&Number.isFinite(y.classQuality))
+     .map(y=>y.classQuality).sort((a,b)=>b-a);
    const top=others.slice(0,Math.min(3,others.length));
-   const anchor=0.65*top.reduce((s,v)=>s+v,0)/top.length+0.35*median(others);
-   const edge=x.classQuality-anchor,contribution=classWeight*edge;
+   const anchor=others.length?0.65*top.reduce((s,v)=>s+v,0)/top.length+0.35*median(others):null;
+   const edge=x.classQuality===null||anchor===null?null:x.classQuality-anchor;
+   const contribution=edge===null?0:classWeight*edge;
    x.parts.class=contribution;x.raw+=contribution;
    x.oppositionAnchor=anchor;x.oppositionEdge=edge;
   });
@@ -275,8 +279,9 @@ function calculate(d,scenario,classWeight=CONFIG.weights.class,options={}){
    records.push({id:x.h.id,race_id:r.id,horse:x.h.horse,meeting:r.meeting,race:r.race,
     rank:i+1,p:x.p,p_exact:x.pExact,model_score:round(clamp(50+18*(x.raw-mid),1,99),1),
     fair_odds:round(100/x.pExact),field_size:entries.length,field_gap:gap,chaos:chaos,
-    completeness:x.completeness,days_since_last:x.daysSinceLast,features:x.parts,grade_quality:round(x.classQuality,3),
-     opposition_class_anchor:round(x.oppositionAnchor,3),opposition_class_edge:round(x.oppositionEdge,3),
+    completeness:x.completeness,days_since_last:x.daysSinceLast,features:x.parts,grade_quality:x.classQuality===null?null:round(x.classQuality,3),
+     opposition_class_anchor:x.oppositionAnchor===null?null:round(x.oppositionAnchor,3),
+     opposition_class_edge:x.oppositionEdge===null?null:round(x.oppositionEdge,3),
     settle_800:x.settle.position,settle_fraction:x.settle.fraction,status:statusOf(x.h),original_pick:!!x.h.original_pick,
     input_issues:x.issues,form_audit:{accepted:x.starts.length,ignored_future:x.formAudit.ignored_future,invalid:x.formAudit.invalid,duplicates:x.formAudit.duplicates},
     g1_wins:x.starts.filter(s=>/\bG1\b/i.test(s.className)&&s.pos===1).length,
@@ -284,8 +289,10 @@ function calculate(d,scenario,classWeight=CONFIG.weights.class,options={}){
     positive_drivers:drivers.filter(x=>x.contribution>0).sort((a,b)=>b.contribution-a.contribution),
     negative_drivers:drivers.filter(x=>x.contribution<0).sort((a,b)=>a.contribution-b.contribution)});
   });
-  const quality=entries.map(x=>x.classQuality).sort((a,b)=>b-a),size=Math.min(entries.length,Math.max(2,Math.ceil(entries.length/3)));
-  races.push(Object.assign(base,{status:'MODELLED_PROVISIONAL',field_quality:round(quality.slice(0,size).reduce((a,b)=>a+b,0)/size),
+  const quality=entries.map(x=>x.classQuality).filter(Number.isFinite).sort((a,b)=>b-a);
+  const size=Math.min(quality.length,Math.max(2,Math.ceil(entries.length/3)));
+  races.push(Object.assign(base,{status:'MODELLED_PROVISIONAL',
+   field_quality:size?round(quality.slice(0,size).reduce((a,b)=>a+b,0)/size):null,
    leader:entries[0].h.horse,top_p:top,gap:gap,chaos:chaos,sum:round(entries.reduce((s,x)=>s+x.p,0)),
    field_verified:horses.every(h=>statusOf(h)==='ACTIVE_VERIFIED')&&r.field_verified===true,
    issues:unique(entries.flatMap(x=>x.issues))}));
@@ -337,6 +344,7 @@ function winFirstBoard(baseline,scenarios){
   const reasons=[];
   if(!samples.every(x=>x.rank===1))reasons.push('CLASS_ASSUMPTION_CHANGES_RANK');
   if(current.form_audit.accepted<3)reasons.push('LIMITED_RECENT_FORM');
+  if(current.grade_quality===null)reasons.push('UNKNOWN_GRADED_CLASS');
   if(current.completeness<0.78)reasons.push('INCOMPLETE_DOSSIER');
   if(current.input_issues.length)reasons.push('FORM_INPUT_ISSUES');
   if(floor<17)reasons.push('LOW_CONSERVATIVE_CHANCE');
@@ -351,7 +359,7 @@ function winFirstBoard(baseline,scenarios){
    grade_quality:current.grade_quality,reasons:reasons,good4_pct:g.p,soft5_pct:s.p};
   if(!reasons.length){item.status='PRIORITY_RESEARCH';priority.push(item);}
   else if(floor>=13&&gap>=4&&chaos<=89&&current.form_audit.accepted>=3&&
-   current.completeness>=0.78&&!current.input_issues.length){
+   current.completeness>=0.78&&current.grade_quality!==null&&!current.input_issues.length){
    item.status='REVIEW_ONLY';review.push(item);
   }else{item.status='NO_SELECTION';avoid.push(item);}
   byRace.push(item);
@@ -398,6 +406,7 @@ function board(d,options={}){
   const r=good.races.find(r=>r.id===x.race_id);x.field_quality=r.field_quality;x.field_chaos=r.chaos;
   x.quality_flags=[];
   if(x.completeness<0.70)x.quality_flags.push('LIMITED_DOSSIER');
+  if(x.grade_quality===null)x.quality_flags.push('UNKNOWN_GRADED_CLASS');
   if(x.input_issues.length)x.quality_flags.push('INPUT_REVIEW_REQUIRED');
   if(x.robust_spread>=6)x.quality_flags.push('SCENARIO_SENSITIVE');
   if(x.going_dependent_lead)x.quality_flags.push('GOING_DEPENDENT_LEAD');
