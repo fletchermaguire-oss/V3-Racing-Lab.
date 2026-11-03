@@ -20,4 +20,5 @@ jobs:
       - run: npm run research:class
       - run: npm run research:rank-driver
       - run: npm run research:class-step
+      - run: npm run research:pace-map
       - run: git diff --exit-code
