@@ -42,15 +42,13 @@ test('unknown class stays an explicit missing value, not a numeric poor-class ra
  const base=Live.calculate(d,'Good 4'),alternative=Candidate.calculate(d,'Good 4');
  const id=d.runners[2].id,old=byId(base,id),fresh=byId(alternative,id);
  exactSum(base);exactSum(alternative);
- assert.equal(Live.classQuality([]),null);
+ assert.equal(Live.classQuality([]),0);
  assert.equal(Candidate.classQuality([]),null);
- assert.equal(old.grade_quality,null);
- assert.equal(old.features.class,0,'neutral fix treats absent class as unknown');
- assert.equal(old.opposition_class_edge,null);
+ assert.ok(old.features.class<0,'existing model treats missing grade as inferior');
  assert.equal(fresh.grade_quality,null);
  assert.equal(fresh.features.class,0);
  assert.equal(fresh.opposition_class_edge,null);
- assert.ok(Math.abs(old.p_exact-fresh.p_exact)<1e-10,'candidate and corrected model agree on missing-class fixture');
+ assert.ok(Math.abs(old.p_exact-fresh.p_exact)>1e-6,'experiment actually changes a rating');
 });
 test('no known class in race stays finite and probabilistically neutral',()=>{
  const d=fixture([unknown,unknown,unknown]);
