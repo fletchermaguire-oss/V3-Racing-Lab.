@@ -698,10 +698,11 @@ function paceClassResearch(r,reviewed){
   panel.append(e('p','','Historical pace evidence: '+z.pressure.known_runners+'/'+z.pressure.modelled_runners+
    ' with dated settling data. '+z.pressure.status.replaceAll('_',' ').toLowerCase()+
    '. Possible early leaders: '+(z.pressure.historical_potential_leaders.join(', ')||'not established')+'.'));
-  var grade=z.class.grade_quality,edge=z.class.opposition_class_edge;
-  panel.append(e('p','','Class assessment: '+(Number.isFinite(grade)?grade.toFixed(3):'unknown (unrecognised graded evidence)')+
-   ' historic graded-form score; '+(Number.isFinite(edge)?((edge>=0?'+':'')+edge.toFixed(3)):'not estimable')+
-   ' vs estimated rivals. Unknown evidence is neutral, not a poor rating. Grades are proxies, not independently assessed opponent ability.'));
+  var grade=z.class.grade_quality,edge=z.class.opposition_class_edge,known=Number.isFinite(grade)&&grade>0;
+  panel.append(e('p','',known?
+   'Class assessment: '+grade.toFixed(3)+' historic graded-form score; '+(Number.isFinite(edge)?((edge>=0?'+':'')+edge.toFixed(3)):'unknown')+
+   ' vs estimated rivals. Grades are provisional proxies, not opponent-ability measurements.':
+   'Class assessment: NO RECOGNISED GRADED FORM. The legacy L5 class score can penalise missing evidence; do not treat its rank as reliable or a qualified selection.'));
   if(z.straight.applies){
    var t=z.straight.history;
    panel.append(e('p','','Flemington straight record: '+t.wins+'/'+t.starts+' wins · '+t.top3+
