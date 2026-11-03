@@ -1,0 +1,65 @@
+{
+  "schema": "racing-lab-shadow-pre-registration/v1",
+  "race_date": "2026-11-07",
+  "registered_date": "2026-11-03",
+  "purpose": "Before-results prospective comparison of original V5 versus a predeclared historical-pace challenger; never silently rerank or claim success.",
+  "meetings": [
+    "FLEMINGTON",
+    "ROSEHILL"
+  ],
+  "target_race_source_links": [
+    "https://vrc-prod-cdn-cxdkhbhwgvh3e0g5.z01.azurefd.net/race-days-and-events/2026-2027/tab-champions-stakes-day/",
+    "https://www.australianturfclub.com.au/races/five-diamonds-ladies-day/"
+  ],
+  "original": {
+    "model_version": "V5-L5-CANDIDATE-20261030",
+    "path": "v5/model.js",
+    "git_blob_sha": "2a4c12ee2b7e43bc1a7da9cbabd967df6d995a06",
+    "weights_unchanged": true,
+    "market_blind": true
+  },
+  "challenger": {
+    "name": "historical-settling-pace-pressure",
+    "path": "v5/experiments/pace-map-shadow.cjs",
+    "git_blob_sha": "dd4dfc0527fb0842ce9606bf825645e80ccee19e",
+    "selected_fixed_strength": 0.3,
+    "min_historical_settling_coverage": 0.7,
+    "early_settling_fraction_max": 0.34,
+    "multiple_leaders_min": 4,
+    "slow_leaders_max": 1,
+    "slow_min_field": 8,
+    "applies_only_if_source_supported": true,
+    "no_manual_per_horse_overrides": true,
+    "results_permitted_as_predictor": false
+  },
+  "before_any_race": [
+    "Obtain full date-matched official starters (including actual emergencies), final weights/claims/barriers and official going as published before each race start.",
+    "Obtain dated independent form for every starter, including pre-race historical 800m settlements, source identity and as-of timestamp.",
+    "Prevent race-level 600m split records from being labelled horse_specific; do not invent individual speed.",
+    "Calculate and independently freeze unchanged baseline and candidate for the entire verified active field before scheduled jump, with commit SHA, timestamp, model code hashes and official-source URL.",
+    "Withhold a scored prospective evaluation if a winner was missing from the original frozen starter field, race started before freeze, or inputs were revised after result."
+  ],
+  "score_after": {
+    "metrics": [
+      "top1_win_rate",
+      "top3_winner_recall",
+      "top5_winner_recall",
+      "multiclass_brier",
+      "mean_log_loss",
+      "race_count",
+      "abstention_rate",
+      "field_mismatch_rate",
+      "source_coverage"
+    ],
+    "original_rank_required": true,
+    "baseline_vs_candidate_same_starters": true,
+    "no_postrace_reordering": true,
+    "report_each_race": true,
+    "target_hit_rate_not_guaranteed": true
+  },
+  "ready_to_publish": false,
+  "calibrated": false,
+  "pre_jump_forecasts_locked": false,
+  "frozen_results_count": 0,
+  "notice": "This manifest registers the hypothesis, not the racecard or any predictions. It cannot be counted as a prospective success without independently dated pre-jump forecasts."
+}
