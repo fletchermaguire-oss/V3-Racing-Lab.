@@ -2,9 +2,9 @@
 (function(global){
 'use strict';
 var C=null,D=null,target=null,embedded=false,navigate=null;
-var match=global.location&&global.location.search.match(/[?&]tab=(sim|multi|top10|races|results|qa|cal|weather|sync|compare)(?:&|$)/);
+var match=global.location&&global.location.search.match(/[?&]tab=(sim|multi|top10|races|results|qa|cal|weather|sync|compare|oaks)(?:&|$)/);
 var S={page:match?match[1]:'overview',meeting:'RANDWICK',race:null,runner:null,top:'ALL',topMode:'RESEARCH',topN:10,multi:[],compareA:null,compareB:null};
-var PAGES=[['overview','Overview'],['top10','Daily Top 5/10/15'],['races','Race Centre'],['multi','Multi Lab'],['sim','Simulator'],['compare','Compare'],['qa','Model QA'],['cal','Calibration'],['weather','Weather & Tracks'],['sync','Data & Sync'],['results','Results & History']];
+var PAGES=[['overview','Overview'],['oaks','Oaks Day 5 Nov'],['top10','Daily Top 5/10/15'],['races','Race Centre'],['multi','Multi Lab'],['sim','Simulator'],['compare','Compare'],['qa','Model QA'],['cal','Calibration'],['weather','Weather & Tracks'],['sync','Data & Sync'],['results','Results & History']];
 function importedCard(){return !!(D&&D.source_import&&D.source_import.kind==='FEATURE_FORM_PDF');}
 function cardDay(){return new Date(D.date+'T00:00:00Z').toLocaleDateString('en-AU',{weekday:'long',timeZone:'UTC'});}
 function readableFlag(flag){return ({LIMITED_DOSSIER:'Limited form evidence',INPUT_REVIEW_REQUIRED:'Input review needed',
@@ -56,6 +56,9 @@ function importedOverview(){
  hero.append(add(e('div','rlv5-command-actions'),action('Explore races',function(){go('races');},'primary'),
   action('Model Top 5 / 10 / 15',function(){go('top10');},'ghost')));
  add(app(),hero,metrics(),scenarios());
+ var next=box('Flemington Thu 5 Nov · new form selections','Soft 5 scenario · Cavalry Girl R9, Proxima Dea R8, Sass Appeal R4 lead the independent nine-race research shortlist. Percentages are not recalculated.');
+ next.append(action('View all Thursday selections',function(){go('oaks');},'primary'));
+ app().insertBefore(next,hero);
  app().append(importedOfficialPanel(),importedStrictScreen(),note('PDF source retained. Official Monday 2 November scratchings and Good 4 ratings applied to the 3 November model; final starters and reserves remain unverified. Model leaders are not an approved independent shortlist.'));
  var main=box('V5 model Top 10','One model leader per race, ordered by its uncalibrated estimate. Separation and scenario sensitivity are shown for every runner.');
  main.append(modelImportList(10,true));app().append(main,venueCards());
@@ -139,7 +142,7 @@ b.type='button';b.innerHTML=icon(id)+'<span>'+it[1]+'</span>';
 b.addEventListener('click',function(){go(id);});
 return b;
 }
-var main=['overview','races','top10','multi','sim','compare'];
+var main=['overview','oaks','races','top10','multi','sim','compare'];
 var second=['results','qa','cal','weather','sync'];
 side.append(e('div','nav-group','RACING STUDIO'));
 main.forEach(function(id){side.append(makeButton(id,'navbtn'));});
@@ -153,7 +156,7 @@ var mobileShort={overview:'Home',races:'Races',top10:'Top 10',multi:'Multi',sim:
 var previous=document.getElementById('v5-more-popup');if(previous)previous.remove();
 var popup=e('div','v5-more-menu');popup.id='v5-more-popup';popup.hidden=true;
 var phead=e('div','v5-more-head','MORE RACING LAB SECTIONS');popup.append(phead);
-['results','compare','weather','qa','cal','sync'].forEach(function(id){var b=makeButton(id,'v5-more-item');popup.append(b);});
+['oaks','results','compare','weather','qa','cal','sync'].forEach(function(id){var b=makeButton(id,'v5-more-item');popup.append(b);});
 document.body.append(popup);
 var more=e('button','v5-more-trigger'+(['compare','weather','qa','cal','sync','results'].includes(S.page)?' active':''));more.type='button';
 more.innerHTML=icon('sync')+'<span>More</span>';
@@ -162,10 +165,10 @@ more.setAttribute('aria-expanded','false');more.setAttribute('aria-controls','v5
 document.getElementById('pagetitle').textContent=PAGES.find(function(x){return x[0]===S.page;})[1];
 document.getElementById('livebadge').textContent=C.error?'SAVED SATURDAY DATA · FEED CHECK':'SAVED SATURDAY RESEARCH';
 var datedLabel=document.querySelector&&document.querySelector('.topdate');
-if(datedLabel)datedLabel.textContent=cardDay()+' '+D.date;
-document.title='Racing Lab V5 · '+D.date;
+if(datedLabel)datedLabel.textContent=S.page==='oaks'?'Thu 5 Nov 2026 · Soft 5 scenario':cardDay()+' '+D.date;
+document.title='Racing Lab V5 · '+(S.page==='oaks'?'Flemington 5 Nov':D.date);
 if(importedCard()){
- document.getElementById('livebadge').textContent='PDF FORM · MODEL ESTIMATES';
+ document.getElementById('livebadge').textContent=S.page==='oaks'?'THU 5 NOV · FORM REVIEW':'PDF FORM · MODEL ESTIMATES';
 }
 }
 
@@ -871,9 +874,47 @@ function statusOnly(){
  var status=document.getElementById('v5-sync-status');
  if(status)status.textContent=C.error||'No refresh error recorded.';
 }
+
+function oaksDayPage(){
+ var root=app();
+ root.append(head('Flemington Oaks Day · Thu 5 November 2026','Nine race-by-race selections · Soft 5 scenario · independent form review'));
+ root.append(note('This is a dated Thursday research checkpoint. The Tuesday 3 November model and historical results are unchanged. No current whole-field probabilities have been recalculated; final starters and official going are not certified.'));
+ var holder=box('Revised selections','Loading dated research record…');
+ root.append(holder);
+ fetch('/v5/cards/2026-11-05/selections.json',{cache:'no-store'}).then(function(res){
+  if(!res.ok)throw Error('Research file unavailable (HTTP '+res.status+')');
+  return res.json();
+ }).then(function(data){
+  if(S.page!=='oaks'||!holder.isConnected)return;
+  if(data.date!=='2026-11-05'||!Array.isArray(data.selections)||data.selections.length!==9)throw Error('Dated selection record failed validation');
+  holder.replaceChildren();
+  holder.append(e('p','muted small','FLEMINGTON · THURSDAY 5 NOV · '+data.going_scenario+' · FORM RANK ONLY · NO CALIBRATED WIN %'));
+  var ranked=e('div','toplist');
+  data.selections.slice().sort(function(a,b){return a.rank-b.rank;}).forEach(function(x){
+   var mid=add(e('div'),e('strong','',x.horse),e('small','', 'R'+x.race+' · '+x.race_name+' · '+x.distance_m+'m'),e('small','','Main dangers: '+x.alternatives.join(' · ')));
+   ranked.append(add(e('div','toprow'),e('div','slot',String(x.rank).padStart(2,'0')),mid,e('div','model-row-stat','RESEARCH ONLY')));
+  });
+  holder.append(ranked);
+  var detail=box('Each race · form, pace and concerns','One independent form selection per race. Alternatives are listed, not additional model picks.');
+  var cards=e('div','grid three');
+  data.selections.slice().sort(function(a,b){return a.race-b.race;}).forEach(function(x){
+   var card=add(e('div','card'),e('p','eyebrow','R'+x.race+' · '+x.distance_m+'m'),e('h3','',x.horse),e('p','muted small',x.race_name),
+    e('p','',x.form),e('p','muted small','PACE: '+x.pace),
+    e('p','muted small','RISK: '+x.risk),e('p','muted small','Dangers: '+x.alternatives.join(', ')));
+   cards.append(card);
+  });
+  detail.append(cards);root.append(detail);
+  var caveat=box('Track and scratching checkpoint','Early independent-publication changes only, checked 3 November; not a final official starter declaration.');
+  caveat.append(e('p','muted small',data.reported_scratchings_early.map(function(x){return 'R'+x.race+' '+x.horse;}).join(' · ')));
+  data.notes.forEach(function(n){caveat.append(e('p','muted small',n));});
+  data.sources.forEach(function(s){caveat.append(link(s.name,s.url,'btn ghost'));});
+  root.append(caveat);
+ }).catch(function(err){if(holder.isConnected){holder.append(e('p','muted small','Could not load selections: '+err.message));}});
+}
+
 function render(){if(!C)return;D=C.data;if(!raceOf(S.race)){S.race=D.races[0].id;S.meeting=D.races[0].meeting;}
  if(global.RacingLabWorkshop)global.RacingLabWorkshop.stop();if(!embedded)nav();app().replaceChildren();
- var views={overview:overview,top10:top10,races:racesPage,multi:function(){workshop('multiPage');},sim:function(){workshop('simPage');},compare:comparePage,qa:qaPage,cal:calPage,weather:weatherPage,sync:syncPage,results:resultsPage};(views[S.page]||overview)();app().append(e('div','footer',C.board.version+' · '+C.revision+' · model estimates uncalibrated · source snapshot '+D.saved_at));
+ var views={overview:overview,oaks:oaksDayPage,top10:top10,races:racesPage,multi:function(){workshop('multiPage');},sim:function(){workshop('simPage');},compare:comparePage,qa:qaPage,cal:calPage,weather:weatherPage,sync:syncPage,results:resultsPage};(views[S.page]||overview)();app().append(e('div','footer',S.page==='oaks'?'Thursday 5 Nov independent form review · Soft 5 assumed · final fields and probabilities not certified':C.board.version+' · '+C.revision+' · model estimates uncalibrated · source snapshot '+D.saved_at));
 }
 function officialPanel(){
  if(importedCard())return importedOfficialPanel();

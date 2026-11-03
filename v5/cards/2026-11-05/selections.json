@@ -1,0 +1,184 @@
+{
+  "schema": "racing-lab-v5-manual-form-selection/v1",
+  "date": "2026-11-05",
+  "meeting": "FLEMINGTON",
+  "as_of_date": "2026-11-03",
+  "status": "PROVISIONAL_FORM_REVIEW_NOT_MODEL_OUTPUT",
+  "going_scenario": "Soft 5 (assumption, not an official track reading)",
+  "independent_form_ranks": true,
+  "model_probability_status": "NOT_RECALCULATED",
+  "whole_field_probabilities_present": false,
+  "final_starters_verified": false,
+  "publication_approved_for_final_model": false,
+  "headline": "Thursday Flemington Oaks Day: nine race-by-race form selections and alternatives",
+  "notes": [
+    "This is a human research-order checkpoint, not the 3 November model card and not a calibrated V5 Top 10.",
+    "One selection per race. Ordered by comparative form conviction; ranks are not statistical win chances.",
+    "Scratchings and final field positions require a further official check; projected pace is not a certified speed map.",
+    "Buccleuch is still published in Thursday R3 after racing Tuesday 3 November; Tavi Time is preferred only as the current Soft 5 form selection."
+  ],
+  "reported_scratchings_early": [
+    {
+      "race": 1,
+      "horse": "Grand Omaha"
+    },
+    {
+      "race": 4,
+      "horse": "Snitzel Dancer"
+    },
+    {
+      "race": 5,
+      "horse": "Haaracaine"
+    },
+    {
+      "race": 7,
+      "horse": "Parcae"
+    },
+    {
+      "race": 9,
+      "horse": "Pallaton"
+    }
+  ],
+  "sources": [
+    {
+      "name": "Thursday Flemington race fields",
+      "url": "https://www.theking.zone/racing/2026-11-05/flemington"
+    },
+    {
+      "name": "Thursday Flemington scratchings and field preview",
+      "url": "https://www.wizardofodds.com.au/gallop/2026-11-05/vic/flemington/188298"
+    },
+    {
+      "name": "Racing and Sports published field",
+      "url": "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/flemington/2026-11-05/race-fields"
+    }
+  ],
+  "selections": [
+    {
+      "rank": 1,
+      "race": 9,
+      "race_name": "G.H. Mumm Century Stakes",
+      "distance_m": 1000,
+      "horse": "Cavalry Girl",
+      "alternatives": [
+        "Bev's Nine",
+        "Rey Magnerio"
+      ],
+      "form": "Five wins and three seconds in eight runs this preparation; two previous Flemington 1000m wins and excellent recent sprint figures.",
+      "risk": "Straight-course lane bias and possible early speed pressure; final track and scratchings still pending.",
+      "pace": "Can lead or race close to the lead; monitor where leaders are winning down the straight."
+    },
+    {
+      "rank": 2,
+      "race": 8,
+      "race_name": "Crown Oaks",
+      "distance_m": 2500,
+      "horse": "Proxima Dea",
+      "alternatives": [
+        "De Armas",
+        "Quick Finish"
+      ],
+      "form": "Unbeaten in five, including Group 1 Spring Champion Stakes; has handled Good, Soft and Heavy ground.",
+      "risk": "Barrier 19, first 2500m and stronger staying challengers, especially Wakeful winner De Armas.",
+      "pace": "Expected to work for position from the wide draw; De Armas can get a much cheaper run from barrier 1."
+    },
+    {
+      "rank": 3,
+      "race": 4,
+      "race_name": "Inglis Bracelet",
+      "distance_m": 1600,
+      "horse": "Sass Appeal",
+      "alternatives": [
+        "Cilacap",
+        "Gold Medallist"
+      ],
+      "form": "Five wins from ten and four wins at Flemington; class profile is a clear positive.",
+      "risk": "Five-day turnaround, barrier 12, 59.5kg and only limited proven Soft-track experience.",
+      "pace": "Can press forward but may work from the outside; Cilacap has the stronger proven Soft record."
+    },
+    {
+      "rank": 4,
+      "race": 5,
+      "race_name": "Sigma Trophy",
+      "distance_m": 1800,
+      "horse": "Perisher",
+      "alternatives": [
+        "Veyepee",
+        "Fiorenot"
+      ],
+      "form": "Recent Rosehill Soft 6 win; two wins from three Soft starts and form around 2000m.",
+      "risk": "Barrier 13 and a deeper handicap field; recheck final engagement after previous cross-entries.",
+      "pace": "Needs to avoid covering extra ground; Veyepee has barrier 1."
+    },
+    {
+      "rank": 5,
+      "race": 7,
+      "race_name": "Red Roses Stakes",
+      "distance_m": 1100,
+      "horse": "Sequinned",
+      "alternatives": [
+        "Scintillation",
+        "Lady Catalina"
+      ],
+      "form": "Three wins this campaign, latest a 2.5-length Caulfield win; has won on Soft ground.",
+      "risk": "Competitive three-year-old sprint with Scintillation a genuine danger.",
+      "pace": "Scintillation can be prominent from barrier 2; Sequinned draws wider and may need speed to run on."
+    },
+    {
+      "rank": 6,
+      "race": 2,
+      "race_name": "Sharp EIT Subzero",
+      "distance_m": 1400,
+      "horse": "You're Not the King",
+      "alternatives": [
+        "Getafix",
+        "Alabama Fox"
+      ],
+      "form": "Three wins in five starts, including consecutive latest wins; barrier 2 and 53kg favour the setup.",
+      "risk": "BM90 rise and no actual Soft-track starts; Heavy-track win is not direct Soft 5 proof.",
+      "pace": "Can sit handy with a low draw while wide-drawn rivals risk covering ground."
+    },
+    {
+      "rank": 7,
+      "race": 3,
+      "race_name": "Chester Manifold Stakes",
+      "distance_m": 1600,
+      "horse": "Tavi Time",
+      "alternatives": [
+        "Just Folk",
+        "Encap"
+      ],
+      "form": "Five wins from twelve Soft-track runs, proven mile form, barrier 1 and James McDonald.",
+      "risk": "Conditional choice while Buccleuch remains listed despite racing on Tuesday 3 November; do not mark Buccleuch as scratched without confirmation.",
+      "pace": "Likely to receive an economical run on the rail; Just Folk may be more forward."
+    },
+    {
+      "rank": 8,
+      "race": 6,
+      "race_name": "Country Final",
+      "distance_m": 1600,
+      "horse": "Our Justify",
+      "alternatives": [
+        "Bel Mezyaan",
+        "Rosa Aotearoa"
+      ],
+      "form": "Two consecutive Bendigo wins, including at 1600m on Soft 6; 54.5kg and barrier 5.",
+      "risk": "Large-field traffic and stronger rivals; not a high-certainty race.",
+      "pace": "Can settle midfield to handy; Rosa Aotearoa can go forward."
+    },
+    {
+      "rank": 9,
+      "race": 1,
+      "race_name": "TCL Trophy",
+      "distance_m": 1700,
+      "horse": "Cute Girl",
+      "alternatives": [
+        "Autumn Slide",
+        "Bon Fete (if admitted)"
+      ],
+      "form": "Two wins from four Soft starts and a recent 1700m victory.",
+      "risk": "Class rise into BM70; Bon Fete is an emergency and must be confirmed admitted.",
+      "pace": "Stung may go forward; Cute Girl can sit midfield and make her run."
+    }
+  ]
+}
