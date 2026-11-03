@@ -96,7 +96,7 @@ function build(){
     source_analysis_git_blob_sha:'4ac23cbea0a2b46a80cb990ed98128a833155987',
     source_analysis_research_sha256:analysis.research_sha256,
     external_speedmap_path:'v5/cards/2026-11-05/pace-speedmap-source-20261103.json',
-    external_speedmap_git_blob_sha:'f4eb8e4e265ac1bbb09eb64da43b76d8e763e898',
+    external_speedmap_git_blob_sha:'f870591ca9c35fa4c0c1120d0fa637b2adb4a316',
     historical_pace_reference:'v5/experiments/pace-map-shadow.cjs',
     pace_reference_commit:'279ab33dc47669498b723d9a53176f0f42197ac4',
     model_version:analysis.model_version,
