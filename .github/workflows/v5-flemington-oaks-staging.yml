@@ -1,0 +1,45 @@
+name: V5 Flemington Oaks Day staged model calculation
+on:
+  push:
+    branches:
+      - data/v5-flemington-oaks-20261105
+    paths:
+      - 'v5/cards/2026-11-05/research.json'
+      - 'v5/cards/2026-11-05/check-card.cjs'
+      - '.github/workflows/v5-flemington-oaks-staging.yml'
+permissions:
+  contents: write
+jobs:
+  build-and-verify:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify 79-page source inventory
+        run: node v5/cards/2026-11-05/check-card.cjs
+      - name: Run existing unmodified V5 regression suite
+        run: npm test
+      - name: Check original site
+        run: npm run check
+      - name: Calculate the nine complete PDF-listed fields with actual L5 model
+        run: node scripts/build-feature-card.cjs v5/cards/2026-11-05/research.json
+      - name: Validate source hash, all conditional percentages and publication gate
+        run: node v5/cards/2026-11-05/check-card.cjs --with-analysis
+      - name: Commit verified experimental analysis to staging branch only
+        run: |
+          set -euo pipefail
+          test "${GITHUB_REF}" = "refs/heads/data/v5-flemington-oaks-20261105"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add v5/cards/2026-11-05/analysis.json
+          if git diff --cached --quiet; then
+            echo "Analysis already exactly matches model and source"
+          else
+            git commit -m "Generate 5 Nov nine-race V5 L5 provisional analysis, no live publication"
+            git push origin HEAD:data/v5-flemington-oaks-20261105
+          fi
