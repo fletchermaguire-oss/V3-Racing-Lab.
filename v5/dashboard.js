@@ -58,7 +58,7 @@ function importedOverview(){
  add(app(),hero,metrics(),scenarios());
  var next=box('Flemington Thu 5 Nov · new form selections','Soft 5 scenario · Cavalry Girl R9, Proxima Dea R8, Sass Appeal R4 lead the independent nine-race research shortlist. Percentages are not recalculated.');
  next.append(action('View all Thursday selections',function(){go('oaks');},'primary'));
- app().insertBefore(next,hero);
+ app().append(next);
  app().append(importedOfficialPanel(),importedStrictScreen(),note('PDF source retained. Official Monday 2 November scratchings and Good 4 ratings applied to the 3 November model; final starters and reserves remain unverified. Model leaders are not an approved independent shortlist.'));
  var main=box('V5 model Top 10','One model leader per race, ordered by its uncalibrated estimate. Separation and scenario sensitivity are shown for every runner.');
  main.append(modelImportList(10,true));app().append(main,venueCards());
