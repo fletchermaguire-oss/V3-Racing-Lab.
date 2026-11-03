@@ -1,0 +1,113 @@
+{
+  "schema": "racing-lab-postrace-verified-winners/v1",
+  "date": "2026-11-03",
+  "status": "POST_RACE_RESULTS_ONLY_NOT_A_PRE_RACE_FEATURE",
+  "source_urls": {
+    "FLEMINGTON": "https://www.tabtouch.com.au/racing/2026-11-03/mr/expanded",
+    "RANDWICK": "https://www.tabtouch.com.au/racing/2026-11-03/sr/expanded"
+  },
+  "forecast_snapshot": "v5/cards/2026-11-03/analysis.json",
+  "snapshot_notice": "Saved 2 November provisional full-field analysis, not independently certified race-day final starters. No result may be fed into ranking features.",
+  "results": [
+    {
+      "race_id": "2026-11-03_FLEMINGTON_R01",
+      "winner": "Amelia's Affair",
+      "source": "FLEMINGTON"
+    },
+    {
+      "race_id": "2026-11-03_FLEMINGTON_R02",
+      "winner": "Yauson",
+      "source": "FLEMINGTON"
+    },
+    {
+      "race_id": "2026-11-03_FLEMINGTON_R03",
+      "winner": "Billycart",
+      "source": "FLEMINGTON"
+    },
+    {
+      "race_id": "2026-11-03_FLEMINGTON_R04",
+      "winner": "Peyton",
+      "source": "FLEMINGTON"
+    },
+    {
+      "race_id": "2026-11-03_FLEMINGTON_R05",
+      "winner": "Beach Pad",
+      "source": "FLEMINGTON"
+    },
+    {
+      "race_id": "2026-11-03_FLEMINGTON_R06",
+      "winner": "Sabaj",
+      "source": "FLEMINGTON"
+    },
+    {
+      "race_id": "2026-11-03_FLEMINGTON_R07",
+      "winner": "Point Of Law",
+      "source": "FLEMINGTON"
+    },
+    {
+      "race_id": "2026-11-03_FLEMINGTON_R08",
+      "winner": "Ranarsson",
+      "source": "FLEMINGTON"
+    },
+    {
+      "race_id": "2026-11-03_FLEMINGTON_R09",
+      "winner": "Shadhavar",
+      "source": "FLEMINGTON"
+    },
+    {
+      "race_id": "2026-11-03_FLEMINGTON_R10",
+      "winner": "Fundamental Nature",
+      "source": "FLEMINGTON"
+    },
+    {
+      "race_id": "2026-11-03_RANDWICK_R01",
+      "winner": "All Star",
+      "source": "RANDWICK"
+    },
+    {
+      "race_id": "2026-11-03_RANDWICK_R02",
+      "winner": "Blue Akoya",
+      "source": "RANDWICK"
+    },
+    {
+      "race_id": "2026-11-03_RANDWICK_R03",
+      "winner": "Graffiti Tycoon",
+      "source": "RANDWICK"
+    },
+    {
+      "race_id": "2026-11-03_RANDWICK_R04",
+      "winner": "Man Of Worth",
+      "source": "RANDWICK"
+    },
+    {
+      "race_id": "2026-11-03_RANDWICK_R05",
+      "winner": "Hellsing",
+      "source": "RANDWICK"
+    },
+    {
+      "race_id": "2026-11-03_RANDWICK_R06",
+      "winner": "Boom Torque",
+      "source": "RANDWICK"
+    },
+    {
+      "race_id": "2026-11-03_RANDWICK_R07",
+      "winner": "Jamberoo",
+      "source": "RANDWICK"
+    },
+    {
+      "race_id": "2026-11-03_RANDWICK_R08",
+      "winner": "Polyglot",
+      "source": "RANDWICK"
+    },
+    {
+      "race_id": "2026-11-03_RANDWICK_R09",
+      "winner": "Bruce I Am",
+      "source": "RANDWICK"
+    },
+    {
+      "race_id": "2026-11-03_RANDWICK_R10",
+      "winner": "Pride To Follow",
+      "source": "RANDWICK"
+    }
+  ]
+}
