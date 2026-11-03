@@ -147,4 +147,4 @@ function run(){
    'Keep venue, class, field size and track sensitivity comparisons and collect genuinely timestamped pre-race fields before training.']};
 }
 if(require.main===module)process.stdout.write(JSON.stringify(run(),null,2)+'\n');
-module.exports={run,remap,evaluate,ALPHAS};
+module.exports={run,remap,evaluate,ALPHAS,loadDatasets:()=>[verifiedReconstructed('2026-10-17'),verifiedReconstructed('2026-10-24'),october31(),november03()]};
