@@ -1,0 +1,1278 @@
+{
+  "schema": "racing-lab-v5-speedmap-source/v1",
+  "date": "2026-11-05",
+  "captured_date": "2026-11-03",
+  "captured_time_precision": "date_only",
+  "source": "Racing & Sports speedmap pages",
+  "source_type": "independent_form_averages",
+  "race_coverage": [
+    {
+      "race_id": "2026-11-05_FLEMINGTON_R01",
+      "race_number": 1,
+      "url": "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/flemington/2026-11-05/R1/speedmap",
+      "listed_runners": 20,
+      "source_rows": 19,
+      "missing_from_source": [
+        "Grand Omaha"
+      ],
+      "aes_numeric": 19,
+      "afs_numeric": 19,
+      "runners": [
+        {
+          "tab": 2,
+          "horse": "STUNG",
+          "barrier": 1,
+          "aes_m_s": 15.9,
+          "afs_m_s": 16.8,
+          "runner_id": "2026-11-05_FLEMINGTON_R01_02"
+        },
+        {
+          "tab": 3,
+          "horse": "ALL BUSINESS",
+          "barrier": 3,
+          "aes_m_s": 16.1,
+          "afs_m_s": 17.7,
+          "runner_id": "2026-11-05_FLEMINGTON_R01_03"
+        },
+        {
+          "tab": 4,
+          "horse": "AUTUMN SLIDE",
+          "barrier": 17,
+          "aes_m_s": 15,
+          "afs_m_s": 17.8,
+          "runner_id": "2026-11-05_FLEMINGTON_R01_04"
+        },
+        {
+          "tab": 5,
+          "horse": "CHIRINGITA",
+          "barrier": 7,
+          "aes_m_s": 14.7,
+          "afs_m_s": 18.1,
+          "runner_id": "2026-11-05_FLEMINGTON_R01_05"
+        },
+        {
+          "tab": 6,
+          "horse": "ILLYIVY",
+          "barrier": 6,
+          "aes_m_s": 14,
+          "afs_m_s": 17,
+          "runner_id": "2026-11-05_FLEMINGTON_R01_06"
+        },
+        {
+          "tab": 7,
+          "horse": "CUTE GIRL",
+          "barrier": 9,
+          "aes_m_s": 16,
+          "afs_m_s": 17.2,
+          "runner_id": "2026-11-05_FLEMINGTON_R01_07"
+        },
+        {
+          "tab": 8,
+          "horse": "CERTAINLY QUIET",
+          "barrier": 10,
+          "aes_m_s": 15.4,
+          "afs_m_s": 17.3,
+          "runner_id": "2026-11-05_FLEMINGTON_R01_08"
+        },
+        {
+          "tab": 9,
+          "horse": "RICK'S CAFE",
+          "barrier": 18,
+          "aes_m_s": 14.4,
+          "afs_m_s": 16.5,
+          "runner_id": "2026-11-05_FLEMINGTON_R01_09"
+        },
+        {
+          "tab": 10,
+          "horse": "AFFAIRE VUE",
+          "barrier": 16,
+          "aes_m_s": 16.3,
+          "afs_m_s": 17.2,
+          "runner_id": "2026-11-05_FLEMINGTON_R01_10"
+        },
+        {
+          "tab": 11,
+          "horse": "DIVERSITY",
+          "barrier": 12,
+          "aes_m_s": 16.4,
+          "afs_m_s": 17.4,
+          "runner_id": "2026-11-05_FLEMINGTON_R01_11"
+        },
+        {
+          "tab": 12,
+          "horse": "EN FLIQUE",
+          "barrier": 8,
+          "aes_m_s": 16.1,
+          "afs_m_s": 17.2,
+          "runner_id": "2026-11-05_FLEMINGTON_R01_12"
+        },
+        {
+          "tab": 13,
+          "horse": "HIGHLY INTRIGUED",
+          "barrier": 20,
+          "aes_m_s": 15.6,
+          "afs_m_s": 17.6,
+          "runner_id": "2026-11-05_FLEMINGTON_R01_13"
+        },
+        {
+          "tab": 14,
+          "horse": "MISS STALWART",
+          "barrier": 14,
+          "aes_m_s": 16.2,
+          "afs_m_s": 18,
+          "runner_id": "2026-11-05_FLEMINGTON_R01_14"
+        },
+        {
+          "tab": 15,
+          "horse": "SHE'S GOT THE CASH",
+          "barrier": 4,
+          "aes_m_s": 16,
+          "afs_m_s": 16,
+          "runner_id": "2026-11-05_FLEMINGTON_R01_15"
+        },
+        {
+          "tab": 16,
+          "horse": "SPEX",
+          "barrier": 11,
+          "aes_m_s": 16,
+          "afs_m_s": 17,
+          "runner_id": "2026-11-05_FLEMINGTON_R01_16"
+        },
+        {
+          "tab": 17,
+          "horse": "BON FETE",
+          "barrier": 5,
+          "aes_m_s": 14.7,
+          "afs_m_s": 17.6,
+          "runner_id": "2026-11-05_FLEMINGTON_R01_17"
+        },
+        {
+          "tab": 18,
+          "horse": "CAT NOIR",
+          "barrier": 15,
+          "aes_m_s": 16,
+          "afs_m_s": 18,
+          "runner_id": "2026-11-05_FLEMINGTON_R01_18"
+        },
+        {
+          "tab": 19,
+          "horse": "JENNI YOU THINK",
+          "barrier": 2,
+          "aes_m_s": 15.3,
+          "afs_m_s": 17.6,
+          "runner_id": "2026-11-05_FLEMINGTON_R01_19"
+        },
+        {
+          "tab": 20,
+          "horse": "CUSHIONED",
+          "barrier": 13,
+          "aes_m_s": 15.2,
+          "afs_m_s": 17.5,
+          "runner_id": "2026-11-05_FLEMINGTON_R01_20"
+        }
+      ]
+    },
+    {
+      "race_id": "2026-11-05_FLEMINGTON_R02",
+      "race_number": 2,
+      "url": "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/flemington/2026-11-05/R2/speedmap",
+      "listed_runners": 15,
+      "source_rows": 15,
+      "missing_from_source": [],
+      "aes_numeric": 15,
+      "afs_numeric": 15,
+      "runners": [
+        {
+          "tab": 1,
+          "horse": "SAV ON ICE",
+          "barrier": 6,
+          "aes_m_s": 16.2,
+          "afs_m_s": 17,
+          "runner_id": "2026-11-05_FLEMINGTON_R02_01"
+        },
+        {
+          "tab": 2,
+          "horse": "KEITEL",
+          "barrier": 9,
+          "aes_m_s": 15.6,
+          "afs_m_s": 18.1,
+          "runner_id": "2026-11-05_FLEMINGTON_R02_02"
+        },
+        {
+          "tab": 3,
+          "horse": "BUSTLING",
+          "barrier": 10,
+          "aes_m_s": 16.5,
+          "afs_m_s": 17.1,
+          "runner_id": "2026-11-05_FLEMINGTON_R02_03"
+        },
+        {
+          "tab": 4,
+          "horse": "GETAFIX",
+          "barrier": 15,
+          "aes_m_s": 16.3,
+          "afs_m_s": 18,
+          "runner_id": "2026-11-05_FLEMINGTON_R02_04"
+        },
+        {
+          "tab": 5,
+          "horse": "KAHHOF",
+          "barrier": 5,
+          "aes_m_s": 16.4,
+          "afs_m_s": 17.6,
+          "runner_id": "2026-11-05_FLEMINGTON_R02_05"
+        },
+        {
+          "tab": 6,
+          "horse": "ALABAMA FOX",
+          "barrier": 13,
+          "aes_m_s": 16.6,
+          "afs_m_s": 17.7,
+          "runner_id": "2026-11-05_FLEMINGTON_R02_06"
+        },
+        {
+          "tab": 7,
+          "horse": "CHAKADO",
+          "barrier": 8,
+          "aes_m_s": 16.7,
+          "afs_m_s": 16.8,
+          "runner_id": "2026-11-05_FLEMINGTON_R02_07"
+        },
+        {
+          "tab": 8,
+          "horse": "HIMALAYAN",
+          "barrier": 12,
+          "aes_m_s": 15.7,
+          "afs_m_s": 17.2,
+          "runner_id": "2026-11-05_FLEMINGTON_R02_08"
+        },
+        {
+          "tab": 9,
+          "horse": "MISTY WHISPER",
+          "barrier": 7,
+          "aes_m_s": 15.6,
+          "afs_m_s": 17.7,
+          "runner_id": "2026-11-05_FLEMINGTON_R02_09"
+        },
+        {
+          "tab": 10,
+          "horse": "SANTA ANA MOON",
+          "barrier": 3,
+          "aes_m_s": 14.9,
+          "afs_m_s": 16.4,
+          "runner_id": "2026-11-05_FLEMINGTON_R02_10"
+        },
+        {
+          "tab": 11,
+          "horse": "SILVER DAGGER",
+          "barrier": 14,
+          "aes_m_s": 16.2,
+          "afs_m_s": 18.2,
+          "runner_id": "2026-11-05_FLEMINGTON_R02_11"
+        },
+        {
+          "tab": 12,
+          "horse": "SPIRIT OF WEALTH",
+          "barrier": 1,
+          "aes_m_s": 16.2,
+          "afs_m_s": 17,
+          "runner_id": "2026-11-05_FLEMINGTON_R02_12"
+        },
+        {
+          "tab": 13,
+          "horse": "DIDN'T MISS MANY",
+          "barrier": 11,
+          "aes_m_s": 16.9,
+          "afs_m_s": 17.3,
+          "runner_id": "2026-11-05_FLEMINGTON_R02_13"
+        },
+        {
+          "tab": 14,
+          "horse": "YOURE NOT THE KING",
+          "barrier": 2,
+          "aes_m_s": 16.8,
+          "afs_m_s": 17.7,
+          "runner_id": "2026-11-05_FLEMINGTON_R02_14"
+        },
+        {
+          "tab": 15,
+          "horse": "MISTRESSOFILLUSION",
+          "barrier": 4,
+          "aes_m_s": 16,
+          "afs_m_s": 17,
+          "runner_id": "2026-11-05_FLEMINGTON_R02_15"
+        }
+      ]
+    },
+    {
+      "race_id": "2026-11-05_FLEMINGTON_R03",
+      "race_number": 3,
+      "url": "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/flemington/2026-11-05/R3/speedmap",
+      "listed_runners": 13,
+      "source_rows": 13,
+      "missing_from_source": [],
+      "aes_numeric": 11,
+      "afs_numeric": 11,
+      "runners": [
+        {
+          "tab": 1,
+          "horse": "FEROCE",
+          "barrier": 4,
+          "aes_m_s": 16.4,
+          "afs_m_s": 17.8,
+          "runner_id": "2026-11-05_FLEMINGTON_R03_01"
+        },
+        {
+          "tab": 2,
+          "horse": "JUST FOLK",
+          "barrier": 11,
+          "aes_m_s": 16.6,
+          "afs_m_s": 16.9,
+          "runner_id": "2026-11-05_FLEMINGTON_R03_02"
+        },
+        {
+          "tab": 3,
+          "horse": "PINSTRIPED",
+          "barrier": 2,
+          "aes_m_s": 15.9,
+          "afs_m_s": 17.9,
+          "runner_id": "2026-11-05_FLEMINGTON_R03_03"
+        },
+        {
+          "tab": 4,
+          "horse": "TAVI TIME",
+          "barrier": 1,
+          "aes_m_s": 15.8,
+          "afs_m_s": 18.5,
+          "runner_id": "2026-11-05_FLEMINGTON_R03_04"
+        },
+        {
+          "tab": 5,
+          "horse": "REVELARE",
+          "barrier": 10,
+          "aes_m_s": null,
+          "afs_m_s": null,
+          "runner_id": "2026-11-05_FLEMINGTON_R03_05"
+        },
+        {
+          "tab": 6,
+          "horse": "HARRY'S YACHT",
+          "barrier": 7,
+          "aes_m_s": 16.6,
+          "afs_m_s": 17.9,
+          "runner_id": "2026-11-05_FLEMINGTON_R03_06"
+        },
+        {
+          "tab": 7,
+          "horse": "ENXUTO",
+          "barrier": 5,
+          "aes_m_s": 15.7,
+          "afs_m_s": 18.4,
+          "runner_id": "2026-11-05_FLEMINGTON_R03_07"
+        },
+        {
+          "tab": 8,
+          "horse": "WARMONGER",
+          "barrier": 6,
+          "aes_m_s": null,
+          "afs_m_s": null,
+          "runner_id": "2026-11-05_FLEMINGTON_R03_08"
+        },
+        {
+          "tab": 9,
+          "horse": "CRAIG",
+          "barrier": 12,
+          "aes_m_s": 15.1,
+          "afs_m_s": 17.8,
+          "runner_id": "2026-11-05_FLEMINGTON_R03_09"
+        },
+        {
+          "tab": 10,
+          "horse": "ENCAP",
+          "barrier": 3,
+          "aes_m_s": 15.9,
+          "afs_m_s": 18.1,
+          "runner_id": "2026-11-05_FLEMINGTON_R03_10"
+        },
+        {
+          "tab": 11,
+          "horse": "CARTOON GRAVEYARD",
+          "barrier": 13,
+          "aes_m_s": 16,
+          "afs_m_s": 18.1,
+          "runner_id": "2026-11-05_FLEMINGTON_R03_11"
+        },
+        {
+          "tab": 12,
+          "horse": "MERRIGOLD",
+          "barrier": 8,
+          "aes_m_s": 16.8,
+          "afs_m_s": 18.1,
+          "runner_id": "2026-11-05_FLEMINGTON_R03_12"
+        },
+        {
+          "tab": 13,
+          "horse": "BUCCLEUCH",
+          "barrier": 9,
+          "aes_m_s": 16,
+          "afs_m_s": 18.1,
+          "runner_id": "2026-11-05_FLEMINGTON_R03_13"
+        }
+      ]
+    },
+    {
+      "race_id": "2026-11-05_FLEMINGTON_R04",
+      "race_number": 4,
+      "url": "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/flemington/2026-11-05/R4/speedmap",
+      "listed_runners": 12,
+      "source_rows": 10,
+      "missing_from_source": [
+        "Snitzel Dancer",
+        "Miss Hades"
+      ],
+      "aes_numeric": 10,
+      "afs_numeric": 10,
+      "runners": [
+        {
+          "tab": 1,
+          "horse": "FIREBALL MISS",
+          "barrier": 3,
+          "aes_m_s": 15.4,
+          "afs_m_s": 17.8,
+          "runner_id": "2026-11-05_FLEMINGTON_R04_01"
+        },
+        {
+          "tab": 2,
+          "horse": "SASS APPEAL",
+          "barrier": 12,
+          "aes_m_s": 16.7,
+          "afs_m_s": 18.3,
+          "runner_id": "2026-11-05_FLEMINGTON_R04_02"
+        },
+        {
+          "tab": 3,
+          "horse": "CILACAP",
+          "barrier": 6,
+          "aes_m_s": 15.8,
+          "afs_m_s": 17.5,
+          "runner_id": "2026-11-05_FLEMINGTON_R04_03"
+        },
+        {
+          "tab": 5,
+          "horse": "MISS PLAYLOUNGE",
+          "barrier": 9,
+          "aes_m_s": 16.7,
+          "afs_m_s": 17.8,
+          "runner_id": "2026-11-05_FLEMINGTON_R04_05"
+        },
+        {
+          "tab": 6,
+          "horse": "GOLD MEDALLIST",
+          "barrier": 7,
+          "aes_m_s": 16.2,
+          "afs_m_s": 17.8,
+          "runner_id": "2026-11-05_FLEMINGTON_R04_06"
+        },
+        {
+          "tab": 7,
+          "horse": "PROBABILITY THEORY",
+          "barrier": 8,
+          "aes_m_s": 16.1,
+          "afs_m_s": 17.3,
+          "runner_id": "2026-11-05_FLEMINGTON_R04_07"
+        },
+        {
+          "tab": 8,
+          "horse": "POLYMNIA",
+          "barrier": 5,
+          "aes_m_s": 15.5,
+          "afs_m_s": 18.1,
+          "runner_id": "2026-11-05_FLEMINGTON_R04_08"
+        },
+        {
+          "tab": 10,
+          "horse": "COLOUR OUR WORLD",
+          "barrier": 4,
+          "aes_m_s": 15.7,
+          "afs_m_s": 17.6,
+          "runner_id": "2026-11-05_FLEMINGTON_R04_10"
+        },
+        {
+          "tab": 11,
+          "horse": "THE VOLTA",
+          "barrier": 11,
+          "aes_m_s": 16,
+          "afs_m_s": 18.3,
+          "runner_id": "2026-11-05_FLEMINGTON_R04_11"
+        },
+        {
+          "tab": 12,
+          "horse": "BELLA VERONA",
+          "barrier": 2,
+          "aes_m_s": 15.6,
+          "afs_m_s": 17.5,
+          "runner_id": "2026-11-05_FLEMINGTON_R04_12"
+        }
+      ]
+    },
+    {
+      "race_id": "2026-11-05_FLEMINGTON_R05",
+      "race_number": 5,
+      "url": "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/flemington/2026-11-05/R5/speedmap",
+      "listed_runners": 19,
+      "source_rows": 18,
+      "missing_from_source": [
+        "Haaracaine"
+      ],
+      "aes_numeric": 16,
+      "afs_numeric": 16,
+      "runners": [
+        {
+          "tab": 1,
+          "horse": "STATUARIO",
+          "barrier": 16,
+          "aes_m_s": 15.6,
+          "afs_m_s": 17.1,
+          "runner_id": "2026-11-05_FLEMINGTON_R05_01"
+        },
+        {
+          "tab": 2,
+          "horse": "GOLDENSTATEWARRIOR",
+          "barrier": 19,
+          "aes_m_s": null,
+          "afs_m_s": null,
+          "runner_id": "2026-11-05_FLEMINGTON_R05_02"
+        },
+        {
+          "tab": 3,
+          "horse": "SINGLE CHOICE",
+          "barrier": 9,
+          "aes_m_s": 15.6,
+          "afs_m_s": 17.1,
+          "runner_id": "2026-11-05_FLEMINGTON_R05_03"
+        },
+        {
+          "tab": 4,
+          "horse": "ROULETTE KING",
+          "barrier": 4,
+          "aes_m_s": 14.4,
+          "afs_m_s": 17.6,
+          "runner_id": "2026-11-05_FLEMINGTON_R05_04"
+        },
+        {
+          "tab": 5,
+          "horse": "SAGANTI",
+          "barrier": 11,
+          "aes_m_s": 16.1,
+          "afs_m_s": 17,
+          "runner_id": "2026-11-05_FLEMINGTON_R05_05"
+        },
+        {
+          "tab": 6,
+          "horse": "NOBLER",
+          "barrier": 14,
+          "aes_m_s": 15.1,
+          "afs_m_s": 17.8,
+          "runner_id": "2026-11-05_FLEMINGTON_R05_06"
+        },
+        {
+          "tab": 7,
+          "horse": "FIORENOT",
+          "barrier": 10,
+          "aes_m_s": 15.6,
+          "afs_m_s": 18.1,
+          "runner_id": "2026-11-05_FLEMINGTON_R05_07"
+        },
+        {
+          "tab": 8,
+          "horse": "OCEAN BEYOND",
+          "barrier": 7,
+          "aes_m_s": 16,
+          "afs_m_s": 17.6,
+          "runner_id": "2026-11-05_FLEMINGTON_R05_08"
+        },
+        {
+          "tab": 9,
+          "horse": "PERISHER",
+          "barrier": 13,
+          "aes_m_s": null,
+          "afs_m_s": null,
+          "runner_id": "2026-11-05_FLEMINGTON_R05_09"
+        },
+        {
+          "tab": 10,
+          "horse": "CHASE YOUR DREAMS",
+          "barrier": 5,
+          "aes_m_s": 15.5,
+          "afs_m_s": 17.6,
+          "runner_id": "2026-11-05_FLEMINGTON_R05_10"
+        },
+        {
+          "tab": 11,
+          "horse": "DIFFERENT GRAVY",
+          "barrier": 17,
+          "aes_m_s": 15.1,
+          "afs_m_s": 17.4,
+          "runner_id": "2026-11-05_FLEMINGTON_R05_11"
+        },
+        {
+          "tab": 12,
+          "horse": "VEYEPEE",
+          "barrier": 1,
+          "aes_m_s": 15.7,
+          "afs_m_s": 17.2,
+          "runner_id": "2026-11-05_FLEMINGTON_R05_12"
+        },
+        {
+          "tab": 14,
+          "horse": "MY BROTHERS KEEPER",
+          "barrier": 3,
+          "aes_m_s": 15.3,
+          "afs_m_s": 17.8,
+          "runner_id": "2026-11-05_FLEMINGTON_R05_14"
+        },
+        {
+          "tab": 15,
+          "horse": "SUN GIFT",
+          "barrier": 6,
+          "aes_m_s": 15.7,
+          "afs_m_s": 17.8,
+          "runner_id": "2026-11-05_FLEMINGTON_R05_15"
+        },
+        {
+          "tab": 16,
+          "horse": "WEALDSTONE",
+          "barrier": 18,
+          "aes_m_s": 15.1,
+          "afs_m_s": 17.9,
+          "runner_id": "2026-11-05_FLEMINGTON_R05_16"
+        },
+        {
+          "tab": 17,
+          "horse": "PRINCE ERIC",
+          "barrier": 8,
+          "aes_m_s": 15.6,
+          "afs_m_s": 17.5,
+          "runner_id": "2026-11-05_FLEMINGTON_R05_17"
+        },
+        {
+          "tab": 18,
+          "horse": "PLACO",
+          "barrier": 2,
+          "aes_m_s": 16.2,
+          "afs_m_s": 16.6,
+          "runner_id": "2026-11-05_FLEMINGTON_R05_18"
+        },
+        {
+          "tab": 19,
+          "horse": "GREGOLIMO",
+          "barrier": 12,
+          "aes_m_s": 16.1,
+          "afs_m_s": 17.5,
+          "runner_id": "2026-11-05_FLEMINGTON_R05_19"
+        }
+      ]
+    },
+    {
+      "race_id": "2026-11-05_FLEMINGTON_R06",
+      "race_number": 6,
+      "url": "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/flemington/2026-11-05/R6/speedmap",
+      "listed_runners": 20,
+      "source_rows": 20,
+      "missing_from_source": [],
+      "aes_numeric": 20,
+      "afs_numeric": 20,
+      "runners": [
+        {
+          "tab": 1,
+          "horse": "YAM",
+          "barrier": 17,
+          "aes_m_s": 16.5,
+          "afs_m_s": 17.7,
+          "runner_id": "2026-11-05_FLEMINGTON_R06_01"
+        },
+        {
+          "tab": 2,
+          "horse": "RICH CHAMPAGNE",
+          "barrier": 9,
+          "aes_m_s": 16,
+          "afs_m_s": 17,
+          "runner_id": "2026-11-05_FLEMINGTON_R06_02"
+        },
+        {
+          "tab": 3,
+          "horse": "SPIRITED DEFENCE",
+          "barrier": 11,
+          "aes_m_s": 15.5,
+          "afs_m_s": 17.6,
+          "runner_id": "2026-11-05_FLEMINGTON_R06_03"
+        },
+        {
+          "tab": 4,
+          "horse": "BEL MEZYAAN",
+          "barrier": 8,
+          "aes_m_s": 16.2,
+          "afs_m_s": 17.7,
+          "runner_id": "2026-11-05_FLEMINGTON_R06_04"
+        },
+        {
+          "tab": 5,
+          "horse": "ROSA AOTEAROA",
+          "barrier": 7,
+          "aes_m_s": 16.8,
+          "afs_m_s": 16.7,
+          "runner_id": "2026-11-05_FLEMINGTON_R06_05"
+        },
+        {
+          "tab": 6,
+          "horse": "BIG ROOSTER",
+          "barrier": 2,
+          "aes_m_s": 15.3,
+          "afs_m_s": 17.2,
+          "runner_id": "2026-11-05_FLEMINGTON_R06_06"
+        },
+        {
+          "tab": 7,
+          "horse": "BLAZING SWORD",
+          "barrier": 20,
+          "aes_m_s": 16.3,
+          "afs_m_s": 17.6,
+          "runner_id": "2026-11-05_FLEMINGTON_R06_07"
+        },
+        {
+          "tab": 8,
+          "horse": "LOFTY THOUGHTS",
+          "barrier": 19,
+          "aes_m_s": 16.1,
+          "afs_m_s": 16.6,
+          "runner_id": "2026-11-05_FLEMINGTON_R06_08"
+        },
+        {
+          "tab": 9,
+          "horse": "SULEK",
+          "barrier": 10,
+          "aes_m_s": 15.5,
+          "afs_m_s": 18.1,
+          "runner_id": "2026-11-05_FLEMINGTON_R06_09"
+        },
+        {
+          "tab": 10,
+          "horse": "FLYING MIKKI",
+          "barrier": 15,
+          "aes_m_s": 16.1,
+          "afs_m_s": 18,
+          "runner_id": "2026-11-05_FLEMINGTON_R06_10"
+        },
+        {
+          "tab": 11,
+          "horse": "ENDLESS SUMMER",
+          "barrier": 16,
+          "aes_m_s": 17,
+          "afs_m_s": 17,
+          "runner_id": "2026-11-05_FLEMINGTON_R06_11"
+        },
+        {
+          "tab": 12,
+          "horse": "NARAGHI",
+          "barrier": 1,
+          "aes_m_s": 16.4,
+          "afs_m_s": 17.4,
+          "runner_id": "2026-11-05_FLEMINGTON_R06_12"
+        },
+        {
+          "tab": 13,
+          "horse": "OUR JUSTIFY",
+          "barrier": 5,
+          "aes_m_s": 16,
+          "afs_m_s": 17.3,
+          "runner_id": "2026-11-05_FLEMINGTON_R06_13"
+        },
+        {
+          "tab": 14,
+          "horse": "WETUMPKA",
+          "barrier": 18,
+          "aes_m_s": 16.1,
+          "afs_m_s": 17.7,
+          "runner_id": "2026-11-05_FLEMINGTON_R06_14"
+        },
+        {
+          "tab": 15,
+          "horse": "AKA DAKA",
+          "barrier": 3,
+          "aes_m_s": 16.3,
+          "afs_m_s": 17.5,
+          "runner_id": "2026-11-05_FLEMINGTON_R06_15"
+        },
+        {
+          "tab": 16,
+          "horse": "KOYUGA RIP",
+          "barrier": 12,
+          "aes_m_s": 16.4,
+          "afs_m_s": 16.7,
+          "runner_id": "2026-11-05_FLEMINGTON_R06_16"
+        },
+        {
+          "tab": 17,
+          "horse": "UNTAPPED",
+          "barrier": 13,
+          "aes_m_s": 15.5,
+          "afs_m_s": 17.5,
+          "runner_id": "2026-11-05_FLEMINGTON_R06_17"
+        },
+        {
+          "tab": 18,
+          "horse": "SURFY PETE",
+          "barrier": 6,
+          "aes_m_s": 16.1,
+          "afs_m_s": 17.7,
+          "runner_id": "2026-11-05_FLEMINGTON_R06_18"
+        },
+        {
+          "tab": 19,
+          "horse": "HEDJET",
+          "barrier": 14,
+          "aes_m_s": 16.2,
+          "afs_m_s": 16.9,
+          "runner_id": "2026-11-05_FLEMINGTON_R06_19"
+        },
+        {
+          "tab": 20,
+          "horse": "HIYAAM PROUD",
+          "barrier": 4,
+          "aes_m_s": 16.7,
+          "afs_m_s": 17.1,
+          "runner_id": "2026-11-05_FLEMINGTON_R06_20"
+        }
+      ]
+    },
+    {
+      "race_id": "2026-11-05_FLEMINGTON_R07",
+      "race_number": 7,
+      "url": "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/flemington/2026-11-05/R7/speedmap",
+      "listed_runners": 16,
+      "source_rows": 15,
+      "missing_from_source": [
+        "Parcae"
+      ],
+      "aes_numeric": 15,
+      "afs_numeric": 15,
+      "runners": [
+        {
+          "tab": 1,
+          "horse": "CALAMARI RING",
+          "barrier": 7,
+          "aes_m_s": 15.9,
+          "afs_m_s": 18.6,
+          "runner_id": "2026-11-05_FLEMINGTON_R07_01"
+        },
+        {
+          "tab": 2,
+          "horse": "SCINTILLATION",
+          "barrier": 2,
+          "aes_m_s": 17,
+          "afs_m_s": 18.4,
+          "runner_id": "2026-11-05_FLEMINGTON_R07_02"
+        },
+        {
+          "tab": 3,
+          "horse": "SEQUINNED",
+          "barrier": 10,
+          "aes_m_s": 16.6,
+          "afs_m_s": 17.9,
+          "runner_id": "2026-11-05_FLEMINGTON_R07_03"
+        },
+        {
+          "tab": 4,
+          "horse": "HANDEE",
+          "barrier": 6,
+          "aes_m_s": 16.9,
+          "afs_m_s": 17.6,
+          "runner_id": "2026-11-05_FLEMINGTON_R07_04"
+        },
+        {
+          "tab": 5,
+          "horse": "LADY CATALINA",
+          "barrier": 5,
+          "aes_m_s": 17,
+          "afs_m_s": 18.1,
+          "runner_id": "2026-11-05_FLEMINGTON_R07_05"
+        },
+        {
+          "tab": 6,
+          "horse": "SEMANTICS",
+          "barrier": 9,
+          "aes_m_s": 16.5,
+          "afs_m_s": 17.5,
+          "runner_id": "2026-11-05_FLEMINGTON_R07_06"
+        },
+        {
+          "tab": 8,
+          "horse": "THE WILDLING",
+          "barrier": 13,
+          "aes_m_s": 17,
+          "afs_m_s": 18,
+          "runner_id": "2026-11-05_FLEMINGTON_R07_08"
+        },
+        {
+          "tab": 9,
+          "horse": "DETERMINED ROSE",
+          "barrier": 12,
+          "aes_m_s": 16.9,
+          "afs_m_s": 16.5,
+          "runner_id": "2026-11-05_FLEMINGTON_R07_09"
+        },
+        {
+          "tab": 10,
+          "horse": "FOVEA",
+          "barrier": 11,
+          "aes_m_s": 17.4,
+          "afs_m_s": 17.3,
+          "runner_id": "2026-11-05_FLEMINGTON_R07_10"
+        },
+        {
+          "tab": 11,
+          "horse": "UNKECHAUG",
+          "barrier": 4,
+          "aes_m_s": 16.1,
+          "afs_m_s": 17.8,
+          "runner_id": "2026-11-05_FLEMINGTON_R07_11"
+        },
+        {
+          "tab": 12,
+          "horse": "I AM ALGADON",
+          "barrier": 8,
+          "aes_m_s": 16.1,
+          "afs_m_s": 17.7,
+          "runner_id": "2026-11-05_FLEMINGTON_R07_12"
+        },
+        {
+          "tab": 13,
+          "horse": "SOUTHERN SWAY",
+          "barrier": 16,
+          "aes_m_s": 16,
+          "afs_m_s": 18,
+          "runner_id": "2026-11-05_FLEMINGTON_R07_13"
+        },
+        {
+          "tab": 14,
+          "horse": "SANCTUARY",
+          "barrier": 15,
+          "aes_m_s": 16.2,
+          "afs_m_s": 18.2,
+          "runner_id": "2026-11-05_FLEMINGTON_R07_14"
+        },
+        {
+          "tab": 15,
+          "horse": "NISHIOKA",
+          "barrier": 14,
+          "aes_m_s": 15.4,
+          "afs_m_s": 18.3,
+          "runner_id": "2026-11-05_FLEMINGTON_R07_15"
+        },
+        {
+          "tab": 16,
+          "horse": "UNWAVERING",
+          "barrier": 3,
+          "aes_m_s": 17,
+          "afs_m_s": 17,
+          "runner_id": "2026-11-05_FLEMINGTON_R07_16"
+        }
+      ]
+    },
+    {
+      "race_id": "2026-11-05_FLEMINGTON_R08",
+      "race_number": 8,
+      "url": "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/flemington/2026-11-05/R8/speedmap",
+      "listed_runners": 20,
+      "source_rows": 20,
+      "missing_from_source": [],
+      "aes_numeric": 2,
+      "afs_numeric": 2,
+      "runners": [
+        {
+          "tab": 1,
+          "horse": "PROXIMA DEA",
+          "barrier": 19,
+          "aes_m_s": null,
+          "afs_m_s": null,
+          "runner_id": "2026-11-05_FLEMINGTON_R08_01"
+        },
+        {
+          "tab": 2,
+          "horse": "ICELADY",
+          "barrier": 4,
+          "aes_m_s": null,
+          "afs_m_s": null,
+          "runner_id": "2026-11-05_FLEMINGTON_R08_02"
+        },
+        {
+          "tab": 3,
+          "horse": "QUICK FINISH",
+          "barrier": 5,
+          "aes_m_s": 16,
+          "afs_m_s": 16,
+          "runner_id": "2026-11-05_FLEMINGTON_R08_03"
+        },
+        {
+          "tab": 4,
+          "horse": "DE ARMAS",
+          "barrier": 1,
+          "aes_m_s": null,
+          "afs_m_s": null,
+          "runner_id": "2026-11-05_FLEMINGTON_R08_04"
+        },
+        {
+          "tab": 5,
+          "horse": "VOYNICHESE",
+          "barrier": 7,
+          "aes_m_s": null,
+          "afs_m_s": null,
+          "runner_id": "2026-11-05_FLEMINGTON_R08_05"
+        },
+        {
+          "tab": 6,
+          "horse": "SALANN",
+          "barrier": 12,
+          "aes_m_s": null,
+          "afs_m_s": null,
+          "runner_id": "2026-11-05_FLEMINGTON_R08_06"
+        },
+        {
+          "tab": 7,
+          "horse": "CHURCHILL ROSE",
+          "barrier": 10,
+          "aes_m_s": null,
+          "afs_m_s": null,
+          "runner_id": "2026-11-05_FLEMINGTON_R08_07"
+        },
+        {
+          "tab": 8,
+          "horse": "YOUR COLOUR",
+          "barrier": 14,
+          "aes_m_s": null,
+          "afs_m_s": null,
+          "runner_id": "2026-11-05_FLEMINGTON_R08_08"
+        },
+        {
+          "tab": 9,
+          "horse": "JOELY",
+          "barrier": 18,
+          "aes_m_s": null,
+          "afs_m_s": null,
+          "runner_id": "2026-11-05_FLEMINGTON_R08_09"
+        },
+        {
+          "tab": 10,
+          "horse": "EXPENSIVE TASTE",
+          "barrier": 11,
+          "aes_m_s": 14,
+          "afs_m_s": 17,
+          "runner_id": "2026-11-05_FLEMINGTON_R08_10"
+        },
+        {
+          "tab": 11,
+          "horse": "NOTIFIED",
+          "barrier": 15,
+          "aes_m_s": null,
+          "afs_m_s": null,
+          "runner_id": "2026-11-05_FLEMINGTON_R08_11"
+        },
+        {
+          "tab": 12,
+          "horse": "REFUSE TO CURTSY",
+          "barrier": 13,
+          "aes_m_s": null,
+          "afs_m_s": null,
+          "runner_id": "2026-11-05_FLEMINGTON_R08_12"
+        },
+        {
+          "tab": 13,
+          "horse": "NIKITRIA",
+          "barrier": 16,
+          "aes_m_s": null,
+          "afs_m_s": null,
+          "runner_id": "2026-11-05_FLEMINGTON_R08_13"
+        },
+        {
+          "tab": 14,
+          "horse": "WAIHEKE ROSE",
+          "barrier": 6,
+          "aes_m_s": null,
+          "afs_m_s": null,
+          "runner_id": "2026-11-05_FLEMINGTON_R08_14"
+        },
+        {
+          "tab": 15,
+          "horse": "THARWA",
+          "barrier": 17,
+          "aes_m_s": null,
+          "afs_m_s": null,
+          "runner_id": "2026-11-05_FLEMINGTON_R08_15"
+        },
+        {
+          "tab": 16,
+          "horse": "SHAMEFUL IMPULSE",
+          "barrier": 8,
+          "aes_m_s": null,
+          "afs_m_s": null,
+          "runner_id": "2026-11-05_FLEMINGTON_R08_16"
+        },
+        {
+          "tab": 17,
+          "horse": "QUYNH",
+          "barrier": 3,
+          "aes_m_s": null,
+          "afs_m_s": null,
+          "runner_id": "2026-11-05_FLEMINGTON_R08_17"
+        },
+        {
+          "tab": 18,
+          "horse": "LITTLE ALLY BAMA",
+          "barrier": 2,
+          "aes_m_s": null,
+          "afs_m_s": null,
+          "runner_id": "2026-11-05_FLEMINGTON_R08_18"
+        },
+        {
+          "tab": 19,
+          "horse": "COURTING",
+          "barrier": 20,
+          "aes_m_s": null,
+          "afs_m_s": null,
+          "runner_id": "2026-11-05_FLEMINGTON_R08_19"
+        },
+        {
+          "tab": 20,
+          "horse": "CHOCOLATE FRECKLES",
+          "barrier": 9,
+          "aes_m_s": null,
+          "afs_m_s": null,
+          "runner_id": "2026-11-05_FLEMINGTON_R08_20"
+        }
+      ]
+    },
+    {
+      "race_id": "2026-11-05_FLEMINGTON_R09",
+      "race_number": 9,
+      "url": "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/flemington/2026-11-05/R9/speedmap",
+      "listed_runners": 14,
+      "source_rows": 13,
+      "missing_from_source": [
+        "Pallaton"
+      ],
+      "aes_numeric": 13,
+      "afs_numeric": 13,
+      "runners": [
+        {
+          "tab": 1,
+          "horse": "REY MAGNERIO",
+          "barrier": 3,
+          "aes_m_s": 15.5,
+          "afs_m_s": 18.9,
+          "runner_id": "2026-11-05_FLEMINGTON_R09_01"
+        },
+        {
+          "tab": 3,
+          "horse": "BEV'S NINE",
+          "barrier": 7,
+          "aes_m_s": 17.2,
+          "afs_m_s": 18.1,
+          "runner_id": "2026-11-05_FLEMINGTON_R09_03"
+        },
+        {
+          "tab": 4,
+          "horse": "CAVALRY GIRL",
+          "barrier": 12,
+          "aes_m_s": 17.1,
+          "afs_m_s": 18.3,
+          "runner_id": "2026-11-05_FLEMINGTON_R09_04"
+        },
+        {
+          "tab": 5,
+          "horse": "MARBLE NINE",
+          "barrier": 11,
+          "aes_m_s": 16.9,
+          "afs_m_s": 16.7,
+          "runner_id": "2026-11-05_FLEMINGTON_R09_05"
+        },
+        {
+          "tab": 6,
+          "horse": "PHILOSOPHER",
+          "barrier": 8,
+          "aes_m_s": 17,
+          "afs_m_s": 18.7,
+          "runner_id": "2026-11-05_FLEMINGTON_R09_06"
+        },
+        {
+          "tab": 7,
+          "horse": "ICE KOOL",
+          "barrier": 4,
+          "aes_m_s": 17.4,
+          "afs_m_s": 18.5,
+          "runner_id": "2026-11-05_FLEMINGTON_R09_07"
+        },
+        {
+          "tab": 8,
+          "horse": "DON'T HOPE DO",
+          "barrier": 6,
+          "aes_m_s": 17.4,
+          "afs_m_s": 18.3,
+          "runner_id": "2026-11-05_FLEMINGTON_R09_08"
+        },
+        {
+          "tab": 9,
+          "horse": "PERILOUS FIGHTER",
+          "barrier": 5,
+          "aes_m_s": 16.3,
+          "afs_m_s": 18.7,
+          "runner_id": "2026-11-05_FLEMINGTON_R09_09"
+        },
+        {
+          "tab": 10,
+          "horse": "LANDMARK",
+          "barrier": 13,
+          "aes_m_s": 15.6,
+          "afs_m_s": 18.5,
+          "runner_id": "2026-11-05_FLEMINGTON_R09_10"
+        },
+        {
+          "tab": 11,
+          "horse": "STOKKE",
+          "barrier": 9,
+          "aes_m_s": 16.7,
+          "afs_m_s": 18.7,
+          "runner_id": "2026-11-05_FLEMINGTON_R09_11"
+        },
+        {
+          "tab": 12,
+          "horse": "ALWAYS ENUFF",
+          "barrier": 1,
+          "aes_m_s": 16.7,
+          "afs_m_s": 18.1,
+          "runner_id": "2026-11-05_FLEMINGTON_R09_12"
+        },
+        {
+          "tab": 13,
+          "horse": "SALUTED",
+          "barrier": 14,
+          "aes_m_s": 16.8,
+          "afs_m_s": 17.9,
+          "runner_id": "2026-11-05_FLEMINGTON_R09_13"
+        },
+        {
+          "tab": 14,
+          "horse": "I'M FOXING",
+          "barrier": 10,
+          "aes_m_s": 17.1,
+          "afs_m_s": 17.9,
+          "runner_id": "2026-11-05_FLEMINGTON_R09_14"
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "AES/AFS are published average speed estimates for horses, not actual Thursday race sectionals or horse-specific last-600 data.",
+    "Source may change before race; absence of values is null, never imputed.",
+    "No speedmap value is directly fitted or used as a new numerical coefficient; predeclared settling pressure is the only numerical shadow adjustment."
+  ]
+}
