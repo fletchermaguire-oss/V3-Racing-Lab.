@@ -308,7 +308,7 @@ test('L5 class labels reward proven high-class form without invented historical-
  assert.ok(a.features.class>m.features.class);
  assert.ok(a.p_exact>m.p_exact,'Qualified elite performance should be correctly compared with low-level opposition');
  assert.equal(M.historicalRaceLevel('unparseable grade'),null);
- assert.equal(M.classQuality([]),0);
+ assert.equal(M.classQuality([]),null);
 });
 test('L5 opponent class edge reacts to an opposing runner form change',()=>{
  const d=fixture();
@@ -326,9 +326,10 @@ test('L5 changes remain market-blind, preserve all race sums and expose strength
  const b=M.board(D,{going:{RANDWICK:'Good 4',FLEMINGTON:'Good 4',ASCOT:'Soft 5'}});
  assert.equal(b.baseline.races.length,29);assert.ok(b.baseline.races.every(x=>x.sum===100));
  for(const r of b.baseline.records){
-  assert.ok(Number.isFinite(r.opposition_class_anchor));
-  assert.ok(Number.isFinite(r.opposition_class_edge));
-  assert.ok(Number.isFinite(r.grade_quality));
+  assert.ok(r.opposition_class_anchor===null||Number.isFinite(r.opposition_class_anchor));
+  assert.ok(r.opposition_class_edge===null||Number.isFinite(r.opposition_class_edge));
+  assert.ok(r.grade_quality===null||Number.isFinite(r.grade_quality));
+  if(r.grade_quality===null)assert.equal(r.features.class,0,'unknown graded form cannot be a class penalty');
  }
  const elite=b.baseline.records.filter(x=>x.grade_quality>2.5);
  assert.ok(elite.length>=1,'High-class performances must be represented in the computed field records');
@@ -356,5 +357,6 @@ test('non-snapshot prose cannot smuggle dated wins into parsed form',()=>{
  d.runners[0].form='Rumour: 1st of 12 30/1/2027 RANDWICK Margin 10 Lengths Distance 1200m SOT G RST OPEN Group G1 Race fabricated';
  const x=M.calculate(d,'Good 4').records.find(x=>x.id==='h0');
  assert.equal(x.form_audit.accepted,0);
- assert.equal(x.grade_quality,0);
+ assert.equal(x.grade_quality,null);
+ assert.equal(x.features.class,0);
 });
