@@ -1,0 +1,513 @@
+          "date": "2026-09-19",
+          "venue": "CAULFIELD",
+          "finish": 8,
+          "field": 9,
+          "margin_l": 5.0,
+          "distance_m": 1100,
+          "surface": "G",
+          "race_class": "BM100",
+          "used_in_model": true
+        },
+        {
+          "date": "2026-08-22",
+          "venue": "SANDOWN-HILLSIDE",
+          "finish": 8,
+          "field": 8,
+          "margin_l": 7.7,
+          "distance_m": 1000,
+          "surface": "H",
+          "race_class": "OPEN Group G3",
+          "used_in_model": true
+        },
+        {
+          "date": "2026-08-08",
+          "venue": "CAULFIELD HEATH",
+          "finish": 5,
+          "field": 6,
+          "margin_l": 6.2,
+          "distance_m": 1000,
+          "surface": "S",
+          "race_class": "BM100",
+          "used_in_model": true
+        },
+        {
+          "date": "2025-11-06",
+          "venue": "FLEMINGTON",
+          "finish": 1,
+          "field": 11,
+          "margin_l": 0.3,
+          "distance_m": 1000,
+          "surface": "G",
+          "race_class": "OPEN Group LR",
+          "used_in_model": true
+        }
+      ],
+      "trials": [
+        {
+          "finish": 1,
+          "date": "2026-07-21",
+          "venue": "COLR",
+          "distance_m": 900,
+          "time": "0:53.00",
+          "used_in_model": false
+        }
+      ],
+      "gear_source_notes": [
+        "[Tongue Tie]"
+      ],
+      "sectional_evidence": [
+        {
+          "date": "2026-10-24",
+          "race_time_last_split_seconds": 33.21,
+          "split_m": 600,
+          "horse_specific": false
+        },
+        {
+          "date": "2026-09-19",
+          "race_time_last_split_seconds": 34.32,
+          "split_m": 600,
+          "horse_specific": false
+        },
+        {
+          "date": "2026-08-22",
+          "race_time_last_split_seconds": 34.45,
+          "split_m": 600,
+          "horse_specific": false
+        },
+        {
+          "date": "2026-08-08",
+          "race_time_last_split_seconds": 33.86,
+          "split_m": 600,
+          "horse_specific": false
+        },
+        {
+          "date": "2025-11-06",
+          "race_time_last_split_seconds": 32.34,
+          "split_m": 600,
+          "horse_specific": false
+        }
+      ]
+    },
+    {
+      "tab": 12,
+      "horse": "Always Enuff",
+      "recent_form": "x4818",
+      "age_sex": "5m",
+      "weight_kg": 55.0,
+      "barrier": 1,
+      "jockey": "Zac Spain",
+      "claim_kg": 0,
+      "trainer": "Shane Nichols & Hayden Black",
+      "career": {
+        "wins": 6,
+        "other_places": 2,
+        "starts": 22
+      },
+      "id": "2026-11-05_FLEMINGTON_R09_12",
+      "race_id": "2026-11-05_FLEMINGTON_R09",
+      "status": "PDF_LISTED_UNVERIFIED",
+      "original_pick": false,
+      "form": "17/10/2026 CAULFIELD 1000m (G), OPEN Group G2: 8/10, PDF margin 5.7L\n26/9/2026 MORNINGTON 1000m (S), BM84: 1/11, PDF margin 1.3L\n16/9/2026 CAULFIELD HEATH 1000m (G), BM78: 8/10, PDF margin 2.8L\n26/8/2026 BENDIGO 1000m (H), BM78: 4/8, PDF margin 2.3L\n18/4/2026 MORNINGTON 1000m (G), BM74: 8/8, PDF margin 2.4L",
+      "statistics": "Career 6-2-22;\nCourse 0-0-3;\nDistance 6-2-20;\nGood 3-2-14;\nSoft 2-0-5;\nHeavy 1-0-3;",
+      "strengths": "PDF records: career 6 wins from 22 starts. Latest race: 17/10/2026 CAULFIELD 1000m (G), OPEN Group G2: 8/10, PDF margin 5.7L.",
+      "risks": "Final field, pace, track pattern and current gear not independently verified.",
+      "historical_map": "Settled 7th 800m (17/10/2026); Settled 6th 800m (26/9/2026); Settled 9th 800m (16/9/2026); Settled 6th 800m (26/8/2026); Settled 8th 800m (18/4/2026)",
+      "outstanding": "Official starters/going/rail/gear, replays, trainer reports and horse-specific sectionals remain unverified.",
+      "source": {
+        "file": "469539.pdf",
+        "sha256": "192a7b461e6fdc62e0babf6c87b80ebe31f2d8c0ac2d03e847794f12fcde27ce",
+        "pages": [
+          77,
+          78
+        ],
+        "summary_page": 72
+      },
+      "source_detail": "ALWAYS ENUFF\nZAC SPAIN\nj50s j350s t50s t350s\nHorse: 4-2-17 24%-36%\nSHANE NICHOLS &\n3-15-50 30-90-350 4-9-50 22-44-260\nJ/T: 4-13-62 6%-27%\n55kg (1) ch 5 M HAYDEN BLACK\n6%-36% 9%-35% 8%-26% 8%-25%\n12.\nCAPITALIST (AUS) - ENUFF EFFORT (AUS)\nRaced Distance: 1000-1200 Winning Distance: 1000m (6)\nGREEN, GOLD DIAMOND, ARMBANDS, WHITE CAP\nOwner: S P Nichols, Supreme Thoroughbreds (Mgr: A B Grayling), N\nF Clifford, J W Clifford, P M Clifford, Ms J G Sheldrake, Ms M E\nAnderson, A La Torraca, P La Torraca, J Slattery, Zodiac Racing\n(Mgr: G Aldous) & I F Foster\nCarPM/s 12mPM/s API RTC/km RDistTC DLS DLW DOD Car 12m Crs Dist ClockW AClockW\n$13,666 $12,373 12.4 5/4 4 19 40 2.5 6-2-22 2-1-10 0-0-3 6-2-20 - 6-2-22\n27%-36% 20%-30% 0%-0% 30%-40% 27%-36%\nG1 G2 G3 LR FU 2U 3U Firm Good Soft Heavy AW Turf\n- 0-0-1 0-0-1 0-0-3 2-0-6 2-0-5 2-0-4 - 3-2-14 2-0-5 1-0-3 - 6-2-22\n0%-0% 0%-0% 0%-0% 33%-33% 40%-40% 50%-50% 21%-35% 40%-40% 33%-33% 27%-36%\n8th of 10 17/10/2026 CAULFIELD Margin 5.7 Lengths Distance 1000m SOT G RST OPEN Group G2 Race Henley Homes Sprint Prize $301,900 API\n36.59 Race Time 0:56.37 Sec Time 33.04 (600) Sec Time Adj 0.29 Jockey Zac Spain Weight 53.5 CD 53.5 BP 2 Odds 60 Prize Won $6,000\nTrainer Shane Nichols & Hayden Black Ongoing Winners 00-01-02 Rail Rail: Out 3m Entire Circuit. Track Direction Anti-Clockwise Gear Change\n[Blinkers] Winner Cavalry Girl 57.5 (5) Second Don't Hope Do 53 (3) Third Bev's Nine 56 (7) Settled 7th 800m 7th Turn 7th\n1st of 11 26/9/2026 MORNINGTON Margin 1.3 Lengths Distance 1000m SOT S RST BM84 Race Tobin Brothers Celebrating Lives Handicap Prize\n$130,000 API 13 Race Time 0:59.40 Sec Time 35.09 (600) Jockey Zac Spain Weight 54.0 CD 54.0 BP 8 Odds 40 Prize Won $71,500 Trainer\nShane Nichols & Hayden Black Ongoing Winners 00-01-09 Rail Rail: True Entire Circuit. Track Direction Anti-Clockwise Gear Change [Blinkers]\nSecond Tres Magnifique 54.5 (1) Third Saluted 52 (6) Settled 6th 800m 6th Turn 4th\n8th of 10 16/9/2026 CAULFIELD HEATH Margin 2.8 Lengths Distance 1000m SOT G RST BM78 Race Quayclean Handicap Prize $50,000 API 11.02\nRace Time 0:57.75 Sec Time 34.22 (600) Sec Time Adj 0.22 Jockey Lachlan Neindorf Weight 59.5 CD 59.5 BP 6 Odds 20 Prize Won $1,000\nTrainer Shane Nichols & Hayden Black Ongoing Winners 02-02-10 Rail Rail: True Entire Circuit. Track Direction Anti-Clockwise Gear Change\n[Blinkers] Winner Cabriole 57 (8) Second Esmahli 59.5 (9) Third Sun Setting 56 (3) Settled 9th 800m 9th Turn 9th\n4th of 8 26/8/2026 BENDIGO Margin 2.3 Lengths Distance 1000m SOT H RST BM78 Race Bendigo Locksmiths BM78 Handicap Prize $40,000 API 7.3\nRace Time 0:59.48 Sec Time 35.9 (600) Sec Time Adj 0.30 Jockey Zac Spain Weight 58.0 CD 58.0 BP 1 Odds 5.5 Prize Won $2,000 Trainer\nShane Nichols & Hayden Black Ongoing Winners 00-01-06 Rail Rail: Out 4m Entire Circuit. Track Direction Anti-Clockwise Gear Change\n[Blinkers] Winner Weapon Clear 52 (4) Second Brenlyn's Legacy 58 (8) Third Jennyanydots 57 (2) Settled 5th 800m 6th Turn 7th\nTrial 3rd 11/8/2026 PAKS 1000m Race Time 0:59.40 Trainer SHANE NICHOLS & HAYDEN BLACK Jockey ZAC SPAIN\nTrial 6th 29/7/2026 MORN 900m Race Time 0:57.54 Trainer SHANE NICHOLS & HAYDEN BLACK Jockey ZAC SPAIN\n8th of 8 18/4/2026 MORNINGTON Margin 2.4 Lengths Distance 1000m SOT G RST BM74 Race 200 Plus Podcast Handicap Prize $80,000 API 11.97\nRace Time 0:58.42 Sec Time 34.12 (600) Sec Time Adj 0.12 Jockey Zac Spain Weight 60.0 CD 60.0 BP 8 Odds 25 Prize Won $1,600 Trainer\nShane Nichols & Hayden Black Ongoing Winners 01-01-07 Rail Rail: True Entire Circuit. Track Direction Anti-Clockwise Gear Change [Blinkers]\nWinner Blue Hotel 54 (2) Second La Astro Chat 56 (3) Third Along The River 58.5 (6) Settled 8th 800m 8th Turn 8th\nGood strike rate; [Blinkers]; Won over this distance; Poor jockey/trainer SR; Prefers soft footing; ;",
+      "source_commentary": "Good strike rate; [Blinkers]; Won over this distance; Poor jockey/trainer SR; Prefers soft footing; ;",
+      "historical_starts": [
+        {
+          "date": "2026-10-17",
+          "venue": "CAULFIELD",
+          "finish": 8,
+          "field": 10,
+          "margin_l": 5.7,
+          "distance_m": 1000,
+          "surface": "G",
+          "race_class": "OPEN Group G2",
+          "used_in_model": true
+        },
+        {
+          "date": "2026-09-26",
+          "venue": "MORNINGTON",
+          "finish": 1,
+          "field": 11,
+          "margin_l": 1.3,
+          "distance_m": 1000,
+          "surface": "S",
+          "race_class": "BM84",
+          "used_in_model": true
+        },
+        {
+          "date": "2026-09-16",
+          "venue": "CAULFIELD HEATH",
+          "finish": 8,
+          "field": 10,
+          "margin_l": 2.8,
+          "distance_m": 1000,
+          "surface": "G",
+          "race_class": "BM78",
+          "used_in_model": true
+        },
+        {
+          "date": "2026-08-26",
+          "venue": "BENDIGO",
+          "finish": 4,
+          "field": 8,
+          "margin_l": 2.3,
+          "distance_m": 1000,
+          "surface": "H",
+          "race_class": "BM78",
+          "used_in_model": true
+        },
+        {
+          "date": "2026-04-18",
+          "venue": "MORNINGTON",
+          "finish": 8,
+          "field": 8,
+          "margin_l": 2.4,
+          "distance_m": 1000,
+          "surface": "G",
+          "race_class": "BM74",
+          "used_in_model": true
+        }
+      ],
+      "trials": [
+        {
+          "finish": 3,
+          "date": "2026-08-11",
+          "venue": "PAKS",
+          "distance_m": 1000,
+          "time": "0:59.40",
+          "used_in_model": false
+        },
+        {
+          "finish": 6,
+          "date": "2026-07-29",
+          "venue": "MORN",
+          "distance_m": 900,
+          "time": "0:57.54",
+          "used_in_model": false
+        }
+      ],
+      "gear_source_notes": [
+        "[Blinkers]"
+      ],
+      "sectional_evidence": [
+        {
+          "date": "2026-10-17",
+          "race_time_last_split_seconds": 33.04,
+          "split_m": 600,
+          "horse_specific": false
+        },
+        {
+          "date": "2026-09-26",
+          "race_time_last_split_seconds": 35.09,
+          "split_m": 600,
+          "horse_specific": false
+        },
+        {
+          "date": "2026-09-16",
+          "race_time_last_split_seconds": 34.22,
+          "split_m": 600,
+          "horse_specific": false
+        },
+        {
+          "date": "2026-08-26",
+          "race_time_last_split_seconds": 35.9,
+          "split_m": 600,
+          "horse_specific": false
+        },
+        {
+          "date": "2026-04-18",
+          "race_time_last_split_seconds": 34.12,
+          "split_m": 600,
+          "horse_specific": false
+        }
+      ]
+    },
+    {
+      "tab": 13,
+      "horse": "Saluted",
+      "recent_form": "21233",
+      "age_sex": "4m",
+      "weight_kg": 55.0,
+      "barrier": 14,
+      "jockey": "Jye Mcneil",
+      "claim_kg": 0,
+      "trainer": "Robbie Griffiths",
+      "career": {
+        "wins": 4,
+        "other_places": 6,
+        "starts": 14
+      },
+      "id": "2026-11-05_FLEMINGTON_R09_13",
+      "race_id": "2026-11-05_FLEMINGTON_R09",
+      "status": "PDF_LISTED_UNVERIFIED",
+      "original_pick": false,
+      "form": "26/9/2026 MORNINGTON 1000m (S), BM84: 3/11, PDF margin 1.6L\n5/9/2026 SANDOWN-HILLSIDE 1000m (S), BM88: 3/8, PDF margin 0.6L\n22/8/2026 SANDOWN-HILLSIDE 1000m (H), BM74: 2/11, PDF margin 1.3L\n22/7/2026 SANDOWN-HILLSIDE 1000m (S), BM70: 1/10, PDF margin 1.3L\n15/7/2026 SANDOWN-HILLSIDE 1000m (H), BM64: 2/11, PDF margin 1.3L",
+      "statistics": "Career 4-6-14;\nCourse 0-0-0;\nDistance 3-6-13;\nGood 1-0-3;\nSoft 3-4-9;\nHeavy 0-2-2;",
+      "strengths": "PDF records: career 4 wins from 14 starts. Latest race: 26/9/2026 MORNINGTON 1000m (S), BM84: 3/11, PDF margin 1.6L.",
+      "risks": "Wide draw: effect depends on pace and race-day lane pattern",
+      "historical_map": "Settled 8th 800m (26/9/2026); Settled 5th 800m (5/9/2026); Settled 5th 800m (22/8/2026); Settled 3th 800m (22/7/2026); Settled 2th 800m (15/7/2026)",
+      "outstanding": "Official starters/going/rail/gear, replays, trainer reports and horse-specific sectionals remain unverified.",
+      "source": {
+        "file": "469539.pdf",
+        "sha256": "192a7b461e6fdc62e0babf6c87b80ebe31f2d8c0ac2d03e847794f12fcde27ce",
+        "pages": [
+          78
+        ],
+        "summary_page": 72
+      },
+      "source_detail": "SALUTED\nJYE MCNEIL\nj50s j350s t50s t350s\nHorse: 3-1-6 50%-67%\n55kg (14) b/br 4 M ROBBIE GRIFFITHS\n5-11-50 41-84-350 6-14-50 44-92-350\nJ/T: 98-191-822 12%-35%\nI AM IMMORTAL (AUS) - NO REWARD (AUS)\n10%-32% 12%-36% 12%-40% 13%-39%\n13.\nRaced Distance: 955-1100 Winning Distance: 1000m (3),\n1100m\nPINK AND NAVY DIAGONAL STRIPES, WHITE SLEEVES AND CAP,\nOwner: R J Kennedy, D J Corrigan, P T Heinz, J P Vanderzalm, D C\nPINK POM POM\nOorloff, Tycoons Galore (Mgr: D J Fletcher), Baxter Lodge (Mgr: A E\nJacobs), G K Racing (Mgr: L Georgiadis), C Jones, P Slacik, B\nPeterson, Mrs K Peterson, Mrs K A Clerke & Ms A Richards\nCarPM/s 12mPM/s API RTC/km RDistTC DLS DLW DOD Car 12m Crs Dist ClockW AClockW\n$18,600 $14,575 14.6 9/8 8 40 106 5 4-6-14 2-4-8 - 3-6-13 - 4-6-14\n29%-72% 25%-75% 23%-69% 29%-72%\nG1 G2 G3 LR FU 2U 3U Firm Good Soft Heavy AW Turf\n- - - - 2-0-2 1-0-2 0-1-2 - 1-0-3 3-4-9 0-2-2 - 4-6-14\n100%-100 50%-50% 0%-50% 33%-33% 33%-77% 0%-100% 29%-72%\n%\n3rd of 11 26/9/2026 MORNINGTON Margin 1.6 Lengths Distance 1000m SOT S RST BM84 Race Tobin Brothers Celebrating Lives Handicap Prize\n$130,000 API 13 Race Time 0:59.40 Sec Time 35.09 (600) Jockey Jackson Radley Weight 54.0 CD 52.0 BP 6 Odds 5.5 Prize Won $11,700\nTrainer Robbie Griffiths Ongoing Winners 00-01-09 Rail Rail: True Entire Circuit. Track Direction Anti-Clockwise Gear Change [Stallion Chain]\nWinner Always Enuff 54 (8) Second Tres Magnifique 54.5 (1) Settled 8th 800m 8th Turn 6th\n3rd of 8 5/9/2026 SANDOWN-HILLSIDE Margin 0.6 Lengths Distance 1000m SOT S RST BM88 Race EDSA Group Handicap Prize $150,000 API 21.12\nRace Time 0:58.19 Sec Time 34.09 (600) Sec Time Adj 0.09 Jockey Jackson Radley Weight 54.0 CD 52.0 BP 5 Odds 9 Prize Won $13,500\nTrainer Robbie Griffiths Ongoing Winners 00-02-05 Rail Rail: True Entire Circuit. Track Direction Anti-Clockwise Gear Change [Stallion Chain]\nWinner Behaviour 54 (1) Second Tres Magnifique 53 (4) Settled 5th 800m 5th Turn 5th\n2nd of 11 22/8/2026 SANDOWN-HILLSIDE Margin 1.3 Lengths Distance 1000m SOT H RST BM74 Race Drummond Golf Handicap Prize $130,000 API 7\nRace Time 0:59.06 Sec Time 35.01 (600) Sec Time Adj 0.71 Jockey Jackson Radley Weight 61.0 CD 59.0 BP 4 Odds 3.8 Prize Won $23,400\nTrainer Robbie Griffiths Ongoing Winners 00-03-07 Rail Rail: Out 5m Entire Circuit. Track Direction Anti-Clockwise Gear Change [Stallion Chain]\nWinner Final Moment 55.5 (7) Third Set Me Loose 56.5 (11) Settled 5th 800m 5th Turn 2nd\n1st of 10 22/7/2026 SANDOWN-HILLSIDE Margin 1.3 Lengths Distance 1000m SOT S RST BM70 Race Sportsbet Get On Extra Handicap Prize $50,000\nAPI 5.87 Race Time 0:57.82 Sec Time 33.61 (600) Jockey Jackson Radley Weight 60.5 CD 58.5 BP 3 Odds 1.9F Prize Won $27,500 Trainer\nRobbie Griffiths Ongoing Winners 00-01-06 Rail Rail: Out 9m Entire Circuit. Track Direction Anti-Clockwise Gear Change [Stallion Chain] Second\nMiss Cotoletta 57 (7) Third Gliding Lightening 55 (1) Settled 3rd 800m 3rd Turn 1st\n2nd of 11 15/7/2026 SANDOWN-HILLSIDE Margin 1.3 Lengths Distance 1000m SOT H RST BM64 Race Sportsbet Feed Handicap Prize $50,000 API 8.97\nRace Time 0:59.54 Sec Time 35.58 (600) Sec Time Adj 1.28 Jockey Jackson Radley Weight 61.5 CD 59.5 BP 2 Odds 8 Prize Won $9,000\nTrainer Robbie Griffiths Ongoing Winners 02-02-11 Rail Rail: Out 6m Entire Circuit. Track Direction Anti-Clockwise Gear Change [Stallion Chain]\nWinner Final Moment 56 (8) Third Blue Humma 59.5 (3) Settled 2nd 800m 2nd Turn 2nd\n9U; Been thereabouts recently; Not raced 40 days; Good strike rate; [Stallion Chain]; Won over this distance; Unraced at this course; Winning rider back on; Prefers\nsoft footing; ;",
+      "source_commentary": "9U; Been thereabouts recently; Not raced 40 days; Good strike rate; [Stallion Chain]; Won over this distance; Unraced at this course; Winning rider back on; Prefers soft footing; ;",
+      "historical_starts": [
+        {
+          "date": "2026-09-26",
+          "venue": "MORNINGTON",
+          "finish": 3,
+          "field": 11,
+          "margin_l": 1.6,
+          "distance_m": 1000,
+          "surface": "S",
+          "race_class": "BM84",
+          "used_in_model": true
+        },
+        {
+          "date": "2026-09-05",
+          "venue": "SANDOWN-HILLSIDE",
+          "finish": 3,
+          "field": 8,
+          "margin_l": 0.6,
+          "distance_m": 1000,
+          "surface": "S",
+          "race_class": "BM88",
+          "used_in_model": true
+        },
+        {
+          "date": "2026-08-22",
+          "venue": "SANDOWN-HILLSIDE",
+          "finish": 2,
+          "field": 11,
+          "margin_l": 1.3,
+          "distance_m": 1000,
+          "surface": "H",
+          "race_class": "BM74",
+          "used_in_model": true
+        },
+        {
+          "date": "2026-07-22",
+          "venue": "SANDOWN-HILLSIDE",
+          "finish": 1,
+          "field": 10,
+          "margin_l": 1.3,
+          "distance_m": 1000,
+          "surface": "S",
+          "race_class": "BM70",
+          "used_in_model": true
+        },
+        {
+          "date": "2026-07-15",
+          "venue": "SANDOWN-HILLSIDE",
+          "finish": 2,
+          "field": 11,
+          "margin_l": 1.3,
+          "distance_m": 1000,
+          "surface": "H",
+          "race_class": "BM64",
+          "used_in_model": true
+        }
+      ],
+      "trials": [],
+      "gear_source_notes": [],
+      "sectional_evidence": [
+        {
+          "date": "2026-09-26",
+          "race_time_last_split_seconds": 35.09,
+          "split_m": 600,
+          "horse_specific": false
+        },
+        {
+          "date": "2026-09-05",
+          "race_time_last_split_seconds": 34.09,
+          "split_m": 600,
+          "horse_specific": false
+        },
+        {
+          "date": "2026-08-22",
+          "race_time_last_split_seconds": 35.01,
+          "split_m": 600,
+          "horse_specific": false
+        },
+        {
+          "date": "2026-07-22",
+          "race_time_last_split_seconds": 33.61,
+          "split_m": 600,
+          "horse_specific": false
+        },
+        {
+          "date": "2026-07-15",
+          "race_time_last_split_seconds": 35.58,
+          "split_m": 600,
+          "horse_specific": false
+        }
+      ]
+    },
+    {
+      "tab": 14,
+      "horse": "I'm Foxing",
+      "recent_form": "111x7",
+      "age_sex": "4m",
+      "weight_kg": 55.0,
+      "barrier": 10,
+      "jockey": "Jamie Melham",
+      "claim_kg": 0,
+      "trainer": "Alexander Rae",
+      "career": {
+        "wins": 4,
+        "other_places": 1,
+        "starts": 6
+      },
+      "id": "2026-11-05_FLEMINGTON_R09_14",
+      "race_id": "2026-11-05_FLEMINGTON_R09",
+      "status": "PDF_LISTED_UNVERIFIED",
+      "original_pick": false,
+      "form": "17/10/2026 CAULFIELD 1000m (G), OPEN Group G2: 7/10, PDF margin 5L\n27/6/2026 CAULFIELD 1000m (S), OPEN: 1/14, PDF margin 4.3L\n20/5/2026 CAULFIELD HEATH 1000m (S), BM64: 1/9, PDF margin 0.1L\n9/4/2026 PAKENHAM 1000m (S), BM0-62: 1/9, PDF margin 0.8L\n24/3/2026 YARRA VALLEY 1000m (S), MDN: 1/9, PDF margin 2L",
+      "statistics": "Career 4-1-6;\nCourse 0-0-0;\nDistance 4-0-5;\nGood 0-1-2;\nSoft 4-0-4;\nHeavy 0-0-0;",
+      "strengths": "PDF records: career 4 wins from 6 starts. Latest race: 17/10/2026 CAULFIELD 1000m (G), OPEN Group G2: 7/10, PDF margin 5L.",
+      "risks": "Wide draw: effect depends on pace and race-day lane pattern",
+      "historical_map": "Settled 4th 800m (17/10/2026); Settled 1th 800m (27/6/2026); Settled 1th 800m (20/5/2026); Settled 1th 800m (9/4/2026); Settled 4th 800m (24/3/2026)",
+      "outstanding": "Official starters/going/rail/gear, replays, trainer reports and horse-specific sectionals remain unverified.",
+      "source": {
+        "file": "469539.pdf",
+        "sha256": "192a7b461e6fdc62e0babf6c87b80ebe31f2d8c0ac2d03e847794f12fcde27ce",
+        "pages": [
+          78,
+          79
+        ],
+        "summary_page": 72
+      },
+      "source_detail": "I'M FOXING\nj50s j350s t50s t350s\nJAMIE MELHAM\nHorse: 1-0-1 100%-100%\n4-16-50 49-97-350 18-12-50 52-101-35\n55kg (10) br 4 M ALEXANDER RAE\n14.\nJ/T: 1-2-3 33%-100%\n8%-40% 14%-42% 36%-60% 0\nI AM IMMORTAL (AUS) - FOX TWO (AUS)\n15%-44%\nRaced Distance: 1000-1100 Winning Distance: 1000m (4)\nOwner: K King, Ken King Thoroughbreds (Mgr: Mrs A P King), S A\nJoyce, M R King, P A C Schultz, Mrs A P King & D E Asquith\nMAROON, LIME SPOT, SLEEVES AND CAP\nCarPM/s 12mPM/s API RTC/km RDistTC DLS DLW DOD Car 12m Crs Dist ClockW AClockW\n$26,608 $26,608 26.6 SU/1 1 19 131 7.5 4-1-6 4-1-6 - 4-0-5 - 4-1-6\n67%-84% 67%-84% 80%-80% 67%-84%\nG1 G2 G3 LR FU 2U 3U Firm Good Soft Heavy AW Turf\n- 0-0-1 - - 0-1-2 1-0-1 1-0-1 - 0-1-2 4-0-4 - - 4-1-6\n0%-0% 0%-50% 100%-100 100%-100 0%-50% 100%-100 67%-84%\n% % %\n7th of 10 17/10/2026 CAULFIELD Margin 5 Lengths Distance 1000m SOT G RST OPEN Group G2 Race Henley Homes Sprint Prize $301,900 API 36.59\nRace Time 0:56.37 Sec Time 33.04 (600) Sec Time Adj 0.29 Jockey Luke Cartwright Weight 53.0 CD 53.0 BP 10 Odds 13 Prize Won $6,000\nTrainer Alexander Rae Ongoing Winners 00-01-02 Rail Rail: Out 3m Entire Circuit. Track Direction Anti-Clockwise Winner Cavalry Girl 57.5 (5)\nSecond Don't Hope Do 53 (3) Third Bev's Nine 56 (7) Settled 4th 800m 4th Turn 3rd\nTrial 2nd 28/9/2026 CRAN 800m Race Time 0:46.60 Trainer ALEXANDER RAE Jockey LUKE CARTWRIGHT\nTrial 4th 14/9/2026 CRAN 800m Race Time 0:46.90 Trainer ALEXANDER RAE Jockey LUKE CARTWRIGHT\n1st of 14 27/6/2026 CAULFIELD Margin 4.3 Lengths Distance 1000m SOT S RST OPEN Race MRC Membership Made Of Moments Handicap Prize\n$150,000 API 11.42 Race Time 0:58.02 Sec Time 34.47 (600) Sec Time Adj 0.47 Jockey Luke Cartwright Weight 56.0 CD 54.5 BP 4 Odds 20\nPrize Won $82,500 Trainer Alexander Rae Ongoing Winners 01-01-08 Rail Rail: Out 3m Entire Circuit. Track Direction Anti-Clockwise Second\nStreet Artist 58 (11) Third Farcited 58 (10) Settled 1st 800m 1st Turn 1st\n1st of 9 20/5/2026 CAULFIELD HEATH Margin 0.1 Lengths Distance 1000m SOT S RST BM64 Race Sportsbet Get On Extra Handicap Prize $50,000\nAPI 10.65 Race Time 0:58.73 Sec Time 35.39 (600) Jockey Jamie Melham Weight 59.0 CD 59.0 BP 9 Odds 13 Prize Won $27,500 Trainer\nAlexander Rae Ongoing Winners 00-02-05 Rail Rail: True Entire Circuit. Track Direction Anti-Clockwise Second Amping Lass 57.5 (6) Third\nBlondie's Award 57 (3) Settled 1st 800m 1st Turn 1st\n1st of 9 9/4/2026 PAKENHAM Margin 0.8 Lengths Distance 1000m SOT S RST BM0-62 Race John Duff & Co Handicap Prize $40,000 API 4.34 Race\nTime 0:57.50 Sec Time 33.68 (600) Sec Time Adj 0.26 Jockey Lachlan Neindorf Weight 57.5 CD 57.5 BP 6 Odds 2 Prize Won $22,000 Trainer\nAlexander Rae Ongoing Winners 00-01-08 Rail Rail: True Entire Circuit. Track Direction Anti-Clockwise Second Doc's Nipper 59.5 (2) Third\nOctrain 57.5 (8) Settled 1st 800m 1st Turn 1st\n1st of 9 24/3/2026 YARRA VALLEY Margin 2 Lengths Distance 1000m SOT S RST MDN Race Manhari Maiden Plate Prize $32,000 API 2.26 Race Time\n0:59.65 Sec Time 35.06 (600) Sec Time Adj 1.31 Jockey Jye Mcneil Weight 57.0 CD 57.0 BP 4 Odds 1.3F Prize Won $17,600 Trainer Alexander\nRae Ongoing Winners 02-02-11 Rail Rail: True Entire Circuit. (Pent: 5.92) Track Direction Anti-Clockwise Second Immortal Truth 57 (7) Third\nBoyd 59 (2) Settled 4th 800m 4th Turn 2nd\nWon SU; Top career strike rate; Excellent SR distance; Winning rider back on; Prefers soft footing; ;",
+      "source_commentary": "Won SU; Top career strike rate; Excellent SR distance; Winning rider back on; Prefers soft footing; ;",
+      "historical_starts": [
+        {
+          "date": "2026-10-17",
+          "venue": "CAULFIELD",
+          "finish": 7,
+          "field": 10,
+          "margin_l": 5.0,
+          "distance_m": 1000,
+          "surface": "G",
+          "race_class": "OPEN Group G2",
+          "used_in_model": true
+        },
+        {
+          "date": "2026-06-27",
+          "venue": "CAULFIELD",
+          "finish": 1,
+          "field": 14,
+          "margin_l": 4.3,
+          "distance_m": 1000,
+          "surface": "S",
+          "race_class": "OPEN",
+          "used_in_model": true
+        },
+        {
+          "date": "2026-05-20",
+          "venue": "CAULFIELD HEATH",
+          "finish": 1,
+          "field": 9,
+          "margin_l": 0.1,
+          "distance_m": 1000,
+          "surface": "S",
+          "race_class": "BM64",
+          "used_in_model": true
+        },
+        {
+          "date": "2026-04-09",
+          "venue": "PAKENHAM",
+          "finish": 1,
+          "field": 9,
+          "margin_l": 0.8,
+          "distance_m": 1000,
+          "surface": "S",
+          "race_class": "BM0-62",
+          "used_in_model": true
+        },
+        {
+          "date": "2026-03-24",
+          "venue": "YARRA VALLEY",
+          "finish": 1,
+          "field": 9,
+          "margin_l": 2.0,
+          "distance_m": 1000,
+          "surface": "S",
+          "race_class": "MDN",
+          "used_in_model": true
+        }
+      ],
+      "trials": [
+        {
+          "finish": 2,
+          "date": "2026-09-28",
+          "venue": "CRAN",
+          "distance_m": 800,
+          "time": "0:46.60",
+          "used_in_model": false
+        },
+        {
+          "finish": 4,
+          "date": "2026-09-14",
+          "venue": "CRAN",
+          "distance_m": 800,
+          "time": "0:46.90",
+          "used_in_model": false
+        }
+      ],
+      "gear_source_notes": [],
+      "sectional_evidence": [
+        {
+          "date": "2026-10-17",
+          "race_time_last_split_seconds": 33.04,
+          "split_m": 600,
+          "horse_specific": false
+        },
+        {
+          "date": "2026-06-27",
+          "race_time_last_split_seconds": 34.47,
+          "split_m": 600,
+          "horse_specific": false
+        },
+        {
+          "date": "2026-05-20",
+          "race_time_last_split_seconds": 35.39,
+          "split_m": 600,
+          "horse_specific": false
+        },
+        {
+          "date": "2026-04-09",
+          "race_time_last_split_seconds": 33.68,
+          "split_m": 600,
+          "horse_specific": false
+        },
+        {
+          "date": "2026-03-24",
+          "race_time_last_split_seconds": 35.06,
+          "split_m": 600,
+          "horse_specific": false
+        }
+      ]
+    }
+  ],
+  "market_audit": [],
+  "market_benchmarks": []
+}
