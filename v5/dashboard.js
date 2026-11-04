@@ -56,7 +56,7 @@ function importedOverview(){
  hero.append(add(e('div','rlv5-command-actions'),action('Explore races',function(){go('races');},'primary'),
   action('Model Top 5 / 10 / 15',function(){go('top10');},'ghost')));
  add(app(),hero,metrics(),scenarios());
- var next=box('Flemington Thu 5 Nov · new form selections','Soft 5 scenario · Cavalry Girl R9, Proxima Dea R8, Sass Appeal R4 lead the independent nine-race research shortlist. Percentages are not recalculated.');
+ var next=box('Flemington Thu 5 Nov · updated after 24 scratchings','Official Wednesday check: 24 scratchings · Good 4 inspected · Cavalry Girl R9 OUT, Buccleuch R3 OUT. Updated provisional form picks led by Sass Appeal, Perisher and Proxima Dea.');
  next.append(action('View all Thursday selections',function(){go('oaks');},'primary'));
  app().append(next);
  app().append(importedOfficialPanel(),importedStrictScreen(),note('PDF source retained. Official Monday 2 November scratchings and Good 4 ratings applied to the 3 November model; final starters and reserves remain unverified. Model leaders are not an approved independent shortlist.'));
@@ -877,39 +877,49 @@ function statusOnly(){
 
 function oaksDayPage(){
  var root=app();
- root.append(head('Flemington Oaks Day · Thu 5 November 2026','Nine race-by-race selections · Soft 5 scenario · independent form review'));
- root.append(note('This is a dated Thursday research checkpoint. The Tuesday 3 November model and historical results are unchanged. No current whole-field probabilities have been recalculated; final starters and official going are not certified.'));
- var holder=box('Revised selections','Loading dated research record…');
- root.append(holder);
+ root.append(head('Flemington Oaks Day · Thu 5 November 2026','Official Wednesday scratchings · nine form selections · no recalculated win probabilities'));
+ root.append(note('This Thursday form board is separate from the Tuesday 3 Nov model. Final Thursday starters are not yet certified; archived rankings and historical results remain untouched.'));
+ var holder=box('Scratching-adjusted shortlist','Loading official Wednesday field checkpoint…');root.append(holder);
  fetch('/v5/cards/2026-11-05/selections.json',{cache:'no-store'}).then(function(res){
-  if(!res.ok)throw Error('Research file unavailable (HTTP '+res.status+')');
-  return res.json();
- }).then(function(data){
+  if(!res.ok)throw Error('Thursday checkpoint HTTP '+res.status);return res.json();
+ }).then(function(d){
   if(S.page!=='oaks'||!holder.isConnected)return;
-  if(data.date!=='2026-11-05'||!Array.isArray(data.selections)||data.selections.length!==9)throw Error('Dated selection record failed validation');
+  var o=d.official_scratchings;
+  if(d.date!=='2026-11-05'||!o||!Array.isArray(d.selections)||d.selections.length!==9)throw Error('Thursday dated data failed validation');
   holder.replaceChildren();
-  holder.append(e('p','muted small','FLEMINGTON · THURSDAY 5 NOV · '+data.going_scenario+' · FORM RANK ONLY · NO CALIBRATED WIN %'));
+  holder.append(e('p','eyebrow','OFFICIAL CHECK · '+o.published_scratchings_count+' SCRATCHINGS · '+o.official_track_rating+' · '+o.rail));
+  holder.append(e('p','muted small','Last published '+o.source_last_published_label+'. Track inspected Wednesday 9am AEDT. Final Thursday scratchings and going still to come.'));
+  holder.append(e('div','panelnote warn','OUT OF FIELD: Cavalry Girl R9, previously our #1 research pick. Rey Magnerio is a CONDITIONAL R9 replacement, not a model-certified lock. Buccleuch R3 is also OUT.'));
+  holder.append(e('p','muted small','Selections below use the current verified exclusions. Research ranks are qualitative; no Thursday full-field win % or model separation has been calculated.'));
   var ranked=e('div','toplist');
-  data.selections.slice().sort(function(a,b){return a.rank-b.rank;}).forEach(function(x){
-   var mid=add(e('div'),e('strong','',x.horse),e('small','', 'R'+x.race+' · '+x.race_name+' · '+x.distance_m+'m'),e('small','','Main dangers: '+x.alternatives.join(' · ')));
-   ranked.append(add(e('div','toprow'),e('div','slot',String(x.rank).padStart(2,'0')),mid,e('div','model-row-stat','RESEARCH ONLY')));
-  });
-  holder.append(ranked);
-  var detail=box('Each race · form, pace and concerns','One independent form selection per race. Alternatives are listed, not additional model picks.');
+  d.selections.slice().sort(function(a,b){return a.rank-b.rank;}).forEach(function(x){
+   var mid=add(e('div'),e('strong','',x.horse),
+    e('small','','R'+x.race+' · '+x.race_name+' · '+x.distance_m+'m'),
+    e('small','','Dangers: '+x.alternatives.join(' · ')),
+    e('small','',x.current_status==='CONDITIONAL_REPLACEMENT'?'CONDITIONAL REPLACEMENT — ORIGINAL CAVALRY GIRL OUT':'CURRENT FORM RESEARCH (no win %)'));
+   var stat=add(e('div','model-row-stat'),e('strong','',String(x.rank).padStart(2,'0')),e('small','','FORM RANK'));
+   ranked.append(add(e('div','toprow'),e('div','slot','R'+x.race),mid,stat));
+  });holder.append(ranked);
+  var detail=box('Race-by-race notes','Current selected runners and remaining rivals, with form, pace and risks.');
   var cards=e('div','grid three');
-  data.selections.slice().sort(function(a,b){return a.race-b.race;}).forEach(function(x){
-   var card=add(e('div','card'),e('p','eyebrow','R'+x.race+' · '+x.distance_m+'m'),e('h3','',x.horse),e('p','muted small',x.race_name),
+  d.selections.slice().sort(function(a,b){return a.race-b.race;}).forEach(function(x){
+   cards.append(add(e('div','card'),e('p','eyebrow','R'+x.race+' · '+x.distance_m+'m'),
+    e('h3','',x.horse),e('p','muted small',x.race_name+' · '+(x.current_status==='CONDITIONAL_REPLACEMENT'?'CONDITIONAL PICK':'RESEARCH PICK')),
     e('p','',x.form),e('p','muted small','PACE: '+x.pace),
-    e('p','muted small','RISK: '+x.risk),e('p','muted small','Dangers: '+x.alternatives.join(', ')));
-   cards.append(card);
-  });
-  detail.append(cards);root.append(detail);
-  var caveat=box('Track and scratching checkpoint','Early independent-publication changes only, checked 3 November; not a final official starter declaration.');
-  caveat.append(e('p','muted small',data.reported_scratchings_early.map(function(x){return 'R'+x.race+' '+x.horse;}).join(' · ')));
-  data.notes.forEach(function(n){caveat.append(e('p','muted small',n));});
-  data.sources.forEach(function(s){caveat.append(link(s.name,s.url,'btn ghost'));});
-  root.append(caveat);
- }).catch(function(err){if(holder.isConnected){holder.append(e('p','muted small','Could not load selections: '+err.message));}});
+    e('p','muted small','RISK: '+x.risk),e('p','muted small','DANGERS: '+x.alternatives.join(' · ')),
+    e('p','muted small','RANK RATIONALE: '+x.rationale_for_current_rank)));
+  });detail.append(cards);root.append(detail);
+  var scratch=box('Official scratching sheet · all races','24 exclusions in the published Wednesday 5pm AEDT snapshot; some are emergencies.');
+  for(var r=1;r<=9;r++){var withdrawn=o.scratchings_by_race[String(r)]||[];
+   if(withdrawn.length)scratch.append(e('p','muted small','R'+r+': '+withdrawn.map(function(x){
+    return '#'+x.number+' '+x.horse+(x.emergency?' (emergency)':'');
+   }).join(' · ')));
+  }
+  scratch.append(e('p','muted small','No scratchings listed in R6. Thursday scratching deadline 7:30am AEDT. Good 4 is from Wednesday morning, not a Thursday final rating.'));
+  scratch.append(link('Racing Australia official scratching sheet',o.source_url,'btn ghost'));
+  root.append(scratch);
+  d.notes.forEach(function(n){root.append(note(n));});
+ }).catch(function(err){if(holder.isConnected)holder.append(e('p','muted small','Could not read Thursday checkpoint: '+err.message));});
 }
 
 function render(){if(!C)return;D=C.data;if(!raceOf(S.race)){S.race=D.races[0].id;S.meeting=D.races[0].meeting;}

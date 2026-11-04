@@ -2,58 +2,350 @@
   "schema": "racing-lab-v5-manual-form-selection/v1",
   "date": "2026-11-05",
   "meeting": "FLEMINGTON",
-  "as_of_date": "2026-11-03",
-  "status": "PROVISIONAL_FORM_REVIEW_NOT_MODEL_OUTPUT",
-  "going_scenario": "Soft 5 (assumption, not an official track reading)",
+  "as_of_date": "2026-11-04",
+  "status": "WEDNESDAY_OFFICIAL_SCRATCHINGS_RECONCILED_NO_PROBABILITIES",
+  "going_scenario": "Good 4 official at 9am AEDT 4 Nov; Soft 5–6 conditional if rainfall changes",
   "independent_form_ranks": true,
-  "model_probability_status": "NOT_RECALCULATED",
+  "model_probability_status": "NOT_RECALCULATED_FOR_THURSDAY_FIELD",
   "whole_field_probabilities_present": false,
   "final_starters_verified": false,
   "publication_approved_for_final_model": false,
-  "headline": "Thursday Flemington Oaks Day: nine race-by-race form selections and alternatives",
+  "headline": "Flemington Oaks Day — 24 official scratchings and revised research selections",
   "notes": [
-    "This is a human research-order checkpoint, not the 3 November model card and not a calibrated V5 Top 10.",
-    "One selection per race. Ordered by comparative form conviction; ranks are not statistical win chances.",
-    "Scratchings and final field positions require a further official check; projected pace is not a certified speed map.",
-    "Buccleuch is still published in Thursday R3 after racing Tuesday 3 November; Tavi Time is preferred only as the current Soft 5 form selection."
-  ],
-  "reported_scratchings_early": [
-    {
-      "race": 1,
-      "horse": "Grand Omaha"
-    },
-    {
-      "race": 4,
-      "horse": "Snitzel Dancer"
-    },
-    {
-      "race": 5,
-      "horse": "Haaracaine"
-    },
-    {
-      "race": 7,
-      "horse": "Parcae"
-    },
-    {
-      "race": 9,
-      "horse": "Pallaton"
-    }
+    "24 official scratching withdrawals, published Wednesday 4 Nov 2026 at 5pm AEDT. Further changes possible before Thursday 7:30am AEDT scratching close.",
+    "Official rating is Good 4 from the 9am Wednesday inspection, not a guarantee of race-day going.",
+    "Tuesday 3 November model, its percentages, and historical results have not been changed; no full-field model percentages for Thursday have been recomputed.",
+    "Cavalry Girl R9 was previous rank 1 and is OUT OF FIELD. Rey Magnerio is a conditional research replacement only.",
+    "Buccleuch R3, Fiorenot R5, Cilacap and Gold Medallist R4, and Getafix R2 are officially scratched. No current pick or named active alternative is among the 24 scratchings."
   ],
   "sources": [
     {
-      "name": "Thursday Flemington race fields",
-      "url": "https://www.theking.zone/racing/2026-11-05/flemington"
+      "name": "Racing Australia official Wednesday scratchings",
+      "url": "https://www.racingaustralia.horse/FreeFields/Scratchings.aspx?Key=2026Nov05%2CVIC%2CFlemington"
     },
     {
-      "name": "Thursday Flemington scratchings and field preview",
+      "name": "Secondary Thursday racecard",
       "url": "https://www.wizardofodds.com.au/gallop/2026-11-05/vic/flemington/188298"
-    },
-    {
-      "name": "Racing and Sports published field",
-      "url": "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/flemington/2026-11-05/race-fields"
     }
   ],
   "selections": [
+    {
+      "rank": 1,
+      "race": 4,
+      "race_name": "Inglis Bracelet",
+      "distance_m": 1600,
+      "horse": "Sass Appeal",
+      "alternatives": [
+        "Polymnia",
+        "Fireball Miss"
+      ],
+      "form": "Five wins from ten and four wins at Flemington; class profile is a clear positive.",
+      "risk": "Despite five scratchings, a five-day backup, outside barrier, 59.5kg and limited Soft-track experience remain risks.",
+      "pace": "Can press forward; a reduced field may reduce pressure, but don't assume a clear lead.",
+      "original_rank": 3,
+      "current_status": "IN_FIELD_AT_WEDNESDAY_CHECK",
+      "rationale_for_current_rank": "Five R4 scratching withdrawals remove Cilacap and Gold Medallist; Sass Appeal retains quick-backup and ground risks."
+    },
+    {
+      "rank": 2,
+      "race": 5,
+      "race_name": "Sigma Trophy",
+      "distance_m": 1800,
+      "horse": "Perisher",
+      "alternatives": [
+        "Nobler",
+        "Veyepee"
+      ],
+      "form": "Recent Rosehill Soft 6 win; two wins from three Soft starts and form around 2000m.",
+      "risk": "Fiorenot and Sun Gift are scratched; Nobler benefits from a 2.5kg relative swing and Perisher's barrier is wide.",
+      "pace": "Needs to avoid covering extra ground; Veyepee has barrier 1.",
+      "original_rank": 4,
+      "current_status": "IN_FIELD_AT_WEDNESDAY_CHECK",
+      "rationale_for_current_rank": "Fiorenot and Sun Gift scratched. Nobler gets a 2.5kg relative weight swing from their last encounter; Veyepee remains a danger."
+    },
+    {
+      "rank": 3,
+      "race": 8,
+      "race_name": "Crown Oaks",
+      "distance_m": 2500,
+      "horse": "Proxima Dea",
+      "alternatives": [
+        "De Armas",
+        "Quick Finish"
+      ],
+      "form": "Unbeaten in five, including Group 1 Spring Champion Stakes; has handled Good, Soft and Heavy ground.",
+      "risk": "Joely, Refuse to Curtsy and Waiheke Rose are scratched. Proxima Dea still faces barrier 19 and an unproven 2500m.",
+      "pace": "Expected to work for position from the wide draw; De Armas can get a much cheaper run from barrier 1.",
+      "original_rank": 2,
+      "current_status": "IN_FIELD_AT_WEDNESDAY_CHECK",
+      "rationale_for_current_rank": "Joely, Refuse to Curtsy and Waiheke Rose scratched; De Armas and Quick Finish remain strong."
+    },
+    {
+      "rank": 4,
+      "race": 7,
+      "race_name": "Red Roses Stakes",
+      "distance_m": 1100,
+      "horse": "Sequinned",
+      "alternatives": [
+        "Scintillation",
+        "Lady Catalina"
+      ],
+      "form": "Three wins this campaign, latest a 2.5-length Caulfield win; has won on Soft ground.",
+      "risk": "Parcae, Fovea and Sanctuary are scratched; Scintillation's straight-course experience and pace profile remain serious threats.",
+      "pace": "Scintillation can be prominent from barrier 2; Sequinned draws wider and may need speed to run on.",
+      "original_rank": 5,
+      "current_status": "IN_FIELD_AT_WEDNESDAY_CHECK",
+      "rationale_for_current_rank": "Three rival scratchings; Scintillation remains the prominent Flemington-straight challenger."
+    },
+    {
+      "rank": 5,
+      "race": 2,
+      "race_name": "Sharp EIT Subzero",
+      "distance_m": 1400,
+      "horse": "You're Not the King",
+      "alternatives": [
+        "Alabama Fox",
+        "Bustling"
+      ],
+      "form": "Three wins in five starts, including consecutive latest wins; barrier 2 and 53kg favour the setup.",
+      "risk": "BM90 class rise, no Soft-track starts, and proven rivals Alabama Fox and Bustling. Getafix is officially scratched.",
+      "pace": "Can sit handy with a low draw while wide-drawn rivals risk covering ground.",
+      "original_rank": 6,
+      "current_status": "IN_FIELD_AT_WEDNESDAY_CHECK",
+      "rationale_for_current_rank": "Getafix scratched, leaving Alabama Fox and Bustling among the main dangers."
+    },
+    {
+      "rank": 6,
+      "race": 9,
+      "race_name": "G.H. Mumm Century Stakes",
+      "distance_m": 1000,
+      "horse": "Rey Magnerio",
+      "alternatives": [
+        "Bev's Nine",
+        "Stokke"
+      ],
+      "form": "Reported fastest last 200m on the McEwen Stakes program, and straight-course experience. Conditional research replacement after Cavalry Girl's official scratching.",
+      "risk": "Not a model-certified leader. No wins in four documented Soft starts; straight-course lane bias, early tempo and final track rating matter.",
+      "pace": "Likely to be finishing from behind the leaders; requires a suitable tempo and clear straight lane.",
+      "original_rank": null,
+      "current_status": "CONDITIONAL_REPLACEMENT",
+      "rationale_for_current_rank": "Cavalry Girl scratched. Rey Magnerio's fast final 200m supports conditional promotion, but the current field has not been independently recalculated.",
+      "previous_horse": "Cavalry Girl"
+    },
+    {
+      "rank": 7,
+      "race": 3,
+      "race_name": "Chester Manifold Stakes",
+      "distance_m": 1600,
+      "horse": "Tavi Time",
+      "alternatives": [
+        "Encap",
+        "Just Folk",
+        "Enxuto"
+      ],
+      "form": "Five wins from twelve Soft-track runs, proven mile form, barrier 1 and James McDonald.",
+      "risk": "Buccleuch now confirmed scratched. Tavi Time's wet-track record is stronger on Soft, while Good 4 requires reassessment against Encap and Enxuto.",
+      "pace": "Likely to receive an economical run on the rail; Just Folk may be more forward.",
+      "original_rank": 7,
+      "current_status": "IN_FIELD_AT_WEDNESDAY_CHECK",
+      "rationale_for_current_rank": "Buccleuch confirmed scratched. Tavi Time was the preferred Soft 5 alternative; current Good 4 requires reassessment."
+    },
+    {
+      "rank": 8,
+      "race": 6,
+      "race_name": "Country Final",
+      "distance_m": 1600,
+      "horse": "Our Justify",
+      "alternatives": [
+        "Bel Mezyaan",
+        "Rosa Aotearoa"
+      ],
+      "form": "Two consecutive Bendigo wins, including at 1600m on Soft 6; 54.5kg and barrier 5.",
+      "risk": "Large-field traffic and stronger rivals; not a high-certainty race.",
+      "pace": "Can settle midfield to handy; Rosa Aotearoa can go forward.",
+      "original_rank": 8,
+      "current_status": "IN_FIELD_AT_WEDNESDAY_CHECK",
+      "rationale_for_current_rank": "No R6 scratching withdrawals; competitive large field remains."
+    },
+    {
+      "rank": 9,
+      "race": 1,
+      "race_name": "TCL Trophy",
+      "distance_m": 1700,
+      "horse": "Cute Girl",
+      "alternatives": [
+        "Autumn Slide",
+        "Bon Fete (if admitted)"
+      ],
+      "form": "Two wins from four Soft starts and a recent 1700m victory.",
+      "risk": "Class rise into BM70; Bon Fete is an emergency and must be confirmed admitted.",
+      "pace": "Stung may go forward; Cute Girl can sit midfield and make her run.",
+      "original_rank": 9,
+      "current_status": "IN_FIELD_AT_WEDNESDAY_CHECK",
+      "rationale_for_current_rank": "Four withdrawals including two emergencies; Cute Girl still faces a class rise."
+    }
+  ],
+  "revision_id": "FLEMINGTON-20261105-OFFICIAL-20261104-1700AEDT",
+  "official_scratchings": {
+    "race_date": "2026-11-05",
+    "meeting": "FLEMINGTON",
+    "source_url": "https://www.racingaustralia.horse/FreeFields/Scratchings.aspx?Key=2026Nov05%2CVIC%2CFlemington",
+    "source_last_published_aedt": "2026-11-04T17:00:00+11:00",
+    "source_last_published_label": "Wednesday 4 November 2026, 5:00pm AEDT",
+    "last_track_inspection_aedt": "2026-11-04T09:00:00+11:00",
+    "official_track_rating": "Good 4",
+    "rail": "Out 6m Entire Circuit",
+    "rainfall_last_24h_mm": 0.2,
+    "published_scratchings_count": 24,
+    "starters_including_emergencies": 126,
+    "final_starters_certified": false,
+    "scratchings_close_aedt": "2026-11-05T07:30:00+11:00",
+    "scratchings_by_race": {
+      "1": [
+        {
+          "horse": "Grand Omaha",
+          "number": 1,
+          "emergency": false
+        },
+        {
+          "horse": "Diversity",
+          "number": 11,
+          "emergency": false
+        },
+        {
+          "horse": "Cat Noir",
+          "number": 18,
+          "emergency": true
+        },
+        {
+          "horse": "Cushioned",
+          "number": 20,
+          "emergency": true
+        }
+      ],
+      "2": [
+        {
+          "horse": "Getafix",
+          "number": 4,
+          "emergency": false
+        }
+      ],
+      "3": [
+        {
+          "horse": "Buccleuch",
+          "number": 13,
+          "emergency": false
+        }
+      ],
+      "4": [
+        {
+          "horse": "Cilacap",
+          "number": 3,
+          "emergency": false
+        },
+        {
+          "horse": "Snitzel Dancer",
+          "number": 4,
+          "emergency": false
+        },
+        {
+          "horse": "Gold Medallist",
+          "number": 6,
+          "emergency": false
+        },
+        {
+          "horse": "Probability Theory",
+          "number": 7,
+          "emergency": false
+        },
+        {
+          "horse": "Miss Hades",
+          "number": 9,
+          "emergency": false
+        }
+      ],
+      "5": [
+        {
+          "horse": "Roulette King",
+          "number": 4,
+          "emergency": false
+        },
+        {
+          "horse": "Fiorenot",
+          "number": 7,
+          "emergency": false
+        },
+        {
+          "horse": "Haaracaine (IRE)",
+          "number": 13,
+          "emergency": false
+        },
+        {
+          "horse": "Sun Gift (NZ)",
+          "number": 15,
+          "emergency": false
+        },
+        {
+          "horse": "Prince Eric (IRE)",
+          "number": 17,
+          "emergency": true
+        }
+      ],
+      "6": [],
+      "7": [
+        {
+          "horse": "Parcae",
+          "number": 7,
+          "emergency": false
+        },
+        {
+          "horse": "Fovea",
+          "number": 10,
+          "emergency": false
+        },
+        {
+          "horse": "Sanctuary",
+          "number": 14,
+          "emergency": false
+        }
+      ],
+      "8": [
+        {
+          "horse": "Joely",
+          "number": 9,
+          "emergency": false
+        },
+        {
+          "horse": "Refuse to Curtsy",
+          "number": 12,
+          "emergency": false
+        },
+        {
+          "horse": "Waiheke Rose (NZ)",
+          "number": 14,
+          "emergency": false
+        }
+      ],
+      "9": [
+        {
+          "horse": "Pallaton",
+          "number": 2,
+          "emergency": false
+        },
+        {
+          "horse": "Cavalry Girl",
+          "number": 4,
+          "emergency": false
+        }
+      ]
+    },
+    "latest_change_from_prior_23": {
+      "race": 5,
+      "horse": "Prince Eric (IRE)",
+      "emergency": true
+    }
+  },
+  "original_research_selections_2026_11_03": [
     {
       "rank": 1,
       "race": 9,
@@ -179,6 +471,23 @@
       "form": "Two wins from four Soft starts and a recent 1700m victory.",
       "risk": "Class rise into BM70; Bon Fete is an emergency and must be confirmed admitted.",
       "pace": "Stung may go forward; Cute Girl can sit midfield and make her run."
+    }
+  ],
+  "original_research_rank_preserved": true,
+  "scratched_original_selections": [
+    {
+      "horse": "Cavalry Girl",
+      "race": 9,
+      "original_rank": 1,
+      "status": "OUT_OF_FIELD",
+      "replacement": "Rey Magnerio",
+      "replacement_status": "CONDITIONAL"
+    }
+  ],
+  "change_log": [
+    {
+      "at": "2026-11-04T17:00:00+11:00",
+      "change": "24 official withdrawals reconciled; original form rankings retained in archive; Cavalry Girl marked OUT and Rey Magnerio conditional replacement; updated danger lists and active ranks; no probability recalculation."
     }
   ]
 }
