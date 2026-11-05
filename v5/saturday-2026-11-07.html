@@ -1,0 +1,29 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Racing Lab — Saturday 7 November checkpoint</title>
+<style>:root{color-scheme:dark}body{font:15px/1.55 system-ui;background:#080f17;color:#eaf4ef;margin:0}main{max-width:1050px;margin:auto;padding:25px 18px 90px}a{color:#76e7b3}.muted{color:#a3b7c0}.warn{color:#ffd08f}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.card{border:1px solid #2d424a;border-radius:16px;padding:18px;background:#11212a}h1{font-size:clamp(27px,4vw,41px);letter-spacing:-.03em}h2{font-size:19px}ul{padding-left:21px}@media(max-width:680px){.grid{grid-template-columns:1fr}}</style></head>
+<body><main><p><a href="/v5/?tab=overview">← Racing Lab V5</a></p><p class="muted">RESEARCH CHECKPOINT · 7 NOVEMBER 2026</p><h1>Saturday: 29 races, no invented locks</h1>
+<p>This is a source-verified early checklist, not a final selection board. All 29 races need final starter, track, and rival reviews before model probabilities can be treated as race-day estimates.</p>
+<div class="grid" id="meetings"><div class="card">Loading source checkpoint…</div></div>
+<section class="card" style="margin-top:20px"><h2>Rules for the final board</h2>
+<ul><li>One named race leader per race; a separate Top 10 may include alternatives in the same race</li>
+<li>Every active runner receives a same-version model probability; each field must total 100%</li>
+<li>Official going and final scratchings must match the model scenario and field revision</li>
+<li>Two serious rivals, speed map and risks must be reviewed for each proposed lead selection</li>
+<li>Every switch preserves the original choice with dated evidence and reason</li>
+<li>High-conviction picks can number zero — no manufactured locks</li></ul></section>
+<p class="muted">Thursday's corrected outcome audit remains separate: <a href="/results.html">Results &amp; History</a>.</p></main>
+<script>(async function(){
+try{const a=await fetch('/v5/cards/2026-11-07/readiness.json',{cache:'no-store'});if(!a.ok)throw Error('HTTP '+a.status);
+const d=await a.json();if(d.schema!=='racing-lab-2026-11-07-source-checkpoint/v1')throw Error('Wrong checkpoint version');
+const root=document.getElementById('meetings');root.replaceChildren();
+d.meetings.forEach(m=>{const el=document.createElement('section');el.className='card';
+const h=document.createElement('h2');h.textContent=m.name+' · '+m.races+' races';el.append(h);
+const p=document.createElement('p');p.className='warn';p.textContent='Track: '+(m.going||'not declared')+' · '+m.scratchings+' scratchings';el.append(p);
+const c=document.createElement('p');c.textContent=m.accepted_including_emergencies+' acceptors incl. emergencies · final starters NOT certified';el.append(c);
+const t=document.createElement('small');t.className='muted';t.textContent='Last published: '+m.published;el.append(t);
+const l=document.createElement('p'),link=document.createElement('a');link.href=m.field_url;link.textContent='Official fields';l.append(link);el.append(l);
+const list=document.createElement('ol');m.program.forEach(name=>{const x=document.createElement('li');x.textContent=name;list.append(x)});el.append(list);
+root.append(el);
+});
+}catch(err){document.getElementById('meetings').textContent='Unable to read checkpoint: '+err.message;}
+})();</script></body></html>

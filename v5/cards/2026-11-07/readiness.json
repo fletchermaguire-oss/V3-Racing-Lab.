@@ -1,0 +1,99 @@
+{
+  "schema": "racing-lab-2026-11-07-source-checkpoint/v1",
+  "date": "2026-11-07",
+  "status": "PRE_FINAL_RESEARCH_ONLY",
+  "final_starters_verified": false,
+  "model_probabilities_ready": false,
+  "winning_selections_frozen": false,
+  "total_races": 29,
+  "notes": [
+    "Accepted-field counts include emergencies, not independently verified final starters.",
+    "Flemington official going not declared; do not infer Good 4 or Soft 5.",
+    "No official Saturday shortlist or final V5 percentages have been published in this checkpoint.",
+    "The high-conviction screen may legitimately have zero qualifiers."
+  ],
+  "meetings": [
+    {
+      "name": "FLEMINGTON",
+      "races": 9,
+      "accepted_including_emergencies": 125,
+      "going": null,
+      "scratchings": 3,
+      "rail": null,
+      "published": "Thu 05-Nov-26 6:18PM AEDT",
+      "field_url": "https://www.racingaustralia.horse/FreeFields/Acceptances.aspx?Key=2026Nov07%2CVIC%2CFlemington",
+      "scratch_url": "https://www.racingaustralia.horse/FreeFields/Scratchings.aspx?Key=2026Nov07%2CVIC%2CFlemington",
+      "scratched_horses": [
+        "R3 House of Lords",
+        "R9 Annie's Rose",
+        "R9 My Zephyr (emergency)"
+      ],
+      "program": [
+        "Inglis Banner",
+        "Ronald McDonald House VIC/TAS Mile",
+        "Queen Elizabeth Stakes",
+        "FISHER Stakes",
+        "TAB One Pool Matriarch Stakes",
+        "VRC Champions Sprint",
+        "VRC Champions Mile",
+        "TAB Champions Stakes",
+        "HKJC World Pool Grand Handicap"
+      ]
+    },
+    {
+      "name": "ROSEHILL",
+      "races": 10,
+      "accepted_including_emergencies": 133,
+      "going": "Soft 6",
+      "scratchings": 6,
+      "rail": "True",
+      "published": "Thu 05-Nov-26 9:35AM AEDT",
+      "field_url": "https://www.racingaustralia.horse/FreeFields/Acceptances.aspx?Key=2026Nov07%2CNSW%2CRosehill%20Gardens",
+      "scratch_url": "https://www.racingaustralia.horse/FreeFields/Scratchings.aspx?Key=2026Nov07%2CNSW%2CRosehill%20Gardens",
+      "scratched_horses": [
+        "R7 Just Precious",
+        "R8 You Wahng",
+        "R9 Nullarbor Jane",
+        "R9 Horseshoe Hill",
+        "R10 Rose Aye",
+        "R10 Blakemore Avenue"
+      ],
+      "program": [
+        "TAB Highway Handicap",
+        "Midway Handicap",
+        "Ranvet Handicap",
+        "Vale Rob Burnet Handicap",
+        "Singapore Pools Handicap",
+        "Golden Gift",
+        "Hot Danish Stakes",
+        "Five Diamonds",
+        "Grant Burge Handicap",
+        "Kia Ora Bloodlines to Headlines Handicap"
+      ]
+    },
+    {
+      "name": "ASCOT",
+      "races": 10,
+      "accepted_including_emergencies": 95,
+      "going": "Soft 5",
+      "scratchings": 0,
+      "rail": "True",
+      "published": "Thu 05-Nov-26 1:13PM AEDT",
+      "field_url": "https://www.racingaustralia.horse/FreeFields/Acceptances.aspx?Key=2026Nov07%2CWA%2CAscot",
+      "scratch_url": "https://www.racingaustralia.horse/FreeFields/Scratchings.aspx?Key=2026Nov07%2CWA%2CAscot",
+      "scratched_horses": [],
+      "program": [
+        "Magic Millions Plate",
+        "Carbine Club of WA Apprentices Cup",
+        "SGC Australia Handicap",
+        "PPS Water Group Handicap",
+        "Tabtouch Westspeed Platinum Series Heat 2",
+        "WAROA Fairetha Stakes",
+        "MC Equine Surfaces Handicap",
+        "Luckygray Stakes",
+        "Lee Steere Stakes",
+        "National Jockey Trust Handicap"
+      ]
+    }
+  ]
+}

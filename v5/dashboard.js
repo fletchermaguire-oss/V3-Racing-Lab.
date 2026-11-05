@@ -204,7 +204,8 @@ function overview(){
    e('p','','Independent selections, current field evidence and straightforward race analysis. No invented confidence.')));
  var heroActions=add(e('div','rlv5-command-actions'),
   action('Explore races',function(){go('races');},'primary'),
-  action('Top 5 / 10 / 15',function(){go('top10');},'ghost'));
+  action('Top 5 / 10 / 15',function(){go('top10');},'ghost'),
+  link('7 Nov · field checkpoint','/v5/saturday-2026-11-07.html','btn ghost'));
  hero.append(heroActions);root.append(hero);
  var status=e('section','rlv5-command-status');
  var meetingCard=add(e('div','rlv5-command-stat'),
