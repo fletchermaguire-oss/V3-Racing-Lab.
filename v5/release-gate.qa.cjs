@@ -68,3 +68,12 @@ test('unverified calibration cannot be certified; research status may remain rea
  assert(run(x).blockers.includes('UNCALIBRATED_ESTIMATES_NOT_CERTIFIED'));
  x.phase='RESEARCH_ONLY';assert(run(x).blockers.includes('RESEARCH_ONLY_NOT_FINAL'));
 });
+
+test('existing safe-build always invokes Saturday release gate before accepting a final board',()=>{
+ const fs=require('node:fs'),path=require('node:path');
+ const safe=fs.readFileSync(path.join(__dirname,'..','scripts','v5-safe-build.cjs'),'utf8');
+ assert.match(safe,/v5\/cards\/2026-11-07\/final-proposal\.json/);
+ assert.match(safe,/gate\.assess\(proposal,proposal\.reviewed_as_of\)/);
+ assert.match(safe,/audit\.certified_final_release/);
+ assert.match(safe,/readiness\.winning_selections_frozen/);
+});

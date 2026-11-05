@@ -21,6 +21,33 @@ for(const page of ['index.html','v5/index.html']){
  for(const asset of ['model.js','site-state.js','dashboard.js','workshop.js'])assert(text.includes('/v5/'+asset),'Missing shared runtime '+asset+' on '+page);
 }
 console.log('PASS: Existing racing shell and history preserved; shared V5 runtime; 29 races; 408 dossiers. Model estimates remain provisional and unapproved.');
+
+/* 7 Nov 2026: publication integrity, not a date-driven tip generator.
+ * A research checkpoint must never masquerade as a signed final Saturday board.
+ * A proposed certified board must pass source, full field, going, and change audit.
+ */
+const readiness=JSON.parse(fs.readFileSync('v5/cards/2026-11-07/readiness.json','utf8'));
+assert.equal(readiness.date,'2026-11-07','Saturday checkpoint is dated incorrectly');
+assert.equal(readiness.total_races,29,'Saturday meeting inventory changed; verify new source before editing');
+assert.equal(readiness.meetings.reduce((n,m)=>n+m.races,0),29,'Saturday race count mismatch');
+const finalProposalFile='v5/cards/2026-11-07/final-proposal.json';
+if(fs.existsSync(finalProposalFile)){
+ const proposal=JSON.parse(fs.readFileSync(finalProposalFile,'utf8'));
+ const gate=require('../v5/release-gate.js');
+ assert.equal(proposal.date,readiness.date,'Final proposal/checkpoint mismatch');
+ const audit=gate.assess(proposal,proposal.reviewed_as_of);
+ assert(audit.certified_final_release,'No certified final V5 release: '+audit.blockers.join('; '));
+ assert.equal(readiness.final_starters_verified,true,'Final starter checkpoint not approved');
+ assert.equal(readiness.model_probabilities_ready,true,'Final model distributions not approved');
+ assert.equal(readiness.winning_selections_frozen,true,'No independently frozen final predictions');
+}else{
+ assert.equal(readiness.status,'PRE_FINAL_RESEARCH_ONLY','Cannot mark Saturday final without a release proposal');
+ assert.equal(readiness.final_starters_verified,false,'Source fields are not yet certified');
+ assert.equal(readiness.model_probabilities_ready,false,'Do not claim approved full-field numbers');
+ assert.equal(readiness.winning_selections_frozen,false,'Cannot claim pre-race freeze without proof');
+}
+console.log('PASS: 7 Nov source checkpoint / final-release barrier; no automatic winner or percentage promotion.');
+
 const active=require('../v5/active-card.js');
 if(active.date!=='2026-10-31'){
  const source=JSON.parse(fs.readFileSync('.'+active.research_url,'utf8'));
