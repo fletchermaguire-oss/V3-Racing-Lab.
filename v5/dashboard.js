@@ -877,54 +877,59 @@ function statusOnly(){
 
 function oaksDayPage(){
  var root=app();
- root.append(head('Flemington Oaks Day · Thu 5 November 2026','Official Wednesday scratchings · nine form selections · no recalculated win probabilities'));
- root.append(note('This Thursday form board is separate from the Tuesday 3 Nov model. Final Thursday starters are not yet certified; archived rankings and historical results remain untouched.'));
- var holder=box('Scratching-adjusted shortlist','Loading official Wednesday field checkpoint…');root.append(holder);
- fetch('/v5/cards/2026-11-05/selections.json',{cache:'no-store'}).then(function(res){
-  if(!res.ok)throw Error('Thursday checkpoint HTTP '+res.status);return res.json();
+ root.append(head('Flemington Oaks Day · 5 November 2026','COMPLETED RESULTS · original site picks and final chat selections assessed separately'));
+ root.append(note('Historical record: this race day is complete. All nine postrace result cards report Good 4; the earlier official inspection had shown Soft 5. The original pre-race board is preserved, not rewritten using the winning horses.'));
+ var holder=box('Verified Thursday outcome audit','Loading race results and original pre-race selections…');root.append(holder);
+ fetch('/v5/cards/2026-11-05/outcome-audit.json',{cache:'no-store'}).then(function(res){
+  if(!res.ok)throw Error('Audit HTTP '+res.status);return res.json();
  }).then(function(d){
   if(S.page!=='oaks'||!holder.isConnected)return;
-  var o=d.official_scratchings;
-  if(d.date!=='2026-11-05'||!o||!Array.isArray(d.selections)||d.selections.length!==9)throw Error('Thursday dated data failed validation');
+  if(d.schema!=='racing-lab-thursday-outcome-audit/v1'||d.date!=='2026-11-05'||d.races.length!==9||d.site.selections.length!==9||d.chat.race_leaders.length!==9)throw Error('Incomplete outcome audit');
+  var win=function(race){var x=d.races.find(function(y){return y.race===race;});return x&&x.winner;};
+  var score=function(list){return list.filter(function(x){return win(x.race)===x.horse;}).length+'/'+list.length;};
   holder.replaceChildren();
-  holder.append(e('p','eyebrow','OFFICIAL CHECK · '+o.published_scratchings_count+' SCRATCHINGS · '+o.official_track_rating+' · '+o.rail));
-  holder.append(e('p','muted small','Last published '+o.source_last_published_label+'. Track inspected Wednesday 9am AEDT. Final Thursday scratchings and going still to come.'));
-  holder.append(e('div','panelnote warn','OUT OF FIELD: Cavalry Girl R9, previously our #1 research pick. Rey Magnerio is a CONDITIONAL R9 replacement, not a model-certified lock. Buccleuch R3 is also OUT.'));
-  holder.append(e('p','muted small','Selections below use the current verified exclusions. Research ranks are qualitative; no Thursday full-field win % or model separation has been calculated.'));
-  var ranked=e('div','toplist');
-  d.selections.slice().sort(function(a,b){return a.rank-b.rank;}).forEach(function(x){
-   var mid=add(e('div'),e('strong','',x.horse),
-    e('small','','R'+x.race+' · '+x.race_name+' · '+x.distance_m+'m'),
-    e('small','','Dangers: '+x.alternatives.join(' · ')),
-    e('small','',x.current_status==='CONDITIONAL_REPLACEMENT'?'CONDITIONAL REPLACEMENT — ORIGINAL CAVALRY GIRL OUT':'CURRENT FORM RESEARCH (no win %)'));
-   var stat=add(e('div','model-row-stat'),e('strong','',String(x.rank).padStart(2,'0')),e('small','','FORM RANK'));
-   ranked.append(add(e('div','toprow'),e('div','slot','R'+x.race),mid,stat));
-  });holder.append(ranked);
-  var detail=box('Race-by-race notes','Current selected runners and remaining rivals, with form, pace and risks.');
-  var cards=e('div','grid three');
-  d.selections.slice().sort(function(a,b){return a.race-b.race;}).forEach(function(x){
-   cards.append(add(e('div','card'),e('p','eyebrow','R'+x.race+' · '+x.distance_m+'m'),
-    e('h3','',x.horse),e('p','muted small',x.race_name+' · '+(x.current_status==='CONDITIONAL_REPLACEMENT'?'CONDITIONAL PICK':'RESEARCH PICK')),
-    e('p','',x.form),e('p','muted small','PACE: '+x.pace),
-    e('p','muted small','RISK: '+x.risk),e('p','muted small','DANGERS: '+x.alternatives.join(' · ')),
-    e('p','muted small','RANK RATIONALE: '+x.rationale_for_current_rank)));
-  });detail.append(cards);root.append(detail);
-  var scratch=box('Official scratching sheet · all races','24 exclusions in the published Wednesday 5pm AEDT snapshot; some are emergencies.');
-  for(var r=1;r<=9;r++){var withdrawn=o.scratchings_by_race[String(r)]||[];
-   if(withdrawn.length)scratch.append(e('p','muted small','R'+r+': '+withdrawn.map(function(x){
-    return '#'+x.number+' '+x.horse+(x.emergency?' (emergency)':'');
-   }).join(' · ')));
-  }
-  scratch.append(e('p','muted small','No scratchings listed in R6. Thursday scratching deadline 7:30am AEDT. Good 4 is from Wednesday morning, not a Thursday final rating.'));
-  scratch.append(link('Racing Australia official scratching sheet',o.source_url,'btn ghost'));
-  root.append(scratch);
-  d.notes.forEach(function(n){root.append(note(n));});
- }).catch(function(err){if(holder.isConnected)holder.append(e('p','muted small','Could not read Thursday checkpoint: '+err.message));});
+  holder.append(e('p','eyebrow','RESULTS VERIFIED · 9 RACES · GOOD 4 RECORDED · 34 FINAL SCRATCHINGS'));
+  var counts=e('div','grid three');
+  [['Published site research',score(d.site.selections)],['Final chat race leaders',score(d.chat.race_leaders)],['Final chat Top 10 runners',score(d.chat.top10)]].forEach(function(x){
+   counts.append(add(e('div','card'),e('p','muted small',x[0]),e('h2','',x[1]+' wins')));
+  });
+  holder.append(counts);
+  holder.append(e('p','muted small','The published site was a Wednesday research list with no model-certified percentages. The later chat used uncalibrated human estimates. These are different records, not interchangeable results. Chat Top 5: '+score(d.chat.top10.filter(function(x){return x.rank<=5;}))+'.'));
+  var table=e('div','toplist');
+  d.races.forEach(function(r){
+   var a=d.site.selections.find(function(x){return x.race===r.race;});
+   var b=d.chat.race_leaders.find(function(x){return x.race===r.race;});
+   var siteWon=a.horse===r.winner,chatWon=b.horse===r.winner;
+   var mid=add(e('div'),e('strong','','R'+r.race+' · '+r.winner+' WON'),
+    e('small','','Published: '+a.horse+' — '+(siteWon?'WIN':'LOST')+(a.source_status==='CONDITIONAL_REPLACEMENT'?' (conditional replacement)':'')),
+    e('small','','Final chat: '+b.horse+' ('+b.estimated_win_pct+'% estimate) — '+(chatWon?'WIN':'LOST')));
+   var stat=add(e('div','model-row-stat'),e('strong','',siteWon?'SITE WIN':'SITE LOSS'),e('small','',chatWon?'CHAT WIN':'CHAT LOSS'));
+   table.append(add(e('div','toprow'),e('div','slot','R'+r.race),mid,stat));
+  });
+  holder.append(table);
+  var sourceBox=box('Race-day sources and original evidence','Published 4 Nov research commit is unchanged; final result source available per race.');
+  sourceBox.append(link('View original published research',d.pre_race_published_source.commit_url,'btn ghost'));
+  d.races.forEach(function(r){sourceBox.append(link('Race '+r.race+' official dividends',r.source_url,'btn ghost'));});
+  root.append(sourceBox);
+  var top=box('Final chat Top 10 · original estimates','Three of ten named runners won. These overlapping candidates include different horses in the same race; they are not ten independent race winners.');
+  var names=e('div','toplist');
+  d.chat.top10.forEach(function(x){var won=win(x.race)===x.horse;
+   names.append(add(e('div','toprow'),e('div','slot',String(x.rank).padStart(2,'0')),
+    add(e('div'),e('strong','',x.horse),e('small','','R'+x.race+' · '+x.estimated_win_pct+'% uncalibrated')),
+    add(e('div','model-row-stat'),e('strong','',won?'WON':'LOST'))));
+  });
+  top.append(names);root.append(top);
+  var archived=box('Original Wednesday form — retained','Original judgments are retained for honest comparison. Race outcomes never change these historical notes.');
+  d.site.selections.slice().sort(function(a,b){return a.rank-b.rank;}).forEach(function(x){
+   archived.append(e('p','muted small','#'+x.rank+' · '+x.horse+' (R'+x.race+') · '+(win(x.race)===x.horse?'WON':'LOST')));
+  });root.append(archived);
+  root.append(note('Research audit only. A single day cannot validate calibration or justify fitting new coefficients. No winning horse is retroactively made a pre-race selection, and the earlier Saturday results ledger remains unchanged.'));
+ }).catch(function(err){if(holder.isConnected)holder.append(e('p','muted small','Could not verify Thursday audit: '+err.message));});
 }
 
 function render(){if(!C)return;D=C.data;if(!raceOf(S.race)){S.race=D.races[0].id;S.meeting=D.races[0].meeting;}
  if(global.RacingLabWorkshop)global.RacingLabWorkshop.stop();if(!embedded)nav();app().replaceChildren();
- var views={overview:overview,oaks:oaksDayPage,top10:top10,races:racesPage,multi:function(){workshop('multiPage');},sim:function(){workshop('simPage');},compare:comparePage,qa:qaPage,cal:calPage,weather:weatherPage,sync:syncPage,results:resultsPage};(views[S.page]||overview)();app().append(e('div','footer',S.page==='oaks'?'Thursday 5 Nov independent form review · Soft 5 assumed · final fields and probabilities not certified':C.board.version+' · '+C.revision+' · model estimates uncalibrated · source snapshot '+D.saved_at));
+ var views={overview:overview,oaks:oaksDayPage,top10:top10,races:racesPage,multi:function(){workshop('multiPage');},sim:function(){workshop('simPage');},compare:comparePage,qa:qaPage,cal:calPage,weather:weatherPage,sync:syncPage,results:resultsPage};(views[S.page]||overview)();app().append(e('div','footer',S.page==='oaks'?'Thursday 5 Nov · verified Good 4 results · pre-race records retained unchanged':C.board.version+' · '+C.revision+' · model estimates uncalibrated · source snapshot '+D.saved_at));
 }
 function officialPanel(){
  if(importedCard())return importedOfficialPanel();

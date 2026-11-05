@@ -1,0 +1,353 @@
+{
+  "schema": "racing-lab-thursday-outcome-audit/v1",
+  "date": "2026-11-05",
+  "meeting": "FLEMINGTON",
+  "observed_after_results": true,
+  "pre_race_published_source": {
+    "commit_sha": "1806317f5ed6589d026872020041fab17f91cc49",
+    "commit_url": "https://github.com/fletchermaguire-oss/V3-Racing-Lab./commit/1806317f5ed6589d026872020041fab17f91cc49",
+    "file": "v5/cards/2026-11-05/selections.json",
+    "method": "PUBLISHED_WEDNESDAY_RESEARCH_ONLY",
+    "independent_calibrated_model": false,
+    "original_status": "WEDNESDAY_OFFICIAL_SCRATCHINGS_RECONCILED_NO_PROBABILITIES"
+  },
+  "pre_race_chat_source": {
+    "method": "THURSDAY_FINAL_CHAT_JUDGMENT",
+    "independent_git_lock": false,
+    "percentages_calibrated": false,
+    "note": "Later in-chat selections, explicitly distinct from Wednesday published GitHub research. Race 6 changed Our Justify to Bel Mezyaan; Race 9 changed Rey Magnerio to Stokke. No postrace substitutions."
+  },
+  "track": {
+    "official_early": "Soft 5",
+    "official_early_inspection": "2026-11-05 06:00 AEDT",
+    "observed_race_results": "Good 4",
+    "note": "Morning Racing Australia inspection was Soft 5, but all nine TABtouch postrace result cards report Good 4. Race-day weather/track scenario was not reconciled before revised chat probabilities.",
+    "official_pre_race_url": "https://www.racingaustralia.horse/FreeFields/Scratchings.aspx?Key=2026Nov05%2CVIC%2CFlemington"
+  },
+  "races": [
+    {
+      "race": 1,
+      "winner": "Chiringita",
+      "winner_number": 5,
+      "first_four": [
+        "Chiringita",
+        "Illyivy",
+        "Jenni You Think",
+        "Miss Stalwart"
+      ],
+      "source_url": "https://www.tabtouch.com.au/racing/2026-11-05/mr/1",
+      "result_status": "DIVIDENDS_OFFICIAL",
+      "reported_going": "Good 4"
+    },
+    {
+      "race": 2,
+      "winner": "You're Not the King",
+      "winner_number": 14,
+      "first_four": [
+        "You're Not the King",
+        "Alabama Fox",
+        "Santa Ana Moon",
+        "Bustling"
+      ],
+      "source_url": "https://www.tabtouch.com.au/racing/2026-11-05/mr/2",
+      "result_status": "DIVIDENDS_OFFICIAL",
+      "reported_going": "Good 4"
+    },
+    {
+      "race": 3,
+      "winner": "Harry's Yacht",
+      "winner_number": 6,
+      "first_four": [
+        "Harry's Yacht",
+        "Pinstriped",
+        "Revelare",
+        "Feroce"
+      ],
+      "source_url": "https://www.tabtouch.com.au/racing/2026-11-05/mr/3",
+      "result_status": "DIVIDENDS_OFFICIAL",
+      "reported_going": "Good 4"
+    },
+    {
+      "race": 4,
+      "winner": "Bella Verona",
+      "winner_number": 12,
+      "first_four": [
+        "Bella Verona",
+        "Sass Appeal",
+        "Fireball Miss",
+        "Polymnia"
+      ],
+      "source_url": "https://www.tabtouch.com.au/racing/2026-11-05/mr/4",
+      "result_status": "DIVIDENDS_OFFICIAL",
+      "reported_going": "Good 4"
+    },
+    {
+      "race": 5,
+      "winner": "Nobler",
+      "winner_number": 6,
+      "first_four": [
+        "Nobler",
+        "Placo",
+        "Veyepee",
+        "Chase Your Dreams"
+      ],
+      "source_url": "https://www.tabtouch.com.au/racing/2026-11-05/mr/5",
+      "result_status": "DIVIDENDS_OFFICIAL",
+      "reported_going": "Good 4"
+    },
+    {
+      "race": 6,
+      "winner": "Sulek",
+      "winner_number": 9,
+      "first_four": [
+        "Sulek",
+        "Wetumpka",
+        "Rosa Aotearoa",
+        "Our Justify"
+      ],
+      "source_url": "https://www.tabtouch.com.au/racing/2026-11-05/mr/6",
+      "result_status": "DIVIDENDS_OFFICIAL",
+      "reported_going": "Good 4"
+    },
+    {
+      "race": 7,
+      "winner": "Lady Catalina",
+      "winner_number": 5,
+      "first_four": [
+        "Lady Catalina",
+        "Sequinned",
+        "Semantics",
+        "Nishioka"
+      ],
+      "source_url": "https://www.tabtouch.com.au/racing/2026-11-05/mr/7",
+      "result_status": "DIVIDENDS_OFFICIAL",
+      "reported_going": "Good 4"
+    },
+    {
+      "race": 8,
+      "winner": "Proxima Dea",
+      "winner_number": 1,
+      "first_four": [
+        "Proxima Dea",
+        "Shameful Impulse",
+        "De Armas",
+        "Courting"
+      ],
+      "source_url": "https://www.tabtouch.com.au/racing/2026-11-05/mr/8",
+      "result_status": "DIVIDENDS_OFFICIAL",
+      "reported_going": "Good 4"
+    },
+    {
+      "race": 9,
+      "winner": "Rey Magnerio",
+      "winner_number": 1,
+      "first_four": [
+        "Rey Magnerio",
+        "Perilous Fighter",
+        "Bev's Nine",
+        "Don't Hope Do"
+      ],
+      "source_url": "https://www.tabtouch.com.au/racing/2026-11-05/mr/9",
+      "result_status": "DIVIDENDS_OFFICIAL",
+      "reported_going": "Good 4"
+    }
+  ],
+  "site": {
+    "label": "Wednesday published research selections",
+    "selections": [
+      {
+        "race": 1,
+        "horse": "Cute Girl",
+        "rank": 9,
+        "source_status": "IN_FIELD_AT_WEDNESDAY_CHECK",
+        "pre_race_probability_published": false
+      },
+      {
+        "race": 2,
+        "horse": "You're Not the King",
+        "rank": 5,
+        "source_status": "IN_FIELD_AT_WEDNESDAY_CHECK",
+        "pre_race_probability_published": false
+      },
+      {
+        "race": 3,
+        "horse": "Tavi Time",
+        "rank": 7,
+        "source_status": "IN_FIELD_AT_WEDNESDAY_CHECK",
+        "pre_race_probability_published": false
+      },
+      {
+        "race": 4,
+        "horse": "Sass Appeal",
+        "rank": 1,
+        "source_status": "IN_FIELD_AT_WEDNESDAY_CHECK",
+        "pre_race_probability_published": false
+      },
+      {
+        "race": 5,
+        "horse": "Perisher",
+        "rank": 2,
+        "source_status": "IN_FIELD_AT_WEDNESDAY_CHECK",
+        "pre_race_probability_published": false
+      },
+      {
+        "race": 6,
+        "horse": "Our Justify",
+        "rank": 8,
+        "source_status": "IN_FIELD_AT_WEDNESDAY_CHECK",
+        "pre_race_probability_published": false
+      },
+      {
+        "race": 7,
+        "horse": "Sequinned",
+        "rank": 4,
+        "source_status": "IN_FIELD_AT_WEDNESDAY_CHECK",
+        "pre_race_probability_published": false
+      },
+      {
+        "race": 8,
+        "horse": "Proxima Dea",
+        "rank": 3,
+        "source_status": "IN_FIELD_AT_WEDNESDAY_CHECK",
+        "pre_race_probability_published": false
+      },
+      {
+        "race": 9,
+        "horse": "Rey Magnerio",
+        "rank": 6,
+        "source_status": "CONDITIONAL_REPLACEMENT",
+        "pre_race_probability_published": false
+      }
+    ],
+    "notes": "No numerical final probabilities were published in the Wednesday site file. Rey Magnerio was the conditional race 9 replacement for scratched Cavalry Girl."
+  },
+  "chat": {
+    "label": "Thursday final in-chat selections and Top 10",
+    "race_leaders": [
+      {
+        "race": 1,
+        "horse": "Cute Girl",
+        "estimated_win_pct": 17,
+        "probability_provenance": "HUMAN_ESTIMATE_UNCALIBRATED"
+      },
+      {
+        "race": 2,
+        "horse": "You're Not the King",
+        "estimated_win_pct": 24,
+        "probability_provenance": "HUMAN_ESTIMATE_UNCALIBRATED"
+      },
+      {
+        "race": 3,
+        "horse": "Tavi Time",
+        "estimated_win_pct": 31,
+        "probability_provenance": "HUMAN_ESTIMATE_UNCALIBRATED"
+      },
+      {
+        "race": 4,
+        "horse": "Sass Appeal",
+        "estimated_win_pct": 46,
+        "probability_provenance": "HUMAN_ESTIMATE_UNCALIBRATED"
+      },
+      {
+        "race": 5,
+        "horse": "Perisher",
+        "estimated_win_pct": 36,
+        "probability_provenance": "HUMAN_ESTIMATE_UNCALIBRATED"
+      },
+      {
+        "race": 6,
+        "horse": "Bel Mezyaan",
+        "estimated_win_pct": 16,
+        "probability_provenance": "HUMAN_ESTIMATE_UNCALIBRATED"
+      },
+      {
+        "race": 7,
+        "horse": "Sequinned",
+        "estimated_win_pct": 35,
+        "probability_provenance": "HUMAN_ESTIMATE_UNCALIBRATED"
+      },
+      {
+        "race": 8,
+        "horse": "Proxima Dea",
+        "estimated_win_pct": 34,
+        "probability_provenance": "HUMAN_ESTIMATE_UNCALIBRATED"
+      },
+      {
+        "race": 9,
+        "horse": "Stokke",
+        "estimated_win_pct": 21,
+        "probability_provenance": "HUMAN_ESTIMATE_UNCALIBRATED"
+      }
+    ],
+    "top10": [
+      {
+        "rank": 1,
+        "race": 4,
+        "horse": "Sass Appeal",
+        "estimated_win_pct": 46
+      },
+      {
+        "rank": 2,
+        "race": 5,
+        "horse": "Perisher",
+        "estimated_win_pct": 36
+      },
+      {
+        "rank": 3,
+        "race": 7,
+        "horse": "Sequinned",
+        "estimated_win_pct": 35
+      },
+      {
+        "rank": 4,
+        "race": 8,
+        "horse": "Proxima Dea",
+        "estimated_win_pct": 34
+      },
+      {
+        "rank": 5,
+        "race": 3,
+        "horse": "Tavi Time",
+        "estimated_win_pct": 31
+      },
+      {
+        "rank": 6,
+        "race": 7,
+        "horse": "Scintillation",
+        "estimated_win_pct": 26
+      },
+      {
+        "rank": 7,
+        "race": 2,
+        "horse": "You're Not the King",
+        "estimated_win_pct": 24
+      },
+      {
+        "rank": 8,
+        "race": 5,
+        "horse": "Nobler",
+        "estimated_win_pct": 23
+      },
+      {
+        "rank": 9,
+        "race": 8,
+        "horse": "De Armas",
+        "estimated_win_pct": 22
+      },
+      {
+        "rank": 10,
+        "race": 9,
+        "horse": "Stokke",
+        "estimated_win_pct": 21
+      }
+    ],
+    "notes": "Numbers were manual uncalibrated judgments, not the V5 calibrated model. The race-by-race final picks override no previously published site selections."
+  },
+  "validation_rules": [
+    "Keep the original published selections file unchanged.",
+    "Report site and final-chat records as separate cohorts.",
+    "Grade each exact horse and race against verified postrace finishing order, never a danger pick as a main selection.",
+    "Never infer a verified winning probability from single-day hit rates or round a model estimate as calibrated.",
+    "No historic backdating: published Wednesday and final chat are different sources."
+  ]
+}

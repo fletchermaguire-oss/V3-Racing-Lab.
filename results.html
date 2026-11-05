@@ -41,6 +41,13 @@ td .source{font-size:12px;color:var(--mint)}.win{color:var(--mint);font-weight:7
 <div class="card"><div class="label">Top 10 · each Saturday</div><div class="number" id="top10Count">—</div><div class="meta" id="top10Rate">Checking results…</div><div class="rail"><span id="top10Bar"></span></div></div>
 <div class="card"><div class="label">Top 15 · each Saturday</div><div class="number" id="top15Count">—</div><div class="meta" id="top15Rate">Checking results…</div><div class="rail"><span id="top15Bar"></span></div></div>
 </section>
+<section class="panel" aria-label="Thursday 5 November complete outcome audit">
+<h2>Thursday 5 November 2026 · Separate race-day results</h2>
+<p class="muted">This completed Thursday meeting is separate from the Saturday-only cumulative history. Original published research picks and later chat selections are tracked independently; neither is a calibrated V5 model record.</p>
+<div class="statstrip"><strong id="nov5Score">Loading verified Thursday results…</strong><span id="nov5ChatScore"></span><span id="nov5Top10"></span></div>
+<div id="nov5Results" class="tablewrap"></div>
+<p class="hint" id="nov5Track">The earlier official morning Soft 5 inspection was different from the Good 4 recorded for the races.</p>
+</section>
 <section class="panel">
 <h2>Record across all Saturdays</h2>
 <div id="dateSummary" class="muted" style="font-size:13px">Loading per-date results…</div>
@@ -192,4 +199,36 @@ async function load(){
  }catch(e){$('error').textContent='Results could not be validated: '+e.message;}
 }
 load();
-</script></body></html>
+</script>
+
+<script>
+(async function(){
+ const el=id=>document.getElementById(id);
+ try{
+  const resp=await fetch('/v5/cards/2026-11-05/outcome-audit.json',{cache:'no-store'});
+  if(!resp.ok)throw Error('HTTP '+resp.status);
+  const d=await resp.json();
+  if(d.schema!=='racing-lab-thursday-outcome-audit/v1'||d.races.length!==9)throw Error('Audit schema mismatch');
+  const won=(x)=>d.races.some(r=>r.race===x.race&&r.winner===x.horse);
+  const count=(list)=>list.filter(won).length+'/'+list.length;
+  el('nov5Score').textContent='Published site: '+count(d.site.selections)+' wins';
+  el('nov5ChatScore').textContent='Final chat: '+count(d.chat.race_leaders)+' wins';
+  el('nov5Top10').textContent='Final chat Top 5 '+count(d.chat.top10.filter(x=>x.rank<=5))+' · Top 10 '+count(d.chat.top10);
+  const table=document.createElement('table');
+  const head=document.createElement('thead'),hr=document.createElement('tr');
+  ['Race','Winner','Published site pick','Final chat pick','Result source'].forEach(t=>{const th=document.createElement('th');th.textContent=t;hr.append(th);});
+  head.append(hr);table.append(head);
+  const body=document.createElement('tbody');
+  d.races.forEach(r=>{
+   const site=d.site.selections.find(x=>x.race===r.race),chat=d.chat.race_leaders.find(x=>x.race===r.race);
+   const tr=document.createElement('tr');
+   const cells=['R'+r.race,r.winner,site.horse+(won(site)?' — WON':' — LOST'),chat.horse+' ('+chat.estimated_win_pct+'%)'+(won(chat)?' — WON':' — LOST')];
+   cells.forEach((t,i)=>{const td=document.createElement('td');td.textContent=t;if(i===2||i===3)td.className=(i===2?won(site):won(chat))?'win':'loss';tr.append(td);});
+   const td=document.createElement('td'),link=document.createElement('a');link.href=r.source_url;link.rel='noopener';link.target='_blank';link.textContent='Verified finish';td.append(link);tr.append(td);body.append(tr);
+  });
+  table.append(body);el('nov5Results').append(table);
+  el('nov5Track').textContent='Recorded race going: '+d.track.observed_race_results+'; morning inspection: '+d.track.official_early+'. Original site list: '+d.pre_race_published_source.commit_sha.slice(0,9)+' (unchanged). Final chat percentages were uncalibrated judgment estimates and are not a model-proven hit rate.';
+ }catch(err){el('nov5Score').textContent='Thursday audit unavailable: '+err.message;}
+})();
+</script>
+</body></html>
