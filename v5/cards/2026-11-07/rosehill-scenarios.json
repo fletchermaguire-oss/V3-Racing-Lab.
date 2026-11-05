@@ -1,0 +1,3975 @@
+{
+  "schema": "racing-lab-official-form-shadow-scenarios/v1",
+  "date": "2026-11-07",
+  "meeting": "ROSEHILL",
+  "model_version": "V5-L5-CANDIDATE-20261030",
+  "source": {
+    "source": "https://www.racingaustralia.horse/FreeFields/Form.aspx?Key=2026Nov07%2CNSW%2CRosehill%20Gardens",
+    "source_published": "Thu 05-Nov-26 9:35AM AEDT",
+    "source_checked_at": "2026-11-05",
+    "source_date": "2026-11-07",
+    "going_report": "Soft 6",
+    "rail": "True",
+    "parser": "v5/official-form-import.js",
+    "notes": "No race-day starter certification or empirical probability calibration"
+  },
+  "import_audit": {
+    "entries": 133,
+    "listed_races": 10,
+    "active_accepted": 122,
+    "published_scratchings": 6,
+    "unactivated_emergencies": 5,
+    "historical_form_lines": 541,
+    "heavy10_lines_recognized": 7,
+    "unparseable_historical_lines": 0,
+    "future_or_same_day_lines_excluded": 0,
+    "official_going": "Soft 6",
+    "rail": "True",
+    "all_final_starters_verified": false
+  },
+  "status": "RESEARCH_ONLY",
+  "final_starters_verified": false,
+  "calibration_established": false,
+  "publication_approved": false,
+  "scenarios": [
+    {
+      "going": "Soft 6",
+      "races": [
+        {
+          "race": 1,
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "title": "TAB HIGHWAY HANDICAP",
+          "field": 18,
+          "leader": "DEFIANCE",
+          "model_pct": 9.11,
+          "top": [
+            {
+              "horse": "DEFIANCE",
+              "runner_id": "2026-11-07_ROSEHILL_R01_01",
+              "model_pct": 9.11,
+              "form_starts": 5,
+              "completeness": 0.92
+            },
+            {
+              "horse": "MAINSTAY",
+              "runner_id": "2026-11-07_ROSEHILL_R01_03",
+              "model_pct": 8.9,
+              "form_starts": 3,
+              "completeness": 0.66
+            },
+            {
+              "horse": "CRIME OF PASSION",
+              "runner_id": "2026-11-07_ROSEHILL_R01_15",
+              "model_pct": 8.01,
+              "form_starts": 4,
+              "completeness": 0.86
+            },
+            {
+              "horse": "JUST HEAR ME OUT",
+              "runner_id": "2026-11-07_ROSEHILL_R01_08",
+              "model_pct": 7.75,
+              "form_starts": 5,
+              "completeness": 0.92
+            },
+            {
+              "horse": "YESSPECIALLY",
+              "runner_id": "2026-11-07_ROSEHILL_R01_18",
+              "model_pct": 7.71,
+              "form_starts": 2,
+              "completeness": 0.59
+            }
+          ]
+        },
+        {
+          "race": 2,
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "title": "MIDWAY HANDICAP",
+          "field": 16,
+          "leader": "POWDER MAN",
+          "model_pct": 11.77,
+          "top": [
+            {
+              "horse": "POWDER MAN",
+              "runner_id": "2026-11-07_ROSEHILL_R02_08",
+              "model_pct": 11.77,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "LAWLESS LUCY",
+              "runner_id": "2026-11-07_ROSEHILL_R02_12",
+              "model_pct": 10.89,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "COMMON GOAL",
+              "runner_id": "2026-11-07_ROSEHILL_R02_09",
+              "model_pct": 10.26,
+              "form_starts": 5,
+              "completeness": 0.92
+            },
+            {
+              "horse": "MAIDOFF",
+              "runner_id": "2026-11-07_ROSEHILL_R02_05",
+              "model_pct": 9.51,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "MY PHAR LADY",
+              "runner_id": "2026-11-07_ROSEHILL_R02_10",
+              "model_pct": 7.68,
+              "form_starts": 5,
+              "completeness": 1
+            }
+          ]
+        },
+        {
+          "race": 3,
+          "race_id": "2026-11-07_ROSEHILL_R03",
+          "title": "RANVET HANDICAP",
+          "field": 10,
+          "leader": "SAVVY SPY (NZ)",
+          "model_pct": 27.75,
+          "top": [
+            {
+              "horse": "SAVVY SPY (NZ)",
+              "runner_id": "2026-11-07_ROSEHILL_R03_03",
+              "model_pct": 27.75,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "CRITERIA (NZ)",
+              "runner_id": "2026-11-07_ROSEHILL_R03_05",
+              "model_pct": 20.52,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "SAVISANTA (NZ)",
+              "runner_id": "2026-11-07_ROSEHILL_R03_02",
+              "model_pct": 8.2,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "WAR RIBBON",
+              "runner_id": "2026-11-07_ROSEHILL_R03_06",
+              "model_pct": 7.87,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "PARTY IT DOWN",
+              "runner_id": "2026-11-07_ROSEHILL_R03_10",
+              "model_pct": 6.88,
+              "form_starts": 5,
+              "completeness": 0.79
+            }
+          ]
+        },
+        {
+          "race": 4,
+          "race_id": "2026-11-07_ROSEHILL_R04",
+          "title": "VALE ROB BURNET HANDICAP",
+          "field": 11,
+          "leader": "SAMARELLE (NZ)",
+          "model_pct": 22.33,
+          "top": [
+            {
+              "horse": "SAMARELLE (NZ)",
+              "runner_id": "2026-11-07_ROSEHILL_R04_02",
+              "model_pct": 22.33,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "DONATELLO (NZ)",
+              "runner_id": "2026-11-07_ROSEHILL_R04_06",
+              "model_pct": 12.99,
+              "form_starts": 5,
+              "completeness": 0.92
+            },
+            {
+              "horse": "OFF THE SCALE",
+              "runner_id": "2026-11-07_ROSEHILL_R04_10",
+              "model_pct": 11.95,
+              "form_starts": 5,
+              "completeness": 0.92
+            },
+            {
+              "horse": "BOTANICAL BOY (NZ)",
+              "runner_id": "2026-11-07_ROSEHILL_R04_03",
+              "model_pct": 10.51,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "STORM SEASON",
+              "runner_id": "2026-11-07_ROSEHILL_R04_04",
+              "model_pct": 10.42,
+              "form_starts": 5,
+              "completeness": 0.87
+            }
+          ]
+        },
+        {
+          "race": 5,
+          "race_id": "2026-11-07_ROSEHILL_R05",
+          "title": "SINGAPORE POOLS HANDICAP",
+          "field": 9,
+          "leader": "CASHOUT",
+          "model_pct": 23.39,
+          "top": [
+            {
+              "horse": "CASHOUT",
+              "runner_id": "2026-11-07_ROSEHILL_R05_01",
+              "model_pct": 23.39,
+              "form_starts": 3,
+              "completeness": 0.79
+            },
+            {
+              "horse": "SHOTGUN BELLA",
+              "runner_id": "2026-11-07_ROSEHILL_R05_09",
+              "model_pct": 14.03,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "BELLA KHADIJAH",
+              "runner_id": "2026-11-07_ROSEHILL_R05_04",
+              "model_pct": 12.95,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "ROSE AYE",
+              "runner_id": "2026-11-07_ROSEHILL_R05_08",
+              "model_pct": 10.6,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "PASADENA",
+              "runner_id": "2026-11-07_ROSEHILL_R05_07",
+              "model_pct": 10.22,
+              "form_starts": 5,
+              "completeness": 0.66
+            }
+          ]
+        },
+        {
+          "race": 6,
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "title": "GOLDEN GIFT",
+          "field": 14,
+          "leader": "EXO VELOCITY",
+          "model_pct": 32.89,
+          "top": [
+            {
+              "horse": "EXO VELOCITY",
+              "runner_id": "2026-11-07_ROSEHILL_R06_09",
+              "model_pct": 32.89,
+              "form_starts": 1,
+              "completeness": 0.39
+            },
+            {
+              "horse": "JENNI IN ROME (NZ)",
+              "runner_id": "2026-11-07_ROSEHILL_R06_10",
+              "model_pct": 11.15,
+              "form_starts": 1,
+              "completeness": 0.39
+            },
+            {
+              "horse": "SILENT INTENT",
+              "runner_id": "2026-11-07_ROSEHILL_R06_07",
+              "model_pct": 8.91,
+              "form_starts": 1,
+              "completeness": 0.39
+            },
+            {
+              "horse": "ORIGINATE",
+              "runner_id": "2026-11-07_ROSEHILL_R06_11",
+              "model_pct": 4.78,
+              "form_starts": 0,
+              "completeness": 0.04
+            },
+            {
+              "horse": "SHARJAWIYAH",
+              "runner_id": "2026-11-07_ROSEHILL_R06_12",
+              "model_pct": 4.78,
+              "form_starts": 0,
+              "completeness": 0.04
+            }
+          ]
+        },
+        {
+          "race": 7,
+          "race_id": "2026-11-07_ROSEHILL_R07",
+          "title": "TOYOTA FORKLIFTS HOT DANISH STAKES",
+          "field": 10,
+          "leader": "LAZZURA",
+          "model_pct": 47.3,
+          "top": [
+            {
+              "horse": "LAZZURA",
+              "runner_id": "2026-11-07_ROSEHILL_R07_01",
+              "model_pct": 47.3,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "GERRINGONG",
+              "runner_id": "2026-11-07_ROSEHILL_R07_03",
+              "model_pct": 12.04,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "CHAINS OF LOVE",
+              "runner_id": "2026-11-07_ROSEHILL_R07_08",
+              "model_pct": 9.23,
+              "form_starts": 5,
+              "completeness": 0.79
+            },
+            {
+              "horse": "SURF’S UP",
+              "runner_id": "2026-11-07_ROSEHILL_R07_10",
+              "model_pct": 7.19,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "ARABIAN ROSE",
+              "runner_id": "2026-11-07_ROSEHILL_R07_04",
+              "model_pct": 6.35,
+              "form_starts": 5,
+              "completeness": 1
+            }
+          ]
+        },
+        {
+          "race": 8,
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "title": "FIVE DIAMONDS",
+          "field": 13,
+          "leader": "TUXEDO (NZ)",
+          "model_pct": 24.89,
+          "top": [
+            {
+              "horse": "TUXEDO (NZ)",
+              "runner_id": "2026-11-07_ROSEHILL_R08_02",
+              "model_pct": 24.89,
+              "form_starts": 5,
+              "completeness": 0.73
+            },
+            {
+              "horse": "VERONA ROSE",
+              "runner_id": "2026-11-07_ROSEHILL_R08_07",
+              "model_pct": 11.91,
+              "form_starts": 5,
+              "completeness": 0.87
+            },
+            {
+              "horse": "BRINDAVAN (IRE)",
+              "runner_id": "2026-11-07_ROSEHILL_R08_12",
+              "model_pct": 11.64,
+              "form_starts": 5,
+              "completeness": 0.92
+            },
+            {
+              "horse": "WELCOMETOTHESHOW",
+              "runner_id": "2026-11-07_ROSEHILL_R08_11",
+              "model_pct": 11.12,
+              "form_starts": 5,
+              "completeness": 0.79
+            },
+            {
+              "horse": "DECLICHY BOULEVARD",
+              "runner_id": "2026-11-07_ROSEHILL_R08_08",
+              "model_pct": 7.81,
+              "form_starts": 5,
+              "completeness": 0.87
+            }
+          ]
+        },
+        {
+          "race": 9,
+          "race_id": "2026-11-07_ROSEHILL_R09",
+          "title": "GRANT BURGE HANDICAP",
+          "field": 10,
+          "leader": "DETAIN (NZ)",
+          "model_pct": 21.21,
+          "top": [
+            {
+              "horse": "DETAIN (NZ)",
+              "runner_id": "2026-11-07_ROSEHILL_R09_06",
+              "model_pct": 21.21,
+              "form_starts": 5,
+              "completeness": 0.92
+            },
+            {
+              "horse": "MERCY ME",
+              "runner_id": "2026-11-07_ROSEHILL_R09_02",
+              "model_pct": 16.79,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "AGATHA",
+              "runner_id": "2026-11-07_ROSEHILL_R09_09",
+              "model_pct": 13.64,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "SHOW BUSINESS",
+              "runner_id": "2026-11-07_ROSEHILL_R09_11",
+              "model_pct": 8.87,
+              "form_starts": 5,
+              "completeness": 0.92
+            },
+            {
+              "horse": "OUTBACK ANGEL",
+              "runner_id": "2026-11-07_ROSEHILL_R09_12",
+              "model_pct": 8.1,
+              "form_starts": 5,
+              "completeness": 0.92
+            }
+          ]
+        },
+        {
+          "race": 10,
+          "race_id": "2026-11-07_ROSEHILL_R10",
+          "title": "KIA ORA BLOODLINES TO HEADLINES HANDICAP",
+          "field": 11,
+          "leader": "ESMAHLI",
+          "model_pct": 17.51,
+          "top": [
+            {
+              "horse": "ESMAHLI",
+              "runner_id": "2026-11-07_ROSEHILL_R10_01",
+              "model_pct": 17.51,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "LET’S GO AGAIN",
+              "runner_id": "2026-11-07_ROSEHILL_R10_05",
+              "model_pct": 14.54,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "HORSESHOE HILL",
+              "runner_id": "2026-11-07_ROSEHILL_R10_09",
+              "model_pct": 10.88,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "ANNIE’S ROSE",
+              "runner_id": "2026-11-07_ROSEHILL_R10_02",
+              "model_pct": 10.79,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "NULLARBOR JANE",
+              "runner_id": "2026-11-07_ROSEHILL_R10_06",
+              "model_pct": 10.62,
+              "form_starts": 5,
+              "completeness": 1
+            }
+          ]
+        }
+      ],
+      "records": [
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_01",
+          "horse": "DEFIANCE",
+          "model_pct": 9.11,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_03",
+          "horse": "MAINSTAY",
+          "model_pct": 8.9,
+          "form_starts": 3
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_15",
+          "horse": "CRIME OF PASSION",
+          "model_pct": 8.01,
+          "form_starts": 4
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_08",
+          "horse": "JUST HEAR ME OUT",
+          "model_pct": 7.75,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_18",
+          "horse": "YESSPECIALLY",
+          "model_pct": 7.71,
+          "form_starts": 2
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_14",
+          "horse": "PANTA RHEI",
+          "model_pct": 6.37,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_04",
+          "horse": "BRAVE XENA",
+          "model_pct": 6.26,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_12",
+          "horse": "NEVERMISTA",
+          "model_pct": 6.25,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_06",
+          "horse": "SPEEDY HENRY",
+          "model_pct": 5.55,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_10",
+          "horse": "ATHENA’S TREASURE",
+          "model_pct": 5.09,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_09",
+          "horse": "WHATELEY",
+          "model_pct": 4.75,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_07",
+          "horse": "CAMPARI TWIST",
+          "model_pct": 4.01,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_11",
+          "horse": "SUPREME STYLE",
+          "model_pct": 3.88,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_02",
+          "horse": "COMONGIN",
+          "model_pct": 3.7,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_16",
+          "horse": "GIRRAWHEEN",
+          "model_pct": 3.47,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_17",
+          "horse": "RELEASE POINT",
+          "model_pct": 3.27,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_05",
+          "horse": "LE CHOCOLAT (NZ)",
+          "model_pct": 3.2,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_13",
+          "horse": "TROPIC",
+          "model_pct": 2.72,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_08",
+          "horse": "POWDER MAN",
+          "model_pct": 11.77,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_12",
+          "horse": "LAWLESS LUCY",
+          "model_pct": 10.89,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_09",
+          "horse": "COMMON GOAL",
+          "model_pct": 10.26,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_05",
+          "horse": "MAIDOFF",
+          "model_pct": 9.51,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_10",
+          "horse": "MY PHAR LADY",
+          "model_pct": 7.68,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_02",
+          "horse": "HELLOVA NATURE",
+          "model_pct": 6.66,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_07",
+          "horse": "SCINTILLA",
+          "model_pct": 5.41,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_03",
+          "horse": "I AM CARROT",
+          "model_pct": 5.27,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_04",
+          "horse": "CONGRESSMAN",
+          "model_pct": 5.19,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_15",
+          "horse": "BOW",
+          "model_pct": 5.04,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_13",
+          "horse": "KITTY OKAY",
+          "model_pct": 4.99,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_16",
+          "horse": "SUPER JAIE",
+          "model_pct": 4.24,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_06",
+          "horse": "CRYPTONIC",
+          "model_pct": 4.01,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_11",
+          "horse": "WILD THOUGHTS",
+          "model_pct": 3.56,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_14",
+          "horse": "AHELLBENDA",
+          "model_pct": 3.07,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_01",
+          "horse": "DUVANA",
+          "model_pct": 2.45,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R03",
+          "runner_id": "2026-11-07_ROSEHILL_R03_03",
+          "horse": "SAVVY SPY (NZ)",
+          "model_pct": 27.75,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R03",
+          "runner_id": "2026-11-07_ROSEHILL_R03_05",
+          "horse": "CRITERIA (NZ)",
+          "model_pct": 20.52,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R03",
+          "runner_id": "2026-11-07_ROSEHILL_R03_02",
+          "horse": "SAVISANTA (NZ)",
+          "model_pct": 8.2,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R03",
+          "runner_id": "2026-11-07_ROSEHILL_R03_06",
+          "horse": "WAR RIBBON",
+          "model_pct": 7.87,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R03",
+          "runner_id": "2026-11-07_ROSEHILL_R03_10",
+          "horse": "PARTY IT DOWN",
+          "model_pct": 6.88,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R03",
+          "runner_id": "2026-11-07_ROSEHILL_R03_08",
+          "horse": "SMART JAZZ",
+          "model_pct": 6.32,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R03",
+          "runner_id": "2026-11-07_ROSEHILL_R03_01",
+          "horse": "MEDATSU (NZ)",
+          "model_pct": 6.15,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R03",
+          "runner_id": "2026-11-07_ROSEHILL_R03_04",
+          "horse": "NKOSI",
+          "model_pct": 5.92,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R03",
+          "runner_id": "2026-11-07_ROSEHILL_R03_09",
+          "horse": "MR FABULOUS",
+          "model_pct": 5.8,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R03",
+          "runner_id": "2026-11-07_ROSEHILL_R03_07",
+          "horse": "SAINT EMILION",
+          "model_pct": 4.59,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R04",
+          "runner_id": "2026-11-07_ROSEHILL_R04_02",
+          "horse": "SAMARELLE (NZ)",
+          "model_pct": 22.33,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R04",
+          "runner_id": "2026-11-07_ROSEHILL_R04_06",
+          "horse": "DONATELLO (NZ)",
+          "model_pct": 12.99,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R04",
+          "runner_id": "2026-11-07_ROSEHILL_R04_10",
+          "horse": "OFF THE SCALE",
+          "model_pct": 11.95,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R04",
+          "runner_id": "2026-11-07_ROSEHILL_R04_03",
+          "horse": "BOTANICAL BOY (NZ)",
+          "model_pct": 10.51,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R04",
+          "runner_id": "2026-11-07_ROSEHILL_R04_04",
+          "horse": "STORM SEASON",
+          "model_pct": 10.42,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R04",
+          "runner_id": "2026-11-07_ROSEHILL_R04_11",
+          "horse": "MARSABIT (IRE)",
+          "model_pct": 6.96,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R04",
+          "runner_id": "2026-11-07_ROSEHILL_R04_05",
+          "horse": "WITHOUT PEER",
+          "model_pct": 6.6,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R04",
+          "runner_id": "2026-11-07_ROSEHILL_R04_07",
+          "horse": "MICHELANGELO",
+          "model_pct": 6.24,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R04",
+          "runner_id": "2026-11-07_ROSEHILL_R04_09",
+          "horse": "CANNY QUEEN (NZ)",
+          "model_pct": 5.09,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R04",
+          "runner_id": "2026-11-07_ROSEHILL_R04_08",
+          "horse": "SHE MOVES TOO",
+          "model_pct": 4.62,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R04",
+          "runner_id": "2026-11-07_ROSEHILL_R04_01",
+          "horse": "THRICE (IRE)",
+          "model_pct": 2.29,
+          "form_starts": 4
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R05",
+          "runner_id": "2026-11-07_ROSEHILL_R05_01",
+          "horse": "CASHOUT",
+          "model_pct": 23.39,
+          "form_starts": 3
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R05",
+          "runner_id": "2026-11-07_ROSEHILL_R05_09",
+          "horse": "SHOTGUN BELLA",
+          "model_pct": 14.03,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R05",
+          "runner_id": "2026-11-07_ROSEHILL_R05_04",
+          "horse": "BELLA KHADIJAH",
+          "model_pct": 12.95,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R05",
+          "runner_id": "2026-11-07_ROSEHILL_R05_08",
+          "horse": "ROSE AYE",
+          "model_pct": 10.6,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R05",
+          "runner_id": "2026-11-07_ROSEHILL_R05_07",
+          "horse": "PASADENA",
+          "model_pct": 10.22,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R05",
+          "runner_id": "2026-11-07_ROSEHILL_R05_05",
+          "horse": "PROBABILITY THEORY",
+          "model_pct": 9.19,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R05",
+          "runner_id": "2026-11-07_ROSEHILL_R05_02",
+          "horse": "THEBELMONTGANGSTER (IRE)",
+          "model_pct": 7.79,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R05",
+          "runner_id": "2026-11-07_ROSEHILL_R05_06",
+          "horse": "ACCIDENTAL BID (GB)",
+          "model_pct": 7.53,
+          "form_starts": 4
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R05",
+          "runner_id": "2026-11-07_ROSEHILL_R05_03",
+          "horse": "WOOTTON LASS",
+          "model_pct": 4.3,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_09",
+          "horse": "EXO VELOCITY",
+          "model_pct": 32.89,
+          "form_starts": 1
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_10",
+          "horse": "JENNI IN ROME (NZ)",
+          "model_pct": 11.15,
+          "form_starts": 1
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_07",
+          "horse": "SILENT INTENT",
+          "model_pct": 8.91,
+          "form_starts": 1
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_11",
+          "horse": "ORIGINATE",
+          "model_pct": 4.78,
+          "form_starts": 0
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_12",
+          "horse": "SHARJAWIYAH",
+          "model_pct": 4.78,
+          "form_starts": 0
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_14",
+          "horse": "WITKOWIN",
+          "model_pct": 4.78,
+          "form_starts": 0
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_01",
+          "horse": "ACT UP",
+          "model_pct": 4.76,
+          "form_starts": 1
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_03",
+          "horse": "FAST FEATHER",
+          "model_pct": 4.55,
+          "form_starts": 0
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_04",
+          "horse": "HOT SOX",
+          "model_pct": 4.55,
+          "form_starts": 0
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_08",
+          "horse": "TORSHAVN",
+          "model_pct": 4.55,
+          "form_starts": 0
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_02",
+          "horse": "CHASING ARCHER",
+          "model_pct": 4.35,
+          "form_starts": 2
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_13",
+          "horse": "VAIN AMBITION",
+          "model_pct": 4.28,
+          "form_starts": 0
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_06",
+          "horse": "ROYAL ACCORD",
+          "model_pct": 3.36,
+          "form_starts": 1
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_05",
+          "horse": "PROVERB",
+          "model_pct": 2.31,
+          "form_starts": 1
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R07",
+          "runner_id": "2026-11-07_ROSEHILL_R07_01",
+          "horse": "LAZZURA",
+          "model_pct": 47.3,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R07",
+          "runner_id": "2026-11-07_ROSEHILL_R07_03",
+          "horse": "GERRINGONG",
+          "model_pct": 12.04,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R07",
+          "runner_id": "2026-11-07_ROSEHILL_R07_08",
+          "horse": "CHAINS OF LOVE",
+          "model_pct": 9.23,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R07",
+          "runner_id": "2026-11-07_ROSEHILL_R07_10",
+          "horse": "SURF’S UP",
+          "model_pct": 7.19,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R07",
+          "runner_id": "2026-11-07_ROSEHILL_R07_04",
+          "horse": "ARABIAN ROSE",
+          "model_pct": 6.35,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R07",
+          "runner_id": "2026-11-07_ROSEHILL_R07_05",
+          "horse": "MODELLA",
+          "model_pct": 5.17,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R07",
+          "runner_id": "2026-11-07_ROSEHILL_R07_02",
+          "horse": "TUILERIES",
+          "model_pct": 4.28,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R07",
+          "runner_id": "2026-11-07_ROSEHILL_R07_11",
+          "horse": "MARETH",
+          "model_pct": 3.01,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R07",
+          "runner_id": "2026-11-07_ROSEHILL_R07_06",
+          "horse": "FIRESTORM (NZ)",
+          "model_pct": 2.76,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R07",
+          "runner_id": "2026-11-07_ROSEHILL_R07_07",
+          "horse": "DARK GLITTER",
+          "model_pct": 2.67,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "runner_id": "2026-11-07_ROSEHILL_R08_02",
+          "horse": "TUXEDO (NZ)",
+          "model_pct": 24.89,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "runner_id": "2026-11-07_ROSEHILL_R08_07",
+          "horse": "VERONA ROSE",
+          "model_pct": 11.91,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "runner_id": "2026-11-07_ROSEHILL_R08_12",
+          "horse": "BRINDAVAN (IRE)",
+          "model_pct": 11.64,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "runner_id": "2026-11-07_ROSEHILL_R08_11",
+          "horse": "WELCOMETOTHESHOW",
+          "model_pct": 11.12,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "runner_id": "2026-11-07_ROSEHILL_R08_08",
+          "horse": "DECLICHY BOULEVARD",
+          "model_pct": 7.81,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "runner_id": "2026-11-07_ROSEHILL_R08_09",
+          "horse": "PLYMOUTH",
+          "model_pct": 5.75,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "runner_id": "2026-11-07_ROSEHILL_R08_10",
+          "horse": "ZAMBARDO (NZ)",
+          "model_pct": 5.27,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "runner_id": "2026-11-07_ROSEHILL_R08_03",
+          "horse": "EVAPORATE (NZ)",
+          "model_pct": 5.19,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "runner_id": "2026-11-07_ROSEHILL_R08_01",
+          "horse": "LINEBACKER (NZ)",
+          "model_pct": 4.62,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "runner_id": "2026-11-07_ROSEHILL_R08_04",
+          "horse": "ATHANATOS",
+          "model_pct": 3.97,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "runner_id": "2026-11-07_ROSEHILL_R08_14",
+          "horse": "MR CHAPLIN (GB)",
+          "model_pct": 3.63,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "runner_id": "2026-11-07_ROSEHILL_R08_13",
+          "horse": "LORD PENMAN (NZ)",
+          "model_pct": 2.35,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "runner_id": "2026-11-07_ROSEHILL_R08_06",
+          "horse": "IMPERIALIST (NZ)",
+          "model_pct": 1.85,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R09",
+          "runner_id": "2026-11-07_ROSEHILL_R09_06",
+          "horse": "DETAIN (NZ)",
+          "model_pct": 21.21,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R09",
+          "runner_id": "2026-11-07_ROSEHILL_R09_02",
+          "horse": "MERCY ME",
+          "model_pct": 16.79,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R09",
+          "runner_id": "2026-11-07_ROSEHILL_R09_09",
+          "horse": "AGATHA",
+          "model_pct": 13.64,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R09",
+          "runner_id": "2026-11-07_ROSEHILL_R09_11",
+          "horse": "SHOW BUSINESS",
+          "model_pct": 8.87,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R09",
+          "runner_id": "2026-11-07_ROSEHILL_R09_12",
+          "horse": "OUTBACK ANGEL",
+          "model_pct": 8.1,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R09",
+          "runner_id": "2026-11-07_ROSEHILL_R09_07",
+          "horse": "SCENIC POINT",
+          "model_pct": 7.35,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R09",
+          "runner_id": "2026-11-07_ROSEHILL_R09_01",
+          "horse": "SWORDPLAY",
+          "model_pct": 7.13,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R09",
+          "runner_id": "2026-11-07_ROSEHILL_R09_10",
+          "horse": "FLIGHTCREW",
+          "model_pct": 6.26,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R09",
+          "runner_id": "2026-11-07_ROSEHILL_R09_03",
+          "horse": "REGIMENTAL COLOURS",
+          "model_pct": 6.18,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R09",
+          "runner_id": "2026-11-07_ROSEHILL_R09_08",
+          "horse": "SHE’S MY EX",
+          "model_pct": 4.47,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R10",
+          "runner_id": "2026-11-07_ROSEHILL_R10_01",
+          "horse": "ESMAHLI",
+          "model_pct": 17.51,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R10",
+          "runner_id": "2026-11-07_ROSEHILL_R10_05",
+          "horse": "LET’S GO AGAIN",
+          "model_pct": 14.54,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R10",
+          "runner_id": "2026-11-07_ROSEHILL_R10_09",
+          "horse": "HORSESHOE HILL",
+          "model_pct": 10.88,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R10",
+          "runner_id": "2026-11-07_ROSEHILL_R10_02",
+          "horse": "ANNIE’S ROSE",
+          "model_pct": 10.79,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R10",
+          "runner_id": "2026-11-07_ROSEHILL_R10_06",
+          "horse": "NULLARBOR JANE",
+          "model_pct": 10.62,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R10",
+          "runner_id": "2026-11-07_ROSEHILL_R10_13",
+          "horse": "CHEMTRAIL",
+          "model_pct": 8.29,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R10",
+          "runner_id": "2026-11-07_ROSEHILL_R10_03",
+          "horse": "MAILATA",
+          "model_pct": 6.21,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R10",
+          "runner_id": "2026-11-07_ROSEHILL_R10_12",
+          "horse": "ATMOSPHERIC ROCK",
+          "model_pct": 6,
+          "form_starts": 3
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R10",
+          "runner_id": "2026-11-07_ROSEHILL_R10_04",
+          "horse": "NITRO",
+          "model_pct": 5.48,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R10",
+          "runner_id": "2026-11-07_ROSEHILL_R10_08",
+          "horse": "SAXOBUSHI",
+          "model_pct": 5.06,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R10",
+          "runner_id": "2026-11-07_ROSEHILL_R10_07",
+          "horse": "PERFECT PICTURE",
+          "model_pct": 4.62,
+          "form_starts": 5
+        }
+      ]
+    },
+    {
+      "going": "Good 4",
+      "races": [
+        {
+          "race": 1,
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "title": "TAB HIGHWAY HANDICAP",
+          "field": 18,
+          "leader": "JUST HEAR ME OUT",
+          "model_pct": 10.48,
+          "top": [
+            {
+              "horse": "JUST HEAR ME OUT",
+              "runner_id": "2026-11-07_ROSEHILL_R01_08",
+              "model_pct": 10.48,
+              "form_starts": 5,
+              "completeness": 0.92
+            },
+            {
+              "horse": "MAINSTAY",
+              "runner_id": "2026-11-07_ROSEHILL_R01_03",
+              "model_pct": 8.88,
+              "form_starts": 3,
+              "completeness": 0.66
+            },
+            {
+              "horse": "DEFIANCE",
+              "runner_id": "2026-11-07_ROSEHILL_R01_01",
+              "model_pct": 8.8,
+              "form_starts": 5,
+              "completeness": 0.92
+            },
+            {
+              "horse": "CRIME OF PASSION",
+              "runner_id": "2026-11-07_ROSEHILL_R01_15",
+              "model_pct": 7.41,
+              "form_starts": 4,
+              "completeness": 0.86
+            },
+            {
+              "horse": "YESSPECIALLY",
+              "runner_id": "2026-11-07_ROSEHILL_R01_18",
+              "model_pct": 6.91,
+              "form_starts": 2,
+              "completeness": 0.59
+            }
+          ]
+        },
+        {
+          "race": 2,
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "title": "MIDWAY HANDICAP",
+          "field": 16,
+          "leader": "MAIDOFF",
+          "model_pct": 11.97,
+          "top": [
+            {
+              "horse": "MAIDOFF",
+              "runner_id": "2026-11-07_ROSEHILL_R02_05",
+              "model_pct": 11.97,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "LAWLESS LUCY",
+              "runner_id": "2026-11-07_ROSEHILL_R02_12",
+              "model_pct": 9.82,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "POWDER MAN",
+              "runner_id": "2026-11-07_ROSEHILL_R02_08",
+              "model_pct": 9.42,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "HELLOVA NATURE",
+              "runner_id": "2026-11-07_ROSEHILL_R02_02",
+              "model_pct": 9.19,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "MY PHAR LADY",
+              "runner_id": "2026-11-07_ROSEHILL_R02_10",
+              "model_pct": 7.75,
+              "form_starts": 5,
+              "completeness": 1
+            }
+          ]
+        },
+        {
+          "race": 3,
+          "race_id": "2026-11-07_ROSEHILL_R03",
+          "title": "RANVET HANDICAP",
+          "field": 10,
+          "leader": "SAVVY SPY (NZ)",
+          "model_pct": 24.59,
+          "top": [
+            {
+              "horse": "SAVVY SPY (NZ)",
+              "runner_id": "2026-11-07_ROSEHILL_R03_03",
+              "model_pct": 24.59,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "CRITERIA (NZ)",
+              "runner_id": "2026-11-07_ROSEHILL_R03_05",
+              "model_pct": 21.38,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "SAVISANTA (NZ)",
+              "runner_id": "2026-11-07_ROSEHILL_R03_02",
+              "model_pct": 9.53,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "MR FABULOUS",
+              "runner_id": "2026-11-07_ROSEHILL_R03_09",
+              "model_pct": 8.64,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "MEDATSU (NZ)",
+              "runner_id": "2026-11-07_ROSEHILL_R03_01",
+              "model_pct": 7.44,
+              "form_starts": 5,
+              "completeness": 0.87
+            }
+          ]
+        },
+        {
+          "race": 4,
+          "race_id": "2026-11-07_ROSEHILL_R04",
+          "title": "VALE ROB BURNET HANDICAP",
+          "field": 11,
+          "leader": "SAMARELLE (NZ)",
+          "model_pct": 16.99,
+          "top": [
+            {
+              "horse": "SAMARELLE (NZ)",
+              "runner_id": "2026-11-07_ROSEHILL_R04_02",
+              "model_pct": 16.99,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "DONATELLO (NZ)",
+              "runner_id": "2026-11-07_ROSEHILL_R04_06",
+              "model_pct": 14.81,
+              "form_starts": 5,
+              "completeness": 0.92
+            },
+            {
+              "horse": "BOTANICAL BOY (NZ)",
+              "runner_id": "2026-11-07_ROSEHILL_R04_03",
+              "model_pct": 12.06,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "STORM SEASON",
+              "runner_id": "2026-11-07_ROSEHILL_R04_04",
+              "model_pct": 11.43,
+              "form_starts": 5,
+              "completeness": 0.87
+            },
+            {
+              "horse": "OFF THE SCALE",
+              "runner_id": "2026-11-07_ROSEHILL_R04_10",
+              "model_pct": 10.81,
+              "form_starts": 5,
+              "completeness": 0.92
+            }
+          ]
+        },
+        {
+          "race": 5,
+          "race_id": "2026-11-07_ROSEHILL_R05",
+          "title": "SINGAPORE POOLS HANDICAP",
+          "field": 9,
+          "leader": "CASHOUT",
+          "model_pct": 25.43,
+          "top": [
+            {
+              "horse": "CASHOUT",
+              "runner_id": "2026-11-07_ROSEHILL_R05_01",
+              "model_pct": 25.43,
+              "form_starts": 3,
+              "completeness": 0.79
+            },
+            {
+              "horse": "SHOTGUN BELLA",
+              "runner_id": "2026-11-07_ROSEHILL_R05_09",
+              "model_pct": 13.64,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "PASADENA",
+              "runner_id": "2026-11-07_ROSEHILL_R05_07",
+              "model_pct": 12.63,
+              "form_starts": 5,
+              "completeness": 0.79
+            },
+            {
+              "horse": "PROBABILITY THEORY",
+              "runner_id": "2026-11-07_ROSEHILL_R05_05",
+              "model_pct": 11.23,
+              "form_starts": 5,
+              "completeness": 0.92
+            },
+            {
+              "horse": "ROSE AYE",
+              "runner_id": "2026-11-07_ROSEHILL_R05_08",
+              "model_pct": 10.91,
+              "form_starts": 5,
+              "completeness": 1
+            }
+          ]
+        },
+        {
+          "race": 6,
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "title": "GOLDEN GIFT",
+          "field": 14,
+          "leader": "EXO VELOCITY",
+          "model_pct": 40.64,
+          "top": [
+            {
+              "horse": "EXO VELOCITY",
+              "runner_id": "2026-11-07_ROSEHILL_R06_09",
+              "model_pct": 40.64,
+              "form_starts": 1,
+              "completeness": 0.52
+            },
+            {
+              "horse": "JENNI IN ROME (NZ)",
+              "runner_id": "2026-11-07_ROSEHILL_R06_10",
+              "model_pct": 11.25,
+              "form_starts": 1,
+              "completeness": 0.52
+            },
+            {
+              "horse": "SILENT INTENT",
+              "runner_id": "2026-11-07_ROSEHILL_R06_07",
+              "model_pct": 7.48,
+              "form_starts": 1,
+              "completeness": 0.39
+            },
+            {
+              "horse": "ORIGINATE",
+              "runner_id": "2026-11-07_ROSEHILL_R06_11",
+              "model_pct": 4.1,
+              "form_starts": 0,
+              "completeness": 0.04
+            },
+            {
+              "horse": "SHARJAWIYAH",
+              "runner_id": "2026-11-07_ROSEHILL_R06_12",
+              "model_pct": 4.1,
+              "form_starts": 0,
+              "completeness": 0.04
+            }
+          ]
+        },
+        {
+          "race": 7,
+          "race_id": "2026-11-07_ROSEHILL_R07",
+          "title": "TOYOTA FORKLIFTS HOT DANISH STAKES",
+          "field": 10,
+          "leader": "LAZZURA",
+          "model_pct": 49.42,
+          "top": [
+            {
+              "horse": "LAZZURA",
+              "runner_id": "2026-11-07_ROSEHILL_R07_01",
+              "model_pct": 49.42,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "GERRINGONG",
+              "runner_id": "2026-11-07_ROSEHILL_R07_03",
+              "model_pct": 12.11,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "CHAINS OF LOVE",
+              "runner_id": "2026-11-07_ROSEHILL_R07_08",
+              "model_pct": 7.95,
+              "form_starts": 5,
+              "completeness": 0.79
+            },
+            {
+              "horse": "SURF’S UP",
+              "runner_id": "2026-11-07_ROSEHILL_R07_10",
+              "model_pct": 6.15,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "MODELLA",
+              "runner_id": "2026-11-07_ROSEHILL_R07_05",
+              "model_pct": 6.09,
+              "form_starts": 5,
+              "completeness": 1
+            }
+          ]
+        },
+        {
+          "race": 8,
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "title": "FIVE DIAMONDS",
+          "field": 13,
+          "leader": "TUXEDO (NZ)",
+          "model_pct": 22.46,
+          "top": [
+            {
+              "horse": "TUXEDO (NZ)",
+              "runner_id": "2026-11-07_ROSEHILL_R08_02",
+              "model_pct": 22.46,
+              "form_starts": 5,
+              "completeness": 0.73
+            },
+            {
+              "horse": "BRINDAVAN (IRE)",
+              "runner_id": "2026-11-07_ROSEHILL_R08_12",
+              "model_pct": 12.18,
+              "form_starts": 5,
+              "completeness": 0.92
+            },
+            {
+              "horse": "WELCOMETOTHESHOW",
+              "runner_id": "2026-11-07_ROSEHILL_R08_11",
+              "model_pct": 11.96,
+              "form_starts": 5,
+              "completeness": 0.79
+            },
+            {
+              "horse": "VERONA ROSE",
+              "runner_id": "2026-11-07_ROSEHILL_R08_07",
+              "model_pct": 10.59,
+              "form_starts": 5,
+              "completeness": 0.87
+            },
+            {
+              "horse": "DECLICHY BOULEVARD",
+              "runner_id": "2026-11-07_ROSEHILL_R08_08",
+              "model_pct": 7.73,
+              "form_starts": 5,
+              "completeness": 0.87
+            }
+          ]
+        },
+        {
+          "race": 9,
+          "race_id": "2026-11-07_ROSEHILL_R09",
+          "title": "GRANT BURGE HANDICAP",
+          "field": 10,
+          "leader": "DETAIN (NZ)",
+          "model_pct": 18.59,
+          "top": [
+            {
+              "horse": "DETAIN (NZ)",
+              "runner_id": "2026-11-07_ROSEHILL_R09_06",
+              "model_pct": 18.59,
+              "form_starts": 5,
+              "completeness": 0.92
+            },
+            {
+              "horse": "MERCY ME",
+              "runner_id": "2026-11-07_ROSEHILL_R09_02",
+              "model_pct": 18.48,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "AGATHA",
+              "runner_id": "2026-11-07_ROSEHILL_R09_09",
+              "model_pct": 13.02,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "SCENIC POINT",
+              "runner_id": "2026-11-07_ROSEHILL_R09_07",
+              "model_pct": 9.17,
+              "form_starts": 5,
+              "completeness": 0.92
+            },
+            {
+              "horse": "OUTBACK ANGEL",
+              "runner_id": "2026-11-07_ROSEHILL_R09_12",
+              "model_pct": 8.48,
+              "form_starts": 5,
+              "completeness": 0.92
+            }
+          ]
+        },
+        {
+          "race": 10,
+          "race_id": "2026-11-07_ROSEHILL_R10",
+          "title": "KIA ORA BLOODLINES TO HEADLINES HANDICAP",
+          "field": 11,
+          "leader": "ESMAHLI",
+          "model_pct": 18.83,
+          "top": [
+            {
+              "horse": "ESMAHLI",
+              "runner_id": "2026-11-07_ROSEHILL_R10_01",
+              "model_pct": 18.83,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "LET’S GO AGAIN",
+              "runner_id": "2026-11-07_ROSEHILL_R10_05",
+              "model_pct": 17.06,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "NULLARBOR JANE",
+              "runner_id": "2026-11-07_ROSEHILL_R10_06",
+              "model_pct": 9.51,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "HORSESHOE HILL",
+              "runner_id": "2026-11-07_ROSEHILL_R10_09",
+              "model_pct": 8.55,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "ANNIE’S ROSE",
+              "runner_id": "2026-11-07_ROSEHILL_R10_02",
+              "model_pct": 8.17,
+              "form_starts": 5,
+              "completeness": 1
+            }
+          ]
+        }
+      ],
+      "records": [
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_08",
+          "horse": "JUST HEAR ME OUT",
+          "model_pct": 10.48,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_03",
+          "horse": "MAINSTAY",
+          "model_pct": 8.88,
+          "form_starts": 3
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_01",
+          "horse": "DEFIANCE",
+          "model_pct": 8.8,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_15",
+          "horse": "CRIME OF PASSION",
+          "model_pct": 7.41,
+          "form_starts": 4
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_18",
+          "horse": "YESSPECIALLY",
+          "model_pct": 6.91,
+          "form_starts": 2
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_10",
+          "horse": "ATHENA’S TREASURE",
+          "model_pct": 6.37,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_09",
+          "horse": "WHATELEY",
+          "model_pct": 6.26,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_11",
+          "horse": "SUPREME STYLE",
+          "model_pct": 6.06,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_14",
+          "horse": "PANTA RHEI",
+          "model_pct": 5.4,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_12",
+          "horse": "NEVERMISTA",
+          "model_pct": 5.06,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_04",
+          "horse": "BRAVE XENA",
+          "model_pct": 4.71,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_07",
+          "horse": "CAMPARI TWIST",
+          "model_pct": 4.37,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_06",
+          "horse": "SPEEDY HENRY",
+          "model_pct": 4.03,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_02",
+          "horse": "COMONGIN",
+          "model_pct": 3.5,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_17",
+          "horse": "RELEASE POINT",
+          "model_pct": 3.17,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_16",
+          "horse": "GIRRAWHEEN",
+          "model_pct": 3.1,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_05",
+          "horse": "LE CHOCOLAT (NZ)",
+          "model_pct": 2.99,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_13",
+          "horse": "TROPIC",
+          "model_pct": 2.5,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_05",
+          "horse": "MAIDOFF",
+          "model_pct": 11.97,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_12",
+          "horse": "LAWLESS LUCY",
+          "model_pct": 9.82,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_08",
+          "horse": "POWDER MAN",
+          "model_pct": 9.42,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_02",
+          "horse": "HELLOVA NATURE",
+          "model_pct": 9.19,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_10",
+          "horse": "MY PHAR LADY",
+          "model_pct": 7.75,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_09",
+          "horse": "COMMON GOAL",
+          "model_pct": 7.39,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_04",
+          "horse": "CONGRESSMAN",
+          "model_pct": 6.62,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_03",
+          "horse": "I AM CARROT",
+          "model_pct": 5.32,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_11",
+          "horse": "WILD THOUGHTS",
+          "model_pct": 4.77,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_15",
+          "horse": "BOW",
+          "model_pct": 4.58,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_16",
+          "horse": "SUPER JAIE",
+          "model_pct": 4.41,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_07",
+          "horse": "SCINTILLA",
+          "model_pct": 4.12,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_06",
+          "horse": "CRYPTONIC",
+          "model_pct": 4.09,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_14",
+          "horse": "AHELLBENDA",
+          "model_pct": 4.02,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_13",
+          "horse": "KITTY OKAY",
+          "model_pct": 3.68,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_01",
+          "horse": "DUVANA",
+          "model_pct": 2.85,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R03",
+          "runner_id": "2026-11-07_ROSEHILL_R03_03",
+          "horse": "SAVVY SPY (NZ)",
+          "model_pct": 24.59,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R03",
+          "runner_id": "2026-11-07_ROSEHILL_R03_05",
+          "horse": "CRITERIA (NZ)",
+          "model_pct": 21.38,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R03",
+          "runner_id": "2026-11-07_ROSEHILL_R03_02",
+          "horse": "SAVISANTA (NZ)",
+          "model_pct": 9.53,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R03",
+          "runner_id": "2026-11-07_ROSEHILL_R03_09",
+          "horse": "MR FABULOUS",
+          "model_pct": 8.64,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R03",
+          "runner_id": "2026-11-07_ROSEHILL_R03_01",
+          "horse": "MEDATSU (NZ)",
+          "model_pct": 7.44,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R03",
+          "runner_id": "2026-11-07_ROSEHILL_R03_10",
+          "horse": "PARTY IT DOWN",
+          "model_pct": 6.86,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R03",
+          "runner_id": "2026-11-07_ROSEHILL_R03_06",
+          "horse": "WAR RIBBON",
+          "model_pct": 6.28,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R03",
+          "runner_id": "2026-11-07_ROSEHILL_R03_08",
+          "horse": "SMART JAZZ",
+          "model_pct": 5.41,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R03",
+          "runner_id": "2026-11-07_ROSEHILL_R03_07",
+          "horse": "SAINT EMILION",
+          "model_pct": 5.2,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R03",
+          "runner_id": "2026-11-07_ROSEHILL_R03_04",
+          "horse": "NKOSI",
+          "model_pct": 4.67,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R04",
+          "runner_id": "2026-11-07_ROSEHILL_R04_02",
+          "horse": "SAMARELLE (NZ)",
+          "model_pct": 16.99,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R04",
+          "runner_id": "2026-11-07_ROSEHILL_R04_06",
+          "horse": "DONATELLO (NZ)",
+          "model_pct": 14.81,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R04",
+          "runner_id": "2026-11-07_ROSEHILL_R04_03",
+          "horse": "BOTANICAL BOY (NZ)",
+          "model_pct": 12.06,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R04",
+          "runner_id": "2026-11-07_ROSEHILL_R04_04",
+          "horse": "STORM SEASON",
+          "model_pct": 11.43,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R04",
+          "runner_id": "2026-11-07_ROSEHILL_R04_10",
+          "horse": "OFF THE SCALE",
+          "model_pct": 10.81,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R04",
+          "runner_id": "2026-11-07_ROSEHILL_R04_11",
+          "horse": "MARSABIT (IRE)",
+          "model_pct": 8.01,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R04",
+          "runner_id": "2026-11-07_ROSEHILL_R04_07",
+          "horse": "MICHELANGELO",
+          "model_pct": 7.71,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R04",
+          "runner_id": "2026-11-07_ROSEHILL_R04_09",
+          "horse": "CANNY QUEEN (NZ)",
+          "model_pct": 5.6,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R04",
+          "runner_id": "2026-11-07_ROSEHILL_R04_05",
+          "horse": "WITHOUT PEER",
+          "model_pct": 4.95,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R04",
+          "runner_id": "2026-11-07_ROSEHILL_R04_08",
+          "horse": "SHE MOVES TOO",
+          "model_pct": 4.88,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R04",
+          "runner_id": "2026-11-07_ROSEHILL_R04_01",
+          "horse": "THRICE (IRE)",
+          "model_pct": 2.75,
+          "form_starts": 4
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R05",
+          "runner_id": "2026-11-07_ROSEHILL_R05_01",
+          "horse": "CASHOUT",
+          "model_pct": 25.43,
+          "form_starts": 3
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R05",
+          "runner_id": "2026-11-07_ROSEHILL_R05_09",
+          "horse": "SHOTGUN BELLA",
+          "model_pct": 13.64,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R05",
+          "runner_id": "2026-11-07_ROSEHILL_R05_07",
+          "horse": "PASADENA",
+          "model_pct": 12.63,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R05",
+          "runner_id": "2026-11-07_ROSEHILL_R05_05",
+          "horse": "PROBABILITY THEORY",
+          "model_pct": 11.23,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R05",
+          "runner_id": "2026-11-07_ROSEHILL_R05_08",
+          "horse": "ROSE AYE",
+          "model_pct": 10.91,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R05",
+          "runner_id": "2026-11-07_ROSEHILL_R05_04",
+          "horse": "BELLA KHADIJAH",
+          "model_pct": 10.57,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R05",
+          "runner_id": "2026-11-07_ROSEHILL_R05_02",
+          "horse": "THEBELMONTGANGSTER (IRE)",
+          "model_pct": 6.06,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R05",
+          "runner_id": "2026-11-07_ROSEHILL_R05_06",
+          "horse": "ACCIDENTAL BID (GB)",
+          "model_pct": 5.85,
+          "form_starts": 4
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R05",
+          "runner_id": "2026-11-07_ROSEHILL_R05_03",
+          "horse": "WOOTTON LASS",
+          "model_pct": 3.68,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_09",
+          "horse": "EXO VELOCITY",
+          "model_pct": 40.64,
+          "form_starts": 1
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_10",
+          "horse": "JENNI IN ROME (NZ)",
+          "model_pct": 11.25,
+          "form_starts": 1
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_07",
+          "horse": "SILENT INTENT",
+          "model_pct": 7.48,
+          "form_starts": 1
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_11",
+          "horse": "ORIGINATE",
+          "model_pct": 4.1,
+          "form_starts": 0
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_12",
+          "horse": "SHARJAWIYAH",
+          "model_pct": 4.1,
+          "form_starts": 0
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_14",
+          "horse": "WITKOWIN",
+          "model_pct": 4.1,
+          "form_starts": 0
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_01",
+          "horse": "ACT UP",
+          "model_pct": 4.08,
+          "form_starts": 1
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_03",
+          "horse": "FAST FEATHER",
+          "model_pct": 3.92,
+          "form_starts": 0
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_04",
+          "horse": "HOT SOX",
+          "model_pct": 3.91,
+          "form_starts": 0
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_08",
+          "horse": "TORSHAVN",
+          "model_pct": 3.91,
+          "form_starts": 0
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_02",
+          "horse": "CHASING ARCHER",
+          "model_pct": 3.79,
+          "form_starts": 2
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_13",
+          "horse": "VAIN AMBITION",
+          "model_pct": 3.7,
+          "form_starts": 0
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_06",
+          "horse": "ROYAL ACCORD",
+          "model_pct": 2.94,
+          "form_starts": 1
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_05",
+          "horse": "PROVERB",
+          "model_pct": 2.08,
+          "form_starts": 1
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R07",
+          "runner_id": "2026-11-07_ROSEHILL_R07_01",
+          "horse": "LAZZURA",
+          "model_pct": 49.42,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R07",
+          "runner_id": "2026-11-07_ROSEHILL_R07_03",
+          "horse": "GERRINGONG",
+          "model_pct": 12.11,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R07",
+          "runner_id": "2026-11-07_ROSEHILL_R07_08",
+          "horse": "CHAINS OF LOVE",
+          "model_pct": 7.95,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R07",
+          "runner_id": "2026-11-07_ROSEHILL_R07_10",
+          "horse": "SURF’S UP",
+          "model_pct": 6.15,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R07",
+          "runner_id": "2026-11-07_ROSEHILL_R07_05",
+          "horse": "MODELLA",
+          "model_pct": 6.09,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R07",
+          "runner_id": "2026-11-07_ROSEHILL_R07_04",
+          "horse": "ARABIAN ROSE",
+          "model_pct": 5.72,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R07",
+          "runner_id": "2026-11-07_ROSEHILL_R07_02",
+          "horse": "TUILERIES",
+          "model_pct": 4.59,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R07",
+          "runner_id": "2026-11-07_ROSEHILL_R07_11",
+          "horse": "MARETH",
+          "model_pct": 2.85,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R07",
+          "runner_id": "2026-11-07_ROSEHILL_R07_06",
+          "horse": "FIRESTORM (NZ)",
+          "model_pct": 2.6,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R07",
+          "runner_id": "2026-11-07_ROSEHILL_R07_07",
+          "horse": "DARK GLITTER",
+          "model_pct": 2.52,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "runner_id": "2026-11-07_ROSEHILL_R08_02",
+          "horse": "TUXEDO (NZ)",
+          "model_pct": 22.46,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "runner_id": "2026-11-07_ROSEHILL_R08_12",
+          "horse": "BRINDAVAN (IRE)",
+          "model_pct": 12.18,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "runner_id": "2026-11-07_ROSEHILL_R08_11",
+          "horse": "WELCOMETOTHESHOW",
+          "model_pct": 11.96,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "runner_id": "2026-11-07_ROSEHILL_R08_07",
+          "horse": "VERONA ROSE",
+          "model_pct": 10.59,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "runner_id": "2026-11-07_ROSEHILL_R08_08",
+          "horse": "DECLICHY BOULEVARD",
+          "model_pct": 7.73,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "runner_id": "2026-11-07_ROSEHILL_R08_01",
+          "horse": "LINEBACKER (NZ)",
+          "model_pct": 7.36,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "runner_id": "2026-11-07_ROSEHILL_R08_10",
+          "horse": "ZAMBARDO (NZ)",
+          "model_pct": 5.98,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "runner_id": "2026-11-07_ROSEHILL_R08_09",
+          "horse": "PLYMOUTH",
+          "model_pct": 5.25,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "runner_id": "2026-11-07_ROSEHILL_R08_03",
+          "horse": "EVAPORATE (NZ)",
+          "model_pct": 4.68,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "runner_id": "2026-11-07_ROSEHILL_R08_04",
+          "horse": "ATHANATOS",
+          "model_pct": 4.14,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "runner_id": "2026-11-07_ROSEHILL_R08_14",
+          "horse": "MR CHAPLIN (GB)",
+          "model_pct": 3.52,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "runner_id": "2026-11-07_ROSEHILL_R08_13",
+          "horse": "LORD PENMAN (NZ)",
+          "model_pct": 2.3,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "runner_id": "2026-11-07_ROSEHILL_R08_06",
+          "horse": "IMPERIALIST (NZ)",
+          "model_pct": 1.85,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R09",
+          "runner_id": "2026-11-07_ROSEHILL_R09_06",
+          "horse": "DETAIN (NZ)",
+          "model_pct": 18.59,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R09",
+          "runner_id": "2026-11-07_ROSEHILL_R09_02",
+          "horse": "MERCY ME",
+          "model_pct": 18.48,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R09",
+          "runner_id": "2026-11-07_ROSEHILL_R09_09",
+          "horse": "AGATHA",
+          "model_pct": 13.02,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R09",
+          "runner_id": "2026-11-07_ROSEHILL_R09_07",
+          "horse": "SCENIC POINT",
+          "model_pct": 9.17,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R09",
+          "runner_id": "2026-11-07_ROSEHILL_R09_12",
+          "horse": "OUTBACK ANGEL",
+          "model_pct": 8.48,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R09",
+          "runner_id": "2026-11-07_ROSEHILL_R09_01",
+          "horse": "SWORDPLAY",
+          "model_pct": 7.8,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R09",
+          "runner_id": "2026-11-07_ROSEHILL_R09_11",
+          "horse": "SHOW BUSINESS",
+          "model_pct": 7.07,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R09",
+          "runner_id": "2026-11-07_ROSEHILL_R09_08",
+          "horse": "SHE’S MY EX",
+          "model_pct": 6.19,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R09",
+          "runner_id": "2026-11-07_ROSEHILL_R09_10",
+          "horse": "FLIGHTCREW",
+          "model_pct": 6.12,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R09",
+          "runner_id": "2026-11-07_ROSEHILL_R09_03",
+          "horse": "REGIMENTAL COLOURS",
+          "model_pct": 5.08,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R10",
+          "runner_id": "2026-11-07_ROSEHILL_R10_01",
+          "horse": "ESMAHLI",
+          "model_pct": 18.83,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R10",
+          "runner_id": "2026-11-07_ROSEHILL_R10_05",
+          "horse": "LET’S GO AGAIN",
+          "model_pct": 17.06,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R10",
+          "runner_id": "2026-11-07_ROSEHILL_R10_06",
+          "horse": "NULLARBOR JANE",
+          "model_pct": 9.51,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R10",
+          "runner_id": "2026-11-07_ROSEHILL_R10_09",
+          "horse": "HORSESHOE HILL",
+          "model_pct": 8.55,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R10",
+          "runner_id": "2026-11-07_ROSEHILL_R10_02",
+          "horse": "ANNIE’S ROSE",
+          "model_pct": 8.17,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R10",
+          "runner_id": "2026-11-07_ROSEHILL_R10_04",
+          "horse": "NITRO",
+          "model_pct": 7.58,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R10",
+          "runner_id": "2026-11-07_ROSEHILL_R10_13",
+          "horse": "CHEMTRAIL",
+          "model_pct": 7.38,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R10",
+          "runner_id": "2026-11-07_ROSEHILL_R10_12",
+          "horse": "ATMOSPHERIC ROCK",
+          "model_pct": 6.9,
+          "form_starts": 3
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R10",
+          "runner_id": "2026-11-07_ROSEHILL_R10_07",
+          "horse": "PERFECT PICTURE",
+          "model_pct": 5.83,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R10",
+          "runner_id": "2026-11-07_ROSEHILL_R10_03",
+          "horse": "MAILATA",
+          "model_pct": 5.58,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R10",
+          "runner_id": "2026-11-07_ROSEHILL_R10_08",
+          "horse": "SAXOBUSHI",
+          "model_pct": 4.61,
+          "form_starts": 5
+        }
+      ]
+    },
+    {
+      "going": "Soft 7",
+      "races": [
+        {
+          "race": 1,
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "title": "TAB HIGHWAY HANDICAP",
+          "field": 18,
+          "leader": "DEFIANCE",
+          "model_pct": 9.11,
+          "top": [
+            {
+              "horse": "DEFIANCE",
+              "runner_id": "2026-11-07_ROSEHILL_R01_01",
+              "model_pct": 9.11,
+              "form_starts": 5,
+              "completeness": 0.92
+            },
+            {
+              "horse": "MAINSTAY",
+              "runner_id": "2026-11-07_ROSEHILL_R01_03",
+              "model_pct": 8.9,
+              "form_starts": 3,
+              "completeness": 0.66
+            },
+            {
+              "horse": "CRIME OF PASSION",
+              "runner_id": "2026-11-07_ROSEHILL_R01_15",
+              "model_pct": 8.01,
+              "form_starts": 4,
+              "completeness": 0.86
+            },
+            {
+              "horse": "JUST HEAR ME OUT",
+              "runner_id": "2026-11-07_ROSEHILL_R01_08",
+              "model_pct": 7.75,
+              "form_starts": 5,
+              "completeness": 0.92
+            },
+            {
+              "horse": "YESSPECIALLY",
+              "runner_id": "2026-11-07_ROSEHILL_R01_18",
+              "model_pct": 7.71,
+              "form_starts": 2,
+              "completeness": 0.59
+            }
+          ]
+        },
+        {
+          "race": 2,
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "title": "MIDWAY HANDICAP",
+          "field": 16,
+          "leader": "POWDER MAN",
+          "model_pct": 11.77,
+          "top": [
+            {
+              "horse": "POWDER MAN",
+              "runner_id": "2026-11-07_ROSEHILL_R02_08",
+              "model_pct": 11.77,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "LAWLESS LUCY",
+              "runner_id": "2026-11-07_ROSEHILL_R02_12",
+              "model_pct": 10.89,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "COMMON GOAL",
+              "runner_id": "2026-11-07_ROSEHILL_R02_09",
+              "model_pct": 10.26,
+              "form_starts": 5,
+              "completeness": 0.92
+            },
+            {
+              "horse": "MAIDOFF",
+              "runner_id": "2026-11-07_ROSEHILL_R02_05",
+              "model_pct": 9.51,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "MY PHAR LADY",
+              "runner_id": "2026-11-07_ROSEHILL_R02_10",
+              "model_pct": 7.68,
+              "form_starts": 5,
+              "completeness": 1
+            }
+          ]
+        },
+        {
+          "race": 3,
+          "race_id": "2026-11-07_ROSEHILL_R03",
+          "title": "RANVET HANDICAP",
+          "field": 10,
+          "leader": "SAVVY SPY (NZ)",
+          "model_pct": 27.75,
+          "top": [
+            {
+              "horse": "SAVVY SPY (NZ)",
+              "runner_id": "2026-11-07_ROSEHILL_R03_03",
+              "model_pct": 27.75,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "CRITERIA (NZ)",
+              "runner_id": "2026-11-07_ROSEHILL_R03_05",
+              "model_pct": 20.52,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "SAVISANTA (NZ)",
+              "runner_id": "2026-11-07_ROSEHILL_R03_02",
+              "model_pct": 8.2,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "WAR RIBBON",
+              "runner_id": "2026-11-07_ROSEHILL_R03_06",
+              "model_pct": 7.87,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "PARTY IT DOWN",
+              "runner_id": "2026-11-07_ROSEHILL_R03_10",
+              "model_pct": 6.88,
+              "form_starts": 5,
+              "completeness": 0.79
+            }
+          ]
+        },
+        {
+          "race": 4,
+          "race_id": "2026-11-07_ROSEHILL_R04",
+          "title": "VALE ROB BURNET HANDICAP",
+          "field": 11,
+          "leader": "SAMARELLE (NZ)",
+          "model_pct": 22.33,
+          "top": [
+            {
+              "horse": "SAMARELLE (NZ)",
+              "runner_id": "2026-11-07_ROSEHILL_R04_02",
+              "model_pct": 22.33,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "DONATELLO (NZ)",
+              "runner_id": "2026-11-07_ROSEHILL_R04_06",
+              "model_pct": 12.99,
+              "form_starts": 5,
+              "completeness": 0.92
+            },
+            {
+              "horse": "OFF THE SCALE",
+              "runner_id": "2026-11-07_ROSEHILL_R04_10",
+              "model_pct": 11.95,
+              "form_starts": 5,
+              "completeness": 0.92
+            },
+            {
+              "horse": "BOTANICAL BOY (NZ)",
+              "runner_id": "2026-11-07_ROSEHILL_R04_03",
+              "model_pct": 10.51,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "STORM SEASON",
+              "runner_id": "2026-11-07_ROSEHILL_R04_04",
+              "model_pct": 10.42,
+              "form_starts": 5,
+              "completeness": 0.87
+            }
+          ]
+        },
+        {
+          "race": 5,
+          "race_id": "2026-11-07_ROSEHILL_R05",
+          "title": "SINGAPORE POOLS HANDICAP",
+          "field": 9,
+          "leader": "CASHOUT",
+          "model_pct": 23.39,
+          "top": [
+            {
+              "horse": "CASHOUT",
+              "runner_id": "2026-11-07_ROSEHILL_R05_01",
+              "model_pct": 23.39,
+              "form_starts": 3,
+              "completeness": 0.79
+            },
+            {
+              "horse": "SHOTGUN BELLA",
+              "runner_id": "2026-11-07_ROSEHILL_R05_09",
+              "model_pct": 14.03,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "BELLA KHADIJAH",
+              "runner_id": "2026-11-07_ROSEHILL_R05_04",
+              "model_pct": 12.95,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "ROSE AYE",
+              "runner_id": "2026-11-07_ROSEHILL_R05_08",
+              "model_pct": 10.6,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "PASADENA",
+              "runner_id": "2026-11-07_ROSEHILL_R05_07",
+              "model_pct": 10.22,
+              "form_starts": 5,
+              "completeness": 0.66
+            }
+          ]
+        },
+        {
+          "race": 6,
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "title": "GOLDEN GIFT",
+          "field": 14,
+          "leader": "EXO VELOCITY",
+          "model_pct": 32.89,
+          "top": [
+            {
+              "horse": "EXO VELOCITY",
+              "runner_id": "2026-11-07_ROSEHILL_R06_09",
+              "model_pct": 32.89,
+              "form_starts": 1,
+              "completeness": 0.39
+            },
+            {
+              "horse": "JENNI IN ROME (NZ)",
+              "runner_id": "2026-11-07_ROSEHILL_R06_10",
+              "model_pct": 11.15,
+              "form_starts": 1,
+              "completeness": 0.39
+            },
+            {
+              "horse": "SILENT INTENT",
+              "runner_id": "2026-11-07_ROSEHILL_R06_07",
+              "model_pct": 8.91,
+              "form_starts": 1,
+              "completeness": 0.39
+            },
+            {
+              "horse": "ORIGINATE",
+              "runner_id": "2026-11-07_ROSEHILL_R06_11",
+              "model_pct": 4.78,
+              "form_starts": 0,
+              "completeness": 0.04
+            },
+            {
+              "horse": "SHARJAWIYAH",
+              "runner_id": "2026-11-07_ROSEHILL_R06_12",
+              "model_pct": 4.78,
+              "form_starts": 0,
+              "completeness": 0.04
+            }
+          ]
+        },
+        {
+          "race": 7,
+          "race_id": "2026-11-07_ROSEHILL_R07",
+          "title": "TOYOTA FORKLIFTS HOT DANISH STAKES",
+          "field": 10,
+          "leader": "LAZZURA",
+          "model_pct": 47.3,
+          "top": [
+            {
+              "horse": "LAZZURA",
+              "runner_id": "2026-11-07_ROSEHILL_R07_01",
+              "model_pct": 47.3,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "GERRINGONG",
+              "runner_id": "2026-11-07_ROSEHILL_R07_03",
+              "model_pct": 12.04,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "CHAINS OF LOVE",
+              "runner_id": "2026-11-07_ROSEHILL_R07_08",
+              "model_pct": 9.23,
+              "form_starts": 5,
+              "completeness": 0.79
+            },
+            {
+              "horse": "SURF’S UP",
+              "runner_id": "2026-11-07_ROSEHILL_R07_10",
+              "model_pct": 7.19,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "ARABIAN ROSE",
+              "runner_id": "2026-11-07_ROSEHILL_R07_04",
+              "model_pct": 6.35,
+              "form_starts": 5,
+              "completeness": 1
+            }
+          ]
+        },
+        {
+          "race": 8,
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "title": "FIVE DIAMONDS",
+          "field": 13,
+          "leader": "TUXEDO (NZ)",
+          "model_pct": 24.89,
+          "top": [
+            {
+              "horse": "TUXEDO (NZ)",
+              "runner_id": "2026-11-07_ROSEHILL_R08_02",
+              "model_pct": 24.89,
+              "form_starts": 5,
+              "completeness": 0.73
+            },
+            {
+              "horse": "VERONA ROSE",
+              "runner_id": "2026-11-07_ROSEHILL_R08_07",
+              "model_pct": 11.91,
+              "form_starts": 5,
+              "completeness": 0.87
+            },
+            {
+              "horse": "BRINDAVAN (IRE)",
+              "runner_id": "2026-11-07_ROSEHILL_R08_12",
+              "model_pct": 11.64,
+              "form_starts": 5,
+              "completeness": 0.92
+            },
+            {
+              "horse": "WELCOMETOTHESHOW",
+              "runner_id": "2026-11-07_ROSEHILL_R08_11",
+              "model_pct": 11.12,
+              "form_starts": 5,
+              "completeness": 0.79
+            },
+            {
+              "horse": "DECLICHY BOULEVARD",
+              "runner_id": "2026-11-07_ROSEHILL_R08_08",
+              "model_pct": 7.81,
+              "form_starts": 5,
+              "completeness": 0.87
+            }
+          ]
+        },
+        {
+          "race": 9,
+          "race_id": "2026-11-07_ROSEHILL_R09",
+          "title": "GRANT BURGE HANDICAP",
+          "field": 10,
+          "leader": "DETAIN (NZ)",
+          "model_pct": 21.21,
+          "top": [
+            {
+              "horse": "DETAIN (NZ)",
+              "runner_id": "2026-11-07_ROSEHILL_R09_06",
+              "model_pct": 21.21,
+              "form_starts": 5,
+              "completeness": 0.92
+            },
+            {
+              "horse": "MERCY ME",
+              "runner_id": "2026-11-07_ROSEHILL_R09_02",
+              "model_pct": 16.79,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "AGATHA",
+              "runner_id": "2026-11-07_ROSEHILL_R09_09",
+              "model_pct": 13.64,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "SHOW BUSINESS",
+              "runner_id": "2026-11-07_ROSEHILL_R09_11",
+              "model_pct": 8.87,
+              "form_starts": 5,
+              "completeness": 0.92
+            },
+            {
+              "horse": "OUTBACK ANGEL",
+              "runner_id": "2026-11-07_ROSEHILL_R09_12",
+              "model_pct": 8.1,
+              "form_starts": 5,
+              "completeness": 0.92
+            }
+          ]
+        },
+        {
+          "race": 10,
+          "race_id": "2026-11-07_ROSEHILL_R10",
+          "title": "KIA ORA BLOODLINES TO HEADLINES HANDICAP",
+          "field": 11,
+          "leader": "ESMAHLI",
+          "model_pct": 17.51,
+          "top": [
+            {
+              "horse": "ESMAHLI",
+              "runner_id": "2026-11-07_ROSEHILL_R10_01",
+              "model_pct": 17.51,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "LET’S GO AGAIN",
+              "runner_id": "2026-11-07_ROSEHILL_R10_05",
+              "model_pct": 14.54,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "HORSESHOE HILL",
+              "runner_id": "2026-11-07_ROSEHILL_R10_09",
+              "model_pct": 10.88,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "ANNIE’S ROSE",
+              "runner_id": "2026-11-07_ROSEHILL_R10_02",
+              "model_pct": 10.79,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "NULLARBOR JANE",
+              "runner_id": "2026-11-07_ROSEHILL_R10_06",
+              "model_pct": 10.62,
+              "form_starts": 5,
+              "completeness": 1
+            }
+          ]
+        }
+      ],
+      "records": [
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_01",
+          "horse": "DEFIANCE",
+          "model_pct": 9.11,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_03",
+          "horse": "MAINSTAY",
+          "model_pct": 8.9,
+          "form_starts": 3
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_15",
+          "horse": "CRIME OF PASSION",
+          "model_pct": 8.01,
+          "form_starts": 4
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_08",
+          "horse": "JUST HEAR ME OUT",
+          "model_pct": 7.75,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_18",
+          "horse": "YESSPECIALLY",
+          "model_pct": 7.71,
+          "form_starts": 2
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_14",
+          "horse": "PANTA RHEI",
+          "model_pct": 6.37,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_04",
+          "horse": "BRAVE XENA",
+          "model_pct": 6.26,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_12",
+          "horse": "NEVERMISTA",
+          "model_pct": 6.25,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_06",
+          "horse": "SPEEDY HENRY",
+          "model_pct": 5.55,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_10",
+          "horse": "ATHENA’S TREASURE",
+          "model_pct": 5.09,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_09",
+          "horse": "WHATELEY",
+          "model_pct": 4.75,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_07",
+          "horse": "CAMPARI TWIST",
+          "model_pct": 4.01,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_11",
+          "horse": "SUPREME STYLE",
+          "model_pct": 3.88,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_02",
+          "horse": "COMONGIN",
+          "model_pct": 3.7,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_16",
+          "horse": "GIRRAWHEEN",
+          "model_pct": 3.47,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_17",
+          "horse": "RELEASE POINT",
+          "model_pct": 3.27,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_05",
+          "horse": "LE CHOCOLAT (NZ)",
+          "model_pct": 3.2,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R01",
+          "runner_id": "2026-11-07_ROSEHILL_R01_13",
+          "horse": "TROPIC",
+          "model_pct": 2.72,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_08",
+          "horse": "POWDER MAN",
+          "model_pct": 11.77,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_12",
+          "horse": "LAWLESS LUCY",
+          "model_pct": 10.89,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_09",
+          "horse": "COMMON GOAL",
+          "model_pct": 10.26,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_05",
+          "horse": "MAIDOFF",
+          "model_pct": 9.51,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_10",
+          "horse": "MY PHAR LADY",
+          "model_pct": 7.68,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_02",
+          "horse": "HELLOVA NATURE",
+          "model_pct": 6.66,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_07",
+          "horse": "SCINTILLA",
+          "model_pct": 5.41,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_03",
+          "horse": "I AM CARROT",
+          "model_pct": 5.27,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_04",
+          "horse": "CONGRESSMAN",
+          "model_pct": 5.19,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_15",
+          "horse": "BOW",
+          "model_pct": 5.04,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_13",
+          "horse": "KITTY OKAY",
+          "model_pct": 4.99,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_16",
+          "horse": "SUPER JAIE",
+          "model_pct": 4.24,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_06",
+          "horse": "CRYPTONIC",
+          "model_pct": 4.01,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_11",
+          "horse": "WILD THOUGHTS",
+          "model_pct": 3.56,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_14",
+          "horse": "AHELLBENDA",
+          "model_pct": 3.07,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R02",
+          "runner_id": "2026-11-07_ROSEHILL_R02_01",
+          "horse": "DUVANA",
+          "model_pct": 2.45,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R03",
+          "runner_id": "2026-11-07_ROSEHILL_R03_03",
+          "horse": "SAVVY SPY (NZ)",
+          "model_pct": 27.75,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R03",
+          "runner_id": "2026-11-07_ROSEHILL_R03_05",
+          "horse": "CRITERIA (NZ)",
+          "model_pct": 20.52,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R03",
+          "runner_id": "2026-11-07_ROSEHILL_R03_02",
+          "horse": "SAVISANTA (NZ)",
+          "model_pct": 8.2,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R03",
+          "runner_id": "2026-11-07_ROSEHILL_R03_06",
+          "horse": "WAR RIBBON",
+          "model_pct": 7.87,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R03",
+          "runner_id": "2026-11-07_ROSEHILL_R03_10",
+          "horse": "PARTY IT DOWN",
+          "model_pct": 6.88,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R03",
+          "runner_id": "2026-11-07_ROSEHILL_R03_08",
+          "horse": "SMART JAZZ",
+          "model_pct": 6.32,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R03",
+          "runner_id": "2026-11-07_ROSEHILL_R03_01",
+          "horse": "MEDATSU (NZ)",
+          "model_pct": 6.15,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R03",
+          "runner_id": "2026-11-07_ROSEHILL_R03_04",
+          "horse": "NKOSI",
+          "model_pct": 5.92,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R03",
+          "runner_id": "2026-11-07_ROSEHILL_R03_09",
+          "horse": "MR FABULOUS",
+          "model_pct": 5.8,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R03",
+          "runner_id": "2026-11-07_ROSEHILL_R03_07",
+          "horse": "SAINT EMILION",
+          "model_pct": 4.59,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R04",
+          "runner_id": "2026-11-07_ROSEHILL_R04_02",
+          "horse": "SAMARELLE (NZ)",
+          "model_pct": 22.33,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R04",
+          "runner_id": "2026-11-07_ROSEHILL_R04_06",
+          "horse": "DONATELLO (NZ)",
+          "model_pct": 12.99,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R04",
+          "runner_id": "2026-11-07_ROSEHILL_R04_10",
+          "horse": "OFF THE SCALE",
+          "model_pct": 11.95,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R04",
+          "runner_id": "2026-11-07_ROSEHILL_R04_03",
+          "horse": "BOTANICAL BOY (NZ)",
+          "model_pct": 10.51,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R04",
+          "runner_id": "2026-11-07_ROSEHILL_R04_04",
+          "horse": "STORM SEASON",
+          "model_pct": 10.42,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R04",
+          "runner_id": "2026-11-07_ROSEHILL_R04_11",
+          "horse": "MARSABIT (IRE)",
+          "model_pct": 6.96,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R04",
+          "runner_id": "2026-11-07_ROSEHILL_R04_05",
+          "horse": "WITHOUT PEER",
+          "model_pct": 6.6,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R04",
+          "runner_id": "2026-11-07_ROSEHILL_R04_07",
+          "horse": "MICHELANGELO",
+          "model_pct": 6.24,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R04",
+          "runner_id": "2026-11-07_ROSEHILL_R04_09",
+          "horse": "CANNY QUEEN (NZ)",
+          "model_pct": 5.09,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R04",
+          "runner_id": "2026-11-07_ROSEHILL_R04_08",
+          "horse": "SHE MOVES TOO",
+          "model_pct": 4.62,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R04",
+          "runner_id": "2026-11-07_ROSEHILL_R04_01",
+          "horse": "THRICE (IRE)",
+          "model_pct": 2.29,
+          "form_starts": 4
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R05",
+          "runner_id": "2026-11-07_ROSEHILL_R05_01",
+          "horse": "CASHOUT",
+          "model_pct": 23.39,
+          "form_starts": 3
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R05",
+          "runner_id": "2026-11-07_ROSEHILL_R05_09",
+          "horse": "SHOTGUN BELLA",
+          "model_pct": 14.03,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R05",
+          "runner_id": "2026-11-07_ROSEHILL_R05_04",
+          "horse": "BELLA KHADIJAH",
+          "model_pct": 12.95,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R05",
+          "runner_id": "2026-11-07_ROSEHILL_R05_08",
+          "horse": "ROSE AYE",
+          "model_pct": 10.6,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R05",
+          "runner_id": "2026-11-07_ROSEHILL_R05_07",
+          "horse": "PASADENA",
+          "model_pct": 10.22,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R05",
+          "runner_id": "2026-11-07_ROSEHILL_R05_05",
+          "horse": "PROBABILITY THEORY",
+          "model_pct": 9.19,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R05",
+          "runner_id": "2026-11-07_ROSEHILL_R05_02",
+          "horse": "THEBELMONTGANGSTER (IRE)",
+          "model_pct": 7.79,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R05",
+          "runner_id": "2026-11-07_ROSEHILL_R05_06",
+          "horse": "ACCIDENTAL BID (GB)",
+          "model_pct": 7.53,
+          "form_starts": 4
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R05",
+          "runner_id": "2026-11-07_ROSEHILL_R05_03",
+          "horse": "WOOTTON LASS",
+          "model_pct": 4.3,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_09",
+          "horse": "EXO VELOCITY",
+          "model_pct": 32.89,
+          "form_starts": 1
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_10",
+          "horse": "JENNI IN ROME (NZ)",
+          "model_pct": 11.15,
+          "form_starts": 1
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_07",
+          "horse": "SILENT INTENT",
+          "model_pct": 8.91,
+          "form_starts": 1
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_11",
+          "horse": "ORIGINATE",
+          "model_pct": 4.78,
+          "form_starts": 0
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_12",
+          "horse": "SHARJAWIYAH",
+          "model_pct": 4.78,
+          "form_starts": 0
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_14",
+          "horse": "WITKOWIN",
+          "model_pct": 4.78,
+          "form_starts": 0
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_01",
+          "horse": "ACT UP",
+          "model_pct": 4.76,
+          "form_starts": 1
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_03",
+          "horse": "FAST FEATHER",
+          "model_pct": 4.55,
+          "form_starts": 0
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_04",
+          "horse": "HOT SOX",
+          "model_pct": 4.55,
+          "form_starts": 0
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_08",
+          "horse": "TORSHAVN",
+          "model_pct": 4.55,
+          "form_starts": 0
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_02",
+          "horse": "CHASING ARCHER",
+          "model_pct": 4.35,
+          "form_starts": 2
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_13",
+          "horse": "VAIN AMBITION",
+          "model_pct": 4.28,
+          "form_starts": 0
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_06",
+          "horse": "ROYAL ACCORD",
+          "model_pct": 3.36,
+          "form_starts": 1
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R06",
+          "runner_id": "2026-11-07_ROSEHILL_R06_05",
+          "horse": "PROVERB",
+          "model_pct": 2.31,
+          "form_starts": 1
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R07",
+          "runner_id": "2026-11-07_ROSEHILL_R07_01",
+          "horse": "LAZZURA",
+          "model_pct": 47.3,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R07",
+          "runner_id": "2026-11-07_ROSEHILL_R07_03",
+          "horse": "GERRINGONG",
+          "model_pct": 12.04,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R07",
+          "runner_id": "2026-11-07_ROSEHILL_R07_08",
+          "horse": "CHAINS OF LOVE",
+          "model_pct": 9.23,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R07",
+          "runner_id": "2026-11-07_ROSEHILL_R07_10",
+          "horse": "SURF’S UP",
+          "model_pct": 7.19,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R07",
+          "runner_id": "2026-11-07_ROSEHILL_R07_04",
+          "horse": "ARABIAN ROSE",
+          "model_pct": 6.35,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R07",
+          "runner_id": "2026-11-07_ROSEHILL_R07_05",
+          "horse": "MODELLA",
+          "model_pct": 5.17,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R07",
+          "runner_id": "2026-11-07_ROSEHILL_R07_02",
+          "horse": "TUILERIES",
+          "model_pct": 4.28,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R07",
+          "runner_id": "2026-11-07_ROSEHILL_R07_11",
+          "horse": "MARETH",
+          "model_pct": 3.01,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R07",
+          "runner_id": "2026-11-07_ROSEHILL_R07_06",
+          "horse": "FIRESTORM (NZ)",
+          "model_pct": 2.76,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R07",
+          "runner_id": "2026-11-07_ROSEHILL_R07_07",
+          "horse": "DARK GLITTER",
+          "model_pct": 2.67,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "runner_id": "2026-11-07_ROSEHILL_R08_02",
+          "horse": "TUXEDO (NZ)",
+          "model_pct": 24.89,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "runner_id": "2026-11-07_ROSEHILL_R08_07",
+          "horse": "VERONA ROSE",
+          "model_pct": 11.91,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "runner_id": "2026-11-07_ROSEHILL_R08_12",
+          "horse": "BRINDAVAN (IRE)",
+          "model_pct": 11.64,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "runner_id": "2026-11-07_ROSEHILL_R08_11",
+          "horse": "WELCOMETOTHESHOW",
+          "model_pct": 11.12,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "runner_id": "2026-11-07_ROSEHILL_R08_08",
+          "horse": "DECLICHY BOULEVARD",
+          "model_pct": 7.81,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "runner_id": "2026-11-07_ROSEHILL_R08_09",
+          "horse": "PLYMOUTH",
+          "model_pct": 5.75,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "runner_id": "2026-11-07_ROSEHILL_R08_10",
+          "horse": "ZAMBARDO (NZ)",
+          "model_pct": 5.27,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "runner_id": "2026-11-07_ROSEHILL_R08_03",
+          "horse": "EVAPORATE (NZ)",
+          "model_pct": 5.19,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "runner_id": "2026-11-07_ROSEHILL_R08_01",
+          "horse": "LINEBACKER (NZ)",
+          "model_pct": 4.62,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "runner_id": "2026-11-07_ROSEHILL_R08_04",
+          "horse": "ATHANATOS",
+          "model_pct": 3.97,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "runner_id": "2026-11-07_ROSEHILL_R08_14",
+          "horse": "MR CHAPLIN (GB)",
+          "model_pct": 3.63,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "runner_id": "2026-11-07_ROSEHILL_R08_13",
+          "horse": "LORD PENMAN (NZ)",
+          "model_pct": 2.35,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R08",
+          "runner_id": "2026-11-07_ROSEHILL_R08_06",
+          "horse": "IMPERIALIST (NZ)",
+          "model_pct": 1.85,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R09",
+          "runner_id": "2026-11-07_ROSEHILL_R09_06",
+          "horse": "DETAIN (NZ)",
+          "model_pct": 21.21,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R09",
+          "runner_id": "2026-11-07_ROSEHILL_R09_02",
+          "horse": "MERCY ME",
+          "model_pct": 16.79,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R09",
+          "runner_id": "2026-11-07_ROSEHILL_R09_09",
+          "horse": "AGATHA",
+          "model_pct": 13.64,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R09",
+          "runner_id": "2026-11-07_ROSEHILL_R09_11",
+          "horse": "SHOW BUSINESS",
+          "model_pct": 8.87,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R09",
+          "runner_id": "2026-11-07_ROSEHILL_R09_12",
+          "horse": "OUTBACK ANGEL",
+          "model_pct": 8.1,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R09",
+          "runner_id": "2026-11-07_ROSEHILL_R09_07",
+          "horse": "SCENIC POINT",
+          "model_pct": 7.35,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R09",
+          "runner_id": "2026-11-07_ROSEHILL_R09_01",
+          "horse": "SWORDPLAY",
+          "model_pct": 7.13,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R09",
+          "runner_id": "2026-11-07_ROSEHILL_R09_10",
+          "horse": "FLIGHTCREW",
+          "model_pct": 6.26,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R09",
+          "runner_id": "2026-11-07_ROSEHILL_R09_03",
+          "horse": "REGIMENTAL COLOURS",
+          "model_pct": 6.18,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R09",
+          "runner_id": "2026-11-07_ROSEHILL_R09_08",
+          "horse": "SHE’S MY EX",
+          "model_pct": 4.47,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R10",
+          "runner_id": "2026-11-07_ROSEHILL_R10_01",
+          "horse": "ESMAHLI",
+          "model_pct": 17.51,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R10",
+          "runner_id": "2026-11-07_ROSEHILL_R10_05",
+          "horse": "LET’S GO AGAIN",
+          "model_pct": 14.54,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R10",
+          "runner_id": "2026-11-07_ROSEHILL_R10_09",
+          "horse": "HORSESHOE HILL",
+          "model_pct": 10.88,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R10",
+          "runner_id": "2026-11-07_ROSEHILL_R10_02",
+          "horse": "ANNIE’S ROSE",
+          "model_pct": 10.79,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R10",
+          "runner_id": "2026-11-07_ROSEHILL_R10_06",
+          "horse": "NULLARBOR JANE",
+          "model_pct": 10.62,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R10",
+          "runner_id": "2026-11-07_ROSEHILL_R10_13",
+          "horse": "CHEMTRAIL",
+          "model_pct": 8.29,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R10",
+          "runner_id": "2026-11-07_ROSEHILL_R10_03",
+          "horse": "MAILATA",
+          "model_pct": 6.21,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R10",
+          "runner_id": "2026-11-07_ROSEHILL_R10_12",
+          "horse": "ATMOSPHERIC ROCK",
+          "model_pct": 6,
+          "form_starts": 3
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R10",
+          "runner_id": "2026-11-07_ROSEHILL_R10_04",
+          "horse": "NITRO",
+          "model_pct": 5.48,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R10",
+          "runner_id": "2026-11-07_ROSEHILL_R10_08",
+          "horse": "SAXOBUSHI",
+          "model_pct": 5.06,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ROSEHILL_R10",
+          "runner_id": "2026-11-07_ROSEHILL_R10_07",
+          "horse": "PERFECT PICTURE",
+          "model_pct": 4.62,
+          "form_starts": 5
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Estimates are uncalibrated and not certified winning probabilities",
+    "Soft 5/6/7 share current V5 soft category",
+    "Trials and first starters not scored as race wins",
+    "Official snapshot predates final scratchings"
+  ]
+}

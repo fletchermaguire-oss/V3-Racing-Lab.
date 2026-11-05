@@ -1,0 +1,64 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Racing Lab V5 · Ascot Saturday 7 Nov 2026</title>
+<style>
+:root{color-scheme:dark;--bg:#091219;--panel:#11222a;--line:#314952;--ink:#eaf4f1;--muted:#a7bbc3;--accent:#7ee9ba}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,sans-serif}
+main{max-width:1100px;margin:auto;padding:25px 16px 60px}a{color:var(--accent)}h1{font-size:clamp(25px,4.3vw,41px);line-height:1.12;letter-spacing:-.03em}h2{font-size:21px;margin:0 0 7px}
+small,.muted{color:var(--muted)}.tag{letter-spacing:.1em;font-weight:700;font-size:11px;text-transform:uppercase;color:var(--accent)}
+.panel{padding:17px 20px;margin:16px 0;border:1px solid var(--line);border-radius:15px;background:var(--panel)}
+.status{font-size:13px;color:#ffdfa0}table{width:100%;border-collapse:collapse;text-align:left}th,td{padding:9px 6px;border-bottom:1px solid var(--line);vertical-align:top;font-size:13px}th{color:var(--muted);font-weight:600}
+td:last-child,th:last-child{text-align:right;font-variant-numeric:tabular-nums}select{padding:9px;border:1px solid var(--line);border-radius:8px;background:#0c1922;color:var(--ink);font:inherit}
+details{margin-top:12px}summary{cursor:pointer;color:var(--accent)}.note{font-size:13px;color:var(--muted)}
+header{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap}
+@media(max-width:650px){.panel{padding:14px}td,th{font-size:12px}}
+</style></head><body><main>
+<p><a href="/v5/saturday-2026-11-07.html">← Saturday source checkpoint</a></p>
+<p class="tag">V5 · Saturday 7 November 2026 · Research only</p>
+<h1>Ascot — all 10 races</h1>
+<p class="muted">The complete 95-runner Racing Australia form is imported into the experimental V5 model. All entrants are modelled, but race-day starter and track verification is pending. None of these figures are empirically calibrated or final selections.</p>
+<section class="panel"><header><div><h2>Track scenarios</h2><p class="status">NOT FINAL — no published locks or certified win chances</p></div>
+<label for="going">Compare surface <select id="going"><option>Loading…</option></select></label></header>
+<p class="note" id="metadata">Awaiting official research snapshot…</p></section>
+<div id="races" aria-live="polite"></div>
+<section class="panel"><h2>Audit rules</h2><p>Debutant trials, gear reports and trainer comments are reviewed as evidence, never silently converted into race wins. Group-class and surface coefficients remain uncalibrated. A Good 4 or Soft 6 scenario is hypothetical unless an official update confirms it. All whole-field shares must sum to 100%.</p>
+<a href="https://www.racingaustralia.horse/FreeFields/Form.aspx?Key=2026Nov07%2CWA%2CAscot">Official Ascot form</a></section>
+</main><script>
+(async()=>{
+const $=s=>document.getElementById(s);
+try{
+ const res=await fetch('/v5/cards/2026-11-07/ascot-scenarios.json',{cache:'no-store'});
+ if(!res.ok)throw Error('Source HTTP '+res.status);const d=await res.json();
+ if(d.schema!=='racing-lab-official-form-shadow-scenarios/v1'||d.date!=='2026-11-07'||d.meeting!=='ASCOT'||d.publication_approved)throw Error('Unapproved or mismatched snapshot');
+ const selector=$('going');selector.replaceChildren();
+ d.scenarios.forEach(s=>{const o=document.createElement('option');o.value=s.going;o.textContent=s.going+(s.going===d.source.going_report?' · official checkpoint':' · hypothetical');selector.append(o)});
+ $('metadata').textContent=d.import_audit.entries+' acceptors, '+d.import_audit.historical_form_lines+' historical starts, '+d.import_audit.published_scratchings+' scratchings recorded; reported rail '+d.source.rail+'. Source published '+d.source.source_published+'.';
+ const risks={
+ 1:'Five unraced juveniles: trial evidence remains outside the numerical model.',
+ 2:'Apprentice claims, pace and repeated 2200m performances need final verification.',
+ 3:'Closely matched middle-distance runners; Soft scenario differs from Good.',
+ 4:'Leading model horse has carried much of its winning form outside metropolitan class.',
+ 5:'No convincing statistical separation; do not force a high-conviction pick.',
+ 6:'Beatty versus unbeaten Roger; Beatty has one Soft-track second and no Soft wins.',
+ 7:'So Si God has outside barrier 11 and no Soft victory despite three placings.',
+ 8:'Tightly grouped handicap and recent gear change to Aberdeen Flyer; highly open.',
+ 9:'King Of Light has a good Soft record; watch Western Empire and Watch Me Rock.',
+ 10:'No clear leader; some horses face unproven trip or wet-track changes.'
+ };
+ function render(){
+ const s=d.scenarios.find(x=>x.going===selector.value),root=$('races');root.replaceChildren();
+ for(const race of s.races){
+ const section=document.createElement('section');section.className='panel';
+ const title=document.createElement('h2');title.textContent='R'+race.race+' · '+race.title;section.append(title);
+ const summary=document.createElement('p');summary.className='muted';summary.textContent='Model research leader: '+race.leader+' · '+race.model_pct.toFixed(2)+'% · '+race.field+' provisional starters';section.append(summary);
+ const caution=document.createElement('p');caution.className='note';caution.textContent=risks[race.race];section.append(caution);
+ const table=document.createElement('table'),head=document.createElement('thead'),hr=document.createElement('tr');
+ for(const h of ['Runner','Dated starts','Experimental V5 share']){const th=document.createElement('th');th.textContent=h;hr.append(th)}head.append(hr);table.append(head);
+ const body=document.createElement('tbody');const rows=s.records.filter(r=>r.race_id===race.race_id).sort((a,b)=>b.model_pct-a.model_pct);
+ rows.forEach(r=>{const tr=document.createElement('tr');for(const t of [r.horse,String(r.form_starts),r.model_pct.toFixed(2)+'%']){const td=document.createElement('td');td.textContent=t;tr.append(td)}body.append(tr)});
+ table.append(body);const details=document.createElement('details'),label=document.createElement('summary');label.textContent='Inspect all '+rows.length+' runners';details.append(label,table);section.append(details);root.append(section);
+ }
+ }
+ selector.addEventListener('change',render);render();
+}catch(e){$('metadata').textContent='Research snapshot unavailable: '+e.message;}
+})();
+</script></body></html>

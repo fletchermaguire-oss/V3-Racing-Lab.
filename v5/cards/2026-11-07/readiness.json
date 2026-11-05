@@ -95,5 +95,25 @@
         "National Jockey Trust Handicap"
       ]
     }
-  ]
+  ],
+  "form_checkpoints": {
+    "ASCOT": {
+      "status": "RESEARCH_ONLY",
+      "entries": 95,
+      "dated_starts": 429,
+      "heavy10_starts": 1,
+      "source": "/v5/cards/2026-11-07/ascot-research.json",
+      "shadow": "/v5/cards/2026-11-07/ascot-scenarios.json",
+      "final_starters_verified": false
+    },
+    "ROSEHILL": {
+      "status": "RESEARCH_ONLY",
+      "entries": 133,
+      "dated_starts": 541,
+      "heavy10_starts": 7,
+      "source": "/v5/cards/2026-11-07/rosehill-research.json",
+      "shadow": "/v5/cards/2026-11-07/rosehill-scenarios.json",
+      "final_starters_verified": false
+    }
+  }
 }

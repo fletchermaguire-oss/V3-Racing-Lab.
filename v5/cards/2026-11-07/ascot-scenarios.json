@@ -1,0 +1,3408 @@
+{
+  "schema": "racing-lab-official-form-shadow-scenarios/v1",
+  "date": "2026-11-07",
+  "meeting": "ASCOT",
+  "model_version": "V5-L5-CANDIDATE-20261030",
+  "source": {
+    "source": "https://www.racingaustralia.horse/FreeFields/Form.aspx?Key=2026Nov07%2CWA%2CAscot",
+    "source_published": "Thu 05-Nov-26 1:13PM AEDT",
+    "source_checked_at": "2026-11-05",
+    "source_date": "2026-11-07",
+    "going_report": "Soft 5",
+    "rail": "True",
+    "parser": "v5/official-form-import.js",
+    "notes": "No race-day starter certification or empirical probability calibration"
+  },
+  "import_audit": {
+    "entries": 95,
+    "listed_races": 10,
+    "active_accepted": 95,
+    "published_scratchings": 0,
+    "unactivated_emergencies": 0,
+    "historical_form_lines": 429,
+    "heavy10_lines_recognized": 1,
+    "unparseable_historical_lines": 0,
+    "future_or_same_day_lines_excluded": 0,
+    "official_going": "Soft 5",
+    "rail": "True",
+    "all_final_starters_verified": false
+  },
+  "status": "RESEARCH_ONLY",
+  "final_starters_verified": false,
+  "calibration_established": false,
+  "publication_approved": false,
+  "scenarios": [
+    {
+      "going": "Soft 5",
+      "races": [
+        {
+          "race": 1,
+          "race_id": "2026-11-07_ASCOT_R01",
+          "title": "MAGIC MILLIONS PLATE",
+          "field": 7,
+          "leader": "AHAB THE ARAB",
+          "model_pct": 28.25,
+          "top": [
+            {
+              "horse": "AHAB THE ARAB",
+              "runner_id": "2026-11-07_ASCOT_R01_01",
+              "model_pct": 28.25,
+              "form_starts": 1,
+              "completeness": 0.47
+            },
+            {
+              "horse": "MADAM LASH",
+              "runner_id": "2026-11-07_ASCOT_R01_05",
+              "model_pct": 13.26,
+              "form_starts": 1,
+              "completeness": 0.47
+            },
+            {
+              "horse": "JUST AN ILLUSION",
+              "runner_id": "2026-11-07_ASCOT_R01_06",
+              "model_pct": 12.07,
+              "form_starts": 0,
+              "completeness": 0.04
+            },
+            {
+              "horse": "MALIBU STAR",
+              "runner_id": "2026-11-07_ASCOT_R01_07",
+              "model_pct": 12.07,
+              "form_starts": 0,
+              "completeness": 0.04
+            },
+            {
+              "horse": "GOLDEN PACIFIC",
+              "runner_id": "2026-11-07_ASCOT_R01_02",
+              "model_pct": 11.45,
+              "form_starts": 0,
+              "completeness": 0.04
+            }
+          ]
+        },
+        {
+          "race": 2,
+          "race_id": "2026-11-07_ASCOT_R02",
+          "title": "CARBINE CLUB OF WA APPRENTICES CUP",
+          "field": 8,
+          "leader": "I LOVE YA MONEY",
+          "model_pct": 35.04,
+          "top": [
+            {
+              "horse": "I LOVE YA MONEY",
+              "runner_id": "2026-11-07_ASCOT_R02_02",
+              "model_pct": 35.04,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "ABISSI (NZ)",
+              "runner_id": "2026-11-07_ASCOT_R02_01",
+              "model_pct": 21.71,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "ROMMEO",
+              "runner_id": "2026-11-07_ASCOT_R02_03",
+              "model_pct": 9.3,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "STARWALKER (NZ)",
+              "runner_id": "2026-11-07_ASCOT_R02_04",
+              "model_pct": 8.46,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "STYLAX",
+              "runner_id": "2026-11-07_ASCOT_R02_08",
+              "model_pct": 7.9,
+              "form_starts": 5,
+              "completeness": 1
+            }
+          ]
+        },
+        {
+          "race": 3,
+          "race_id": "2026-11-07_ASCOT_R03",
+          "title": "SGC AUSTRALIA HANDICAP",
+          "field": 9,
+          "leader": "VAMPI QUEEN",
+          "model_pct": 16.72,
+          "top": [
+            {
+              "horse": "VAMPI QUEEN",
+              "runner_id": "2026-11-07_ASCOT_R03_05",
+              "model_pct": 16.72,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "ACTA NON VERBA",
+              "runner_id": "2026-11-07_ASCOT_R03_07",
+              "model_pct": 16.27,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "ROCK IN WONDER",
+              "runner_id": "2026-11-07_ASCOT_R03_02",
+              "model_pct": 13.83,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "MASMELO",
+              "runner_id": "2026-11-07_ASCOT_R03_01",
+              "model_pct": 11.94,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "JAVELIN STRIKE",
+              "runner_id": "2026-11-07_ASCOT_R03_03",
+              "model_pct": 10.48,
+              "form_starts": 5,
+              "completeness": 0.87
+            }
+          ]
+        },
+        {
+          "race": 4,
+          "race_id": "2026-11-07_ASCOT_R04",
+          "title": "PPS WATER GROUP HANDICAP",
+          "field": 9,
+          "leader": "SNIPPETY LEGEND",
+          "model_pct": 23.62,
+          "top": [
+            {
+              "horse": "SNIPPETY LEGEND",
+              "runner_id": "2026-11-07_ASCOT_R04_03",
+              "model_pct": 23.62,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "PRINCE OF DALA",
+              "runner_id": "2026-11-07_ASCOT_R04_02",
+              "model_pct": 14.09,
+              "form_starts": 5,
+              "completeness": 0.79
+            },
+            {
+              "horse": "EMPIRE OF ROME",
+              "runner_id": "2026-11-07_ASCOT_R04_08",
+              "model_pct": 10.83,
+              "form_starts": 4,
+              "completeness": 0.73
+            },
+            {
+              "horse": "SHE’S A SPLINTER",
+              "runner_id": "2026-11-07_ASCOT_R04_09",
+              "model_pct": 10.78,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "MAALIS SONG",
+              "runner_id": "2026-11-07_ASCOT_R04_04",
+              "model_pct": 10.03,
+              "form_starts": 5,
+              "completeness": 1
+            }
+          ]
+        },
+        {
+          "race": 5,
+          "race_id": "2026-11-07_ASCOT_R05",
+          "title": "TABTOUCH - WESTSPEED PLATINUM SERIES HEAT 2",
+          "field": 12,
+          "leader": "HELLUVA GODDESS",
+          "model_pct": 13.95,
+          "top": [
+            {
+              "horse": "HELLUVA GODDESS",
+              "runner_id": "2026-11-07_ASCOT_R05_01",
+              "model_pct": 13.95,
+              "form_starts": 5,
+              "completeness": 0.87
+            },
+            {
+              "horse": "RIPPER FAROOQ",
+              "runner_id": "2026-11-07_ASCOT_R05_02",
+              "model_pct": 13.31,
+              "form_starts": 4,
+              "completeness": 0.94
+            },
+            {
+              "horse": "BEYOND MEASURE",
+              "runner_id": "2026-11-07_ASCOT_R05_05",
+              "model_pct": 12.58,
+              "form_starts": 5,
+              "completeness": 0.87
+            },
+            {
+              "horse": "DESERT DANCING",
+              "runner_id": "2026-11-07_ASCOT_R05_04",
+              "model_pct": 8.71,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "SOLDIER OF GOD",
+              "runner_id": "2026-11-07_ASCOT_R05_10",
+              "model_pct": 8.03,
+              "form_starts": 5,
+              "completeness": 1
+            }
+          ]
+        },
+        {
+          "race": 6,
+          "race_id": "2026-11-07_ASCOT_R06",
+          "title": "WAROA - FAIRETHA STAKES",
+          "field": 8,
+          "leader": "BEATTY",
+          "model_pct": 36.59,
+          "top": [
+            {
+              "horse": "BEATTY",
+              "runner_id": "2026-11-07_ASCOT_R06_01",
+              "model_pct": 36.59,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "ROGER",
+              "runner_id": "2026-11-07_ASCOT_R06_04",
+              "model_pct": 18.63,
+              "form_starts": 3,
+              "completeness": 0.74
+            },
+            {
+              "horse": "GODSPEED",
+              "runner_id": "2026-11-07_ASCOT_R06_05",
+              "model_pct": 11.56,
+              "form_starts": 3,
+              "completeness": 0.74
+            },
+            {
+              "horse": "SWIFT RULER",
+              "runner_id": "2026-11-07_ASCOT_R06_03",
+              "model_pct": 10.26,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "HE’S A MACHINO",
+              "runner_id": "2026-11-07_ASCOT_R06_02",
+              "model_pct": 7.02,
+              "form_starts": 5,
+              "completeness": 0.87
+            }
+          ]
+        },
+        {
+          "race": 7,
+          "race_id": "2026-11-07_ASCOT_R07",
+          "title": "MC EQUINE SURFACES HANDICAP",
+          "field": 11,
+          "leader": "SO SI GOD",
+          "model_pct": 24.96,
+          "top": [
+            {
+              "horse": "SO SI GOD",
+              "runner_id": "2026-11-07_ASCOT_R07_04",
+              "model_pct": 24.96,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "OURGIRLCANRUN",
+              "runner_id": "2026-11-07_ASCOT_R07_06",
+              "model_pct": 18.38,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "STYLIN’ (NZ)",
+              "runner_id": "2026-11-07_ASCOT_R07_10",
+              "model_pct": 12.38,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "GOD’S GATE",
+              "runner_id": "2026-11-07_ASCOT_R07_05",
+              "model_pct": 7.21,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "PLATINUM SHOT",
+              "runner_id": "2026-11-07_ASCOT_R07_02",
+              "model_pct": 6.81,
+              "form_starts": 5,
+              "completeness": 1
+            }
+          ]
+        },
+        {
+          "race": 8,
+          "race_id": "2026-11-07_ASCOT_R08",
+          "title": "TECHNICAL MECHANICAL MAINTENANCE - LUCKYGRAY STAKES",
+          "field": 12,
+          "leader": "ABERDEEN FLYER",
+          "model_pct": 16.28,
+          "top": [
+            {
+              "horse": "ABERDEEN FLYER",
+              "runner_id": "2026-11-07_ASCOT_R08_07",
+              "model_pct": 16.28,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "OLY’S CHOICE",
+              "runner_id": "2026-11-07_ASCOT_R08_06",
+              "model_pct": 10.84,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "ALL GRUNT",
+              "runner_id": "2026-11-07_ASCOT_R08_08",
+              "model_pct": 10.08,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "SOWAR",
+              "runner_id": "2026-11-07_ASCOT_R08_12",
+              "model_pct": 9.52,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "ROYAL TORONADO",
+              "runner_id": "2026-11-07_ASCOT_R08_04",
+              "model_pct": 9.06,
+              "form_starts": 5,
+              "completeness": 1
+            }
+          ]
+        },
+        {
+          "race": 9,
+          "race_id": "2026-11-07_ASCOT_R09",
+          "title": "AFGRI EQUIPMENT - LEE STEERE STAKES",
+          "field": 8,
+          "leader": "KING OF LIGHT",
+          "model_pct": 34.84,
+          "top": [
+            {
+              "horse": "KING OF LIGHT",
+              "runner_id": "2026-11-07_ASCOT_R09_06",
+              "model_pct": 34.84,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "WATCH ME ROCK",
+              "runner_id": "2026-11-07_ASCOT_R09_03",
+              "model_pct": 16.13,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "TOO DARDY",
+              "runner_id": "2026-11-07_ASCOT_R09_07",
+              "model_pct": 13.02,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "WESTERN EMPIRE (NZ)",
+              "runner_id": "2026-11-07_ASCOT_R09_01",
+              "model_pct": 12.8,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "LET’S GALAHVANT",
+              "runner_id": "2026-11-07_ASCOT_R09_04",
+              "model_pct": 9.69,
+              "form_starts": 5,
+              "completeness": 1
+            }
+          ]
+        },
+        {
+          "race": 10,
+          "race_id": "2026-11-07_ASCOT_R10",
+          "title": "NATIONAL JOCKEY TRUST HANDICAP",
+          "field": 11,
+          "leader": "HURRICANE HARLEY",
+          "model_pct": 19.96,
+          "top": [
+            {
+              "horse": "HURRICANE HARLEY",
+              "runner_id": "2026-11-07_ASCOT_R10_06",
+              "model_pct": 19.96,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "XENTARO",
+              "runner_id": "2026-11-07_ASCOT_R10_11",
+              "model_pct": 15.54,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "SNITZALATTE",
+              "runner_id": "2026-11-07_ASCOT_R10_08",
+              "model_pct": 10.19,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "SIR DREAMALOT",
+              "runner_id": "2026-11-07_ASCOT_R10_05",
+              "model_pct": 8.61,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "BLACK ORA",
+              "runner_id": "2026-11-07_ASCOT_R10_04",
+              "model_pct": 8.26,
+              "form_starts": 5,
+              "completeness": 1
+            }
+          ]
+        }
+      ],
+      "records": [
+        {
+          "race_id": "2026-11-07_ASCOT_R01",
+          "runner_id": "2026-11-07_ASCOT_R01_01",
+          "horse": "AHAB THE ARAB",
+          "model_pct": 28.25,
+          "form_starts": 1
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R01",
+          "runner_id": "2026-11-07_ASCOT_R01_05",
+          "horse": "MADAM LASH",
+          "model_pct": 13.26,
+          "form_starts": 1
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R01",
+          "runner_id": "2026-11-07_ASCOT_R01_06",
+          "horse": "JUST AN ILLUSION",
+          "model_pct": 12.07,
+          "form_starts": 0
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R01",
+          "runner_id": "2026-11-07_ASCOT_R01_07",
+          "horse": "MALIBU STAR",
+          "model_pct": 12.07,
+          "form_starts": 0
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R01",
+          "runner_id": "2026-11-07_ASCOT_R01_02",
+          "horse": "GOLDEN PACIFIC",
+          "model_pct": 11.45,
+          "form_starts": 0
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R01",
+          "runner_id": "2026-11-07_ASCOT_R01_03",
+          "horse": "PRINCE PROSECCO",
+          "model_pct": 11.45,
+          "form_starts": 0
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R01",
+          "runner_id": "2026-11-07_ASCOT_R01_04",
+          "horse": "SNIPPEX",
+          "model_pct": 11.45,
+          "form_starts": 0
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R02",
+          "runner_id": "2026-11-07_ASCOT_R02_02",
+          "horse": "I LOVE YA MONEY",
+          "model_pct": 35.04,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R02",
+          "runner_id": "2026-11-07_ASCOT_R02_01",
+          "horse": "ABISSI (NZ)",
+          "model_pct": 21.71,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R02",
+          "runner_id": "2026-11-07_ASCOT_R02_03",
+          "horse": "ROMMEO",
+          "model_pct": 9.3,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R02",
+          "runner_id": "2026-11-07_ASCOT_R02_04",
+          "horse": "STARWALKER (NZ)",
+          "model_pct": 8.46,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R02",
+          "runner_id": "2026-11-07_ASCOT_R02_08",
+          "horse": "STYLAX",
+          "model_pct": 7.9,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R02",
+          "runner_id": "2026-11-07_ASCOT_R02_05",
+          "horse": "ADMIRED",
+          "model_pct": 6.76,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R02",
+          "runner_id": "2026-11-07_ASCOT_R02_06",
+          "horse": "LIEN HYPHEN",
+          "model_pct": 6.1,
+          "form_starts": 4
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R02",
+          "runner_id": "2026-11-07_ASCOT_R02_07",
+          "horse": "OBSCENTINO",
+          "model_pct": 4.73,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R03",
+          "runner_id": "2026-11-07_ASCOT_R03_05",
+          "horse": "VAMPI QUEEN",
+          "model_pct": 16.72,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R03",
+          "runner_id": "2026-11-07_ASCOT_R03_07",
+          "horse": "ACTA NON VERBA",
+          "model_pct": 16.27,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R03",
+          "runner_id": "2026-11-07_ASCOT_R03_02",
+          "horse": "ROCK IN WONDER",
+          "model_pct": 13.83,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R03",
+          "runner_id": "2026-11-07_ASCOT_R03_01",
+          "horse": "MASMELO",
+          "model_pct": 11.94,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R03",
+          "runner_id": "2026-11-07_ASCOT_R03_03",
+          "horse": "JAVELIN STRIKE",
+          "model_pct": 10.48,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R03",
+          "runner_id": "2026-11-07_ASCOT_R03_09",
+          "horse": "LEETRON",
+          "model_pct": 8.13,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R03",
+          "runner_id": "2026-11-07_ASCOT_R03_06",
+          "horse": "SPANK APPEAL",
+          "model_pct": 7.96,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R03",
+          "runner_id": "2026-11-07_ASCOT_R03_08",
+          "horse": "BONDI STAR",
+          "model_pct": 7.78,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R03",
+          "runner_id": "2026-11-07_ASCOT_R03_04",
+          "horse": "BILLIONAIRE’S ROW",
+          "model_pct": 6.89,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R04",
+          "runner_id": "2026-11-07_ASCOT_R04_03",
+          "horse": "SNIPPETY LEGEND",
+          "model_pct": 23.62,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R04",
+          "runner_id": "2026-11-07_ASCOT_R04_02",
+          "horse": "PRINCE OF DALA",
+          "model_pct": 14.09,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R04",
+          "runner_id": "2026-11-07_ASCOT_R04_08",
+          "horse": "EMPIRE OF ROME",
+          "model_pct": 10.83,
+          "form_starts": 4
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R04",
+          "runner_id": "2026-11-07_ASCOT_R04_09",
+          "horse": "SHE’S A SPLINTER",
+          "model_pct": 10.78,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R04",
+          "runner_id": "2026-11-07_ASCOT_R04_04",
+          "horse": "MAALIS SONG",
+          "model_pct": 10.03,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R04",
+          "runner_id": "2026-11-07_ASCOT_R04_07",
+          "horse": "ELEGANT RULER",
+          "model_pct": 9.14,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R04",
+          "runner_id": "2026-11-07_ASCOT_R04_06",
+          "horse": "WOLF WHISTLE ZEL",
+          "model_pct": 8.51,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R04",
+          "runner_id": "2026-11-07_ASCOT_R04_05",
+          "horse": "MARCOS",
+          "model_pct": 8,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R04",
+          "runner_id": "2026-11-07_ASCOT_R04_01",
+          "horse": "RALLY THE TROOPS",
+          "model_pct": 5,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R05",
+          "runner_id": "2026-11-07_ASCOT_R05_01",
+          "horse": "HELLUVA GODDESS",
+          "model_pct": 13.95,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R05",
+          "runner_id": "2026-11-07_ASCOT_R05_02",
+          "horse": "RIPPER FAROOQ",
+          "model_pct": 13.31,
+          "form_starts": 4
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R05",
+          "runner_id": "2026-11-07_ASCOT_R05_05",
+          "horse": "BEYOND MEASURE",
+          "model_pct": 12.58,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R05",
+          "runner_id": "2026-11-07_ASCOT_R05_04",
+          "horse": "DESERT DANCING",
+          "model_pct": 8.71,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R05",
+          "runner_id": "2026-11-07_ASCOT_R05_10",
+          "horse": "SOLDIER OF GOD",
+          "model_pct": 8.03,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R05",
+          "runner_id": "2026-11-07_ASCOT_R05_07",
+          "horse": "COSMIC TREAT",
+          "model_pct": 8.01,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R05",
+          "runner_id": "2026-11-07_ASCOT_R05_06",
+          "horse": "YOU CAN CALL ME AL",
+          "model_pct": 7.22,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R05",
+          "runner_id": "2026-11-07_ASCOT_R05_12",
+          "horse": "ROCKING IN VEGAS",
+          "model_pct": 7.04,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R05",
+          "runner_id": "2026-11-07_ASCOT_R05_08",
+          "horse": "MIA GUSTO",
+          "model_pct": 6.72,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R05",
+          "runner_id": "2026-11-07_ASCOT_R05_03",
+          "horse": "WICKED VENOM",
+          "model_pct": 4.96,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R05",
+          "runner_id": "2026-11-07_ASCOT_R05_11",
+          "horse": "PAT’S LAST BANG",
+          "model_pct": 4.88,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R05",
+          "runner_id": "2026-11-07_ASCOT_R05_09",
+          "horse": "RISE TO GLORY",
+          "model_pct": 4.59,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R06",
+          "runner_id": "2026-11-07_ASCOT_R06_01",
+          "horse": "BEATTY",
+          "model_pct": 36.59,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R06",
+          "runner_id": "2026-11-07_ASCOT_R06_04",
+          "horse": "ROGER",
+          "model_pct": 18.63,
+          "form_starts": 3
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R06",
+          "runner_id": "2026-11-07_ASCOT_R06_05",
+          "horse": "GODSPEED",
+          "model_pct": 11.56,
+          "form_starts": 3
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R06",
+          "runner_id": "2026-11-07_ASCOT_R06_03",
+          "horse": "SWIFT RULER",
+          "model_pct": 10.26,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R06",
+          "runner_id": "2026-11-07_ASCOT_R06_02",
+          "horse": "HE’S A MACHINO",
+          "model_pct": 7.02,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R06",
+          "runner_id": "2026-11-07_ASCOT_R06_08",
+          "horse": "BLUE SPARX",
+          "model_pct": 6.54,
+          "form_starts": 4
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R06",
+          "runner_id": "2026-11-07_ASCOT_R06_06",
+          "horse": "CONSIGNMENT",
+          "model_pct": 4.98,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R06",
+          "runner_id": "2026-11-07_ASCOT_R06_07",
+          "horse": "COUNTERSUNK",
+          "model_pct": 4.42,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R07",
+          "runner_id": "2026-11-07_ASCOT_R07_04",
+          "horse": "SO SI GOD",
+          "model_pct": 24.96,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R07",
+          "runner_id": "2026-11-07_ASCOT_R07_06",
+          "horse": "OURGIRLCANRUN",
+          "model_pct": 18.38,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R07",
+          "runner_id": "2026-11-07_ASCOT_R07_10",
+          "horse": "STYLIN’ (NZ)",
+          "model_pct": 12.38,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R07",
+          "runner_id": "2026-11-07_ASCOT_R07_05",
+          "horse": "GOD’S GATE",
+          "model_pct": 7.21,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R07",
+          "runner_id": "2026-11-07_ASCOT_R07_02",
+          "horse": "PLATINUM SHOT",
+          "model_pct": 6.81,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R07",
+          "runner_id": "2026-11-07_ASCOT_R07_03",
+          "horse": "FAST HARRY",
+          "model_pct": 6.72,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R07",
+          "runner_id": "2026-11-07_ASCOT_R07_11",
+          "horse": "WHEELY",
+          "model_pct": 6.59,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R07",
+          "runner_id": "2026-11-07_ASCOT_R07_07",
+          "horse": "SCULLY",
+          "model_pct": 5.28,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R07",
+          "runner_id": "2026-11-07_ASCOT_R07_09",
+          "horse": "MY AUTHORITAH",
+          "model_pct": 5.22,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R07",
+          "runner_id": "2026-11-07_ASCOT_R07_01",
+          "horse": "CRUISE TO VICTORY",
+          "model_pct": 3.88,
+          "form_starts": 0
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R07",
+          "runner_id": "2026-11-07_ASCOT_R07_08",
+          "horse": "LITTLE SILVER",
+          "model_pct": 2.57,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R08",
+          "runner_id": "2026-11-07_ASCOT_R08_07",
+          "horse": "ABERDEEN FLYER",
+          "model_pct": 16.28,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R08",
+          "runner_id": "2026-11-07_ASCOT_R08_06",
+          "horse": "OLY’S CHOICE",
+          "model_pct": 10.84,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R08",
+          "runner_id": "2026-11-07_ASCOT_R08_08",
+          "horse": "ALL GRUNT",
+          "model_pct": 10.08,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R08",
+          "runner_id": "2026-11-07_ASCOT_R08_12",
+          "horse": "SOWAR",
+          "model_pct": 9.52,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R08",
+          "runner_id": "2026-11-07_ASCOT_R08_04",
+          "horse": "ROYAL TORONADO",
+          "model_pct": 9.06,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R08",
+          "runner_id": "2026-11-07_ASCOT_R08_11",
+          "horse": "ROCKING SOCIETY",
+          "model_pct": 7.4,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R08",
+          "runner_id": "2026-11-07_ASCOT_R08_03",
+          "horse": "ROYAL LAW",
+          "model_pct": 6.93,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R08",
+          "runner_id": "2026-11-07_ASCOT_R08_10",
+          "horse": "MEMORY PARADE",
+          "model_pct": 6.89,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R08",
+          "runner_id": "2026-11-07_ASCOT_R08_01",
+          "horse": "GINGER BAKER",
+          "model_pct": 6.84,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R08",
+          "runner_id": "2026-11-07_ASCOT_R08_09",
+          "horse": "ARCADIA PARK (NZ)",
+          "model_pct": 6.31,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R08",
+          "runner_id": "2026-11-07_ASCOT_R08_02",
+          "horse": "FOREVER BOY (NZ)",
+          "model_pct": 6.27,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R08",
+          "runner_id": "2026-11-07_ASCOT_R08_05",
+          "horse": "PLAYHOUSE PATRON",
+          "model_pct": 3.58,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R09",
+          "runner_id": "2026-11-07_ASCOT_R09_06",
+          "horse": "KING OF LIGHT",
+          "model_pct": 34.84,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R09",
+          "runner_id": "2026-11-07_ASCOT_R09_03",
+          "horse": "WATCH ME ROCK",
+          "model_pct": 16.13,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R09",
+          "runner_id": "2026-11-07_ASCOT_R09_07",
+          "horse": "TOO DARDY",
+          "model_pct": 13.02,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R09",
+          "runner_id": "2026-11-07_ASCOT_R09_01",
+          "horse": "WESTERN EMPIRE (NZ)",
+          "model_pct": 12.8,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R09",
+          "runner_id": "2026-11-07_ASCOT_R09_04",
+          "horse": "LET’S GALAHVANT",
+          "model_pct": 9.69,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R09",
+          "runner_id": "2026-11-07_ASCOT_R09_08",
+          "horse": "LONDON’S IMAGE",
+          "model_pct": 7.22,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R09",
+          "runner_id": "2026-11-07_ASCOT_R09_05",
+          "horse": "SENTIMENTAL HERO",
+          "model_pct": 3.2,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R09",
+          "runner_id": "2026-11-07_ASCOT_R09_02",
+          "horse": "BUSTLER",
+          "model_pct": 3.1,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R10",
+          "runner_id": "2026-11-07_ASCOT_R10_06",
+          "horse": "HURRICANE HARLEY",
+          "model_pct": 19.96,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R10",
+          "runner_id": "2026-11-07_ASCOT_R10_11",
+          "horse": "XENTARO",
+          "model_pct": 15.54,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R10",
+          "runner_id": "2026-11-07_ASCOT_R10_08",
+          "horse": "SNITZALATTE",
+          "model_pct": 10.19,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R10",
+          "runner_id": "2026-11-07_ASCOT_R10_05",
+          "horse": "SIR DREAMALOT",
+          "model_pct": 8.61,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R10",
+          "runner_id": "2026-11-07_ASCOT_R10_04",
+          "horse": "BLACK ORA",
+          "model_pct": 8.26,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R10",
+          "runner_id": "2026-11-07_ASCOT_R10_07",
+          "horse": "KEEP READING",
+          "model_pct": 8.21,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R10",
+          "runner_id": "2026-11-07_ASCOT_R10_01",
+          "horse": "GINNIVAN",
+          "model_pct": 7.44,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R10",
+          "runner_id": "2026-11-07_ASCOT_R10_10",
+          "horse": "CAPPER THIRTYNINE",
+          "model_pct": 7.16,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R10",
+          "runner_id": "2026-11-07_ASCOT_R10_09",
+          "horse": "SEPTEMBER BORN",
+          "model_pct": 5.44,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R10",
+          "runner_id": "2026-11-07_ASCOT_R10_03",
+          "horse": "TYCOON HARRY",
+          "model_pct": 5.15,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R10",
+          "runner_id": "2026-11-07_ASCOT_R10_02",
+          "horse": "RUSSIAN TO THE BAR",
+          "model_pct": 4.04,
+          "form_starts": 5
+        }
+      ]
+    },
+    {
+      "going": "Good 4",
+      "races": [
+        {
+          "race": 1,
+          "race_id": "2026-11-07_ASCOT_R01",
+          "title": "MAGIC MILLIONS PLATE",
+          "field": 7,
+          "leader": "AHAB THE ARAB",
+          "model_pct": 30.56,
+          "top": [
+            {
+              "horse": "AHAB THE ARAB",
+              "runner_id": "2026-11-07_ASCOT_R01_01",
+              "model_pct": 30.56,
+              "form_starts": 1,
+              "completeness": 0.6
+            },
+            {
+              "horse": "MADAM LASH",
+              "runner_id": "2026-11-07_ASCOT_R01_05",
+              "model_pct": 12.79,
+              "form_starts": 1,
+              "completeness": 0.6
+            },
+            {
+              "horse": "JUST AN ILLUSION",
+              "runner_id": "2026-11-07_ASCOT_R01_06",
+              "model_pct": 11.69,
+              "form_starts": 0,
+              "completeness": 0.04
+            },
+            {
+              "horse": "MALIBU STAR",
+              "runner_id": "2026-11-07_ASCOT_R01_07",
+              "model_pct": 11.69,
+              "form_starts": 0,
+              "completeness": 0.04
+            },
+            {
+              "horse": "GOLDEN PACIFIC",
+              "runner_id": "2026-11-07_ASCOT_R01_02",
+              "model_pct": 11.09,
+              "form_starts": 0,
+              "completeness": 0.04
+            }
+          ]
+        },
+        {
+          "race": 2,
+          "race_id": "2026-11-07_ASCOT_R02",
+          "title": "CARBINE CLUB OF WA APPRENTICES CUP",
+          "field": 8,
+          "leader": "I LOVE YA MONEY",
+          "model_pct": 34.9,
+          "top": [
+            {
+              "horse": "I LOVE YA MONEY",
+              "runner_id": "2026-11-07_ASCOT_R02_02",
+              "model_pct": 34.9,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "ABISSI (NZ)",
+              "runner_id": "2026-11-07_ASCOT_R02_01",
+              "model_pct": 19.01,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "ROMMEO",
+              "runner_id": "2026-11-07_ASCOT_R02_03",
+              "model_pct": 10.9,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "STYLAX",
+              "runner_id": "2026-11-07_ASCOT_R02_08",
+              "model_pct": 8.95,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "STARWALKER (NZ)",
+              "runner_id": "2026-11-07_ASCOT_R02_04",
+              "model_pct": 8.76,
+              "form_starts": 5,
+              "completeness": 1
+            }
+          ]
+        },
+        {
+          "race": 3,
+          "race_id": "2026-11-07_ASCOT_R03",
+          "title": "SGC AUSTRALIA HANDICAP",
+          "field": 9,
+          "leader": "VAMPI QUEEN",
+          "model_pct": 18.94,
+          "top": [
+            {
+              "horse": "VAMPI QUEEN",
+              "runner_id": "2026-11-07_ASCOT_R03_05",
+              "model_pct": 18.94,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "ACTA NON VERBA",
+              "runner_id": "2026-11-07_ASCOT_R03_07",
+              "model_pct": 14.98,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "ROCK IN WONDER",
+              "runner_id": "2026-11-07_ASCOT_R03_02",
+              "model_pct": 13.82,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "MASMELO",
+              "runner_id": "2026-11-07_ASCOT_R03_01",
+              "model_pct": 12.99,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "JAVELIN STRIKE",
+              "runner_id": "2026-11-07_ASCOT_R03_03",
+              "model_pct": 11.63,
+              "form_starts": 5,
+              "completeness": 1
+            }
+          ]
+        },
+        {
+          "race": 4,
+          "race_id": "2026-11-07_ASCOT_R04",
+          "title": "PPS WATER GROUP HANDICAP",
+          "field": 9,
+          "leader": "SNIPPETY LEGEND",
+          "model_pct": 24.11,
+          "top": [
+            {
+              "horse": "SNIPPETY LEGEND",
+              "runner_id": "2026-11-07_ASCOT_R04_03",
+              "model_pct": 24.11,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "PRINCE OF DALA",
+              "runner_id": "2026-11-07_ASCOT_R04_02",
+              "model_pct": 16.66,
+              "form_starts": 5,
+              "completeness": 0.92
+            },
+            {
+              "horse": "EMPIRE OF ROME",
+              "runner_id": "2026-11-07_ASCOT_R04_08",
+              "model_pct": 12.15,
+              "form_starts": 4,
+              "completeness": 0.86
+            },
+            {
+              "horse": "SHE’S A SPLINTER",
+              "runner_id": "2026-11-07_ASCOT_R04_09",
+              "model_pct": 11.16,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "MAALIS SONG",
+              "runner_id": "2026-11-07_ASCOT_R04_04",
+              "model_pct": 8.75,
+              "form_starts": 5,
+              "completeness": 1
+            }
+          ]
+        },
+        {
+          "race": 5,
+          "race_id": "2026-11-07_ASCOT_R05",
+          "title": "TABTOUCH - WESTSPEED PLATINUM SERIES HEAT 2",
+          "field": 12,
+          "leader": "HELLUVA GODDESS",
+          "model_pct": 18.14,
+          "top": [
+            {
+              "horse": "HELLUVA GODDESS",
+              "runner_id": "2026-11-07_ASCOT_R05_01",
+              "model_pct": 18.14,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "BEYOND MEASURE",
+              "runner_id": "2026-11-07_ASCOT_R05_05",
+              "model_pct": 14.4,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "RIPPER FAROOQ",
+              "runner_id": "2026-11-07_ASCOT_R05_02",
+              "model_pct": 10.6,
+              "form_starts": 4,
+              "completeness": 0.94
+            },
+            {
+              "horse": "COSMIC TREAT",
+              "runner_id": "2026-11-07_ASCOT_R05_07",
+              "model_pct": 9.82,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "DESERT DANCING",
+              "runner_id": "2026-11-07_ASCOT_R05_04",
+              "model_pct": 8.22,
+              "form_starts": 5,
+              "completeness": 1
+            }
+          ]
+        },
+        {
+          "race": 6,
+          "race_id": "2026-11-07_ASCOT_R06",
+          "title": "WAROA - FAIRETHA STAKES",
+          "field": 8,
+          "leader": "BEATTY",
+          "model_pct": 42.25,
+          "top": [
+            {
+              "horse": "BEATTY",
+              "runner_id": "2026-11-07_ASCOT_R06_01",
+              "model_pct": 42.25,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "ROGER",
+              "runner_id": "2026-11-07_ASCOT_R06_04",
+              "model_pct": 22.06,
+              "form_starts": 3,
+              "completeness": 0.87
+            },
+            {
+              "horse": "GODSPEED",
+              "runner_id": "2026-11-07_ASCOT_R06_05",
+              "model_pct": 8.21,
+              "form_starts": 3,
+              "completeness": 0.74
+            },
+            {
+              "horse": "HE’S A MACHINO",
+              "runner_id": "2026-11-07_ASCOT_R06_02",
+              "model_pct": 7.89,
+              "form_starts": 5,
+              "completeness": 0.87
+            },
+            {
+              "horse": "SWIFT RULER",
+              "runner_id": "2026-11-07_ASCOT_R06_03",
+              "model_pct": 6.32,
+              "form_starts": 5,
+              "completeness": 1
+            }
+          ]
+        },
+        {
+          "race": 7,
+          "race_id": "2026-11-07_ASCOT_R07",
+          "title": "MC EQUINE SURFACES HANDICAP",
+          "field": 11,
+          "leader": "SO SI GOD",
+          "model_pct": 27.36,
+          "top": [
+            {
+              "horse": "SO SI GOD",
+              "runner_id": "2026-11-07_ASCOT_R07_04",
+              "model_pct": 27.36,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "OURGIRLCANRUN",
+              "runner_id": "2026-11-07_ASCOT_R07_06",
+              "model_pct": 16.33,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "STYLIN’ (NZ)",
+              "runner_id": "2026-11-07_ASCOT_R07_10",
+              "model_pct": 11.87,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "WHEELY",
+              "runner_id": "2026-11-07_ASCOT_R07_11",
+              "model_pct": 8.85,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "FAST HARRY",
+              "runner_id": "2026-11-07_ASCOT_R07_03",
+              "model_pct": 8.61,
+              "form_starts": 5,
+              "completeness": 1
+            }
+          ]
+        },
+        {
+          "race": 8,
+          "race_id": "2026-11-07_ASCOT_R08",
+          "title": "TECHNICAL MECHANICAL MAINTENANCE - LUCKYGRAY STAKES",
+          "field": 12,
+          "leader": "ABERDEEN FLYER",
+          "model_pct": 15.68,
+          "top": [
+            {
+              "horse": "ABERDEEN FLYER",
+              "runner_id": "2026-11-07_ASCOT_R08_07",
+              "model_pct": 15.68,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "ALL GRUNT",
+              "runner_id": "2026-11-07_ASCOT_R08_08",
+              "model_pct": 10.89,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "OLY’S CHOICE",
+              "runner_id": "2026-11-07_ASCOT_R08_06",
+              "model_pct": 9.28,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "ROYAL TORONADO",
+              "runner_id": "2026-11-07_ASCOT_R08_04",
+              "model_pct": 9.25,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "SOWAR",
+              "runner_id": "2026-11-07_ASCOT_R08_12",
+              "model_pct": 8.94,
+              "form_starts": 5,
+              "completeness": 1
+            }
+          ]
+        },
+        {
+          "race": 9,
+          "race_id": "2026-11-07_ASCOT_R09",
+          "title": "AFGRI EQUIPMENT - LEE STEERE STAKES",
+          "field": 8,
+          "leader": "KING OF LIGHT",
+          "model_pct": 32.89,
+          "top": [
+            {
+              "horse": "KING OF LIGHT",
+              "runner_id": "2026-11-07_ASCOT_R09_06",
+              "model_pct": 32.89,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "WATCH ME ROCK",
+              "runner_id": "2026-11-07_ASCOT_R09_03",
+              "model_pct": 16.6,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "WESTERN EMPIRE (NZ)",
+              "runner_id": "2026-11-07_ASCOT_R09_01",
+              "model_pct": 13.34,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "TOO DARDY",
+              "runner_id": "2026-11-07_ASCOT_R09_07",
+              "model_pct": 11.75,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "LONDON’S IMAGE",
+              "runner_id": "2026-11-07_ASCOT_R09_08",
+              "model_pct": 10.07,
+              "form_starts": 5,
+              "completeness": 1
+            }
+          ]
+        },
+        {
+          "race": 10,
+          "race_id": "2026-11-07_ASCOT_R10",
+          "title": "NATIONAL JOCKEY TRUST HANDICAP",
+          "field": 11,
+          "leader": "HURRICANE HARLEY",
+          "model_pct": 21.28,
+          "top": [
+            {
+              "horse": "HURRICANE HARLEY",
+              "runner_id": "2026-11-07_ASCOT_R10_06",
+              "model_pct": 21.28,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "XENTARO",
+              "runner_id": "2026-11-07_ASCOT_R10_11",
+              "model_pct": 13.31,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "BLACK ORA",
+              "runner_id": "2026-11-07_ASCOT_R10_04",
+              "model_pct": 10.08,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "SNITZALATTE",
+              "runner_id": "2026-11-07_ASCOT_R10_08",
+              "model_pct": 9.72,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "KEEP READING",
+              "runner_id": "2026-11-07_ASCOT_R10_07",
+              "model_pct": 8,
+              "form_starts": 5,
+              "completeness": 1
+            }
+          ]
+        }
+      ],
+      "records": [
+        {
+          "race_id": "2026-11-07_ASCOT_R01",
+          "runner_id": "2026-11-07_ASCOT_R01_01",
+          "horse": "AHAB THE ARAB",
+          "model_pct": 30.56,
+          "form_starts": 1
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R01",
+          "runner_id": "2026-11-07_ASCOT_R01_05",
+          "horse": "MADAM LASH",
+          "model_pct": 12.79,
+          "form_starts": 1
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R01",
+          "runner_id": "2026-11-07_ASCOT_R01_06",
+          "horse": "JUST AN ILLUSION",
+          "model_pct": 11.69,
+          "form_starts": 0
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R01",
+          "runner_id": "2026-11-07_ASCOT_R01_07",
+          "horse": "MALIBU STAR",
+          "model_pct": 11.69,
+          "form_starts": 0
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R01",
+          "runner_id": "2026-11-07_ASCOT_R01_02",
+          "horse": "GOLDEN PACIFIC",
+          "model_pct": 11.09,
+          "form_starts": 0
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R01",
+          "runner_id": "2026-11-07_ASCOT_R01_03",
+          "horse": "PRINCE PROSECCO",
+          "model_pct": 11.09,
+          "form_starts": 0
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R01",
+          "runner_id": "2026-11-07_ASCOT_R01_04",
+          "horse": "SNIPPEX",
+          "model_pct": 11.09,
+          "form_starts": 0
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R02",
+          "runner_id": "2026-11-07_ASCOT_R02_02",
+          "horse": "I LOVE YA MONEY",
+          "model_pct": 34.9,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R02",
+          "runner_id": "2026-11-07_ASCOT_R02_01",
+          "horse": "ABISSI (NZ)",
+          "model_pct": 19.01,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R02",
+          "runner_id": "2026-11-07_ASCOT_R02_03",
+          "horse": "ROMMEO",
+          "model_pct": 10.9,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R02",
+          "runner_id": "2026-11-07_ASCOT_R02_08",
+          "horse": "STYLAX",
+          "model_pct": 8.95,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R02",
+          "runner_id": "2026-11-07_ASCOT_R02_04",
+          "horse": "STARWALKER (NZ)",
+          "model_pct": 8.76,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R02",
+          "runner_id": "2026-11-07_ASCOT_R02_05",
+          "horse": "ADMIRED",
+          "model_pct": 6.42,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R02",
+          "runner_id": "2026-11-07_ASCOT_R02_06",
+          "horse": "LIEN HYPHEN",
+          "model_pct": 6.39,
+          "form_starts": 4
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R02",
+          "runner_id": "2026-11-07_ASCOT_R02_07",
+          "horse": "OBSCENTINO",
+          "model_pct": 4.67,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R03",
+          "runner_id": "2026-11-07_ASCOT_R03_05",
+          "horse": "VAMPI QUEEN",
+          "model_pct": 18.94,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R03",
+          "runner_id": "2026-11-07_ASCOT_R03_07",
+          "horse": "ACTA NON VERBA",
+          "model_pct": 14.98,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R03",
+          "runner_id": "2026-11-07_ASCOT_R03_02",
+          "horse": "ROCK IN WONDER",
+          "model_pct": 13.82,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R03",
+          "runner_id": "2026-11-07_ASCOT_R03_01",
+          "horse": "MASMELO",
+          "model_pct": 12.99,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R03",
+          "runner_id": "2026-11-07_ASCOT_R03_03",
+          "horse": "JAVELIN STRIKE",
+          "model_pct": 11.63,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R03",
+          "runner_id": "2026-11-07_ASCOT_R03_04",
+          "horse": "BILLIONAIRE’S ROW",
+          "model_pct": 8.09,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R03",
+          "runner_id": "2026-11-07_ASCOT_R03_06",
+          "horse": "SPANK APPEAL",
+          "model_pct": 7.37,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R03",
+          "runner_id": "2026-11-07_ASCOT_R03_08",
+          "horse": "BONDI STAR",
+          "model_pct": 6.87,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R03",
+          "runner_id": "2026-11-07_ASCOT_R03_09",
+          "horse": "LEETRON",
+          "model_pct": 5.31,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R04",
+          "runner_id": "2026-11-07_ASCOT_R04_03",
+          "horse": "SNIPPETY LEGEND",
+          "model_pct": 24.11,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R04",
+          "runner_id": "2026-11-07_ASCOT_R04_02",
+          "horse": "PRINCE OF DALA",
+          "model_pct": 16.66,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R04",
+          "runner_id": "2026-11-07_ASCOT_R04_08",
+          "horse": "EMPIRE OF ROME",
+          "model_pct": 12.15,
+          "form_starts": 4
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R04",
+          "runner_id": "2026-11-07_ASCOT_R04_09",
+          "horse": "SHE’S A SPLINTER",
+          "model_pct": 11.16,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R04",
+          "runner_id": "2026-11-07_ASCOT_R04_04",
+          "horse": "MAALIS SONG",
+          "model_pct": 8.75,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R04",
+          "runner_id": "2026-11-07_ASCOT_R04_06",
+          "horse": "WOLF WHISTLE ZEL",
+          "model_pct": 8.61,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R04",
+          "runner_id": "2026-11-07_ASCOT_R04_07",
+          "horse": "ELEGANT RULER",
+          "model_pct": 7.18,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R04",
+          "runner_id": "2026-11-07_ASCOT_R04_05",
+          "horse": "MARCOS",
+          "model_pct": 6.68,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R04",
+          "runner_id": "2026-11-07_ASCOT_R04_01",
+          "horse": "RALLY THE TROOPS",
+          "model_pct": 4.7,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R05",
+          "runner_id": "2026-11-07_ASCOT_R05_01",
+          "horse": "HELLUVA GODDESS",
+          "model_pct": 18.14,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R05",
+          "runner_id": "2026-11-07_ASCOT_R05_05",
+          "horse": "BEYOND MEASURE",
+          "model_pct": 14.4,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R05",
+          "runner_id": "2026-11-07_ASCOT_R05_02",
+          "horse": "RIPPER FAROOQ",
+          "model_pct": 10.6,
+          "form_starts": 4
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R05",
+          "runner_id": "2026-11-07_ASCOT_R05_07",
+          "horse": "COSMIC TREAT",
+          "model_pct": 9.82,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R05",
+          "runner_id": "2026-11-07_ASCOT_R05_04",
+          "horse": "DESERT DANCING",
+          "model_pct": 8.22,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R05",
+          "runner_id": "2026-11-07_ASCOT_R05_06",
+          "horse": "YOU CAN CALL ME AL",
+          "model_pct": 6.89,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R05",
+          "runner_id": "2026-11-07_ASCOT_R05_10",
+          "horse": "SOLDIER OF GOD",
+          "model_pct": 6.09,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R05",
+          "runner_id": "2026-11-07_ASCOT_R05_12",
+          "horse": "ROCKING IN VEGAS",
+          "model_pct": 5.77,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R05",
+          "runner_id": "2026-11-07_ASCOT_R05_08",
+          "horse": "MIA GUSTO",
+          "model_pct": 5.49,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R05",
+          "runner_id": "2026-11-07_ASCOT_R05_11",
+          "horse": "PAT’S LAST BANG",
+          "model_pct": 5.17,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R05",
+          "runner_id": "2026-11-07_ASCOT_R05_03",
+          "horse": "WICKED VENOM",
+          "model_pct": 4.86,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R05",
+          "runner_id": "2026-11-07_ASCOT_R05_09",
+          "horse": "RISE TO GLORY",
+          "model_pct": 4.55,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R06",
+          "runner_id": "2026-11-07_ASCOT_R06_01",
+          "horse": "BEATTY",
+          "model_pct": 42.25,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R06",
+          "runner_id": "2026-11-07_ASCOT_R06_04",
+          "horse": "ROGER",
+          "model_pct": 22.06,
+          "form_starts": 3
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R06",
+          "runner_id": "2026-11-07_ASCOT_R06_05",
+          "horse": "GODSPEED",
+          "model_pct": 8.21,
+          "form_starts": 3
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R06",
+          "runner_id": "2026-11-07_ASCOT_R06_02",
+          "horse": "HE’S A MACHINO",
+          "model_pct": 7.89,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R06",
+          "runner_id": "2026-11-07_ASCOT_R06_03",
+          "horse": "SWIFT RULER",
+          "model_pct": 6.32,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R06",
+          "runner_id": "2026-11-07_ASCOT_R06_08",
+          "horse": "BLUE SPARX",
+          "model_pct": 5.06,
+          "form_starts": 4
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R06",
+          "runner_id": "2026-11-07_ASCOT_R06_06",
+          "horse": "CONSIGNMENT",
+          "model_pct": 4.91,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R06",
+          "runner_id": "2026-11-07_ASCOT_R06_07",
+          "horse": "COUNTERSUNK",
+          "model_pct": 3.3,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R07",
+          "runner_id": "2026-11-07_ASCOT_R07_04",
+          "horse": "SO SI GOD",
+          "model_pct": 27.36,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R07",
+          "runner_id": "2026-11-07_ASCOT_R07_06",
+          "horse": "OURGIRLCANRUN",
+          "model_pct": 16.33,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R07",
+          "runner_id": "2026-11-07_ASCOT_R07_10",
+          "horse": "STYLIN’ (NZ)",
+          "model_pct": 11.87,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R07",
+          "runner_id": "2026-11-07_ASCOT_R07_11",
+          "horse": "WHEELY",
+          "model_pct": 8.85,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R07",
+          "runner_id": "2026-11-07_ASCOT_R07_03",
+          "horse": "FAST HARRY",
+          "model_pct": 8.61,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R07",
+          "runner_id": "2026-11-07_ASCOT_R07_05",
+          "horse": "GOD’S GATE",
+          "model_pct": 6.95,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R07",
+          "runner_id": "2026-11-07_ASCOT_R07_02",
+          "horse": "PLATINUM SHOT",
+          "model_pct": 6.71,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R07",
+          "runner_id": "2026-11-07_ASCOT_R07_07",
+          "horse": "SCULLY",
+          "model_pct": 4.23,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R07",
+          "runner_id": "2026-11-07_ASCOT_R07_01",
+          "horse": "CRUISE TO VICTORY",
+          "model_pct": 3.57,
+          "form_starts": 0
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R07",
+          "runner_id": "2026-11-07_ASCOT_R07_09",
+          "horse": "MY AUTHORITAH",
+          "model_pct": 3.23,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R07",
+          "runner_id": "2026-11-07_ASCOT_R07_08",
+          "horse": "LITTLE SILVER",
+          "model_pct": 2.29,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R08",
+          "runner_id": "2026-11-07_ASCOT_R08_07",
+          "horse": "ABERDEEN FLYER",
+          "model_pct": 15.68,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R08",
+          "runner_id": "2026-11-07_ASCOT_R08_08",
+          "horse": "ALL GRUNT",
+          "model_pct": 10.89,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R08",
+          "runner_id": "2026-11-07_ASCOT_R08_06",
+          "horse": "OLY’S CHOICE",
+          "model_pct": 9.28,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R08",
+          "runner_id": "2026-11-07_ASCOT_R08_04",
+          "horse": "ROYAL TORONADO",
+          "model_pct": 9.25,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R08",
+          "runner_id": "2026-11-07_ASCOT_R08_12",
+          "horse": "SOWAR",
+          "model_pct": 8.94,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R08",
+          "runner_id": "2026-11-07_ASCOT_R08_10",
+          "horse": "MEMORY PARADE",
+          "model_pct": 8.66,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R08",
+          "runner_id": "2026-11-07_ASCOT_R08_11",
+          "horse": "ROCKING SOCIETY",
+          "model_pct": 8.32,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R08",
+          "runner_id": "2026-11-07_ASCOT_R08_03",
+          "horse": "ROYAL LAW",
+          "model_pct": 7.51,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R08",
+          "runner_id": "2026-11-07_ASCOT_R08_02",
+          "horse": "FOREVER BOY (NZ)",
+          "model_pct": 6.75,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R08",
+          "runner_id": "2026-11-07_ASCOT_R08_01",
+          "horse": "GINGER BAKER",
+          "model_pct": 6.21,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R08",
+          "runner_id": "2026-11-07_ASCOT_R08_09",
+          "horse": "ARCADIA PARK (NZ)",
+          "model_pct": 5.43,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R08",
+          "runner_id": "2026-11-07_ASCOT_R08_05",
+          "horse": "PLAYHOUSE PATRON",
+          "model_pct": 3.08,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R09",
+          "runner_id": "2026-11-07_ASCOT_R09_06",
+          "horse": "KING OF LIGHT",
+          "model_pct": 32.89,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R09",
+          "runner_id": "2026-11-07_ASCOT_R09_03",
+          "horse": "WATCH ME ROCK",
+          "model_pct": 16.6,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R09",
+          "runner_id": "2026-11-07_ASCOT_R09_01",
+          "horse": "WESTERN EMPIRE (NZ)",
+          "model_pct": 13.34,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R09",
+          "runner_id": "2026-11-07_ASCOT_R09_07",
+          "horse": "TOO DARDY",
+          "model_pct": 11.75,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R09",
+          "runner_id": "2026-11-07_ASCOT_R09_08",
+          "horse": "LONDON’S IMAGE",
+          "model_pct": 10.07,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R09",
+          "runner_id": "2026-11-07_ASCOT_R09_04",
+          "horse": "LET’S GALAHVANT",
+          "model_pct": 9,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R09",
+          "runner_id": "2026-11-07_ASCOT_R09_05",
+          "horse": "SENTIMENTAL HERO",
+          "model_pct": 3.39,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R09",
+          "runner_id": "2026-11-07_ASCOT_R09_02",
+          "horse": "BUSTLER",
+          "model_pct": 2.96,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R10",
+          "runner_id": "2026-11-07_ASCOT_R10_06",
+          "horse": "HURRICANE HARLEY",
+          "model_pct": 21.28,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R10",
+          "runner_id": "2026-11-07_ASCOT_R10_11",
+          "horse": "XENTARO",
+          "model_pct": 13.31,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R10",
+          "runner_id": "2026-11-07_ASCOT_R10_04",
+          "horse": "BLACK ORA",
+          "model_pct": 10.08,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R10",
+          "runner_id": "2026-11-07_ASCOT_R10_08",
+          "horse": "SNITZALATTE",
+          "model_pct": 9.72,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R10",
+          "runner_id": "2026-11-07_ASCOT_R10_07",
+          "horse": "KEEP READING",
+          "model_pct": 8,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R10",
+          "runner_id": "2026-11-07_ASCOT_R10_05",
+          "horse": "SIR DREAMALOT",
+          "model_pct": 7.49,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R10",
+          "runner_id": "2026-11-07_ASCOT_R10_10",
+          "horse": "CAPPER THIRTYNINE",
+          "model_pct": 7.2,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R10",
+          "runner_id": "2026-11-07_ASCOT_R10_03",
+          "horse": "TYCOON HARRY",
+          "model_pct": 6.96,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R10",
+          "runner_id": "2026-11-07_ASCOT_R10_01",
+          "horse": "GINNIVAN",
+          "model_pct": 5.86,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R10",
+          "runner_id": "2026-11-07_ASCOT_R10_09",
+          "horse": "SEPTEMBER BORN",
+          "model_pct": 5.49,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R10",
+          "runner_id": "2026-11-07_ASCOT_R10_02",
+          "horse": "RUSSIAN TO THE BAR",
+          "model_pct": 4.61,
+          "form_starts": 5
+        }
+      ]
+    },
+    {
+      "going": "Soft 6",
+      "races": [
+        {
+          "race": 1,
+          "race_id": "2026-11-07_ASCOT_R01",
+          "title": "MAGIC MILLIONS PLATE",
+          "field": 7,
+          "leader": "AHAB THE ARAB",
+          "model_pct": 28.25,
+          "top": [
+            {
+              "horse": "AHAB THE ARAB",
+              "runner_id": "2026-11-07_ASCOT_R01_01",
+              "model_pct": 28.25,
+              "form_starts": 1,
+              "completeness": 0.47
+            },
+            {
+              "horse": "MADAM LASH",
+              "runner_id": "2026-11-07_ASCOT_R01_05",
+              "model_pct": 13.26,
+              "form_starts": 1,
+              "completeness": 0.47
+            },
+            {
+              "horse": "JUST AN ILLUSION",
+              "runner_id": "2026-11-07_ASCOT_R01_06",
+              "model_pct": 12.07,
+              "form_starts": 0,
+              "completeness": 0.04
+            },
+            {
+              "horse": "MALIBU STAR",
+              "runner_id": "2026-11-07_ASCOT_R01_07",
+              "model_pct": 12.07,
+              "form_starts": 0,
+              "completeness": 0.04
+            },
+            {
+              "horse": "GOLDEN PACIFIC",
+              "runner_id": "2026-11-07_ASCOT_R01_02",
+              "model_pct": 11.45,
+              "form_starts": 0,
+              "completeness": 0.04
+            }
+          ]
+        },
+        {
+          "race": 2,
+          "race_id": "2026-11-07_ASCOT_R02",
+          "title": "CARBINE CLUB OF WA APPRENTICES CUP",
+          "field": 8,
+          "leader": "I LOVE YA MONEY",
+          "model_pct": 35.04,
+          "top": [
+            {
+              "horse": "I LOVE YA MONEY",
+              "runner_id": "2026-11-07_ASCOT_R02_02",
+              "model_pct": 35.04,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "ABISSI (NZ)",
+              "runner_id": "2026-11-07_ASCOT_R02_01",
+              "model_pct": 21.71,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "ROMMEO",
+              "runner_id": "2026-11-07_ASCOT_R02_03",
+              "model_pct": 9.3,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "STARWALKER (NZ)",
+              "runner_id": "2026-11-07_ASCOT_R02_04",
+              "model_pct": 8.46,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "STYLAX",
+              "runner_id": "2026-11-07_ASCOT_R02_08",
+              "model_pct": 7.9,
+              "form_starts": 5,
+              "completeness": 1
+            }
+          ]
+        },
+        {
+          "race": 3,
+          "race_id": "2026-11-07_ASCOT_R03",
+          "title": "SGC AUSTRALIA HANDICAP",
+          "field": 9,
+          "leader": "VAMPI QUEEN",
+          "model_pct": 16.72,
+          "top": [
+            {
+              "horse": "VAMPI QUEEN",
+              "runner_id": "2026-11-07_ASCOT_R03_05",
+              "model_pct": 16.72,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "ACTA NON VERBA",
+              "runner_id": "2026-11-07_ASCOT_R03_07",
+              "model_pct": 16.27,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "ROCK IN WONDER",
+              "runner_id": "2026-11-07_ASCOT_R03_02",
+              "model_pct": 13.83,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "MASMELO",
+              "runner_id": "2026-11-07_ASCOT_R03_01",
+              "model_pct": 11.94,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "JAVELIN STRIKE",
+              "runner_id": "2026-11-07_ASCOT_R03_03",
+              "model_pct": 10.48,
+              "form_starts": 5,
+              "completeness": 0.87
+            }
+          ]
+        },
+        {
+          "race": 4,
+          "race_id": "2026-11-07_ASCOT_R04",
+          "title": "PPS WATER GROUP HANDICAP",
+          "field": 9,
+          "leader": "SNIPPETY LEGEND",
+          "model_pct": 23.62,
+          "top": [
+            {
+              "horse": "SNIPPETY LEGEND",
+              "runner_id": "2026-11-07_ASCOT_R04_03",
+              "model_pct": 23.62,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "PRINCE OF DALA",
+              "runner_id": "2026-11-07_ASCOT_R04_02",
+              "model_pct": 14.09,
+              "form_starts": 5,
+              "completeness": 0.79
+            },
+            {
+              "horse": "EMPIRE OF ROME",
+              "runner_id": "2026-11-07_ASCOT_R04_08",
+              "model_pct": 10.83,
+              "form_starts": 4,
+              "completeness": 0.73
+            },
+            {
+              "horse": "SHE’S A SPLINTER",
+              "runner_id": "2026-11-07_ASCOT_R04_09",
+              "model_pct": 10.78,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "MAALIS SONG",
+              "runner_id": "2026-11-07_ASCOT_R04_04",
+              "model_pct": 10.03,
+              "form_starts": 5,
+              "completeness": 1
+            }
+          ]
+        },
+        {
+          "race": 5,
+          "race_id": "2026-11-07_ASCOT_R05",
+          "title": "TABTOUCH - WESTSPEED PLATINUM SERIES HEAT 2",
+          "field": 12,
+          "leader": "HELLUVA GODDESS",
+          "model_pct": 13.95,
+          "top": [
+            {
+              "horse": "HELLUVA GODDESS",
+              "runner_id": "2026-11-07_ASCOT_R05_01",
+              "model_pct": 13.95,
+              "form_starts": 5,
+              "completeness": 0.87
+            },
+            {
+              "horse": "RIPPER FAROOQ",
+              "runner_id": "2026-11-07_ASCOT_R05_02",
+              "model_pct": 13.31,
+              "form_starts": 4,
+              "completeness": 0.94
+            },
+            {
+              "horse": "BEYOND MEASURE",
+              "runner_id": "2026-11-07_ASCOT_R05_05",
+              "model_pct": 12.58,
+              "form_starts": 5,
+              "completeness": 0.87
+            },
+            {
+              "horse": "DESERT DANCING",
+              "runner_id": "2026-11-07_ASCOT_R05_04",
+              "model_pct": 8.71,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "SOLDIER OF GOD",
+              "runner_id": "2026-11-07_ASCOT_R05_10",
+              "model_pct": 8.03,
+              "form_starts": 5,
+              "completeness": 1
+            }
+          ]
+        },
+        {
+          "race": 6,
+          "race_id": "2026-11-07_ASCOT_R06",
+          "title": "WAROA - FAIRETHA STAKES",
+          "field": 8,
+          "leader": "BEATTY",
+          "model_pct": 36.59,
+          "top": [
+            {
+              "horse": "BEATTY",
+              "runner_id": "2026-11-07_ASCOT_R06_01",
+              "model_pct": 36.59,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "ROGER",
+              "runner_id": "2026-11-07_ASCOT_R06_04",
+              "model_pct": 18.63,
+              "form_starts": 3,
+              "completeness": 0.74
+            },
+            {
+              "horse": "GODSPEED",
+              "runner_id": "2026-11-07_ASCOT_R06_05",
+              "model_pct": 11.56,
+              "form_starts": 3,
+              "completeness": 0.74
+            },
+            {
+              "horse": "SWIFT RULER",
+              "runner_id": "2026-11-07_ASCOT_R06_03",
+              "model_pct": 10.26,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "HE’S A MACHINO",
+              "runner_id": "2026-11-07_ASCOT_R06_02",
+              "model_pct": 7.02,
+              "form_starts": 5,
+              "completeness": 0.87
+            }
+          ]
+        },
+        {
+          "race": 7,
+          "race_id": "2026-11-07_ASCOT_R07",
+          "title": "MC EQUINE SURFACES HANDICAP",
+          "field": 11,
+          "leader": "SO SI GOD",
+          "model_pct": 24.96,
+          "top": [
+            {
+              "horse": "SO SI GOD",
+              "runner_id": "2026-11-07_ASCOT_R07_04",
+              "model_pct": 24.96,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "OURGIRLCANRUN",
+              "runner_id": "2026-11-07_ASCOT_R07_06",
+              "model_pct": 18.38,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "STYLIN’ (NZ)",
+              "runner_id": "2026-11-07_ASCOT_R07_10",
+              "model_pct": 12.38,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "GOD’S GATE",
+              "runner_id": "2026-11-07_ASCOT_R07_05",
+              "model_pct": 7.21,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "PLATINUM SHOT",
+              "runner_id": "2026-11-07_ASCOT_R07_02",
+              "model_pct": 6.81,
+              "form_starts": 5,
+              "completeness": 1
+            }
+          ]
+        },
+        {
+          "race": 8,
+          "race_id": "2026-11-07_ASCOT_R08",
+          "title": "TECHNICAL MECHANICAL MAINTENANCE - LUCKYGRAY STAKES",
+          "field": 12,
+          "leader": "ABERDEEN FLYER",
+          "model_pct": 16.28,
+          "top": [
+            {
+              "horse": "ABERDEEN FLYER",
+              "runner_id": "2026-11-07_ASCOT_R08_07",
+              "model_pct": 16.28,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "OLY’S CHOICE",
+              "runner_id": "2026-11-07_ASCOT_R08_06",
+              "model_pct": 10.84,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "ALL GRUNT",
+              "runner_id": "2026-11-07_ASCOT_R08_08",
+              "model_pct": 10.08,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "SOWAR",
+              "runner_id": "2026-11-07_ASCOT_R08_12",
+              "model_pct": 9.52,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "ROYAL TORONADO",
+              "runner_id": "2026-11-07_ASCOT_R08_04",
+              "model_pct": 9.06,
+              "form_starts": 5,
+              "completeness": 1
+            }
+          ]
+        },
+        {
+          "race": 9,
+          "race_id": "2026-11-07_ASCOT_R09",
+          "title": "AFGRI EQUIPMENT - LEE STEERE STAKES",
+          "field": 8,
+          "leader": "KING OF LIGHT",
+          "model_pct": 34.84,
+          "top": [
+            {
+              "horse": "KING OF LIGHT",
+              "runner_id": "2026-11-07_ASCOT_R09_06",
+              "model_pct": 34.84,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "WATCH ME ROCK",
+              "runner_id": "2026-11-07_ASCOT_R09_03",
+              "model_pct": 16.13,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "TOO DARDY",
+              "runner_id": "2026-11-07_ASCOT_R09_07",
+              "model_pct": 13.02,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "WESTERN EMPIRE (NZ)",
+              "runner_id": "2026-11-07_ASCOT_R09_01",
+              "model_pct": 12.8,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "LET’S GALAHVANT",
+              "runner_id": "2026-11-07_ASCOT_R09_04",
+              "model_pct": 9.69,
+              "form_starts": 5,
+              "completeness": 1
+            }
+          ]
+        },
+        {
+          "race": 10,
+          "race_id": "2026-11-07_ASCOT_R10",
+          "title": "NATIONAL JOCKEY TRUST HANDICAP",
+          "field": 11,
+          "leader": "HURRICANE HARLEY",
+          "model_pct": 19.96,
+          "top": [
+            {
+              "horse": "HURRICANE HARLEY",
+              "runner_id": "2026-11-07_ASCOT_R10_06",
+              "model_pct": 19.96,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "XENTARO",
+              "runner_id": "2026-11-07_ASCOT_R10_11",
+              "model_pct": 15.54,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "SNITZALATTE",
+              "runner_id": "2026-11-07_ASCOT_R10_08",
+              "model_pct": 10.19,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "SIR DREAMALOT",
+              "runner_id": "2026-11-07_ASCOT_R10_05",
+              "model_pct": 8.61,
+              "form_starts": 5,
+              "completeness": 1
+            },
+            {
+              "horse": "BLACK ORA",
+              "runner_id": "2026-11-07_ASCOT_R10_04",
+              "model_pct": 8.26,
+              "form_starts": 5,
+              "completeness": 1
+            }
+          ]
+        }
+      ],
+      "records": [
+        {
+          "race_id": "2026-11-07_ASCOT_R01",
+          "runner_id": "2026-11-07_ASCOT_R01_01",
+          "horse": "AHAB THE ARAB",
+          "model_pct": 28.25,
+          "form_starts": 1
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R01",
+          "runner_id": "2026-11-07_ASCOT_R01_05",
+          "horse": "MADAM LASH",
+          "model_pct": 13.26,
+          "form_starts": 1
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R01",
+          "runner_id": "2026-11-07_ASCOT_R01_06",
+          "horse": "JUST AN ILLUSION",
+          "model_pct": 12.07,
+          "form_starts": 0
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R01",
+          "runner_id": "2026-11-07_ASCOT_R01_07",
+          "horse": "MALIBU STAR",
+          "model_pct": 12.07,
+          "form_starts": 0
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R01",
+          "runner_id": "2026-11-07_ASCOT_R01_02",
+          "horse": "GOLDEN PACIFIC",
+          "model_pct": 11.45,
+          "form_starts": 0
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R01",
+          "runner_id": "2026-11-07_ASCOT_R01_03",
+          "horse": "PRINCE PROSECCO",
+          "model_pct": 11.45,
+          "form_starts": 0
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R01",
+          "runner_id": "2026-11-07_ASCOT_R01_04",
+          "horse": "SNIPPEX",
+          "model_pct": 11.45,
+          "form_starts": 0
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R02",
+          "runner_id": "2026-11-07_ASCOT_R02_02",
+          "horse": "I LOVE YA MONEY",
+          "model_pct": 35.04,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R02",
+          "runner_id": "2026-11-07_ASCOT_R02_01",
+          "horse": "ABISSI (NZ)",
+          "model_pct": 21.71,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R02",
+          "runner_id": "2026-11-07_ASCOT_R02_03",
+          "horse": "ROMMEO",
+          "model_pct": 9.3,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R02",
+          "runner_id": "2026-11-07_ASCOT_R02_04",
+          "horse": "STARWALKER (NZ)",
+          "model_pct": 8.46,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R02",
+          "runner_id": "2026-11-07_ASCOT_R02_08",
+          "horse": "STYLAX",
+          "model_pct": 7.9,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R02",
+          "runner_id": "2026-11-07_ASCOT_R02_05",
+          "horse": "ADMIRED",
+          "model_pct": 6.76,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R02",
+          "runner_id": "2026-11-07_ASCOT_R02_06",
+          "horse": "LIEN HYPHEN",
+          "model_pct": 6.1,
+          "form_starts": 4
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R02",
+          "runner_id": "2026-11-07_ASCOT_R02_07",
+          "horse": "OBSCENTINO",
+          "model_pct": 4.73,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R03",
+          "runner_id": "2026-11-07_ASCOT_R03_05",
+          "horse": "VAMPI QUEEN",
+          "model_pct": 16.72,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R03",
+          "runner_id": "2026-11-07_ASCOT_R03_07",
+          "horse": "ACTA NON VERBA",
+          "model_pct": 16.27,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R03",
+          "runner_id": "2026-11-07_ASCOT_R03_02",
+          "horse": "ROCK IN WONDER",
+          "model_pct": 13.83,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R03",
+          "runner_id": "2026-11-07_ASCOT_R03_01",
+          "horse": "MASMELO",
+          "model_pct": 11.94,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R03",
+          "runner_id": "2026-11-07_ASCOT_R03_03",
+          "horse": "JAVELIN STRIKE",
+          "model_pct": 10.48,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R03",
+          "runner_id": "2026-11-07_ASCOT_R03_09",
+          "horse": "LEETRON",
+          "model_pct": 8.13,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R03",
+          "runner_id": "2026-11-07_ASCOT_R03_06",
+          "horse": "SPANK APPEAL",
+          "model_pct": 7.96,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R03",
+          "runner_id": "2026-11-07_ASCOT_R03_08",
+          "horse": "BONDI STAR",
+          "model_pct": 7.78,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R03",
+          "runner_id": "2026-11-07_ASCOT_R03_04",
+          "horse": "BILLIONAIRE’S ROW",
+          "model_pct": 6.89,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R04",
+          "runner_id": "2026-11-07_ASCOT_R04_03",
+          "horse": "SNIPPETY LEGEND",
+          "model_pct": 23.62,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R04",
+          "runner_id": "2026-11-07_ASCOT_R04_02",
+          "horse": "PRINCE OF DALA",
+          "model_pct": 14.09,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R04",
+          "runner_id": "2026-11-07_ASCOT_R04_08",
+          "horse": "EMPIRE OF ROME",
+          "model_pct": 10.83,
+          "form_starts": 4
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R04",
+          "runner_id": "2026-11-07_ASCOT_R04_09",
+          "horse": "SHE’S A SPLINTER",
+          "model_pct": 10.78,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R04",
+          "runner_id": "2026-11-07_ASCOT_R04_04",
+          "horse": "MAALIS SONG",
+          "model_pct": 10.03,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R04",
+          "runner_id": "2026-11-07_ASCOT_R04_07",
+          "horse": "ELEGANT RULER",
+          "model_pct": 9.14,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R04",
+          "runner_id": "2026-11-07_ASCOT_R04_06",
+          "horse": "WOLF WHISTLE ZEL",
+          "model_pct": 8.51,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R04",
+          "runner_id": "2026-11-07_ASCOT_R04_05",
+          "horse": "MARCOS",
+          "model_pct": 8,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R04",
+          "runner_id": "2026-11-07_ASCOT_R04_01",
+          "horse": "RALLY THE TROOPS",
+          "model_pct": 5,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R05",
+          "runner_id": "2026-11-07_ASCOT_R05_01",
+          "horse": "HELLUVA GODDESS",
+          "model_pct": 13.95,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R05",
+          "runner_id": "2026-11-07_ASCOT_R05_02",
+          "horse": "RIPPER FAROOQ",
+          "model_pct": 13.31,
+          "form_starts": 4
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R05",
+          "runner_id": "2026-11-07_ASCOT_R05_05",
+          "horse": "BEYOND MEASURE",
+          "model_pct": 12.58,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R05",
+          "runner_id": "2026-11-07_ASCOT_R05_04",
+          "horse": "DESERT DANCING",
+          "model_pct": 8.71,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R05",
+          "runner_id": "2026-11-07_ASCOT_R05_10",
+          "horse": "SOLDIER OF GOD",
+          "model_pct": 8.03,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R05",
+          "runner_id": "2026-11-07_ASCOT_R05_07",
+          "horse": "COSMIC TREAT",
+          "model_pct": 8.01,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R05",
+          "runner_id": "2026-11-07_ASCOT_R05_06",
+          "horse": "YOU CAN CALL ME AL",
+          "model_pct": 7.22,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R05",
+          "runner_id": "2026-11-07_ASCOT_R05_12",
+          "horse": "ROCKING IN VEGAS",
+          "model_pct": 7.04,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R05",
+          "runner_id": "2026-11-07_ASCOT_R05_08",
+          "horse": "MIA GUSTO",
+          "model_pct": 6.72,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R05",
+          "runner_id": "2026-11-07_ASCOT_R05_03",
+          "horse": "WICKED VENOM",
+          "model_pct": 4.96,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R05",
+          "runner_id": "2026-11-07_ASCOT_R05_11",
+          "horse": "PAT’S LAST BANG",
+          "model_pct": 4.88,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R05",
+          "runner_id": "2026-11-07_ASCOT_R05_09",
+          "horse": "RISE TO GLORY",
+          "model_pct": 4.59,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R06",
+          "runner_id": "2026-11-07_ASCOT_R06_01",
+          "horse": "BEATTY",
+          "model_pct": 36.59,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R06",
+          "runner_id": "2026-11-07_ASCOT_R06_04",
+          "horse": "ROGER",
+          "model_pct": 18.63,
+          "form_starts": 3
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R06",
+          "runner_id": "2026-11-07_ASCOT_R06_05",
+          "horse": "GODSPEED",
+          "model_pct": 11.56,
+          "form_starts": 3
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R06",
+          "runner_id": "2026-11-07_ASCOT_R06_03",
+          "horse": "SWIFT RULER",
+          "model_pct": 10.26,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R06",
+          "runner_id": "2026-11-07_ASCOT_R06_02",
+          "horse": "HE’S A MACHINO",
+          "model_pct": 7.02,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R06",
+          "runner_id": "2026-11-07_ASCOT_R06_08",
+          "horse": "BLUE SPARX",
+          "model_pct": 6.54,
+          "form_starts": 4
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R06",
+          "runner_id": "2026-11-07_ASCOT_R06_06",
+          "horse": "CONSIGNMENT",
+          "model_pct": 4.98,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R06",
+          "runner_id": "2026-11-07_ASCOT_R06_07",
+          "horse": "COUNTERSUNK",
+          "model_pct": 4.42,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R07",
+          "runner_id": "2026-11-07_ASCOT_R07_04",
+          "horse": "SO SI GOD",
+          "model_pct": 24.96,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R07",
+          "runner_id": "2026-11-07_ASCOT_R07_06",
+          "horse": "OURGIRLCANRUN",
+          "model_pct": 18.38,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R07",
+          "runner_id": "2026-11-07_ASCOT_R07_10",
+          "horse": "STYLIN’ (NZ)",
+          "model_pct": 12.38,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R07",
+          "runner_id": "2026-11-07_ASCOT_R07_05",
+          "horse": "GOD’S GATE",
+          "model_pct": 7.21,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R07",
+          "runner_id": "2026-11-07_ASCOT_R07_02",
+          "horse": "PLATINUM SHOT",
+          "model_pct": 6.81,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R07",
+          "runner_id": "2026-11-07_ASCOT_R07_03",
+          "horse": "FAST HARRY",
+          "model_pct": 6.72,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R07",
+          "runner_id": "2026-11-07_ASCOT_R07_11",
+          "horse": "WHEELY",
+          "model_pct": 6.59,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R07",
+          "runner_id": "2026-11-07_ASCOT_R07_07",
+          "horse": "SCULLY",
+          "model_pct": 5.28,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R07",
+          "runner_id": "2026-11-07_ASCOT_R07_09",
+          "horse": "MY AUTHORITAH",
+          "model_pct": 5.22,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R07",
+          "runner_id": "2026-11-07_ASCOT_R07_01",
+          "horse": "CRUISE TO VICTORY",
+          "model_pct": 3.88,
+          "form_starts": 0
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R07",
+          "runner_id": "2026-11-07_ASCOT_R07_08",
+          "horse": "LITTLE SILVER",
+          "model_pct": 2.57,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R08",
+          "runner_id": "2026-11-07_ASCOT_R08_07",
+          "horse": "ABERDEEN FLYER",
+          "model_pct": 16.28,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R08",
+          "runner_id": "2026-11-07_ASCOT_R08_06",
+          "horse": "OLY’S CHOICE",
+          "model_pct": 10.84,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R08",
+          "runner_id": "2026-11-07_ASCOT_R08_08",
+          "horse": "ALL GRUNT",
+          "model_pct": 10.08,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R08",
+          "runner_id": "2026-11-07_ASCOT_R08_12",
+          "horse": "SOWAR",
+          "model_pct": 9.52,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R08",
+          "runner_id": "2026-11-07_ASCOT_R08_04",
+          "horse": "ROYAL TORONADO",
+          "model_pct": 9.06,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R08",
+          "runner_id": "2026-11-07_ASCOT_R08_11",
+          "horse": "ROCKING SOCIETY",
+          "model_pct": 7.4,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R08",
+          "runner_id": "2026-11-07_ASCOT_R08_03",
+          "horse": "ROYAL LAW",
+          "model_pct": 6.93,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R08",
+          "runner_id": "2026-11-07_ASCOT_R08_10",
+          "horse": "MEMORY PARADE",
+          "model_pct": 6.89,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R08",
+          "runner_id": "2026-11-07_ASCOT_R08_01",
+          "horse": "GINGER BAKER",
+          "model_pct": 6.84,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R08",
+          "runner_id": "2026-11-07_ASCOT_R08_09",
+          "horse": "ARCADIA PARK (NZ)",
+          "model_pct": 6.31,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R08",
+          "runner_id": "2026-11-07_ASCOT_R08_02",
+          "horse": "FOREVER BOY (NZ)",
+          "model_pct": 6.27,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R08",
+          "runner_id": "2026-11-07_ASCOT_R08_05",
+          "horse": "PLAYHOUSE PATRON",
+          "model_pct": 3.58,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R09",
+          "runner_id": "2026-11-07_ASCOT_R09_06",
+          "horse": "KING OF LIGHT",
+          "model_pct": 34.84,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R09",
+          "runner_id": "2026-11-07_ASCOT_R09_03",
+          "horse": "WATCH ME ROCK",
+          "model_pct": 16.13,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R09",
+          "runner_id": "2026-11-07_ASCOT_R09_07",
+          "horse": "TOO DARDY",
+          "model_pct": 13.02,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R09",
+          "runner_id": "2026-11-07_ASCOT_R09_01",
+          "horse": "WESTERN EMPIRE (NZ)",
+          "model_pct": 12.8,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R09",
+          "runner_id": "2026-11-07_ASCOT_R09_04",
+          "horse": "LET’S GALAHVANT",
+          "model_pct": 9.69,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R09",
+          "runner_id": "2026-11-07_ASCOT_R09_08",
+          "horse": "LONDON’S IMAGE",
+          "model_pct": 7.22,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R09",
+          "runner_id": "2026-11-07_ASCOT_R09_05",
+          "horse": "SENTIMENTAL HERO",
+          "model_pct": 3.2,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R09",
+          "runner_id": "2026-11-07_ASCOT_R09_02",
+          "horse": "BUSTLER",
+          "model_pct": 3.1,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R10",
+          "runner_id": "2026-11-07_ASCOT_R10_06",
+          "horse": "HURRICANE HARLEY",
+          "model_pct": 19.96,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R10",
+          "runner_id": "2026-11-07_ASCOT_R10_11",
+          "horse": "XENTARO",
+          "model_pct": 15.54,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R10",
+          "runner_id": "2026-11-07_ASCOT_R10_08",
+          "horse": "SNITZALATTE",
+          "model_pct": 10.19,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R10",
+          "runner_id": "2026-11-07_ASCOT_R10_05",
+          "horse": "SIR DREAMALOT",
+          "model_pct": 8.61,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R10",
+          "runner_id": "2026-11-07_ASCOT_R10_04",
+          "horse": "BLACK ORA",
+          "model_pct": 8.26,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R10",
+          "runner_id": "2026-11-07_ASCOT_R10_07",
+          "horse": "KEEP READING",
+          "model_pct": 8.21,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R10",
+          "runner_id": "2026-11-07_ASCOT_R10_01",
+          "horse": "GINNIVAN",
+          "model_pct": 7.44,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R10",
+          "runner_id": "2026-11-07_ASCOT_R10_10",
+          "horse": "CAPPER THIRTYNINE",
+          "model_pct": 7.16,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R10",
+          "runner_id": "2026-11-07_ASCOT_R10_09",
+          "horse": "SEPTEMBER BORN",
+          "model_pct": 5.44,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R10",
+          "runner_id": "2026-11-07_ASCOT_R10_03",
+          "horse": "TYCOON HARRY",
+          "model_pct": 5.15,
+          "form_starts": 5
+        },
+        {
+          "race_id": "2026-11-07_ASCOT_R10",
+          "runner_id": "2026-11-07_ASCOT_R10_02",
+          "horse": "RUSSIAN TO THE BAR",
+          "model_pct": 4.04,
+          "form_starts": 5
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Estimates are uncalibrated and not certified winning probabilities",
+    "Soft 5/6/7 share current V5 soft category",
+    "Trials and first starters not scored as race wins",
+    "Official snapshot predates final scratchings"
+  ]
+}
