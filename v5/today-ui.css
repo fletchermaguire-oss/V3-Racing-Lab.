@@ -26,3 +26,12 @@
 .rl-simple-tool{padding:16px 18px;display:grid;gap:6px;min-height:108px;background:#112631}.rl-simple-tool strong{font-size:16px}.rl-simple-tool p{font-weight:400}
 @media(max-width:750px){.rl-simple-meetings{grid-template-columns:1fr}.rl-simple-meeting{display:grid;grid-template-columns:1fr auto;gap:4px;min-height:95px}.rl-simple-meeting small,.rl-simple-meeting .rl-simple-open{grid-column:1/-1}.rl-simple-metrics{gap:6px}.rl-simple-metric{padding:11px}.rl-simple-metric strong{font-size:22px}.rl-simple-toolgrid{grid-template-columns:1fr}.rl-simple-toprow{grid-template-columns:24px minmax(0,1fr) 94px;gap:7px;padding:13px 9px}.rl-simple-topchance strong{font-size:17px}.rl-simple-runner{gap:7px;padding:11px 9px}.rl-simple-quick .rl-simple-button{flex:1 1 42%;text-align:center}.rl-simple-heading h2{font-size:28px}}
 @media(prefers-reduced-motion:reduce){.rl-simple-button{transition:none}}
+
+/* Standalone V5 tools: retain every model feature without a secondary popover. */
+.rlv5-tools-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}
+.rlv5-tool-tile{min-height:112px;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:7px;padding:16px;border:1px solid #36545d;background:#122833;border-radius:13px;white-space:normal;text-align:left}
+.rlv5-tool-tile strong{font-size:15px;color:#ecf9f1}.rlv5-tool-tile small{font-size:12px;color:#a1b8c0;font-weight:400;line-height:1.4}.rlv5-tool-tile>span{font-size:12px;color:#88ebbf}
+.rlv5-tool-tile:hover{background:#1b3b41;border-color:#75e3ba}
+.rlv5-meeting-tabs{display:flex;gap:7px;flex-wrap:wrap}.rlv5-meeting-tabs .btn{flex:0 1 auto}
+@media(max-width:800px){.rlv5-tools-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.rlv5-tools-grid{grid-template-columns:1fr}}
