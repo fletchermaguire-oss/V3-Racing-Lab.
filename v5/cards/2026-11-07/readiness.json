@@ -7,26 +7,43 @@
   "winning_selections_frozen": false,
   "total_races": 29,
   "notes": [
-    "Accepted-field counts include emergencies, not independently verified final starters.",
-    "Flemington official going not declared; do not infer Good 4 or Soft 5.",
-    "No official Saturday shortlist or final V5 percentages have been published in this checkpoint.",
-    "The high-conviction screen may legitimately have zero qualifiers."
+    "Official 7 Nov scratching sheets have been finalised and reconciled against declared acceptances in all 29 races.",
+    "Final declarations show all ten reviewed selections active. Late scratchings can still occur.",
+    "V5 November 7 full-field calibrated model predictions are NOT complete or approved; analyst working percentages are shown separately.",
+    "Earlier 31 October and 3 November models/results and rank snapshots remain immutable."
   ],
   "meetings": [
     {
       "name": "FLEMINGTON",
       "races": 9,
       "accepted_including_emergencies": 125,
-      "going": null,
-      "scratchings": 3,
-      "rail": null,
-      "published": "Thu 05-Nov-26 6:18PM AEDT",
-      "field_url": "https://www.racingaustralia.horse/FreeFields/Acceptances.aspx?Key=2026Nov07%2CVIC%2CFlemington",
-      "scratch_url": "https://www.racingaustralia.horse/FreeFields/Scratchings.aspx?Key=2026Nov07%2CVIC%2CFlemington",
+      "going": "Good 4",
+      "scratchings": 20,
+      "rail": "Out 9m Entire Circuit",
+      "published": "Sat 07-Nov-26 7:50AM AEDT",
+      "field_url": "https://www.racingaustralia.horse/FreeFields/Acceptances.aspx?Key=2026Nov07,VIC,Flemington",
+      "scratch_url": "https://racingaustralia.horse/FreeFields/Scratchings.aspx?Key=2026Nov07%2CVIC%2CFlemington",
       "scratched_horses": [
-        "R3 House of Lords",
-        "R9 Annie's Rose",
-        "R9 My Zephyr (emergency)"
+        "R1 6 DARK SISTER (7/11 0511VC)",
+        "R1 12 PALMILLA (6/11 1441VC)",
+        "R2 12 STAGE ’N’ SCREEN (NZ) (7/11 0447VC)",
+        "R3 2 VAUBAN (FR) (7/11 0725)",
+        "R3 12 HOUSE OF LORDS (NZ) (5/11 1148)",
+        "R4 13 TUFF TU MUS (6/11 1146)",
+        "R4 14 JIMMY RECARD (7/11 0729VC)",
+        "R4 16 ELOUYOU (7/11 0645)",
+        "R5 16 SAMARELLE (NZ) (6/11 0757)",
+        "R5 18e SUPERFABULISTIC (NZ) (Eliminated)",
+        "R6 1 GIGA KICK (7/11 0708)",
+        "R6 5 REY MAGNERIO (7/11 0658VC)",
+        "R7 6 ANOTHER WIL (7/11 0724VC)",
+        "R8 8 SABAJ (6/11 1609VC)",
+        "R9 3 ANNIE’S ROSE (05/11 1001)",
+        "R9 4 SERGEANT MAJOR (NZ) (7/11 0724)",
+        "R9 11 SALUTED (7/11 0722)",
+        "R9 13 PRESTIGE LUCKY (6/11 2209)",
+        "R9 15 HUSTLE IN HEELS (6/11 0634)",
+        "R9 20e MY ZEPHYR (5/11 1818)"
       ],
       "program": [
         "Inglis Banner",
@@ -38,25 +55,49 @@
         "VRC Champions Mile",
         "TAB Champions Stakes",
         "HKJC World Pool Grand Handicap"
-      ]
+      ],
+      "final_official_sheet": true,
+      "active_declared_runners": 105
     },
     {
       "name": "ROSEHILL",
       "races": 10,
       "accepted_including_emergencies": 133,
-      "going": "Soft 6",
-      "scratchings": 6,
+      "going": "Good 4",
+      "scratchings": 28,
       "rail": "True",
-      "published": "Thu 05-Nov-26 9:35AM AEDT",
-      "field_url": "https://www.racingaustralia.horse/FreeFields/Acceptances.aspx?Key=2026Nov07%2CNSW%2CRosehill%20Gardens",
-      "scratch_url": "https://www.racingaustralia.horse/FreeFields/Scratchings.aspx?Key=2026Nov07%2CNSW%2CRosehill%20Gardens",
+      "published": "Sat 07-Nov-26 7:50AM AEDT",
+      "field_url": "https://www.racingaustralia.horse/FreeFields/Acceptances.aspx?Key=2026Nov07,NSW,Rosehill%20Gardens",
+      "scratch_url": "https://racingaustralia.horse/FreeFields/Scratchings.aspx?Key=2026Nov07,NSW,Rosehill%20Gardens",
       "scratched_horses": [
-        "R7 Just Precious",
-        "R8 You Wahng",
-        "R9 Nullarbor Jane",
-        "R9 Horseshoe Hill",
-        "R10 Rose Aye",
-        "R10 Blakemore Avenue"
+        "R1 6 SPEEDY HENRY (7/11 0721)",
+        "R1 7 CAMPARI TWIST (6/11 1758)",
+        "R1 9 WHATELEY (6/11 1446)",
+        "R2 1 DUVANA (7/11 0605)",
+        "R2 13 KITTY OKAY (7/11 0704)",
+        "R2 14 AHELLBENDA (7/11 0724)",
+        "R2 17e MAILATA (7/11 0610)",
+        "R3 2 SAVISANTA (NZ) (7/11 0715VC)",
+        "R3 8 SMART JAZZ (7/11 0715)",
+        "R4 7 MICHELANGELO (7/11 0627)",
+        "R4 9 CANNY QUEEN (NZ) (7/11 0706)",
+        "R5 6 ACCIDENTAL BID (GB) (7/11 0729)",
+        "R6 15e ACROZINA (Eliminated)",
+        "R6 16e TOYTOWN (Eliminated)",
+        "R6 17e FREEFLOW (Eliminated)",
+        "R6 18e TASSORT’S GLORY (Eliminated)",
+        "R7 9 JUST PRECIOUS (5/11 0734)",
+        "R7 11 MARETH (6/11 1452)",
+        "R8 5 YOU WAHNG (5/11 0709)",
+        "R9 2 MERCY ME (6/11 1238VC)",
+        "R9 4 NULLARBOR JANE (4/11 1119)",
+        "R9 5 HORSESHOE HILL (4/11 1508)",
+        "R9 7 SCENIC POINT (6/11 0819VC)",
+        "R9 12 OUTBACK ANGEL (6/11 2048)",
+        "R10 1 ESMAHLI (6/11 0716)",
+        "R10 8 SAXOBUSHI (6/11 1323VC)",
+        "R10 10 ROSE AYE (4/11 1553)",
+        "R10 11 BLAKEMORE AVENUE (4/11 1401)"
       ],
       "program": [
         "TAB Highway Handicap",
@@ -69,19 +110,25 @@
         "Five Diamonds",
         "Grant Burge Handicap",
         "Kia Ora Bloodlines to Headlines Handicap"
-      ]
+      ],
+      "final_official_sheet": true,
+      "active_declared_runners": 105
     },
     {
       "name": "ASCOT",
       "races": 10,
       "accepted_including_emergencies": 95,
-      "going": "Soft 5",
-      "scratchings": 0,
+      "going": "Good 4",
+      "scratchings": 3,
       "rail": "True",
-      "published": "Thu 05-Nov-26 1:13PM AEDT",
-      "field_url": "https://www.racingaustralia.horse/FreeFields/Acceptances.aspx?Key=2026Nov07%2CWA%2CAscot",
-      "scratch_url": "https://www.racingaustralia.horse/FreeFields/Scratchings.aspx?Key=2026Nov07%2CWA%2CAscot",
-      "scratched_horses": [],
+      "published": "Sat 07-Nov-26 11:01AM AEDT",
+      "field_url": "https://www.racingaustralia.horse/FreeFields/Acceptances.aspx?Key=2026Nov07,WA,Ascot",
+      "scratch_url": "https://racingaustralia.horse/FreeFields/Scratchings.aspx?Key=2026Nov07%2CWA%2CAscot",
+      "scratched_horses": [
+        "R3 8 BONDI STAR (07/11 1031)",
+        "R6 7 COUNTERSUNK (6/11 1213)",
+        "R7 11 WHEELY (06/11 1427)"
+      ],
       "program": [
         "Magic Millions Plate",
         "Carbine Club of WA Apprentices Cup",
@@ -93,7 +140,9 @@
         "Luckygray Stakes",
         "Lee Steere Stakes",
         "National Jockey Trust Handicap"
-      ]
+      ],
+      "final_official_sheet": true,
+      "active_declared_runners": 92
     }
   ],
   "form_checkpoints": {
@@ -115,5 +164,10 @@
       "shadow": "/v5/cards/2026-11-07/rosehill-scenarios.json",
       "final_starters_verified": false
     }
-  }
+  },
+  "official_declarations_finalised": true,
+  "official_final_source": "/v5/cards/2026-11-07/official-final.json",
+  "independent_top10_source": "/v5/cards/2026-11-07/independent-top10.json",
+  "active_declared_runners": 302,
+  "verified_field_timestamp": "2026-11-07T00:44:28.834Z"
 }

@@ -1,0 +1,617 @@
+{
+  "schema": "racing-lab-2026-11-07-official-meeting/v1",
+  "date": "2026-11-07",
+  "meeting": "FLEMINGTON",
+  "accepted_count": 125,
+  "removed_count": 20,
+  "active_count": 105,
+  "track_going": "Good 4",
+  "rail": "Out 9m Entire Circuit",
+  "source_published": "Sat 07-Nov-26 7:50AM AEDT",
+  "finality": "Finalised 7/11 - 7:45am. Chairperson: Rob Montgomery |",
+  "source_checked_at": "2026-11-07T00:40:42.722Z",
+  "acceptances_url": "https://www.racingaustralia.horse/FreeFields/Acceptances.aspx?Key=2026Nov07,VIC,Flemington",
+  "scratchings_url": "https://racingaustralia.horse/FreeFields/Scratchings.aspx?Key=2026Nov07%2CVIC%2CFlemington",
+  "races": [
+    {
+      "race": 1,
+      "title": "12:40PM Inglis Banner (1000 METRES)",
+      "accepted": 13,
+      "active": 11,
+      "removed": 2,
+      "active_runners": [
+        {
+          "number": "1",
+          "horse": "PUBLIC AFFAIRS"
+        },
+        {
+          "number": "2",
+          "horse": "STEEL POINT"
+        },
+        {
+          "number": "3",
+          "horse": "THE CHANCER"
+        },
+        {
+          "number": "4",
+          "horse": "SOLDI"
+        },
+        {
+          "number": "5",
+          "horse": "SHE’S SUPREME"
+        },
+        {
+          "number": "7",
+          "horse": "GODDESS KAY"
+        },
+        {
+          "number": "8",
+          "horse": "JACQUETS OFF"
+        },
+        {
+          "number": "9",
+          "horse": "MISS RUTHLESS"
+        },
+        {
+          "number": "10",
+          "horse": "NATURAL EMOTION"
+        },
+        {
+          "number": "11",
+          "horse": "NAUGHTY MAY"
+        },
+        {
+          "number": "13",
+          "horse": "RUSTY PEARL"
+        }
+      ],
+      "scratchings": [
+        {
+          "number": "6",
+          "label": "6 DARK SISTER (7/11 0511VC)"
+        },
+        {
+          "number": "12",
+          "label": "12 PALMILLA (6/11 1441VC)"
+        }
+      ]
+    },
+    {
+      "race": 2,
+      "title": "1:15PM Ronald McDonald House VIC/TAS Mile (1600 METRES)",
+      "accepted": 13,
+      "active": 12,
+      "removed": 1,
+      "active_runners": [
+        {
+          "number": "1",
+          "horse": "ROULETTE KING"
+        },
+        {
+          "number": "2",
+          "horse": "FIORENOT"
+        },
+        {
+          "number": "3",
+          "horse": "NATION’S CALL (IRE)"
+        },
+        {
+          "number": "4",
+          "horse": "HE’LL RIP"
+        },
+        {
+          "number": "5",
+          "horse": "TEST OF LOVE (IRE)"
+        },
+        {
+          "number": "6",
+          "horse": "DIRTY OLD TOWN"
+        },
+        {
+          "number": "7",
+          "horse": "OPTIONS"
+        },
+        {
+          "number": "8",
+          "horse": "SILVASISTA"
+        },
+        {
+          "number": "9",
+          "horse": "GRAND OMAHA"
+        },
+        {
+          "number": "10",
+          "horse": "HIYAAM PROUD"
+        },
+        {
+          "number": "11",
+          "horse": "MOUNT BONA"
+        },
+        {
+          "number": "13",
+          "horse": "SUPERFABULISTIC (NZ)"
+        }
+      ],
+      "scratchings": [
+        {
+          "number": "12",
+          "label": "12 STAGE ’N’ SCREEN (NZ) (7/11 0447VC)"
+        }
+      ]
+    },
+    {
+      "race": 3,
+      "title": "1:50PM Queen Elizabeth Stakes (2600 METRES)",
+      "accepted": 12,
+      "active": 10,
+      "removed": 2,
+      "active_runners": [
+        {
+          "number": "1",
+          "horse": "DEFIANTLY (FR)"
+        },
+        {
+          "number": "3",
+          "horse": "BERKELEY SQUARE"
+        },
+        {
+          "number": "4",
+          "horse": "PINHOLE (GB)"
+        },
+        {
+          "number": "5",
+          "horse": "KING PEDRO (NZ)"
+        },
+        {
+          "number": "6",
+          "horse": "TORRANZINO (NZ)"
+        },
+        {
+          "number": "7",
+          "horse": "VALIANT KING (GB)"
+        },
+        {
+          "number": "8",
+          "horse": "LITZDEEL"
+        },
+        {
+          "number": "9",
+          "horse": "MANZOR BLUE (NZ)"
+        },
+        {
+          "number": "10",
+          "horse": "NEWLOOK (FR)"
+        },
+        {
+          "number": "11",
+          "horse": "BELLA MONTAGNA (NZ)"
+        }
+      ],
+      "scratchings": [
+        {
+          "number": "2",
+          "label": "2 VAUBAN (FR) (7/11 0725)"
+        },
+        {
+          "number": "12",
+          "label": "12 HOUSE OF LORDS (NZ) (5/11 1148)"
+        }
+      ]
+    },
+    {
+      "race": 4,
+      "title": "2:30PM FISHER Stakes (1200 METRES)",
+      "accepted": 17,
+      "active": 14,
+      "removed": 3,
+      "active_runners": [
+        {
+          "number": "1",
+          "horse": "ARKANSAW KID"
+        },
+        {
+          "number": "2",
+          "horse": "GRAND LARCENY"
+        },
+        {
+          "number": "3",
+          "horse": "SIR SWAY"
+        },
+        {
+          "number": "4",
+          "horse": "WATCHME WIN"
+        },
+        {
+          "number": "5",
+          "horse": "PALLATON"
+        },
+        {
+          "number": "6",
+          "horse": "INKARUNA"
+        },
+        {
+          "number": "7",
+          "horse": "DE BERGERAC"
+        },
+        {
+          "number": "8",
+          "horse": "GRAND IMPACT (NZ)"
+        },
+        {
+          "number": "9",
+          "horse": "IMMORTAL STAR"
+        },
+        {
+          "number": "10",
+          "horse": "LA FRACAS (IRE)"
+        },
+        {
+          "number": "11",
+          "horse": "PHOTOGRAPH"
+        },
+        {
+          "number": "12",
+          "horse": "CRIPPS"
+        },
+        {
+          "number": "15",
+          "horse": "PIASTRI"
+        },
+        {
+          "number": "17e",
+          "horse": "HANKEE ALPHA (NZ)"
+        }
+      ],
+      "scratchings": [
+        {
+          "number": "13",
+          "label": "13 TUFF TU MUS (6/11 1146)"
+        },
+        {
+          "number": "14",
+          "label": "14 JIMMY RECARD (7/11 0729VC)"
+        },
+        {
+          "number": "16",
+          "label": "16 ELOUYOU (7/11 0645)"
+        }
+      ]
+    },
+    {
+      "race": 5,
+      "title": "3:10PM TAB ONE POOL Matriarch Stakes (2000 METRES)",
+      "accepted": 18,
+      "active": 16,
+      "removed": 2,
+      "active_runners": [
+        {
+          "number": "1",
+          "horse": "PANOVA"
+        },
+        {
+          "number": "2",
+          "horse": "SUNSET PARK (GB)"
+        },
+        {
+          "number": "3",
+          "horse": "MACHINE GUN GRACIE"
+        },
+        {
+          "number": "4",
+          "horse": "SOVERATO (NZ)"
+        },
+        {
+          "number": "5",
+          "horse": "TOO DARN DISCREET"
+        },
+        {
+          "number": "6",
+          "horse": "PRIVATE LEGACY"
+        },
+        {
+          "number": "7",
+          "horse": "ZULEIKA"
+        },
+        {
+          "number": "8",
+          "horse": "VIVY AIR"
+        },
+        {
+          "number": "9",
+          "horse": "YOU WAHNG"
+        },
+        {
+          "number": "10",
+          "horse": "JENNI’S MEADOW"
+        },
+        {
+          "number": "11",
+          "horse": "SUN WORSHIPPER"
+        },
+        {
+          "number": "12",
+          "horse": "SUN GIFT (NZ)"
+        },
+        {
+          "number": "13",
+          "horse": "PERFECT TEN (NZ)"
+        },
+        {
+          "number": "14",
+          "horse": "PILLOW FIGHT"
+        },
+        {
+          "number": "15",
+          "horse": "OCEAN BAY (NZ)"
+        },
+        {
+          "number": "17e",
+          "horse": "CLASSIC GEM"
+        }
+      ],
+      "scratchings": [
+        {
+          "number": "16",
+          "label": "16 SAMARELLE (NZ) (6/11 0757)"
+        },
+        {
+          "number": "18e",
+          "label": "18e SUPERFABULISTIC (NZ) (Eliminated)"
+        }
+      ]
+    },
+    {
+      "race": 6,
+      "title": "3:50PM VRC Champions Sprint (1200 METRES)",
+      "accepted": 12,
+      "active": 10,
+      "removed": 2,
+      "active_runners": [
+        {
+          "number": "2",
+          "horse": "MAZU"
+        },
+        {
+          "number": "3",
+          "horse": "HEADWALL"
+        },
+        {
+          "number": "4",
+          "horse": "CABALLUS"
+        },
+        {
+          "number": "6",
+          "horse": "TEMPTED"
+        },
+        {
+          "number": "7",
+          "horse": "JOLIESTAR"
+        },
+        {
+          "number": "8",
+          "horse": "CHARM STONE"
+        },
+        {
+          "number": "9",
+          "horse": "SKYBIRD"
+        },
+        {
+          "number": "10",
+          "horse": "GEEGEES MISTRUTH"
+        },
+        {
+          "number": "11",
+          "horse": "POINT BARROW"
+        },
+        {
+          "number": "12",
+          "horse": "PLAINTIFF"
+        }
+      ],
+      "scratchings": [
+        {
+          "number": "1",
+          "label": "1 GIGA KICK (7/11 0708)"
+        },
+        {
+          "number": "5",
+          "label": "5 REY MAGNERIO (7/11 0658VC)"
+        }
+      ]
+    },
+    {
+      "race": 7,
+      "title": "4:30PM VRC Champions Mile (1600 METRES)",
+      "accepted": 9,
+      "active": 8,
+      "removed": 1,
+      "active_runners": [
+        {
+          "number": "1",
+          "horse": "TOM KITTEN"
+        },
+        {
+          "number": "2",
+          "horse": "LINDERMANN"
+        },
+        {
+          "number": "3",
+          "horse": "BUCKAROO (GB)"
+        },
+        {
+          "number": "4",
+          "horse": "SEPALS"
+        },
+        {
+          "number": "5",
+          "horse": "POUNDING"
+        },
+        {
+          "number": "7",
+          "horse": "EL SOLEADO"
+        },
+        {
+          "number": "8",
+          "horse": "AUTUMN GLOW"
+        },
+        {
+          "number": "9",
+          "horse": "WITHIN THE LAW"
+        }
+      ],
+      "scratchings": [
+        {
+          "number": "6",
+          "label": "6 ANOTHER WIL (7/11 0724VC)"
+        }
+      ]
+    },
+    {
+      "race": 8,
+      "title": "5:10PM TAB Champions Stakes (2000 METRES)",
+      "accepted": 11,
+      "active": 10,
+      "removed": 1,
+      "active_runners": [
+        {
+          "number": "1",
+          "horse": "COSMIC CRUSADER (NZ)"
+        },
+        {
+          "number": "2",
+          "horse": "LIGHT INFANTRY MAN (FR)"
+        },
+        {
+          "number": "3",
+          "horse": "SIR DELIUS (GB)"
+        },
+        {
+          "number": "4",
+          "horse": "ATTRITION"
+        },
+        {
+          "number": "5",
+          "horse": "BIRDMAN (IRE)"
+        },
+        {
+          "number": "6",
+          "horse": "LAND LEGEND (FR)"
+        },
+        {
+          "number": "7",
+          "horse": "VON HAUKE (NZ)"
+        },
+        {
+          "number": "9",
+          "horse": "OMNI MAN (IRE)"
+        },
+        {
+          "number": "10",
+          "horse": "AELIANA (NZ)"
+        },
+        {
+          "number": "11",
+          "horse": "TREASURETHE MOMENT"
+        }
+      ],
+      "scratchings": [
+        {
+          "number": "8",
+          "label": "8 SABAJ (6/11 1609VC)"
+        }
+      ]
+    },
+    {
+      "race": 9,
+      "title": "5:50PM HKJC World Pool Grand Handicap (1100 METRES)",
+      "accepted": 20,
+      "active": 14,
+      "removed": 6,
+      "active_runners": [
+        {
+          "number": "1",
+          "horse": "VERDOUX"
+        },
+        {
+          "number": "2",
+          "horse": "ESMAHLI"
+        },
+        {
+          "number": "5",
+          "horse": "TORSHEEN"
+        },
+        {
+          "number": "6",
+          "horse": "EDUCATED"
+        },
+        {
+          "number": "7",
+          "horse": "ROHESIA"
+        },
+        {
+          "number": "8",
+          "horse": "ELECTRIC ELVIS (NZ)"
+        },
+        {
+          "number": "9",
+          "horse": "KING TUT"
+        },
+        {
+          "number": "10",
+          "horse": "TRES MAGNIFIQUE"
+        },
+        {
+          "number": "12",
+          "horse": "IT’S A YES"
+        },
+        {
+          "number": "14",
+          "horse": "ROYAL RENDEZVOUS"
+        },
+        {
+          "number": "16",
+          "horse": "SALARIA"
+        },
+        {
+          "number": "17e",
+          "horse": "FISSION"
+        },
+        {
+          "number": "18e",
+          "horse": "BRAVE DESIGN"
+        },
+        {
+          "number": "19e",
+          "horse": "LAWBOROUGH (NZ)"
+        }
+      ],
+      "scratchings": [
+        {
+          "number": "3",
+          "label": "3 ANNIE’S ROSE (05/11 1001)"
+        },
+        {
+          "number": "4",
+          "label": "4 SERGEANT MAJOR (NZ) (7/11 0724)"
+        },
+        {
+          "number": "11",
+          "label": "11 SALUTED (7/11 0722)"
+        },
+        {
+          "number": "13",
+          "label": "13 PRESTIGE LUCKY (6/11 2209)"
+        },
+        {
+          "number": "15",
+          "label": "15 HUSTLE IN HEELS (6/11 0634)"
+        },
+        {
+          "number": "20e",
+          "label": "20e MY ZEPHYR (5/11 1818)"
+        }
+      ]
+    }
+  ],
+  "late_scratching_risk": true
+}

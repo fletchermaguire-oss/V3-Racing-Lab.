@@ -1,0 +1,660 @@
+{
+  "schema": "racing-lab-2026-11-07-official-meeting/v1",
+  "date": "2026-11-07",
+  "meeting": "ROSEHILL",
+  "accepted_count": 133,
+  "removed_count": 28,
+  "active_count": 105,
+  "track_going": "Good 4",
+  "rail": "True",
+  "source_published": "Sat 07-Nov-26 7:50AM AEDT",
+  "finality": "Finalised 7/11 - 7:45am |",
+  "source_checked_at": "2026-11-07T00:43:31.094Z",
+  "acceptances_url": "https://www.racingaustralia.horse/FreeFields/Acceptances.aspx?Key=2026Nov07,NSW,Rosehill%20Gardens",
+  "scratchings_url": "https://racingaustralia.horse/FreeFields/Scratchings.aspx?Key=2026Nov07,NSW,Rosehill%20Gardens",
+  "races": [
+    {
+      "race": 1,
+      "title": "12:25PM TAB HIGHWAY HANDICAP (1200 METRES)",
+      "accepted": 18,
+      "active": 15,
+      "removed": 3,
+      "active_runners": [
+        {
+          "number": "1",
+          "horse": "DEFIANCE"
+        },
+        {
+          "number": "2",
+          "horse": "COMONGIN"
+        },
+        {
+          "number": "3",
+          "horse": "MAINSTAY"
+        },
+        {
+          "number": "4",
+          "horse": "BRAVE XENA"
+        },
+        {
+          "number": "5",
+          "horse": "LE CHOCOLAT (NZ)"
+        },
+        {
+          "number": "8",
+          "horse": "JUST HEAR ME OUT"
+        },
+        {
+          "number": "10",
+          "horse": "ATHENA’S TREASURE"
+        },
+        {
+          "number": "11",
+          "horse": "SUPREME STYLE"
+        },
+        {
+          "number": "12",
+          "horse": "NEVERMISTA"
+        },
+        {
+          "number": "13",
+          "horse": "TROPIC"
+        },
+        {
+          "number": "14",
+          "horse": "PANTA RHEI"
+        },
+        {
+          "number": "15",
+          "horse": "CRIME OF PASSION"
+        },
+        {
+          "number": "16",
+          "horse": "GIRRAWHEEN"
+        },
+        {
+          "number": "17",
+          "horse": "RELEASE POINT"
+        },
+        {
+          "number": "18",
+          "horse": "YESSPECIALLY"
+        }
+      ],
+      "scratchings": [
+        {
+          "number": "6",
+          "label": "6 SPEEDY HENRY (7/11 0721)"
+        },
+        {
+          "number": "7",
+          "label": "7 CAMPARI TWIST (6/11 1758)"
+        },
+        {
+          "number": "9",
+          "label": "9 WHATELEY (6/11 1446)"
+        }
+      ]
+    },
+    {
+      "race": 2,
+      "title": "1:00PM MIDWAY HANDICAP (1300 METRES)",
+      "accepted": 17,
+      "active": 13,
+      "removed": 4,
+      "active_runners": [
+        {
+          "number": "2",
+          "horse": "HELLOVA NATURE"
+        },
+        {
+          "number": "3",
+          "horse": "I AM CARROT"
+        },
+        {
+          "number": "4",
+          "horse": "CONGRESSMAN"
+        },
+        {
+          "number": "5",
+          "horse": "MAIDOFF"
+        },
+        {
+          "number": "6",
+          "horse": "CRYPTONIC"
+        },
+        {
+          "number": "7",
+          "horse": "SCINTILLA"
+        },
+        {
+          "number": "8",
+          "horse": "POWDER MAN"
+        },
+        {
+          "number": "9",
+          "horse": "COMMON GOAL"
+        },
+        {
+          "number": "10",
+          "horse": "MY PHAR LADY"
+        },
+        {
+          "number": "11",
+          "horse": "WILD THOUGHTS"
+        },
+        {
+          "number": "12",
+          "horse": "LAWLESS LUCY"
+        },
+        {
+          "number": "15",
+          "horse": "BOW"
+        },
+        {
+          "number": "16",
+          "horse": "SUPER JAIE"
+        }
+      ],
+      "scratchings": [
+        {
+          "number": "1",
+          "label": "1 DUVANA (7/11 0605)"
+        },
+        {
+          "number": "13",
+          "label": "13 KITTY OKAY (7/11 0704)"
+        },
+        {
+          "number": "14",
+          "label": "14 AHELLBENDA (7/11 0724)"
+        },
+        {
+          "number": "17e",
+          "label": "17e MAILATA (7/11 0610)"
+        }
+      ]
+    },
+    {
+      "race": 3,
+      "title": "1:35PM RANVET HANDICAP (2400 METRES)",
+      "accepted": 10,
+      "active": 8,
+      "removed": 2,
+      "active_runners": [
+        {
+          "number": "1",
+          "horse": "MEDATSU (NZ)"
+        },
+        {
+          "number": "3",
+          "horse": "SAVVY SPY (NZ)"
+        },
+        {
+          "number": "4",
+          "horse": "NKOSI"
+        },
+        {
+          "number": "5",
+          "horse": "CRITERIA (NZ)"
+        },
+        {
+          "number": "6",
+          "horse": "WAR RIBBON"
+        },
+        {
+          "number": "7",
+          "horse": "SAINT EMILION"
+        },
+        {
+          "number": "9",
+          "horse": "MR FABULOUS"
+        },
+        {
+          "number": "10",
+          "horse": "PARTY IT DOWN"
+        }
+      ],
+      "scratchings": [
+        {
+          "number": "2",
+          "label": "2 SAVISANTA (NZ) (7/11 0715VC)"
+        },
+        {
+          "number": "8",
+          "label": "8 SMART JAZZ (7/11 0715)"
+        }
+      ]
+    },
+    {
+      "race": 4,
+      "title": "2:10PM VALE ROB BURNET HANDICAP (1800 METRES)",
+      "accepted": 11,
+      "active": 9,
+      "removed": 2,
+      "active_runners": [
+        {
+          "number": "1",
+          "horse": "THRICE (IRE)"
+        },
+        {
+          "number": "2",
+          "horse": "SAMARELLE (NZ)"
+        },
+        {
+          "number": "3",
+          "horse": "BOTANICAL BOY (NZ)"
+        },
+        {
+          "number": "4",
+          "horse": "STORM SEASON"
+        },
+        {
+          "number": "5",
+          "horse": "WITHOUT PEER"
+        },
+        {
+          "number": "6",
+          "horse": "DONATELLO (NZ)"
+        },
+        {
+          "number": "8",
+          "horse": "SHE MOVES TOO"
+        },
+        {
+          "number": "10",
+          "horse": "OFF THE SCALE"
+        },
+        {
+          "number": "11",
+          "horse": "MARSABIT (IRE)"
+        }
+      ],
+      "scratchings": [
+        {
+          "number": "7",
+          "label": "7 MICHELANGELO (7/11 0627)"
+        },
+        {
+          "number": "9",
+          "label": "9 CANNY QUEEN (NZ) (7/11 0706)"
+        }
+      ]
+    },
+    {
+      "race": 5,
+      "title": "2:50PM SINGAPORE POOLS HANDICAP (1400 METRES)",
+      "accepted": 9,
+      "active": 8,
+      "removed": 1,
+      "active_runners": [
+        {
+          "number": "1",
+          "horse": "CASHOUT"
+        },
+        {
+          "number": "2",
+          "horse": "THEBELMONTGANGSTER (IRE)"
+        },
+        {
+          "number": "3",
+          "horse": "WOOTTON LASS"
+        },
+        {
+          "number": "4",
+          "horse": "BELLA KHADIJAH"
+        },
+        {
+          "number": "5",
+          "horse": "PROBABILITY THEORY"
+        },
+        {
+          "number": "7",
+          "horse": "PASADENA"
+        },
+        {
+          "number": "8",
+          "horse": "ROSE AYE"
+        },
+        {
+          "number": "9",
+          "horse": "SHOTGUN BELLA"
+        }
+      ],
+      "scratchings": [
+        {
+          "number": "6",
+          "label": "6 ACCIDENTAL BID (GB) (7/11 0729)"
+        }
+      ]
+    },
+    {
+      "race": 6,
+      "title": "3:30PM GOLDEN GIFT (1100 METRES)",
+      "accepted": 18,
+      "active": 14,
+      "removed": 4,
+      "active_runners": [
+        {
+          "number": "1",
+          "horse": "ACT UP"
+        },
+        {
+          "number": "2",
+          "horse": "CHASING ARCHER"
+        },
+        {
+          "number": "3",
+          "horse": "FAST FEATHER"
+        },
+        {
+          "number": "4",
+          "horse": "HOT SOX"
+        },
+        {
+          "number": "5",
+          "horse": "PROVERB"
+        },
+        {
+          "number": "6",
+          "horse": "ROYAL ACCORD"
+        },
+        {
+          "number": "7",
+          "horse": "SILENT INTENT"
+        },
+        {
+          "number": "8",
+          "horse": "TORSHAVN"
+        },
+        {
+          "number": "9",
+          "horse": "EXO VELOCITY"
+        },
+        {
+          "number": "10",
+          "horse": "JENNI IN ROME (NZ)"
+        },
+        {
+          "number": "11",
+          "horse": "ORIGINATE"
+        },
+        {
+          "number": "12",
+          "horse": "SHARJAWIYAH"
+        },
+        {
+          "number": "13",
+          "horse": "VAIN AMBITION"
+        },
+        {
+          "number": "14",
+          "horse": "WITKOWIN"
+        }
+      ],
+      "scratchings": [
+        {
+          "number": "15e",
+          "label": "15e ACROZINA (Eliminated)"
+        },
+        {
+          "number": "16e",
+          "label": "16e TOYTOWN (Eliminated)"
+        },
+        {
+          "number": "17e",
+          "label": "17e FREEFLOW (Eliminated)"
+        },
+        {
+          "number": "18e",
+          "label": "18e TASSORT’S GLORY (Eliminated)"
+        }
+      ]
+    },
+    {
+      "race": 7,
+      "title": "4:10PM TOYOTA FORKLIFTS HOT DANISH STAKES (1400 METRES)",
+      "accepted": 11,
+      "active": 9,
+      "removed": 2,
+      "active_runners": [
+        {
+          "number": "1",
+          "horse": "LAZZURA"
+        },
+        {
+          "number": "2",
+          "horse": "TUILERIES"
+        },
+        {
+          "number": "3",
+          "horse": "GERRINGONG"
+        },
+        {
+          "number": "4",
+          "horse": "ARABIAN ROSE"
+        },
+        {
+          "number": "5",
+          "horse": "MODELLA"
+        },
+        {
+          "number": "6",
+          "horse": "FIRESTORM (NZ)"
+        },
+        {
+          "number": "7",
+          "horse": "DARK GLITTER"
+        },
+        {
+          "number": "8",
+          "horse": "CHAINS OF LOVE"
+        },
+        {
+          "number": "10",
+          "horse": "SURF’S UP"
+        }
+      ],
+      "scratchings": [
+        {
+          "number": "9",
+          "label": "9 JUST PRECIOUS (5/11 0734)"
+        },
+        {
+          "number": "11",
+          "label": "11 MARETH (6/11 1452)"
+        }
+      ]
+    },
+    {
+      "race": 8,
+      "title": "4:50PM FIVE DIAMONDS (1800 METRES)",
+      "accepted": 14,
+      "active": 13,
+      "removed": 1,
+      "active_runners": [
+        {
+          "number": "1",
+          "horse": "LINEBACKER (NZ)"
+        },
+        {
+          "number": "2",
+          "horse": "TUXEDO (NZ)"
+        },
+        {
+          "number": "3",
+          "horse": "EVAPORATE (NZ)"
+        },
+        {
+          "number": "4",
+          "horse": "ATHANATOS"
+        },
+        {
+          "number": "6",
+          "horse": "IMPERIALIST (NZ)"
+        },
+        {
+          "number": "7",
+          "horse": "VERONA ROSE"
+        },
+        {
+          "number": "8",
+          "horse": "DECLICHY BOULEVARD"
+        },
+        {
+          "number": "9",
+          "horse": "PLYMOUTH"
+        },
+        {
+          "number": "10",
+          "horse": "ZAMBARDO (NZ)"
+        },
+        {
+          "number": "11",
+          "horse": "WELCOMETOTHESHOW"
+        },
+        {
+          "number": "12",
+          "horse": "BRINDAVAN (IRE)"
+        },
+        {
+          "number": "13",
+          "horse": "LORD PENMAN (NZ)"
+        },
+        {
+          "number": "14",
+          "horse": "MR CHAPLIN (GB)"
+        }
+      ],
+      "scratchings": [
+        {
+          "number": "5",
+          "label": "5 YOU WAHNG (5/11 0709)"
+        }
+      ]
+    },
+    {
+      "race": 9,
+      "title": "5:25PM GRANT BURGE HANDICAP (1100 METRES)",
+      "accepted": 12,
+      "active": 7,
+      "removed": 5,
+      "active_runners": [
+        {
+          "number": "1",
+          "horse": "SWORDPLAY"
+        },
+        {
+          "number": "3",
+          "horse": "REGIMENTAL COLOURS"
+        },
+        {
+          "number": "6",
+          "horse": "DETAIN (NZ)"
+        },
+        {
+          "number": "8",
+          "horse": "SHE’S MY EX"
+        },
+        {
+          "number": "9",
+          "horse": "AGATHA"
+        },
+        {
+          "number": "10",
+          "horse": "FLIGHTCREW"
+        },
+        {
+          "number": "11",
+          "horse": "SHOW BUSINESS"
+        }
+      ],
+      "scratchings": [
+        {
+          "number": "2",
+          "label": "2 MERCY ME (6/11 1238VC)"
+        },
+        {
+          "number": "4",
+          "label": "4 NULLARBOR JANE (4/11 1119)"
+        },
+        {
+          "number": "5",
+          "label": "5 HORSESHOE HILL (4/11 1508)"
+        },
+        {
+          "number": "7",
+          "label": "7 SCENIC POINT (6/11 0819VC)"
+        },
+        {
+          "number": "12",
+          "label": "12 OUTBACK ANGEL (6/11 2048)"
+        }
+      ]
+    },
+    {
+      "race": 10,
+      "title": "6:05PM KIA ORA BLOODLINES TO HEADLINES HANDICAP (1200 METRES)",
+      "accepted": 13,
+      "active": 9,
+      "removed": 4,
+      "active_runners": [
+        {
+          "number": "2",
+          "horse": "ANNIE’S ROSE"
+        },
+        {
+          "number": "3",
+          "horse": "MAILATA"
+        },
+        {
+          "number": "4",
+          "horse": "NITRO"
+        },
+        {
+          "number": "5",
+          "horse": "LET’S GO AGAIN"
+        },
+        {
+          "number": "6",
+          "horse": "NULLARBOR JANE"
+        },
+        {
+          "number": "7",
+          "horse": "PERFECT PICTURE"
+        },
+        {
+          "number": "9",
+          "horse": "HORSESHOE HILL"
+        },
+        {
+          "number": "12",
+          "horse": "ATMOSPHERIC ROCK"
+        },
+        {
+          "number": "13",
+          "horse": "CHEMTRAIL"
+        }
+      ],
+      "scratchings": [
+        {
+          "number": "1",
+          "label": "1 ESMAHLI (6/11 0716)"
+        },
+        {
+          "number": "8",
+          "label": "8 SAXOBUSHI (6/11 1323VC)"
+        },
+        {
+          "number": "10",
+          "label": "10 ROSE AYE (4/11 1553)"
+        },
+        {
+          "number": "11",
+          "label": "11 BLAKEMORE AVENUE (4/11 1401)"
+        }
+      ]
+    }
+  ],
+  "late_scratching_risk": true
+}

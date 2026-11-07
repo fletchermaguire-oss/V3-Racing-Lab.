@@ -25,8 +25,8 @@ const run=x=>G.assess(x,'2026-11-07T00:25:00Z');
 test('Saturday has 29 accepted races but no claimed final selections',()=>{
  assert.equal(c.total_races,29);
  assert.deepEqual(c.meetings.map(m=>m.races),[9,10,10]);
- assert.deepEqual(c.meetings.map(m=>m.going),[null,'Soft 6','Soft 5']);
- assert.deepEqual(c.meetings.map(m=>m.scratchings),[3,6,0]);
+ assert.deepEqual(c.meetings.map(m=>m.going),['Good 4','Good 4','Good 4']);
+ assert.deepEqual(c.meetings.map(m=>m.scratchings),[20,28,3]);
  assert(c.meetings.every(m=>m.program.length===m.races));
  assert.equal(c.final_starters_verified,false);
 });
