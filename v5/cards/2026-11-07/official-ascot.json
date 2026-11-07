@@ -1,0 +1,501 @@
+{
+  "schema": "racing-lab-2026-11-07-official-meeting/v1",
+  "date": "2026-11-07",
+  "meeting": "ASCOT",
+  "accepted_count": 95,
+  "removed_count": 3,
+  "active_count": 92,
+  "track_going": "Good 4",
+  "rail": "True",
+  "source_published": "Sat 07-Nov-26 11:01AM AEDT",
+  "finality": "Finalised 7/11 - 8.00am |",
+  "source_checked_at": "2026-11-07T00:43:52.727Z",
+  "acceptances_url": "https://www.racingaustralia.horse/FreeFields/Acceptances.aspx?Key=2026Nov07,WA,Ascot",
+  "scratchings_url": "https://racingaustralia.horse/FreeFields/Scratchings.aspx?Key=2026Nov07%2CWA%2CAscot",
+  "races": [
+    {
+      "race": 1,
+      "title": "11:54AM MAGIC MILLIONS PLATE (1100 METRES)",
+      "accepted": 7,
+      "active": 7,
+      "removed": 0,
+      "active_runners": [
+        {
+          "number": "1",
+          "horse": "AHAB THE ARAB"
+        },
+        {
+          "number": "2",
+          "horse": "GOLDEN PACIFIC"
+        },
+        {
+          "number": "3",
+          "horse": "PRINCE PROSECCO"
+        },
+        {
+          "number": "4",
+          "horse": "SNIPPEX"
+        },
+        {
+          "number": "5",
+          "horse": "MADAM LASH"
+        },
+        {
+          "number": "6",
+          "horse": "JUST AN ILLUSION"
+        },
+        {
+          "number": "7",
+          "horse": "MALIBU STAR"
+        }
+      ],
+      "scratchings": []
+    },
+    {
+      "race": 2,
+      "title": "12:34PM CARBINE CLUB OF WA APPRENTICES CUP (2200 METRES)",
+      "accepted": 8,
+      "active": 8,
+      "removed": 0,
+      "active_runners": [
+        {
+          "number": "1",
+          "horse": "ABISSI (NZ)"
+        },
+        {
+          "number": "2",
+          "horse": "I LOVE YA MONEY"
+        },
+        {
+          "number": "3",
+          "horse": "ROMMEO"
+        },
+        {
+          "number": "4",
+          "horse": "STARWALKER (NZ)"
+        },
+        {
+          "number": "5",
+          "horse": "ADMIRED"
+        },
+        {
+          "number": "6",
+          "horse": "LIEN HYPHEN"
+        },
+        {
+          "number": "7",
+          "horse": "OBSCENTINO"
+        },
+        {
+          "number": "8",
+          "horse": "STYLAX"
+        }
+      ],
+      "scratchings": []
+    },
+    {
+      "race": 3,
+      "title": "1:14PM SGC AUSTRALIA HANDICAP (1600 METRES)",
+      "accepted": 9,
+      "active": 8,
+      "removed": 1,
+      "active_runners": [
+        {
+          "number": "1",
+          "horse": "MASMELO"
+        },
+        {
+          "number": "2",
+          "horse": "ROCK IN WONDER"
+        },
+        {
+          "number": "3",
+          "horse": "JAVELIN STRIKE"
+        },
+        {
+          "number": "4",
+          "horse": "BILLIONAIRE’S ROW"
+        },
+        {
+          "number": "5",
+          "horse": "VAMPI QUEEN"
+        },
+        {
+          "number": "6",
+          "horse": "SPANK APPEAL"
+        },
+        {
+          "number": "7",
+          "horse": "ACTA NON VERBA"
+        },
+        {
+          "number": "9",
+          "horse": "LEETRON"
+        }
+      ],
+      "scratchings": [
+        {
+          "number": "8",
+          "label": "8 BONDI STAR (07/11 1031)"
+        }
+      ]
+    },
+    {
+      "race": 4,
+      "title": "1:54PM PPS WATER GROUP HANDICAP (1400 METRES)",
+      "accepted": 9,
+      "active": 9,
+      "removed": 0,
+      "active_runners": [
+        {
+          "number": "1",
+          "horse": "RALLY THE TROOPS"
+        },
+        {
+          "number": "2",
+          "horse": "PRINCE OF DALA"
+        },
+        {
+          "number": "3",
+          "horse": "SNIPPETY LEGEND"
+        },
+        {
+          "number": "4",
+          "horse": "MAALIS SONG"
+        },
+        {
+          "number": "5",
+          "horse": "MARCOS"
+        },
+        {
+          "number": "6",
+          "horse": "WOLF WHISTLE ZEL"
+        },
+        {
+          "number": "7",
+          "horse": "ELEGANT RULER"
+        },
+        {
+          "number": "8",
+          "horse": "EMPIRE OF ROME"
+        },
+        {
+          "number": "9",
+          "horse": "SHE’S A SPLINTER"
+        }
+      ],
+      "scratchings": []
+    },
+    {
+      "race": 5,
+      "title": "2:34PM TABTOUCH - WESTSPEED PLATINUM SERIES HEAT 2 (1200 METRES)",
+      "accepted": 12,
+      "active": 12,
+      "removed": 0,
+      "active_runners": [
+        {
+          "number": "1",
+          "horse": "HELLUVA GODDESS"
+        },
+        {
+          "number": "2",
+          "horse": "RIPPER FAROOQ"
+        },
+        {
+          "number": "3",
+          "horse": "WICKED VENOM"
+        },
+        {
+          "number": "4",
+          "horse": "DESERT DANCING"
+        },
+        {
+          "number": "5",
+          "horse": "BEYOND MEASURE"
+        },
+        {
+          "number": "6",
+          "horse": "YOU CAN CALL ME AL"
+        },
+        {
+          "number": "7",
+          "horse": "COSMIC TREAT"
+        },
+        {
+          "number": "8",
+          "horse": "MIA GUSTO"
+        },
+        {
+          "number": "9",
+          "horse": "RISE TO GLORY"
+        },
+        {
+          "number": "10",
+          "horse": "SOLDIER OF GOD"
+        },
+        {
+          "number": "11",
+          "horse": "PAT’S LAST BANG"
+        },
+        {
+          "number": "12",
+          "horse": "ROCKING IN VEGAS"
+        }
+      ],
+      "scratchings": []
+    },
+    {
+      "race": 6,
+      "title": "3:15PM WAROA - FAIRETHA STAKES (1400 METRES)",
+      "accepted": 8,
+      "active": 7,
+      "removed": 1,
+      "active_runners": [
+        {
+          "number": "1",
+          "horse": "BEATTY"
+        },
+        {
+          "number": "2",
+          "horse": "HE’S A MACHINO"
+        },
+        {
+          "number": "3",
+          "horse": "SWIFT RULER"
+        },
+        {
+          "number": "4",
+          "horse": "ROGER"
+        },
+        {
+          "number": "5",
+          "horse": "GODSPEED"
+        },
+        {
+          "number": "6",
+          "horse": "CONSIGNMENT"
+        },
+        {
+          "number": "8",
+          "horse": "BLUE SPARX"
+        }
+      ],
+      "scratchings": [
+        {
+          "number": "7",
+          "label": "7 COUNTERSUNK (6/11 1213)"
+        }
+      ]
+    },
+    {
+      "race": 7,
+      "title": "3:51PM MC EQUINE SURFACES HANDICAP (1200 METRES)",
+      "accepted": 11,
+      "active": 10,
+      "removed": 1,
+      "active_runners": [
+        {
+          "number": "1",
+          "horse": "CRUISE TO VICTORY"
+        },
+        {
+          "number": "2",
+          "horse": "PLATINUM SHOT"
+        },
+        {
+          "number": "3",
+          "horse": "FAST HARRY"
+        },
+        {
+          "number": "4",
+          "horse": "SO SI GOD"
+        },
+        {
+          "number": "5",
+          "horse": "GOD’S GATE"
+        },
+        {
+          "number": "6",
+          "horse": "OURGIRLCANRUN"
+        },
+        {
+          "number": "7",
+          "horse": "SCULLY"
+        },
+        {
+          "number": "8",
+          "horse": "LITTLE SILVER"
+        },
+        {
+          "number": "9",
+          "horse": "MY AUTHORITAH"
+        },
+        {
+          "number": "10",
+          "horse": "STYLIN’ (NZ)"
+        }
+      ],
+      "scratchings": [
+        {
+          "number": "11",
+          "label": "11 WHEELY (06/11 1427)"
+        }
+      ]
+    },
+    {
+      "race": 8,
+      "title": "4:29PM TECHNICAL MECHANICAL MAINTENANCE - LUCKYGRAY STAKES (1800 METRES)",
+      "accepted": 12,
+      "active": 12,
+      "removed": 0,
+      "active_runners": [
+        {
+          "number": "1",
+          "horse": "GINGER BAKER"
+        },
+        {
+          "number": "2",
+          "horse": "FOREVER BOY (NZ)"
+        },
+        {
+          "number": "3",
+          "horse": "ROYAL LAW"
+        },
+        {
+          "number": "4",
+          "horse": "ROYAL TORONADO"
+        },
+        {
+          "number": "5",
+          "horse": "PLAYHOUSE PATRON"
+        },
+        {
+          "number": "6",
+          "horse": "OLY’S CHOICE"
+        },
+        {
+          "number": "7",
+          "horse": "ABERDEEN FLYER"
+        },
+        {
+          "number": "8",
+          "horse": "ALL GRUNT"
+        },
+        {
+          "number": "9",
+          "horse": "ARCADIA PARK (NZ)"
+        },
+        {
+          "number": "10",
+          "horse": "MEMORY PARADE"
+        },
+        {
+          "number": "11",
+          "horse": "ROCKING SOCIETY"
+        },
+        {
+          "number": "12",
+          "horse": "SOWAR"
+        }
+      ],
+      "scratchings": []
+    },
+    {
+      "race": 9,
+      "title": "5:05PM AFGRI EQUIPMENT - LEE STEERE STAKES (1400 METRES)",
+      "accepted": 8,
+      "active": 8,
+      "removed": 0,
+      "active_runners": [
+        {
+          "number": "1",
+          "horse": "WESTERN EMPIRE (NZ)"
+        },
+        {
+          "number": "2",
+          "horse": "BUSTLER"
+        },
+        {
+          "number": "3",
+          "horse": "WATCH ME ROCK"
+        },
+        {
+          "number": "4",
+          "horse": "LET’S GALAHVANT"
+        },
+        {
+          "number": "5",
+          "horse": "SENTIMENTAL HERO"
+        },
+        {
+          "number": "6",
+          "horse": "KING OF LIGHT"
+        },
+        {
+          "number": "7",
+          "horse": "TOO DARDY"
+        },
+        {
+          "number": "8",
+          "horse": "LONDON’S IMAGE"
+        }
+      ],
+      "scratchings": []
+    },
+    {
+      "race": 10,
+      "title": "5:44PM NATIONAL JOCKEY TRUST HANDICAP (1200 METRES)",
+      "accepted": 11,
+      "active": 11,
+      "removed": 0,
+      "active_runners": [
+        {
+          "number": "1",
+          "horse": "GINNIVAN"
+        },
+        {
+          "number": "2",
+          "horse": "RUSSIAN TO THE BAR"
+        },
+        {
+          "number": "3",
+          "horse": "TYCOON HARRY"
+        },
+        {
+          "number": "4",
+          "horse": "BLACK ORA"
+        },
+        {
+          "number": "5",
+          "horse": "SIR DREAMALOT"
+        },
+        {
+          "number": "6",
+          "horse": "HURRICANE HARLEY"
+        },
+        {
+          "number": "7",
+          "horse": "KEEP READING"
+        },
+        {
+          "number": "8",
+          "horse": "SNITZALATTE"
+        },
+        {
+          "number": "9",
+          "horse": "SEPTEMBER BORN"
+        },
+        {
+          "number": "10",
+          "horse": "CAPPER THIRTYNINE"
+        },
+        {
+          "number": "11",
+          "horse": "XENTARO"
+        }
+      ],
+      "scratchings": []
+    }
+  ],
+  "late_scratching_risk": true
+}
