@@ -927,6 +927,7 @@ function toolsPage(){
  var root=app();root.append(head('All tools','Everything is still available — fewer menus on the main screens.'));
  var cards=e('div','rlv5-tools-grid');
  var items=[
+  ['quaddie','Quaddie worksheets','Today’s Flemington and Rosehill ticket studies'],
   ['sim','Simulator','10,000-draw model demonstrations'],
   ['compare','Compare horses','Saved form and head-to-head research'],
   ['results','Results & history','Previous race outcomes and accuracy'],
@@ -937,7 +938,7 @@ function toolsPage(){
   ['oaks','5 Nov results','Completed Oaks Day analysis'],
   ['archive','Archived V5 board','Earlier model Top 5/10/15 and race dossiers']
  ];
- items.forEach(function(x){var b=action('',function(){go(x[0]);},'rlv5-tool-tile');
+ items.forEach(function(x){var b=action('',function(){if(x[0]==='quaddie')global.location.href='/v5/saturday-2026-11-07.html';else go(x[0]);},'rlv5-tool-tile');
   b.append(e('strong','',x[1]),e('small','',x[2]),e('span','','Open →'));cards.append(b);
  });
  root.append(cards,note('Today’s field data is separate from the 3 November model archive. All model features remain available; old probabilities are not current race-day predictions.'));
