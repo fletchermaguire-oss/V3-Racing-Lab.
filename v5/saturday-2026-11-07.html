@@ -1,30 +1,43 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Racing Lab — Saturday 7 November checkpoint</title>
-<style>:root{color-scheme:dark}body{font:15px/1.55 system-ui;background:#080f17;color:#eaf4ef;margin:0}main{max-width:1050px;margin:auto;padding:25px 18px 90px}a{color:#76e7b3}.muted{color:#a3b7c0}.warn{color:#ffd08f}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.card{border:1px solid #2d424a;border-radius:16px;padding:18px;background:#11212a}h1{font-size:clamp(27px,4vw,41px);letter-spacing:-.03em}h2{font-size:19px}ul{padding-left:21px}@media(max-width:680px){.grid{grid-template-columns:1fr}}</style></head>
-<body><main><p><a href="/v5/?tab=overview">← Racing Lab V5</a></p><p class="muted">RESEARCH CHECKPOINT · 7 NOVEMBER 2026</p><h1>Saturday: 29 races, no invented locks</h1>
-<p>This is a source-verified early checklist, not a final selection board. All 29 races need final starter, track, and rival reviews before model probabilities can be treated as race-day estimates.</p>
-<p><a href="/v5/ascot-2026-11-07.html">Open Ascot · all 10 races, full provisional V5 form and model scenarios</a></p>
-<div class="grid" id="meetings"><div class="card">Loading source checkpoint…</div></div>
-<section class="card" style="margin-top:20px"><h2>Rules for the final board</h2>
-<ul><li>One named race leader per race; a separate Top 10 may include alternatives in the same race</li>
-<li>Every active runner receives a same-version model probability; each field must total 100%</li>
-<li>Official going and final scratchings must match the model scenario and field revision</li>
-<li>Two serious rivals, speed map and risks must be reviewed for each proposed lead selection</li>
-<li>Every switch preserves the original choice with dated evidence and reason</li>
-<li>High-conviction picks can number zero — no manufactured locks</li></ul></section>
-<p class="muted">Thursday's corrected outcome audit remains separate: <a href="/results.html">Results &amp; History</a>.</p></main>
-<script>(async function(){
-try{const a=await fetch('/v5/cards/2026-11-07/readiness.json',{cache:'no-store'});if(!a.ok)throw Error('HTTP '+a.status);
-const d=await a.json();if(d.schema!=='racing-lab-2026-11-07-source-checkpoint/v1')throw Error('Wrong checkpoint version');
-const root=document.getElementById('meetings');root.replaceChildren();
-d.meetings.forEach(m=>{const el=document.createElement('section');el.className='card';
-const h=document.createElement('h2');h.textContent=m.name+' · '+m.races+' races';el.append(h);
-const p=document.createElement('p');p.className='warn';p.textContent='Track: '+(m.going||'not declared')+' · '+m.scratchings+' scratchings';el.append(p);
-const c=document.createElement('p');c.textContent=m.accepted_including_emergencies+' acceptors incl. emergencies · final starters NOT certified';el.append(c);
-const t=document.createElement('small');t.className='muted';t.textContent='Last published: '+m.published;el.append(t);
-const l=document.createElement('p'),link=document.createElement('a');link.href=m.field_url;link.textContent='Official fields';l.append(link);el.append(l);
-const list=document.createElement('ol');m.program.forEach(name=>{const x=document.createElement('li');x.textContent=name;list.append(x)});el.append(list);
-root.append(el);
-});
-}catch(err){document.getElementById('meetings').textContent='Unable to read checkpoint: '+err.message;}
-})();</script></body></html>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#09121c"><title>Racing Lab V5 — Saturday 7 November final field desk</title>
+<style>
+:root{color-scheme:dark;--bg:#09121c;--box:#10212c;--border:#2c4754;--accent:#82eac0;--text:#e5eef0;--muted:#a6b7c0;--warn:#ffd595}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 system-ui,-apple-system,sans-serif}main{max-width:1120px;margin:auto;padding:20px 17px 75px}
+a{color:var(--accent)}header{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.pill{display:inline-block;border:1px solid #3c5660;color:var(--accent);border-radius:30px;padding:5px 11px;font-size:12px;font-weight:650}
+h1{font-size:clamp(26px,4.2vw,45px);letter-spacing:-.035em;line-height:1.13;margin:24px 0 8px}h2{font-size:22px;margin:0 0 12px}h3{font-size:17px;margin:0}.muted,small{color:var(--muted)}.warn{color:var(--warn)}
+.panel{border:1px solid var(--border);border-radius:16px;background:var(--box);padding:20px;margin-top:17px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-top:17px}.stat{border:1px solid var(--border);padding:13px;border-radius:13px;background:#11232e}.stat b{display:block;font-size:23px}.stat small{font-size:11px}
+table{border-collapse:collapse;width:100%}th,td{text-align:left;vertical-align:top;border-bottom:1px solid #29414c;padding:10px 8px;font-size:13px}th{color:var(--muted);font-weight:600}td.num,th.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}.horse{font-weight:750}.warnbox{border-left:3px solid var(--warn);padding:10px 14px;background:#221e19;border-radius:4px;margin:18px 0}
+button{cursor:pointer;color:var(--text);background:#18313b;border:1px solid #36515b;border-radius:8px;padding:8px 11px;font:inherit}button[aria-pressed="true"]{background:#245b4d;border-color:var(--accent)}
+.controls{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 14px}details{margin:12px 0;border:1px solid #324853;border-radius:10px;padding:12px;background:#10222a}summary{font-weight:650;cursor:pointer}.runnerlist{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.runner{background:#1b3540;border-radius:7px;padding:5px 8px;font-size:12px}.scr{color:var(--warn)}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.flex{display:flex;justify-content:space-between;gap:10px;align-items:start}.ticket{font-size:13px;margin:8px 0}.ticket strong{color:var(--accent)}.track{font-size:19px;font-weight:750}#error{color:var(--warn)}
+@media(max-width:730px){.stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.panel{padding:15px}th,td{padding:8px 4px;font-size:12px}.note-col{display:none}} 
+</style></head>
+<body><main>
+<header><a href="/v5/?tab=overview">← Main V5 studio</a><span class="pill">Saturday field desk · 7 November 2026</span></header>
+<h1>Final fields &amp; research board</h1>
+<p class="muted">Flemington · Rosehill · Ascot · official Racing Australia declarations. This is a race-day data checkpoint; late scratchings can still occur.</p>
+<div class="warnbox"><strong>Research versus model:</strong> The Top 10 below is our independent reviewed selection list. Any displayed percentages are provisional analyst working estimates, <strong>not</strong> regenerated or calibrated V5 model forecasts. Prices/EV are excluded. The 31 October and 3 November model archives remain separate.</div>
+<div id="error"></div><section class="stats" id="stats"><div class="stat">Reading official fields…</div></section>
+<section class="panel"><h2>Independent Top 10</h2><p class="muted">Rank order preserved from research. Every horse cross-checked against Saturday's active final declaration.</p><div style="overflow-x:auto"><table><thead><tr><th>Rank</th><th>Horse</th><th>Race</th><th class="num">Working %</th><th class="note-col">Form / rival caveat</th></tr></thead><tbody id="top10"></tbody></table></div></section>
+<section class="panel"><h2>All 29 final fields</h2><p class="muted">Open any race to inspect every active declared runner and the withdrawn or eliminated entries.</p><div class="controls" id="filters"></div><div id="races"></div></section>
+<section class="panel"><h2>Quaddie research worksheets</h2><p class="muted">Previously discussed coverage sketches, checked against the final active declarations. Combination counts are not payout forecasts, and these tickets have not been probability-optimised.</p><div class="grid" id="quaddies"></div></section>
+<footer class="muted" style="margin-top:22px">Official sheets are time-stamped snapshots, not a live guarantee. Saturday V5 full-field model calibration and certification are still outstanding.</footer>
+</main><script>
+(function(){'use strict';
+var root='/v5/cards/2026-11-07/',data=null,select='ALL';
+function el(tag,cls,text){var x=document.createElement(tag);if(cls)x.className=cls;if(text!==undefined)x.textContent=text;return x;}
+function add(parent,child){parent.appendChild(child);return child;}
+function raceKey(m,n){return m.meeting+' R'+n;}
+function rowCells(tr,vals){vals.forEach(function(v){add(tr,el('td','',String(v)));});}
+function stat(parent,name,val){var d=add(parent,el('div','stat'));add(d,el('small','',name));add(d,el('b','',String(val)));}
+function toBris(s){try{return new Date(s).toLocaleString('en-AU',{timeZone:'Australia/Brisbane',hour:'numeric',minute:'2-digit',hour12:true,day:'numeric',month:'short'});}catch(e){return s;}}
+function renderStats(){var box=document.getElementById('stats');box.replaceChildren();stat(box,'Active declarations',data.inventory.active);stat(box,'Scratches / eliminated',data.inventory.excluded);stat(box,'Verified races',data.inventory.races);stat(box,'Snapshot (Brisbane)',toBris(data.checked_at));
+var t=add(box,el('div','stat'));add(t,el('small','','Official going'));data.meetings.forEach(function(m){add(t,el('div','',m.meeting+' · '+m.track_going));});}
+function renderTop10(top){var out=document.getElementById('top10');out.replaceChildren();top.entries.forEach(function(v){var tr=add(out,el('tr'));add(tr,el('td','',v.rank));add(tr,el('td','horse',v.horse));add(tr,el('td','',v.meeting+' R'+v.race+' · #'+v.saddlecloth));add(tr,el('td','num',v.working_win_pct.toFixed(1)+'%'));add(tr,el('td','note-col',v.review));});}
+function renderRaces(){var out=document.getElementById('races');out.replaceChildren();data.meetings.filter(function(m){return select==='ALL'||m.meeting===select;}).forEach(function(m){var panel=add(out,el('section','panel'));var h=add(panel,el('div','flex'));add(h,el('h3','',m.meeting));add(h,el('span','track',m.track_going));add(panel,el('p','muted','Rail: '+m.rail+' · '+m.active_count+' active · '+m.removed_count+' withdrawn/eliminated · official sheet: '+m.source_published));var a=add(panel,el('a','','Open official scratchings'));a.href=m.scratchings_url;a.target='_blank';a.rel='noopener noreferrer';
+m.races.forEach(function(r){var d=add(panel,el('details'));var s=add(d,el('summary','', 'R'+r.race+' · '+r.title+' · '+r.active+' active'+(r.removed?' · '+r.removed+' out':'')));var inner=add(d,el('div','runnerlist'));r.active_runners.forEach(function(h){add(inner,el('span','runner','#'+h.number+' '+h.horse));});if(r.scratchings.length){var sub=add(d,el('p','scr','Out: '+r.scratchings.map(function(x){return x.label.replace(/\s+\((?:\d{1,2}\/\d{1,2}|Eliminated)[^)]*\)\s*$/,'');}).join(' · ')));}});});}
+function renderFilters(){var f=document.getElementById('filters');['ALL','FLEMINGTON','ROSEHILL','ASCOT'].forEach(function(name){var b=add(f,el('button','',name==='ALL'?'All meetings':name));b.setAttribute('aria-pressed',name===select?'true':'false');b.addEventListener('click',function(){select=name;Array.from(f.children).forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});renderRaces();});});}
+function renderQuaddies(){var cases=[{meeting:'FLEMINGTON',start:6,legs:[[6,7],[8],[1,5,10],[1,2,6,8,10]]},{meeting:'ROSEHILL',start:7,legs:[[1],[1,3,8,9,11],[1,9,11],[3,4,9]]}];var target=document.getElementById('quaddies');cases.forEach(function(c){var m=data.meetings.find(function(x){return x.meeting===c.meeting;}),panel=add(target,el('div','panel'));add(panel,el('h3','',c.meeting+' · R'+c.start+'–R'+(c.start+3)));var count=1,valid=true;c.legs.forEach(function(ids,i){var r=m.races.find(function(x){return x.race===c.start+i;}),line=add(panel,el('div','ticket'));count*=ids.length;var picks=ids.map(function(n){var horse=r.active_runners.find(function(x){return x.number===String(n);});if(!horse)valid=false;return '#'+n+' '+(horse?horse.horse:'OUT / NOT ACTIVE');});add(line,el('strong','','R'+(i+c.start)+': '));add(line,el('span','',picks.join(', ')));});add(panel,el('p',valid?'muted':'scr',(valid?'All named runners active at this snapshot. ':'NOT ALL ACTIVE. ')+count+' combinations · $'+count+' at $1 per combination, or $'+(count/2).toFixed(2)+' at 50% flexi.'));});}
+Promise.all([fetch(root+'official-final.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw Error('Official fields HTTP '+r.status);return r.json();}),fetch(root+'independent-top10.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw Error('Research shortlist HTTP '+r.status);return r.json();})]).then(function(arr){data=arr[0];var top=arr[1];if(data.date!=='2026-11-07'||data.inventory.active!==302||data.inventory.races!==29||top.entries.length!==10||top.entries.some(function(x){return !x.active_verified;}))throw Error('Release field/shortlist mismatch');renderStats();renderTop10(top);renderFilters();renderRaces();renderQuaddies();}).catch(function(e){document.getElementById('error').textContent='Unable to verify Saturday sources: '+e.message;});
+})();
+</script></body></html>
