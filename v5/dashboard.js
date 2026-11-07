@@ -4,7 +4,7 @@
 var C=null,D=null,target=null,embedded=false,navigate=null;
 var match=global.location&&global.location.search.match(/[?&]tab=(sim|multi|top10|races|results|qa|cal|weather|sync|compare|oaks)(?:&|$)/);
 var S={page:match?match[1]:'overview',meeting:'RANDWICK',race:null,runner:null,top:'ALL',topMode:'RESEARCH',topN:10,multi:[],compareA:null,compareB:null};
-var PAGES=[['overview','Overview'],['oaks','Oaks Day 5 Nov'],['top10','Daily Top 5/10/15'],['races','Race Centre'],['multi','Multi Lab'],['sim','Simulator'],['compare','Compare'],['qa','Model QA'],['cal','Calibration'],['weather','Weather & Tracks'],['sync','Data & Sync'],['results','Results & History']];
+var PAGES=[['overview','Overview'],['oaks','Oaks Day 5 Nov'],['top10','Daily Top 5/10/15'],['races','Race Centre'],['multi','Multi Lab'],['sim','Simulator'],['compare','Compare'],['qa','Model QA'],['cal','Calibration'],['weather','Weather & Tracks'],['sync','Data & Sync'],['results','Results & History'],['tools','All Tools'],['archive','Archived Model']];
 function importedCard(){return !!(D&&D.source_import&&D.source_import.kind==='FEATURE_FORM_PDF');}
 function cardDay(){return new Date(D.date+'T00:00:00Z').toLocaleDateString('en-AU',{weekday:'long',timeZone:'UTC'});}
 function readableFlag(flag){return ({LIMITED_DOSSIER:'Limited form evidence',INPUT_REVIEW_REQUIRED:'Input review needed',
@@ -131,6 +131,7 @@ pros:'<path d="M8 12l3 3 6-7"/><path d="M3 5h18v14H3z"/>',
 qa:'<path d="m12 2 9 4v6c0 6-4 9-9 10-5-1-9-4-9-10V6z"/><path d="m8 12 3 3 5-5"/>',
 cal:'<path d="M3 19h18M5 16V9m5 7V6m5 10v-4m5 4V3"/>',
 weather:'<path d="M5 16H4a3 3 0 0 1 0-6 5 5 0 0 1 9-2 4 4 0 0 1 4 5c0 2-2 3-4 3H5z"/>',
+tools:'<path d="M3 5h7v7H3zM14 5h7v7h-7zM3 16h7v5H3zM14 16h7v5h-7z"/>',
 sync:'<circle cx="12" cy="12" r="3"/><path d="M4 9l-2 3 2 3 3 1 1 4h8l1-4 3-1 2-3-2-3-3-1-1-4H8L7 8z"/>',
 results:'<path d="M7 3h10v5a5 5 0 0 1-10 0V3z"/><path d="M9 15h6m-3-2v7m-5 0h10"/>'
 };
@@ -142,31 +143,26 @@ b.type='button';b.innerHTML=icon(id)+'<span>'+it[1]+'</span>';
 b.addEventListener('click',function(){go(id);});
 return b;
 }
-var main=['overview','oaks','races','top10','multi','sim','compare'];
-var second=['results','qa','cal','weather','sync'];
-side.append(e('div','nav-group','RACING STUDIO'));
+var main=['overview','races','top10','multi','tools'];
+side.append(e('div','nav-group','RACE DAY'));
 main.forEach(function(id){side.append(makeButton(id,'navbtn'));});
-side.append(e('div','nav-group','RESEARCH & CONTROLS'));
-second.forEach(function(id){side.append(makeButton(id,'navbtn'));});
 var foot=e('div','sidebar-foot');
-add(foot,e('strong','','◉ SHARED V5 FORMULA'),e('p','',C.board.raceCount+' races · '+C.board.activeCount+' included runners. Model estimates remain uncalibrated.'),link('Original Racing Lab ↗','/',''));
+add(foot,e('strong','','7 NOV · FINAL DECLARED FIELDS'),
+ e('p','','All 29 races are on Today and Race Centre. Older V5 model analysis is under All Tools.'));
 side.append(foot);
-var mobileShort={overview:'Home',races:'Races',top10:'Top 10',multi:'Multi',sim:'Simulator'};
-['overview','races','top10','multi','sim'].forEach(function(id){var b=makeButton(id,'');b.querySelector('span').textContent=mobileShort[id];mobile.append(b);});
+var mobileShort={overview:'Today',races:'Races',top10:'Top 10',multi:'Multi',tools:'Tools'};
+main.forEach(function(id){
+ var b=makeButton(id,'');
+ var title=b&&b.querySelector&&b.querySelector('span');
+ if(title)title.textContent=mobileShort[id];
+ if(b)mobile.append(b);
+});
 var previous=document.getElementById('v5-more-popup');if(previous)previous.remove();
-var popup=e('div','v5-more-menu');popup.id='v5-more-popup';popup.hidden=true;
-var phead=e('div','v5-more-head','MORE RACING LAB SECTIONS');popup.append(phead);
-['oaks','results','compare','weather','qa','cal','sync'].forEach(function(id){var b=makeButton(id,'v5-more-item');popup.append(b);});
-document.body.append(popup);
-var more=e('button','v5-more-trigger'+(['compare','weather','qa','cal','sync','results'].includes(S.page)?' active':''));more.type='button';
-more.innerHTML=icon('sync')+'<span>More</span>';
-more.addEventListener('click',function(){popup.hidden=!popup.hidden;more.setAttribute('aria-expanded',String(!popup.hidden));});
-more.setAttribute('aria-expanded','false');more.setAttribute('aria-controls','v5-more-popup');mobile.append(more);
-document.getElementById('pagetitle').textContent=PAGES.find(function(x){return x[0]===S.page;})[1];
+document.getElementById('pagetitle').textContent=(PAGES.find(function(x){return x[0]===S.page;})||['','All Tools'])[1];
 document.getElementById('livebadge').textContent=C.error?'SAVED SATURDAY DATA · FEED CHECK':'SAVED SATURDAY RESEARCH';
 var datedLabel=document.querySelector&&document.querySelector('.topdate');
-if(datedLabel)datedLabel.textContent=S.page==='oaks'?'Thu 5 Nov 2026 · Soft 5 scenario':cardDay()+' '+D.date;
-document.title='Racing Lab V5 · '+(S.page==='oaks'?'Flemington 5 Nov':D.date);
+if(datedLabel)datedLabel.textContent=['overview','races','top10'].includes(S.page)?'Sat 7 Nov 2026 · final fields':S.page==='oaks'?'Thu 5 Nov 2026 · results':'3 Nov 2026 · archived model';
+document.title='Racing Lab V5 · '+(['overview','races','top10'].includes(S.page)?'Saturday 7 November 2026':'Archived research · '+D.date);
 if(importedCard()){
  document.getElementById('livebadge').textContent=S.page==='oaks'?'THU 5 NOV · FORM REVIEW':'PDF FORM · MODEL ESTIMATES';
 }
@@ -495,12 +491,11 @@ function top10(){
  advanced.append(inner);root.append(advanced);
 }
 function raceNav(){
- var all=D.races.filter(function(r){return r.meeting===S.meeting;}),filter=e('div','filters');
- filter.append(setField('Meeting',Object.keys(C.going).map(function(x){return {value:x,text:x};}),S.meeting,function(v){
-  S.meeting=v;S.race=D.races.find(function(r){return r.meeting===v;}).id;S.runner=null;render();
- }),setField('Race',all.map(function(r){return {value:r.id,text:'R'+r.race+' · '+r.title};}),S.race,function(v){
-  S.race=v;S.runner=null;render();
- }));
+ var all=D.races.filter(function(r){return r.meeting===S.meeting;}),filter=e('div','filters rlv5-meeting-tabs');
+ Object.keys(C.going).forEach(function(m){
+  var b=action(m,function(){S.meeting=m;S.race=D.races.find(function(r){return r.meeting===m;}).id;S.runner=null;render();},S.meeting===m?'primary':'ghost');
+  b.setAttribute('aria-pressed',String(S.meeting===m));filter.append(b);
+ });
  var grid=e('div','racechips');
  all.forEach(function(r){
   var research=C.curated&&C.curated.entries.find(function(h){return h.race_id===r.id&&h.research_lane==='TOP10_RESEARCH';});
@@ -928,9 +923,35 @@ function oaksDayPage(){
  }).catch(function(err){if(holder.isConnected)holder.append(e('p','muted small','Could not verify Thursday audit: '+err.message));});
 }
 
+function toolsPage(){
+ var root=app();root.append(head('All tools','Everything is still available — fewer menus on the main screens.'));
+ var cards=e('div','rlv5-tools-grid');
+ var items=[
+  ['quaddie','Quaddie worksheets','Today’s Flemington and Rosehill ticket studies'],
+  ['sim','Simulator','10,000-draw model demonstrations'],
+  ['compare','Compare horses','Saved form and head-to-head research'],
+  ['results','Results & history','Previous race outcomes and accuracy'],
+  ['weather','Weather & tracks','Rail, ground and weather research'],
+  ['qa','Model QA','Evidence quality and diagnostics'],
+  ['cal','Calibration','Historical model evaluation'],
+  ['sync','Data & sync','Airtable and source controls'],
+  ['oaks','5 Nov results','Completed Oaks Day analysis'],
+  ['archive','Archived V5 board','Earlier model Top 5/10/15 and race dossiers']
+ ];
+ items.forEach(function(x){var b=action('',function(){if(x[0]==='quaddie')global.location.href='/v5/saturday-2026-11-07.html';else go(x[0]);},'rlv5-tool-tile');
+  b.append(e('strong','',x[1]),e('small','',x[2]),e('span','','Open →'));cards.append(b);
+ });
+ root.append(cards,note('Today’s field data is separate from the 3 November model archive. All model features remain available; old probabilities are not current race-day predictions.'));
+}
 function render(){if(!C)return;D=C.data;if(!raceOf(S.race)){S.race=D.races[0].id;S.meeting=D.races[0].meeting;}
  if(global.RacingLabWorkshop)global.RacingLabWorkshop.stop();if(!embedded)nav();app().replaceChildren();
- var views={overview:overview,oaks:oaksDayPage,top10:top10,races:racesPage,multi:function(){workshop('multiPage');},sim:function(){workshop('simPage');},compare:comparePage,qa:qaPage,cal:calPage,weather:weatherPage,sync:syncPage,results:resultsPage};(views[S.page]||overview)();app().append(e('div','footer',S.page==='oaks'?'Thursday 5 Nov · verified Good 4 results · pre-race records retained unchanged':C.board.version+' · '+C.revision+' · model estimates uncalibrated · source snapshot '+D.saved_at));
+ if(global.RacingLabToday&&['overview','races','top10'].includes(S.page)){
+  var todayPage=S.page==='overview'?'home':S.page==='top10'?'daily':'races';
+  global.RacingLabToday.render(app(),{page:todayPage,navigate:function(p){go(({home:'overview',daily:'top10',races:'races',multi:'multi',tools:'tools'})[p]||p);}});
+  return;
+ }
+ var views={overview:overview,oaks:oaksDayPage,top10:top10,races:racesPage,multi:function(){workshop('multiPage');},sim:function(){workshop('simPage');},compare:comparePage,qa:qaPage,cal:calPage,weather:weatherPage,sync:syncPage,results:resultsPage,tools:toolsPage,archive:overview};
+ (views[S.page]||toolsPage)();app().append(e('div','footer',S.page==='oaks'?'Thursday 5 Nov · verified results':C.board.version+' · archived '+D.date+' model · estimates uncalibrated · all tools preserved'));
 }
 function officialPanel(){
  if(importedCard())return importedOfficialPanel();
