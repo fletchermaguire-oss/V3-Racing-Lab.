@@ -1,0 +1,129 @@
+{
+  "schema": "racing-lab-2026-11-07-independent-analyst-shortlist/v1",
+  "date": "2026-11-07",
+  "reviewed_at": "2026-11-07T00:44:28.834Z",
+  "status": "VERIFIED_ACTIVE_RESEARCH_ONLY",
+  "publication_approved": false,
+  "independent_ranking": true,
+  "model_version": null,
+  "win_pct_status": "UNCALIBRATED_ANALYST_WORKING_SHARES_NOT_V5_MODEL",
+  "odds_based": false,
+  "entries": [
+    {
+      "rank": 1,
+      "horse": "Autumn Glow",
+      "meeting": "FLEMINGTON",
+      "race": 7,
+      "saddlecloth": "8",
+      "working_win_pct": 77.6,
+      "review": "Another Wil is withdrawn; Lindermann may face less pressure in front.",
+      "active_verified": true,
+      "source_race_id": "2026-11-07_FLEMINGTON_R07"
+    },
+    {
+      "rank": 2,
+      "horse": "Lazzura",
+      "meeting": "ROSEHILL",
+      "race": 7,
+      "saddlecloth": "1",
+      "working_win_pct": 65,
+      "review": "Favourable barrier two and strong 1400m form; Tuileries and Gerringong remain.",
+      "active_verified": true,
+      "source_race_id": "2026-11-07_ROSEHILL_R07"
+    },
+    {
+      "rank": 3,
+      "horse": "Tempted",
+      "meeting": "FLEMINGTON",
+      "race": 6,
+      "saddlecloth": "6",
+      "working_win_pct": 52.9,
+      "review": "Giga Kick and Rey Magnerio are out; Joliestar and Caballus remain major straight-track rivals.",
+      "active_verified": true,
+      "source_race_id": "2026-11-07_FLEMINGTON_R06"
+    },
+    {
+      "rank": 4,
+      "horse": "Beatty",
+      "meeting": "ASCOT",
+      "race": 6,
+      "saddlecloth": "1",
+      "working_win_pct": 48.2,
+      "review": "Countersunk withdrawn, but Roger, Godspeed and Swift Ruler are still active.",
+      "active_verified": true,
+      "source_race_id": "2026-11-07_ASCOT_R06"
+    },
+    {
+      "rank": 5,
+      "horse": "King Of Light",
+      "meeting": "ASCOT",
+      "race": 9,
+      "saddlecloth": "6",
+      "working_win_pct": 43,
+      "review": "Strong Eurythmic form; Watch Me Rock and Western Empire are credible rivals.",
+      "active_verified": true,
+      "source_race_id": "2026-11-07_ASCOT_R09"
+    },
+    {
+      "rank": 6,
+      "horse": "Savvy Spy",
+      "meeting": "ROSEHILL",
+      "race": 3,
+      "saddlecloth": "3",
+      "working_win_pct": 41.7,
+      "review": "Savisanta and Smart Jazz out; Criteria could control a softer 2400m tempo.",
+      "active_verified": true,
+      "source_race_id": "2026-11-07_ROSEHILL_R03"
+    },
+    {
+      "rank": 7,
+      "horse": "Ourgirlcanrun",
+      "meeting": "ASCOT",
+      "race": 7,
+      "saddlecloth": "6",
+      "working_win_pct": 34.5,
+      "review": "Wheely scratched; easier tactical run expected from six, Fast Harry and So Si God dangerous.",
+      "active_verified": true,
+      "source_race_id": "2026-11-07_ASCOT_R07"
+    },
+    {
+      "rank": 8,
+      "horse": "Cosmic Crusader",
+      "meeting": "FLEMINGTON",
+      "race": 8,
+      "saddlecloth": "1",
+      "working_win_pct": 34.5,
+      "review": "Sabaj scratched; Birdman, Aeliana and Light Infantry Man are serious dangers.",
+      "active_verified": true,
+      "source_race_id": "2026-11-07_FLEMINGTON_R08"
+    },
+    {
+      "rank": 9,
+      "horse": "Cashout",
+      "meeting": "ROSEHILL",
+      "race": 5,
+      "saddlecloth": "1",
+      "working_win_pct": 32.3,
+      "review": "Accidental Bid out; Melbourne-to-Sydney class transfer and tempo remain key tests.",
+      "active_verified": true,
+      "source_race_id": "2026-11-07_ROSEHILL_R05"
+    },
+    {
+      "rank": 10,
+      "horse": "Horseshoe Hill",
+      "meeting": "ROSEHILL",
+      "race": 10,
+      "saddlecloth": "9",
+      "working_win_pct": 32,
+      "review": "Withdrawn from R9 only; confirmed active in R10, 1200m expected to suit.",
+      "active_verified": true,
+      "source_race_id": "2026-11-07_ROSEHILL_R10"
+    }
+  ],
+  "source_snapshot": "/v5/cards/2026-11-07/official-final.json",
+  "notes": [
+    "Retains previously reviewed order and provisional analyst estimates after scratchings.",
+    "Percentages must not be presented as validated V5 statistical forecasts or as guaranteed outcomes.",
+    "Do not silently update archived 31 October human rankings or 3 November model."
+  ]
+}
