@@ -35,3 +35,18 @@
 .rlv5-meeting-tabs{display:flex;gap:7px;flex-wrap:wrap}.rlv5-meeting-tabs .btn{flex:0 1 auto}
 @media(max-width:800px){.rlv5-tools-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:520px){.rlv5-tools-grid{grid-template-columns:1fr}}
+
+/* Every race now has an evidence-sourced first pick and a short danger line. */
+.rl-simple-dailyboard{border:1px solid #2a4850;border-radius:13px;overflow:hidden;margin:4px 0 16px}
+.rl-simple-dailyline{display:grid;grid-template-columns:38px minmax(0,1fr) auto;gap:11px;align-items:center;border-radius:0;border:0;border-bottom:1px solid #2a414b;background:#10232d;padding:12px 13px;width:100%;color:#e9f5f1;text-align:left;min-height:50px}
+.rl-simple-dailyline:last-child{border-bottom:0}.rl-simple-dailyline:hover{background:#204037}
+.rl-simple-daily-race{color:#9cb4bc}.rl-simple-daily-horse{font-size:14px;min-width:0;overflow-wrap:anywhere}
+.rl-simple-daily-edge{font-size:12px;color:#88edc0;white-space:nowrap}
+.rl-simple-pickwhy{font-size:13px;line-height:1.6;color:#d7eee5;margin:12px 0}
+.rl-simple-threats{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin:11px 0}.rl-simple-threats>strong{font-size:12px;margin-right:5px}
+.rl-simple-danger{padding:5px 8px;min-height:30px;font-size:11px;color:#e5eced;background:#25424a;border-color:#45626c}
+.rl-simple-danger:hover{background:#365761}
+.rl-simple-danger-tag{font-size:9px;font-weight:650;color:#c4d8df}
+.rl-simple-analysis{margin-top:9px;border-top:1px solid #3d6856;padding-top:10px}.rl-simple-analysis>summary{font-size:12px;cursor:pointer;color:#a9e9c9;font-weight:750;list-style-position:inside}
+.rl-simple-analysis p{padding-top:8px;margin:0;line-height:1.6}.rl-simple-sourcelinks{display:flex;gap:18px;flex-wrap:wrap}
+@media(max-width:550px){.rl-simple-dailyline{grid-template-columns:30px minmax(0,1fr) auto;gap:7px;padding:11px 9px}.rl-simple-daily-horse{font-size:12px}.rl-simple-daily-edge{font-size:10px}}

@@ -1,0 +1,989 @@
+{
+  "schema": "racing-lab-dated-race-by-race-research/v1",
+  "date": "2026-11-07",
+  "created_at": "2026-11-07T01:39:39.484Z",
+  "status": "RESEARCH_ONLY_NOT_CERTIFIED_MODEL",
+  "authoring_rule": "29 independent first-pick research candidates. No additional model-calibrated chances invented; frozen Top 10 retained.",
+  "source_field": "/v5/cards/2026-11-07/official-final.json",
+  "status_rule": "Selections for races with start_at <= created_at must never be counted or labelled as preregistered pre-race picks. No retroactive results scoring.",
+  "track_snapshot": "Good 4 in official final declarations; late track changes remain possible",
+  "all_runner_status": "As declared final scratchings at earlier timestamp; late scratches may happen",
+  "races": [
+    {
+      "race_id": "2026-11-07_FLEMINGTON_R01",
+      "meeting": "FLEMINGTON",
+      "race": 1,
+      "start_at": "2026-11-07T12:40:00+11:00",
+      "first_pick": {
+        "horse": "SOLDI",
+        "saddlecloth": "4"
+      },
+      "dangers": [
+        {
+          "horse": "PUBLIC AFFAIRS",
+          "saddlecloth": "1"
+        },
+        {
+          "horse": "STEEL POINT",
+          "saddlecloth": "2"
+        },
+        {
+          "horse": "THE CHANCER",
+          "saddlecloth": "3"
+        }
+      ],
+      "why": "Has already won at Caulfield, which is unusually useful race-day experience in a two-year-old field dominated by debutants.",
+      "caution": "Most rivals have only jumpouts/trials; reliable comparative ability is unknown.",
+      "form_tier": "LOW",
+      "source_urls": [
+        "https://www.beforeyoubet.com.au/flemington-racing-tips-champions-stakes-day-saturday-november-7th-2026",
+        "https://www.racingbase.com.au/latest/tips/flemington/flemington-racing-tips-7-nov-2026-tempted-for-seven/"
+      ],
+      "source_basis": "INDEPENDENT_RACE_RESEARCH_CHECKPOINT",
+      "working_win_pct": null,
+      "starter_verified_at_snapshot": true
+    },
+    {
+      "race_id": "2026-11-07_FLEMINGTON_R02",
+      "meeting": "FLEMINGTON",
+      "race": 2,
+      "start_at": "2026-11-07T13:15:00+11:00",
+      "first_pick": {
+        "horse": "FIORENOT",
+        "saddlecloth": "2"
+      },
+      "dangers": [
+        {
+          "horse": "SUPERFABULISTIC (NZ)",
+          "saddlecloth": "13"
+        },
+        {
+          "horse": "NATION’S CALL (IRE)",
+          "saddlecloth": "3"
+        },
+        {
+          "horse": "GRAND OMAHA",
+          "saddlecloth": "9"
+        }
+      ],
+      "why": "Won fresh, then finished strongly behind Buccleuch at 1440m. Now third-up to a more suitable mile, with tactical speed in a smaller field.",
+      "caution": "Superfabulistic gets a major weight relief and may lead; tempo could decide this.",
+      "form_tier": "MODERATE",
+      "source_urls": [
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/flemington/2026-11-07/race-tips",
+        "https://www.beforeyoubet.com.au/flemington-racing-tips-champions-stakes-day-saturday-november-7th-2026"
+      ],
+      "source_basis": "INDEPENDENT_RACE_RESEARCH_CHECKPOINT",
+      "working_win_pct": null,
+      "starter_verified_at_snapshot": true
+    },
+    {
+      "race_id": "2026-11-07_FLEMINGTON_R03",
+      "meeting": "FLEMINGTON",
+      "race": 3,
+      "start_at": "2026-11-07T13:50:00+11:00",
+      "first_pick": {
+        "horse": "PINHOLE (GB)",
+        "saddlecloth": "4"
+      },
+      "dangers": [
+        {
+          "horse": "DEFIANTLY (FR)",
+          "saddlecloth": "1"
+        },
+        {
+          "horse": "LITZDEEL",
+          "saddlecloth": "8"
+        },
+        {
+          "horse": "BERKELEY SQUARE",
+          "saddlecloth": "3"
+        }
+      ],
+      "why": "Strong recent staying form and proven at this longer trip; receives a useful weight advantage over European Group winner Defiantly.",
+      "caution": "Defiantly has higher-class overseas credentials; local speed and first-up adjustment are uncertain.",
+      "form_tier": "MODERATE",
+      "source_urls": [
+        "https://www.racingbase.com.au/latest/tips/flemington/flemington-racing-tips-7-nov-2026-tempted-for-seven/",
+        "https://www.beforeyoubet.com.au/flemington-racing-tips-champions-stakes-day-saturday-november-7th-2026"
+      ],
+      "source_basis": "INDEPENDENT_RACE_RESEARCH_CHECKPOINT",
+      "working_win_pct": null,
+      "starter_verified_at_snapshot": true
+    },
+    {
+      "race_id": "2026-11-07_FLEMINGTON_R04",
+      "meeting": "FLEMINGTON",
+      "race": 4,
+      "start_at": "2026-11-07T14:30:00+11:00",
+      "first_pick": {
+        "horse": "HANKEE ALPHA (NZ)",
+        "saddlecloth": "17e"
+      },
+      "dangers": [
+        {
+          "horse": "INKARUNA",
+          "saddlecloth": "6"
+        },
+        {
+          "horse": "IMMORTAL STAR",
+          "saddlecloth": "9"
+        },
+        {
+          "horse": "PHOTOGRAPH",
+          "saddlecloth": "11"
+        }
+      ],
+      "why": "Went from a dominant wet-track win to a luckless Rising Fast run, held up 500m to 150m. Wide straight-course draw can help if the outside lanes suit.",
+      "caution": "Track remains Good 4; the huge wet-track win may overstate her dry-ground edge. Inkaruna has strong sectionals.",
+      "form_tier": "LOW",
+      "source_urls": [
+        "https://uat.form-guide.com.au/race/horse/flemington-aus/2026-11-07/4",
+        "https://www.tabtouch.com.au/racing/2026-11-07/mr/4",
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/flemington/2026-11-07/race-tips"
+      ],
+      "source_basis": "INDEPENDENT_RACE_RESEARCH_CHECKPOINT",
+      "working_win_pct": null,
+      "starter_verified_at_snapshot": true
+    },
+    {
+      "race_id": "2026-11-07_FLEMINGTON_R05",
+      "meeting": "FLEMINGTON",
+      "race": 5,
+      "start_at": "2026-11-07T15:10:00+11:00",
+      "first_pick": {
+        "horse": "TOO DARN DISCREET",
+        "saddlecloth": "5"
+      },
+      "dangers": [
+        {
+          "horse": "VIVY AIR",
+          "saddlecloth": "8"
+        },
+        {
+          "horse": "SOVERATO (NZ)",
+          "saddlecloth": "4"
+        },
+        {
+          "horse": "ZULEIKA",
+          "saddlecloth": "7"
+        }
+      ],
+      "why": "Meets last-start Tesio winner Soverato 7kg better, gets Zahra and a suitable draw. Her last run included a reported issue, making a rebound plausible.",
+      "caution": "Previous throat/health concern needs checking; Vivy Air's stronger Sydney form is dangerous.",
+      "form_tier": "LOW",
+      "source_urls": [
+        "https://www.racingbase.com.au/latest/tips/flemington/flemington-racing-tips-7-nov-2026-tempted-for-seven/",
+        "https://www.beforeyoubet.com.au/flemington-racing-tips-champions-stakes-day-saturday-november-7th-2026"
+      ],
+      "source_basis": "INDEPENDENT_RACE_RESEARCH_CHECKPOINT",
+      "working_win_pct": null,
+      "starter_verified_at_snapshot": true
+    },
+    {
+      "race_id": "2026-11-07_FLEMINGTON_R06",
+      "meeting": "FLEMINGTON",
+      "race": 6,
+      "start_at": "2026-11-07T15:50:00+11:00",
+      "first_pick": {
+        "horse": "TEMPTED",
+        "saddlecloth": "6"
+      },
+      "dangers": [
+        {
+          "horse": "JOLIESTAR",
+          "saddlecloth": "7"
+        },
+        {
+          "horse": "HEADWALL",
+          "saddlecloth": "3"
+        },
+        {
+          "horse": "CABALLUS",
+          "saddlecloth": "4"
+        }
+      ],
+      "why": "Everest winner on a six-race streak. Giga Kick and Rey Magnerio are scratched, simplifying her field.",
+      "caution": "First Flemington straight start; Joliestar is a proven straight-track Group 1 performer.",
+      "form_tier": "STRONG_RELATIVE",
+      "source_urls": [
+        "https://www.racingbase.com.au/latest/tips/flemington/flemington-racing-tips-7-nov-2026-tempted-for-seven/",
+        "https://www.beforeyoubet.com.au/flemington-racing-tips-champions-stakes-day-saturday-november-7th-2026"
+      ],
+      "source_basis": "PRIOR_REVIEWED_TOP10",
+      "working_win_pct": 52.9,
+      "starter_verified_at_snapshot": true
+    },
+    {
+      "race_id": "2026-11-07_FLEMINGTON_R07",
+      "meeting": "FLEMINGTON",
+      "race": 7,
+      "start_at": "2026-11-07T16:30:00+11:00",
+      "first_pick": {
+        "horse": "AUTUMN GLOW",
+        "saddlecloth": "8"
+      },
+      "dangers": [
+        {
+          "horse": "TOM KITTEN",
+          "saddlecloth": "1"
+        },
+        {
+          "horse": "LINDERMANN",
+          "saddlecloth": "2"
+        },
+        {
+          "horse": "BUCKAROO (GB)",
+          "saddlecloth": "3"
+        }
+      ],
+      "why": "Outstanding unbeaten recent mile profile, official class advantage and a favourable two-kilo allowance against older males.",
+      "caution": "Another Wil's withdrawal could give Lindermann an easier lead; track pattern remains important.",
+      "form_tier": "STRONG_RELATIVE",
+      "source_urls": [
+        "https://www.racingbase.com.au/latest/tips/flemington/flemington-racing-tips-7-nov-2026-tempted-for-seven/",
+        "https://www.beforeyoubet.com.au/flemington-racing-tips-champions-stakes-day-saturday-november-7th-2026"
+      ],
+      "source_basis": "PRIOR_REVIEWED_TOP10",
+      "working_win_pct": 77.6,
+      "starter_verified_at_snapshot": true
+    },
+    {
+      "race_id": "2026-11-07_FLEMINGTON_R08",
+      "meeting": "FLEMINGTON",
+      "race": 8,
+      "start_at": "2026-11-07T17:10:00+11:00",
+      "first_pick": {
+        "horse": "COSMIC CRUSADER (NZ)",
+        "saddlecloth": "1"
+      },
+      "dangers": [
+        {
+          "horse": "AELIANA (NZ)",
+          "saddlecloth": "10"
+        },
+        {
+          "horse": "BIRDMAN (IRE)",
+          "saddlecloth": "5"
+        },
+        {
+          "horse": "LIGHT INFANTRY MAN (FR)",
+          "saddlecloth": "2"
+        }
+      ],
+      "why": "Dual Flemington Group 1 winner this preparation and Cox Plate winner. Proven over 2000m on varying ground.",
+      "caution": "Birdman had Cox Plate interference, Aeliana gets weight relief, and barrier 11 creates an early map risk.",
+      "form_tier": "MODERATE",
+      "source_urls": [
+        "https://www.racingbase.com.au/latest/tips/flemington/flemington-racing-tips-7-nov-2026-tempted-for-seven/",
+        "https://www.beforeyoubet.com.au/flemington-racing-tips-champions-stakes-day-saturday-november-7th-2026"
+      ],
+      "source_basis": "PRIOR_REVIEWED_TOP10",
+      "working_win_pct": 34.5,
+      "starter_verified_at_snapshot": true
+    },
+    {
+      "race_id": "2026-11-07_FLEMINGTON_R09",
+      "meeting": "FLEMINGTON",
+      "race": 9,
+      "start_at": "2026-11-07T17:50:00+11:00",
+      "first_pick": {
+        "horse": "EDUCATED",
+        "saddlecloth": "6"
+      },
+      "dangers": [
+        {
+          "horse": "ELECTRIC ELVIS (NZ)",
+          "saddlecloth": "8"
+        },
+        {
+          "horse": "TRES MAGNIFIQUE",
+          "saddlecloth": "10"
+        },
+        {
+          "horse": "ESMAHLI",
+          "saddlecloth": "2"
+        }
+      ],
+      "why": "Progressive 1100m handicap sprinter with a useful forward map and a recent win after two close placings.",
+      "caution": "Fourteen-runner straight-course handicap is volatile; Electric Elvis and Tres Magnifique are genuine alternatives.",
+      "form_tier": "LOW",
+      "source_urls": [
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/flemington/2026-11-07/race-tips",
+        "https://www.racingbase.com.au/latest/tips/flemington/flemington-racing-tips-7-nov-2026-tempted-for-seven/"
+      ],
+      "source_basis": "INDEPENDENT_RACE_RESEARCH_CHECKPOINT",
+      "working_win_pct": null,
+      "starter_verified_at_snapshot": true
+    },
+    {
+      "race_id": "2026-11-07_ROSEHILL_R01",
+      "meeting": "ROSEHILL",
+      "race": 1,
+      "start_at": "2026-11-07T12:25:00+11:00",
+      "first_pick": {
+        "horse": "DEFIANCE",
+        "saddlecloth": "1"
+      },
+      "dangers": [
+        {
+          "horse": "MAINSTAY",
+          "saddlecloth": "3"
+        },
+        {
+          "horse": "BRAVE XENA",
+          "saddlecloth": "4"
+        },
+        {
+          "horse": "YESSPECIALLY",
+          "saddlecloth": "18"
+        }
+      ],
+      "why": "Three convincing consecutive wins for the new stable, plus the early speed to make his own position at 1200m.",
+      "caution": "Barrier 12 and 60kg add pressure. Mainstay is unbeaten and Brave Xena has stronger Sydney Highway exposure.",
+      "form_tier": "LOW",
+      "source_urls": [
+        "https://www.racingnsw.com.au/news/latest-racing-news/rosehill-preview-tips-for-five-diamonds-day-saturday-7th-november/"
+      ],
+      "source_basis": "INDEPENDENT_RACE_RESEARCH_CHECKPOINT",
+      "working_win_pct": null,
+      "starter_verified_at_snapshot": true
+    },
+    {
+      "race_id": "2026-11-07_ROSEHILL_R02",
+      "meeting": "ROSEHILL",
+      "race": 2,
+      "start_at": "2026-11-07T13:00:00+11:00",
+      "first_pick": {
+        "horse": "MAIDOFF",
+        "saddlecloth": "5"
+      },
+      "dangers": [
+        {
+          "horse": "LAWLESS LUCY",
+          "saddlecloth": "12"
+        },
+        {
+          "horse": "CONGRESSMAN",
+          "saddlecloth": "4"
+        },
+        {
+          "horse": "POWDER MAN",
+          "saddlecloth": "8"
+        }
+      ],
+      "why": "Forgive his interrupted Midway run as favourite; two previous Illawarra Grange wins and a cleaner run make him a credible rebound.",
+      "caution": "Congressman's Group 3 fourth and Lawless Lucy's closing sectionals make this a genuinely competitive Midway.",
+      "form_tier": "LOW",
+      "source_urls": [
+        "https://www.racingnsw.com.au/news/latest-racing-news/rosehill-preview-tips-for-five-diamonds-day-saturday-7th-november/",
+        "https://racehub.com.au/race-preview/rosehill-2026-11-07-preview"
+      ],
+      "source_basis": "INDEPENDENT_RACE_RESEARCH_CHECKPOINT",
+      "working_win_pct": null,
+      "starter_verified_at_snapshot": true
+    },
+    {
+      "race_id": "2026-11-07_ROSEHILL_R03",
+      "meeting": "ROSEHILL",
+      "race": 3,
+      "start_at": "2026-11-07T13:35:00+11:00",
+      "first_pick": {
+        "horse": "SAVVY SPY (NZ)",
+        "saddlecloth": "3"
+      },
+      "dangers": [
+        {
+          "horse": "CRITERIA (NZ)",
+          "saddlecloth": "5"
+        },
+        {
+          "horse": "NKOSI",
+          "saddlecloth": "4"
+        },
+        {
+          "horse": "MEDATSU (NZ)",
+          "saddlecloth": "1"
+        }
+      ],
+      "why": "Two consecutive staying wins, including at 2400m, with Savisanta and Smart Jazz now scratched.",
+      "caution": "Criteria meets him better at the weights and may dictate a softer pace.",
+      "form_tier": "MODERATE",
+      "source_urls": [
+        "https://www.racingnsw.com.au/news/latest-racing-news/rosehill-preview-tips-for-five-diamonds-day-saturday-7th-november/"
+      ],
+      "source_basis": "PRIOR_REVIEWED_TOP10",
+      "working_win_pct": 41.7,
+      "starter_verified_at_snapshot": true
+    },
+    {
+      "race_id": "2026-11-07_ROSEHILL_R04",
+      "meeting": "ROSEHILL",
+      "race": 4,
+      "start_at": "2026-11-07T14:10:00+11:00",
+      "first_pick": {
+        "horse": "DONATELLO (NZ)",
+        "saddlecloth": "6"
+      },
+      "dangers": [
+        {
+          "horse": "SAMARELLE (NZ)",
+          "saddlecloth": "2"
+        },
+        {
+          "horse": "BOTANICAL BOY (NZ)",
+          "saddlecloth": "3"
+        },
+        {
+          "horse": "WITHOUT PEER",
+          "saddlecloth": "5"
+        }
+      ],
+      "why": "Strong late run over 1500m last start suggests the rise to 1800m is well timed. Can be ridden forward or allowed to finish.",
+      "caution": "Samarelle is chasing three successive wins; Botanical Boy is well treated at the weights.",
+      "form_tier": "LOW",
+      "source_urls": [
+        "https://www.racingnsw.com.au/news/latest-racing-news/rosehill-preview-tips-for-five-diamonds-day-saturday-7th-november/"
+      ],
+      "source_basis": "INDEPENDENT_RACE_RESEARCH_CHECKPOINT",
+      "working_win_pct": null,
+      "starter_verified_at_snapshot": true
+    },
+    {
+      "race_id": "2026-11-07_ROSEHILL_R05",
+      "meeting": "ROSEHILL",
+      "race": 5,
+      "start_at": "2026-11-07T14:50:00+11:00",
+      "first_pick": {
+        "horse": "CASHOUT",
+        "saddlecloth": "1"
+      },
+      "dangers": [
+        {
+          "horse": "WOOTTON LASS",
+          "saddlecloth": "3"
+        },
+        {
+          "horse": "SHOTGUN BELLA",
+          "saddlecloth": "9"
+        },
+        {
+          "horse": "PROBABILITY THEORY",
+          "saddlecloth": "5"
+        }
+      ],
+      "why": "Three wins from his last four over 1400m and fought through early pressure last start. Can lead or track.",
+      "caution": "Sydney metro class rise and 59kg still need to be proved; Wootton Lass's fresh effort was better than her latest.",
+      "form_tier": "MODERATE",
+      "source_urls": [
+        "https://www.racingnsw.com.au/news/latest-racing-news/rosehill-preview-tips-for-five-diamonds-day-saturday-7th-november/"
+      ],
+      "source_basis": "PRIOR_REVIEWED_TOP10",
+      "working_win_pct": 32.3,
+      "starter_verified_at_snapshot": true
+    },
+    {
+      "race_id": "2026-11-07_ROSEHILL_R06",
+      "meeting": "ROSEHILL",
+      "race": 6,
+      "start_at": "2026-11-07T15:30:00+11:00",
+      "first_pick": {
+        "horse": "EXO VELOCITY",
+        "saddlecloth": "9"
+      },
+      "dangers": [
+        {
+          "horse": "PROVERB",
+          "saddlecloth": "5"
+        },
+        {
+          "horse": "SILENT INTENT",
+          "saddlecloth": "7"
+        },
+        {
+          "horse": "JENNI IN ROME (NZ)",
+          "saddlecloth": "10"
+        }
+      ],
+      "why": "The only runner in this juvenile field with a recent race win against useful opposition; the prior official-form shadow scenario also ranks him highest.",
+      "caution": "Two-year-olds with limited race starts or only trials are notoriously hard to assess; Proverb's dry-track rebound is a threat.",
+      "form_tier": "LOW",
+      "source_urls": [
+        "https://www.racingnsw.com.au/news/latest-racing-news/rosehill-preview-tips-for-five-diamonds-day-saturday-7th-november/",
+        "https://racehub.com.au/race-preview/rosehill-2026-11-07-preview"
+      ],
+      "source_basis": "INDEPENDENT_RACE_RESEARCH_CHECKPOINT",
+      "working_win_pct": null,
+      "starter_verified_at_snapshot": true
+    },
+    {
+      "race_id": "2026-11-07_ROSEHILL_R07",
+      "meeting": "ROSEHILL",
+      "race": 7,
+      "start_at": "2026-11-07T16:10:00+11:00",
+      "first_pick": {
+        "horse": "LAZZURA",
+        "saddlecloth": "1"
+      },
+      "dangers": [
+        {
+          "horse": "GERRINGONG",
+          "saddlecloth": "3"
+        },
+        {
+          "horse": "TUILERIES",
+          "saddlecloth": "2"
+        },
+        {
+          "horse": "ARABIAN ROSE",
+          "saddlecloth": "4"
+        }
+      ],
+      "why": "Already beat key rivals in the Invitation carrying more weight; now barrier two at favourable set weights.",
+      "caution": "Gerringong races forward and Tuileries is drawn more suitably after recent luckless runs.",
+      "form_tier": "STRONG_RELATIVE",
+      "source_urls": [
+        "https://www.racingnsw.com.au/news/latest-racing-news/rosehill-preview-tips-for-five-diamonds-day-saturday-7th-november/"
+      ],
+      "source_basis": "PRIOR_REVIEWED_TOP10",
+      "working_win_pct": 65,
+      "starter_verified_at_snapshot": true
+    },
+    {
+      "race_id": "2026-11-07_ROSEHILL_R08",
+      "meeting": "ROSEHILL",
+      "race": 8,
+      "start_at": "2026-11-07T16:50:00+11:00",
+      "first_pick": {
+        "horse": "WELCOMETOTHESHOW",
+        "saddlecloth": "11"
+      },
+      "dangers": [
+        {
+          "horse": "TUXEDO (NZ)",
+          "saddlecloth": "2"
+        },
+        {
+          "horse": "DECLICHY BOULEVARD",
+          "saddlecloth": "8"
+        },
+        {
+          "horse": "VERONA ROSE",
+          "saddlecloth": "7"
+        }
+      ],
+      "why": "Held up repeatedly in the Five Diamonds Prelude before finishing hard late. The rise to 1800m looks suitable and the relative weight is improved.",
+      "caution": "Wide gate makes the first 200m crucial; Tuxedo is the archived shadow-model top and Declichy Boulevard already beat him.",
+      "form_tier": "LOW",
+      "source_urls": [
+        "https://www.racingnsw.com.au/news/latest-racing-news/rosehill-preview-tips-for-five-diamonds-day-saturday-7th-november/",
+        "https://racehub.com.au/race-preview/rosehill-2026-11-07-preview"
+      ],
+      "source_basis": "INDEPENDENT_RACE_RESEARCH_CHECKPOINT",
+      "working_win_pct": null,
+      "starter_verified_at_snapshot": true
+    },
+    {
+      "race_id": "2026-11-07_ROSEHILL_R09",
+      "meeting": "ROSEHILL",
+      "race": 9,
+      "start_at": "2026-11-07T17:25:00+11:00",
+      "first_pick": {
+        "horse": "AGATHA",
+        "saddlecloth": "9"
+      },
+      "dangers": [
+        {
+          "horse": "DETAIN (NZ)",
+          "saddlecloth": "6"
+        },
+        {
+          "horse": "SHOW BUSINESS",
+          "saddlecloth": "11"
+        },
+        {
+          "horse": "SWORDPLAY",
+          "saddlecloth": "1"
+        }
+      ],
+      "why": "A good recent metropolitan run behind Maybe Moet, with repeatable early positioning at the 1100m trip.",
+      "caution": "Mercy Me and several others are scratched, but Detain has strong underlying form and Swordplay may control the speed.",
+      "form_tier": "LOW",
+      "source_urls": [
+        "https://www.racingnsw.com.au/news/latest-racing-news/rosehill-preview-tips-for-five-diamonds-day-saturday-7th-november/"
+      ],
+      "source_basis": "INDEPENDENT_RACE_RESEARCH_CHECKPOINT",
+      "working_win_pct": null,
+      "starter_verified_at_snapshot": true
+    },
+    {
+      "race_id": "2026-11-07_ROSEHILL_R10",
+      "meeting": "ROSEHILL",
+      "race": 10,
+      "start_at": "2026-11-07T18:05:00+11:00",
+      "first_pick": {
+        "horse": "HORSESHOE HILL",
+        "saddlecloth": "9"
+      },
+      "dangers": [
+        {
+          "horse": "NITRO",
+          "saddlecloth": "4"
+        },
+        {
+          "horse": "LET’S GO AGAIN",
+          "saddlecloth": "5"
+        },
+        {
+          "horse": "MAILATA",
+          "saddlecloth": "3"
+        }
+      ],
+      "why": "Trainer deliberately used a short first-up sprint to build her fitness; her late work behind Bruce I Am strongly suggests 1200m second-up is ideal.",
+      "caution": "Let’s Go Again can get a cheap lead; Nitro is dangerous if he jumps cleanly. R9 scratching does not affect R10.",
+      "form_tier": "MODERATE",
+      "source_urls": [
+        "https://www.racingnsw.com.au/news/latest-racing-news/rosehill-preview-tips-for-five-diamonds-day-saturday-7th-november/"
+      ],
+      "source_basis": "PRIOR_REVIEWED_TOP10",
+      "working_win_pct": 32,
+      "starter_verified_at_snapshot": true
+    },
+    {
+      "race_id": "2026-11-07_ASCOT_R01",
+      "meeting": "ASCOT",
+      "race": 1,
+      "start_at": "2026-11-07T11:54:00+08:00",
+      "first_pick": {
+        "horse": "JUST AN ILLUSION",
+        "saddlecloth": "6"
+      },
+      "dangers": [
+        {
+          "horse": "AHAB THE ARAB",
+          "saddlecloth": "1"
+        },
+        {
+          "horse": "SNIPPEX",
+          "saddlecloth": "4"
+        },
+        {
+          "horse": "GOLDEN PACIFIC",
+          "saddlecloth": "2"
+        }
+      ],
+      "why": "Impressive late acceleration in her 850m trial and professional gate speed in the jumpout.",
+      "caution": "Unraced debutant: trials are a thin evidence base, while Ahab The Arab has actual race-day experience.",
+      "form_tier": "LOW",
+      "source_urls": [
+        "https://www.ozrace.com.au/scott-embrys-saturday-ascot-preview-saturday-7-november-2026/"
+      ],
+      "source_basis": "INDEPENDENT_RACE_RESEARCH_CHECKPOINT",
+      "working_win_pct": null,
+      "starter_verified_at_snapshot": true
+    },
+    {
+      "race_id": "2026-11-07_ASCOT_R02",
+      "meeting": "ASCOT",
+      "race": 2,
+      "start_at": "2026-11-07T12:34:00+08:00",
+      "first_pick": {
+        "horse": "I LOVE YA MONEY",
+        "saddlecloth": "2"
+      },
+      "dangers": [
+        {
+          "horse": "ABISSI (NZ)",
+          "saddlecloth": "1"
+        },
+        {
+          "horse": "ROMMEO",
+          "saddlecloth": "3"
+        },
+        {
+          "horse": "STARWALKER (NZ)",
+          "saddlecloth": "4"
+        }
+      ],
+      "why": "Strong recent staying campaign including two 66+ placings and a Graduation win; a slow tempo can suit.",
+      "caution": "Fourth start in three weeks and Abissi gets a significant weight swing; Rommeo can control the tempo.",
+      "form_tier": "MODERATE",
+      "source_urls": [
+        "https://www.ozrace.com.au/scott-embrys-saturday-ascot-preview-saturday-7-november-2026/"
+      ],
+      "source_basis": "INDEPENDENT_RACE_RESEARCH_CHECKPOINT",
+      "working_win_pct": null,
+      "starter_verified_at_snapshot": true
+    },
+    {
+      "race_id": "2026-11-07_ASCOT_R03",
+      "meeting": "ASCOT",
+      "race": 3,
+      "start_at": "2026-11-07T13:14:00+08:00",
+      "first_pick": {
+        "horse": "VAMPI QUEEN",
+        "saddlecloth": "5"
+      },
+      "dangers": [
+        {
+          "horse": "ACTA NON VERBA",
+          "saddlecloth": "7"
+        },
+        {
+          "horse": "MASMELO",
+          "saddlecloth": "1"
+        },
+        {
+          "horse": "ROCK IN WONDER",
+          "saddlecloth": "2"
+        }
+      ],
+      "why": "Wins at 1400m and 1600m have shown a sharp turn of foot. Should be able to find a forward enough position more cheaply.",
+      "caution": "Ascot transition must be proven; Bondi Star (previous danger) is scratched, and Masmelo can close strongly.",
+      "form_tier": "MODERATE",
+      "source_urls": [
+        "https://www.ozrace.com.au/scott-embrys-saturday-ascot-preview-saturday-7-november-2026/"
+      ],
+      "source_basis": "INDEPENDENT_RACE_RESEARCH_CHECKPOINT",
+      "working_win_pct": null,
+      "starter_verified_at_snapshot": true
+    },
+    {
+      "race_id": "2026-11-07_ASCOT_R04",
+      "meeting": "ASCOT",
+      "race": 4,
+      "start_at": "2026-11-07T13:54:00+08:00",
+      "first_pick": {
+        "horse": "PRINCE OF DALA",
+        "saddlecloth": "2"
+      },
+      "dangers": [
+        {
+          "horse": "SNIPPETY LEGEND",
+          "saddlecloth": "3"
+        },
+        {
+          "horse": "ELEGANT RULER",
+          "saddlecloth": "7"
+        },
+        {
+          "horse": "MARCOS",
+          "saddlecloth": "5"
+        }
+      ],
+      "why": "Best prior class form, including a close finish against Hot & High, and finds a softer graduation race.",
+      "caution": "A hoof abscess caused last week's scratching; soundness is a genuine uncertainty. Snippety Legend has stronger consistency.",
+      "form_tier": "LOW",
+      "source_urls": [
+        "https://www.ozrace.com.au/scott-embrys-saturday-ascot-preview-saturday-7-november-2026/"
+      ],
+      "source_basis": "INDEPENDENT_RACE_RESEARCH_CHECKPOINT",
+      "working_win_pct": null,
+      "starter_verified_at_snapshot": true
+    },
+    {
+      "race_id": "2026-11-07_ASCOT_R05",
+      "meeting": "ASCOT",
+      "race": 5,
+      "start_at": "2026-11-07T14:34:00+08:00",
+      "first_pick": {
+        "horse": "HELLUVA GODDESS",
+        "saddlecloth": "1"
+      },
+      "dangers": [
+        {
+          "horse": "BEYOND MEASURE",
+          "saddlecloth": "5"
+        },
+        {
+          "horse": "RIPPER FAROOQ",
+          "saddlecloth": "2"
+        },
+        {
+          "horse": "SOLDIER OF GOD",
+          "saddlecloth": "10"
+        }
+      ],
+      "why": "Held ground while trapped wide first-up and should improve second-up; the claim and expected midfield trail work in her favour.",
+      "caution": "Beyond Measure has latent upside, while Ripper Farooq finds regular opportunities in this grade.",
+      "form_tier": "LOW",
+      "source_urls": [
+        "https://www.ozrace.com.au/scott-embrys-saturday-ascot-preview-saturday-7-november-2026/"
+      ],
+      "source_basis": "INDEPENDENT_RACE_RESEARCH_CHECKPOINT",
+      "working_win_pct": null,
+      "starter_verified_at_snapshot": true
+    },
+    {
+      "race_id": "2026-11-07_ASCOT_R06",
+      "meeting": "ASCOT",
+      "race": 6,
+      "start_at": "2026-11-07T15:15:00+08:00",
+      "first_pick": {
+        "horse": "BEATTY",
+        "saddlecloth": "1"
+      },
+      "dangers": [
+        {
+          "horse": "ROGER",
+          "saddlecloth": "4"
+        },
+        {
+          "horse": "GODSPEED",
+          "saddlecloth": "5"
+        },
+        {
+          "horse": "SWIFT RULER",
+          "saddlecloth": "3"
+        }
+      ],
+      "why": "Proven stakes winner at Ascot 1400m who was dominant first-up; his only loss came with interference.",
+      "caution": "Unbeaten Roger is improving, while Godspeed and Swift Ruler offer tactical and weight-based resistance.",
+      "form_tier": "MODERATE",
+      "source_urls": [
+        "https://www.ozrace.com.au/scott-embrys-saturday-ascot-preview-saturday-7-november-2026/"
+      ],
+      "source_basis": "PRIOR_REVIEWED_TOP10",
+      "working_win_pct": 48.2,
+      "starter_verified_at_snapshot": true
+    },
+    {
+      "race_id": "2026-11-07_ASCOT_R07",
+      "meeting": "ASCOT",
+      "race": 7,
+      "start_at": "2026-11-07T15:51:00+08:00",
+      "first_pick": {
+        "horse": "OURGIRLCANRUN",
+        "saddlecloth": "6"
+      },
+      "dangers": [
+        {
+          "horse": "FAST HARRY",
+          "saddlecloth": "3"
+        },
+        {
+          "horse": "SO SI GOD",
+          "saddlecloth": "4"
+        },
+        {
+          "horse": "STYLIN’ (NZ)",
+          "saddlecloth": "10"
+        }
+      ],
+      "why": "Crossed from barrier twelve into a frenetic first-up tempo and kept fighting. Better gate and lower expected early expenditure favour her now.",
+      "caution": "Fast Harry's new shades and the ability of So Si God to chase or lead create rival pace scenarios.",
+      "form_tier": "MODERATE",
+      "source_urls": [
+        "https://www.ozrace.com.au/scott-embrys-saturday-ascot-preview-saturday-7-november-2026/"
+      ],
+      "source_basis": "PRIOR_REVIEWED_TOP10",
+      "working_win_pct": 34.5,
+      "starter_verified_at_snapshot": true
+    },
+    {
+      "race_id": "2026-11-07_ASCOT_R08",
+      "meeting": "ASCOT",
+      "race": 8,
+      "start_at": "2026-11-07T16:29:00+08:00",
+      "first_pick": {
+        "horse": "ABERDEEN FLYER",
+        "saddlecloth": "7"
+      },
+      "dangers": [
+        {
+          "horse": "ROCKING SOCIETY",
+          "saddlecloth": "11"
+        },
+        {
+          "horse": "MEMORY PARADE",
+          "saddlecloth": "10"
+        },
+        {
+          "horse": "FOREVER BOY (NZ)",
+          "saddlecloth": "2"
+        }
+      ],
+      "why": "One of the strongest underlying ability profiles in this grade and leads the pre-race shadow ranking.",
+      "caution": "Only one win from eleven and repeated traffic/inexperience issues; Rocking Society and Memory Parade are dangerous at suitable tempos.",
+      "form_tier": "LOW",
+      "source_urls": [
+        "https://www.ozrace.com.au/scott-embrys-saturday-ascot-preview-saturday-7-november-2026/"
+      ],
+      "source_basis": "INDEPENDENT_RACE_RESEARCH_CHECKPOINT",
+      "working_win_pct": null,
+      "starter_verified_at_snapshot": true
+    },
+    {
+      "race_id": "2026-11-07_ASCOT_R09",
+      "meeting": "ASCOT",
+      "race": 9,
+      "start_at": "2026-11-07T17:05:00+08:00",
+      "first_pick": {
+        "horse": "KING OF LIGHT",
+        "saddlecloth": "6"
+      },
+      "dangers": [
+        {
+          "horse": "WATCH ME ROCK",
+          "saddlecloth": "3"
+        },
+        {
+          "horse": "WESTERN EMPIRE (NZ)",
+          "saddlecloth": "1"
+        },
+        {
+          "horse": "LET’S GALAHVANT",
+          "saddlecloth": "4"
+        }
+      ],
+      "why": "Outstanding last-to-first Eurythmic win despite an awkward turn; has already beaten much of this field.",
+      "caution": "Watch Me Rock was also held up and gets a small relative weight improvement; Western Empire is proven at WFA.",
+      "form_tier": "MODERATE",
+      "source_urls": [
+        "https://www.ozrace.com.au/scott-embrys-saturday-ascot-preview-saturday-7-november-2026/"
+      ],
+      "source_basis": "PRIOR_REVIEWED_TOP10",
+      "working_win_pct": 43,
+      "starter_verified_at_snapshot": true
+    },
+    {
+      "race_id": "2026-11-07_ASCOT_R10",
+      "meeting": "ASCOT",
+      "race": 10,
+      "start_at": "2026-11-07T17:44:00+08:00",
+      "first_pick": {
+        "horse": "HURRICANE HARLEY",
+        "saddlecloth": "6"
+      },
+      "dangers": [
+        {
+          "horse": "SNITZALATTE",
+          "saddlecloth": "8"
+        },
+        {
+          "horse": "XENTARO",
+          "saddlecloth": "11"
+        },
+        {
+          "horse": "SEPTEMBER BORN",
+          "saddlecloth": "9"
+        }
+      ],
+      "why": "Forgive last-start Asian Beau effort when trapped wide throughout; drop back to 1200m and a swooping run could suit.",
+      "caution": "Needs the predicted tempo and outside-finishing pattern; Xentaro and Snitzalatte bring competing closing profiles.",
+      "form_tier": "LOW",
+      "source_urls": [
+        "https://www.ozrace.com.au/scott-embrys-saturday-ascot-preview-saturday-7-november-2026/"
+      ],
+      "source_basis": "INDEPENDENT_RACE_RESEARCH_CHECKPOINT",
+      "working_win_pct": null,
+      "starter_verified_at_snapshot": true
+    }
+  ],
+  "notes": [
+    "Every pick and listed danger strictly matched to active official declarations; no bookmaker odds or EV used.",
+    "Our previously researched Top 10 order and percentages are retained and not overwritten by independent tipster opinions.",
+    "Other 19 first picks are provisional form judgments, without fake percentages or a claimed independently calibrated V5 forecast.",
+    "Any selections whose scheduled start predates source creation are visibly flagged as post-start research notes, never counted in pre-race accuracy."
+  ]
+}
