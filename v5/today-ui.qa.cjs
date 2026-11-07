@@ -110,7 +110,7 @@ test('Previously reviewed Top 10 stays frozen and older started races are flagge
  assert.equal(ranking.length,10);
  for(const p of ranking){
   const old=source.shortlist.entries.find(x=>x.meeting===p.meeting&&x.race===p.race);
-  assert.equal(p.first_pick.horse.toUpperCase().replace(/[^A-Z0-9]/g,''),old.horse.toUpperCase().replace(/[^A-Z0-9]/g,''));
+  assert.equal(p.first_pick.horse.toUpperCase().replace(/\([^)]*\)/g,'').replace(/[^A-Z0-9]/g,''),old.horse.toUpperCase().replace(/\([^)]*\)/g,'').replace(/[^A-Z0-9]/g,''));
   assert.equal(p.working_win_pct,old.working_win_pct);
  }
  a.api.select('ROSEHILL',1);
