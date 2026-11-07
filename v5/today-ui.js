@@ -3,7 +3,7 @@
 'use strict';
 var root='/v5/cards/2026-11-07/';
 var cache=null,request=null,last=null;
-var state={meeting:'FLEMINGTON',race:7,selectedHorse:null,topN:10,topMeeting:'ALL',showOut:false};
+var state={meeting:'FLEMINGTON',race:7,homeMeeting:'FLEMINGTON',selectedHorse:null,topN:10,topMeeting:'ALL',showOut:false};
 var TOOL_ITEMS=[
  ['simulator','Simulator','Run the saved 10,000-draw model simulations · archived research'],
  ['compare','Compare horses','Compare runner evidence from the saved model card'],
@@ -36,11 +36,13 @@ function setMeeting(m){state.meeting=m;var mt=daySource().meetings.find(function
 function setRace(n){state.race=n;state.selectedHorse=null;state.showOut=false;rerender();}
 function chooseHorse(entry){state.meeting=entry.meeting;state.race=entry.race;state.selectedHorse=entry.horse;state.showOut=false;navigate('races');}
 function rerender(){if(last&&last.element)render(last.element,last.opts);}
-function actual(){return cache&&cache.official&&cache.shortlist;}
+function actual(){return cache&&cache.official&&cache.shortlist&&cache.selections;}
 function sourceLink(m,label){
  var a=el('a','rl-simple-source',label||'Official field ↗');a.href=m.official_acceptances_url||m.acceptances_url;a.target='_blank';a.rel='noopener noreferrer';return a;
 }
-function selection(m,n){return cache.shortlist.entries.find(function(x){return x.meeting===m&&x.race===n;});}
+function selection(m,n){return cache&&cache.selections&&cache.selections.races.find(function(x){return x.meeting===m&&x.race===n;});}
+function researchTiming(pick){return Date.parse(pick.start_at)<=Date.parse(cache.selections.created_at)?'Added after scheduled jump · research note only':'Uncertified research selection · results lock pending';}
+function topPickAt(m,r){return cache.shortlist.entries.find(function(x){return x.meeting===m&&x.race===r;});}
 function meetingTabs(active,change,withAll){
  var row=el('div','rl-simple-tabs');var names=withAll?['ALL','FLEMINGTON','ROSEHILL','ASCOT']:['FLEMINGTON','ROSEHILL','ASCOT'];
  names.forEach(function(name){put(row,button(name==='ALL'?'All':name==='FLEMINGTON'?'Flemington':name==='ROSEHILL'?'Rosehill':'Ascot',function(){change(name);},'rl-simple-tab',active===name));});return row;
@@ -53,28 +55,37 @@ function topItem(x){
  var right=put(el('span','rl-simple-topchance'),el('strong','',Number(x.working_win_pct).toFixed(1)+'%'),copyLine('Working estimate'));
  return put(card,left,body,right);
 }
+function pickLine(entry){
+ var b=button('',function(){
+  state.meeting=entry.meeting;state.race=entry.race;state.selectedHorse=entry.first_pick.horse;
+  navigate('races');
+ },'rl-simple-dailyline');
+ put(b,el('strong','rl-simple-daily-race','R'+entry.race),
+  el('strong','rl-simple-daily-horse',entry.first_pick.horse),
+  el('span','rl-simple-daily-edge',entry.working_win_pct!==null?Number(entry.working_win_pct).toFixed(1)+'% *':'View race →'));
+ return b;
+}
 function renderHome(container){
- put(container,heading('Saturday 7 November','Final declared fields · Flemington / Rosehill / Ascot'));
+ put(container,heading('Saturday 7 November','29 races · first picks · Flemington, Rosehill and Ascot'));
  var actions=el('div','rl-simple-quick');
- [['View every race','races'],['Top 10 selections','daily'],['Multi Builder','multi'],['All features','tools']].forEach(function(x,i){put(actions,button(x[0],function(){navigate(x[1]);},i===0?'rl-simple-primary':''));});
+ [['View every race','races'],['Top 10 selections','daily'],['Multi Builder','multi'],['All features','tools']].forEach(function(x,i){
+  put(actions,button(x[0],function(){navigate(x[1]);},i===0?'rl-simple-primary':''));
+ });
  put(container,actions);
  var info=el('div','rl-simple-metrics');
- put(info,metric('29','Races'),metric('302','Active runners'),metric('51','Scratchings / eliminated'));
+ put(info,metric('29','Races'),metric('302','Active runners'),metric('29','Research first picks'));
  put(container,info);
- var grid=el('div','rl-simple-meetings');
- cache.official.meetings.forEach(function(m){
-  var target=button('',function(){state.meeting=m.meeting;state.race=1;state.showOut=false;navigate('races');},'rl-simple-meeting');
-  put(target,el('strong','',m.meeting),el('span','rl-simple-rating',m.track_going),
-    copyLine(m.races.length+' races · '+m.active_count+' active · '+m.removed_count+' out'),
-    el('span','rl-simple-open','View R1–R'+m.races.length+' →'));
-  put(grid,target);
- });
- put(container,grid);
- var h=put(el('div','rl-simple-linehead'),el('h3','','Leading research selections'),button('Full Top 10 →',function(){navigate('daily')},'rl-simple-link'));
+ put(container,put(el('div','rl-simple-linehead'),el('h3','','Race-by-race first picks'),el('span','rl-simple-muted','Tap a horse for form + dangers')));
+ put(container,meetingTabs(state.homeMeeting,function(m){state.homeMeeting=m;rerender();},false));
+ var lines=el('div','rl-simple-dailyboard');
+ cache.selections.races.filter(function(r){return r.meeting===state.homeMeeting;}).forEach(function(r){put(lines,pickLine(r));});
+ put(container,lines);
+ put(container,foot('* Only the existing Top 10 has working percentage estimates. Other race choices do not have fabricated win percentages. Published research is not a certified pre-race results lock.'));
+ var h=put(el('div','rl-simple-linehead'),el('h3','','Our reviewed Top 5'),button('Full Top 10 →',function(){navigate('daily')},'rl-simple-link'));
  put(container,h);
  var list=el('div','rl-simple-toplist');
  cache.shortlist.entries.slice(0,5).forEach(function(x){put(list,topItem(x));});put(container,list);
- put(container,foot('Selections are human-reviewed. Percentages are uncalibrated working estimates, not newly run V5 forecasts.'));
+ put(container,foot('Official field declarations are a dated snapshot. Check late scratchings and live results before relying on a runner.'));
 }
 function metric(value,label){return put(el('div','rl-simple-metric'),el('strong','',value),el('small','',label));}
 function foot(text){return el('p','rl-simple-foot',text);}
@@ -105,27 +116,50 @@ function renderRaces(container){
   el('h3','',race.title||race.name),
   detail(race.active+' active runners · '+m.track_going+' · '+race.removed+' scratched / eliminated'));
  put(cap,sourceLink(m,'View official racecard ↗'));put(container,cap);
- var pick=selection(m.meeting,race.race);
+ var pick=selection(m.meeting,race.race),top10=topPickAt(m.meeting,race.race);
  if(pick){
-  var focus=put(el('section','rl-simple-pick'),el('span','rl-simple-eyebrow','REVIEWED SELECTION'),
-   el('h3','',pick.horse),el('strong','rl-simple-pickpct',Number(pick.working_win_pct).toFixed(1)+'% working estimate'),
-   detail(pick.review));
-  put(container,focus);
+  var after=Date.parse(pick.start_at)<=Date.parse(cache.selections.created_at);
+  var focus=put(el('section','rl-simple-pick'),
+   el('span','rl-simple-eyebrow',after?'RESEARCH OPINION · ADDED AFTER SCHEDULED START':'FIRST PICK · RACE-DAY RESEARCH'),
+   el('h3','', '#'+pick.first_pick.saddlecloth+' '+pick.first_pick.horse));
+  var subtype=after?'Not a pre-race recommendation; this was recorded after scheduled race time.':
+   'Form-based selection; not a certified V5 forecast or a guaranteed winner.';
+  put(focus,detail(subtype));
+  if(top10&&pick.working_win_pct!==null)put(focus,el('strong','rl-simple-pickpct',
+    Number(pick.working_win_pct).toFixed(1)+'% working estimate · uncalibrated'));
+  put(focus,el('p','rl-simple-pickwhy',pick.why));
+  var threats=el('div','rl-simple-threats');
+  put(threats,el('strong','','Main dangers: '));
+  pick.dangers.forEach(function(d,i){
+   var press=button('#'+d.saddlecloth+' '+d.horse,function(){state.selectedHorse=d.horse;rerender();},'rl-simple-danger');
+   put(threats,press);
+  });
+  put(focus,threats);
+  var analysis=el('details','rl-simple-analysis'),summary=el('summary','','Risk + source research');
+  put(analysis,summary,el('p','rl-simple-muted',pick.caution));
+  var srcs=el('div','rl-simple-sourcelinks');
+  pick.source_urls.forEach(function(url,i){
+   var a=el('a','rl-simple-source','Form source '+(i+1)+' ↗');a.href=url;a.target='_blank';a.rel='noopener noreferrer';put(srcs,a);
+  });
+  put(analysis,srcs);put(focus,analysis);put(container,focus);
  }
  var header=put(el('div','rl-simple-linehead'),el('h3','','All active runners'),el('span','rl-simple-muted',race.active+' runners'));put(container,header);
  var list=el('div','rl-simple-runlist');
  race.active_runners.forEach(function(h){
-  var isPick=pick&&String(pick.saddlecloth)===String(h.number);
+  var isPick=pick&&String(pick.first_pick.saddlecloth)===String(h.number);
+  var isDanger=pick&&pick.dangers.some(function(d){return String(d.saddlecloth)===String(h.number);});
   var isSelected=state.selectedHorse&&h.horse.toUpperCase().indexOf(state.selectedHorse.toUpperCase())>=0;
   var line=button('',function(){state.selectedHorse=h.horse;rerender();},'rl-simple-runner'+(isSelected?' is-selected':''));
   put(line,el('span','rl-simple-runnum','#'+h.number),el('strong','',h.horse),
-   isPick?el('span','rl-simple-picked','TOP 10 PICK'):null);
+   isPick?el('span','rl-simple-picked','FIRST PICK'):isDanger?el('span','rl-simple-danger-tag','DANGER'):null);
   put(list,line);
  });
  put(container,list);
  if(state.selectedHorse){
-  put(container,put(el('div','rl-simple-selected'),
-   el('strong','',state.selectedHorse),detail('Officially active at the published final declarations. No verified detailed form profile has been imported for this date.'),
+  var chosen=pick&&pick.first_pick.horse===state.selectedHorse?'Our first selection':
+   pick&&pick.dangers.some(function(d){return d.horse===state.selectedHorse;})?'Main danger':'Active declared runner';
+  put(container,put(el('div','rl-simple-selected'),el('strong','',state.selectedHorse),
+   detail(chosen+(chosen==='Our first selection'?' · '+pick.why:'. No separate fully verified 7 Nov form dossier is published for this runner.')),
    sourceLink(m,'Check official runners ↗')));
  }
  if(race.scratching_count||race.scratchings.length){
@@ -158,12 +192,18 @@ function render(element,opts){
   put(element,heading('Saturday field desk','Opening today’s verified racecards…'));
   if(!request)request=Promise.all([
    fetch(root+'official-final.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw Error('Fields '+r.status);return r.json();}),
-   fetch(root+'independent-top10.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw Error('Shortlist '+r.status);return r.json();})
+   fetch(root+'independent-top10.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw Error('Shortlist '+r.status);return r.json();}),
+   fetch(root+'race-selections.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw Error('Race picks '+r.status);return r.json();})
   ]).then(function(b){
    if(b[0].date!=='2026-11-07'||b[0].inventory.active!==302||b[0].inventory.races!==29||
-      b[1].date!=='2026-11-07'||b[1].entries.length!==10||b[1].entries.some(function(x){return !x.active_verified;}))
+      b[1].date!=='2026-11-07'||b[1].entries.length!==10||b[1].entries.some(function(x){return !x.active_verified;})||
+      b[2].date!=='2026-11-07'||b[2].races.length!==29||b[2].status!=='RESEARCH_ONLY_NOT_CERTIFIED_MODEL'||
+      b[2].races.some(function(p){
+       var m=b[0].meetings.find(function(x){return x.meeting===p.meeting;}),r=m&&m.races.find(function(x){return x.race===p.race;});
+       return !r||!r.active_runners.some(function(h){return h.horse===p.first_pick.horse;});
+      }))
       throw Error('Dated field integrity check failed');
-   cache={official:b[0],shortlist:b[1]};return cache;
+   cache={official:b[0],shortlist:b[1],selections:b[2]};return cache;
   }).catch(function(e){cache={error:e.message};return cache;}).then(function(){if(last&&(!last.element.isConnected||last.element.isConnected===true))rerender();});
   if(cache&&cache.error){
    element.replaceChildren(heading('Race-day data unavailable','The official snapshot could not be verified.'));
