@@ -13,7 +13,8 @@ var TOOL_ITEMS=[
  ['calibration','Calibration','Historical calibration and model diagnostics'],
  ['settings','Data & sync','Airtable connection and data controls'],
  ['oaks','5 Nov results','Thursday racing outcome and pre-race audit'],
- ['archive','Archived model','Previous V5 research board and all legacy form analysis']
+ ['archive','Archived model','Previous V5 research board and all legacy form analysis'],
+ ['quaddie','Quaddie worksheets','Flemington and Rosehill coverage from today’s racecard']
 ];
 function el(tag,cls,content){
  var x=document.createElement(tag);if(cls)x.className=cls;
@@ -142,7 +143,7 @@ function renderTools(container,opts){
  put(container,heading('All features','Everything is still here, grouped into one place.'));
  var shortcuts=el('div','rl-simple-toolgrid');
  TOOL_ITEMS.forEach(function(item){
-  var card=button('',function(){navigate(item[0]);},'rl-simple-tool');
+  var card=button('',function(){if(item[0]==='quaddie')global.location.href='/v5/saturday-2026-11-07.html';else navigate(item[0]);},'rl-simple-tool');
   put(card,el('strong','',item[1]),detail(item[2]),el('span','rl-simple-open','Open →'));
   put(shortcuts,card);
  });
