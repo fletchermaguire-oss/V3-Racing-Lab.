@@ -41,6 +41,7 @@ function sourceLink(m,label){
  var a=el('a','rl-simple-source',label||'Official field ↗');a.href=m.official_acceptances_url||m.acceptances_url;a.target='_blank';a.rel='noopener noreferrer';return a;
 }
 function selection(m,n){return cache&&cache.selections&&cache.selections.races.find(function(x){return x.meeting===m&&x.race===n;});}
+function sameHorse(a,b){var clean=function(s){return String(s||'').normalize('NFKD').replace(/\([^)]*\)/g,'').toUpperCase().replace(/[^A-Z0-9]/g,'');};return clean(a)===clean(b);}
 function researchTiming(pick){return Date.parse(pick.start_at)<=Date.parse(cache.selections.created_at)?'Added after scheduled jump · research note only':'Uncertified research selection · results lock pending';}
 function topPickAt(m,r){return cache.shortlist.entries.find(function(x){return x.meeting===m&&x.race===r;});}
 function meetingTabs(active,change,withAll){
@@ -119,10 +120,12 @@ function renderRaces(container){
  var pick=selection(m.meeting,race.race),top10=topPickAt(m.meeting,race.race);
  if(pick){
   var after=Date.parse(pick.start_at)<=Date.parse(cache.selections.created_at);
+  var started=Date.now()>=Date.parse(pick.start_at);
   var focus=put(el('section','rl-simple-pick'),
-   el('span','rl-simple-eyebrow',after?'RESEARCH OPINION · ADDED AFTER SCHEDULED START':'FIRST PICK · RACE-DAY RESEARCH'),
+   el('span','rl-simple-eyebrow',after?'RESEARCH NOTE · ADDED AFTER SCHEDULED START':started?'RESEARCH PICK · START TIME PASSED':'FIRST PICK · RACE-DAY RESEARCH'),
    el('h3','', '#'+pick.first_pick.saddlecloth+' '+pick.first_pick.horse));
   var subtype=after?'Not a pre-race recommendation; this was recorded after scheduled race time.':
+   started?'Scheduled start has passed — check actual results. This selection is not an official result.':
    'Form-based selection; not a certified V5 forecast or a guaranteed winner.';
   put(focus,detail(subtype));
   if(top10&&pick.working_win_pct!==null)put(focus,el('strong','rl-simple-pickpct',
@@ -148,7 +151,7 @@ function renderRaces(container){
  race.active_runners.forEach(function(h){
   var isPick=pick&&String(pick.first_pick.saddlecloth)===String(h.number);
   var isDanger=pick&&pick.dangers.some(function(d){return String(d.saddlecloth)===String(h.number);});
-  var isSelected=state.selectedHorse&&h.horse.toUpperCase().indexOf(state.selectedHorse.toUpperCase())>=0;
+  var isSelected=state.selectedHorse&&sameHorse(h.horse,state.selectedHorse);
   var line=button('',function(){state.selectedHorse=h.horse;rerender();},'rl-simple-runner'+(isSelected?' is-selected':''));
   put(line,el('span','rl-simple-runnum','#'+h.number),el('strong','',h.horse),
    isPick?el('span','rl-simple-picked','FIRST PICK'):isDanger?el('span','rl-simple-danger-tag','DANGER'):null);
@@ -156,8 +159,8 @@ function renderRaces(container){
  });
  put(container,list);
  if(state.selectedHorse){
-  var chosen=pick&&pick.first_pick.horse===state.selectedHorse?'Our first selection':
-   pick&&pick.dangers.some(function(d){return d.horse===state.selectedHorse;})?'Main danger':'Active declared runner';
+  var chosen=pick&&sameHorse(pick.first_pick.horse,state.selectedHorse)?'Our first selection':
+   pick&&pick.dangers.some(function(d){return sameHorse(d.horse,state.selectedHorse);})?'Main danger':'Active declared runner';
   put(container,put(el('div','rl-simple-selected'),el('strong','',state.selectedHorse),
    detail(chosen+(chosen==='Our first selection'?' · '+pick.why:'. No separate fully verified 7 Nov form dossier is published for this runner.')),
    sourceLink(m,'Check official runners ↗')));
