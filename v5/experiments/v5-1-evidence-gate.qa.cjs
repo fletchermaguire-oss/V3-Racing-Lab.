@@ -42,11 +42,16 @@ test('Cashout requires evidence review; winning first-ranked runners are not aut
  assert.equal(cash.screen_status,'EVIDENCE_REVIEW_REQUIRED');
  assert(cash.quality_issues.includes('THIN_PARSEABLE_RECENT_FORM'));
  assert(cash.quality_issues.includes('RECENT_FORM_DOMINATES_UNFAVOURABLE_CLASS_EVIDENCE'));
- for(const [x,race,horse] of [[r,3,'SAVVY SPY (NZ)'],[r,7,'LAZZURA'],
-  [a,6,'BEATTY'],[a,9,'KING OF LIGHT']]){
+ for(const [x,race,horse] of [[r,3,'SAVVY SPY (NZ)'],[a,6,'BEATTY'],[a,9,'KING OF LIGHT']]){
   assert.equal(get(x,race).horse,horse);
   assert.equal(get(x,race).screen_status,'MODEL_LEADER_ELIGIBLE_FOR_REVIEW');
  }
+ // Lazzura still won and stays first, but the class sensitivity is real.
+ const lazzura=get(r,7);
+ assert.equal(lazzura.horse,'LAZZURA');
+ assert.equal(lazzura.model_pct,49.85);
+ assert.equal(lazzura.scenario_stability.leader_count,4);
+ assert(lazzura.quality_issues.includes('WIDE_GOING_CLASS_PROBABILITY_SPREAD'));
 });
 test('review gates cannot retrospectively promote the winning but lower-ranked outsiders',()=>{
  const r=Q.evaluate(Rose,Official,'ROSEHILL'),a=Q.evaluate(Ascot,Official,'ASCOT');
@@ -74,4 +79,18 @@ test('post-race results and bookmaker odds cannot influence the overlay',()=>{
  const after=Q.evaluate(injected,Official,'ASCOT');
  assert.deepEqual(after.screen,baseline.screen);
  assert.deepEqual(after.model.records.map(x=>x.p_exact),baseline.model.records.map(x=>x.p_exact));
+});
+
+test('scenario diagnostics use four named variations without changing the baseline rating',()=>{
+ const r=Q.evaluate(Rose,Official,'ROSEHILL'),a=Q.evaluate(Ascot,Official,'ASCOT');
+ for(const x of r.screen.concat(a.screen)){
+  assert.equal(x.scenario_stability.scenarios.length,4);
+  assert(x.scenario_stability.leader_count>=0&&x.scenario_stability.leader_count<=4);
+  assert(x.scenario_stability.probability_floor<=x.model_pct);
+  assert(x.scenario_stability.probability_ceiling>=x.model_pct);
+  assert.equal(x.scenario_stability.scenarios[0].pct,x.model_pct);
+ }
+ const lazzura=get(r,7);
+ assert.equal(lazzura.scenario_stability.probability_floor,36.17);
+ assert.equal(lazzura.scenario_stability.probability_ceiling,49.85);
 });
