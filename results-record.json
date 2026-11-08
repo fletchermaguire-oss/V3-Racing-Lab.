@@ -1,9 +1,9 @@
 {
   "schema": "racing-lab-unified-results/v1",
-  "updated_date": "2026-11-01",
+  "updated_date": "2026-11-09",
   "display_title": "Racing Lab · All Saturday results",
-  "status": "VERIFIED_RACE_OUTCOMES_WITH_MIXED_SELECTION_PROVENANCE",
-  "reporting_note": "One cumulative record across 17, 24 and 31 October 2026. The older 17/24 October entries are retrospective reconstructions of model race leaders, while 31 October entries are original published reviewed Top 15 ranks. These distinct selection methodologies share one outcome ledger but do not establish one comparable out-of-sample model hit rate or statistically calibrated win probabilities. Scratchings are excluded from the denominator.",
+  "status": "VERIFIED_RACE_OUTCOMES_WITH_MIXED_SELECTION_PROVENANCE_AND_PARTIAL_2026_11_07_TOP15",
+  "reporting_note": "One cumulative outcome ledger for 17 and 24 October historical reconstructed model leaders; 31 October published reviewed Top 15; and 7 November pre-race researched Top 10 only. Mixed selection methods are not a single calibrated or forward-certified V5 hit rate. Top 15 deliberately excludes 7 November because ranks 11–15 were not saved before racing. Scratchings excluded.",
   "sources": [
     {
       "kind": "HISTORICAL_MODEL_RECONSTRUCTION",
@@ -23,32 +23,49 @@
       "published_at_utc": "2026-10-30T22:28:29Z",
       "published_commit": "f5a75c61f02ee5276aa36e01fe2769563ae2044f",
       "strict_independent_lock_certified": false
+    },
+    {
+      "kind": "PRE_RACE_REVIEWED_ANALYST_TOP10",
+      "file": "v5/cards/2026-11-07/independent-top10.json",
+      "dates": [
+        "2026-11-07"
+      ],
+      "reviewed_at": "2026-11-07T00:44:28.834Z",
+      "publication_approved": false,
+      "strict_independent_lock_certified": false,
+      "model_calibrated": false,
+      "result_sources": [
+        "https://www.vrc.com.au/race-days-and-events/2026-2027/tab-champions-stakes-day/",
+        "https://racehub.com.au/raceday-wrap/rosehill-2026-11-07",
+        "https://www.tabtouch.com.au/racing/2026-11-07/pr"
+      ],
+      "method": "10 pre-race independent analyst selections; ranks 11–15 not saved. Do not count this date in Top 15."
     }
   ],
   "metrics": {
     "all": {
-      "entries": 64,
-      "finished": 62,
-      "wins": 20,
+      "entries": 74,
+      "finished": 72,
+      "wins": 27,
       "scratched": 2,
-      "win_rate_pct": 32.26,
-      "top_three": 37
+      "win_rate_pct": 37.5,
+      "top_three": 45
     },
     "top5": {
-      "entries": 15,
-      "finished": 15,
-      "wins": 6,
+      "entries": 20,
+      "finished": 20,
+      "wins": 10,
       "scratched": 0,
-      "win_rate_pct": 40,
-      "top_three": 8
+      "win_rate_pct": 50,
+      "top_three": 12
     },
     "top10": {
-      "entries": 30,
-      "finished": 30,
-      "wins": 11,
+      "entries": 40,
+      "finished": 40,
+      "wins": 18,
       "scratched": 0,
-      "win_rate_pct": 36.67,
-      "top_three": 20
+      "win_rate_pct": 45,
+      "top_three": 28
     },
     "top15": {
       "entries": 45,
@@ -84,6 +101,15 @@
         "wins": 4,
         "scratched": 0,
         "win_rate_pct": 26.67,
+        "top_three": 8
+      },
+      {
+        "date": "2026-11-07",
+        "entries": 10,
+        "finished": 10,
+        "wins": 7,
+        "scratched": 0,
+        "win_rate_pct": 70,
         "top_three": 8
       }
     ]
@@ -1304,6 +1330,434 @@
       "source_url": "https://www.theking.zone/racing/2026-10-31/ascot",
       "starting_price": null,
       "notes": "Rank and percentages preserved, no post-race substitutions."
+    },
+    {
+      "date": "2026-11-07",
+      "meeting": "FLEMINGTON",
+      "race": 7,
+      "horse": "Autumn Glow",
+      "rank": 1,
+      "model": "INDEPENDENT_ANALYST_2026-11-07",
+      "model_pct": 77.6,
+      "model_separation_pp": null,
+      "form_grade": null,
+      "selection_method": "PRE_RACE_REVIEWED_ANALYST_TOP10",
+      "provenance": "Pre-race reviewed Top 10 saved in GitHub v5/cards/2026-11-07/independent-top10.json before racing; publication_approved=false, no strict frozen model board; percentages are uncalibrated analyst working shares, not V5 model output.",
+      "finish_position": 1,
+      "scratched": false,
+      "status": "FINISHED_VERIFIED",
+      "source_url": "https://www.vrc.com.au/race-days-and-events/2026-2027/tab-champions-stakes-day/",
+      "starting_price": null,
+      "notes": "Original rank and working chance retained without retrospectively changing selections.",
+      "pre_race_factor": "ELITE_CLASS",
+      "postrace_evidence": "Relative opposition and class advantage were credible; actual winner was a short-priced favourite"
+    },
+    {
+      "date": "2026-11-07",
+      "meeting": "ROSEHILL",
+      "race": 7,
+      "horse": "Lazzura",
+      "rank": 2,
+      "model": "INDEPENDENT_ANALYST_2026-11-07",
+      "model_pct": 65,
+      "model_separation_pp": null,
+      "form_grade": null,
+      "selection_method": "PRE_RACE_REVIEWED_ANALYST_TOP10",
+      "provenance": "Pre-race reviewed Top 10 saved in GitHub v5/cards/2026-11-07/independent-top10.json before racing; publication_approved=false, no strict frozen model board; percentages are uncalibrated analyst working shares, not V5 model output.",
+      "finish_position": 1,
+      "scratched": false,
+      "status": "FINISHED_VERIFIED",
+      "source_url": "https://racehub.com.au/raceday-wrap/rosehill-2026-11-07",
+      "starting_price": null,
+      "notes": "Original rank and working chance retained without retrospectively changing selections.",
+      "pre_race_factor": "CLASS_ADVANTAGE",
+      "postrace_evidence": "Strong class/race-fit profile supported win; Gerringong pushed her closely"
+    },
+    {
+      "date": "2026-11-07",
+      "meeting": "FLEMINGTON",
+      "race": 6,
+      "horse": "Tempted",
+      "rank": 3,
+      "model": "INDEPENDENT_ANALYST_2026-11-07",
+      "model_pct": 52.9,
+      "model_separation_pp": null,
+      "form_grade": null,
+      "selection_method": "PRE_RACE_REVIEWED_ANALYST_TOP10",
+      "provenance": "Pre-race reviewed Top 10 saved in GitHub v5/cards/2026-11-07/independent-top10.json before racing; publication_approved=false, no strict frozen model board; percentages are uncalibrated analyst working shares, not V5 model output.",
+      "finish_position": 5,
+      "scratched": false,
+      "status": "FINISHED_VERIFIED",
+      "source_url": "https://www.vrc.com.au/race-days-and-events/2026-2027/tab-champions-stakes-day/",
+      "starting_price": null,
+      "notes": "Original rank and working chance retained without retrospectively changing selections.",
+      "pre_race_factor": "ELITE_RECENT_FORM",
+      "postrace_evidence": "These were insufficient to offset an untested Flemington straight and long preparation"
+    },
+    {
+      "date": "2026-11-07",
+      "meeting": "ASCOT",
+      "race": 6,
+      "horse": "Beatty",
+      "rank": 4,
+      "model": "INDEPENDENT_ANALYST_2026-11-07",
+      "model_pct": 48.2,
+      "model_separation_pp": null,
+      "form_grade": null,
+      "selection_method": "PRE_RACE_REVIEWED_ANALYST_TOP10",
+      "provenance": "Pre-race reviewed Top 10 saved in GitHub v5/cards/2026-11-07/independent-top10.json before racing; publication_approved=false, no strict frozen model board; percentages are uncalibrated analyst working shares, not V5 model output.",
+      "finish_position": 1,
+      "scratched": false,
+      "status": "FINISHED_VERIFIED",
+      "source_url": "https://www.tabtouch.com.au/racing/2026-11-07/pr",
+      "starting_price": null,
+      "notes": "Original rank and working chance retained without retrospectively changing selections.",
+      "pre_race_factor": "PROGRESSIVE_FORM",
+      "postrace_evidence": "Form/class advantage aligned with victory"
+    },
+    {
+      "date": "2026-11-07",
+      "meeting": "ASCOT",
+      "race": 9,
+      "horse": "King Of Light",
+      "rank": 5,
+      "model": "INDEPENDENT_ANALYST_2026-11-07",
+      "model_pct": 43,
+      "model_separation_pp": null,
+      "form_grade": null,
+      "selection_method": "PRE_RACE_REVIEWED_ANALYST_TOP10",
+      "provenance": "Pre-race reviewed Top 10 saved in GitHub v5/cards/2026-11-07/independent-top10.json before racing; publication_approved=false, no strict frozen model board; percentages are uncalibrated analyst working shares, not V5 model output.",
+      "finish_position": 1,
+      "scratched": false,
+      "status": "FINISHED_VERIFIED",
+      "source_url": "https://www.tabtouch.com.au/racing/2026-11-07/pr",
+      "starting_price": null,
+      "notes": "Original rank and working chance retained without retrospectively changing selections.",
+      "pre_race_factor": "CLASS_ADVANTAGE",
+      "postrace_evidence": "Race class record was consistent with winning"
+    },
+    {
+      "date": "2026-11-07",
+      "meeting": "ROSEHILL",
+      "race": 3,
+      "horse": "Savvy Spy",
+      "rank": 6,
+      "model": "INDEPENDENT_ANALYST_2026-11-07",
+      "model_pct": 41.7,
+      "model_separation_pp": null,
+      "form_grade": null,
+      "selection_method": "PRE_RACE_REVIEWED_ANALYST_TOP10",
+      "provenance": "Pre-race reviewed Top 10 saved in GitHub v5/cards/2026-11-07/independent-top10.json before racing; publication_approved=false, no strict frozen model board; percentages are uncalibrated analyst working shares, not V5 model output.",
+      "finish_position": 1,
+      "scratched": false,
+      "status": "FINISHED_VERIFIED",
+      "source_url": "https://racehub.com.au/raceday-wrap/rosehill-2026-11-07",
+      "starting_price": null,
+      "notes": "Original rank and working chance retained without retrospectively changing selections.",
+      "pre_race_factor": "PACE_POSITION",
+      "postrace_evidence": "Staying suitability and accessible pace position aligned with winning"
+    },
+    {
+      "date": "2026-11-07",
+      "meeting": "ASCOT",
+      "race": 7,
+      "horse": "Ourgirlcanrun",
+      "rank": 7,
+      "model": "INDEPENDENT_ANALYST_2026-11-07",
+      "model_pct": 34.5,
+      "model_separation_pp": null,
+      "form_grade": null,
+      "selection_method": "PRE_RACE_REVIEWED_ANALYST_TOP10",
+      "provenance": "Pre-race reviewed Top 10 saved in GitHub v5/cards/2026-11-07/independent-top10.json before racing; publication_approved=false, no strict frozen model board; percentages are uncalibrated analyst working shares, not V5 model output.",
+      "finish_position": 1,
+      "scratched": false,
+      "status": "FINISHED_VERIFIED",
+      "source_url": "https://www.tabtouch.com.au/racing/2026-11-07/pr",
+      "starting_price": null,
+      "notes": "Original rank and working chance retained without retrospectively changing selections.",
+      "pre_race_factor": "TACTICAL_DRAW",
+      "postrace_evidence": "Tactical advantage aligned with victory"
+    },
+    {
+      "date": "2026-11-07",
+      "meeting": "FLEMINGTON",
+      "race": 8,
+      "horse": "Cosmic Crusader",
+      "rank": 8,
+      "model": "INDEPENDENT_ANALYST_2026-11-07",
+      "model_pct": 34.5,
+      "model_separation_pp": null,
+      "form_grade": null,
+      "selection_method": "PRE_RACE_REVIEWED_ANALYST_TOP10",
+      "provenance": "Pre-race reviewed Top 10 saved in GitHub v5/cards/2026-11-07/independent-top10.json before racing; publication_approved=false, no strict frozen model board; percentages are uncalibrated analyst working shares, not V5 model output.",
+      "finish_position": 2,
+      "scratched": false,
+      "status": "FINISHED_VERIFIED",
+      "source_url": "https://www.vrc.com.au/race-days-and-events/2026-2027/tab-champions-stakes-day/",
+      "starting_price": null,
+      "notes": "Original rank and working chance retained without retrospectively changing selections.",
+      "pre_race_factor": "LATE_PEAK_RIVAL",
+      "postrace_evidence": "Top-two result confirms broad class assessment"
+    },
+    {
+      "date": "2026-11-07",
+      "meeting": "ROSEHILL",
+      "race": 5,
+      "horse": "Cashout",
+      "rank": 9,
+      "model": "INDEPENDENT_ANALYST_2026-11-07",
+      "model_pct": 32.3,
+      "model_separation_pp": null,
+      "form_grade": null,
+      "selection_method": "PRE_RACE_REVIEWED_ANALYST_TOP10",
+      "provenance": "Pre-race reviewed Top 10 saved in GitHub v5/cards/2026-11-07/independent-top10.json before racing; publication_approved=false, no strict frozen model board; percentages are uncalibrated analyst working shares, not V5 model output.",
+      "finish_position": 6,
+      "scratched": false,
+      "status": "FINISHED_VERIFIED",
+      "source_url": "https://racehub.com.au/raceday-wrap/rosehill-2026-11-07",
+      "starting_price": null,
+      "notes": "Original rank and working chance retained without retrospectively changing selections.",
+      "pre_race_factor": "CLASS_TRANSFER_UNCERTAINTY",
+      "postrace_evidence": "No evidence this was sufficiently resolved before assigning 32.3%"
+    },
+    {
+      "date": "2026-11-07",
+      "meeting": "ROSEHILL",
+      "race": 10,
+      "horse": "Horseshoe Hill",
+      "rank": 10,
+      "model": "INDEPENDENT_ANALYST_2026-11-07",
+      "model_pct": 32,
+      "model_separation_pp": null,
+      "form_grade": null,
+      "selection_method": "PRE_RACE_REVIEWED_ANALYST_TOP10",
+      "provenance": "Pre-race reviewed Top 10 saved in GitHub v5/cards/2026-11-07/independent-top10.json before racing; publication_approved=false, no strict frozen model board; percentages are uncalibrated analyst working shares, not V5 model output.",
+      "finish_position": 1,
+      "scratched": false,
+      "status": "FINISHED_VERIFIED",
+      "source_url": "https://racehub.com.au/raceday-wrap/rosehill-2026-11-07",
+      "starting_price": null,
+      "notes": "Original rank and working chance retained without retrospectively changing selections.",
+      "pre_race_factor": "TRIP_SUITABILITY",
+      "postrace_evidence": "1200m suitability and race fitness supported result"
     }
-  ]
+  ],
+  "cohort_eligibility": {
+    "2026-10-17": {
+      "top5": true,
+      "top10": true,
+      "top15": true,
+      "basis": "Historical reconstructed model ranking"
+    },
+    "2026-10-24": {
+      "top5": true,
+      "top10": true,
+      "top15": true,
+      "basis": "Historical reconstructed model ranking"
+    },
+    "2026-10-31": {
+      "top5": true,
+      "top10": true,
+      "top15": true,
+      "basis": "Saved pre-race reviewed Top 15"
+    },
+    "2026-11-07": {
+      "top5": true,
+      "top10": true,
+      "top15": false,
+      "basis": "Saved reviewed Top 10 only; no independently saved ranks 11-15"
+    }
+  },
+  "postrace_analysis": {
+    "schema": "racing-lab-factor-diagnostics/v1",
+    "as_of": "2026-11-09",
+    "outcomes_not_forecast_inputs": true,
+    "status": "RETROSPECTIVE_DIAGNOSTICS_ONLY_NO_COEFFICIENTS_CHANGED",
+    "method": "Compare documented pre-race reasons with independently published results; distinguish evidence available before racing from explanations discovered afterward. Associations are not causal proof. No outcome-derived features enter live model.",
+    "oct31": {
+      "source": "v5/shortlists/2026-10-31-results.json",
+      "n": 15,
+      "wins": 4,
+      "expected_wins_uncalibrated": 3.557,
+      "win_mean_model_pct": 25.16,
+      "loss_mean_model_pct": 23.18,
+      "win_mean_model_gap_pp": 9.16,
+      "loss_mean_model_gap_pp": 7.2,
+      "winners": [
+        "Regal Ambition",
+        "Western Miss",
+        "Lady Shenandoah",
+        "Hot And High"
+      ],
+      "dominant_gap_misses": [
+        "Sheza Alibi",
+        "Where'stheprofit"
+      ],
+      "interpretation": "Average model gap/score separated wins only weakly in one sample; high separation did not prevent large misses. Attribution to individual coefficients is impossible without saved feature-level model decomposition."
+    },
+    "nov7": {
+      "source": "v5/cards/2026-11-07/independent-top10.json",
+      "n": 10,
+      "wins": 7,
+      "top_three": 8,
+      "expected_wins_from_analyst_shares": 4.617,
+      "not_model_output": true,
+      "top15_available": false,
+      "cases": [
+        {
+          "rank": 1,
+          "horse": "Autumn Glow",
+          "meeting": "FLEMINGTON",
+          "race": 7,
+          "finish_position": 1,
+          "working_win_pct": 77.6,
+          "primary_factor": "ELITE_CLASS",
+          "known_before": "Proven top-class ability confirmed in Champions Mile; field reduction another known benefit",
+          "interpretation": "Relative opposition and class advantage were credible; actual winner was a short-priced favourite",
+          "limitation": "Rival strength still mattered, especially Lindermann"
+        },
+        {
+          "rank": 2,
+          "horse": "Lazzura",
+          "meeting": "ROSEHILL",
+          "race": 7,
+          "finish_position": 1,
+          "working_win_pct": 65,
+          "primary_factor": "CLASS_ADVANTAGE",
+          "known_before": "Strong 1400m form and advantageous draw were documented pre-race",
+          "interpretation": "Strong class/race-fit profile supported win; Gerringong pushed her closely",
+          "limitation": "Pre-race 65% working share not independently calibrated"
+        },
+        {
+          "rank": 3,
+          "horse": "Tempted",
+          "meeting": "FLEMINGTON",
+          "race": 6,
+          "finish_position": 5,
+          "working_win_pct": 52.9,
+          "primary_factor": "ELITE_RECENT_FORM",
+          "known_before": "Everest victory and six-race streak; Giga Kick/Rey Magnerio out",
+          "interpretation": "These were insufficient to offset an untested Flemington straight and long preparation",
+          "limitation": "First straight run; post-race respiratory issue and trainer fatigue remarks are POST-RACE evidence only"
+        },
+        {
+          "rank": 4,
+          "horse": "Beatty",
+          "meeting": "ASCOT",
+          "race": 6,
+          "finish_position": 1,
+          "working_win_pct": 48.2,
+          "primary_factor": "PROGRESSIVE_FORM",
+          "known_before": "Favoured after Countersunk withdrew",
+          "interpretation": "Form/class advantage aligned with victory",
+          "limitation": "Roger was withdrawn late; this is after the saved morning snapshot"
+        },
+        {
+          "rank": 5,
+          "horse": "King Of Light",
+          "meeting": "ASCOT",
+          "race": 9,
+          "finish_position": 1,
+          "working_win_pct": 43,
+          "primary_factor": "CLASS_ADVANTAGE",
+          "known_before": "Strong Eurythmic form documented in pre-race report",
+          "interpretation": "Race class record was consistent with winning",
+          "limitation": "Working share 43% uncalibrated"
+        },
+        {
+          "rank": 6,
+          "horse": "Savvy Spy",
+          "meeting": "ROSEHILL",
+          "race": 3,
+          "finish_position": 1,
+          "working_win_pct": 41.7,
+          "primary_factor": "PACE_POSITION",
+          "known_before": "Expected to benefit from a softer 2400m tempo after Savisanta/Smart Jazz scratches",
+          "interpretation": "Staying suitability and accessible pace position aligned with winning",
+          "limitation": "Criteria still a legitimate rival pre-race"
+        },
+        {
+          "rank": 7,
+          "horse": "Ourgirlcanrun",
+          "meeting": "ASCOT",
+          "race": 7,
+          "finish_position": 1,
+          "working_win_pct": 34.5,
+          "primary_factor": "TACTICAL_DRAW",
+          "known_before": "Wheely scratched; favourable six draw noted",
+          "interpretation": "Tactical advantage aligned with victory",
+          "limitation": "Not independently evidence of formula coefficient"
+        },
+        {
+          "rank": 8,
+          "horse": "Cosmic Crusader",
+          "meeting": "FLEMINGTON",
+          "race": 8,
+          "finish_position": 2,
+          "working_win_pct": 34.5,
+          "primary_factor": "LATE_PEAK_RIVAL",
+          "known_before": "Cox Plate win and Flemington 2000m suitability; Birdman flagged as danger",
+          "interpretation": "Top-two result confirms broad class assessment",
+          "limitation": "Birdman had beaten him in Underwood and was held up in Cox Plate; more weight needed on rival trajectory"
+        },
+        {
+          "rank": 9,
+          "horse": "Cashout",
+          "meeting": "ROSEHILL",
+          "race": 5,
+          "finish_position": 6,
+          "working_win_pct": 32.3,
+          "primary_factor": "CLASS_TRANSFER_UNCERTAINTY",
+          "known_before": "Melbourne-to-Sydney class transfer and pace both explicitly flagged",
+          "interpretation": "No evidence this was sufficiently resolved before assigning 32.3%",
+          "limitation": "Sixth of eight, settled sixth; class transfer and race setup were under-controlled risks"
+        },
+        {
+          "rank": 10,
+          "horse": "Horseshoe Hill",
+          "meeting": "ROSEHILL",
+          "race": 10,
+          "finish_position": 1,
+          "working_win_pct": 32,
+          "primary_factor": "TRIP_SUITABILITY",
+          "known_before": "Confirmed R10 starter, distance expected to suit after R9 scratch",
+          "interpretation": "1200m suitability and race fitness supported result",
+          "limitation": "Avoid interpreting outcome as proof of percentage"
+        }
+      ]
+    },
+    "lessons": [
+      {
+        "signal": "Prior class / current ability",
+        "result": "Supported wins for Autumn Glow, Lazzura, Beatty and King Of Light",
+        "action": "Keep class comparisons independent of betting prices; inspect strongest rivals."
+      },
+      {
+        "signal": "Track & distance / pace suitability",
+        "result": "Savvy Spy, Ourgirlcanrun and Horseshoe Hill won where pre-race setup was favourable",
+        "action": "Require evidence of course configuration and likely early position; test these assumptions by race."
+      },
+      {
+        "signal": "Straight-course uncertainty and fatigue",
+        "result": "Tempted fifth; pulmonary haemorrhage identified only AFTER the race",
+        "action": "Flag unproven straight-course conditions and long preparation separately; do not train on retrospective medical finding."
+      },
+      {
+        "signal": "Rival improvement / hidden runs",
+        "result": "Birdman beat Cosmic Crusader after an unlucky Cox Plate and prior Underwood win",
+        "action": "Check strongest rival trajectory and traffic-affected runs before conferring a big gap."
+      },
+      {
+        "signal": "Class / jurisdiction transfer",
+        "result": "Cashout sixth, despite 32.3% analyst working share",
+        "action": "Flag weak transfer assumptions; require documented class-strength comparison or abstain from A tier."
+      },
+      {
+        "signal": "Model separation alone",
+        "result": "31 Oct Sheza Alibi (18.64pp gap) and Where'stheprofit (16.91pp) both sixth or worse",
+        "action": "Prohibit automatic A-tier based on gap alone; test robustness and calibrated performance."
+      }
+    ],
+    "next_validation": "Track prospective Top 5/10/15 snapshots frozen before each Saturday; evaluate Brier/log loss on fully specified race fields. Do not retroactively tune coefficients from these 25 reviewed picks."
+  }
 }
