@@ -58,7 +58,7 @@ function reconcileSnapshot(research,official,meeting){
 }
 function riskScreen(row,race,field,stability=null){
  const gap=Number(race.gap),issues=Array.isArray(row.input_issues)?row.input_issues:[];
- const problems=[];
+ const problems=[],warnings=[];
  if(row.form_audit.accepted<4)problems.push('THIN_PARSEABLE_RECENT_FORM');
  if(row.completeness<0.85)problems.push('LOW_DOCUMENTED_COMPLETENESS');
  if(issues.length)problems.push('SOURCE_INPUT_WARNINGS');
@@ -68,7 +68,7 @@ function riskScreen(row,race,field,stability=null){
  if(race.chaos>89)problems.push('CROWDED_FIELD');
  if(row.days_since_last!==null&&row.days_since_last>70)problems.push('LAYOFF_RISK');
  if(stability&&stability.leader_count!==4)problems.push('LEADER_CHANGES_WITH_GOING_OR_CLASS_SCENARIO');
- if(stability&&stability.probability_spread_pp>12)problems.push('WIDE_GOING_CLASS_PROBABILITY_SPREAD');
+ if(stability&&stability.probability_spread_pp>12)warnings.push('WIDE_GOING_CLASS_PROBABILITY_SPREAD');
  const straight=row.meeting==='FLEMINGTON'&&race.distance_m<=1200;
  if(straight&&row.features.course<=0)problems.push('STRAIGHT_COURSE_TRANSFER_NEEDS_REVIEW');
  const settled=field.filter(x=>Number.isFinite(x.settle_800)),likelyLeaders=settled.filter(x=>x.settle_800<=2);
@@ -78,7 +78,7 @@ function riskScreen(row,race,field,stability=null){
   likelyLeaders.length>=3?'POSSIBLE_EARLY_SPEED_PRESSURE_NEEDS_REPLAY':
   'PACE_NOT_ESTABLISHED_FROM_SETTLING_ALONE';
  return {runner_id:row.id,horse:row.horse,race_id:row.race_id,model_rank:row.rank,
-  model_pct:row.p,model_gap:race.gap,quality_issues:problems,pace_context:paceNote,
+  model_pct:row.p,model_gap:race.gap,quality_issues:problems,sensitivity_warnings:warnings,pace_context:paceNote,
   scenario_stability:stability,
   pace_verified:false,sectionals_verified:false,
   screen_status:problems.length?'EVIDENCE_REVIEW_REQUIRED':'MODEL_LEADER_ELIGIBLE_FOR_REVIEW',
