@@ -105,6 +105,14 @@ test('comparison reports identical race coverage, not automatically published im
  assert.equal(result.historical_totals.candidate.races,71);
  assert.equal(result.groups[3].baseline.races+result.groups[4].baseline.races,7);
  assert.equal(result.groups[5].baseline.races+result.groups[6].baseline.races,20);
+ assert.equal(result.historical_model_only_top_tiers.baseline.top5.selected,15);
+ assert.equal(result.historical_model_only_top_tiers.candidate.top10.selected,30);
+ assert.equal(result.historical_model_only_top_tiers.candidate.top15.selected,45);
+ assert.equal(result.november_7_rosehill_ascot_only_model_tiers.baseline.top5.selected,5);
+ assert.equal(result.november_7_rosehill_ascot_only_model_tiers.candidate.top10.selected,10);
+ assert.equal(result.november_7_rosehill_ascot_only_model_tiers.candidate.top15.selected,15);
+ assert.equal(result.groups[3].model_only_tiers,null);
+ assert.equal(result.groups[4].model_only_tiers,null);
  for(const group of result.groups){
   assert.equal(group.candidate.races,group.baseline.races);
   assert(group.candidate.mean_multiclass_brier>0);
