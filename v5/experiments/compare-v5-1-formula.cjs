@@ -87,9 +87,9 @@ function run(){
    mean_winner_probability:avg(x,'winner_probability')});
   return {date:g.label,provenance:g.type,
    baseline:summarize(base),candidate:summarize(candidate),
-   leader_changes:candidate.filter((x,i)=>x.leader!==base[i].leader).map((x,i)=>({
+   leader_changes:candidate.flatMap((x,i)=>x.leader===base[i].leader?[]:[{
      race:x.raceId,original:base[i].leader,candidate:x.leader,winner:x.winner
-   })),baseline_races:base,candidate_races:candidate};
+   }]),baseline_races:base,candidate_races:candidate};
  });
  const head=output.slice(0,3),sum=(name,key)=>{
   const n=head.reduce((z,x)=>z+x[name].races,0);
