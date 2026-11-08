@@ -14,7 +14,8 @@
     "research:class": "node v5/experiments/compare-neutral-class.cjs",
     "card:build": "node scripts/build-feature-card.cjs",
     "card:import-official": "node scripts/import-official-form.cjs",
-    "test:v5-1": "node --test v5/experiments/v5-1-evidence-gate.qa.cjs v5/experiments/v5-1-course-prep.qa.cjs",
-    "research:v5-1": "node v5/experiments/v5-1-shadow-review.cjs"
+    "test:v5-1": "node --test v5/experiments/v5-1-evidence-gate.qa.cjs v5/experiments/v5-1-course-prep.qa.cjs v5/experiments/v5-1-formula.qa.cjs",
+    "research:v5-1": "node v5/experiments/v5-1-shadow-review.cjs",
+    "research:v5-1:formula": "node v5/experiments/compare-v5-1-formula.cjs"
   }
 }
