@@ -39,7 +39,16 @@ td .source{font-size:12px;color:var(--mint)}.win{color:var(--mint);font-weight:7
 <div class="card primary"><div class="label">Overall · All selections</div><div class="number mint" id="allCount">—</div><div class="meta" id="allRate">Checking results…</div><div class="rail"><span id="allBar"></span></div></div>
 <div class="card"><div class="label">Top 5 · each Saturday</div><div class="number" id="top5Count">—</div><div class="meta" id="top5Rate">Checking results…</div><div class="rail"><span id="top5Bar"></span></div></div>
 <div class="card"><div class="label">Top 10 · each Saturday</div><div class="number" id="top10Count">—</div><div class="meta" id="top10Rate">Checking results…</div><div class="rail"><span id="top10Bar"></span></div></div>
-<div class="card"><div class="label">Top 15 · each Saturday</div><div class="number" id="top15Count">—</div><div class="meta" id="top15Rate">Checking results…</div><div class="rail"><span id="top15Bar"></span></div></div>
+<div class="card"><div class="label">Top 15 · eligible Saturdays</div><div class="number" id="top15Count">—</div><div class="meta" id="top15Rate">Checking results…</div><div class="rail"><span id="top15Bar"></span></div></div>
+</section>
+<section class="panel" aria-label="Post-race performance diagnostics">
+<h2>What worked, what failed · Post-race audit</h2>
+<p class="muted">Archived pre-race signals versus verified outcomes. These are diagnostic associations, not proof that an individual V5 coefficient caused a result. No post-race knowledge changes the saved selections or model.</p>
+<div id="factorSummary" class="statstrip"></div>
+<div id="factorLessons"></div>
+<details><summary style="cursor:pointer;color:var(--mint);font-weight:700;margin:15px 0">Open the 10-horse audit for 7 November</summary>
+<div class="tablewrap"><table><thead><tr><th>Rank / runner</th><th>Finish</th><th>Pre-race signal</th><th>Post-race interpretation</th></tr></thead><tbody id="factorCases"></tbody></table></div></details>
+<p class="hint">Official race results are matched to the saved Top 10 from before racing. Top 15 for 7 November cannot be scored without the missing pre-race ranks 11–15.</p>
 </section>
 <section class="panel" aria-label="Thursday 5 November complete outcome audit">
 <h2>Thursday 5 November 2026 · Separate race-day results</h2>
@@ -63,18 +72,20 @@ td .source{font-size:12px;color:var(--mint)}.win{color:var(--mint);font-weight:7
 </div>
 <div id="currentStats" style="color:#76e7b3;font-weight:700;margin:16px 0 5px">Loading…</div>
 <canvas id="graph" class="linechart" role="img" aria-label="Cumulative wins for selected result rows"></canvas>
-<div class="tablewrap"><table><thead><tr><th>Rank</th><th>Saturday</th><th>Meeting · Race</th><th>Original selection / source</th><th class="num">Model %</th><th class="num">Separation</th><th class="num">Finish</th></tr></thead><tbody id="resultsRows"></tbody></table></div>
+<div class="tablewrap"><table><thead><tr><th>Rank</th><th>Saturday</th><th>Meeting · Race</th><th>Original selection / source</th><th class="num">Saved estimate</th><th class="num">Separation</th><th class="num">Finish</th></tr></thead><tbody id="resultsRows"></tbody></table></div>
 <p id="recordStatus"></p>
 </section>
 <section class="panel"><h2>How this cumulative record is calculated</h2>
 <p class="hint" id="recordMethod">Earlier dates may use a different selection method; sources and rankings are preserved.</p>
-<p class="hint">Top 5, Top 10 and Top 15 use each Saturday's recorded ranking and overlap; their counts must not be added together. Scratched runners never count as wins or losses. The older October 17/24 rankings were reconstructed from saved model forecasts, while October 31 uses the published original reviewed shortlist. This single combined outcome ledger is <strong>not</strong> a uniformly pre-race-certified, out-of-sample model accuracy statistic.</p>
+<p class="hint">Top 5, Top 10 and Top 15 are nested cohorts; their counts must not be added together. On 7 November the saved research ranking covered only ten runners, so it is included in Top 5 and Top 10 but excluded from Top 15. Scratched runners never count as wins or losses. The older October 17/24 rankings were reconstructed from saved model forecasts, while October 31 uses the published original reviewed shortlist. This single combined outcome ledger is <strong>not</strong> a uniformly pre-race-certified, out-of-sample model accuracy statistic.</p>
 <p class="hint">Underlying source archives remain available for traceability; the live results page uses one file: <code>results-record.json</code>.</p>
 </section><p id="error" role="alert"></p>
 </main><script>'use strict';
 const $=id=>document.getElementById(id);
 let record=null;
 const defs=[['all','All selections'],['top5','Top 5 per date'],['top10','Top 10 per date'],['top15','Top 15 per date']];
+const cohort=(d,r,key)=>key==='all'||(r.rank<=Number(key.slice(3))&&d.cohort_eligibility?.[r.date]?.[key]!==false);
+
 const isFinish=r=>r.status==='FINISHED_VERIFIED'&&!r.scratched&&Number.isInteger(r.finish_position)&&r.finish_position>0;
 const summarize=a=>{
  const finished=a.filter(isFinish),wins=finished.filter(r=>r.finish_position===1).length;
@@ -82,21 +93,21 @@ const summarize=a=>{
   topThree:finished.filter(r=>r.finish_position<=3).length,rate:finished.length?100*wins/finished.length:null};
 };
 function check(d){
- if(!d||d.schema!=='racing-lab-unified-results/v1'||!Array.isArray(d.records)||d.records.length!==64)
+ if(!d||d.schema!=='racing-lab-unified-results/v1'||!Array.isArray(d.records)||d.records.length<74)
   throw Error('Unified historical results file is invalid or unavailable.');
  const seen=new Set(),dateRanks=new Set();
  for(const r of d.records){
   const id=[r.date,r.meeting,r.race].join('|'),rank=[r.date,r.rank].join('|');
   if(!/^\d{4}-\d{2}-\d{2}$/.test(r.date)||!r.horse||!Number.isInteger(r.rank)||r.rank<1||
      !Number.isInteger(r.race)||r.race<1||seen.has(id)||dateRanks.has(rank)||
-     !['HISTORICAL_MODEL_RECONSTRUCTION','PUBLISHED_REVIEWED_SHORTLIST'].includes(r.selection_method)||
+     !['HISTORICAL_MODEL_RECONSTRUCTION','PUBLISHED_REVIEWED_SHORTLIST','PRE_RACE_REVIEWED_ANALYST_TOP10'].includes(r.selection_method)||
      !/^https:\/\//.test(r.source_url)||!Number.isFinite(r.model_pct)||
      (!r.scratched&&!isFinish(r))||(r.scratched&&r.finish_position!==null))
    throw Error('Invalid individual finishing record for '+(r.horse||id));
   seen.add(id);dateRanks.add(rank);
  }
  for(const [key,limit] of [['all',null],['top5',5],['top10',10],['top15',15]]){
-  const rows=limit===null?d.records:d.records.filter(r=>r.rank<=limit),actual=summarize(rows);
+  const rows=limit===null?d.records:d.records.filter(r=>cohort(d,r,key)),actual=summarize(rows);
   const saved=d.metrics[key];
   if(!saved||saved.finished!==actual.completed||saved.wins!==actual.wins||
     saved.scratched!==actual.scratched||saved.entries!==actual.entries)
@@ -113,14 +124,14 @@ function place(r){
  return [n+suffix,n===1?'win':n<=3?'placed':'loss'];
 }
 function card(k){
- const subset=k==='all'?record.records:record.records.filter(r=>r.rank<=Number(k.slice(3)));
+ const subset=record.records.filter(r=>cohort(record,r,k));
  return summarize(subset);
 }
 function fillCards(){
  for(const [key] of defs){
   const m=card(key);
   $(key+'Count').textContent=m.wins+'/'+m.completed;
-  $(key+'Rate').textContent=pct(m.rate)+' win rate · '+m.topThree+' top-three finishes';
+  $(key+'Rate').textContent=pct(m.rate)+' win rate · '+m.topThree+' top-three finishes'+(key==='top15'?' · 7 Nov not eligible':'');
   $(key+'Bar').style.width=(m.rate===null?0:m.rate)+'%';
  }
  const total=card('all');
@@ -130,9 +141,9 @@ function fillCards(){
  $('dateSummary').textContent=days.map(x=>prettyDate(x.date)+': '+x.wins+'/'+x.finished).join('  ·  ');
 }
 function selectRows(){
- const n=$('tierFilter').value==='all'?Infinity:Number($('tierFilter').value);
+ const group=$('tierFilter').value==='all'?'all':'top'+$('tierFilter').value;
  const d=$('dateFilter').value,m=$('meetingFilter').value,status=$('resultFilter').value;
- return record.records.filter(r=>r.rank<=n&&(d==='all'||r.date===d)&&
+ return record.records.filter(r=>cohort(record,r,group)&&(d==='all'||r.date===d)&&
    (m==='all'||r.meeting===m)&&(status==='all'||status==='win'&&isFinish(r)&&r.finish_position===1||
    status==='nonwin'&&isFinish(r)&&r.finish_position!==1||status==='scratch'&&r.scratched));
 }
@@ -176,7 +187,7 @@ function render(){
     const a=document.createElement('a');a.href=r.source_url;a.target='_blank';a.rel='noopener';a.textContent=String(item);
     td.append(a);
     const detail=document.createElement('span');detail.className='method';
-    detail.textContent=r.selection_method==='PUBLISHED_REVIEWED_SHORTLIST'?'Published reviewed V5 shortlist':'Historical model reconstruction';
+    detail.textContent=r.selection_method==='PUBLISHED_REVIEWED_SHORTLIST'?'Published reviewed V5 shortlist':r.selection_method==='PRE_RACE_REVIEWED_ANALYST_TOP10'?'Pre-race analyst Top 10 · uncalibrated (not V5 model)':'Historical model reconstruction';
     td.append(detail);
    }else td.textContent=String(item);
    if(i===6)td.classList.add(flag[1]);
@@ -185,14 +196,38 @@ function render(){
   body.append(tr);
  }
  $('currentStats').textContent=m.wins+'/'+m.completed+' wins · '+pct(m.rate)+' · '+m.scratched+' scratched · '+m.topThree+' top-three finishes';
- $('recordStatus').textContent='Showing '+rows.length+' rows across '+new Set(rows.map(r=>r.date)).size+' Saturday(s), in the single results ledger.';
+ $('recordStatus').textContent=($('tierFilter').value==='15'&&$('dateFilter').value==='2026-11-07')?'7 November Top 15 unavailable: ranks 11–15 were not saved before racing. No post-race candidates are added.':'Showing '+rows.length+' rows across '+new Set(rows.map(r=>r.date)).size+' Saturday(s), in the single results ledger.';
  plot(rows);
+}
+function factorAudit(){
+ const a=record.postrace_analysis;if(!a)return;
+ const summary=$('factorSummary');summary.replaceChildren();
+ const facts=['31 Oct saved Top 15: '+a.oct31.wins+'/'+a.oct31.n+' won',
+ '7 Nov saved Top 10: '+a.nov7.wins+'/'+a.nov7.n+' won',
+ '31 Oct estimated wins: '+a.oct31.expected_wins_uncalibrated,
+ '7 Nov analyst expected wins: '+a.nov7.expected_wins_from_analyst_shares];
+ for(const value of facts){const span=document.createElement('span');span.textContent=value;summary.append(span);}
+ const lessons=$('factorLessons');lessons.replaceChildren();
+ for(const item of a.lessons){
+  const details=document.createElement('details');details.style.margin='9px 0';
+  const heading=document.createElement('summary');heading.style.cursor='pointer';heading.style.fontWeight='720';heading.textContent=item.signal+' — '+item.result;
+  const para=document.createElement('p');para.className='muted';para.textContent='Prospective test: '+item.action;
+  details.append(heading,para);lessons.append(details);
+ }
+ const body=$('factorCases');body.replaceChildren();
+ for(const c of a.nov7.cases){
+  const tr=document.createElement('tr');
+  for(const value of ['#'+c.rank+' '+c.horse,c.finish_position===1?'1st · WON':c.finish_position===2?'2nd':'Finished '+c.finish_position+'th',c.primary_factor+' — '+c.known_before,c.interpretation+' | Note: '+c.limitation]){
+   const td=document.createElement('td');td.textContent=value;td.style.whiteSpace='normal';td.style.minWidth='145px';tr.append(td);
+  }
+  tr.children[1].className=c.finish_position===1?'win':c.finish_position<=3?'placed':'loss';body.append(tr);
+ }
 }
 async function load(){
  try{
   const resp=await fetch('/results-record.json',{cache:'no-store'});
   if(!resp.ok)throw Error('HTTP '+resp.status);
-  record=check(await resp.json());populate();fillCards();render();
+  record=check(await resp.json());populate();fillCards();render();factorAudit();
   ['tierFilter','dateFilter','meetingFilter','resultFilter'].forEach(id=>$(id).addEventListener('change',render));
   window.addEventListener('resize',render);
   $('recordMethod').textContent=record.reporting_note;
