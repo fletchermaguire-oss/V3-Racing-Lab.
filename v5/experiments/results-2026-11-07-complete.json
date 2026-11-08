@@ -1,0 +1,154 @@
+{
+  "schema": "v5-1-postrace-outcome-source/v1",
+  "race_date": "2026-11-07",
+  "recorded_date": "2026-11-09",
+  "use": "EVALUATION_ONLY_NEVER_FORECAST_FEATURES",
+  "provenance": {
+    "ROSEHILL": {
+      "url": "https://racehub.com.au/raceday-wrap/rosehill-2026-11-07",
+      "kind": "PUBLIC_FINAL_RESULTS"
+    },
+    "ASCOT": {
+      "url": "https://www.tabtouch.com.au/racing/2026-11-07/pr",
+      "kind": "PUBLIC_FINAL_DIVIDENDS_RESULTS"
+    }
+  },
+  "meetings": [
+    {
+      "meeting": "ROSEHILL",
+      "races": [
+        {
+          "race": 1,
+          "winner": "BRAVE XENA",
+          "tab": 4,
+          "source_key": "ROSEHILL"
+        },
+        {
+          "race": 2,
+          "winner": "COMMON GOAL",
+          "tab": 9,
+          "source_key": "ROSEHILL"
+        },
+        {
+          "race": 3,
+          "winner": "SAVVY SPY (NZ)",
+          "tab": 3,
+          "source_key": "ROSEHILL"
+        },
+        {
+          "race": 4,
+          "winner": "SHE MOVES TOO",
+          "tab": 8,
+          "source_key": "ROSEHILL"
+        },
+        {
+          "race": 5,
+          "winner": "PROBABILITY THEORY",
+          "tab": 5,
+          "source_key": "ROSEHILL"
+        },
+        {
+          "race": 6,
+          "winner": "ACT UP",
+          "tab": 1,
+          "source_key": "ROSEHILL"
+        },
+        {
+          "race": 7,
+          "winner": "LAZZURA",
+          "tab": 1,
+          "source_key": "ROSEHILL"
+        },
+        {
+          "race": 8,
+          "winner": "EVAPORATE (NZ)",
+          "tab": 3,
+          "source_key": "ROSEHILL"
+        },
+        {
+          "race": 9,
+          "winner": "AGATHA",
+          "tab": 9,
+          "source_key": "ROSEHILL"
+        },
+        {
+          "race": 10,
+          "winner": "HORSESHOE HILL",
+          "tab": 9,
+          "source_key": "ROSEHILL"
+        }
+      ]
+    },
+    {
+      "meeting": "ASCOT",
+      "races": [
+        {
+          "race": 1,
+          "winner": "SNIPPEX",
+          "tab": 4,
+          "source_key": "ASCOT"
+        },
+        {
+          "race": 2,
+          "winner": "I LOVE YA MONEY",
+          "tab": 2,
+          "source_key": "ASCOT"
+        },
+        {
+          "race": 3,
+          "winner": "JAVELIN STRIKE",
+          "tab": 3,
+          "source_key": "ASCOT"
+        },
+        {
+          "race": 4,
+          "winner": "PRINCE OF DALA",
+          "tab": 2,
+          "source_key": "ASCOT"
+        },
+        {
+          "race": 5,
+          "winner": "RIPPER FAROOQ",
+          "tab": 2,
+          "source_key": "ASCOT"
+        },
+        {
+          "race": 6,
+          "winner": "BEATTY",
+          "tab": 1,
+          "source_key": "ASCOT"
+        },
+        {
+          "race": 7,
+          "winner": "OURGIRLCANRUN",
+          "tab": 6,
+          "source_key": "ASCOT"
+        },
+        {
+          "race": 8,
+          "winner": "ABERDEEN FLYER",
+          "tab": 7,
+          "source_key": "ASCOT"
+        },
+        {
+          "race": 9,
+          "winner": "KING OF LIGHT",
+          "tab": 6,
+          "source_key": "ASCOT"
+        },
+        {
+          "race": 10,
+          "winner": "SEPTEMBER BORN",
+          "tab": 9,
+          "source_key": "ASCOT"
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Outcome source assembled after racing, crosschecked against 7 Nov declared active runner identities.",
+    "Outcomes must not enter scoring modules or feature extraction.",
+    "All 20 results are evaluated, not just our selected analyst shortlist.",
+    "Original 5 Nov model dossiers with 7 Nov morning declarations do not prove jump-time freeze."
+  ]
+}
