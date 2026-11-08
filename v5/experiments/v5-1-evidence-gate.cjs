@@ -70,15 +70,29 @@ function riskScreen(row,race,field,stability=null){
  if(stability&&stability.leader_count!==4)problems.push('LEADER_CHANGES_WITH_GOING_OR_CLASS_SCENARIO');
  if(stability&&stability.probability_spread_pp>12)warnings.push('WIDE_GOING_CLASS_PROBABILITY_SPREAD');
  const straight=row.meeting==='FLEMINGTON'&&race.distance_m<=1200;
- if(straight&&row.features.course<=0)problems.push('STRAIGHT_COURSE_TRANSFER_NEEDS_REVIEW');
- const settled=field.filter(x=>Number.isFinite(x.settle_800)),likelyLeaders=settled.filter(x=>x.settle_800<=2);
- const paceNote=settled.length<Math.ceil(field.length/2)?
-  'PACE_EVIDENCE_INSUFFICIENT':
-  likelyLeaders.length===1?'POSSIBLE_UNCONTESTED_EARLY_SPEED_NEEDS_REPLAY':
-  likelyLeaders.length>=3?'POSSIBLE_EARLY_SPEED_PRESSURE_NEEDS_REPLAY':
+ // A course-history win-rate feature is NOT evidence of straight-track experience.
+ // Flemington straight confirmation requires independent dated course evidence.
+ if(straight)warnings.push('STRAIGHT_CONFIGURATION_EVIDENCE_REQUIRES_EXTERNAL_VERIFICATION');
+ const settled=field.filter(x=>Number.isFinite(x.settle_fraction)&&x.settle_fraction>=0&&x.settle_fraction<=1);
+ const possibleEarly=settled.filter(x=>x.settle_fraction<=0.34);
+ const paceCoverage=settled.length/field.length;
+ const paceNote=paceCoverage<0.6?'PACE_EVIDENCE_INSUFFICIENT':
+  possibleEarly.length>=4?'MULTIPLE_POTENTIAL_EARLY_LEADERS':
+  possibleEarly.length>=2?'POTENTIAL_TEMPO_PRESSURE':
   'PACE_NOT_ESTABLISHED_FROM_SETTLING_ALONE';
+ // Normalized relative settling tendency is not a verified race-day pace map.
+ if(paceNote==='MULTIPLE_POTENTIAL_EARLY_LEADERS')
+  warnings.push('POSSIBLE_PACE_CONTEST_FROM_HISTORICAL_SETTLING');
+ if(paceNote==='PACE_EVIDENCE_INSUFFICIENT')
+  warnings.push('PACE_DATA_INCOMPLETE');
  return {runner_id:row.id,horse:row.horse,race_id:row.race_id,model_rank:row.rank,
   model_pct:row.p,model_gap:race.gap,quality_issues:problems,sensitivity_warnings:warnings,pace_context:paceNote,
+  pace_diagnostics:{
+   known_historical_settling: settled.length,field_size:field.length,
+   historical_coverage:Number(paceCoverage.toFixed(2)),
+   potential_early_leaders:possibleEarly.length,
+   normalized_cutoff:0.34,not_verified_race_day_map:true
+  },
   scenario_stability:stability,
   pace_verified:false,sectionals_verified:false,
   screen_status:problems.length?'EVIDENCE_REVIEW_REQUIRED':'MODEL_LEADER_ELIGIBLE_FOR_REVIEW',
