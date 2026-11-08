@@ -1,0 +1,98 @@
+{
+  "schema": "v5-1-pre-race-configuration-evidence/v1",
+  "race_date": "2026-11-07",
+  "basis": "Source statements available before scheduled jump; manually encoded for retrospective experiment, NOT an immutable independently attested pre-race release.",
+  "screen_created": "2026-11-09",
+  "sources": [
+    {
+      "key": "archived_picks",
+      "kind": "PRE_RACE_ARCHIVE",
+      "url": "https://github.com/fletchermaguire-oss/V3-Racing-Lab./blob/main/v5/cards/2026-11-07/race-selections.json",
+      "observed_at": "2026-11-07T01:39:39.484Z"
+    },
+    {
+      "key": "vrc_preview",
+      "kind": "DATED_PRE_RACE_REPORT",
+      "url": "https://www.vrc.com.au/latest-news/vrc-champions-sprint-preview/",
+      "published_date": "2026-11-06"
+    },
+    {
+      "key": "vrc_trainer",
+      "kind": "DATED_PRE_RACE_REPORT",
+      "url": "https://www.vrc.com.au/latest-news/tempted-to-see-her-shine-again/",
+      "published_date": "2026-11-06"
+    },
+    {
+      "key": "racing_preview",
+      "kind": "DATED_PRE_RACE_REPORT",
+      "url": "https://www.racing.com/news/2026/11/06/news-preview-judgement-champions-sprint-071126",
+      "published_date": "2026-11-06"
+    },
+    {
+      "key": "ladbrokes_preview",
+      "kind": "DATED_PRE_RACE_REPORT",
+      "url": "https://www.ladbrokes.com.au/blog/2026/11/06/champions-sprint-predictions/",
+      "published_date": "2026-11-06"
+    }
+  ],
+  "entries": [
+    {
+      "race_id": "2026-11-07_FLEMINGTON_R06",
+      "runner": {
+        "saddlecloth": "6",
+        "horse": "TEMPTED"
+      },
+      "course_configuration": "STRAIGHT",
+      "documented_configuration_starts": 0,
+      "documented_configuration_experience": "CONFIRMED_NO_RACE_START",
+      "sources": [
+        "archived_picks",
+        "vrc_preview",
+        "racing_preview"
+      ],
+      "previous_major_target": {
+        "date": "2026-10-17",
+        "level": "G1",
+        "name": "THE EVEREST",
+        "outcome_known_before": "WON",
+        "sources": [
+          "vrc_preview",
+          "vrc_trainer"
+        ]
+      },
+      "trainer_latest_comment": {
+        "kind": "POSITIVE_PRE_RACE",
+        "note": "Reported travelled well, worked sharp, no observed reason peak would not be maintained",
+        "sources": [
+          "vrc_trainer"
+        ]
+      },
+      "credible_rivals": [
+        {
+          "horse": "JOLIESTAR",
+          "type": "COURSE_CONFIGURATION_PROVEN",
+          "documented_same_configuration_starts": 2,
+          "documented_same_configuration_wins": 1,
+          "sources": [
+            "racing_preview",
+            "vrc_preview"
+          ]
+        },
+        {
+          "horse": "POINT BARROW",
+          "type": "RECENT_GRADED_PROGRESS",
+          "documented_consecutive_graded_wins": 2,
+          "sources": [
+            "ladbrokes_preview"
+          ]
+        }
+      ],
+      "pre_race_limitations": [
+        "No validated lane preference forecast",
+        "No independently sourced runner fatigue/medical diagnosis",
+        "A gallop on the Flemington course is not a straight-race start"
+      ],
+      "post_race_evidence_used": false
+    }
+  ]
+}
