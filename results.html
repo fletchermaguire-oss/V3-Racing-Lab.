@@ -48,7 +48,9 @@ td .source{font-size:12px;color:var(--mint)}.win{color:var(--mint);font-weight:7
 <div id="factorLessons"></div>
 <details><summary style="cursor:pointer;color:var(--mint);font-weight:700;margin:15px 0">Open the 10-horse audit for 7 November</summary>
 <div class="tablewrap"><table><thead><tr><th>Rank / runner</th><th>Finish</th><th>Pre-race signal</th><th>Post-race interpretation</th></tr></thead><tbody id="factorCases"></tbody></table></div></details>
-<p class="hint">Official race results are matched to the saved Top 10 from before racing. Top 15 for 7 November cannot be scored without the missing pre-race ranks 11–15.</p>
+<details><summary style="cursor:pointer;color:var(--mint);font-weight:700;margin:15px 0">Open all 15 original 31 October selections, results and missed risks</summary>
+<div class="tablewrap"><table><thead><tr><th>Rank / runner</th><th>Finish</th><th>Model % / gap</th><th>Original strength and risk</th><th>Post-race interpretation</th></tr></thead><tbody id="factorOctCases"></tbody></table></div></details>
+<p class="hint">Official results are matched to the saved Top 10 from before 7 November racing and the preserved Top 15 from 31 October. The 7 November Top 15 cannot be scored without pre-race ranks 11–15.</p>
 </section>
 <section class="panel" aria-label="Thursday 5 November complete outcome audit">
 <h2>Thursday 5 November 2026 · Separate race-day results</h2>
@@ -221,6 +223,15 @@ function factorAudit(){
    const td=document.createElement('td');td.textContent=value;td.style.whiteSpace='normal';td.style.minWidth='145px';tr.append(td);
   }
   tr.children[1].className=c.finish_position===1?'win':c.finish_position<=3?'placed':'loss';body.append(tr);
+ }
+ const oct=$('factorOctCases');oct.replaceChildren();
+ for(const c of a.oct31.cases||[]){
+  const tr=document.createElement('tr');
+  const cells=['#'+c.rank+' '+c.horse,c.finish_position===1?'1st · WON':c.finish_position===2?'2nd':c.finish_position===3?'3rd':'Finished '+c.finish_position+'th',
+    c.saved_model_pct.toFixed(2)+'% / '+(c.saved_model_gap_pp>=0?'+':'')+c.saved_model_gap_pp.toFixed(2)+'pp',
+    'Strength: '+c.pre_race_strength+' | Known risk: '+c.pre_race_risk,c.retrospective_interpretation];
+  for(const value of cells){const td=document.createElement('td');td.textContent=value;td.style.whiteSpace='normal';td.style.minWidth='130px';tr.append(td);}
+  tr.children[1].className=c.finish_position===1?'win':c.finish_position<=3?'placed':'loss';oct.append(tr);
  }
 }
 async function load(){
