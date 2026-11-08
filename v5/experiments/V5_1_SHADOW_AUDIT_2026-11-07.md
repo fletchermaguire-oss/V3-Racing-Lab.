@@ -81,3 +81,81 @@ In this subset, the quality screen excludes one losing favourite, retains four w
 - Find pre-race **measurable** tactical evidence for the two unresolved misses: reliable pace maps, expected speed pressure, gear/trainer intention, interference-aware sectionals and class-adjusted recent form.
 - Construct a *separate* candidate numerical model only after sourcing these inputs reliably; do not modify the live baseline simply because a winner differed.
 - Freeze a full Top 5/10/15 board and per-race ranked list before a new Saturday to measure out-of-sample results, keeping the model/analyst comparison and scratchings checkpoints separately versioned.
+
+
+## Numerical V5.1 formula correction: sparse evidence and relative class
+
+**Candidate file:** `v5/experiments/model-v5-1.cjs`; base `v5/model.js` stays unchanged. The candidate preserves existing career, surface, course, distance, recency, class, weight, barrier and probability-normalization machinery. It introduces one new **score-level** contribution after existing race-relative class has been calculated:
+
+```text
+missingDatedShare = max(0, 5 - acceptedRecentStarts) / 5
+classShortfall = class edge is known
+  ? min(1, max(0, -classEdge) / max(0.5, oppositionClassAnchor))
+  : 0
+discount = 0.50 * missingDatedShare + 0.12 * classShortfall
+recent_evidence_adjustment = recentFormScore > 0 ? -recentFormScore * discount : 0
+```
+
+The adjustment is applied **to every horse**, with fixed parameters and no horse-name exceptions, bookmaker inputs, market-derived scores, or actual results. Whole-field probabilities are recalculated using the unchanged 0.78 temperature and 15% uniform component; every field totals 100%. The new parameters are engineering hypotheses chosen after review of 7 November, not calibrated effect sizes.
+
+**Illustration from 7 November after morning scratchings:** Cashout moves from 26.72% to 23.09% (still rank #1), Probability Theory from 12.05% to 12.75% (still #4). Lazzura 49.85% → 50.13%, Beatty 42.74% → 46.06%, King Of Light 32.89% → 33.03%. The candidate has not fixed the ranked misses against Ourgirlcanrun or Horseshoe Hill. Tempted has an evidence-only warning because a matching 7 Nov Flemington machine-readable model was not archived.
+
+### Whole-field historical comparison (not independently forward-frozen)
+
+| Date | Races used | V5 top-1 winners | V5.1 top-1 winners | V5 multiclass Brier ↓ | V5.1 Brier ↓ | V5 log loss ↓ | V5.1 log loss ↓ |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 17 Oct | 30 | 13 | 13 | 0.807814 | 0.807135 | 1.989690 | 1.983492 |
+| 24 Oct | 19 | 4 | 5 | 0.897058 | 0.891223 | 2.275402 | 2.254571 |
+| 31 Oct | 22 | 7 | 8 | 0.846084 | 0.841351 | 2.146979 | 2.131084 |
+| **Combined** | **71** | **24** | **26** | **0.843555** | **0.840240** | **2.114886** | **2.101767** |
+
+For 31 Oct, seven races with known model-field/official-result mismatches were excluded identically for both models. The 17/24 Oct snapshots are reconstructed, not reliably independently frozen before racing.
+
+### 7 November complete Rosehill + Ascot day, not merely 7 shortlisted races
+
+All 20 race winners were obtained from the [Rosehill results](https://racehub.com.au/raceday-wrap/rosehill-2026-11-07) and [Ascot results](https://www.tabtouch.com.au/racing/2026-11-07/pr), stored only in `v5/experiments/results-2026-11-07-complete.json`. This outcome file is **evaluation-only**; scoring modules never read it. Winner names were checked against the corresponding tab number in the saved official declared field.
+
+| Meeting | Races | V5 top-1 wins | V5.1 top-1 wins | V5 Brier ↓ | V5.1 Brier ↓ | V5 log loss ↓ | V5.1 log loss ↓ |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Rosehill | 10 | 2 | 2 | 0.852331 | 0.841086 | 2.227604 | 2.194499 |
+| Ascot | 10 | 4 | 4 | 0.756407 | 0.748837 | 1.781537 | 1.769794 |
+| **Combined** | **20** | **6** | **6** | **0.804369** | **0.794961** | **2.004571** | **1.982146** |
+
+Thus **the candidate improves the historical probability scores but not race-leader win count on 7 November**. Model inputs were dated 5 Nov and starters reconciled to the official 7 Nov morning declarations: not a certified pre-jump forecast set, and not a prospective success claim.
+
+### Model-only Top 5/10/15 (different from the human-reviewed history record)
+
+Across 17, 24 and 31 October, rank one candidate **per race** by the model's baseline winning probability in each date's *eligible* matched-field subset:
+
+| Tier | V5 winners/finished | V5.1 winners/finished |
+|---|---:|---:|
+| Top 5 | 5/15 | 6/15 |
+| Top 10 | 10/30 | 12/30 |
+| Top 15 | 16/45 | 18/45 |
+
+On the 7 Nov **Rosehill + Ascot-only** subset (20 races, no Flemington model), both versions return the same model-tier results: Top 5 **4/5**, Top 10 **5/10**, Top 15 **5/15**. Those are *not* the independently reviewed 7 Nov analyst Top 5 **4/5** / Top 10 **7/10** and do not establish a verified national 7 Nov Top 15.
+
+### One-time ablation (diagnostic, not a fitted parameter search)
+
+We evaluated the fixed component contributions, without changing weights after seeing the result:
+
+| Variant | Retrospective Top-1 / 71 | Multiclass Brier ↓ | Log loss ↓ |
+|---|---:|---:|---:|
+| Unchanged V5 | 24 | 0.843555 | 2.114886 |
+| Thin-form component only | 26 | 0.841192 | 2.105574 |
+| Relative-class component only | 25 | 0.842478 | 2.110673 |
+| Both as originally specified | 26 | 0.840240 | 2.101767 |
+
+Both contributions move metrics in the expected direction on this limited sample. **This is not an unbiased model-selection exercise**: all runs are historical, and the correction followed a known poor result. We must pre-register this unchanged candidate and compare against future Saturdays before promotion.
+
+### Reproduction and release boundary
+
+```bash
+npm run test:v5-1
+npm run research:v5-1:formula
+npm run research:v5-1
+```
+
+The experiment's targeted regression checks verify 100%-sum per field, runner identity and counts, deterministic row order, exclusion of market/outcome leakage, zero adjustment for complete positive-class form, venue/source matching and strict post-race result separation.
+
+**Release decision: NOT PROMOTED.** Neither `v5/model.js`, the live site, the human-reviewed selections nor their results ledger has been changed. The newer model must first survive prospective frozen Saturday racecards and adequate comparisons of Brier/log loss, top-one hit rate, Top 5/10/15 strike and coverage, and baseline-versus-candidate per-race overlap.
