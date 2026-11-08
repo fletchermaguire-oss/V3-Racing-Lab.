@@ -42,16 +42,17 @@ test('Cashout requires evidence review; winning first-ranked runners are not aut
  assert.equal(cash.screen_status,'EVIDENCE_REVIEW_REQUIRED');
  assert(cash.quality_issues.includes('THIN_PARSEABLE_RECENT_FORM'));
  assert(cash.quality_issues.includes('RECENT_FORM_DOMINATES_UNFAVOURABLE_CLASS_EVIDENCE'));
- for(const [x,race,horse] of [[r,3,'SAVVY SPY (NZ)'],[a,6,'BEATTY'],[a,9,'KING OF LIGHT']]){
+ for(const [x,race,horse] of [[r,3,'SAVVY SPY (NZ)'],[r,7,'LAZZURA'],
+  [a,6,'BEATTY'],[a,9,'KING OF LIGHT']]){
   assert.equal(get(x,race).horse,horse);
   assert.equal(get(x,race).screen_status,'MODEL_LEADER_ELIGIBLE_FOR_REVIEW');
  }
- // Lazzura still won and stays first, but the class sensitivity is real.
- const lazzura=get(r,7);
- assert.equal(lazzura.horse,'LAZZURA');
+ // A wide range is disclosed but not a hard rejection when the same horse leads all scenarios.
+ const lazzura=get(r,7),beatty=get(a,6);
  assert.equal(lazzura.model_pct,49.85);
  assert.equal(lazzura.scenario_stability.leader_count,4);
- assert(lazzura.quality_issues.includes('WIDE_GOING_CLASS_PROBABILITY_SPREAD'));
+ assert(lazzura.sensitivity_warnings.includes('WIDE_GOING_CLASS_PROBABILITY_SPREAD'));
+ assert(beatty.sensitivity_warnings.includes('WIDE_GOING_CLASS_PROBABILITY_SPREAD'));
 });
 test('review gates cannot retrospectively promote the winning but lower-ranked outsiders',()=>{
  const r=Q.evaluate(Rose,Official,'ROSEHILL'),a=Q.evaluate(Ascot,Official,'ASCOT');
