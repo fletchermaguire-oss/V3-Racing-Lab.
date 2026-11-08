@@ -45,11 +45,11 @@ function unifiedScore(a){
 test('one unified results file combines every historical and published pick without overwriting the archived source',()=>{
  const all=unified.records;
  assert.equal(unified.schema,'racing-lab-unified-results/v1');
- assert.equal(all.length,64);
- assert.deepEqual(unifiedScore(all),{entries:64,finished:62,wins:20,scratched:2});
- assert.equal(new Set(all.map(r=>r.date+'|'+r.meeting+'|'+r.race)).size,64);
- assert.deepEqual([...new Set(all.map(r=>r.date))],['2026-10-17','2026-10-24','2026-10-31']);
- const sourceDays=all.filter(r=>r.date!=='2026-10-31');
+ assert.equal(all.length,74);
+ assert.deepEqual(unifiedScore(all),{entries:74,finished:72,wins:27,scratched:2});
+ assert.equal(new Set(all.map(r=>r.date+'|'+r.meeting+'|'+r.race)).size,74);
+ assert.deepEqual([...new Set(all.map(r=>r.date))],['2026-10-17','2026-10-24','2026-10-31','2026-11-07']);
+ const sourceDays=all.filter(r=>['2026-10-17','2026-10-24'].includes(r.date));
  assert.equal(sourceDays.length,archive.records.length);
  for(const original of archive.records){
   const matched=sourceDays.find(r=>r.date===original.date&&r.meeting===original.meeting.toUpperCase()&&r.race===original.race);
@@ -70,18 +70,34 @@ test('one unified results file combines every historical and published pick with
  }
 });
 test('one cumulative strike-rate for all rows and top5/10/15 by each Saturday rank, with scratchings excluded',()=>{
- const ranks=[['all',Infinity,64,62,20,2],['top5',5,15,15,6,0],
-              ['top10',10,30,30,11,0],['top15',15,45,44,13,1]];
+ const ranks=[['all',Infinity,74,72,27,2],['top5',5,20,20,10,0],
+              ['top10',10,40,40,18,0],['top15',15,45,44,13,1]];
  ranks.forEach(([key,n,entries,finished,wins,scratched])=>{
-  const selected=unified.records.filter(r=>r.rank<=n),actual=unifiedScore(selected);
+  const selected=unified.records.filter(r=>r.rank<=n&&(key==='all'||unified.cohort_eligibility[r.date]?.[key]!==false)),actual=unifiedScore(selected);
   assert.deepEqual(actual,{entries,finished,wins,scratched});
   assert.equal(unified.metrics[key].wins,wins);
   assert.equal(unified.metrics[key].finished,finished);
   assert.equal(unified.metrics[key].win_rate_pct,+(100*wins/finished).toFixed(2));
  });
  assert.deepEqual(unified.metrics.by_date.map(x=>[x.date,x.finished,x.wins,x.scratched]),
- [['2026-10-17',28,7,2],['2026-10-24',19,9,0],['2026-10-31',15,4,0]]);
+ [['2026-10-17',28,7,2],['2026-10-24',19,9,0],['2026-10-31',15,4,0],['2026-11-07',10,7,0]]);
  assert.equal(archive.records.length,49);
+ assert.equal(unified.cohort_eligibility['2026-11-07'].top15,false);
+ const preRace=require('./cards/2026-11-07/independent-top10.json');
+ const positions=[1,1,5,1,1,1,1,2,6,1];
+ const nov=unified.records.filter(r=>r.date==='2026-11-07').sort((a,b)=>a.rank-b.rank);
+ assert.equal(nov.length,10);
+ nov.forEach((r,i)=>{
+  assert.equal(r.rank,preRace.entries[i].rank);
+  assert.equal(r.horse,preRace.entries[i].horse);
+  assert.equal(r.race,preRace.entries[i].race);
+  assert.equal(r.model_pct,preRace.entries[i].working_win_pct);
+  assert.equal(r.finish_position,positions[i]);
+  assert.equal(r.selection_method,'PRE_RACE_REVIEWED_ANALYST_TOP10');
+  assert.equal(r.model_separation_pp,null);
+ });
+ assert.equal(unified.postrace_analysis.nov7.not_model_output,true);
+ assert.equal(unified.postrace_analysis.outcomes_not_forecast_inputs,true);
  const strict=require('./prospective-record.json');
  assert.equal(strict.independent_freeze_verified,false);
  assert.equal(strict.official_results.length,0);
@@ -96,6 +112,8 @@ test('Results UI uses one data file and one graph, not split historical and pros
  assert.match(html,/id="top15Count"/);
  assert.match(html,/function render\(/);
  assert.match(html,/model_separation_pp/);
+ assert.match(html,/function factorAudit\(/);
+ assert.match(html,/cohort_eligibility/);
  assert.match(html,/selection_method/);
  assert.match(html,/reconstructed from saved model forecasts/);
  assert.doesNotMatch(html,/id="forward-record"/);
