@@ -272,7 +272,8 @@ function calculate(d,scenario,classWeight=CONFIG.weights.class,options={}){
    const relativeClassShortfall=edge===null||anchor===null?0:
      Math.min(1,Math.max(0,-edge)/Math.max(0.5,anchor));
    const recentEvidenceDiscount=0.50*missingDatedShare+0.12*relativeClassShortfall;
-   const recentEvidenceAdjustment=-Math.max(0,x.parts.recency)*recentEvidenceDiscount;
+   const recentEvidenceAdjustment=x.parts.recency>0&&recentEvidenceDiscount>0?
+     -x.parts.recency*recentEvidenceDiscount:0;
    x.parts.recent_evidence_adjustment=recentEvidenceAdjustment;
    x.raw+=recentEvidenceAdjustment;
    x.oppositionAnchor=anchor;x.oppositionEdge=edge;
