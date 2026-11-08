@@ -56,7 +56,7 @@ function reconcileSnapshot(research,official,meeting){
   removed:removed,publication_approved:false,
   starter_certification:'OFFICIAL_SNAPSHOT_ONLY_NOT_JUMP_TIME_CERTIFIED'}};
 }
-function riskScreen(row,race,field){
+function riskScreen(row,race,field,stability=null){
  const gap=Number(race.gap),issues=Array.isArray(row.input_issues)?row.input_issues:[];
  const problems=[];
  if(row.form_audit.accepted<4)problems.push('THIN_PARSEABLE_RECENT_FORM');
@@ -67,6 +67,8 @@ function riskScreen(row,race,field){
  if(Number.isFinite(gap)&&gap<4)problems.push('SMALL_MODEL_FIELD_GAP');
  if(race.chaos>89)problems.push('CROWDED_FIELD');
  if(row.days_since_last!==null&&row.days_since_last>70)problems.push('LAYOFF_RISK');
+ if(stability&&stability.leader_count!==4)problems.push('LEADER_CHANGES_WITH_GOING_OR_CLASS_SCENARIO');
+ if(stability&&stability.probability_spread_pp>12)problems.push('WIDE_GOING_CLASS_PROBABILITY_SPREAD');
  const straight=row.meeting==='FLEMINGTON'&&race.distance_m<=1200;
  if(straight&&row.features.course<=0)problems.push('STRAIGHT_COURSE_TRANSFER_NEEDS_REVIEW');
  const settled=field.filter(x=>Number.isFinite(x.settle_800)),likelyLeaders=settled.filter(x=>x.settle_800<=2);
@@ -77,6 +79,7 @@ function riskScreen(row,race,field){
   'PACE_NOT_ESTABLISHED_FROM_SETTLING_ALONE';
  return {runner_id:row.id,horse:row.horse,race_id:row.race_id,model_rank:row.rank,
   model_pct:row.p,model_gap:race.gap,quality_issues:problems,pace_context:paceNote,
+  scenario_stability:stability,
   pace_verified:false,sectionals_verified:false,
   screen_status:problems.length?'EVIDENCE_REVIEW_REQUIRED':'MODEL_LEADER_ELIGIBLE_FOR_REVIEW',
   calibrated:false,published:false};
@@ -85,11 +88,30 @@ function evaluate(research,official,meeting,going='Good 4'){
  const rec=reconcileSnapshot(research,official,meeting);
  const model=Model.calculate(rec.data,{default:going});
  assert(model.races.length===rec.data.races.length,'model race count mismatch');
+ const variantSpecs=[['good_base','Good 4',Model.CONFIG.weights.class],
+  ['soft_base','Soft 5',Model.CONFIG.weights.class],
+  ['good_conservative_class','Good 4',Model.CONFIG.conservativeClass],
+  ['soft_conservative_class','Soft 5',Model.CONFIG.conservativeClass]];
+ const variants=variantSpecs.map(([name,surface,weight])=>({
+  name:name,calculated:Model.calculate(rec.data,{default:surface},weight)
+ }));
  const items=model.races.map(r=>{
   const field=model.records.filter(x=>x.race_id===r.id).sort((a,b)=>a.rank-b.rank);
   const selected=field[0];
   assert(selected&&field.length===r.field,'model field mismatch '+r.id);
-  const row=riskScreen(selected,{...r,distance_m:rec.data.races.find(x=>x.id===r.id).distance_m},field);
+  const estimates=variants.map(v=>{
+   const contender=v.calculated.records.find(x=>x.id===selected.id);
+   const lead=v.calculated.records.find(x=>x.race_id===r.id&&x.rank===1);
+   assert(contender&&lead,'scenario loses active model runner '+r.id);
+   return {scenario:v.name,pct:contender.p,rank:contender.rank,leader:lead.horse};
+  });
+  const percentageValues=estimates.map(x=>x.pct);
+  const stability={leader_count:estimates.filter(x=>x.rank===1).length,
+   probability_floor:Math.min(...percentageValues),
+   probability_ceiling:Math.max(...percentageValues),
+   probability_spread_pp:Number((Math.max(...percentageValues)-Math.min(...percentageValues)).toFixed(2)),
+   scenarios:estimates};
+  const row=riskScreen(selected,{...r,distance_m:rec.data.races.find(x=>x.id===r.id).distance_m},field,stability);
   return {...row,meeting:meeting,race:r.race,model_runner_count:r.field};
  });
  return {schema:'v5-1-evidence-overlay/v1',date:research.date,meeting:meeting,going:going,
