@@ -16,6 +16,7 @@ const R7=require('../cards/2026-11-07/rosehill-research.json');
 const A7=require('../cards/2026-11-07/ascot-research.json');
 const O7=require('../cards/2026-11-07/official-final.json');
 const Q=require('./v5-1-evidence-gate.cjs');
+const Results7=require('./results-2026-11-07-complete.json');
 const canonical=s=>String(s||'').normalize('NFKD').toUpperCase()
  .replace(/\([^)]*\)/g,'').replace(/[^A-Z0-9]/g,'');
 const round=x=>Number(x.toFixed(6));
@@ -70,7 +71,30 @@ function groups(){
   return {label:'2026-11-07/'+meeting,type:'SEVEN_CHOSEN_REVIEWED_RACES_ONLY',
    data:rec.data,going:{default:'Good 4'},winners,exclude:new Set()};
  });
- return [...hist,october,...november];
+ assert.equal(Results7.schema,'v5-1-postrace-outcome-source/v1');
+ assert.equal(Results7.race_date,'2026-11-07');
+ assert.equal(Results7.use,'EVALUATION_ONLY_NEVER_FORECAST_FEATURES');
+ const complete=['ROSEHILL','ASCOT'].map(meeting=>{
+  const source=meeting==='ROSEHILL'?R7:A7;
+  const data=Q.reconcileSnapshot(source,O7,meeting).data;
+  const known=Results7.meetings.find(x=>x.meeting===meeting);
+  const declarations=O7.meetings.find(x=>x.meeting===meeting);
+  assert(known&&declarations&&known.races.length===10,'Incomplete 7 Nov outcome coverage');
+  const winnerRows=known.races.map(row=>{
+   const officialRace=declarations.races.find(x=>x.race===row.race);
+   const match=officialRace?.active_runners.find(x=>Number(x.number)===row.tab);
+   assert(match&&canonical(match.horse)===canonical(row.winner),'Result/official runner mismatch R'+row.race);
+   return [nameToId('2026-11-07',meeting,row.race),row.winner];
+  });
+  for(const [selectedMeeting,race,winner] of NOV7_VERIFIED_WINNERS.filter(x=>x[0]===meeting)){
+   const found=winnerRows.find(x=>x[0]===nameToId('2026-11-07',meeting,race));
+   assert(found&&canonical(found[1])===canonical(winner),'Selected-results cohort disagrees with full result');
+  }
+  return {label:'2026-11-07/'+meeting+'/FULL',
+   type:'ALL_TEN_RACES_UNFROZEN_MODELS_POSTRACE_OUTCOMES',data,going:{default:'Good 4'},
+   winners:winnerRows,exclude:new Set()};
+ });
+ return [...hist,october,...november,...complete];
 }
 function run(){
  const output=groups().map(g=>{
@@ -111,7 +135,8 @@ function run(){
    candidate:x.candidate,leader_changes:x.leader_changes})),
   notes:['17 and 24 October snapshots are retrospective reconstructions, not independently proven pre-jump data.',
    '31 October excludes seven saved-versus-actual field mismatches, leaving 22 eligible races.',
-   '7 November is ONLY seven reviewed pre-race-selected races, not the full 20 racing results or a model Top 10 record.',
+   '7 November has two separate comparisons: seven previously reviewed races and ALL 20 Rosehill/Ascot races. These are NOT an independently frozen 7 Nov model Top 10.',
+   'Full 7 Nov outcomes are sourced from race results after the events and matched against original 7 Nov official declared runner numbers.',
    'This candidate was developed after seeing 7 November results. Better historical metrics are NOT a forward-test improvement.',
    'No result is an input to either model; all results are used in this comparator only.']};
 }
