@@ -100,8 +100,15 @@ test('comparison reports identical race coverage, not automatically published im
  assert.equal(result.run_kind,'RETROSPECTIVE_DIAGNOSTIC_ONLY');
  assert.equal(result.formula_approved,false);
  assert.equal(result.prospective_frozen_forecasts,0);
- assert.equal(result.groups.length,5);
+ assert.equal(result.groups.length,7);
  assert.equal(result.historical_totals.baseline.races,71);
  assert.equal(result.historical_totals.candidate.races,71);
  assert.equal(result.groups[3].baseline.races+result.groups[4].baseline.races,7);
+ assert.equal(result.groups[5].baseline.races+result.groups[6].baseline.races,20);
+ for(const group of result.groups){
+  assert.equal(group.candidate.races,group.baseline.races);
+  assert(group.candidate.mean_multiclass_brier>0);
+  assert(group.candidate.mean_log_loss>0);
+ }
+
 });
