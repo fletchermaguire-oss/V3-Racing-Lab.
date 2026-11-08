@@ -96,6 +96,16 @@ test('one cumulative strike-rate for all rows and top5/10/15 by each Saturday ra
   assert.equal(r.selection_method,'PRE_RACE_REVIEWED_ANALYST_TOP10');
   assert.equal(r.model_separation_pp,null);
  });
+ assert.equal(unified.postrace_analysis.oct31.cases.length,15);
+ const archivedTop15=require('./shortlists/2026-10-30-independent-top15-review.json');
+ archivedTop15.entries.forEach((original,i)=>{
+  const c=unified.postrace_analysis.oct31.cases[i];
+  const r=unified.records.find(x=>x.date==='2026-10-31'&&x.rank===original.rank);
+  assert.equal(c.horse,original.horse);
+  assert.equal(c.pre_race_strength,original.reason);
+  assert.equal(c.pre_race_risk,original.risk);
+  assert.equal(c.finish_position,r.finish_position);
+ });
  assert.equal(unified.postrace_analysis.nov7.not_model_output,true);
  assert.equal(unified.postrace_analysis.outcomes_not_forecast_inputs,true);
  const strict=require('./prospective-record.json');
@@ -113,6 +123,7 @@ test('Results UI uses one data file and one graph, not split historical and pros
  assert.match(html,/function render\(/);
  assert.match(html,/model_separation_pp/);
  assert.match(html,/function factorAudit\(/);
+ assert.match(html,/id="factorOctCases"/);
  assert.match(html,/cohort_eligibility/);
  assert.match(html,/selection_method/);
  assert.match(html,/reconstructed from saved model forecasts/);
