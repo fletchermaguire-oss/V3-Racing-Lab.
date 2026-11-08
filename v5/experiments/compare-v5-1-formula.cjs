@@ -21,6 +21,13 @@ const canonical=s=>String(s||'').normalize('NFKD').toUpperCase()
  .replace(/\([^)]*\)/g,'').replace(/[^A-Z0-9]/g,'');
 const round=x=>Number(x.toFixed(6));
 const avg=(rows,k)=>round(rows.reduce((s,r)=>s+r[k],0)/rows.length);
+const tiers=rows=>{
+ const ordered=rows.slice().sort((a,b)=>b.leader_probability-a.leader_probability||a.raceId.localeCompare(b.raceId));
+ return Object.fromEntries([5,10,15].map(n=>{
+  const subset=ordered.slice(0,n),wins=subset.reduce((z,x)=>z+x.hit,0);
+  return ['top'+n,{selected:subset.length,wins,win_rate_pct:round(100*wins/subset.length)}];
+ }));
+};
 function scores(model,data,going,winners,exclude=new Set()){
  const out=model.calculate(data,going),rows=[];
  for(const [raceId,winner] of winners){
@@ -32,7 +39,7 @@ function scores(model,data,going,winners,exclude=new Set()){
   const p=w.p_exact/100,leader=field.find(x=>x.rank===1);
   assert(leader,'Missing model leader '+raceId);
   assert(Math.abs(field.reduce((s,x)=>s+x.p_exact,0)-100)<1e-9,'Not normalized '+raceId);
-  rows.push({raceId,winner:w.id,leader:leader.id,hit:Number(w.id===leader.id),
+  rows.push({raceId,winner:w.id,leader:leader.id,leader_probability:leader.p_exact,hit:Number(w.id===leader.id),
    brier:field.reduce((s,x)=>s+Math.pow(x.p_exact/100-Number(x.id===w.id),2),0),
    logloss:-Math.log(Math.max(1e-15,p)),winner_probability:p,field:field.map(x=>x.id).sort()});
  }
@@ -113,7 +120,10 @@ function run(){
    baseline:summarize(base),candidate:summarize(candidate),
    leader_changes:candidate.flatMap((x,i)=>x.leader===base[i].leader?[]:[{
      race:x.raceId,original:base[i].leader,candidate:x.leader,winner:x.winner
-   }]),baseline_races:base,candidate_races:candidate};
+   }]),baseline_races:base,candidate_races:candidate,
+   model_only_tiers:g.type==='SEVEN_CHOSEN_REVIEWED_RACES_ONLY'?null:
+    {baseline:tiers(base),candidate:tiers(candidate)}
+  };
  });
  const head=output.slice(0,3),sum=(name,key)=>{
   const n=head.reduce((z,x)=>z+x[name].races,0);
@@ -123,6 +133,21 @@ function run(){
  };
  const keys=['races','top1_wins','mean_multiclass_brier','mean_log_loss'];
  const totals={};
+ const historicalTierTotals={};
+ for(const k of ['baseline','candidate']){
+  historicalTierTotals[k]={};
+  for(const tier of ['top5','top10','top15']){
+   const saved=head.map(g=>g.model_only_tiers[k][tier]);
+   historicalTierTotals[k][tier]={selected:saved.reduce((s,r)=>s+r.selected,0),
+    wins:saved.reduce((s,r)=>s+r.wins,0)};
+  }
+ }
+ const fullNovember=output.filter(x=>x.date.endsWith('/FULL'));
+ assert.equal(fullNovember.length,2);
+ const nov20={
+  baseline:tiers(fullNovember.flatMap(x=>x.baseline_races)),
+  candidate:tiers(fullNovember.flatMap(x=>x.candidate_races))
+ };
  for(const model of ['baseline','candidate']){
   totals[model]=Object.fromEntries(keys.map(k=>[k,sum(model,k)]));
  }
@@ -131,12 +156,16 @@ function run(){
   candidate_version:V51.VERSION,formula_approved:false,
   prospective_frozen_forecasts:0,
   historical_totals:totals,
+  historical_model_only_top_tiers:historicalTierTotals,
+  november_7_rosehill_ascot_only_model_tiers:nov20,
   groups:output.map(x=>({date:x.date,provenance:x.provenance,baseline:x.baseline,
-   candidate:x.candidate,leader_changes:x.leader_changes})),
+   candidate:x.candidate,leader_changes:x.leader_changes,model_only_tiers:x.model_only_tiers})),
   notes:['17 and 24 October snapshots are retrospective reconstructions, not independently proven pre-jump data.',
    '31 October excludes seven saved-versus-actual field mismatches, leaving 22 eligible races.',
    '7 November has two separate comparisons: seven previously reviewed races and ALL 20 Rosehill/Ascot races. These are NOT an independently frozen 7 Nov model Top 10.',
    'Full 7 Nov outcomes are sourced from race results after the events and matched against original 7 Nov official declared runner numbers.',
+   'All reported Top 5/10/15 model tiers are recalculated race leaders ordered by model probability, NOT the originally published human-reviewed selections.',
+   '7 November Top 5/10/15 model-tier comparison includes Rosehill and Ascot only (20 races), not Flemington; no complete national 7 Nov ranked board was archived.',
    'This candidate was developed after seeing 7 November results. Better historical metrics are NOT a forward-test improvement.',
    'No result is an input to either model; all results are used in this comparator only.']};
 }
