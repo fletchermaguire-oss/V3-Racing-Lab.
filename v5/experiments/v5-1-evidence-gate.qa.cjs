@@ -95,3 +95,32 @@ test('scenario diagnostics use four named variations without changing the baseli
  assert.equal(lazzura.scenario_stability.probability_floor,36.17);
  assert.equal(lazzura.scenario_stability.probability_ceiling,49.85);
 });
+
+test('pace warning uses field-normalized historical position, not absolute runner numbers',()=>{
+ const r=Q.evaluate(Rose,Official,'ROSEHILL'),a=Q.evaluate(Ascot,Official,'ASCOT');
+ const cash=get(r,5),so=get(a,7);
+ assert.equal(cash.pace_context,'MULTIPLE_POTENTIAL_EARLY_LEADERS');
+ assert.equal(cash.pace_diagnostics.potential_early_leaders,4);
+ assert(cash.sensitivity_warnings.includes('POSSIBLE_PACE_CONTEST_FROM_HISTORICAL_SETTLING'));
+ assert.equal(so.pace_context,'MULTIPLE_POTENTIAL_EARLY_LEADERS');
+ assert.equal(so.pace_diagnostics.potential_early_leaders,5);
+ assert(so.sensitivity_warnings.includes('POSSIBLE_PACE_CONTEST_FROM_HISTORICAL_SETTLING'));
+ assert.equal(so.screen_status,'MODEL_LEADER_ELIGIBLE_FOR_REVIEW');
+ assert.equal(cash.pace_verified,false);
+});
+test('Flemington straight-course history is not inferred from course-score sign',()=>{
+ const field=[{settle_fraction:0.1,settle_800:1},{settle_fraction:0.5,settle_800:4}];
+ const mkRow=course=>({
+  id:'synthetic-id',horse:'SYNTHETIC RUNNER',race_id:'synthetic-race',
+  meeting:'FLEMINGTON',rank:1,p:35,
+  input_issues:[],completeness:1,form_audit:{accepted:5},days_since_last:14,
+  features:{recency:0.6,class:0.2,course}
+ });
+ const race={gap:10,chaos:65,distance_m:1200};
+ for(const course of [-0.8,0,0.8]){
+  const x=Q.riskScreen(mkRow(course),race,field);
+  assert(x.sensitivity_warnings.includes('STRAIGHT_CONFIGURATION_EVIDENCE_REQUIRES_EXTERNAL_VERIFICATION'));
+  assert.equal(x.quality_issues.includes('STRAIGHT_COURSE_TRANSFER_NEEDS_REVIEW'),false);
+  assert.equal(x.pace_verified,false);
+ }
+});
