@@ -5,16 +5,22 @@
  * 7 November morning declarations are the only inputs.
  */
 const Q=require('./v5-1-evidence-gate.cjs');
+const CoursePrep=require('./v5-1-course-prep.cjs');
+const ConfigEvidence=require('./v5-1-pre-race-evidence-20261107.json');
+const SavedRacePicks=require('../cards/2026-11-07/race-selections.json');
 const Official=require('../cards/2026-11-07/official-final.json');
 const inputs=[
  ['ROSEHILL',require('../cards/2026-11-07/rosehill-research.json')],
  ['ASCOT',require('../cards/2026-11-07/ascot-research.json')]
 ];
 const cards=inputs.map(([meeting,data])=>Q.evaluate(data,Official,meeting,'Good 4'));
+const flemingtonAnalystScreen=CoursePrep.evaluateOne(ConfigEvidence,SavedRacePicks,Official);
 const output={
  schema:'v5-1-shadow-replay/v1',date:'2026-11-07',
  experimental:true,calibrated:false,outcomes_in_inputs:false,publication_approved:false,
- missing_meetings:['FLEMINGTON'],method:'Original V5-L5 model, reconciled official 7 Nov morning starter snapshot, evidence/robustness screening only',
+ missing_model_meetings:['FLEMINGTON'],
+ method:'Original V5-L5 model for Rosehill/Ascot plus a separate source-only analyst evidence screen for Flemington; no unsaved Flemington model percentages invented',
+ flemington_analyst_evidence_screen:flemingtonAnalystScreen,
  summary:{
   races:cards.reduce((n,c)=>n+c.screen.length,0),
   active_runners:cards.reduce((n,c)=>n+c.reconciliation.activeCount,0),
