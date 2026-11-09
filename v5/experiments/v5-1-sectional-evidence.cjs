@@ -7,8 +7,11 @@
 const assert=require('node:assert/strict');
 const norm=s=>String(s||'').normalize('NFKD').toUpperCase()
  .replace(/\([^)]*\)/g,'').replace(/[^A-Z0-9]/g,'');
-const day=s=>typeof s==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(s)
- &&!Number.isNaN(Date.parse(s+'T00:00:00Z'));
+const day=s=>{
+ if(typeof s!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(s))return false;
+ const t=Date.parse(s+'T00:00:00Z');
+ return Number.isFinite(t)&&new Date(t).toISOString().slice(0,10)===s;
+};
 const time=s=>typeof s==='string'&&/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d+)?(?:Z|[+-]\d\d:\d\d)$/.test(s)
  &&Number.isFinite(Date.parse(s));
 const iso=(d,m,y)=>String(y)+'-'+String(m).padStart(2,'0')+'-'+String(d).padStart(2,'0');
