@@ -270,3 +270,28 @@ For final results, `RESULTS.json` must have schema `v5-1-official-outcomes/v1`, 
 - Any future sectional or interference signal requires a pre-race runner/race identity join, chronological source timestamp, source coverage counter, trial-vs-race distinction, and explicit missing-value handling. Do not add another numeric weight until identical paired historical and forward audits show a genuine lift in winner rate and probability calibration.
 
 **Deployment status:** These tools remain in the experimental branch; no merge, Netlify deployment or production probability change is included.
+
+## Sectional evidence: safe ingestion stage, no invented pace coefficient
+
+**New research modules:** `v5/experiments/v5-1-sectional-evidence.cjs` and `v5/experiments/v5-1-sectional-evidence.qa.cjs`. All six targeted tests passed in a JavaScript harness; GitHub/Node CI still needs to run.
+
+The public [Racing Queensland Thoroughbred Sectionals and Position Maps](https://www.racingqueensland.com.au/industry/thoroughbred/thoroughbred-sectionals) page provides historical CSV/ZIP files for Queensland thoroughbred meetings. The [Queensland open-data policy](https://www.racingqueensland.com.au/about/reports-and-data/open-data) lists thoroughbred sectionals and position maps among available racing datasets. A direct historical CSV retrieval attempt in this session was blocked by the source anti-bot/download process, **so the genuine original CSV headings and rows were NOT inspected and no production-grade source parser is claimed**. We also must not substitute greyhound or harness sectionals.
+
+### What the validator actually does
+
+It accepts ONLY an explicitly normalized JSON source with schema `v5-1-normalized-thoroughbred-sectionals/v1`. Each bundle specifies the source provider, real official URL, first-observed capture timestamp, and prior-race rows. Rows include past meeting date, venue, race number, horse, race distance and measured last-600m time, with optional 800-metre position, finishing position and GPS extra ground.
+
+- Excludes any source not observed before the forecast cutoff, and any historical run dated on/after the target race date.
+- Matches **horse + exact historical race date + venue + race distance** against a dated form start already present in the research dossier. A same-name match alone is insufficient. Archives not in the supported dated form format remain unjoined.
+- Compares raw last-600m times **only within the same past race**. With fewer than three available past competitors, relative time and sectional rank are deliberately `null`.
+- Rejects impossible split times, duplicate/conflicting rows, unsupported providers, missing provenance, and corrupt positions/extra distance.
+- Reports peer count, measured past-race last-600m time, within-race relative split, position at 800m, finishing position and ground travelled, but **adds no score or win-percentage coefficient**.
+- Marks source authenticity as unverified until the original official file and access time have been independently confirmed.
+
+This is an essential first step to evaluate hidden runs, strong closing sectionals and running-cover differences that currently evade V5's position/margin-based recency signal. **It does not yet establish a numerical lift.**
+
+### Next controlled experiment after original CSV parsing
+
+Convert actual published Racing Queensland thoroughbred CSVs into the validator's normalized format using an inspected, version-pinned adapter, with preserved raw file/checksum and complete race coverage. Audit the number of runners with at least 2–3 genuine historical splits before devising a conditional adjustment. Compare original V5, V5.1 and a single explicitly specified sectional candidate on the exact same whole-field race cohorts; require evidence improvement without retrospective race-specific changes. Do not combine sectional metrics from different distances/surfaces without control or normalisation.
+
+**No use of post-race winner knowledge, market prices or trainer statements is authorised inside the feature join.**
