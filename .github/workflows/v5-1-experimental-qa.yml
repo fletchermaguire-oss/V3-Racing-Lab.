@@ -1,0 +1,29 @@
+name: V5.1 experimental QA
+on:
+  push:
+    branches:
+      - experiment/v5-1-nov7-evidence-gates
+    paths:
+      - 'v5/experiments/**'
+      - 'package.json'
+      - '.github/workflows/v5-1-experimental-qa.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  no-deploy-verification:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout experimental branch
+        uses: actions/checkout@v4
+      - name: Use Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test V5.1 integrity, scoring and reliability research
+        run: npm run test:v5-1
+      - name: Run repository regression tests
+        run: npm test
+      - name: Validate static production build without deployment
+        run: npm run check
