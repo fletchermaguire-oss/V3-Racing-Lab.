@@ -216,3 +216,57 @@ npm run research:v5-2:pace
 The enhanced suite includes deterministic cross-meeting shortlist sorting, one-pick-per-race enforcement, no fake Top 15 fill, fail-closed starter identities, outcome/odds injection checks, source-versus-race-risk reporting, and explicit rejection of unproven pace coefficients.
 
 **Promotion remains blocked** pending new independently frozen pre-race cards, official matched results and a meaningful improvement in both hit rate *at comparable coverage* and probability calibration.
+
+
+## Prospective matched forecast/official-result workflow
+
+The true performance question is not whether we can explain losing horses after the event; it is whether **pre-race** model V5.1 beats *simultaneously archived* original V5 at matched race coverage. Two new strictly separated modules implement that workflow:
+
+- `v5/experiments/v5-1-prospective-packet.cjs`: collects both models' **entire** race-field probability distributions, baseline and candidate model versions, individual runner IDs, the original one-per-race candidate rankings, selection screen status and Top 5/10/15 ranks, source hashes and full-field identity fingerprints.
+- `v5/experiments/v5-1-results-score.cjs`: scores those SAME saved runner probabilities after externally sourced official results. A changed final starter list is **excluded**, not imputed. It reports matched race coverage, top-one wins, multiclass Brier score, log loss, and the candidate's **separately saved** Top 5/10/15. This does NOT replace the original analyst's human-reviewed Top 5/10/15 ledger.
+
+The attached tests replay all 20 Rosehill/Ascot results on 7 Nov. The research packet has status `HISTORICAL_REPLAY_ONLY`, includes 197 matched runner forecasts, and deliberately leaves the Top 15 at 10/15 filled because no equivalent Flemington numerical model file was archived. The results scorer makes **zero prospective-lock claims**, even when historical results match.
+
+### Use for a NEW future Saturday
+
+The operator must gather full machine-readable form for each meeting, the dated official starter/withdrawal file, and genuinely sourced start times for **every** included race. Provide a `CONFIG.json`:
+
+```json
+{
+  "schema": "v5-1-capture-config/v1",
+  "mode": "PRE_RACE_DRAFT",
+  "official_file": "official-fields.json",
+  "start_times_file": "sourced-start-times.json",
+  "cards": [
+    {
+      "meeting": "ROSEHILL",
+      "research_file": "rosehill-research.json",
+      "going": "Good 4"
+    }
+  ]
+}
+```
+
+`sourced-start-times.json` needs a `v5-1-sourced-start-times/v1` schema, matching `date`, and `races` with `race_id`, `race_at_utc`, `source_url` and `observed_at_utc`. Sources must be genuine, not synthetic or inferred from bookmaker odds; do not copy the example meeting/going into a new date without checking.
+
+```bash
+npm run test:v5-1
+npm run research:v5-1:capture -- CONFIG.json forecast-draft.json
+# independently commit this exact draft to GitHub strictly before each included race;
+# independently verify the exact committed bytes and commit date vs recorded starts.
+# use the original final runners and published winner IDs in RESULTS.json:
+npm run research:v5-1:score -- forecast-draft.json RESULTS.json paired-audit.json
+```
+
+The capture script uses the system clock, rejects stale timestamps and races already started, and refuses to overwrite forecast files. It issues only `UNVERIFIED_PROSPECTIVE_DRAFT`; a GitHub SHA-256 digest is **integrity evidence, not independent timestamp proof**. The existing `v5/forward.js` has stricter prospective-result attribution rules; the shadow modules deliberately never set that ledger to verified.
+
+For final results, `RESULTS.json` must have schema `v5-1-official-outcomes/v1`, match the racing date and contain one `races` row per result with `race_id`, `winner_runner_id`, **entire** `final_starter_ids`, an actual `official_source_url`, and timezone-aware `verified_at_utc`. No result may be added to the forecast packet or original training/form data.
+
+### Where to source future objective tactical evidence
+
+- [Racing Queensland thoroughbred GPS sectionals and positional-map CSV files](https://www.racingqueensland.com.au/industry/thoroughbred/thoroughbred-sectionals) are an official source for *prior completed* Queensland runs; inspect race/date, measured variables and original source timestamps before joining.
+- [Racing NSW Punter's Intelligence](https://www.racingnsw.com.au/punters-intelligence/?main=true) provides 3D replay and tracking including time, positioning, distance travelled and speed for completed NSW racing. App data should not be assumed to be a public programmable CSV/API.
+- Neither provider currently supplies a verified future race speed map in V5.1; we **must not** label median historical position as a proven early-pace forecast.
+- Any future sectional or interference signal requires a pre-race runner/race identity join, chronological source timestamp, source coverage counter, trial-vs-race distinction, and explicit missing-value handling. Do not add another numeric weight until identical paired historical and forward audits show a genuine lift in winner rate and probability calibration.
+
+**Deployment status:** These tools remain in the experimental branch; no merge, Netlify deployment or production probability change is included.
