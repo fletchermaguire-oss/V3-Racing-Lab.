@@ -81,3 +81,10 @@ test('insufficient historical peers prevent false high-confidence late-speed ran
  assert.equal(x.candidate_evidence[0].matched_history[0].relative_last600_seconds,null);
  assert.equal(x.candidate_evidence[0].matched_history[0].peer_count,2);
 });
+
+test('nonexistent calendar dates cannot be rolled into subsequent months',()=>{
+ const b=clone(bundle);b.rows[0].race_date='2026-02-31';
+ assert.throws(()=>run(research,[b]),/invalid sectionals field/);
+ const r=clone(research);r.date='2026-02-31';
+ assert.throws(()=>run(r),/valid model research required/);
+});
