@@ -14,7 +14,7 @@
     "research:class": "node v5/experiments/compare-neutral-class.cjs",
     "card:build": "node scripts/build-feature-card.cjs",
     "card:import-official": "node scripts/import-official-form.cjs",
-    "test:v5-1": "node --test v5/experiments/v5-1-evidence-gate.qa.cjs v5/experiments/v5-1-course-prep.qa.cjs v5/experiments/v5-1-formula.qa.cjs v5/experiments/v5-1-reliability-shortlist.qa.cjs v5/experiments/v5-1-selection-screen-audit.qa.cjs v5/experiments/v5-2-pace.qa.cjs v5/experiments/v5-1-prospective-packet.qa.cjs v5/experiments/v5-1-results-score.qa.cjs",
+    "test:v5-1": "node --test v5/experiments/v5-1-evidence-gate.qa.cjs v5/experiments/v5-1-course-prep.qa.cjs v5/experiments/v5-1-formula.qa.cjs v5/experiments/v5-1-reliability-shortlist.qa.cjs v5/experiments/v5-1-selection-screen-audit.qa.cjs v5/experiments/v5-2-pace.qa.cjs v5/experiments/v5-1-prospective-packet.qa.cjs v5/experiments/v5-1-results-score.qa.cjs v5/experiments/v5-1-sectional-evidence.qa.cjs",
     "research:v5-1": "node v5/experiments/v5-1-shadow-review.cjs",
     "research:v5-1:formula": "node v5/experiments/compare-v5-1-formula.cjs",
     "research:v5-1:screen": "node v5/experiments/v5-1-selection-screen-audit.cjs",
