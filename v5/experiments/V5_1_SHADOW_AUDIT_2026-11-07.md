@@ -159,3 +159,60 @@ npm run research:v5-1
 The experiment's targeted regression checks verify 100%-sum per field, runner identity and counts, deterministic row order, exclusion of market/outcome leakage, zero adjustment for complete positive-class form, venue/source matching and strict post-race result separation.
 
 **Release decision: NOT PROMOTED.** Neither `v5/model.js`, the live site, the human-reviewed selections nor their results ledger has been changed. The newer model must first survive prospective frozen Saturday racecards and adequate comparisons of Brier/log loss, top-one hit rate, Top 5/10/15 strike and coverage, and baseline-versus-candidate per-race overlap.
+
+## Further correction: evidence quality, selection coverage, and a rejected pace coefficient
+
+### Reliability-screen audit with real winner coverage
+
+The fixed V5.1 evidence screen now reports **two different reasons** for review instead of treating them as interchangeable:
+
+- `source_data_issues`: too few recognisable form starts, low completeness, or input/parser warnings
+- `racing_uncertainty_issues`: crowded field, small gap, negative class-vs-recency interaction, layoff, or unstable leader across scenarios
+
+`data_readiness` is separately recorded, while `screen_status` remains an analyst review instruction. Incomplete historical source files are a data acquisition problem, **not evidence of a horse's inability to win**.
+
+A results-only retrospective audit `v5/experiments/v5-1-selection-screen-audit.cjs` applies the unchanged screen to **all 42 matched race leaders** from 31 Oct (22 races) and 7 Nov Rosehill + Ascot (20 races).
+
+| Category | Races scored | Race leaders that won | Strike rate |
+|---|---:|---:|---:|
+| All | 42 | 14 | 33.33% |
+| Screen qualified for further human review | 21 | 12 | 57.14% |
+| Further evidence needed | 21 | 2 | 9.52% |
+
+This is a **selection-versus-coverage comparison**, not a prospective improvement. It deliberately scores **one leader from every race**, including losses. The screen was designed in light of recent results, and the 17/24 Oct reconstructed archives have systematically incomplete parsed forms. Blindly applying this screen to those older sources would flag almost everything and yield a misleading mixed-source strike rate.
+
+The two 31 Oct winners flagged for review (Columbus and Ndola) demonstrate that caution flags **cannot imply a horse will lose**. The 7 Nov screened subset retains losing leaders So Si God and Let's Go Again, while flagging losing Cashout. Those misses still require measured tactical and opposition-strength inputs.
+
+### Candidate shortlist infrastructure: do not pad the Top 15
+
+`v5/experiments/v5-1-reliability-shortlist.cjs` produces one **candidate model leader per race**, sorted in descending independent model win probability. Only after ranking are source/race-suitability issues applied. Top 5/10/15 are populated **only with qualified leaders**. Any unfilled positions are explicitly reported; the algorithm will not fill them with fragile suggestions merely to reach a target count.
+
+In the saved 7 Nov Rosehill + Ascot replay: 20 races, **10 qualified leaders and 10 flagged**, with Top 5 filled 5/5, Top 10 filled 10/10, and **Top 15 only 10/15 filled**. It marks the day **PARTIAL** because there is no equivalent numerical Flemington model dossier. This is not the archived independently reviewed 7 Nov Top 10, and no Top 15 is retrospectively inserted into the official result ledger.
+
+### Rejected numerical pace adjustment
+
+We tested another fixed hypothesis in `v5/experiments/model-v5-2-pace.cjs`: use normalized historical 800-metre settling tendencies to give a small generic adjustment under possible contested or lone early speed. It uses no outcome or price in features.
+
+Paired evaluation against the V5.1 sparse-form candidate (`v5/experiments/compare-v5-2-pace.cjs`):
+
+| Cohort | Races | V5.1 leader wins | V5.2 leader wins | V5.1 multiclass Brier ↓ | V5.2 Brier ↓ | V5.1 log loss ↓ | V5.2 log loss ↓ |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 17/24/31 Oct combined | 71 | 26 | 26 | 0.840240 | 0.840132 | 2.101767 | 2.101408 |
+| 7 Nov Rosehill + Ascot | 20 | 6 | 6 | 0.794961 | 0.794982 | 1.982147 | 1.983722 |
+
+**Decision: DO NOT PROMOTE V5.2.** Zero race leaders changed, and the 7 Nov overall probability metrics became slightly worse. Historic settling positions alone aren't enough to create a credible pace forecast. The 31 Oct small aggregate score improvement is not a reason to introduce an unverified coefficient.
+
+The next substantive evidence gap is **real speed maps, sectionals, lane bias, interference and strength-of-opposition data sourced before racing**, without which the model still has no defensible numeric correction for Tempted, Ourgirlcanrun, Horseshoe Hill or improving rivals.
+
+### New reproducible commands
+
+```bash
+npm run test:v5-1
+npm run research:v5-1:screen
+npm run research:v5-1:shortlist
+npm run research:v5-2:pace
+```
+
+The enhanced suite includes deterministic cross-meeting shortlist sorting, one-pick-per-race enforcement, no fake Top 15 fill, fail-closed starter identities, outcome/odds injection checks, source-versus-race-risk reporting, and explicit rejection of unproven pace coefficients.
+
+**Promotion remains blocked** pending new independently frozen pre-race cards, official matched results and a meaningful improvement in both hit rate *at comparable coverage* and probability calibration.
