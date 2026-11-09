@@ -119,7 +119,7 @@ function run({cards,official,raceStartSources=[],mode='HISTORICAL_REPLAY',create
    unfilled:Object.fromEntries([5,10,15].map(k=>['top'+k,shortlist.tiers['top'+k].unfilled])),
    flagged_for_review:shortlist.flagged_for_review.map(x=>({race_id:x.race_id,runner_id:x.horse_id,quality_issues:x.quality_issues}))
   },
-  status:'UNVERIFIED_PROSPECTIVE_DRAFT',
+  status:mode==='PRE_RACE_DRAFT'?'UNVERIFIED_PROSPECTIVE_DRAFT':'HISTORICAL_REPLAY_ONLY',
   publication_approved:false,independently_frozen:false,
   eligible_for_release:false,
   pre_release_source_gates_met:eligible,
@@ -129,4 +129,37 @@ function run({cards,official,raceStartSources=[],mode='HISTORICAL_REPLAY',create
  const packet_sha256=sha(manifest);
  return {...manifest,packet_sha256};
 }
-module.exports={run};
+function verifyIntegrity(packet){
+ assert(packet&&packet.schema==='v5-1-paired-forecast-draft/v1','wrong packet schema');
+ assert(packet.publication_approved===false&&packet.independently_frozen===false
+  &&packet.eligible_for_release===false,'packet claims certification');
+ assert(['HISTORICAL_REPLAY_ONLY','UNVERIFIED_PROSPECTIVE_DRAFT'].includes(packet.status),'invalid packet status');
+ assert(iso(packet.created_at_utc),'invalid packet timestamp');
+ assert(Array.isArray(packet.fields)&&packet.fields.length>0,'missing race fields');
+ assert(typeof packet.packet_sha256==='string'&&/^[a-f0-9]{64}$/.test(packet.packet_sha256),'invalid digest');
+ const {packet_sha256,...unsigned}=packet;
+ assert.equal(sha(unsigned),packet_sha256,'packet mutated after hashing');
+ const ids=new Set();
+ for(const race of packet.fields){
+  assert(typeof race.race_id==='string'&&race.race_id.startsWith(packet.date+'_'),'invalid race ID');
+  assert(!ids.has(race.race_id),'duplicate race');
+  ids.add(race.race_id);
+  assert(Array.isArray(race.runners)&&race.runners.length>=2,'missing runners');
+  assert(new Set(race.runners.map(x=>x.runner_id)).size===race.runners.length,'duplicate runner');
+  assert(race.runners.every(x=>x.runner_id.startsWith(race.race_id+'_')&&
+    Number.isFinite(x.candidate_win_pct_exact)&&x.candidate_win_pct_exact>0&&
+    Number.isFinite(x.baseline_win_pct_exact)&&x.baseline_win_pct_exact>0),'bad runner chances');
+  assert(Math.abs(race.runners.reduce((s,x)=>s+x.candidate_win_pct_exact,0)-100)<0.00001,'candidate chance sum fails');
+  assert(Math.abs(race.runners.reduce((s,x)=>s+x.baseline_win_pct_exact,0)-100)<0.00001,'baseline chance sum fails');
+  assert.equal(race.field_revision_sha256,sha(race.runners.map(x=>[x.runner_id,x.horse])),'field revision mismatch');
+  assert.equal(race.paired_probabilities_sha256,sha(race.runners),'probability digest mismatch');
+  assert(race.runners.some(x=>x.runner_id===race.model_leader_id&&x.model_rank===1),'leader not in field');
+ }
+ assert.equal(ids.size,packet.race_count,'race count mismatch');
+ assert(Array.isArray(packet.blockers)&&packet.blockers.includes('INDEPENDENT_GITHUB_COMMIT_PROOF_NOT_VERIFIED'),
+  'missing external-commit proof gate');
+ return {integrity_valid:true,independent_pre_race_freeze_verified:false,
+  status:'INTEGRITY_ONLY_NO_PROSPECTIVE_CERTIFICATION',
+  notice:'Hash consistency is not proof of pre-race timestamp; independently verify committed GitHub content and official jump times.'};
+}
+module.exports={run,verifyIntegrity};
