@@ -337,6 +337,9 @@ function winFirstBoard(baseline,scenarios){
   const reasons=[];
   if(!samples.every(x=>x.rank===1))reasons.push('CLASS_ASSUMPTION_CHANGES_RANK');
   if(current.form_audit.accepted<3)reasons.push('LIMITED_RECENT_FORM');
+  // Zero is missing recognised grade, not verified low racing class.
+  // Do not alter scores or full-field probabilities based on missing evidence.
+  if(current.grade_quality===0)reasons.push('UNKNOWN_GRADED_CLASS');
   if(current.completeness<0.78)reasons.push('INCOMPLETE_DOSSIER');
   if(current.input_issues.length)reasons.push('FORM_INPUT_ISSUES');
   if(floor<17)reasons.push('LOW_CONSERVATIVE_CHANCE');
@@ -351,7 +354,7 @@ function winFirstBoard(baseline,scenarios){
    grade_quality:current.grade_quality,reasons:reasons,good4_pct:g.p,soft5_pct:s.p};
   if(!reasons.length){item.status='PRIORITY_RESEARCH';priority.push(item);}
   else if(floor>=13&&gap>=4&&chaos<=89&&current.form_audit.accepted>=3&&
-   current.completeness>=0.78&&!current.input_issues.length){
+   current.completeness>=0.78&&current.grade_quality>0&&!current.input_issues.length){
    item.status='REVIEW_ONLY';review.push(item);
   }else{item.status='NO_SELECTION';avoid.push(item);}
   byRace.push(item);
@@ -398,6 +401,7 @@ function board(d,options={}){
   const r=good.races.find(r=>r.id===x.race_id);x.field_quality=r.field_quality;x.field_chaos=r.chaos;
   x.quality_flags=[];
   if(x.completeness<0.70)x.quality_flags.push('LIMITED_DOSSIER');
+  if(x.grade_quality===0)x.quality_flags.push('UNKNOWN_GRADED_CLASS');
   if(x.input_issues.length)x.quality_flags.push('INPUT_REVIEW_REQUIRED');
   if(x.robust_spread>=6)x.quality_flags.push('SCENARIO_SENSITIVE');
   if(x.going_dependent_lead)x.quality_flags.push('GOING_DEPENDENT_LEAD');

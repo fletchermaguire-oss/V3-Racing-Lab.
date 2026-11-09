@@ -358,3 +358,15 @@ test('non-snapshot prose cannot smuggle dated wins into parsed form',()=>{
  assert.equal(x.form_audit.accepted,0);
  assert.equal(x.grade_quality,0);
 });
+
+test('missing historical class is treated as unknown and cannot earn strict priority',()=>{
+ const d=fixture();
+ d.runners.forEach(h=>{h.form='30/1/2027 TEST 1200m (G), HCP: 2/10, PDF margin 0.5L';});
+ const b=M.board(d,{going:{TEST:'Good 4'}});
+ assert.ok(b.baseline.records.every(h=>h.grade_quality===0));
+ assert.ok(b.baseline.records.every(h=>h.quality_flags.includes('UNKNOWN_GRADED_CLASS')));
+ assert.equal(b.winFirst.priority.length,0);
+ assert.equal(b.winFirst.review.length,0);
+ assert.equal(b.calibration_status,'NOT_ESTABLISHED');
+ assert.ok(b.baseline.races.every(r=>r.sum===100));
+});

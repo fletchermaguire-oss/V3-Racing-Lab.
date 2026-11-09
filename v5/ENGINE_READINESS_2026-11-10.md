@@ -19,3 +19,7 @@ Run `npm test`, `npm run check`, `npm run preflight:future-card -- v5/cards/YYYY
 V5-L6 is *shadow only* until independently frozen forward paired results support an upgrade.
 
 Future staging is dry-run by default: `npm run card:stage-reviewed -- . v5/cards/YYYY-MM-DD/research.json v5/cards/YYYY-MM-DD/going.json`. A reviewed, explicitly authorized local activation additionally uses `--apply`; this is NOT a deploy.
+
+## Missing-class reliability protection
+
+Ported the tested quality-only protection from the earlier draft PR #24: leaders with zero recognised class evidence receive `UNKNOWN_GRADED_CLASS` and cannot be promoted into strict win-first priority/review without source validation. The raw L5 score, formula coefficients and race probabilities are unchanged; a withheld leader is not replaced by a different horse. Dashboard discloses the missing grade as uncertainty, not weak class.
