@@ -10,12 +10,14 @@
 function clone(x){return JSON.parse(JSON.stringify(x));}
 function datedGoing(source,meeting){
   var row=(source.meetings||[]).find(function(x){return x.meeting===meeting;})||{};
-  var value=String(row.official_going||row.scenario_going||row.official_29_oct||'').trim();
-  return /^(?:Good [34]|Soft [567]|Heavy (?:8|9|10))$/.test(value)?value:'Good 4';
+  var value=String(row.official_going||row.scenario_going||(source.date==='2026-10-31'?row.official_29_oct:'')||'').trim();
+  if(!/^(?:Good [34]|Soft [567]|Heavy (?:8|9|10))$/.test(value))throw Error('Explicit track going is missing or invalid for '+meeting); return value;
 }
-function recordedGoingStamp(source){
-  return String(source.saved_at||'')+'|'+(source.meetings||[]).map(function(x){
-    return x.meeting+':'+datedGoing(source,x.meeting);
+function recordedGoingStamp(source,explicit){
+  return String(source.saved_at||'')+'|'+Array.from(new Set((source.races||[]).map(function(r){return r.meeting;}))).map(function(meeting){
+    var value=explicit&&explicit[meeting]||datedGoing(source,meeting);
+    if(!/^(?:Good [34]|Soft [567]|Heavy (?:8|9|10))$/.test(value))throw Error('Invalid track going: '+meeting);
+    return meeting+':'+value;
   }).sort().join('|');
 }
 // Official source names may arrive HTML-encoded, while saved dossiers use real punctuation.
@@ -46,7 +48,7 @@ function publishedAt(value){
 }
 function requireCumulativeScratchings(archive,replacement){
  if(!archive||archive.schema!=='racing-lab-friday-field-overlay/v1'||
-    archive.race_date!==replacement.race_date||archive.checked_date!=='2026-10-30'||
+    archive.race_date!==replacement.race_date||!/\d{4}-\d{2}-\d{2}/.test(archive.checked_date)||archive.checked_date>=replacement.race_date||
     replacement.schema!=='racing-lab-racecard-overlay/v2'||
     !archive.scratchings||!replacement.scratchings)
    throw Error('Immutable Friday scratching reference missing or mismatched');
@@ -73,7 +75,7 @@ function applyOfficialOverlay(input,overlay){
     throw Error('Race-day overlay requires a timestamp with local timezone');
   if(overlay.publication_approved!==false)throw Error('A research overlay cannot grant publication approval');
   if((overlay.schema==='racing-lab-racecard-overlay/v2') !== (overlay.checked_date===input.date))
-    throw Error('Race-day replacement requires v2 schema and 31 October check date');
+    throw Error('Race-day replacement requires v2 schema with the actual race date');
   function record(x){return x!==null&&typeof x==='object'&&!Array.isArray(x);}
   if(!record(overlay.scratchings)||!record(overlay.emergency_order)||
      !record(overlay.projected_promotions)||!record(overlay.source_documents)||
@@ -148,7 +150,7 @@ function create(input,options){
   var checkpoint=options.checkpoint||null,overrides={},history=[],curated=null;
   data.races.forEach(function(r){going[r.meeting]=options.going&&options.going[r.meeting]||datedGoing(source,r.meeting);});
   officialGoing=Object.assign({},going);
-  var storage=options.storage,settingsKey='racing-lab-v5-settings:'+data.date,archiveKey='racing-lab-v5-research:'+data.date,sourceStamp=recordedGoingStamp(source)+'|'+String(source.official_check_at||'');
+  var storage=options.storage,settingsKey='racing-lab-v5-settings:'+data.date,archiveKey='racing-lab-v5-research:'+data.date,sourceStamp=recordedGoingStamp(source,going)+'|'+String(source.official_check_at||'');
   try{
     var settings=storage&&JSON.parse(storage.getItem(settingsKey)||'null');
     if(settings&&settings.sourceSavedAt===sourceStamp){
@@ -513,7 +515,7 @@ function load(fetcher){
       RANDWICK:official.meetings.RANDWICK.track_condition}};
     });
    }
-   if(data.date!=='2026-10-31')return {data:data,going:null};
+   if(data.date!=='2026-10-31')return {data:data,going:Card&&Card.going||null};
    return f('/v5/official-latest.json',{cache:'no-store'}).then(function(r){
     if(!r.ok)throw Error('Official snapshot HTTP '+r.status+' (saved board withheld)');
     return r.json();

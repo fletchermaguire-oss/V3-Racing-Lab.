@@ -1,3 +1,4 @@
+throw Error('LEGACY_BUILD_DISABLED: dated horse-name overrides cannot rewrite an approved V5 board');
 const fs=require('fs'),gz=require('zlib');
 const file='saturday-v5.html',raw=fs.readFileSync(file,'utf8'),amp=String.fromCharCode(38);
 const entity={amp:amp,lt:String.fromCharCode(60),gt:String.fromCharCode(62),quot:'"',apos:"'",'#39':"'"};

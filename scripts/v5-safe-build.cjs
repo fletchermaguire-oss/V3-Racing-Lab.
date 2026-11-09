@@ -33,7 +33,7 @@ assert.equal(readiness.meetings.reduce((n,m)=>n+m.races,0),29,'Saturday race cou
 const finalProposalFile='v5/cards/2026-11-07/final-proposal.json';
 if(fs.existsSync(finalProposalFile)){
  const proposal=JSON.parse(fs.readFileSync(finalProposalFile,'utf8'));
- const gate=require('../v5/release-gate.js');
+ const gate=require('../v5/release-gate-hardened.cjs');
  assert.equal(proposal.date,readiness.date,'Final proposal/checkpoint mismatch');
  const audit=gate.assess(proposal,proposal.reviewed_as_of);
  assert(audit.certified_final_release,'No certified final V5 release: '+audit.blockers.join('; '));
@@ -54,9 +54,22 @@ if(active.date!=='2026-10-31'){
  assert.equal(source.date,active.date,'Active-card date mismatch');
  const model=require('../v5/model.js').board(source);
  assert.equal(model.raceCount,source.expected_inventory.races);
- assert.equal(model.activeCount,source.expected_inventory.runners);
+ assert.equal(model.sourceCount,source.expected_inventory.runners,'Complete listed inventory');
+ assert.equal(model.activeCount+model.excludedCount,source.expected_inventory.runners,'Active plus excluded must match source inventory');
  assert(model.scenarios.every(s=>s.races.every(r=>r.sum===100)),'Active-card scenario distributions must total 100');
  assert.equal(source.publication.approved,false);
  for(const page of ['index.html','v5/index.html'])assert(fs.readFileSync(page,'utf8').includes('/v5/active-card.js'),'Dated source selector missing');
  console.log('PASS: Active '+source.date+' card; '+model.raceCount+' races; '+model.activeCount+' listed entries; ten full-field scenarios.');
+}
+
+/* Dynamic next-date final-release gate, without touching historical cards. */
+if(active.date!=='2026-11-07'&&active.date!=='2026-10-31'){
+ const proposalFile='v5/cards/'+active.date+'/final-proposal.json';
+ if(fs.existsSync(proposalFile)){
+  const proposal=JSON.parse(fs.readFileSync(proposalFile,'utf8'));
+  const gate=require('../v5/release-gate-hardened.cjs');
+  assert.equal(proposal.date,active.date,'Proposal does not match current card date');
+  const audit=gate.assess(proposal,proposal.reviewed_as_of);
+  assert(audit.certified_final_release,'Future release blocked: '+audit.blockers.join('; '));
+ }
 }
