@@ -8,7 +8,7 @@ var PAGES=[['overview','Overview'],['oaks','Oaks Day 5 Nov'],['top10','Daily Top
 function importedCard(){return !!(D&&D.source_import&&D.source_import.kind==='FEATURE_FORM_PDF');}
 function cardDay(){return new Date(D.date+'T00:00:00Z').toLocaleDateString('en-AU',{weekday:'long',timeZone:'UTC'});}
 function readableFlag(flag){return ({LIMITED_DOSSIER:'Limited form evidence',INPUT_REVIEW_REQUIRED:'Input review needed',
- SCENARIO_SENSITIVE:'Sensitive to scenarios',GOING_DEPENDENT_LEAD:'Leader changes with going',
+ SCENARIO_SENSITIVE:'Sensitive to scenarios',UNKNOWN_GRADED_CLASS:'No recognised graded-form evidence',GOING_DEPENDENT_LEAD:'Leader changes with going',
  UNSTABLE_RACE_LEAD:'Lead varies by scenario',CROWDED_RACE:'Closely matched field',
  UNRACED_RIVALS_NOT_RATED_FROM_TRIALS:'First starters among rivals',
  CROSS_ENTRIES_REQUIRE_FINAL_FIELD_CHECK:'Cross-entries need confirmation'})[flag]||flag.replaceAll('_',' ').toLowerCase();}
@@ -697,9 +697,11 @@ function paceClassResearch(r,reviewed){
   panel.append(e('p','','Historical pace evidence: '+z.pressure.known_runners+'/'+z.pressure.modelled_runners+
    ' with dated settling data. '+z.pressure.status.replaceAll('_',' ').toLowerCase()+
    '. Possible early leaders: '+(z.pressure.historical_potential_leaders.join(', ')||'not established')+'.'));
-  panel.append(e('p','','Class assessment: '+z.class.grade_quality.toFixed(3)+
-   ' historic graded-form score; '+(z.class.opposition_class_edge>=0?'+':'')+
-   z.class.opposition_class_edge.toFixed(3)+' vs estimated rivals. Grades are proxies, not independently assessed opponent ability.'));
+  var grade=z.class.grade_quality,edge=z.class.opposition_class_edge,known=Number.isFinite(grade)&&grade>0;
+  panel.append(e('p','',known?
+   'Class assessment: '+grade.toFixed(3)+' historic graded-form score; '+(Number.isFinite(edge)?((edge>=0?'+':'')+edge.toFixed(3)):'unknown')+
+   ' vs estimated rivals. Grades are provisional proxies, not opponent-ability measurements.':
+   'Class assessment: NO RECOGNISED GRADED FORM. The legacy L5 class score can penalise missing evidence; do not treat its rank as reliable or a qualified selection.'));
   if(z.straight.applies){
    var t=z.straight.history;
    panel.append(e('p','','Flemington straight record: '+t.wins+'/'+t.starts+' wins · '+t.top3+
