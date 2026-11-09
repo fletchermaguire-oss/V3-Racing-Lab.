@@ -30,10 +30,9 @@ function inspect({research,bundles,asOfUtc}){
  const seen=new Set(),indexed=new Map(),rejected=[],sources=[];
  for(const bundle of bundles){
   assert(bundle?.schema==='v5-1-normalized-thoroughbred-sectionals/v1','not an explicitly normalized thoroughbred source');
-  const src=bundle.source||{},parsedUrl=new URL(src.url||'https://invalid.invalid');
+  const src=bundle.source||{};
   assert(src.provider==='RACING_QUEENSLAND_THOROUGHBRED'&&
-   parsedUrl.protocol==='https:'&&
-   parsedUrl.hostname.toLowerCase()==='www.racingqueensland.com.au',
+   /^https:\/\/www\.racingqueensland\.com\.au(?:\/|$)/i.test(String(src.url||'')),
    'unsupported sectional provenance');
   assert(time(src.observed_at_utc),'source capture timestamp missing');
   assert(Array.isArray(bundle.rows),'missing sectionals');
