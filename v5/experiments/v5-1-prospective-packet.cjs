@@ -68,7 +68,8 @@ function run({cards,official,raceStartSources=[],mode='HISTORICAL_REPLAY',create
     baseline_win_pct_exact:amount(fieldBase[i].p_exact)
    }));
    const start=schedule.get(r.id),leader=experimental.records.find(x=>x.race_id===r.id&&x.rank===1);
-   assert(leader&&start?.race_id!==undefined||leader&&mode==='HISTORICAL_REPLAY','missing pre-race start source for '+r.id);
+   assert(leader,'missing model leader '+r.id);
+   assert(!!start||mode==='HISTORICAL_REPLAY','missing pre-race start source for '+r.id);
    if(mode==='PRE_RACE_DRAFT')assert(Date.parse(start.race_at_utc)>Date.parse(createdAtUtc),'race already started: '+r.id);
    cardResults.push({
     race_id:r.id,meeting:r.meeting,race:r.race,model_going:r.going,
@@ -90,6 +91,8 @@ function run({cards,official,raceStartSources=[],mode='HISTORICAL_REPLAY',create
    active_runners:rec.provenance.activeCount,
    removed:rec.provenance.removed.length});
  }
+ cardResults.sort((a,b)=>a.race_id.localeCompare(b.race_id));
+ overview.sort((a,b)=>a.meeting.localeCompare(b.meeting));
  const shortlist=Select.build(cards,official);
  assert.equal(shortlist.total_races,cardResults.length);
  const eligible=mode==='PRE_RACE_DRAFT'&&shortlist.full_official_meeting_coverage&&
