@@ -48,7 +48,7 @@ function publishedAt(value){
 }
 function requireCumulativeScratchings(archive,replacement){
  if(!archive||archive.schema!=='racing-lab-friday-field-overlay/v1'||
-    archive.race_date!==replacement.race_date||!/\d{4}-\d{2}-\d{2}/.test(archive.checked_date)||archive.checked_date>=replacement.race_date||
+    archive.race_date!==replacement.race_date||!/^\d{4}-\d{2}-\d{2}$/.test(archive.checked_date)||archive.checked_date>=replacement.race_date||
     replacement.schema!=='racing-lab-racecard-overlay/v2'||
     !archive.scratchings||!replacement.scratchings)
    throw Error('Immutable Friday scratching reference missing or mismatched');

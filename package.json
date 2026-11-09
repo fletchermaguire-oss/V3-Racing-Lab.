@@ -15,6 +15,7 @@
     "card:build": "node scripts/build-feature-card.cjs",
     "card:import-official": "node scripts/import-official-form.cjs",
     "test:formula-readiness": "node --test v5/formula-readiness.qa.cjs",
-    "preflight:future-card": "node scripts/future-card-check.cjs"
+    "preflight:future-card": "node scripts/future-card-check.cjs",
+    "card:stage-reviewed": "node scripts/stage-current-card.cjs"
   }
 }

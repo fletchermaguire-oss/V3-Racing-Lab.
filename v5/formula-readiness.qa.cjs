@@ -46,3 +46,20 @@ test('legacy publishing and future release gates are wired',()=>{
  assert.match(fs.readFileSync('build-v5.js','utf8'),/LEGACY_BUILD_DISABLED/);
  assert.match(fs.readFileSync('scripts/v5-safe-build.cjs','utf8'),/release-gate-hardened/);
 });
+
+test('future-card staging never writes on a dry run or changes archives',()=>{
+ const fs=require('node:fs'),os=require('node:os'),path=require('node:path');
+ const stage=require('../scripts/stage-current-card.cjs').stage;
+ const root=fs.mkdtempSync(path.join(os.tmpdir(),'v5-future-test-'));
+ try{
+  const x=card(),dir=path.join(root,'v5/cards',x.date);
+  fs.mkdirSync(dir,{recursive:true});
+  fs.writeFileSync(path.join(dir,'research.json'),JSON.stringify(x));
+  fs.writeFileSync(path.join(dir,'going.json'),JSON.stringify(going));
+  fs.writeFileSync(path.join(root,'v5/active-card.js'),'preserve original');
+  const r=stage({checkout:root,cardPath:'v5/cards/'+x.date+'/research.json',
+   goingPath:'v5/cards/'+x.date+'/going.json'});
+  assert.equal(r.status,'DRY_RUN_ONLY');assert.equal(r.change_needed,true);
+  assert.equal(fs.readFileSync(path.join(root,'v5/active-card.js'),'utf8'),'preserve original');
+ }finally{fs.rmSync(root,{recursive:true,force:true});}
+});

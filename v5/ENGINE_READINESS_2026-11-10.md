@@ -17,3 +17,5 @@ No model probabilities are certified. Source URLs and asserted timestamps still 
 Run `npm test`, `npm run check`, `npm run preflight:future-card -- v5/cards/YYYY-MM-DD/research.json v5/cards/YYYY-MM-DD/going.json`.
 
 V5-L6 is *shadow only* until independently frozen forward paired results support an upgrade.
+
+Future staging is dry-run by default: `npm run card:stage-reviewed -- . v5/cards/YYYY-MM-DD/research.json v5/cards/YYYY-MM-DD/going.json`. A reviewed, explicitly authorized local activation additionally uses `--apply`; this is NOT a deploy.
