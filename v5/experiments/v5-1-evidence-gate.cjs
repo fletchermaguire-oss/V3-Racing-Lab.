@@ -87,6 +87,10 @@ function riskScreen(row,race,field,stability=null){
   warnings.push('PACE_DATA_INCOMPLETE');
  return {runner_id:row.id,horse:row.horse,race_id:row.race_id,model_rank:row.rank,
   model_pct:row.p,model_gap:race.gap,quality_issues:problems,sensitivity_warnings:warnings,pace_context:paceNote,
+  source_data_issues:problems.filter(x=>['THIN_PARSEABLE_RECENT_FORM','LOW_DOCUMENTED_COMPLETENESS','SOURCE_INPUT_WARNINGS'].includes(x)),
+  racing_uncertainty_issues:problems.filter(x=>!['THIN_PARSEABLE_RECENT_FORM','LOW_DOCUMENTED_COMPLETENESS','SOURCE_INPUT_WARNINGS'].includes(x)),
+  data_readiness:problems.some(x=>['THIN_PARSEABLE_RECENT_FORM','LOW_DOCUMENTED_COMPLETENESS','SOURCE_INPUT_WARNINGS'].includes(x))?
+    'INSUFFICIENT_SOURCE_EVIDENCE':'EVIDENCE_CHECK_COMPLETED',
   pace_diagnostics:{
    known_historical_settling: settled.length,field_size:field.length,
    historical_coverage:Number(paceCoverage.toFixed(2)),
