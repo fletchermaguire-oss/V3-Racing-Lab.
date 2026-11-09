@@ -23,3 +23,7 @@ Future staging is dry-run by default: `npm run card:stage-reviewed -- . v5/cards
 ## Missing-class reliability protection
 
 Ported the tested quality-only protection from the earlier draft PR #24: leaders with zero recognised class evidence receive `UNKNOWN_GRADED_CLASS` and cannot be promoted into strict win-first priority/review without source validation. The raw L5 score, formula coefficients and race probabilities are unchanged; a withheld leader is not replaced by a different horse. Dashboard discloses the missing grade as uncertainty, not weak class.
+
+## L6 historical evidence integrity
+
+New `v5/l6-evidence-gate.cjs` blocks race-level last-600 timings from being labelled horse-specific, rejects mismatched runner identities, same-day results, late source captures, unknown adjustment methods and incomplete opponent measurements. Returns per-race source coverage, never invented speed scores. It **never adjusts probabilities** and never claims that URLs or hashes prove source authenticity. Sources still need independent pre-race attestation before L6 can be scored.
