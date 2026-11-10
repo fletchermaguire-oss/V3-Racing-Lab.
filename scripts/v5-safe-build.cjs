@@ -52,7 +52,24 @@ const active=require('../v5/active-card.js');
 if(active.date!=='2026-10-31'){
  const source=JSON.parse(fs.readFileSync('.'+active.research_url,'utf8'));
  assert.equal(source.date,active.date,'Active-card date mismatch');
- const model=require('../v5/model.js').board(source);
+ /* A new Saturday must be checked using its explicitly staged going.
+  * Do not silently run all meetings under the model's Good 4 default.
+  * The 3 Nov archived card keeps its separately verified historical overlay path.
+  */
+ const originalModel=require('../v5/model.js');
+ const plannedGoing=active.date==='2026-11-03'?null:active.going;
+ if(active.date!=='2026-11-03'){
+  const preflight=require('../v5/future-card-preflight.cjs').checkResearch({
+   card:source,going:plannedGoing,model:originalModel
+  });
+  assert.equal(preflight.status,'RESEARCH_ONLY_READY',
+   'New Saturday input/going validation blocked: '+preflight.blockers.join('; '));
+ }
+ const model=originalModel.board(source,plannedGoing?{going:plannedGoing}:{});
+ if(plannedGoing)model.baseline.races.forEach(r=>{
+  assert.equal(r.going,plannedGoing[r.meeting],
+   'Build validation going must match displayed active-card going: '+r.meeting);
+ });
  assert.equal(model.raceCount,source.expected_inventory.races);
  assert.equal(model.sourceCount,source.expected_inventory.runners,'Complete listed inventory');
  assert.equal(model.activeCount+model.excludedCount,source.expected_inventory.runners,'Active plus excluded must match source inventory');
