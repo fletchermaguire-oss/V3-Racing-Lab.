@@ -50,13 +50,26 @@ function wilson(w,n){
 }
 function stat(items){
  const n=items.length,w=items.filter(x=>x.won).length;
- return {picks:n,wins:w,hit_rate:n?+(w/n).toFixed(4):null,wilson95:wilson(w,n)};
+ return {picks:n,wins:w,hit_rate:n?+(w/n).toFixed(4):null,wilson95:wilson(w,n),
+  model_expected_winners:+(items.reduce((sum,x)=>sum+(Number.isFinite(x.p)?x.p:0)/100,0)).toFixed(3)};
 }
 function topK(items,k,field){
  const sorted=items.slice().sort((a,b)=>b[field]-a[field]||a.race_id.localeCompare(b.race_id));
  return {k,selected:sorted.slice(0,k).map(x=>({race_id:x.race_id,horse:x.leader_horse,won:x.won,p:x.p})),
   ...stat(sorted.slice(0,k))};
 }
+
+function contrast(original,challenger){
+ const a=new Map(original.selected.map(x=>[x.race_id,x])),b=new Map(challenger.selected.map(x=>[x.race_id,x]));
+ const removed=[...a.values()].filter(x=>!b.has(x.race_id));
+ const added=[...b.values()].filter(x=>!a.has(x.race_id));
+ assert.equal(removed.length,added.length,'Fixed-size cohort must exchange equal picks');
+ return {changes:added.length,additional_winners:added.filter(x=>x.won).length,
+  removed_winners:removed.filter(x=>x.won).length,
+  net_wins:added.filter(x=>x.won).length-removed.filter(x=>x.won).length,
+  added,removed};
+}
+
 function evaluate(){
  const raw=Rank.loadDatasets(),days=[];
  for(const d of raw){
@@ -72,10 +85,11 @@ function evaluate(){
    top10:topK(items,10,'baseline_ranking_score'),top15:topK(items,15,'baseline_ranking_score')};
   const quality={top5:topK(items,5,'quality_ranking_score'),
    top10:topK(items,10,'quality_ranking_score'),top15:topK(items,15,'quality_ranking_score')};
+  const swaps=Object.fromEntries([5,10,15].map(k=>['top'+k,contrast(baseline['top'+k],quality['top'+k])]));
   days.push({date:d.date,source:d.source,races:items.length,baseline:stat(items),
    by_field_size:{under15:stat(items.filter(x=>x.field_size<15)),
     at_least15:stat(items.filter(x=>x.field_size>=15))},
-   screens,leaderboard:{baseline,quality},
+   screens,leaderboard:{baseline,quality},swaps,
    // Prospective debugging: separate all entries, including losses.
    cases:items});
  }
@@ -90,7 +104,10 @@ function evaluate(){
    const selected=days.flatMap(d=>d.leaderboard[label]['top'+k].selected);
    sums[label]={...stat(selected),days:days.length};
   }
-  totals.leaderboard['top'+k]=sums;
+  const differences=days.map(d=>({date:d.date,...d.swaps['top'+k]}));
+  totals.leaderboard['top'+k]={...sums,
+    swaps:days.map(d=>({date:d.date,...d.swaps['top'+k]}))};
+
  }
  return {schema:'racing-lab-leader-reliability-shadow/v1',
   status:'RETROSPECTIVE_NO_HOLDOUT_DO_NOT_DEPLOY',

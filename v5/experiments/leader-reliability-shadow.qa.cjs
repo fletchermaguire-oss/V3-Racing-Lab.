@@ -41,3 +41,18 @@ test('Quality screen is completely separate from prediction and reports uncertai
  assert.ok(out.dates.every(d=>d.cases.length===d.races));
  assert.ok(out.totals.baseline.wilson95[0]<out.totals.baseline.hit_rate);
 });
+
+test('Quality board changes are counted as winners added AND removed',()=>{
+ const x=E.evaluate();
+ for(const [tier,s] of Object.entries(x.totals.leaderboard)){
+  assert.equal(s.quality.wins-s.baseline.wins,s.swaps.reduce((n,a)=>n+a.net_wins,0),tier);
+  assert.equal(s.baseline.picks,s.quality.picks);
+  assert.ok(s.swaps.every(d=>d.changes===d.added.length&&d.changes===d.removed.length));
+ }
+});
+test('Strict screen reports full coverage and expected win count without guaranteeing accuracy',()=>{
+ const x=E.evaluate(),p=x.totals.screens.strict_winfirst;
+ assert.equal(p.picks,10);assert.equal(p.wins,7);
+ assert.ok(p.model_expected_winners>0&&p.model_expected_winners<10);
+ assert.deepEqual(x.dates.map(d=>d.screens.strict_winfirst.picks),[3,0,7,0]);
+});
