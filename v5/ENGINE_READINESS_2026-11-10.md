@@ -35,3 +35,7 @@ Run `npm run research:regional-open` to compare unchanged L5 vs two **non-produc
 ## Pace leader-flip audit
 
 Run `npm run research:pace-flips`. This extends the earlier fixed 0.30 historical settling pressure research (draft PR #26) with an honest race-by-race list of changed leaders, additional winners and correct picks damaged. Reuses original L5 scenario probabilities and changes no baseline score. A 14 November preregistration manifest freezes the rule before the next card, but contains NO actual forecasts.
+
+## Real opponent ratings, not class proxies
+
+The additional `v5/experiments/opposition-strength-shadow.cjs` requires two source-matched historical races and at least 60% of each historical field's other runners with timestamped official ratings for **every current starter**, all on a comparable source scale. It regresses away the part already explained by L5's class-quality feature, then uses a bounded hypothetical coefficient of 0.10. Missing records leave L5 unchanged. No public probability or ranked selection changes. The source-only inventory audit is `npm run research:opposition-coverage`.
