@@ -24,3 +24,5 @@ This is an experimental scoring definition, not evidence of predictive gain. Run
 ## Integration decision
 
 Keep existing V5-L5 main model, model percentages and archived human rankings unchanged. The optional shadow can run **only off formally sourced new historical opposition fields**, and must be rejected or left inactive without them. This is a small incremental formula candidate, not a V6 rebuild.
+
+**Cross-runner QA:** When two current horses reference the same historical race ID, their historical field size, date, venue, rating scale and any overlapping rated opponent identities must agree. Conflicting finish places are withheld (unless an independently verified dead-heat treatment is added later). The entire current race abstains rather than treating contradictory input as an ability signal.

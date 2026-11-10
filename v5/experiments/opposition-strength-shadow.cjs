@@ -118,6 +118,34 @@ function applyToField(rows,evidence,{strength=STRENGTH}={}){
   throw Error('Zero strength must reproduce identical L5');
  return results.sort((a,b)=>b.shadow_pct-a.shadow_pct||a.id.localeCompare(b.id));
 }
+
+/* Cross-runner historical source agreement: same historical race must not
+ * claim impossible contradictory field sizes/finish positions/peer ratings.
+ * A real dead heat requires a separate verifiable source; abstain here.
+ */
+function crossFieldConflicts(evidences){
+ const historical=new Map(),bad=new Set();
+ for(const row of evidences||[]){
+  for(const x of Array.isArray(row?.historical_races)?row.historical_races:[]){
+   const id=x?.historical_race_id;
+   if(typeof id!=='string'||!id)continue;
+   const current={runner_id:row.runner_id,finish:x.finish,field:x.field_size,
+    date:x.historical_race_date,venue:canon(x.venue),rating_scale:x.rating_scale,
+    peerRatings:new Map((Array.isArray(x.opponents)?x.opponents:[]).filter(p=>p&&typeof p.id==='string').map(p=>[p.id,p.rating]))};
+   if(!historical.has(id)){historical.set(id,[current]);continue;}
+   for(const prior of historical.get(id)){
+    const mismatch=prior.field!==current.field||prior.date!==current.date||
+     prior.venue!==current.venue||prior.rating_scale!==current.rating_scale||
+     prior.finish===current.finish&&prior.runner_id!==current.runner_id;
+    const peerConflict=[...current.peerRatings].some(([peer,v])=>prior.peerRatings.has(peer)&&prior.peerRatings.get(peer)!==v);
+    if(mismatch||peerConflict){bad.add(prior.runner_id);bad.add(current.runner_id);}
+   }
+   historical.get(id).push(current);
+  }
+ }
+ return bad;
+}
+
 function evaluate(card,baseline,manifest,asOfUtc){
  if(!card||!validDate(card.date)||!baseline||!Array.isArray(baseline.records))
   throw Error('Dated V5 racecard and its unchanged L5 calculation required');
@@ -131,6 +159,7 @@ function evaluate(card,baseline,manifest,asOfUtc){
   results:card.races.map(r=>({race_id:r.id,status:'L5_UNCHANGED_MISSING_OPPONENT_DATA',leader_changed:false}))};
  const byId=new Map(card.runners.map(h=>[h.id,h]));
  const candidateById=new Map(),duplicate=new Set();
+ const historicConflicts=crossFieldConflicts(manifest.runner_evidence);
  for(const e of manifest.runner_evidence){
   if(candidateById.has(e.runner_id))duplicate.add(e.runner_id);
   candidateById.set(e.runner_id,e);
@@ -144,6 +173,7 @@ function evaluate(card,baseline,manifest,asOfUtc){
   for(const h of l5){
    const horse=byId.get(h.id),e=candidateById.get(h.id);
    if(!horse||!e||duplicate.has(h.id)){reasons.push('MISSING_OR_DUPLICATE_RUNNER_EVIDENCE');continue;}
+   if(historicConflicts.has(h.id)){reasons.push('CONTRADICTORY_SHARED_HISTORICAL_RACE');continue;}
    const v=recordCheck({h:horse,row:e,targetDate:card.date,asOf,sourceStart:start,scale:manifest.rating_scale});
    if(!v.ok)reasons.push(...v.problems);
    else{
@@ -172,4 +202,4 @@ function evaluate(card,baseline,manifest,asOfUtc){
  root.evidence_sha256=crypto.createHash('sha256').update(JSON.stringify(manifest)).digest('hex');
  return root;
 }
-module.exports={SCHEMA,METHOD,STRENGTH,savedStarts,recordCheck,residuals,applyToField,evaluate};
+module.exports={SCHEMA,METHOD,STRENGTH,savedStarts,recordCheck,crossFieldConflicts,residuals,applyToField,evaluate};

@@ -13,11 +13,11 @@ function baseline(){
   {id:'T1',horse:'Runner B',race_id:race,rank:2,p_exact:35,grade_quality:1.2},
   {id:'T2',horse:'Runner C',race_id:race,rank:3,p_exact:25,grade_quality:.9}]};
 }
-function past(i,difficulty){
+function past(i,difficulty,runnerIndex){
  const day=i?'2026-11-07':'2026-11-01';
  const t=i?'2026-11-07T03:00:00Z':'2026-11-01T03:00:00Z';
  const asof=i?'2026-11-06T14:00:00Z':'2026-10-31T14:00:00Z';
- return {historical_race_id:day+'_TESTTRACK_R01',historical_race_date:day,
+ return {historical_race_id:day+'_TESTTRACK_R0'+(runnerIndex+1),historical_race_date:day,
   historical_race_start_utc:t,venue:'TESTTRACK',finish:i?2:1,field_size:5,
   rating_scale:'TEST_SINGLE_RATING_SCALE_2026',
   source_url:'https://example.org/racing/historical/'+day,
@@ -29,7 +29,7 @@ function manifest(){
  return {schema:S.SCHEMA,target_date:'2026-11-14',method:S.METHOD,
   rating_scale:'TEST_SINGLE_RATING_SCALE_2026',race_starts_utc:{[race]:start},
   runner_evidence:[65,93,66].map((q,i)=>({runner_id:'T'+i,horse:'Runner '+['A','B','C'][i],
-   historical_races:[past(0,q),past(1,q)]}))};
+   historical_races:[past(0,q,i),past(1,q,i)]}))};
 }
 test('No opponent evidence: unchanged L5 and explicit abstention',()=>{
  const r=S.evaluate(card(),baseline(),null,cutoff);
@@ -98,4 +98,21 @@ test('Bounded independent residual never creates impossible probabilities',()=>{
  assert.ok(f.every(x=>x.shadow_pct>0&&x.shadow_pct<100&&Math.abs(x.delta_logit)<=S.STRENGTH));
  assert.ok(f.some(x=>Math.abs(x.shadow_pct-x.baseline_pct)>0.01));
  assert.throws(()=>S.applyToField(baseline().records,[{difficulty:1},{difficulty:2}],{strength:.5}));
+});
+
+test('Contradictory shared historical fields prevent the full-field shadow',()=>{
+ const x=manifest(),shared=x.runner_evidence[0].historical_races[0].historical_race_id;
+ x.runner_evidence[1].historical_races[0].historical_race_id=shared;
+ // Both contestants claim 1st in same past race, without dead-heat proof.
+ assert(S.crossFieldConflicts(x.runner_evidence).has('T0'));
+ const r=S.evaluate(card(),baseline(),x,cutoff);
+ assert.equal(r.comparable_races,0);
+ assert(r.results[0].reason_codes.includes('CONTRADICTORY_SHARED_HISTORICAL_RACE'));
+});
+test('Same historical field can contain distinct finishing positions and consistent peer ratings',()=>{
+ const x=manifest(),first=x.runner_evidence[0].historical_races[0],other=x.runner_evidence[1].historical_races[0];
+ other.historical_race_id=first.historical_race_id;
+ other.finish=2;
+ // This is a legitimate shared race only for consistent field sizes, venues and ratings.
+ assert.equal(S.crossFieldConflicts(x.runner_evidence).has('T0'),false);
 });
