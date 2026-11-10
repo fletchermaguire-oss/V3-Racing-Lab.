@@ -27,5 +27,9 @@
   "horse_picks_created": false,
   "verified_starters_present": false,
   "forecasts_frozen": false,
-  "caveat": "Registration is not a genuine forward forecast. Saturday fields must exist and be verified before any forecast."
+  "caveat": "Registration is not a genuine forward forecast. Saturday fields must exist and be verified before any forecast.",
+  "baseline_git_blob_sha": "44a451ff9db646e1fbd80c543acd204085ae42df",
+  "shadow_git_blob_sha": "dd4dfc0527fb0842ce9606bf825645e80ccee19e",
+  "quality_rule": "Do not flip unless >=70% historical 800m settling coverage. Missing evidence keeps exact L5. No result-based horse override.",
+  "report_sample_provenance": "91 retrospective races, source limitations documented separately; not a forward test."
 }
