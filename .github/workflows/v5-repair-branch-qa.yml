@@ -18,4 +18,5 @@ jobs:
       - run: npm run research:audit
       - run: npm run research:class
       - run: node v5/experiments/venue-open-shadow.cjs > /tmp/v5-regional-open.json && node -e "const x=require('/tmp/v5-regional-open.json'); console.log(JSON.stringify(x.scenarios.map(s=>({alpha:s.alpha,top1:s.top1,top3:s.top3,top5:s.top5,brier:s.brier,log_loss:s.log_loss,gains:s.gains,harms:s.harms,flips:s.flips.length,affected_races:s.affected_races}))))"
+      - run: node v5/experiments/pace-flip-audit.cjs > /tmp/v5-pace-flips.json && node -e "const x=require('/tmp/v5-pace-flips.json');console.log(JSON.stringify({days:x.days,changes:x.leader_changes,gains:x.gained_winners,harms:x.lost_winners,both_wrong:x.switched_between_losers,beneficial:x.beneficial_flips,harmful:x.harmful_flips}))"
       - run: git diff --exit-code

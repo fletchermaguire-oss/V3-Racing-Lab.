@@ -31,3 +31,7 @@ New `v5/l6-evidence-gate.cjs` blocks race-level last-600 timings from being labe
 ## Small class-context experiment
 
 Run `npm run research:regional-open` to compare unchanged L5 vs two **non-production** class-context residuals across 91 retrospectively reconstructed/modelled races. Results never rewrite L5 coefficients, probability forecasts or outcomes. Detailed method: `v5/experiments/REGIONAL_OPEN_SHADOW_METHOD.md`.
+
+## Pace leader-flip audit
+
+Run `npm run research:pace-flips`. This extends the earlier fixed 0.30 historical settling pressure research (draft PR #26) with an honest race-by-race list of changed leaders, additional winners and correct picks damaged. Reuses original L5 scenario probabilities and changes no baseline score. A 14 November preregistration manifest freezes the rule before the next card, but contains NO actual forecasts.

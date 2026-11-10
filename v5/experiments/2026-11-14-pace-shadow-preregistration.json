@@ -1,0 +1,31 @@
+{
+  "schema": "racing-lab-shadow-preregistration/v1",
+  "race_date": "2026-11-14",
+  "date_registered": "2026-11-10",
+  "model": "V5-L5-CANDIDATE-20261030",
+  "candidate": "HISTORICAL_SETTLING_PACE_0_30",
+  "candidate_status": "SHADOW_ONLY_NOT_PUBLISHED",
+  "fixed_strength": 0.3,
+  "min_coverage": 0.7,
+  "front_fraction_max": 0.34,
+  "multiple_leaders_min": 4,
+  "slow_leaders_max": 1,
+  "slow_min_field": 8,
+  "data_requirements": [
+    "Official complete starters including emergency activations",
+    "Dated individual historical settling position with source publication and capture timestamps",
+    "Track going and subsequent official results",
+    "Whole-field predictions locked with independent GitHub timestamp before race jump"
+  ],
+  "outputs_to_freeze": [
+    "L5 exact full-field probabilities",
+    "Pace shadow exact full-field probabilities",
+    "Leader-change ledger",
+    "Source coverage and quality status"
+  ],
+  "premature_data_allowed": false,
+  "horse_picks_created": false,
+  "verified_starters_present": false,
+  "forecasts_frozen": false,
+  "caveat": "Registration is not a genuine forward forecast. Saturday fields must exist and be verified before any forecast."
+}
