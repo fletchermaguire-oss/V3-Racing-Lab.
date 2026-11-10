@@ -1,0 +1,55 @@
+{
+  "schema": "racing-lab-selective-l5-preregistration/v1",
+  "registered_date": "2026-11-10",
+  "target_race_date": "2026-11-14",
+  "original_model": "V5-L5-CANDIDATE-20261030",
+  "original_model_git_blob_sha": "44a451ff9db646e1fbd80c543acd204085ae42df",
+  "reliability_script_git_blob_sha": "9791af342f8b46962eeaf781a677607b0a3ba404",
+  "pace_shadow_git_blob_sha": "dd4dfc0527fb0842ce9606bf825645e80ccee19e",
+  "strict_screen": {
+    "model_p_at_least_pct": 20,
+    "lead_gap_at_least_pp": 5,
+    "min_dated_form_starts": 3,
+    "min_dossier_completeness": 0.7,
+    "known_historical_grade_required": true,
+    "parse_issues_allowed": 0,
+    "max_field_size": 14
+  },
+  "quality_leaderboard": {
+    "p_exact_preserved": true,
+    "missing_class_penalty_score_points": 5,
+    "fewer_than_three_starts_penalty": 3,
+    "completeness_below_70pct_penalty": 3,
+    "any_parse_issues_penalty": 3,
+    "field_15plus_penalty": 2,
+    "tie_breaker": "race_id ASCENDING",
+    "one_model_leader_per_race": true
+  },
+  "priority": "Evidence-quality/race-selection challengers only; unchanged original L5 model remains frozen alongside both experimental ranks.",
+  "prospective_success_metrics": [
+    "strict_screener_picks",
+    "strict_screener_wins",
+    "abstention_rate",
+    "all_race_original_l5_top1",
+    "top5_top10_top15_baseline_versus_quality_ordering",
+    "paired_winner_gains",
+    "paired_winner_harms",
+    "mean_brier",
+    "log_loss",
+    "field_mismatch_rate",
+    "official_starter_integrity",
+    "source_completeness"
+  ],
+  "source_requirements": [
+    "Complete final starter fields incl. emergency activation and scratchings, independently timestamped before jump",
+    "Real track going, rail and verified rider/weight updates",
+    "Before-jump exact-code and source-data SHA256 commitment",
+    "Original L5 and every challenger frozen before first jump; no winner/outcome data enters prediction"
+  ],
+  "no_guaranteed_strike_rate": true,
+  "fields_available": false,
+  "pre_jump_forecasts_frozen": false,
+  "human_shortlist_rewritten": false,
+  "production_formula_modified": false,
+  "source_caveat": "Previous 7/10 strict-screen result came from four retrospective/provisional race dates, with only 10 qualifying races across two dates; it was not a prospectively preregistered rule when those outcomes occurred."
+}

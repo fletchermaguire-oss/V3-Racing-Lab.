@@ -56,3 +56,14 @@ test('Strict screen reports full coverage and expected win count without guarant
  assert.ok(p.model_expected_winners>0&&p.model_expected_winners<10);
  assert.deepEqual(x.dates.map(d=>d.screens.strict_winfirst.picks),[3,0,7,0]);
 });
+
+test('14 Nov prospective screen is fixed, source-gated and cannot edit L5',()=>{
+ const p=require('./2026-11-14-selection-rule-preregistration.json');
+ assert.equal(p.strict_screen.model_p_at_least_pct,20);
+ assert.equal(p.strict_screen.lead_gap_at_least_pp,5);
+ assert.equal(p.strict_screen.min_dated_form_starts,3);
+ assert.equal(p.strict_screen.max_field_size,14);
+ assert.equal(p.fields_available,false);
+ assert.equal(p.pre_jump_forecasts_frozen,false);
+ assert.equal(p.production_formula_modified,false);
+});
