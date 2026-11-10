@@ -113,6 +113,7 @@ test('Same historical field can contain distinct finishing positions and consist
  const x=manifest(),first=x.runner_evidence[0].historical_races[0],other=x.runner_evidence[1].historical_races[0];
  other.historical_race_id=first.historical_race_id;
  other.finish=2;
+ other.opponents=first.opponents.map(p=>({...p}));
  // This is a legitimate shared race only for consistent field sizes, venues and ratings.
  assert.equal(S.crossFieldConflicts(x.runner_evidence).has('T0'),false);
 });
