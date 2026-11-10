@@ -17,4 +17,5 @@ jobs:
       - run: npm run check
       - run: npm run research:audit
       - run: npm run research:class
+      - run: npm run research:regional-open > /tmp/v5-regional-open.json && node -e "const x=require('/tmp/v5-regional-open.json'); console.log(JSON.stringify(x.scenarios.map(s=>({alpha:s.alpha,top1:s.top1,top3:s.top3,top5:s.top5,brier:s.brier,log_loss:s.log_loss,gains:s.gains,harms:s.harms,flips:s.flips.length,affected_races:s.affected_races}))))"
       - run: git diff --exit-code

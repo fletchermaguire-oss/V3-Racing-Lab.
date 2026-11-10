@@ -27,3 +27,7 @@ Ported the tested quality-only protection from the earlier draft PR #24: leaders
 ## L6 historical evidence integrity
 
 New `v5/l6-evidence-gate.cjs` blocks race-level last-600 timings from being labelled horse-specific, rejects mismatched runner identities, same-day results, late source captures, unknown adjustment methods and incomplete opponent measurements. Returns per-race source coverage, never invented speed scores. It **never adjusts probabilities** and never claims that URLs or hashes prove source authenticity. Sources still need independent pre-race attestation before L6 can be scored.
+
+## Small class-context experiment
+
+Run `npm run research:regional-open` to compare unchanged L5 vs two **non-production** class-context residuals across 91 retrospectively reconstructed/modelled races. Results never rewrite L5 coefficients, probability forecasts or outcomes. Detailed method: `v5/experiments/REGIONAL_OPEN_SHADOW_METHOD.md`.
