@@ -1,7 +1,7 @@
 name: V5 repair branch regression (no deploy)
 on:
   push:
-    branches: ['fix/v5-engine-readiness-20261110']
+    branches: ['fix/v5-engine-readiness-20261110', 'fix/v5-future-going-smoke-20261111']
 permissions:
   contents: read
 jobs:
