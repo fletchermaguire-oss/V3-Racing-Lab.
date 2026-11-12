@@ -1,0 +1,966 @@
+{
+  "schema": "racing-lab-ascot-early-races-pace-check/v1",
+  "meeting_date": "2026-11-14",
+  "review_date": "2026-11-12",
+  "status": "RESEARCH_ONLY_NO_NEW_WIN_PERCENTAGES",
+  "source_root": "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/ascot/2026-11-14/",
+  "covered_races": [
+    2,
+    3,
+    4,
+    5
+  ],
+  "accepted_runners": 53,
+  "valid_early_and_finishing": 52,
+  "check": "Every tab/barrier/horse checked against 12 Nov acceptance roster",
+  "direct_pages": {
+    "2": "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/ascot/2026-11-14/R2/speedmap",
+    "3": "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/ascot/2026-11-14/R3/speedmap",
+    "4": "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/ascot/2026-11-14/R4/speedmap",
+    "5": "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/ascot/2026-11-14/R5/speedmap"
+  },
+  "caveats": [
+    "R1 speedmap indexing is misrouted to R9; refuse to treat as R1 data.",
+    "AES/AFS are proprietary historical average speeds, not measured one-race split times, not comparably reliable across all horses.",
+    "Apprentice allowance sources show listed claims, not official actual effective weights. Apply claims only if confirmed by WA declarations.",
+    "Race-day scratchings/going not certified; no finished V5 full-card model, no probability override."
+  ],
+  "summary": [
+    {
+      "race": 2,
+      "accepted": 11,
+      "numeric_speeds": 11,
+      "fastest_early": [
+        {
+          "horse": "Castle Road",
+          "tab": 6,
+          "early": 16.8,
+          "barrier": 9
+        },
+        {
+          "horse": "Maria Lucia",
+          "tab": 9,
+          "early": 16.8,
+          "barrier": 1
+        },
+        {
+          "horse": "Kings Court",
+          "tab": 2,
+          "early": 16.7,
+          "barrier": 5
+        },
+        {
+          "horse": "Bosisto",
+          "tab": 11,
+          "early": 16.7,
+          "barrier": 8
+        }
+      ],
+      "fastest_finish": [
+        {
+          "horse": "Baby Pearl",
+          "tab": 3,
+          "finish": 18.3
+        },
+        {
+          "horse": "Long Service Leaf",
+          "tab": 5,
+          "finish": 18.3
+        },
+        {
+          "horse": "Keep Reading",
+          "tab": 1,
+          "finish": 18.2
+        }
+      ]
+    },
+    {
+      "race": 3,
+      "accepted": 12,
+      "numeric_speeds": 11,
+      "fastest_early": [
+        {
+          "horse": "Hezangelic",
+          "tab": 1,
+          "early": 16.8,
+          "barrier": 3
+        },
+        {
+          "horse": "Just Famous",
+          "tab": 2,
+          "early": 16.4,
+          "barrier": 10
+        },
+        {
+          "horse": "Delzee",
+          "tab": 6,
+          "early": 16.4,
+          "barrier": 12
+        },
+        {
+          "horse": "Excelindeed",
+          "tab": 9,
+          "early": 16.4,
+          "barrier": 2
+        }
+      ],
+      "fastest_finish": [
+        {
+          "horse": "Wheely",
+          "tab": 7,
+          "finish": 17.7
+        },
+        {
+          "horse": "Galway Shawl",
+          "tab": 3,
+          "finish": 17.6
+        },
+        {
+          "horse": "Just Famous",
+          "tab": 2,
+          "finish": 17.5
+        }
+      ]
+    },
+    {
+      "race": 4,
+      "accepted": 17,
+      "numeric_speeds": 17,
+      "fastest_early": [
+        {
+          "horse": "South Hoba",
+          "tab": 13,
+          "early": 16.3,
+          "barrier": 13
+        },
+        {
+          "horse": "Admire Astra",
+          "tab": 1,
+          "early": 16.2,
+          "barrier": 6
+        },
+        {
+          "horse": "Boussac",
+          "tab": 12,
+          "early": 15.9,
+          "barrier": 11
+        },
+        {
+          "horse": "Knockoneback",
+          "tab": 16,
+          "early": 15.9,
+          "barrier": 5
+        }
+      ],
+      "fastest_finish": [
+        {
+          "horse": "Vexatious Rose",
+          "tab": 11,
+          "finish": 17.9
+        },
+        {
+          "horse": "Long Genes",
+          "tab": 5,
+          "finish": 17.6
+        },
+        {
+          "horse": "I'm Nipote",
+          "tab": 6,
+          "finish": 17.6
+        }
+      ]
+    },
+    {
+      "race": 5,
+      "accepted": 13,
+      "numeric_speeds": 13,
+      "fastest_early": [
+        {
+          "horse": "Famous Dain",
+          "tab": 3,
+          "early": 16.3,
+          "barrier": 11
+        },
+        {
+          "horse": "Redback Flyer",
+          "tab": 8,
+          "early": 16.3,
+          "barrier": 12
+        },
+        {
+          "horse": "Yougivemechills",
+          "tab": 5,
+          "early": 16.2,
+          "barrier": 2
+        },
+        {
+          "horse": "Classic Impact",
+          "tab": 9,
+          "early": 16.2,
+          "barrier": 9
+        }
+      ],
+      "fastest_finish": [
+        {
+          "horse": "Westbound",
+          "tab": 2,
+          "finish": 18
+        },
+        {
+          "horse": "Our Paladin Al",
+          "tab": 1,
+          "finish": 17.8
+        },
+        {
+          "horse": "Madame Magic",
+          "tab": 4,
+          "finish": 17.6
+        }
+      ]
+    }
+  ],
+  "rows": [
+    {
+      "race": 2,
+      "runner_id": "2026-11-14_ASCOT_R02_01",
+      "tab": 1,
+      "horse": "Keep Reading",
+      "barrier": 10,
+      "allotted_kg": 61,
+      "advertised_apprentice_claim_kg": 2,
+      "effective_if_claim_accepted_kg": 59,
+      "average_early_m_per_s": 16.4,
+      "average_finishing_m_per_s": 18.2,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "PROVISIONAL_CHECK_FINAL_DECLARATIONS"
+    },
+    {
+      "race": 2,
+      "runner_id": "2026-11-14_ASCOT_R02_02",
+      "tab": 2,
+      "horse": "Kings Court",
+      "barrier": 5,
+      "allotted_kg": 60.5,
+      "advertised_apprentice_claim_kg": 3,
+      "effective_if_claim_accepted_kg": 57.5,
+      "average_early_m_per_s": 16.7,
+      "average_finishing_m_per_s": 17.9,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "PROVISIONAL_CHECK_FINAL_DECLARATIONS"
+    },
+    {
+      "race": 2,
+      "runner_id": "2026-11-14_ASCOT_R02_03",
+      "tab": 3,
+      "horse": "Baby Pearl",
+      "barrier": 11,
+      "allotted_kg": 59.5,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 16.4,
+      "average_finishing_m_per_s": 18.3,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 2,
+      "runner_id": "2026-11-14_ASCOT_R02_04",
+      "tab": 4,
+      "horse": "Have A Crack",
+      "barrier": 6,
+      "allotted_kg": 57,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 16,
+      "average_finishing_m_per_s": 18,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 2,
+      "runner_id": "2026-11-14_ASCOT_R02_05",
+      "tab": 5,
+      "horse": "Long Service Leaf",
+      "barrier": 2,
+      "allotted_kg": 57,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 16,
+      "average_finishing_m_per_s": 18.3,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 2,
+      "runner_id": "2026-11-14_ASCOT_R02_06",
+      "tab": 6,
+      "horse": "Castle Road",
+      "barrier": 9,
+      "allotted_kg": 56.5,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 16.8,
+      "average_finishing_m_per_s": 17.9,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 2,
+      "runner_id": "2026-11-14_ASCOT_R02_07",
+      "tab": 7,
+      "horse": "Do I Feel Lucky",
+      "barrier": 4,
+      "allotted_kg": 56,
+      "advertised_apprentice_claim_kg": 3,
+      "effective_if_claim_accepted_kg": 53,
+      "average_early_m_per_s": 16.3,
+      "average_finishing_m_per_s": 17.3,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "PROVISIONAL_CHECK_FINAL_DECLARATIONS"
+    },
+    {
+      "race": 2,
+      "runner_id": "2026-11-14_ASCOT_R02_08",
+      "tab": 8,
+      "horse": "First Beach",
+      "barrier": 7,
+      "allotted_kg": 55.5,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 16.3,
+      "average_finishing_m_per_s": 17.2,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 2,
+      "runner_id": "2026-11-14_ASCOT_R02_09",
+      "tab": 9,
+      "horse": "Maria Lucia",
+      "barrier": 1,
+      "allotted_kg": 55.5,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 16.8,
+      "average_finishing_m_per_s": 17.3,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 2,
+      "runner_id": "2026-11-14_ASCOT_R02_10",
+      "tab": 10,
+      "horse": "Split The Gee",
+      "barrier": 3,
+      "allotted_kg": 55.5,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 16,
+      "average_finishing_m_per_s": 18,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 2,
+      "runner_id": "2026-11-14_ASCOT_R02_11",
+      "tab": 11,
+      "horse": "Bosisto",
+      "barrier": 8,
+      "allotted_kg": 54,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 16.7,
+      "average_finishing_m_per_s": 17.7,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 3,
+      "runner_id": "2026-11-14_ASCOT_R03_01",
+      "tab": 1,
+      "horse": "Hezangelic",
+      "barrier": 3,
+      "allotted_kg": 60,
+      "advertised_apprentice_claim_kg": 2,
+      "effective_if_claim_accepted_kg": 58,
+      "average_early_m_per_s": 16.8,
+      "average_finishing_m_per_s": 17.1,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "PROVISIONAL_CHECK_FINAL_DECLARATIONS"
+    },
+    {
+      "race": 3,
+      "runner_id": "2026-11-14_ASCOT_R03_02",
+      "tab": 2,
+      "horse": "Just Famous",
+      "barrier": 10,
+      "allotted_kg": 59,
+      "advertised_apprentice_claim_kg": 3,
+      "effective_if_claim_accepted_kg": 56,
+      "average_early_m_per_s": 16.4,
+      "average_finishing_m_per_s": 17.5,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "PROVISIONAL_CHECK_FINAL_DECLARATIONS"
+    },
+    {
+      "race": 3,
+      "runner_id": "2026-11-14_ASCOT_R03_03",
+      "tab": 3,
+      "horse": "Galway Shawl",
+      "barrier": 6,
+      "allotted_kg": 58,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 16.3,
+      "average_finishing_m_per_s": 17.6,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 3,
+      "runner_id": "2026-11-14_ASCOT_R03_04",
+      "tab": 4,
+      "horse": "King's Drama",
+      "barrier": 1,
+      "allotted_kg": 58,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 15.6,
+      "average_finishing_m_per_s": 17.5,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 3,
+      "runner_id": "2026-11-14_ASCOT_R03_05",
+      "tab": 5,
+      "horse": "Maalis Song",
+      "barrier": 7,
+      "allotted_kg": 58,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 15.9,
+      "average_finishing_m_per_s": 17.5,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 3,
+      "runner_id": "2026-11-14_ASCOT_R03_06",
+      "tab": 6,
+      "horse": "Delzee",
+      "barrier": 12,
+      "allotted_kg": 57,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 16.4,
+      "average_finishing_m_per_s": 17.5,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 3,
+      "runner_id": "2026-11-14_ASCOT_R03_07",
+      "tab": 7,
+      "horse": "Wheely",
+      "barrier": 9,
+      "allotted_kg": 57,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 16.1,
+      "average_finishing_m_per_s": 17.7,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 3,
+      "runner_id": "2026-11-14_ASCOT_R03_08",
+      "tab": 8,
+      "horse": "Market Snitz",
+      "barrier": 5,
+      "allotted_kg": 56.5,
+      "advertised_apprentice_claim_kg": 3,
+      "effective_if_claim_accepted_kg": 53.5,
+      "average_early_m_per_s": 16.2,
+      "average_finishing_m_per_s": 17.5,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "PROVISIONAL_CHECK_FINAL_DECLARATIONS"
+    },
+    {
+      "race": 3,
+      "runner_id": "2026-11-14_ASCOT_R03_09",
+      "tab": 9,
+      "horse": "Excelindeed",
+      "barrier": 2,
+      "allotted_kg": 56,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 16.4,
+      "average_finishing_m_per_s": 17.5,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 3,
+      "runner_id": "2026-11-14_ASCOT_R03_10",
+      "tab": 10,
+      "horse": "Testy Pharoah",
+      "barrier": 11,
+      "allotted_kg": 55.5,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 16,
+      "average_finishing_m_per_s": 17.5,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 3,
+      "runner_id": "2026-11-14_ASCOT_R03_11",
+      "tab": 11,
+      "horse": "Tribal Ruler",
+      "barrier": 8,
+      "allotted_kg": 54.5,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 16.3,
+      "average_finishing_m_per_s": 17.5,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 3,
+      "runner_id": "2026-11-14_ASCOT_R03_12",
+      "tab": 12,
+      "horse": "That Is Justice",
+      "barrier": 4,
+      "allotted_kg": 54,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": null,
+      "average_finishing_m_per_s": null,
+      "speed_status": "NOT_DISPLAYED",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 4,
+      "runner_id": "2026-11-14_ASCOT_R04_01",
+      "tab": 1,
+      "horse": "Admire Astra",
+      "barrier": 6,
+      "allotted_kg": 60,
+      "advertised_apprentice_claim_kg": 3,
+      "effective_if_claim_accepted_kg": 57,
+      "average_early_m_per_s": 16.2,
+      "average_finishing_m_per_s": 17,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "PROVISIONAL_CHECK_FINAL_DECLARATIONS"
+    },
+    {
+      "race": 4,
+      "runner_id": "2026-11-14_ASCOT_R04_02",
+      "tab": 2,
+      "horse": "Alaskan",
+      "barrier": 14,
+      "allotted_kg": 58.5,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 15.1,
+      "average_finishing_m_per_s": 17.2,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 4,
+      "runner_id": "2026-11-14_ASCOT_R04_03",
+      "tab": 3,
+      "horse": "Cheyne Bay",
+      "barrier": 1,
+      "allotted_kg": 58.5,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 15.7,
+      "average_finishing_m_per_s": 16.9,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 4,
+      "runner_id": "2026-11-14_ASCOT_R04_04",
+      "tab": 4,
+      "horse": "Streamlined",
+      "barrier": 7,
+      "allotted_kg": 58.5,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 15.3,
+      "average_finishing_m_per_s": 17,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 4,
+      "runner_id": "2026-11-14_ASCOT_R04_05",
+      "tab": 5,
+      "horse": "Long Genes",
+      "barrier": 17,
+      "allotted_kg": 58,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 14.2,
+      "average_finishing_m_per_s": 17.6,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 4,
+      "runner_id": "2026-11-14_ASCOT_R04_06",
+      "tab": 6,
+      "horse": "I'm Nipote",
+      "barrier": 12,
+      "allotted_kg": 57.5,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 15.7,
+      "average_finishing_m_per_s": 17.6,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 4,
+      "runner_id": "2026-11-14_ASCOT_R04_07",
+      "tab": 7,
+      "horse": "Ocean Goddess",
+      "barrier": 4,
+      "allotted_kg": 57.5,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 15,
+      "average_finishing_m_per_s": 17.6,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 4,
+      "runner_id": "2026-11-14_ASCOT_R04_08",
+      "tab": 8,
+      "horse": "Summer's Legacy",
+      "barrier": 3,
+      "allotted_kg": 57.5,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 14.9,
+      "average_finishing_m_per_s": 17.3,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 4,
+      "runner_id": "2026-11-14_ASCOT_R04_09",
+      "tab": 9,
+      "horse": "Spank Appeal",
+      "barrier": 16,
+      "allotted_kg": 57,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 15.8,
+      "average_finishing_m_per_s": 17,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 4,
+      "runner_id": "2026-11-14_ASCOT_R04_10",
+      "tab": 10,
+      "horse": "Truevinsky",
+      "barrier": 10,
+      "allotted_kg": 56,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 15,
+      "average_finishing_m_per_s": 17.1,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 4,
+      "runner_id": "2026-11-14_ASCOT_R04_11",
+      "tab": 11,
+      "horse": "Vexatious Rose",
+      "barrier": 9,
+      "allotted_kg": 56,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 15.5,
+      "average_finishing_m_per_s": 17.9,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 4,
+      "runner_id": "2026-11-14_ASCOT_R04_12",
+      "tab": 12,
+      "horse": "Boussac",
+      "barrier": 11,
+      "allotted_kg": 55.5,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 15.9,
+      "average_finishing_m_per_s": 17.3,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 4,
+      "runner_id": "2026-11-14_ASCOT_R04_13",
+      "tab": 13,
+      "horse": "South Hoba",
+      "barrier": 13,
+      "allotted_kg": 55.5,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 16.3,
+      "average_finishing_m_per_s": 16.5,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 4,
+      "runner_id": "2026-11-14_ASCOT_R04_14",
+      "tab": 14,
+      "horse": "Bob The Baker",
+      "barrier": 8,
+      "allotted_kg": 55,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 15,
+      "average_finishing_m_per_s": 16.3,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 4,
+      "runner_id": "2026-11-14_ASCOT_R04_15",
+      "tab": 15,
+      "horse": "Idodomya",
+      "barrier": 15,
+      "allotted_kg": 55,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 14.8,
+      "average_finishing_m_per_s": 16.9,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 4,
+      "runner_id": "2026-11-14_ASCOT_R04_16",
+      "tab": 16,
+      "horse": "Knockoneback",
+      "barrier": 5,
+      "allotted_kg": 55,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 15.9,
+      "average_finishing_m_per_s": 17.1,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 4,
+      "runner_id": "2026-11-14_ASCOT_R04_17",
+      "tab": 17,
+      "horse": "Whispering Pharaoh",
+      "barrier": 2,
+      "allotted_kg": 55,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 14.6,
+      "average_finishing_m_per_s": 16.3,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 5,
+      "runner_id": "2026-11-14_ASCOT_R05_01",
+      "tab": 1,
+      "horse": "Our Paladin Al",
+      "barrier": 6,
+      "allotted_kg": 59.5,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 15.8,
+      "average_finishing_m_per_s": 17.8,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 5,
+      "runner_id": "2026-11-14_ASCOT_R05_02",
+      "tab": 2,
+      "horse": "Westbound",
+      "barrier": 4,
+      "allotted_kg": 59,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 15.9,
+      "average_finishing_m_per_s": 18,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 5,
+      "runner_id": "2026-11-14_ASCOT_R05_03",
+      "tab": 3,
+      "horse": "Famous Dain",
+      "barrier": 11,
+      "allotted_kg": 58.5,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 16.3,
+      "average_finishing_m_per_s": 17.4,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 5,
+      "runner_id": "2026-11-14_ASCOT_R05_04",
+      "tab": 4,
+      "horse": "Madame Magic",
+      "barrier": 3,
+      "allotted_kg": 56.5,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 15.6,
+      "average_finishing_m_per_s": 17.6,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 5,
+      "runner_id": "2026-11-14_ASCOT_R05_05",
+      "tab": 5,
+      "horse": "Yougivemechills",
+      "barrier": 2,
+      "allotted_kg": 56,
+      "advertised_apprentice_claim_kg": 3,
+      "effective_if_claim_accepted_kg": 53,
+      "average_early_m_per_s": 16.2,
+      "average_finishing_m_per_s": 17.3,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "PROVISIONAL_CHECK_FINAL_DECLARATIONS"
+    },
+    {
+      "race": 5,
+      "runner_id": "2026-11-14_ASCOT_R05_06",
+      "tab": 6,
+      "horse": "Idyllic Ruler",
+      "barrier": 13,
+      "allotted_kg": 55.5,
+      "advertised_apprentice_claim_kg": 2,
+      "effective_if_claim_accepted_kg": 53.5,
+      "average_early_m_per_s": 15.5,
+      "average_finishing_m_per_s": 17.1,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "PROVISIONAL_CHECK_FINAL_DECLARATIONS"
+    },
+    {
+      "race": 5,
+      "runner_id": "2026-11-14_ASCOT_R05_07",
+      "tab": 7,
+      "horse": "Odinaka",
+      "barrier": 10,
+      "allotted_kg": 55.5,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 15.9,
+      "average_finishing_m_per_s": 17.5,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 5,
+      "runner_id": "2026-11-14_ASCOT_R05_08",
+      "tab": 8,
+      "horse": "Redback Flyer",
+      "barrier": 12,
+      "allotted_kg": 55.5,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 16.3,
+      "average_finishing_m_per_s": 17.1,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 5,
+      "runner_id": "2026-11-14_ASCOT_R05_09",
+      "tab": 9,
+      "horse": "Classic Impact",
+      "barrier": 9,
+      "allotted_kg": 55,
+      "advertised_apprentice_claim_kg": 3,
+      "effective_if_claim_accepted_kg": 52,
+      "average_early_m_per_s": 16.2,
+      "average_finishing_m_per_s": 17.3,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "PROVISIONAL_CHECK_FINAL_DECLARATIONS"
+    },
+    {
+      "race": 5,
+      "runner_id": "2026-11-14_ASCOT_R05_10",
+      "tab": 10,
+      "horse": "Linchpin",
+      "barrier": 7,
+      "allotted_kg": 55,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 15.8,
+      "average_finishing_m_per_s": 17.3,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 5,
+      "runner_id": "2026-11-14_ASCOT_R05_11",
+      "tab": 11,
+      "horse": "Masmelo",
+      "barrier": 8,
+      "allotted_kg": 55,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 15.2,
+      "average_finishing_m_per_s": 17.5,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 5,
+      "runner_id": "2026-11-14_ASCOT_R05_12",
+      "tab": 12,
+      "horse": "Street Band",
+      "barrier": 1,
+      "allotted_kg": 55,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 16.1,
+      "average_finishing_m_per_s": 17.5,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    },
+    {
+      "race": 5,
+      "runner_id": "2026-11-14_ASCOT_R05_13",
+      "tab": 13,
+      "horse": "Western Lady",
+      "barrier": 5,
+      "allotted_kg": 55,
+      "advertised_apprentice_claim_kg": null,
+      "effective_if_claim_accepted_kg": null,
+      "average_early_m_per_s": 15.6,
+      "average_finishing_m_per_s": 17.3,
+      "speed_status": "PUBLISHED_HISTORICAL_AVERAGE",
+      "claim_status": "NO_NEW_CLAIM_ASSERTED"
+    }
+  ]
+}
