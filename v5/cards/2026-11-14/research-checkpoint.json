@@ -1,0 +1,851 @@
+{
+  "schema": "racing-lab-v5-saturday-research-checkpoint/v1",
+  "race_date": "2026-11-14",
+  "created_date": "2026-11-13",
+  "timezone": "Australia/Brisbane",
+  "project": "Racing Lab V5",
+  "status": "RESEARCH_ONLY_UNFROZEN_NOT_LIVE_MODEL",
+  "publication_approved": false,
+  "certified_final_starters": false,
+  "independent_probabilities_available": false,
+  "change_policy": "Preserve all historical archives and pre-existing Top 5/10/15; no invented winner percentages, no retrospective rank rewrites, no final publication without official complete starters and 100-percent whole-field model.",
+  "meetings": [
+    {
+      "name": "SANDOWN",
+      "state": "VIC",
+      "circuit": "Hillside except R7 Lakeside",
+      "races": 10,
+      "going_observed": "Good 4",
+      "going_status": "reported Friday form listing, recheck before first race",
+      "source": "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/sandown-hillside/2026-11-14",
+      "priority": "R8 CF Orr pace/class and blinkers; R10 Concord Connie draw; R7 special Lakeside pace"
+    },
+    {
+      "name": "ASCOT",
+      "state": "WA",
+      "races": 10,
+      "going_observed": "Soft 5",
+      "going_status": "Friday field listing, recheck Saturday",
+      "source": "https://www.fanverse.com.au/race-books/ascot-2026-11-14/",
+      "priority": "Rock Fest R10 stable + map; Profit Motive R8 wide draw and mile"
+    },
+    {
+      "name": "DOOMBEN",
+      "state": "QLD",
+      "races": 10,
+      "going_observed": "Soft 6",
+      "going_status": "13 Nov updated aggregator and R&S listing; may deteriorate, official check required",
+      "source": "https://www.racingqueensland.com.au/racing/full-calendar/thoroughbred/meeting/doom/20261114",
+      "priority": "Re-evaluate all wet suitability and R8 Keith Noud; Queensland track source earlier Good 4, now stale"
+    },
+    {
+      "name": "NEWCASTLE",
+      "state": "NSW",
+      "races": 10,
+      "going_observed": "Good 4",
+      "going_status": "Friday form listing; verify Saturday after scratchings",
+      "source": "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/newcastle/2026-11-14/race-fields",
+      "priority": "The Hunter R8; Spring Stakes R7; Beauford R9; wide fields and emergency changes"
+    }
+  ],
+  "readiness": {
+    "horse_level_form_import": "INCOMPLETE_FOR_ALL_FOUR_MEETINGS",
+    "full_sectional_export": "NOT_COMPLETE",
+    "speed_map_review": "RESEARCH_HYPOTHESES_ONLY",
+    "all_gear_changes_official_reconciled": false,
+    "scratchings_saturday_final": "NOT_AVAILABLE_AS_OF_FRIDAY",
+    "model_v5_100pct_whole_field": "NOT_RUN",
+    "top5_top10_top15": "NOT_FROZEN_FOR_14_NOV",
+    "certified_win_percentages": false,
+    "site_model_activation": "NOT_PERMITTED"
+  },
+  "key_alerts": [
+    "Newcastle was not previously completed; 10 races are now included as a sourced preliminary review, not a field-by-field finished V5 analysis.",
+    "Sandown R7 uses Lakeside; do not transfer Hillside bias or pace assumptions.",
+    "Pericles has a reported Newcastle Hunter scratching and a confirmed Sandown Orr engagement; don't count the same horse twice.",
+    "Doomben older Good 4 listing conflicts with Friday Soft 6 reports; run only with independently verified current conditions.",
+    "Concord Connie stable update positive but wide draw is a material risk.",
+    "Older Racing and Sports acceptance pages may retain scratched runners; final official sheet must decide active status."
+  ],
+  "notes": [
+    {
+      "meeting": "SANDOWN",
+      "race": 1,
+      "horse": "Ichnusa",
+      "kind": "pace / late sectionals",
+      "detail": "Prior desk review reported strong closing efforts in recent defeats; early speed and wide draw can compromise the 2400m attempt.",
+      "assessment": "Potential closer, not a verified speed-edge without individual sectional export.",
+      "sources": [
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/sandown-hillside/2026-11-14/race-fields"
+      ],
+      "status": "PREVIOUS_RESEARCH_RECHECK"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 1,
+      "horse": "Cable Dancer",
+      "kind": "trainer nomination",
+      "detail": "Charlotte Littlefield's published stable survey included Cable Dancer in a place component of her $100 strategy.",
+      "assessment": "Positive stable mention, not an independently calculated win edge.",
+      "sources": [
+        "https://sen.com.au/news/2026/11/12/horse-racing-tips-2026-how-key-trainers-would-spend-100-at-caulfield-more-29-08-copy-copy-copy-2-copy-copy-copy-copy-copy-copy"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 2,
+      "horse": "Chicago Blues",
+      "kind": "hidden run",
+      "detail": "Earlier desk review described a Bendigo finish against the prevailing track pattern.",
+      "assessment": "Tempo-dependent contender, track-bias claim needs replay confirmation.",
+      "sources": [
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/sandown-hillside/2026-11-14/race-fields"
+      ],
+      "status": "PREVIOUS_RESEARCH_RECHECK"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 2,
+      "horse": "Ruska Roma",
+      "kind": "gear",
+      "detail": "Blinkers OFF first time shown on 14 November gear listing.",
+      "assessment": "Gear change verified; performance response unknown.",
+      "sources": [
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/sandown-hillside/2026-11-14"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 3,
+      "horse": "Fundamental Nature",
+      "kind": "form / map",
+      "detail": "Prior research described a strong late run but possible tactical disadvantage behind Porter and a long preparation.",
+      "assessment": "Retain as contender; do not manufacture an improvement percentage.",
+      "sources": [
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/sandown-hillside/2026-11-14/race-fields"
+      ],
+      "status": "PREVIOUS_RESEARCH_RECHECK"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 3,
+      "horse": "Ferivia",
+      "kind": "trainer interest",
+      "detail": "Previous trainer-survey discussion named Ferivia; the source-linked stable sheet should be rechecked before elevating the claim.",
+      "assessment": "Treat as possible rival, not an automatic upgrade.",
+      "sources": [
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/sandown-hillside/2026-11-14/race-fields"
+      ],
+      "status": "PREVIOUS_RESEARCH_RECHECK"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 5,
+      "horse": "Harry Lime",
+      "kind": "stable nomination / map",
+      "detail": "Adrian Bott publicly nominated Harry Lime in Sandown R5 in the $100 trainer survey. Inside draw and a recent Listed placing add context.",
+      "assessment": "Primary contender to compare against Consulate rather than an automatic winner.",
+      "sources": [
+        "https://sen.com.au/news/2026/11/12/horse-racing-tips-2026-how-key-trainers-would-spend-100-at-caulfield-more-29-08-copy-copy-copy-2-copy-copy-copy-copy-copy-copy",
+        "https://www.ladbrokes.com.au/blog/2026/11/13/saturdays-best-bets-sandown-newcastle-doomben/"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 5,
+      "horse": "Consulate",
+      "kind": "hidden run / mile",
+      "detail": "Prior desk review noted held-up straight running and late improvement before 1600m.",
+      "assessment": "Recheck full stewards report, sectional splits and exact opponent field.",
+      "sources": [
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/sandown-hillside/2026-11-14/race-fields"
+      ],
+      "status": "PREVIOUS_RESEARCH_RECHECK"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 5,
+      "horse": "Milsons Point",
+      "kind": "gear",
+      "detail": "Prior notes suggested crossover noseband off and Norton bit on.",
+      "assessment": "Confirm with official changes before treating as a new adjustment.",
+      "sources": [
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/sandown-hillside/2026-11-14"
+      ],
+      "status": "PREVIOUS_RESEARCH_RECHECK"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 6,
+      "horse": "Bred 'Em All",
+      "kind": "form / weight",
+      "detail": "14 November R6 declarations show 54kg, Craig Williams, and form 19x12 entering the Doveton Stakes.",
+      "assessment": "Strong candidate, but verify 1000m tempo and Lake Forest's late speed.",
+      "sources": [
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/sandown-hillside/2026-11-14/race-fields"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 6,
+      "horse": "Lake Forest",
+      "kind": "closing threat",
+      "detail": "Prior desk comparison had Lake Forest as a very strong late finisher; recent field form x112x and barrier 11 present a map tradeoff.",
+      "assessment": "Serious danger if sprint pace is strong; sectional speed figure remains provisional.",
+      "sources": [
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/sandown-hillside/2026-11-14/race-fields"
+      ],
+      "status": "PREVIOUS_RESEARCH_RECHECK"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 7,
+      "horse": "Aroused",
+      "kind": "stable nomination / excuse",
+      "detail": "Grahame Begg put his published $100 stable nomination on Aroused. Earlier stewards review indicated an awkward start and narrow defeat.",
+      "assessment": "Positive stable signal; retain contender status, assess Lakeside-specific map.",
+      "sources": [
+        "https://sen.com.au/news/2026/11/12/horse-racing-tips-2026-how-key-trainers-would-spend-100-at-caulfield-more-29-08-copy-copy-copy-2-copy-copy-copy-copy-copy-copy",
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/sandown-hillside/2026-11-14"
+      ],
+      "status": "SOURCE_SUPPORTED_WITH_PREVIOUS_FORM_RECHECK"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 7,
+      "horse": "Nishioka",
+      "kind": "gear / hidden form",
+      "detail": "First-time blinkers explicitly listed. Prior analysis also reported interference in the Group 3 Red Roses.",
+      "assessment": "Potential improver; blinkers' effect is unknown and could increase pulling.",
+      "sources": [
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/sandown-hillside/2026-11-14"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 7,
+      "horse": "Semantics",
+      "kind": "hidden run",
+      "detail": "Previous review highlighted a blocked passage in the Red Roses and limited career exposure.",
+      "assessment": "Pace-dependent late threat; verify stewards and individual sectionals.",
+      "sources": [
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/sandown-hillside/2026-11-14"
+      ],
+      "status": "PREVIOUS_RESEARCH_RECHECK"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 7,
+      "horse": "Affari",
+      "kind": "held-up form",
+      "detail": "Earlier review reported being held up 500–250m before stepping back to 1200m.",
+      "assessment": "Possible inside-run improver; needs current-field route analysis.",
+      "sources": [
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/sandown-hillside/2026-11-14"
+      ],
+      "status": "PREVIOUS_RESEARCH_RECHECK"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 7,
+      "horse": "Natural Fling",
+      "kind": "pace",
+      "detail": "Prior maps suggest Natural Fling likely to race forward; Race 7 operates on Lakeside, unlike the rest of the Sandown card.",
+      "assessment": "Do not copy Hillside pace bias to this event.",
+      "sources": [
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/sandown-hillside/2026-11-14"
+      ],
+      "status": "PREVIOUS_RESEARCH_RECHECK"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 8,
+      "horse": "Jimmysstar",
+      "kind": "trainer / gear",
+      "detail": "Jack Turnbull said the horse was in his best physical shape this preparation. Blinkers OFF is confirmed by the field gear listing; HKJC lists him drawn barrier 1.",
+      "assessment": "Fitness and gate help; still assess settling style and possible lack of speed.",
+      "sources": [
+        "https://www.racing.com/news/2026/11/10/news-contenders-blinkers-may-come-off-jimmysstar-in-cf-orr",
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/sandown-hillside/2026-11-14",
+        "https://racing.hkjc.com/Racing/Info/MCS/English/racing/prerace/dstr/20261114_S10000_S_DSTR.xml.zip"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 8,
+      "horse": "Shadhavar",
+      "kind": "pace / class",
+      "detail": "Strong recent wins and 2kg pull versus 59kg males, but a rise to Group 1 weight-for-age and contested speed are significant uncertainties.",
+      "assessment": "Treat as pace-sensitive and do not retain high-multi confidence mechanically.",
+      "sources": [
+        "https://racing.hkjc.com/Racing/Info/MCS/English/racing/prerace/dstr/20261114_S10000_S_DSTR.xml.zip",
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/sandown-hillside/2026-11-14/race-fields"
+      ],
+      "status": "SOURCE_SUPPORTED_WITH_ANALYST_RISK"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 8,
+      "horse": "Beiwacht",
+      "kind": "distance / class",
+      "detail": "Previous desk review identified a strong Group 1 record at 1400m; HKJC confirms 59kg, barrier 3, James McDonald.",
+      "assessment": "Serious proven-class rival, avoid favoured-horse anchoring.",
+      "sources": [
+        "https://racing.hkjc.com/Racing/Info/MCS/English/racing/prerace/dstr/20261114_S10000_S_DSTR.xml.zip"
+      ],
+      "status": "PREVIOUS_RESEARCH_RECHECK"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 8,
+      "horse": "Angel Capital",
+      "kind": "class",
+      "detail": "Previously highlighted Group 1 1400m quality; HKJC entry confirms Ben Melham, barrier 6, 59kg.",
+      "assessment": "Key class threat; inspect Everest effort independently.",
+      "sources": [
+        "https://racing.hkjc.com/Racing/Info/MCS/English/racing/prerace/dstr/20261114_S10000_S_DSTR.xml.zip"
+      ],
+      "status": "PREVIOUS_RESEARCH_RECHECK"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 8,
+      "horse": "Pericles",
+      "kind": "cross-entry / fitness",
+      "detail": "HKJC confirms Pericles in the Sandown C.F. Orr (barrier 8, Craig Williams). Newcastle Hunter market lists him scratched there on 11 Nov.",
+      "assessment": "IMPORTANT: Never count him as an active Newcastle starter.",
+      "sources": [
+        "https://racing.hkjc.com/Racing/Info/MCS/English/racing/prerace/dstr/20261114_S10000_S_DSTR.xml.zip",
+        "https://www.justhorseracing.com.au/general-news/betting/the-hunter-2026-tips-field-betting-odds-horse-previews/914963"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 8,
+      "horse": "Splash Back",
+      "kind": "trainer / rebound",
+      "detail": "Previous discussion noted a possible second-up training improvement and a form line through Rey Magnerio.",
+      "assessment": "A potential deeper-field upset, not independently quantified.",
+      "sources": [
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/sandown-hillside/2026-11-14/race-fields"
+      ],
+      "status": "PREVIOUS_RESEARCH_RECHECK"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 8,
+      "horse": "Desert Lightning",
+      "kind": "gear",
+      "detail": "First-time blinkers and nose roll off are listed for the Orr.",
+      "assessment": "Possible tactical change, but not intrinsically positive.",
+      "sources": [
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/sandown-hillside/2026-11-14"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 9,
+      "horse": "Kingswood",
+      "kind": "trainer nomination",
+      "detail": "Gavin Bedggood nominated Kingswood as his $100 win selection for Sandown R9.",
+      "assessment": "Strong confidence signal; assess recent recovery and load independently.",
+      "sources": [
+        "https://sen.com.au/news/2026/11/12/horse-racing-tips-2026-how-key-trainers-would-spend-100-at-caulfield-more-29-08-copy-copy-copy-2-copy-copy-copy-copy-copy-copy"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 9,
+      "horse": "Juja Kibo",
+      "kind": "staying form / tempo",
+      "detail": "Prior review noted Melbourne Cup placing and return to 2400m, but potential inside-rail traffic.",
+      "assessment": "Distance positive, tactical/weight sensitivity; don't call a lock.",
+      "sources": [
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/sandown-hillside/2026-11-14/race-fields"
+      ],
+      "status": "PREVIOUS_RESEARCH_RECHECK"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 9,
+      "horse": "Small Fry",
+      "kind": "form line",
+      "detail": "Geelong Cup runner-up form strengthened by Point Of Law's Melbourne Cup success.",
+      "assessment": "Serious danger to Kingswood and Juja Kibo.",
+      "sources": [
+        "https://www.ladbrokes.com.au/blog/2026/11/13/saturdays-best-bets-sandown-newcastle-doomben/"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 10,
+      "horse": "Concord Connie",
+      "kind": "direct trainer / preparation",
+      "detail": "Charlotte Littlefield says Concord Connie thrived after her Empire Rose second; Craig Williams encouraged another run. 56kg, effective wide barrier 11 after Davida scratching.",
+      "assessment": "Retain primary reviewed candidate, but no invented win percentage; wide draw and forward runners remain risks.",
+      "sources": [
+        "https://www.racingandsports.com.au/news/racing/news/2026-11-13/connie-summoned-for-one-last-spring-fling/725012",
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/sandown-hillside/2026-11-14/race-fields"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 10,
+      "horse": "Superfabulistic",
+      "kind": "pace threat",
+      "detail": "Recent winning form and barrier 3 permit an on-pace scenario against the backmarker Concord Connie.",
+      "assessment": "Potential leader to establish a winning break if unpressured.",
+      "sources": [
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/sandown-hillside/2026-11-14/race-fields"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "ASCOT",
+      "race": 8,
+      "horse": "Profit Motive",
+      "kind": "class / wide draw",
+      "detail": "Published Champion Fillies market and field confirm 1600m, 56kg, wide effective draw 11; recent good form.",
+      "assessment": "Strong candidate but first-class mile/pace and wet going need independent check.",
+      "sources": [
+        "https://www.justhorseracing.com.au/general-news/betting/profit-motive-stifles-wa-champion-fillies-betting/915123",
+        "https://www.fanverse.com.au/race-books/ascot-2026-11-14/"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "ASCOT",
+      "race": 10,
+      "horse": "Rock Fest",
+      "kind": "stable nomination / map",
+      "detail": "Dan Pearce nominated Rock Fest in the published stable $100 survey. Perth Racing's digital racebook lists Chris Parnham, barrier 4, and strongest rating consensus.",
+      "assessment": "Retain among best reviewed interstate chances; not a guaranteed win.",
+      "sources": [
+        "https://sen.com.au/news/2026/11/12/horse-racing-tips-2026-how-key-trainers-would-spend-100-at-caulfield-more-29-08-copy-copy-copy-2-copy-copy-copy-copy-copy-copy",
+        "https://www.fanverse.com.au/race-books/ascot-2026-11-14/"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "ASCOT",
+      "race": 10,
+      "horse": "Western Miss",
+      "kind": "main rival",
+      "detail": "Perth Racing digital racebook has William Pike, gate 6 and competitive wet-track profile.",
+      "assessment": "Main danger to Rock Fest; do not hide in one-horse model.",
+      "sources": [
+        "https://www.fanverse.com.au/race-books/ascot-2026-11-14/"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "ASCOT",
+      "race": 10,
+      "horse": "Memory Parade",
+      "kind": "secondary rival",
+      "detail": "Perth Racing lists barrier 3 and favourable 12-month figures.",
+      "assessment": "Potential map-value rival, without an independently calibrated percentage.",
+      "sources": [
+        "https://www.fanverse.com.au/race-books/ascot-2026-11-14/"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 1,
+      "horse": "Stellar Ami",
+      "kind": "trial / speed",
+      "detail": "Racing NSW preview reports decisive quick-start trial win ahead of the 900m Max Lees Classic.",
+      "assessment": "Speed potentially offsets wide draw, but race experience limited.",
+      "sources": [
+        "https://www.racingnsw.com.au/news/latest-racing-news/newcastle-preview-tips-for-the-hunter-race-day-saturday-14th-november/"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 2,
+      "horse": "Agent Zero",
+      "kind": "trainer / map",
+      "detail": "Maher assistant Johann Gerard-Dubord positive about last-start time and reliability; Racing NSW preview notes favourable draw and weight drop.",
+      "assessment": "Prominent researched contender, verify full opponents and pace.",
+      "sources": [
+        "https://www.racingnsw.com.au/news/latest-racing-news/hunter-hands-mahers-artist-the-chance-to-come-of-age/",
+        "https://www.racingnsw.com.au/news/latest-racing-news/newcastle-preview-tips-for-the-hunter-race-day-saturday-14th-november/"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 3,
+      "horse": "Street Force",
+      "kind": "hidden run",
+      "detail": "Racing NSW preview cites difficult recent runs and a strong finish from too far back; 1600m may help.",
+      "assessment": "Interested contender, not a certified pick.",
+      "sources": [
+        "https://www.racingnsw.com.au/news/latest-racing-news/newcastle-preview-tips-for-the-hunter-race-day-saturday-14th-november/"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 4,
+      "horse": "Cabbucio",
+      "kind": "form / placement",
+      "detail": "Racing NSW says four straight preparation placings, improving route from an advantageous draw and 1600m drop.",
+      "assessment": "Primary analytical contender in Newcastle R4.",
+      "sources": [
+        "https://www.racingnsw.com.au/news/latest-racing-news/newcastle-preview-tips-for-the-hunter-race-day-saturday-14th-november/"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 5,
+      "horse": "Cuban Cigar",
+      "kind": "hidden form",
+      "detail": "Racing NSW reports narrow Four Pillars defeat despite wide gate and 62kg.",
+      "assessment": "Prominent contender with improved draw.",
+      "sources": [
+        "https://www.racingnsw.com.au/news/latest-racing-news/newcastle-preview-tips-for-the-hunter-race-day-saturday-14th-november/"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 5,
+      "horse": "Amreekiyah",
+      "kind": "stable nomination",
+      "detail": "Peter Snowden publicly nominates Amreekiyah to win R5 in the $100 trainer survey.",
+      "assessment": "Upgrade attention; compare against Cuban Cigar.",
+      "sources": [
+        "https://sen.com.au/news/2026/11/12/horse-racing-tips-2026-how-key-trainers-would-spend-100-at-caulfield-more-29-08-copy-copy-copy-2-copy-copy-copy-copy-copy-copy"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 6,
+      "horse": "Regal Problem",
+      "kind": "new gear / map",
+      "detail": "Racing NSW preview says first-time blinkers and stalking draw. Current form has been consistent.",
+      "assessment": "Genuine contender; verify gear in official sheet and remaining field.",
+      "sources": [
+        "https://www.racingnsw.com.au/news/latest-racing-news/newcastle-preview-tips-for-the-hunter-race-day-saturday-14th-november/"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 6,
+      "horse": "Chix",
+      "kind": "form",
+      "detail": "Racing NSW notes Chix is two-for-two this preparation and usually races prominently.",
+      "assessment": "Strong opposing contender to Regal Problem.",
+      "sources": [
+        "https://www.racingnsw.com.au/news/latest-racing-news/newcastle-preview-tips-for-the-hunter-race-day-saturday-14th-november/"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 7,
+      "horse": "Kickup Rocky",
+      "kind": "class / speed",
+      "detail": "Racing NSW preview flags two easy wins this prep and relevant Brisbane class form.",
+      "assessment": "Serious Spring Stakes contender, 1600m test.",
+      "sources": [
+        "https://www.racingnsw.com.au/news/latest-racing-news/newcastle-preview-tips-for-the-hunter-race-day-saturday-14th-november/"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 7,
+      "horse": "Prince Of Verona",
+      "kind": "improving rival",
+      "detail": "Three wins from three and mile prospects according to Racing NSW preview.",
+      "assessment": "Unexposed main danger to Kickup Rocky.",
+      "sources": [
+        "https://www.racingnsw.com.au/news/latest-racing-news/newcastle-preview-tips-for-the-hunter-race-day-saturday-14th-november/"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 7,
+      "horse": "Zahav",
+      "kind": "trainer insights",
+      "detail": "Maher team expects 1600m to suit and says further improvement is required; only recent maiden class success.",
+      "assessment": "Promising but not validated against stronger rivals.",
+      "sources": [
+        "https://www.racingnsw.com.au/news/latest-racing-news/hunter-hands-mahers-artist-the-chance-to-come-of-age/"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 8,
+      "horse": "She's An Artist",
+      "kind": "direct stable / tactical change",
+      "detail": "Maher assistant says mare recovered well, Warwick Farm win restored confidence, 1300m and low weight suit; may race closer to lead.",
+      "assessment": "Important Hunter contender not yet measured against full-field pace.",
+      "sources": [
+        "https://www.racingnsw.com.au/news/latest-racing-news/hunter-hands-mahers-artist-the-chance-to-come-of-age/",
+        "https://www.racingnsw.com.au/news/latest-racing-news/newcastle-preview-tips-for-the-hunter-race-day-saturday-14th-november/"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 8,
+      "horse": "Infancy",
+      "kind": "late sectionals / run style",
+      "detail": "Racing NSW preview says strong recent closing performances and close finish near Lazzura in The Invitation.",
+      "assessment": "Pace-dependent threat; backmarker-style win reliability limited.",
+      "sources": [
+        "https://www.racingnsw.com.au/news/latest-racing-news/newcastle-preview-tips-for-the-hunter-race-day-saturday-14th-november/"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 8,
+      "horse": "General Salute",
+      "kind": "staying quality",
+      "detail": "Racing NSW reports a competitive last result in Alan Brown and proven Bill Ritchie win; 59kg limits margin for error.",
+      "assessment": "Strong class danger.",
+      "sources": [
+        "https://www.racingnsw.com.au/news/latest-racing-news/newcastle-preview-tips-for-the-hunter-race-day-saturday-14th-november/"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 8,
+      "horse": "Sweynesday",
+      "kind": "tempo / new stable",
+      "detail": "Racing NSW notes two promising runs in new stable, a close recent finish, good draw, but no win beyond 1200m.",
+      "assessment": "Third-up challenger with 1300m stamina query.",
+      "sources": [
+        "https://www.racingnsw.com.au/news/latest-racing-news/newcastle-preview-tips-for-the-hunter-race-day-saturday-14th-november/"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 8,
+      "horse": "Pericles",
+      "kind": "scratched cross-entry",
+      "detail": "Listed in stale accepted Hunter field but 11-Nov scratching recorded on up-to-date market; now C.F. Orr entrant at Sandown.",
+      "assessment": "EXCLUDE from Newcastle Hunter unless official records overturn.",
+      "sources": [
+        "https://www.justhorseracing.com.au/general-news/betting/the-hunter-2026-tips-field-betting-odds-horse-previews/914963",
+        "https://racing.hkjc.com/Racing/Info/MCS/English/racing/prerace/dstr/20261114_S10000_S_DSTR.xml.zip"
+      ],
+      "status": "SCRATCHING_REPORTED_RECONFIRM_ON_OFFICIAL_SHEET"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 9,
+      "horse": "Savvy Spy",
+      "kind": "direct trainer / staying",
+      "detail": "Adrian Bott says patient settling is improving; horse recovered well from Rosehill win and carries 53kg in 2300m Beauford.",
+      "assessment": "Good staking-form profile, but 7-day backup and class jump require review.",
+      "sources": [
+        "https://www.racingnsw.com.au/news/latest-racing-news/patient-pattern-proving-a-savvy-move-for-emerging-stayer/",
+        "https://www.racingnsw.com.au/news/latest-racing-news/newcastle-preview-tips-for-the-hunter-race-day-saturday-14th-november/"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 10,
+      "horse": "Glorious Moments",
+      "kind": "first-up preparation",
+      "detail": "Racing NSW cites strong latest trial and two previous first-up wins; turf and going suitability check.",
+      "assessment": "Resuming contender, not a proven lock.",
+      "sources": [
+        "https://www.racingnsw.com.au/news/latest-racing-news/newcastle-preview-tips-for-the-hunter-race-day-saturday-14th-november/"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 10,
+      "horse": "Kerguelen",
+      "kind": "gear / hidden run",
+      "detail": "Racing NSW preview notes blinkers and unfavourable last-start rail position, with more room possible here.",
+      "assessment": "High-upside bounceback but source timing of gear wording requires recheck.",
+      "sources": [
+        "https://www.racingnsw.com.au/news/latest-racing-news/newcastle-preview-tips-for-the-hunter-race-day-saturday-14th-november/"
+      ],
+      "status": "SOURCE_SUPPORTED_WITH_GEAR_TIMING_RECHECK"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 1,
+      "horse": "Miss Verstak",
+      "kind": "trial / juvenile",
+      "detail": "Public preview reports impressive Gold Coast trial; juveniles have high variability.",
+      "assessment": "Trial to verify; not a high-certainty V5 leg.",
+      "sources": [
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/doomben/2026-11-14/race-fields",
+        "https://www.gobet.com.au/horse-racing-tips/doomben-november-14-2026/"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 2,
+      "horse": "The Grey One",
+      "kind": "form / barrier",
+      "detail": "Accepted 59kg from barrier 3, recent win following second at previous start.",
+      "assessment": "Candidate to compare after explicit Soft 6 scenario.",
+      "sources": [
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/doomben/2026-11-14/race-fields"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 3,
+      "horse": "Headhunter",
+      "kind": "map / consistency",
+      "detail": "Accepted from barrier 3 with recent placing profile 37342.",
+      "assessment": "Potential minor map edge, needs field-level probabilities.",
+      "sources": [
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/doomben/2026-11-14/race-fields"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 4,
+      "horse": "Draw Attention",
+      "kind": "winning sequence",
+      "detail": "Form 43111, barrier 2 and 55.5kg in the 2200m handicap.",
+      "assessment": "In-form contender; heavy/soft staying aptitude still to verify.",
+      "sources": [
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/doomben/2026-11-14/race-fields"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 6,
+      "horse": "Divine Justice",
+      "kind": "winning sequence",
+      "detail": "Form 03111 and 58kg; barrier 10 limits easy on-pace lead.",
+      "assessment": "Condition-sensitive contender with more early-map work needed.",
+      "sources": [
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/doomben/2026-11-14/race-fields"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 7,
+      "horse": "Ready For Aimee",
+      "kind": "winning form",
+      "detail": "Two wins in latest two runs with 60.5kg and apprentice 1350m assignment.",
+      "assessment": "Weight and wet-track robustness need individual review.",
+      "sources": [
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/doomben/2026-11-14/race-fields"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 8,
+      "horse": "Now Is The Hour",
+      "kind": "class / inside gate",
+      "detail": "Keith Noud Listed 1200m; Gollan runner last-start winner with barrier 1 and 54kg.",
+      "assessment": "Focus contender but softer going requires evidence, not price.",
+      "sources": [
+        "https://www.justhorseracing.com.au/general-news/betting/now-is-the-hour-odds-in-the-keith-noud-quality-field/915128",
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/doomben/2026-11-14/race-fields"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 8,
+      "horse": "King Of Minto",
+      "kind": "recent winning form",
+      "detail": "Two consecutive wins leading in and lower-end handicap weight of 53kg.",
+      "assessment": "Main form danger in Listed race; barrier and traffic matter.",
+      "sources": [
+        "https://www.justhorseracing.com.au/general-news/betting/now-is-the-hour-odds-in-the-keith-noud-quality-field/915128"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 8,
+      "horse": "Restonica",
+      "kind": "class / weight",
+      "detail": "Listed contender, last-start winner, 59.5kg and barrier 3.",
+      "assessment": "Quality danger, carrying much more weight than Now Is The Hour.",
+      "sources": [
+        "https://www.justhorseracing.com.au/general-news/betting/now-is-the-hour-odds-in-the-keith-noud-quality-field/915128"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 8,
+      "horse": "Pride To Follow",
+      "kind": "scratching",
+      "detail": "13 November market display lists scratching recorded 12 November; do not use as active runner.",
+      "assessment": "Remove only after final official field reconciliation.",
+      "sources": [
+        "https://www.justhorseracing.com.au/general-news/betting/now-is-the-hour-odds-in-the-keith-noud-quality-field/915128"
+      ],
+      "status": "SCRATCHING_REPORTED_RECONFIRM_ON_OFFICIAL_SHEET"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 10,
+      "horse": "All Kinds Of Folk",
+      "kind": "map",
+      "detail": "Form 1x512, 56kg and inside draw (2) in BM85 1600m.",
+      "assessment": "Favourable map; Soft 6 performance needs detailed check.",
+      "sources": [
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/doomben/2026-11-14/race-fields"
+      ],
+      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+    }
+  ],
+  "source_index": {
+    "sandown": "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/sandown-hillside/2026-11-14",
+    "sandownfields": "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/sandown-hillside/2026-11-14/race-fields",
+    "stable": "https://sen.com.au/news/2026/11/12/horse-racing-tips-2026-how-key-trainers-would-spend-100-at-caulfield-more-29-08-copy-copy-copy-2-copy-copy-copy-copy-copy-copy",
+    "connie": "https://www.racingandsports.com.au/news/racing/news/2026-11-13/connie-summoned-for-one-last-spring-fling/725012",
+    "jimmysstar": "https://www.racing.com/news/2026/11/10/news-contenders-blinkers-may-come-off-jimmysstar-in-cf-orr",
+    "hkjc": "https://racing.hkjc.com/Racing/Info/MCS/English/racing/prerace/dstr/20261114_S10000_S_DSTR.xml.zip",
+    "ascot": "https://www.fanverse.com.au/race-books/ascot-2026-11-14/",
+    "ascotfields": "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/ascot/2026-11-14/race-fields",
+    "profit": "https://www.justhorseracing.com.au/general-news/betting/profit-motive-stifles-wa-champion-fillies-betting/915123",
+    "doomben": "https://www.racingqueensland.com.au/racing/full-calendar/thoroughbred/meeting/doom/20261114",
+    "doombenfields": "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/doomben/2026-11-14/race-fields",
+    "doombenfeature": "https://www.justhorseracing.com.au/general-news/betting/now-is-the-hour-odds-in-the-keith-noud-quality-field/915128",
+    "newcastle": "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/newcastle/2026-11-14/race-fields",
+    "newcastlepreview": "https://www.racingnsw.com.au/news/latest-racing-news/newcastle-preview-tips-for-the-hunter-race-day-saturday-14th-november/",
+    "newcastlestable": "https://www.racingnsw.com.au/news/latest-racing-news/hunter-hands-mahers-artist-the-chance-to-come-of-age/",
+    "savvy": "https://www.racingnsw.com.au/news/latest-racing-news/patient-pattern-proving-a-savvy-move-for-emerging-stayer/",
+    "newcastlehunter": "https://www.justhorseracing.com.au/general-news/betting/the-hunter-2026-tips-field-betting-odds-horse-previews/914963",
+    "breednet": "https://www.breednet.com.au/race-fields/horse-racing"
+  }
+}
