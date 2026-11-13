@@ -515,6 +515,16 @@ function load(fetcher){
       RANDWICK:official.meetings.RANDWICK.track_condition}};
     });
    }
+   if(data.date==='2026-11-14'){
+    return f('/v5/cards/2026-11-14/independent-top15.json',{cache:'no-store'}).then(function(r){
+      if(!r.ok)throw Error('14 Nov independent shortlist HTTP '+r.status);
+      return r.json();
+    }).then(function(checkpoint){
+      if(checkpoint.date!==data.date||checkpoint.publication_approved!==false)
+       throw Error('Dated independent shortlist mismatched or falsely approved');
+      return {data:data,going:Card&&Card.going||null,checkpoint:checkpoint};
+    });
+   }
    if(data.date!=='2026-10-31')return {data:data,going:Card&&Card.going||null};
    return f('/v5/official-latest.json',{cache:'no-store'}).then(function(r){
     if(!r.ok)throw Error('Official snapshot HTTP '+r.status+' (saved board withheld)');
