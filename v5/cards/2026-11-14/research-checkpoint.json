@@ -60,6 +60,8 @@
     "site_model_activation": "NOT_PERMITTED"
   },
   "key_alerts": [
+    "Newcastle official Friday sheet has 20 scratchings across the 10-race meeting; R2 All Kinds Of Folk, R4 Cuban Cigar and Spaceballs, R6 Love Story, R7 Consulate, R8 Pericles and Run Harry Run all excluded.",
+    "Friday official 13 Nov 9:34pm AEDT: She's An Artist is scratched R10 and first emergency R8 with no rider; trainer comment cannot prove start. See deep review.",
     "Newcastle was not previously completed; 10 races are now included as a sourced preliminary review, not a field-by-field finished V5 analysis.",
     "Sandown R7 uses Lakeside; do not transfer Hillside bias or pace assumptions.",
     "Pericles has a reported Newcastle Hunter scratching and a confirmed Sandown Orr engagement; don't count the same horse twice.",
@@ -599,13 +601,14 @@
       "race": 8,
       "horse": "She's An Artist",
       "kind": "direct stable / tactical change",
-      "detail": "Maher assistant says mare recovered well, Warwick Farm win restored confidence, 1300m and low weight suit; may race closer to lead.",
-      "assessment": "Important Hunter contender not yet measured against full-field pace.",
+      "detail": "Official Friday 13-Nov-26 9:34pm AEDT sheet: She's An Artist is scratched from Newcastle R10 and is first emergency 17e with no declared jockey in The Hunter R8; trainer interview is positive but does not establish activation.",
+      "assessment": "DO NOT TREAT AS ACTIVE R8 RUNNER until emergency activation and rider are officially confirmed. Do not use R10 entry.",
       "sources": [
-        "https://www.racingnsw.com.au/news/latest-racing-news/hunter-hands-mahers-artist-the-chance-to-come-of-age/",
-        "https://www.racingnsw.com.au/news/latest-racing-news/newcastle-preview-tips-for-the-hunter-race-day-saturday-14th-november/"
+        "https://www.racingaustralia.horse/FreeFields/Scratchings.aspx?Key=2026Nov14,NSW,Newcastle",
+        "https://www.racingaustralia.horse/FreeFields/Acceptances.aspx?Key=2026Nov14,NSW,Newcastle",
+        "https://www.racingnsw.com.au/news/latest-racing-news/hunter-hands-mahers-artist-the-chance-to-come-of-age/"
       ],
-      "status": "SOURCE_SUPPORTED_ANALYST_INTERPRETATION"
+      "status": "OFFICIAL_2026_11_13_RIDER_UNDECLARED_R8_EMERGENCY"
     },
     {
       "meeting": "NEWCASTLE",
@@ -846,6 +849,16 @@
     "newcastlestable": "https://www.racingnsw.com.au/news/latest-racing-news/hunter-hands-mahers-artist-the-chance-to-come-of-age/",
     "savvy": "https://www.racingnsw.com.au/news/latest-racing-news/patient-pattern-proving-a-savvy-move-for-emerging-stayer/",
     "newcastlehunter": "https://www.justhorseracing.com.au/general-news/betting/the-hunter-2026-tips-field-betting-odds-horse-previews/914963",
-    "breednet": "https://www.breednet.com.au/race-fields/horse-racing"
-  }
+    "breednet": "https://www.breednet.com.au/race-fields/horse-racing",
+    "newcastleofficialscratchings": "https://www.racingaustralia.horse/FreeFields/Scratchings.aspx?Key=2026Nov14,NSW,Newcastle",
+    "newcastleofficialgear": "https://www.racingaustralia.horse/FreeFields/GearChanges.aspx?Key=2026Nov14,NSW,Newcastle"
+  },
+  "newcastle_deep_review_url": "/v5/cards/2026-11-14/newcastle-deep-review.json",
+  "change_log": [
+    {
+      "at_local": "2026-11-13 evening AEST",
+      "kind": "EVIDENCE_CORRECTION",
+      "details": "Reconciled Newcastle official Friday scratches and rider status, corrected She's An Artist R8 emergency vs R10 scratched. Added standalone comprehensive Newcastle race-level review; no ranked selection changed."
+    }
+  ]
 }
