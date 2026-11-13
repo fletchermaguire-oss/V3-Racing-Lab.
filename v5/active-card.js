@@ -13,10 +13,10 @@
    live_refresh:false,source_label:'3 November original imported form archive'
  }:{
    date:'2026-11-14',research_url:'/v5/cards/2026-11-14/research.json',
-   going:{SANDOWN:'Good 4',NEWCASTLE:'Good 4',DOOMBEN:'Soft 5',ASCOT:'Soft 5'},
+   going:{SANDOWN:'Heavy 8',NEWCASTLE:'Soft 5',DOOMBEN:'Heavy 8',ASCOT:'Soft 5'},
    independent_shortlist_url:'/v5/cards/2026-11-14/independent-top15.json',
    official_research_only:true,live_refresh:false,
-   source_label:'Friday 13 Nov official-form source · 40 races · 544 accepted entries · 56 scratched · 25 unactivated emergencies · final Saturday starters not certified'
+   source_label:'Saturday 14 November latest official scratching sheets · 121 listed · 410 modelled runners · 134 excluded including reserves · final Doomben and Ascot deadlines pending'
  };
  if(typeof module==='object'&&module.exports)module.exports=card;
  else root.RacingLabV5Card=Object.freeze(card);

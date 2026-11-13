@@ -1,0 +1,1266 @@
+{
+  "schema": "racing-lab-v5-official-20261114-morning/v1",
+  "date": "2026-11-14",
+  "as_of": "2026-11-14T07:52:00+10:00",
+  "publication_approved": false,
+  "status": "SANDOWN_NEWCASTLE_AFTER_CLOSE_DOOMBEN_ASCOT_PENDING",
+  "meetings": [
+    {
+      "meeting": "SANDOWN",
+      "track": "Heavy 8",
+      "official_url": "https://www.racingaustralia.horse/FreeFields/Scratchings.aspx?Key=2026Nov14,VIC,Sportsbet%20Sandown%20Hillside",
+      "source_published": "Sat 14-Nov-26 7:54AM AEDT",
+      "reported": 37,
+      "after_close": true,
+      "closing_time": "7:30AM AEDT"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "track": "Soft 5",
+      "official_url": "https://www.racingaustralia.horse/FreeFields/Scratchings.aspx?Key=2026Nov14,NSW,Newcastle",
+      "source_published": "Sat 14-Nov-26 8:10AM AEDT",
+      "reported": 36,
+      "after_close": true,
+      "closing_time": "7:30AM AEDT"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "track": "Heavy 8",
+      "official_url": "https://www.racingaustralia.horse/FreeFields/Scratchings.aspx?Key=2026Nov14,QLD,Doomben",
+      "source_published": "Sat 14-Nov-26 8:47AM AEDT",
+      "reported": 44,
+      "after_close": false,
+      "closing_time": "8:30AM AEST"
+    },
+    {
+      "meeting": "ASCOT",
+      "track": "Soft 5",
+      "official_url": "https://www.racingaustralia.horse/FreeFields/Scratchings.aspx?Key=2026Nov14,WA,Ascot",
+      "source_published": "Fri 13-Nov-26 7:16PM AEDT",
+      "reported": 4,
+      "after_close": false,
+      "closing_time": "11:00AM AEDT"
+    }
+  ],
+  "withdrawals": [
+    {
+      "meeting": "SANDOWN",
+      "race": 1,
+      "tab": 2,
+      "horse": "CABLE DANCER",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 1,
+      "tab": 4,
+      "horse": "SUFFOLK STAR (GB)",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 1,
+      "tab": 6,
+      "horse": "FEDERER",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.820Z"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 1,
+      "tab": 7,
+      "horse": "BUR DUBAI (GB)",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 2,
+      "tab": 1,
+      "horse": "ALERO",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 2,
+      "tab": 4,
+      "horse": "MOMETZ",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 2,
+      "tab": 7,
+      "horse": "CHARMING NIC",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 2,
+      "tab": 8,
+      "horse": "NATION STATE",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 2,
+      "tab": 10,
+      "horse": "CHICAGO BLUES",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 2,
+      "tab": 11,
+      "horse": "FLUENT",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 2,
+      "tab": 14,
+      "horse": "SUSPECT",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.820Z"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 3,
+      "tab": 3,
+      "horse": "ROADCONE",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 3,
+      "tab": 8,
+      "horse": "CURRAWOOD (IRE)",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 4,
+      "tab": 2,
+      "horse": "POLITELY DUN",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 4,
+      "tab": 3,
+      "horse": "TWO WOLVES",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 4,
+      "tab": 9,
+      "horse": "COCO JEN",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 4,
+      "tab": 10,
+      "horse": "FLAG FLYER",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 4,
+      "tab": 13,
+      "horse": "TERRORTORIAN",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 4,
+      "tab": 14,
+      "horse": "REVOLVER (NZ)",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 4,
+      "tab": 16,
+      "horse": "RICK’S CAFE",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.820Z"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 5,
+      "tab": 10,
+      "horse": "KATOTO",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.820Z"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 6,
+      "tab": 4,
+      "horse": "MCGAW",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 6,
+      "tab": 5,
+      "horse": "PHILOSOPHER",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 6,
+      "tab": 11,
+      "horse": "LAKE FOREST",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 7,
+      "tab": 1,
+      "horse": "CHAYAN",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.820Z"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 7,
+      "tab": 11,
+      "horse": "ALMOST AN ANGEL",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 8,
+      "tab": 3,
+      "horse": "ANGEL CAPITAL",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 8,
+      "tab": 6,
+      "horse": "DESERT LIGHTNING (NZ)",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 9,
+      "tab": 1,
+      "horse": "KNIGHT’S CHOICE",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 9,
+      "tab": 4,
+      "horse": "SMOKIN’ ROMANS (NZ)",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 10,
+      "tab": 1,
+      "horse": "CILACAP",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.820Z"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 10,
+      "tab": 3,
+      "horse": "MERRIGOLD",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 10,
+      "tab": 5,
+      "horse": "ON DISPLAY",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 10,
+      "tab": 6,
+      "horse": "ASTRAL FLAME",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 10,
+      "tab": 8,
+      "horse": "BETWITCHERY",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 10,
+      "tab": 9,
+      "horse": "DAVIDA",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.820Z"
+    },
+    {
+      "meeting": "SANDOWN",
+      "race": 10,
+      "tab": 14,
+      "horse": "RUSSIAN CHOICE",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 2,
+      "tab": 4,
+      "horse": "ALL KINDS OF FOLK",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.800Z"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 2,
+      "tab": 7,
+      "horse": "POISEN POINT (NZ)",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.800Z"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 3,
+      "tab": 7,
+      "horse": "FLAMBOYANT LAD",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.800Z"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 3,
+      "tab": 18,
+      "horse": "SMART SCUD",
+      "previous_status": "EMERGENCY - unactivated"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 3,
+      "tab": 19,
+      "horse": "COELLA",
+      "previous_status": "EMERGENCY - unactivated"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 3,
+      "tab": 20,
+      "horse": "KING SOLEIL",
+      "previous_status": "EMERGENCY - unactivated"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 3,
+      "tab": 21,
+      "horse": "SPREAD THE LOVE (NZ)",
+      "previous_status": "EMERGENCY - unactivated"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 3,
+      "tab": 22,
+      "horse": "ANGEL IN THE WIND",
+      "previous_status": "EMERGENCY - unactivated"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 4,
+      "tab": 1,
+      "horse": "CUBAN CIGAR",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.800Z"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 4,
+      "tab": 2,
+      "horse": "SPACEBALLS",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.800Z"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 4,
+      "tab": 4,
+      "horse": "COSMIC LAD",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 5,
+      "tab": 7,
+      "horse": "VALOROUS POWER (GER)",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.800Z"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 5,
+      "tab": 10,
+      "horse": "ZENMASTER",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.800Z"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 5,
+      "tab": 11,
+      "horse": "GIAPPONESE",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.800Z"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 6,
+      "tab": 5,
+      "horse": "SPACEBALLS",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.800Z"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 6,
+      "tab": 8,
+      "horse": "LOVE STORY",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.800Z"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 6,
+      "tab": 9,
+      "horse": "MAGICAL MOMENTS",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 6,
+      "tab": 11,
+      "horse": "BENEATH THE ROCK",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.800Z"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 6,
+      "tab": 15,
+      "horse": "UNREACHABLE",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 7,
+      "tab": 5,
+      "horse": "AM I DREAMING",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 7,
+      "tab": 7,
+      "horse": "EL PABLO",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.800Z"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 7,
+      "tab": 10,
+      "horse": "CONSULATE",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.800Z"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 8,
+      "tab": 1,
+      "horse": "PERICLES",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.800Z"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 8,
+      "tab": 8,
+      "horse": "RUN HARRY RUN",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.800Z"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 8,
+      "tab": 19,
+      "horse": "THEBLADE",
+      "previous_status": "EMERGENCY - unactivated"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 8,
+      "tab": 20,
+      "horse": "PHEARSON",
+      "previous_status": "EMERGENCY - unactivated"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 8,
+      "tab": 21,
+      "horse": "ROTAGILLA",
+      "previous_status": "EMERGENCY - unactivated"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 8,
+      "tab": 22,
+      "horse": "OUI OUI OUI",
+      "previous_status": "EMERGENCY - unactivated"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 9,
+      "tab": 11,
+      "horse": "SAM HAWKENS (IRE)",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.800Z"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 10,
+      "tab": 4,
+      "horse": "SHE’S AN ARTIST",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.800Z"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 10,
+      "tab": 14,
+      "horse": "ASGARDA",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.800Z"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 10,
+      "tab": 16,
+      "horse": "MARETH",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.800Z"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 10,
+      "tab": 18,
+      "horse": "IL PASSERO",
+      "previous_status": "EMERGENCY - unactivated"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 10,
+      "tab": 19,
+      "horse": "SPIONE",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.800Z"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 10,
+      "tab": 21,
+      "horse": "FELIX MAJESTIC",
+      "previous_status": "EMERGENCY - unactivated"
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 10,
+      "tab": 22,
+      "horse": "ELSON BOY (NZ)",
+      "previous_status": "EMERGENCY - unactivated"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 1,
+      "tab": 1,
+      "horse": "ALABAMA OUTLAW",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.838Z"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 1,
+      "tab": 3,
+      "horse": "OI OI OI",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.838Z"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 1,
+      "tab": 4,
+      "horse": "SWIM UP BAR",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 1,
+      "tab": 5,
+      "horse": "POWER WITNESS",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 1,
+      "tab": 6,
+      "horse": "SHE HAD A PLAN",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.838Z"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 3,
+      "tab": 9,
+      "horse": "MISS MARANDA",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 3,
+      "tab": 10,
+      "horse": "THINK LIKE PADDY (NZ)",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.838Z"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 3,
+      "tab": 12,
+      "horse": "LARIDAE",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 4,
+      "tab": 1,
+      "horse": "PRINCE LEVI",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 4,
+      "tab": 3,
+      "horse": "THINKHARDANDFAST",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.838Z"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 4,
+      "tab": 7,
+      "horse": "MAZIS",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.838Z"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 4,
+      "tab": 10,
+      "horse": "EMPRESS ASPEN",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.838Z"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 4,
+      "tab": 11,
+      "horse": "ORMOND ROAD",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 4,
+      "tab": 13,
+      "horse": "TARAVIA (NZ)",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.838Z"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 5,
+      "tab": 2,
+      "horse": "KOHLER KID",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.838Z"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 5,
+      "tab": 5,
+      "horse": "PUFF ’N’ HARRY",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.838Z"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 5,
+      "tab": 6,
+      "horse": "ROBRICK",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.838Z"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 5,
+      "tab": 8,
+      "horse": "STREET CHASE",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.838Z"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 5,
+      "tab": 10,
+      "horse": "CHAMPAGNE LANE",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 5,
+      "tab": 12,
+      "horse": "TASMAN BAY",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.838Z"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 5,
+      "tab": 14,
+      "horse": "TESSATORI",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.838Z"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 5,
+      "tab": 16,
+      "horse": "REMEMBRALL",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 5,
+      "tab": 17,
+      "horse": "DUOMO",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.838Z"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 5,
+      "tab": 18,
+      "horse": "STAR RAPPER",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.838Z"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 5,
+      "tab": 20,
+      "horse": "CARBONARA",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.838Z"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 6,
+      "tab": 2,
+      "horse": "NEW PHAROAH",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.838Z"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 6,
+      "tab": 3,
+      "horse": "INFLUENTIAL",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 6,
+      "tab": 4,
+      "horse": "DIVINE JUSTICE",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 6,
+      "tab": 11,
+      "horse": "TREASURER",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 7,
+      "tab": 2,
+      "horse": "COBRA CLUB",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 7,
+      "tab": 7,
+      "horse": "GODTFRED KIRK",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.838Z"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 7,
+      "tab": 8,
+      "horse": "SNITZSTREAM",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 7,
+      "tab": 10,
+      "horse": "ELUSIVE DOMINA",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.838Z"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 8,
+      "tab": 1,
+      "horse": "ENRICHED",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 8,
+      "tab": 9,
+      "horse": "PRIDE TO FOLLOW",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.838Z"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 9,
+      "tab": 1,
+      "horse": "BAT OUT OF HELL",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 9,
+      "tab": 4,
+      "horse": "JOY A PLENTY",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.838Z"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 9,
+      "tab": 6,
+      "horse": "DAGGERS",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 9,
+      "tab": 10,
+      "horse": "ZOUBABY",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 10,
+      "tab": 2,
+      "horse": "DEMON DARB",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.838Z"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 10,
+      "tab": 5,
+      "horse": "LAST COMMAND",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 10,
+      "tab": 6,
+      "horse": "NO DRAMA (NZ)",
+      "previous_status": "ACCEPTED_NOT_FINAL"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 10,
+      "tab": 13,
+      "horse": "LAST CHANCE SALOON",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.838Z"
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 10,
+      "tab": 14,
+      "horse": "CONNECTICUT",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.838Z"
+    },
+    {
+      "meeting": "ASCOT",
+      "race": 3,
+      "tab": 7,
+      "horse": "WHEELY",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.855Z"
+    },
+    {
+      "meeting": "ASCOT",
+      "race": 4,
+      "tab": 13,
+      "horse": "SOUTH HOBA",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.855Z"
+    },
+    {
+      "meeting": "ASCOT",
+      "race": 8,
+      "tab": 6,
+      "horse": "IN GOOD NICC",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.855Z"
+    },
+    {
+      "meeting": "ASCOT",
+      "race": 9,
+      "tab": 3,
+      "horse": "BOY CRUSH",
+      "previous_status": "SCRATCHED - official as of 2026-11-13T11:45:40.855Z"
+    }
+  ],
+  "rider_updates": [
+    {
+      "meeting": "SANDOWN",
+      "race": 5,
+      "tab": 12,
+      "horse": "ANGLAIS",
+      "old": "(late alt)",
+      "new": "Craig Williams",
+      "activation_not_certified": false
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 3,
+      "tab": 12,
+      "horse": "COSTA DEL SOL",
+      "old": "Tim Clark (late alt)",
+      "new": "Tim Clark",
+      "activation_not_certified": false
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 4,
+      "tab": 6,
+      "horse": "ZENMASTER",
+      "old": "Ms Mollie Fitzgerald (a2/50kg), (late alt)",
+      "new": "Ms Mollie Fitzgerald (a2/50kg)",
+      "activation_not_certified": false
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 8,
+      "tab": 5,
+      "horse": "WAR ETERNAL (NZ)",
+      "old": "Tommy Berry (late alt)",
+      "new": "Tommy Berry",
+      "activation_not_certified": false
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 8,
+      "tab": 11,
+      "horse": "DISNECK",
+      "old": "Reece Jones (late alt)",
+      "new": "Reece Jones",
+      "activation_not_certified": false
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 8,
+      "tab": 17,
+      "horse": "SHE’S AN ARTIST",
+      "old": "",
+      "new": "Ms Mollie Fitzgerald (a)",
+      "activation_not_certified": true
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 8,
+      "tab": 18,
+      "horse": "POINT AND SHOOT",
+      "old": "Ms Winona Costin (late alt)",
+      "new": "Ms Winona Costin",
+      "activation_not_certified": true
+    },
+    {
+      "meeting": "NEWCASTLE",
+      "race": 10,
+      "tab": 8,
+      "horse": "WELL TIMED",
+      "old": "Nash Rawiller (late alt)",
+      "new": "Nash Rawiller",
+      "activation_not_certified": false
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 5,
+      "tab": 13,
+      "horse": "DESANTO",
+      "old": "Ben Thompson",
+      "new": "Taylor Marshall",
+      "activation_not_certified": false
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 7,
+      "tab": 6,
+      "horse": "SHORTCUT",
+      "old": "Martin Harley (late alt)",
+      "new": "Martin Harley",
+      "activation_not_certified": false
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 9,
+      "tab": 5,
+      "horse": "ADDRIEL",
+      "old": "Andrew Mallyon (late alt)",
+      "new": "Andrew Mallyon",
+      "activation_not_certified": false
+    },
+    {
+      "meeting": "ASCOT",
+      "race": 1,
+      "tab": 11,
+      "horse": "ENCROACHING",
+      "old": "Shaun O'Donnell (late alt)",
+      "new": "Shaun O'Donnell",
+      "activation_not_certified": false
+    },
+    {
+      "meeting": "ASCOT",
+      "race": 9,
+      "tab": 17,
+      "horse": "JUNIPER",
+      "old": "Fred Kersley (late alt)",
+      "new": "Fred Kersley",
+      "activation_not_certified": true
+    }
+  ],
+  "uncertified_emergencies": [
+    {
+      "race_id": "2026-11-14_NEWCASTLE_R03",
+      "tab": 17,
+      "horse": "MR CHIPS",
+      "jockey": "Ms Jenny Duggan"
+    },
+    {
+      "race_id": "2026-11-14_NEWCASTLE_R08",
+      "tab": 17,
+      "horse": "SHE’S AN ARTIST",
+      "jockey": "Ms Mollie Fitzgerald (a)"
+    },
+    {
+      "race_id": "2026-11-14_NEWCASTLE_R08",
+      "tab": 18,
+      "horse": "POINT AND SHOOT",
+      "jockey": "Ms Winona Costin"
+    },
+    {
+      "race_id": "2026-11-14_NEWCASTLE_R10",
+      "tab": 17,
+      "horse": "CHARCOALS",
+      "jockey": "Dylan Gibbons"
+    },
+    {
+      "race_id": "2026-11-14_NEWCASTLE_R10",
+      "tab": 20,
+      "horse": "LIGHTNING GLORY",
+      "jockey": "William Stanley (a2/54kg)"
+    },
+    {
+      "race_id": "2026-11-14_SANDOWN_R04",
+      "tab": 17,
+      "horse": "THE MUFFIN MAN",
+      "jockey": "Luke Currie"
+    },
+    {
+      "race_id": "2026-11-14_DOOMBEN_R05",
+      "tab": 19,
+      "horse": "EVER SO READY",
+      "jockey": "Martin Harley"
+    },
+    {
+      "race_id": "2026-11-14_ASCOT_R04",
+      "tab": 17,
+      "horse": "WHISPERING PHARAOH",
+      "jockey": "Ms Jessica Gray"
+    },
+    {
+      "race_id": "2026-11-14_ASCOT_R08",
+      "tab": 17,
+      "horse": "MORE DARLING",
+      "jockey": ""
+    },
+    {
+      "race_id": "2026-11-14_ASCOT_R09",
+      "tab": 17,
+      "horse": "JUNIPER",
+      "jockey": "Fred Kersley"
+    },
+    {
+      "race_id": "2026-11-14_ASCOT_R09",
+      "tab": 18,
+      "horse": "FLYING SWAGMAN",
+      "jockey": "Paul Harvey"
+    },
+    {
+      "race_id": "2026-11-14_ASCOT_R09",
+      "tab": 19,
+      "horse": "THAT IS JUSTICE",
+      "jockey": ""
+    },
+    {
+      "race_id": "2026-11-14_ASCOT_R09",
+      "tab": 20,
+      "horse": "MORE DARLING",
+      "jockey": ""
+    }
+  ],
+  "conditional_emergencies_races": [
+    "2026-11-14_NEWCASTLE_R03",
+    "2026-11-14_NEWCASTLE_R08",
+    "2026-11-14_NEWCASTLE_R10",
+    "2026-11-14_SANDOWN_R04",
+    "2026-11-14_DOOMBEN_R05",
+    "2026-11-14_ASCOT_R04",
+    "2026-11-14_ASCOT_R09"
+  ],
+  "model": {
+    "version": "V5-L5-CANDIDATE-20261030",
+    "active": 410,
+    "excluded": 134,
+    "races": 40,
+    "source": 544,
+    "scenarios": 10,
+    "fully_normalized": true,
+    "calibrated": false
+  },
+  "shortlist_unchanged": true,
+  "top15": [
+    {
+      "rank": 1,
+      "horse": "CONCORD CONNIE",
+      "meeting": "SANDOWN",
+      "race": 10,
+      "old_pct": 17.98,
+      "new_pct": 22.61,
+      "separation_pp": 3.37,
+      "model_rank": 1
+    },
+    {
+      "rank": 2,
+      "horse": "ROCK FEST",
+      "meeting": "ASCOT",
+      "race": 10,
+      "old_pct": 28.24,
+      "new_pct": 28.24,
+      "separation_pp": 6.33,
+      "model_rank": 1
+    },
+    {
+      "rank": 3,
+      "horse": "AGENT ZERO",
+      "meeting": "NEWCASTLE",
+      "race": 2,
+      "old_pct": 32.55,
+      "new_pct": 34.59,
+      "separation_pp": 15.97,
+      "model_rank": 1
+    },
+    {
+      "rank": 4,
+      "horse": "SAVVY SPY (NZ)",
+      "meeting": "NEWCASTLE",
+      "race": 9,
+      "old_pct": 28.71,
+      "new_pct": 30.52,
+      "separation_pp": 15.31,
+      "model_rank": 1
+    },
+    {
+      "rank": 5,
+      "horse": "KICKUP ROCKY",
+      "meeting": "NEWCASTLE",
+      "race": 7,
+      "old_pct": 23.87,
+      "new_pct": 30.94,
+      "separation_pp": 10.74,
+      "model_rank": 1
+    },
+    {
+      "rank": 6,
+      "horse": "BRED ’EM ALL",
+      "meeting": "SANDOWN",
+      "race": 6,
+      "old_pct": 19.95,
+      "new_pct": 20.39,
+      "separation_pp": -2.08,
+      "model_rank": 2
+    },
+    {
+      "rank": 7,
+      "horse": "GLORIOUS MOMENTS",
+      "meeting": "NEWCASTLE",
+      "race": 10,
+      "old_pct": 8.52,
+      "new_pct": 12.62,
+      "separation_pp": 2.63,
+      "model_rank": 1
+    },
+    {
+      "rank": 8,
+      "horse": "ALL KINDS OF FOLK",
+      "meeting": "DOOMBEN",
+      "race": 10,
+      "old_pct": 18.79,
+      "new_pct": 25.88,
+      "separation_pp": 10.66,
+      "model_rank": 1
+    },
+    {
+      "rank": 9,
+      "horse": "ICHNUSA",
+      "meeting": "SANDOWN",
+      "race": 1,
+      "old_pct": 7.47,
+      "new_pct": 13.14,
+      "separation_pp": -19,
+      "model_rank": 3
+    },
+    {
+      "rank": 10,
+      "horse": "FUNDAMENTAL NATURE",
+      "meeting": "SANDOWN",
+      "race": 3,
+      "old_pct": 16.9,
+      "new_pct": 17.88,
+      "separation_pp": -1.32,
+      "model_rank": 2
+    },
+    {
+      "rank": 11,
+      "horse": "AROUSED",
+      "meeting": "SANDOWN",
+      "race": 7,
+      "old_pct": 9.18,
+      "new_pct": 8.19,
+      "separation_pp": -6.15,
+      "model_rank": 4
+    },
+    {
+      "rank": 12,
+      "horse": "DRAW ATTENTION",
+      "meeting": "DOOMBEN",
+      "race": 4,
+      "old_pct": 26.31,
+      "new_pct": 26.1,
+      "separation_pp": 7.23,
+      "model_rank": 1
+    },
+    {
+      "rank": 13,
+      "horse": "REGAL PROBLEM",
+      "meeting": "NEWCASTLE",
+      "race": 6,
+      "old_pct": 12.66,
+      "new_pct": 15.03,
+      "separation_pp": -3.86,
+      "model_rank": 3
+    },
+    {
+      "rank": 14,
+      "horse": "PROFIT MOTIVE",
+      "meeting": "ASCOT",
+      "race": 8,
+      "old_pct": 17.34,
+      "new_pct": 17.34,
+      "separation_pp": 6.97,
+      "model_rank": 1
+    },
+    {
+      "rank": 15,
+      "horse": "CABBUCIO",
+      "meeting": "NEWCASTLE",
+      "race": 4,
+      "old_pct": 23.81,
+      "new_pct": 31.39,
+      "separation_pp": 19.03,
+      "model_rank": 1
+    }
+  ],
+  "caveat": "Official scraping after morning declarations is not a signed starter attestation, and riders on emergencies do not establish their activation."
+}
