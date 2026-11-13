@@ -1,0 +1,292 @@
+{
+  "schema": "racing-lab-v5-independent-research-shortlist/v1",
+  "date": "2026-11-14",
+  "as_of": "2026-11-13T11:49:34.436Z",
+  "status": "PRE_RACE_RESEARCH_NOT_FINAL",
+  "publication_approved": false,
+  "model": "V5-L5-CANDIDATE-20261030",
+  "track_assumptions": {
+    "NEWCASTLE": "Good 4",
+    "SANDOWN": "Good 4",
+    "DOOMBEN": "Soft 5",
+    "ASCOT": "Soft 5"
+  },
+  "scope": "40 races, 544 accepted horses (56 Friday scratchings and 25 unactivated emergencies); official source at 13 Nov publication only",
+  "entries": [
+    {
+      "rank": 1,
+      "meeting": "SANDOWN",
+      "race": 10,
+      "horse": "CONCORD CONNIE",
+      "tier": "A-",
+      "original_form_tier": "A-",
+      "research_status": "TOP10_RESEARCH",
+      "reason": "Trainer reports excellent recovery after Empire Rose second, and rider encouraged the extra run; well-established Group 1 form",
+      "risk": "Wide barrier and possible uncontested leader Superfabulistic; 1500m positioning",
+      "sources": [
+        "https://www.racingandsports.com.au/news/racing/news/2026-11-13/connie-summoned-for-one-last-spring-fling/725012"
+      ],
+      "model_pct": null,
+      "ranking_basis": "Provisional independently reviewed form-first candidate ordering; not derived from odds or model percent",
+      "model_pct_status": "COMPUTED_AT_RUNTIME_UNCALIBRATED",
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL"
+    },
+    {
+      "rank": 2,
+      "meeting": "ASCOT",
+      "race": 10,
+      "horse": "ROCK FEST",
+      "tier": "A-",
+      "original_form_tier": "A-",
+      "research_status": "TOP10_RESEARCH",
+      "reason": "Dan and Ben Pearce stable nomination; strong recent form, Chris Parnham and favourable barrier",
+      "risk": "Western Miss and other R.J. Peters rivals; Soft 5 adaptation and 1500m pace",
+      "sources": [
+        "https://www.fanverse.com.au/race-books/ascot-2026-11-14/"
+      ],
+      "model_pct": null,
+      "ranking_basis": "Provisional independently reviewed form-first candidate ordering; not derived from odds or model percent",
+      "model_pct_status": "COMPUTED_AT_RUNTIME_UNCALIBRATED",
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL"
+    },
+    {
+      "rank": 3,
+      "meeting": "NEWCASTLE",
+      "race": 2,
+      "horse": "AGENT ZERO",
+      "tier": "A-",
+      "original_form_tier": "A-",
+      "research_status": "TOP10_RESEARCH",
+      "reason": "Maher stable positive, strong last-start win, 55kg and practical barrier-four midfield trip",
+      "risk": "Rock Empire can dictate tempo; rise to 1850m and wet weather uncertainty",
+      "sources": [
+        "https://www.racingnsw.com.au/news/latest-racing-news/newcastle-preview-tips-for-the-hunter-race-day-saturday-14th-november/"
+      ],
+      "model_pct": null,
+      "ranking_basis": "Provisional independently reviewed form-first candidate ordering; not derived from odds or model percent",
+      "model_pct_status": "COMPUTED_AT_RUNTIME_UNCALIBRATED",
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL"
+    },
+    {
+      "rank": 4,
+      "meeting": "NEWCASTLE",
+      "race": 9,
+      "horse": "SAVVY SPY (NZ)",
+      "tier": "B+",
+      "original_form_tier": "B+",
+      "research_status": "TOP10_RESEARCH",
+      "reason": "Three consecutive staying wins and trainer-confirmed positive recovery; 53kg and gate four",
+      "risk": "BM78 to Listed class jump, seven-day backup and Bestower/Campaldino",
+      "sources": [
+        "https://www.racingnsw.com.au/news/latest-racing-news/patient-pattern-proving-a-savvy-move-for-emerging-stayer/"
+      ],
+      "model_pct": null,
+      "ranking_basis": "Provisional independently reviewed form-first candidate ordering; not derived from odds or model percent",
+      "model_pct_status": "COMPUTED_AT_RUNTIME_UNCALIBRATED",
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL"
+    },
+    {
+      "rank": 5,
+      "meeting": "NEWCASTLE",
+      "race": 7,
+      "horse": "KICKUP ROCKY",
+      "tier": "B+",
+      "original_form_tier": "B+",
+      "research_status": "TOP10_RESEARCH",
+      "reason": "Strong set-weights class advantage after two open-class Queensland wins; well drawn",
+      "risk": "Prince Of Verona pace control; Group 3 mile test and possible soft going",
+      "sources": [
+        "https://www.racingnsw.com.au/news/latest-racing-news/newcastle-preview-tips-for-the-hunter-race-day-saturday-14th-november/"
+      ],
+      "model_pct": null,
+      "ranking_basis": "Provisional independently reviewed form-first candidate ordering; not derived from odds or model percent",
+      "model_pct_status": "COMPUTED_AT_RUNTIME_UNCALIBRATED",
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL"
+    },
+    {
+      "rank": 6,
+      "meeting": "SANDOWN",
+      "race": 6,
+      "horse": "BRED ’EM ALL",
+      "tier": "B+",
+      "original_form_tier": "B+",
+      "research_status": "TOP10_RESEARCH",
+      "reason": "Narrow recent stakes-class result, 54kg, Craig Williams and third-up form",
+      "risk": "Deep sprint with strong finishing Lake Forest and winning Tennessee Spirit",
+      "sources": [
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/sandown-hillside/2026-11-14/race-fields"
+      ],
+      "model_pct": null,
+      "ranking_basis": "Provisional independently reviewed form-first candidate ordering; not derived from odds or model percent",
+      "model_pct_status": "COMPUTED_AT_RUNTIME_UNCALIBRATED",
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL"
+    },
+    {
+      "rank": 7,
+      "meeting": "NEWCASTLE",
+      "race": 10,
+      "horse": "GLORIOUS MOMENTS",
+      "tier": "B+",
+      "original_form_tier": "B+",
+      "research_status": "TOP10_RESEARCH",
+      "reason": "Trainer reports strong physical return, two prior first-up wins, favourable draw and trial",
+      "risk": "First-up after break versus Kerguelen with new blinkers and Theblade",
+      "sources": [
+        "https://www.racingnsw.com.au/news/latest-racing-news/newcastle-preview-tips-for-the-hunter-race-day-saturday-14th-november/"
+      ],
+      "model_pct": null,
+      "ranking_basis": "Provisional independently reviewed form-first candidate ordering; not derived from odds or model percent",
+      "model_pct_status": "COMPUTED_AT_RUNTIME_UNCALIBRATED",
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL"
+    },
+    {
+      "rank": 8,
+      "meeting": "DOOMBEN",
+      "race": 10,
+      "horse": "ALL KINDS OF FOLK",
+      "tier": "B",
+      "original_form_tier": "B",
+      "research_status": "TOP10_RESEARCH",
+      "reason": "Recent strong form, inside draw and practical 1600m map",
+      "risk": "58kg relative to lighter rivals, Soft 5 versus Soft 6 uncertainty and wet profile",
+      "sources": [
+        "https://www.racingaustralia.horse/FreeFields/Form.aspx?Key=2026Nov14,QLD,Doomben&recentForm=Y"
+      ],
+      "model_pct": null,
+      "ranking_basis": "Provisional independently reviewed form-first candidate ordering; not derived from odds or model percent",
+      "model_pct_status": "COMPUTED_AT_RUNTIME_UNCALIBRATED",
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL"
+    },
+    {
+      "rank": 9,
+      "meeting": "SANDOWN",
+      "race": 1,
+      "horse": "ICHNUSA",
+      "tier": "B",
+      "original_form_tier": "B",
+      "research_status": "TOP10_RESEARCH",
+      "reason": "Recent strong closing form and step up to 2400m may help",
+      "risk": "Early speed and position; Fiorowngood could sustain lead unchallenged",
+      "sources": [
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/sandown-hillside/2026-11-14/race-fields"
+      ],
+      "model_pct": null,
+      "ranking_basis": "Provisional independently reviewed form-first candidate ordering; not derived from odds or model percent",
+      "model_pct_status": "COMPUTED_AT_RUNTIME_UNCALIBRATED",
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL"
+    },
+    {
+      "rank": 10,
+      "meeting": "SANDOWN",
+      "race": 3,
+      "horse": "FUNDAMENTAL NATURE",
+      "tier": "B",
+      "original_form_tier": "B",
+      "research_status": "TOP10_RESEARCH",
+      "reason": "Recent late effort with trainer confidence and suitable class profile",
+      "risk": "Porter may lead uncontested; long preparation and pace dependency",
+      "sources": [
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/sandown-hillside/2026-11-14/race-fields"
+      ],
+      "model_pct": null,
+      "ranking_basis": "Provisional independently reviewed form-first candidate ordering; not derived from odds or model percent",
+      "model_pct_status": "COMPUTED_AT_RUNTIME_UNCALIBRATED",
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL"
+    },
+    {
+      "rank": 11,
+      "meeting": "SANDOWN",
+      "race": 7,
+      "horse": "AROUSED",
+      "tier": "B",
+      "original_form_tier": "B",
+      "research_status": "CONDITIONAL_REVIEW",
+      "reason": "Begg stable nomination and evidence of awkward previous beginning despite narrow defeat",
+      "risk": "Lakeside-specific map, Semantics and Nishioka hidden form; low career exposure",
+      "sources": [
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/sandown-hillside/2026-11-14/race-fields"
+      ],
+      "model_pct": null,
+      "ranking_basis": "Provisional independently reviewed form-first candidate ordering; not derived from odds or model percent",
+      "model_pct_status": "COMPUTED_AT_RUNTIME_UNCALIBRATED",
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL"
+    },
+    {
+      "rank": 12,
+      "meeting": "DOOMBEN",
+      "race": 4,
+      "horse": "DRAW ATTENTION",
+      "tier": "B-",
+      "original_form_tier": "B-",
+      "research_status": "CONDITIONAL_REVIEW",
+      "reason": "Three successive wins, good inside draw and known staying trip",
+      "risk": "2200m handicap field, unverified Soft 5/6 capability and class jump",
+      "sources": [
+        "https://www.racingaustralia.horse/FreeFields/Form.aspx?Key=2026Nov14,QLD,Doomben&recentForm=Y"
+      ],
+      "model_pct": null,
+      "ranking_basis": "Provisional independently reviewed form-first candidate ordering; not derived from odds or model percent",
+      "model_pct_status": "COMPUTED_AT_RUNTIME_UNCALIBRATED",
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL"
+    },
+    {
+      "rank": 13,
+      "meeting": "NEWCASTLE",
+      "race": 6,
+      "horse": "REGAL PROBLEM",
+      "tier": "B-",
+      "original_form_tier": "B-",
+      "research_status": "CONDITIONAL_REVIEW",
+      "reason": "First-time blinkers, gate four and narrow form behind Chix",
+      "risk": "Chix has consistent on-pace winning profile; equipment reaction unproven",
+      "sources": [
+        "https://www.racingaustralia.horse/FreeFields/GearChanges.aspx?Key=2026Nov14,NSW,Newcastle"
+      ],
+      "model_pct": null,
+      "ranking_basis": "Provisional independently reviewed form-first candidate ordering; not derived from odds or model percent",
+      "model_pct_status": "COMPUTED_AT_RUNTIME_UNCALIBRATED",
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL"
+    },
+    {
+      "rank": 14,
+      "meeting": "ASCOT",
+      "race": 8,
+      "horse": "PROFIT MOTIVE",
+      "tier": "B-",
+      "original_form_tier": "B-",
+      "research_status": "CONDITIONAL_REVIEW",
+      "reason": "Recent strong winning form and champion fillies profile",
+      "risk": "Wide barrier, first mile pressure and wet-track test",
+      "sources": [
+        "https://www.fanverse.com.au/race-books/ascot-2026-11-14/"
+      ],
+      "model_pct": null,
+      "ranking_basis": "Provisional independently reviewed form-first candidate ordering; not derived from odds or model percent",
+      "model_pct_status": "COMPUTED_AT_RUNTIME_UNCALIBRATED",
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL"
+    },
+    {
+      "rank": 15,
+      "meeting": "NEWCASTLE",
+      "race": 4,
+      "horse": "CABBUCIO",
+      "tier": "B-",
+      "original_form_tier": "B-",
+      "research_status": "CONDITIONAL_REVIEW",
+      "reason": "Four consecutive placings, favourable 55kg weight, noseband first time",
+      "risk": "Cosmic Avenger's form through Agent Zero, and noseband response unproven",
+      "sources": [
+        "https://www.racingaustralia.horse/FreeFields/GearChanges.aspx?Key=2026Nov14,NSW,Newcastle"
+      ],
+      "model_pct": null,
+      "ranking_basis": "Provisional independently reviewed form-first candidate ordering; not derived from odds or model percent",
+      "model_pct_status": "COMPUTED_AT_RUNTIME_UNCALIBRATED",
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL"
+    }
+  ],
+  "selection_method": "Independently reviewed qualitative top ten plus five conditional research horses; one per race; no automatic favourite selection, no market-first ordering, no certified winners",
+  "revision_id": "2026-11-13-friday-saturday14-qualitative-research",
+  "change_policy": "Do not silently reorder selections or overwrite frozen archive; update only after explicit source-confirmed scratch/track/pace reason",
+  "unverified_calibration": true,
+  "notes": "This provisional human-reviewed list does not assert 14 Nov final starters or validated hit rate. Each runner is included on Friday accepted field only; source form imported separately."
+}
