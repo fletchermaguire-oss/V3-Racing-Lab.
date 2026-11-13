@@ -1,0 +1,34 @@
+{
+  "schema": "racing-lab-v5-saturday-research-readiness/v1",
+  "date": "2026-11-14",
+  "status": "FRIDAY_OFFICIAL_FORM_SOURCED_MODEL_UNCALIBRATED",
+  "official_acceptances_complete": true,
+  "total_races": 40,
+  "accepted_entries": 544,
+  "friday_scratchings": 56,
+  "unactivated_emergencies": 25,
+  "model_included": 463,
+  "model_excluded": 81,
+  "form_history_parsed": 2213,
+  "source_publication": "Friday 13 November 2026",
+  "track_scenarios": {
+    "SANDOWN": "Good 4",
+    "NEWCASTLE": "Good 4",
+    "DOOMBEN": "Soft 5",
+    "ASCOT": "Soft 5"
+  },
+  "model_version": "V5-L5-CANDIDATE-20261030",
+  "scenario_count": 10,
+  "all_scenario_distributions_sum_100": true,
+  "provisional_top15_saved": true,
+  "model_probabilities_calibrated": false,
+  "saturday_final_starters_verified": false,
+  "wet_track_discrepancy": "Doomben official Friday accepts Soft 5; another Friday feed Soft 6. Use time-matched published source; rescore if officially updated.",
+  "publication_approved": false,
+  "notes": [
+    "All 40 races have full Friday official form dossier and field statuses; no post-race data or market prices entered.",
+    "Top 15 research is provisional qualitative judgment and does not automatically follow model probability order.",
+    "Final starter list, late scratchings, horse-level individual adjusted sectionals and calibrated win probabilities remain unverified.",
+    "Archived dates 31 Oct, 3 Nov and 7 Nov and results are preserved."
+  ]
+}

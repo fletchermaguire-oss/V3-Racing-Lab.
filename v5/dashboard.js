@@ -162,7 +162,7 @@ document.getElementById('pagetitle').textContent=(PAGES.find(function(x){return 
 document.getElementById('livebadge').textContent=C.error?'SAVED SATURDAY DATA · FEED CHECK':'SAVED SATURDAY RESEARCH';
 var datedLabel=document.querySelector&&document.querySelector('.topdate');
 if(datedLabel)datedLabel.textContent=['overview','races','top10'].includes(S.page)?'Sat 7 Nov 2026 · final fields':S.page==='oaks'?'Thu 5 Nov 2026 · results':'3 Nov 2026 · archived model';
-document.title='Racing Lab V5 · '+(['overview','races','top10'].includes(S.page)?'Saturday 7 November 2026':'Archived research · '+D.date);
+document.title='Racing Lab V5 · '+(['overview','races','top10'].includes(S.page)?'Saturday '+D.date:'Archived research · '+D.date);
 if(importedCard()){
  document.getElementById('livebadge').textContent=S.page==='oaks'?'THU 5 NOV · FORM REVIEW':'PDF FORM · MODEL ESTIMATES';
 }
@@ -206,7 +206,7 @@ function overview(){
  var status=e('section','rlv5-command-status');
  var meetingCard=add(e('div','rlv5-command-stat'),
   e('span','rlv5-stat-label','MEETINGS'),
-  e('strong','','Randwick · Flemington · Ascot'),
+  e('strong','',venues.join(' · ')),
   e('small','',C.board.raceCount+' races · '+C.board.activeCount+' modelled runners · final starters unconfirmed'));
  status.append(meetingCard);
  var trackCard=add(e('div','rlv5-command-stat'),e('span','rlv5-stat-label','TRACK REPORT'));
@@ -949,7 +949,7 @@ function render(){if(!C)return;D=C.data;if(!raceOf(S.race)){S.race=D.races[0].id
  if(global.RacingLabWorkshop)global.RacingLabWorkshop.stop();if(!embedded)nav();app().replaceChildren();
  if(global.RacingLabToday&&['overview','races','top10'].includes(S.page)){
   var todayPage=S.page==='overview'?'home':S.page==='top10'?'daily':'races';
-  global.RacingLabToday.render(app(),{page:todayPage,navigate:function(p){go(({home:'overview',daily:'top10',races:'races',multi:'multi',tools:'tools'})[p]||p);}});
+  global.RacingLabToday.render(app(),{page:todayPage,controller:C,navigate:function(p){go(({home:'overview',daily:'top10',races:'races',multi:'multi',tools:'tools'})[p]||p);}});
   return;
  }
  var views={overview:overview,oaks:oaksDayPage,top10:top10,races:racesPage,multi:function(){workshop('multiPage');},sim:function(){workshop('simPage');},compare:comparePage,qa:qaPage,cal:calPage,weather:weatherPage,sync:syncPage,results:resultsPage,tools:toolsPage,archive:overview};
