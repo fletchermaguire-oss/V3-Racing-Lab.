@@ -12,6 +12,7 @@
 <div class="tag">Saturday 14 November 2026 · pre-race checkpoint</div>
 <h1>Four-meeting research board</h1><p class="lead">Sandown · Ascot · Doomben · Newcastle. Trainer mail, sectionals to verify, gear changes, pace maps and field alerts, consolidated into one dated V5 record.</p>
 <div class="banner"><strong>Research only — not final selections.</strong> No certified starter list, frozen Top 5/10/15, 100% whole-field probability model or verified win percentages yet. Previous dates and results are unchanged. Claims brought forward from earlier discussion are flagged for rechecking.</div>
+<section class="section" id="newcastle-reviewed" style="margin-top:8px;margin-bottom:22px"><h2>Newcastle · official Friday review</h2><p class="sub">A fresh 10-race assessment using Friday's 9:34pm AEDT scratchings and Racing Australia gear list. This <strong>supersedes earlier Newcastle notes when they conflict</strong>.</p><div id="newcastle-reviewed-content" class="grid"><div class="entry">Loading reviewed Newcastle evidence…</div></div><p><a href="/v5/cards/2026-11-14/newcastle-deep-review.json">Open the full Newcastle official-data audit and race-by-race JSON</a></p></section>
 <div class="nav flex" aria-label="Jump to meeting"><a href="#SANDOWN">Sandown</a><a href="#ASCOT">Ascot</a><a href="#DOOMBEN">Doomben</a><a href="#NEWCASTLE">Newcastle</a><a href="#requirements">Release checks</a></div>
 <div class="cards" id="cards"><div class="card">Loading checkpoint…</div></div>
 <div id="sections" aria-live="polite"></div>
@@ -31,4 +32,12 @@ const grid=el('div','grid');d.notes.filter(n=>n.meeting===m.name).sort((a,b)=>a.
 if(n.sources?.length){const sr=el('div','sources');sr.append(el('span','','Sources: '));n.sources.forEach((u,i)=>{const a=el('a','',String(i+1));a.href=u;a.target='_blank';a.rel='noopener noreferrer';sr.append(a)});item.append(sr)}grid.append(item)});
 section.append(grid);root.append(section)}
 }).catch(err=>{document.querySelector('#cards').textContent='Research source could not load: '+err.message;});
-</script></body></html>
+</script><script>(function(){
+const area=document.querySelector('#newcastle-reviewed-content');
+fetch('/v5/cards/2026-11-14/newcastle-deep-review.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('HTTP '+r.status);return r.json()}).then(d=>{
+const mk=(tag,cls,content)=>{const x=document.createElement(tag);if(cls)x.className=cls;if(content!==undefined)x.textContent=content;return x;};
+area.replaceChildren();const notice=mk('div','banner','Friday 13 Nov: '+d.scratched_reported.reduce((a,v)=>a+v.horses.length,0)+' official scratchings. She\'s An Artist: scratched R10, first emergency R8 with no rider—do not treat as a verified Hunter starter.');area.append(notice);
+for(const r of d.races){const node=mk('article','entry');const heading=mk('div','heading');heading.append(mk('span','race','R'+r.race),mk('strong','',r.title+' · '+r.distance_m+'m'));node.append(heading,mk('p','','Provisional preference: '+r.working_leader),mk('p','','Main rivals: '+r.principal_challengers.join(', ')),mk('p','',r.evidence),mk('p','warn','Pace/uncertainty: '+r.pace_risk));area.append(node);}
+area.append(mk('p','sub','No model win probabilities generated; 7:30am Saturday scratchings and emergency activation remain outstanding.'));
+}).catch(err=>area.textContent='Unable to load review: '+err.message);
+})();</script></body></html>
