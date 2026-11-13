@@ -1,0 +1,426 @@
+{
+  "schema": "racing-lab-v5-newcastle-deep-review/v1",
+  "date": "2026-11-14",
+  "captured_local_day": "2026-11-13",
+  "meeting": "NEWCASTLE",
+  "status": "SOURCE_BASED_PRE_RACE_ANALYST_REVIEW_UNFROZEN",
+  "publication_approved": false,
+  "full_field_model_run": false,
+  "win_probabilities_released": false,
+  "official_source_cutoff": "Fri 13-Nov-26 9:34PM AEDT, official scratchings; Saturday 7:30AM AEDT scratching close not reached",
+  "venue": {
+    "rail": "True",
+    "track": "Good 4",
+    "weather": "Overcast",
+    "irrigation_last_24h_mm": 6,
+    "irrigation_7d_mm": 35,
+    "rainfall_last_7d_mm": 8,
+    "scratchings_close_AEDT": "2026-11-14 07:30",
+    "track_status": "FRIDAY_OFFICIAL_NOT_FINAL"
+  },
+  "scratched_reported": [
+    {
+      "race": 2,
+      "horses": [
+        "ALL KINDS OF FOLK",
+        "POISEN POINT (NZ)"
+      ]
+    },
+    {
+      "race": 3,
+      "horses": [
+        "FLAMBOYANT LAD (Ineligible)"
+      ]
+    },
+    {
+      "race": 4,
+      "horses": [
+        "CUBAN CIGAR",
+        "SPACEBALLS"
+      ]
+    },
+    {
+      "race": 5,
+      "horses": [
+        "VALOROUS POWER (GER)",
+        "ZENMASTER",
+        "GIAPPONESE"
+      ]
+    },
+    {
+      "race": 6,
+      "horses": [
+        "SPACEBALLS",
+        "LOVE STORY",
+        "BENEATH THE ROCK"
+      ]
+    },
+    {
+      "race": 7,
+      "horses": [
+        "EL PABLO",
+        "CONSULATE"
+      ]
+    },
+    {
+      "race": 8,
+      "horses": [
+        "PERICLES",
+        "RUN HARRY RUN"
+      ]
+    },
+    {
+      "race": 9,
+      "horses": [
+        "SAM HAWKENS (IRE)"
+      ]
+    },
+    {
+      "race": 10,
+      "horses": [
+        "SHE'S AN ARTIST",
+        "ASGARDA",
+        "MARETH",
+        "SPIONE (19e)"
+      ]
+    }
+  ],
+  "critical_cross_entry": {
+    "horse": "SHE'S AN ARTIST",
+    "race_8_status": "first emergency (17e) with no rider as of last official sheet; entry not confirmed as a starter; stable interview points to Hunter but require activation and rider confirmation",
+    "race_10_status": "scratched as at official Friday sheet",
+    "do_not_infer": "Do not promote a presumed R8 start from R10 scratching; official emergency announcement required"
+  },
+  "official_gear": [
+    {
+      "race": 3,
+      "horse": "IMELDA",
+      "change": "Blinkers FIRST TIME"
+    },
+    {
+      "race": 4,
+      "horse": "CABBUCIO",
+      "change": "Cross-over Nose Band FIRST TIME"
+    },
+    {
+      "race": 5,
+      "horse": "SPICY LU",
+      "change": "Tongue Tie FIRST TIME; Winkers OFF FIRST TIME"
+    },
+    {
+      "race": 6,
+      "horse": "REGAL PROBLEM",
+      "change": "Blinkers FIRST TIME"
+    },
+    {
+      "race": 6,
+      "horse": "BESIDE THE OCEAN",
+      "change": "Blinkers FIRST TIME; Tongue Tie OFF FIRST TIME"
+    },
+    {
+      "race": 6,
+      "horse": "MAGICAL MOMENTS",
+      "change": "Winkers FIRST TIME"
+    },
+    {
+      "race": 7,
+      "horse": "ZAHAV",
+      "change": "Ear Muffs (Pre-Race Only) FIRST TIME"
+    },
+    {
+      "race": 8,
+      "horse": "COAL CRUSHER",
+      "change": "Blinkers AGAIN"
+    },
+    {
+      "race": 9,
+      "horse": "CAMPALDINO",
+      "change": "Blinkers AGAIN"
+    },
+    {
+      "race": 10,
+      "horse": "KERGUELEN",
+      "change": "Blinkers FIRST TIME"
+    },
+    {
+      "race": 10,
+      "horse": "JUST PARTY",
+      "change": "Tongue Tie FIRST TIME"
+    },
+    {
+      "race": 10,
+      "horse": "SHANGRI LA BOY",
+      "change": "Blinkers FIRST TIME; Gelded; Tongue Tie OFF FIRST TIME"
+    },
+    {
+      "race": 10,
+      "horse": "ROTAGILLA",
+      "change": "Barrier Blanket OFF FIRST TIME; Lugging Bit OFF FIRST TIME"
+    }
+  ],
+  "races": [
+    {
+      "race": 1,
+      "title": "Max Lees Classic",
+      "distance_m": 900,
+      "working_leader": "Stellar Ami",
+      "principal_challengers": [
+        "Bronze Lion",
+        "Toytown"
+      ],
+      "evidence": "Stellar Ami's one public trial reportedly won by almost four lengths with sharp early break. Bronze Lion inside barrier 1; Toytown double trial and intended longer Golden Gift.",
+      "pace_risk": "Juvenile debutant volatility and likely 900m pace rush; no calibrated figures.",
+      "extra": [
+        "Stellar Ami barrier 9, 54.5kg"
+      ]
+    },
+    {
+      "race": 2,
+      "title": "Alf Kneebone BM88",
+      "distance_m": 1850,
+      "working_leader": "Agent Zero",
+      "principal_challengers": [
+        "Rock Empire",
+        "Fortune",
+        "Super Helpful"
+      ],
+      "evidence": "Agent Zero (55kg, barrier 4, Tim Clark) 1500m last-start winner with 3kg lower weight; direct Maher assistant says he ran good time and is more consistent. Racing NSW Friday Focus cites hidden first-up closing splits and career-peak latest run. Rock Empire (59kg gate2 Nash) likely leads, trainer worries quick turnaround.",
+      "pace_risk": "If Rock Empire walks to halfway at slow fractions, Agent Zero's distance/pace advantage is reduced.",
+      "extra": [
+        "No new official gear changes in R2",
+        "ALL KINDS OF FOLK scratched"
+      ]
+    },
+    {
+      "race": 3,
+      "title": "TAB Highway Class 3",
+      "distance_m": 1600,
+      "working_leader": "Street Force",
+      "principal_challengers": [
+        "Condone",
+        "Costa Del Sol",
+        "Airhawk",
+        "Think Like Paddy"
+      ],
+      "evidence": "Street Force (54kg, barrier 8) strong finish from too far back; Condone forward-run placings; Costa Del Sol unbeaten in two starts but barrier 22; Airhawk three wins form 53111 draws 3.",
+      "pace_risk": "Very large handicap with emergencies, variable country-to-metro form; strong early tempo helps backmarkers.",
+      "extra": [
+        "IMELDA first-time blinkers",
+        "Flamboyant Lad ineligible"
+      ]
+    },
+    {
+      "race": 4,
+      "title": "Express Glass Midway BM72",
+      "distance_m": 1600,
+      "working_leader": "Cabbucio",
+      "principal_challengers": [
+        "Cosmic Avenger",
+        "Caltsar",
+        "Djapana"
+      ],
+      "evidence": "Cabbucio 4 straight placings, 55kg from gate5 and drops 200m; first-time cross-over noseband. Cosmic Avenger has gate1 and is third behind Agent Zero; both Cuban Cigar and Spaceballs scratched from R4.",
+      "pace_risk": "Cabbucio may settle handier, but form line through Agent Zero makes Cosmic Avenger serious danger.",
+      "extra": [
+        "First-time noseband isn't automatically positive"
+      ]
+    },
+    {
+      "race": 5,
+      "title": "Rose Davies Legend Mile BM78",
+      "distance_m": 1600,
+      "working_leader": "Cuban Cigar",
+      "principal_challengers": [
+        "Amreekiyah",
+        "Spaceballs",
+        "Hammoon Sensation"
+      ],
+      "evidence": "Cuban Cigar narrow Four Pillars second under 62kg and wider gate; now 58kg gate7. Amreekiyah 58kg gate9 fresh win; Spaceballs gate3 56.5kg and strong sustained close in Four Pillars; Hammoon gate2 56kg with successive wins.",
+      "pace_risk": "Amreekiyah consistency and Spaceballs finishing route make leader only narrow; do not ignore Hammoon on easy forward map.",
+      "extra": [
+        "VALOROUS POWER, ZENMASTER, GIAPPONESE scratched"
+      ]
+    },
+    {
+      "race": 6,
+      "title": "Izzy's Gift F&M BM78",
+      "distance_m": 1400,
+      "working_leader": "Regal Problem",
+      "principal_challengers": [
+        "Chix",
+        "Beside The Ocean",
+        "Live"
+      ],
+      "evidence": "Regal Problem has 58kg gate4, first-time blinkers, excellent recent defeat behind Chix; Chix gate7 carries 60kg less 1.5kg apprentice claim, wins latest two. Love Story and Beneath The Rock scratched.",
+      "pace_risk": "Chix established on-pace winner; Regal needs gear to work and the previous narrow margin to reverse.",
+      "extra": [
+        "Beside The Ocean first-time blinkers, tongue tie off"
+      ]
+    },
+    {
+      "race": 7,
+      "title": "3YO Spring Stakes G3",
+      "distance_m": 1600,
+      "working_leader": "Kickup Rocky",
+      "principal_challengers": [
+        "Prince Of Verona",
+        "Zahav",
+        "Horologist"
+      ],
+      "evidence": "Kickup Rocky has 80 official rating versus Prince Of Verona 68, both carry 56.5kg. Desleigh Forster says 2 open-class wins this prep, matured physically. Barrier4 Daniel Moor. Prince undefeated 3/3 gate8 with Nash; 17.0m/s historical early average vs Kickup Rocky 14.6 (non directly comparable).",
+      "pace_risk": "Zahav may lead, Prince can hold forward position; if Kickup Rocky settles too far back from slow fractions class edge may not translate. Prior mile failure was on heavy G1 ground.",
+      "extra": [
+        "El Pablo and Consulate scratched",
+        "Zahav first-time pre-race ear muffs"
+      ]
+    },
+    {
+      "race": 8,
+      "title": "The Hunter Listed",
+      "distance_m": 1300,
+      "working_leader": "UNRESOLVED_OPEN_FIELD",
+      "principal_challengers": [
+        "Sweynesday",
+        "Infancy",
+        "General Salute",
+        "Accredited",
+        "Signor Tortoni",
+        "Disneck",
+        "King Of Roseau",
+        "War Eternal"
+      ],
+      "evidence": "Sweynesday 55kg/gate6, strong recent Group3 Rising Fast second, but yet to win >1200m. Infancy 54.5kg gate5, close in The Invitation, late average speed 18.9m/s but gets back. Disneck 53kg gate4 also 18.9m/s and needs genuine pace. General Salute 59kg, recent G3 1400m winner. Signor Tortoni gate13 53kg placed all three 1300m appearances. King Of Roseau gate16 57.5kg, proven 1300m 3/5 but difficult gate. Accredited gate1 53.5kg should get economical route.",
+      "pace_risk": "Coal Crusher and Golden Straand may inject wide early pace; Run Harry Run scratched. Consider high/average/slow tempo scenarios, final emergency replacements, and rain-sensitive Good to Soft condition.",
+      "extra": [
+        "Pericles scratched",
+        "She's An Artist 17e undeclared rider; not presumed active",
+        "War Eternal resuming wide gate22"
+      ]
+    },
+    {
+      "race": 9,
+      "title": "The Beauford Listed",
+      "distance_m": 2300,
+      "working_leader": "Savvy Spy",
+      "principal_challengers": [
+        "Bestower",
+        "Zuleika",
+        "Campaldino"
+      ],
+      "evidence": "Savvy Spy 53kg barrier4, three successive wins including last Saturday 2400m Rosehill BM78. Bott says backmarker tactics permit relaxation, horse pulled up well. Louis Beuzelin new raceday rider works the horse. Bestower 53kg gate9, closing second to Columbus; Campaldino 59kg blinkers again and specifically targeted by stable.",
+      "pace_risk": "7-day backup, large BM78-to-Listed class jump, and possible modest pace. Campaldino superior historical class but 6kg penalty.",
+      "extra": [
+        "Sam Hawkens scratched",
+        "Average finishing speed ~17.6 Savvy and Bestower, not verified horse split time"
+      ]
+    },
+    {
+      "race": 10,
+      "title": "The Sugarloaf BM94",
+      "distance_m": 1300,
+      "working_leader": "Glorious Moments",
+      "principal_challengers": [
+        "Kerguelen",
+        "Theblade",
+        "Just Party",
+        "Well Timed"
+      ],
+      "evidence": "Greg Lee says Glorious Moments is physically improved, first-up two previous campaigns won, 4/6 wins since gelded and trial 4 Nov was strong through line; barrier6 55kg Bayliss. Friday Racing NSW analyst independently nominates top bet. Kerguelen 60kg gate11 gets blinkers first time and needs clear outside. Theblade 55.5kg gate4 has strong benchmark form.",
+      "pace_risk": "Sharp first-up race and moderate first-up speed; Kerguelen outside finishing advantage could suit rain. Glorious Moments favourable if genuine tempo and has cover.",
+      "extra": [
+        "She's An Artist scratched from R10",
+        "Shangri La Boy first-time blinkers and newly gelded"
+      ]
+    }
+  ],
+  "speed_snapshot_R8": {
+    "unit": "m/s",
+    "source": "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/newcastle/2026-11-14/R8/speedmap",
+    "definition": "RAS historical average early/final speed at approximately today's trip, not horse-specific recent sectional split",
+    "rows": [
+      {
+        "horse": "Sweynesday",
+        "AES": 16.2,
+        "AFS": 18.4,
+        "barrier": 6,
+        "wt": 55
+      },
+      {
+        "horse": "Infancy",
+        "AES": 16,
+        "AFS": 18.9,
+        "barrier": 5,
+        "wt": 54.5
+      },
+      {
+        "horse": "Disneck",
+        "AES": 15.8,
+        "AFS": 18.9,
+        "barrier": 4,
+        "wt": 53
+      },
+      {
+        "horse": "General Salute",
+        "AES": 16.4,
+        "AFS": 17.9,
+        "barrier": 10,
+        "wt": 59
+      },
+      {
+        "horse": "King Of Roseau",
+        "AES": 16.6,
+        "AFS": 18.5,
+        "barrier": 16,
+        "wt": 57.5
+      },
+      {
+        "horse": "War Eternal",
+        "AES": 16.6,
+        "AFS": 17.6,
+        "barrier": 22,
+        "wt": 56.5
+      },
+      {
+        "horse": "Signor Tortoni",
+        "AES": 16.7,
+        "AFS": 18,
+        "barrier": 13,
+        "wt": 53
+      },
+      {
+        "horse": "Accredited",
+        "AES": 16.4,
+        "AFS": 18.2,
+        "barrier": 1,
+        "wt": 53.5
+      }
+    ]
+  },
+  "source_urls": {
+    "acceptances": "https://www.racingaustralia.horse/FreeFields/Acceptances.aspx?Key=2026Nov14,NSW,Newcastle",
+    "scratchings": "https://www.racingaustralia.horse/FreeFields/Scratchings.aspx?Key=2026Nov14,NSW,Newcastle",
+    "gear": "https://www.racingaustralia.horse/FreeFields/GearChanges.aspx?Key=2026Nov14,NSW,Newcastle",
+    "preview": "https://www.racingnsw.com.au/news/latest-racing-news/newcastle-preview-tips-for-the-hunter-race-day-saturday-14th-november/",
+    "huntertrainer": "https://www.racingnsw.com.au/news/latest-racing-news/hunter-hands-mahers-artist-the-chance-to-come-of-age/",
+    "savvytrainer": "https://www.racingnsw.com.au/news/latest-racing-news/patient-pattern-proving-a-savvy-move-for-emerging-stayer/",
+    "glorioustrainer": "https://www.racingnsw.com.au/news/latest-racing-news/glorious-return-on-cards-as-lee-eyes-summer-feature/",
+    "friday": "https://www.racingnsw.com.au/news/latest-racing-news/friday-focus-a-snapshot-of-saturday-racing-177/",
+    "hunterpace": "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/newcastle/2026-11-14/R8/speedmap",
+    "springpace": "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/newcastle/2026-11-14/R7/speedmap",
+    "beaufordpace": "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/newcastle/2026-11-14/R9/speedmap",
+    "sugarpace": "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/newcastle/2026-11-14/R10/speedmap",
+    "agentpace": "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/newcastle/2026-11-14/R2/speedmap",
+    "kickuptrainer": "https://www.justhorseracing.com.au/news/australian-racing/kickup-rocky-favourite-for-newcastle-spring-stakes-as-magic-millions-looms/914862",
+    "savvyresults": "https://grouponethoroughbreds.com.au/news/savvy-spy-makes-it-three-straight-with-dominant-rosehill-victory/"
+  },
+  "blockers": [
+    "Saturday scratchings and emergency order not yet confirmed",
+    "Some R8 entries carry old pre-scratching map barrier positions",
+    "Horse-level recent adjusted sections unavailable, use historical AES/AFS separately",
+    "Full 10-race probability vectors not run and independent Top10 not frozen",
+    "Runner cross-entries require official reconciliation, esp She's An Artist",
+    "Rain and track bias may alter assessed pace"
+  ],
+  "interpretation_policy": "No synthetic probabilities, no favourite anchoring, no bookmaker odds used as winner proof; old prior race selections remain untouched until official full-field import.",
+  "source_as_of": "Racing Australia Friday 13 Nov 9:34PM AEDT report; Saturday scratching close not reached"
+}
