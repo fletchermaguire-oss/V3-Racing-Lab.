@@ -147,8 +147,8 @@ var main=['overview','races','top10','multi','tools'];
 side.append(e('div','nav-group','RACE DAY'));
 main.forEach(function(id){side.append(makeButton(id,'navbtn'));});
 var foot=e('div','sidebar-foot');
-add(foot,e('strong','','7 NOV · FINAL DECLARED FIELDS'),
- e('p','','All 29 races are on Today and Race Centre. Older V5 model analysis is under All Tools.'));
+add(foot,e('strong','','14 NOV · FRIDAY FORM RESEARCH'),
+ e('p','','All 40 Saturday races are loaded. Friday form is provisional; final scratchings are not certified. Historical model tools remain in All Tools.'));
 side.append(foot);
 var mobileShort={overview:'Today',races:'Races',top10:'Top 10',multi:'Multi',tools:'Tools'};
 main.forEach(function(id){
@@ -161,7 +161,7 @@ var previous=document.getElementById('v5-more-popup');if(previous)previous.remov
 document.getElementById('pagetitle').textContent=(PAGES.find(function(x){return x[0]===S.page;})||['','All Tools'])[1];
 document.getElementById('livebadge').textContent=C.error?'SAVED SATURDAY DATA · FEED CHECK':'SAVED SATURDAY RESEARCH';
 var datedLabel=document.querySelector&&document.querySelector('.topdate');
-if(datedLabel)datedLabel.textContent=['overview','races','top10'].includes(S.page)?'Sat 7 Nov 2026 · final fields':S.page==='oaks'?'Thu 5 Nov 2026 · results':'3 Nov 2026 · archived model';
+if(datedLabel)datedLabel.textContent=['overview','races','top10'].includes(S.page)?'Sat '+D.date+' · Friday research, final starters pending':S.page==='oaks'?'Thu 5 Nov 2026 · results':'3 Nov 2026 · archived model';
 document.title='Racing Lab V5 · '+(['overview','races','top10'].includes(S.page)?'Saturday '+D.date:'Archived research · '+D.date);
 if(importedCard()){
  document.getElementById('livebadge').textContent=S.page==='oaks'?'THU 5 NOV · FORM REVIEW':'PDF FORM · MODEL ESTIMATES';
@@ -953,7 +953,7 @@ function render(){if(!C)return;D=C.data;if(!raceOf(S.race)){S.race=D.races[0].id
   return;
  }
  var views={overview:overview,oaks:oaksDayPage,top10:top10,races:racesPage,multi:function(){workshop('multiPage');},sim:function(){workshop('simPage');},compare:comparePage,qa:qaPage,cal:calPage,weather:weatherPage,sync:syncPage,results:resultsPage,tools:toolsPage,archive:overview};
- (views[S.page]||toolsPage)();app().append(e('div','footer',S.page==='oaks'?'Thursday 5 Nov · verified results':C.board.version+' · archived '+D.date+' model · estimates uncalibrated · all tools preserved'));
+ (views[S.page]||toolsPage)();app().append(e('div','footer',S.page==='oaks'?'Thursday 5 Nov · verified results':C.board.version+' · '+D.date+' research model · uncalibrated · all tools preserved''));
 }
 function officialPanel(){
  if(importedCard())return importedOfficialPanel();
