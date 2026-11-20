@@ -1,0 +1,859 @@
+{
+  "date": "2026-11-21",
+  "going": {
+    "CRANBOURNE": "Good 4",
+    "KEMBLA GRANGE": "Good 4",
+    "ASCOT": "Good 4",
+    "SUNSHINE COAST": "Good 4"
+  },
+  "model": "V5-L5-EVIDENCE-GATE-20261120",
+  "raw_unchanged": true,
+  "publication_approved": false,
+  "inventory": {
+    "races": 40,
+    "runners": 533
+  },
+  "active": 463,
+  "priority": [
+    {
+      "runner_id": "2026-11-21_ASCOT_R08_01",
+      "horse": "BEATTY",
+      "race_id": "2026-11-21_ASCOT_R08",
+      "meeting": "ASCOT",
+      "race": 8,
+      "model_pct": 34.19,
+      "robust_floor": 22.56,
+      "robust_spread": 11.63,
+      "min_gap": 17.5,
+      "max_chaos": 68,
+      "completeness": 0.87,
+      "dated_starts": 5,
+      "grade_quality": 1.783,
+      "reasons": [],
+      "good4_pct": 34.19,
+      "soft5_pct": 29.54,
+      "status": "PRIORITY_RESEARCH"
+    },
+    {
+      "runner_id": "2026-11-21_SUNSHINE COAST_R07_09",
+      "horse": "LIVALITTLE (NZ)",
+      "race_id": "2026-11-21_SUNSHINE COAST_R07",
+      "meeting": "SUNSHINE COAST",
+      "race": 7,
+      "model_pct": 24.01,
+      "robust_floor": 22.2,
+      "robust_spread": 2.2,
+      "min_gap": 9.62,
+      "max_chaos": 79,
+      "completeness": 1,
+      "dated_starts": 5,
+      "grade_quality": 0.804,
+      "reasons": [],
+      "good4_pct": 24.01,
+      "soft5_pct": 22.2,
+      "status": "PRIORITY_RESEARCH"
+    },
+    {
+      "runner_id": "2026-11-21_SUNSHINE COAST_R06_05",
+      "horse": "NOBLE DECREE (NZ)",
+      "race_id": "2026-11-21_SUNSHINE COAST_R06",
+      "meeting": "SUNSHINE COAST",
+      "race": 6,
+      "model_pct": 24.53,
+      "robust_floor": 21.03,
+      "robust_spread": 3.5,
+      "min_gap": 12.46,
+      "max_chaos": 77,
+      "completeness": 1,
+      "dated_starts": 5,
+      "grade_quality": 0.695,
+      "reasons": [],
+      "good4_pct": 24.53,
+      "soft5_pct": 22.19,
+      "status": "PRIORITY_RESEARCH"
+    },
+    {
+      "runner_id": "2026-11-21_ASCOT_R07_04",
+      "horse": "ABERDEEN FLYER",
+      "race_id": "2026-11-21_ASCOT_R07",
+      "meeting": "ASCOT",
+      "race": 7,
+      "model_pct": 23.42,
+      "robust_floor": 20.2,
+      "robust_spread": 3.22,
+      "min_gap": 9.19,
+      "max_chaos": 80,
+      "completeness": 0.87,
+      "dated_starts": 5,
+      "grade_quality": 1.262,
+      "reasons": [],
+      "good4_pct": 23.42,
+      "soft5_pct": 22.71,
+      "status": "PRIORITY_RESEARCH"
+    },
+    {
+      "runner_id": "2026-11-21_SUNSHINE COAST_R03_03",
+      "horse": "SCHEHERAZADE",
+      "race_id": "2026-11-21_SUNSHINE COAST_R03",
+      "meeting": "SUNSHINE COAST",
+      "race": 3,
+      "model_pct": 20.68,
+      "robust_floor": 19.25,
+      "robust_spread": 2.24,
+      "min_gap": 7.41,
+      "max_chaos": 83,
+      "completeness": 1,
+      "dated_starts": 5,
+      "grade_quality": 0.716,
+      "reasons": [],
+      "good4_pct": 20.68,
+      "soft5_pct": 21.49,
+      "status": "PRIORITY_RESEARCH"
+    },
+    {
+      "runner_id": "2026-11-21_CRANBOURNE_R09_04",
+      "horse": "SMOOTH CHINO",
+      "race_id": "2026-11-21_CRANBOURNE_R09",
+      "meeting": "CRANBOURNE",
+      "race": 9,
+      "model_pct": 23.72,
+      "robust_floor": 17.86,
+      "robust_spread": 5.86,
+      "min_gap": 5.61,
+      "max_chaos": 84,
+      "completeness": 0.92,
+      "dated_starts": 5,
+      "grade_quality": 1.972,
+      "reasons": [],
+      "good4_pct": 23.72,
+      "soft5_pct": 21.49,
+      "status": "PRIORITY_RESEARCH"
+    }
+  ],
+  "review": [
+    {
+      "runner_id": "2026-11-21_ASCOT_R06_08",
+      "horse": "WESTERN MISS",
+      "race_id": "2026-11-21_ASCOT_R06",
+      "meeting": "ASCOT",
+      "race": 6,
+      "model_pct": 28.2,
+      "robust_floor": 26.91,
+      "robust_spread": 3.67,
+      "min_gap": 9.01,
+      "max_chaos": 79,
+      "completeness": 1,
+      "dated_starts": 5,
+      "grade_quality": 1.121,
+      "reasons": [
+        "SHORT_BACKUP"
+      ],
+      "good4_pct": 28.2,
+      "soft5_pct": 30.58,
+      "status": "REVIEW_ONLY"
+    },
+    {
+      "runner_id": "2026-11-21_KEMBLA GRANGE_R07_05",
+      "horse": "EARN TO BURN",
+      "race_id": "2026-11-21_KEMBLA GRANGE_R07",
+      "meeting": "KEMBLA GRANGE",
+      "race": 7,
+      "model_pct": 31.84,
+      "robust_floor": 26.18,
+      "robust_spread": 5.66,
+      "min_gap": 14.58,
+      "max_chaos": 74,
+      "completeness": 0.92,
+      "dated_starts": 5,
+      "grade_quality": 1.198,
+      "reasons": [
+        "FITNESS_AFTER_BREAK"
+      ],
+      "good4_pct": 31.84,
+      "soft5_pct": 29.58,
+      "status": "REVIEW_ONLY"
+    },
+    {
+      "runner_id": "2026-11-21_SUNSHINE COAST_R10_08",
+      "horse": "SMOKE ON THE WATER",
+      "race_id": "2026-11-21_SUNSHINE COAST_R10",
+      "meeting": "SUNSHINE COAST",
+      "race": 10,
+      "model_pct": 23.66,
+      "robust_floor": 18.88,
+      "robust_spread": 4.78,
+      "min_gap": 8.28,
+      "max_chaos": 82,
+      "completeness": 1,
+      "dated_starts": 5,
+      "grade_quality": 0.907,
+      "reasons": [
+        "SHORT_BACKUP"
+      ],
+      "good4_pct": 23.66,
+      "soft5_pct": 20.32,
+      "status": "REVIEW_ONLY"
+    },
+    {
+      "runner_id": "2026-11-21_ASCOT_R09_01",
+      "horse": "COSMIC CRUSADER (NZ)",
+      "race_id": "2026-11-21_ASCOT_R09",
+      "meeting": "ASCOT",
+      "race": 9,
+      "model_pct": 26.02,
+      "robust_floor": 16.84,
+      "robust_spread": 11.34,
+      "min_gap": 7.77,
+      "max_chaos": 78,
+      "completeness": 1,
+      "dated_starts": 5,
+      "grade_quality": 3.009,
+      "reasons": [
+        "CLASS_ASSUMPTION_CHANGES_RANK",
+        "LOW_CONSERVATIVE_CHANCE"
+      ],
+      "good4_pct": 26.02,
+      "soft5_pct": 28.18,
+      "status": "REVIEW_ONLY"
+    },
+    {
+      "runner_id": "2026-11-21_ASCOT_R02_01",
+      "horse": "STRAPPING PROPHET",
+      "race_id": "2026-11-21_ASCOT_R02",
+      "meeting": "ASCOT",
+      "race": 2,
+      "model_pct": 17.59,
+      "robust_floor": 16.06,
+      "robust_spread": 1.86,
+      "min_gap": 5.94,
+      "max_chaos": 86,
+      "completeness": 1,
+      "dated_starts": 5,
+      "grade_quality": 0.928,
+      "reasons": [
+        "LOW_CONSERVATIVE_CHANCE",
+        "FITNESS_AFTER_BREAK"
+      ],
+      "good4_pct": 17.59,
+      "soft5_pct": 17.92,
+      "status": "REVIEW_ONLY"
+    },
+    {
+      "runner_id": "2026-11-21_SUNSHINE COAST_R02_08",
+      "horse": "OUT OF LUCK",
+      "race_id": "2026-11-21_SUNSHINE COAST_R02",
+      "meeting": "SUNSHINE COAST",
+      "race": 2,
+      "model_pct": 15.43,
+      "robust_floor": 13.75,
+      "robust_spread": 2.42,
+      "min_gap": 4.48,
+      "max_chaos": 88,
+      "completeness": 1,
+      "dated_starts": 5,
+      "grade_quality": 0.825,
+      "reasons": [
+        "LOW_CONSERVATIVE_CHANCE"
+      ],
+      "good4_pct": 15.43,
+      "soft5_pct": 16.17,
+      "status": "REVIEW_ONLY"
+    }
+  ],
+  "avoid": [
+    {
+      "runner_id": "2026-11-21_CRANBOURNE_R01_01",
+      "horse": "DOUBT TIME",
+      "race_id": "2026-11-21_CRANBOURNE_R01",
+      "meeting": "CRANBOURNE",
+      "race": 1,
+      "model_pct": 34.76,
+      "robust_floor": 27.59,
+      "robust_spread": 7.9,
+      "min_gap": 11.55,
+      "max_chaos": 77,
+      "completeness": 0.66,
+      "dated_starts": 3,
+      "grade_quality": 1.318,
+      "reasons": [
+        "INCOMPLETE_DOSSIER"
+      ],
+      "good4_pct": 34.76,
+      "soft5_pct": 35.49,
+      "status": "NO_SELECTION"
+    },
+    {
+      "runner_id": "2026-11-21_CRANBOURNE_R02_07",
+      "horse": "DIRTY LOOK (NZ)",
+      "race_id": "2026-11-21_CRANBOURNE_R02",
+      "meeting": "CRANBOURNE",
+      "race": 2,
+      "model_pct": 21.8,
+      "robust_floor": 20.53,
+      "robust_spread": 1.27,
+      "min_gap": 0.09,
+      "max_chaos": 93,
+      "completeness": 1,
+      "dated_starts": 5,
+      "grade_quality": 0.551,
+      "reasons": [
+        "WEAK_FIELD_SEPARATION",
+        "CROWDED_RACE"
+      ],
+      "good4_pct": 21.8,
+      "soft5_pct": 21.05,
+      "status": "NO_SELECTION"
+    },
+    {
+      "race_id": "2026-11-21_CRANBOURNE_R03",
+      "meeting": "CRANBOURNE",
+      "race": 3,
+      "status": "NO_SELECTION",
+      "reasons": [
+        "GOING_CHANGES_RACE_LEADER"
+      ],
+      "good4": "MARSEPT",
+      "soft5": "SWIFT FORCE"
+    },
+    {
+      "runner_id": "2026-11-21_CRANBOURNE_R04_06",
+      "horse": "STAKES",
+      "race_id": "2026-11-21_CRANBOURNE_R04",
+      "meeting": "CRANBOURNE",
+      "race": 4,
+      "model_pct": 16.25,
+      "robust_floor": 13.93,
+      "robust_spread": 8.23,
+      "min_gap": 0.21,
+      "max_chaos": 96,
+      "completeness": 0.66,
+      "dated_starts": 3,
+      "grade_quality": 0.809,
+      "reasons": [
+        "CLASS_ASSUMPTION_CHANGES_RANK",
+        "INCOMPLETE_DOSSIER",
+        "LOW_CONSERVATIVE_CHANCE",
+        "WEAK_FIELD_SEPARATION",
+        "CROWDED_RACE",
+        "FITNESS_AFTER_BREAK"
+      ],
+      "good4_pct": 16.25,
+      "soft5_pct": 22.16,
+      "status": "NO_SELECTION"
+    },
+    {
+      "race_id": "2026-11-21_CRANBOURNE_R05",
+      "meeting": "CRANBOURNE",
+      "race": 5,
+      "status": "NO_SELECTION",
+      "reasons": [
+        "GOING_CHANGES_RACE_LEADER"
+      ],
+      "good4": "ARDASHIR (FR)",
+      "soft5": "TISHMAN"
+    },
+    {
+      "race_id": "2026-11-21_CRANBOURNE_R06",
+      "meeting": "CRANBOURNE",
+      "race": 6,
+      "status": "NO_SELECTION",
+      "reasons": [
+        "GOING_CHANGES_RACE_LEADER"
+      ],
+      "good4": "CHAMPAGNE JENNI",
+      "soft5": "JENNI MULTABELLA (NZ)"
+    },
+    {
+      "race_id": "2026-11-21_CRANBOURNE_R07",
+      "meeting": "CRANBOURNE",
+      "race": 7,
+      "status": "NO_SELECTION",
+      "reasons": [
+        "GOING_CHANGES_RACE_LEADER"
+      ],
+      "good4": "ALERO",
+      "soft5": "CELSIUS STAR"
+    },
+    {
+      "runner_id": "2026-11-21_CRANBOURNE_R08_03",
+      "horse": "COTE ATLANTIQUE (IRE)",
+      "race_id": "2026-11-21_CRANBOURNE_R08",
+      "meeting": "CRANBOURNE",
+      "race": 8,
+      "model_pct": 12.28,
+      "robust_floor": 10.98,
+      "robust_spread": 2.98,
+      "min_gap": 0.67,
+      "max_chaos": 96,
+      "completeness": 0.92,
+      "dated_starts": 5,
+      "grade_quality": 1.578,
+      "reasons": [
+        "CLASS_ASSUMPTION_CHANGES_RANK",
+        "LOW_CONSERVATIVE_CHANCE",
+        "WEAK_FIELD_SEPARATION",
+        "CROWDED_RACE"
+      ],
+      "good4_pct": 12.28,
+      "soft5_pct": 13.96,
+      "status": "NO_SELECTION"
+    },
+    {
+      "runner_id": "2026-11-21_CRANBOURNE_R10_03",
+      "horse": "MAINMANKASH",
+      "race_id": "2026-11-21_CRANBOURNE_R10",
+      "meeting": "CRANBOURNE",
+      "race": 10,
+      "model_pct": 15.84,
+      "robust_floor": 15.81,
+      "robust_spread": 0.93,
+      "min_gap": 2.09,
+      "max_chaos": 92,
+      "completeness": 1,
+      "dated_starts": 5,
+      "grade_quality": 0.524,
+      "reasons": [
+        "LOW_CONSERVATIVE_CHANCE",
+        "WEAK_FIELD_SEPARATION",
+        "CROWDED_RACE"
+      ],
+      "good4_pct": 15.84,
+      "soft5_pct": 15.81,
+      "status": "NO_SELECTION"
+    },
+    {
+      "runner_id": "2026-11-21_KEMBLA GRANGE_R01_02",
+      "horse": "PARTY BOSS",
+      "race_id": "2026-11-21_KEMBLA GRANGE_R01",
+      "meeting": "KEMBLA GRANGE",
+      "race": 1,
+      "model_pct": 13.32,
+      "robust_floor": 9.82,
+      "robust_spread": 3.5,
+      "min_gap": 0.59,
+      "max_chaos": 97,
+      "completeness": 0.92,
+      "dated_starts": 5,
+      "grade_quality": 0.85,
+      "reasons": [
+        "CLASS_ASSUMPTION_CHANGES_RANK",
+        "LOW_CONSERVATIVE_CHANCE",
+        "WEAK_FIELD_SEPARATION",
+        "CROWDED_RACE"
+      ],
+      "good4_pct": 13.32,
+      "soft5_pct": 11.09,
+      "status": "NO_SELECTION"
+    },
+    {
+      "runner_id": "2026-11-21_KEMBLA GRANGE_R02_15",
+      "horse": "MAYLEIGH",
+      "race_id": "2026-11-21_KEMBLA GRANGE_R02",
+      "meeting": "KEMBLA GRANGE",
+      "race": 2,
+      "model_pct": 17.42,
+      "robust_floor": 15.04,
+      "robust_spread": 3.58,
+      "min_gap": 1.82,
+      "max_chaos": 92,
+      "completeness": 1,
+      "dated_starts": 5,
+      "grade_quality": 0.285,
+      "reasons": [
+        "LOW_CONSERVATIVE_CHANCE",
+        "WEAK_FIELD_SEPARATION",
+        "CROWDED_RACE"
+      ],
+      "good4_pct": 17.42,
+      "soft5_pct": 15.04,
+      "status": "NO_SELECTION"
+    },
+    {
+      "race_id": "2026-11-21_KEMBLA GRANGE_R03",
+      "meeting": "KEMBLA GRANGE",
+      "race": 3,
+      "status": "NO_SELECTION",
+      "reasons": [
+        "GOING_CHANGES_RACE_LEADER"
+      ],
+      "good4": "VALENTIAGO",
+      "soft5": "SNAP DECISION (NZ)"
+    },
+    {
+      "race_id": "2026-11-21_KEMBLA GRANGE_R04",
+      "meeting": "KEMBLA GRANGE",
+      "race": 4,
+      "status": "NO_SELECTION",
+      "reasons": [
+        "GOING_CHANGES_RACE_LEADER"
+      ],
+      "good4": "LET’S GO AGAIN",
+      "soft5": "HORSESHOE HILL"
+    },
+    {
+      "runner_id": "2026-11-21_KEMBLA GRANGE_R05_05",
+      "horse": "SATONO JASMINE (NZ)",
+      "race_id": "2026-11-21_KEMBLA GRANGE_R05",
+      "meeting": "KEMBLA GRANGE",
+      "race": 5,
+      "model_pct": 21.15,
+      "robust_floor": 20.63,
+      "robust_spread": 1.31,
+      "min_gap": 0.04,
+      "max_chaos": 96,
+      "completeness": 0.92,
+      "dated_starts": 5,
+      "grade_quality": 0.561,
+      "reasons": [
+        "CLASS_ASSUMPTION_CHANGES_RANK",
+        "WEAK_FIELD_SEPARATION",
+        "CROWDED_RACE",
+        "FITNESS_AFTER_BREAK"
+      ],
+      "good4_pct": 21.15,
+      "soft5_pct": 21.94,
+      "status": "NO_SELECTION"
+    },
+    {
+      "race_id": "2026-11-21_KEMBLA GRANGE_R06",
+      "meeting": "KEMBLA GRANGE",
+      "race": 6,
+      "status": "NO_SELECTION",
+      "reasons": [
+        "GOING_CHANGES_RACE_LEADER"
+      ],
+      "good4": "BRUCE I AM",
+      "soft5": "BLUE AKOYA"
+    },
+    {
+      "race_id": "2026-11-21_KEMBLA GRANGE_R08",
+      "meeting": "KEMBLA GRANGE",
+      "race": 8,
+      "status": "NO_SELECTION",
+      "reasons": [
+        "GOING_CHANGES_RACE_LEADER"
+      ],
+      "good4": "HYPERBOLIC (NZ)",
+      "soft5": "GRINGOTTS (NZ)"
+    },
+    {
+      "runner_id": "2026-11-21_KEMBLA GRANGE_R09_08",
+      "horse": "YOURE NOT THE KING",
+      "race_id": "2026-11-21_KEMBLA GRANGE_R09",
+      "meeting": "KEMBLA GRANGE",
+      "race": 9,
+      "model_pct": 21.3,
+      "robust_floor": 20.23,
+      "robust_spread": 1.25,
+      "min_gap": 2.46,
+      "max_chaos": 89,
+      "completeness": 0.79,
+      "dated_starts": 5,
+      "grade_quality": 0.862,
+      "reasons": [
+        "WEAK_FIELD_SEPARATION"
+      ],
+      "good4_pct": 21.3,
+      "soft5_pct": 21.48,
+      "status": "NO_SELECTION"
+    },
+    {
+      "race_id": "2026-11-21_KEMBLA GRANGE_R10",
+      "meeting": "KEMBLA GRANGE",
+      "race": 10,
+      "status": "NO_SELECTION",
+      "reasons": [
+        "GOING_CHANGES_RACE_LEADER"
+      ],
+      "good4": "CHEEKY SMIRK",
+      "soft5": "FRIENDLY FIRE"
+    },
+    {
+      "runner_id": "2026-11-21_ASCOT_R01_05",
+      "horse": "MADAM LASH",
+      "race_id": "2026-11-21_ASCOT_R01",
+      "meeting": "ASCOT",
+      "race": 1,
+      "model_pct": 32.02,
+      "robust_floor": 27.9,
+      "robust_spread": 4.12,
+      "min_gap": 7.98,
+      "max_chaos": 83,
+      "completeness": 0.8,
+      "dated_starts": 2,
+      "grade_quality": 0.608,
+      "reasons": [
+        "LIMITED_RECENT_FORM",
+        "UNEXPOSED_OR_UNPARSED_OPPOSITION"
+      ],
+      "good4_pct": 32.02,
+      "soft5_pct": 31.52,
+      "status": "NO_SELECTION"
+    },
+    {
+      "runner_id": "2026-11-21_ASCOT_R03_04",
+      "horse": "ADMIRE ASTRA",
+      "race_id": "2026-11-21_ASCOT_R03",
+      "meeting": "ASCOT",
+      "race": 3,
+      "model_pct": 14.96,
+      "robust_floor": 14.01,
+      "robust_spread": 2.03,
+      "min_gap": 1.86,
+      "max_chaos": 93,
+      "completeness": 1,
+      "dated_starts": 5,
+      "grade_quality": 1.027,
+      "reasons": [
+        "LOW_CONSERVATIVE_CHANCE",
+        "WEAK_FIELD_SEPARATION",
+        "CROWDED_RACE",
+        "SHORT_BACKUP"
+      ],
+      "good4_pct": 14.96,
+      "soft5_pct": 16.04,
+      "status": "NO_SELECTION"
+    },
+    {
+      "runner_id": "2026-11-21_ASCOT_R04_03",
+      "horse": "DECORATION",
+      "race_id": "2026-11-21_ASCOT_R04",
+      "meeting": "ASCOT",
+      "race": 4,
+      "model_pct": 12.99,
+      "robust_floor": 11.97,
+      "robust_spread": 2.75,
+      "min_gap": 1.16,
+      "max_chaos": 96,
+      "completeness": 1,
+      "dated_starts": 5,
+      "grade_quality": 0.966,
+      "reasons": [
+        "CLASS_ASSUMPTION_CHANGES_RANK",
+        "LOW_CONSERVATIVE_CHANCE",
+        "WEAK_FIELD_SEPARATION",
+        "CROWDED_RACE"
+      ],
+      "good4_pct": 12.99,
+      "soft5_pct": 14.72,
+      "status": "NO_SELECTION"
+    },
+    {
+      "runner_id": "2026-11-21_ASCOT_R05_06",
+      "horse": "ANABALLISTIC",
+      "race_id": "2026-11-21_ASCOT_R05",
+      "meeting": "ASCOT",
+      "race": 5,
+      "model_pct": 23.36,
+      "robust_floor": 17.38,
+      "robust_spread": 5.98,
+      "min_gap": 3.77,
+      "max_chaos": 89,
+      "completeness": 1,
+      "dated_starts": 5,
+      "grade_quality": 0.818,
+      "reasons": [
+        "WEAK_FIELD_SEPARATION"
+      ],
+      "good4_pct": 23.36,
+      "soft5_pct": 18.06,
+      "status": "NO_SELECTION"
+    },
+    {
+      "race_id": "2026-11-21_ASCOT_R10",
+      "meeting": "ASCOT",
+      "race": 10,
+      "status": "NO_SELECTION",
+      "reasons": [
+        "GOING_CHANGES_RACE_LEADER"
+      ],
+      "good4": "PRINCE OF DALA",
+      "soft5": "TRULY LOYAL"
+    },
+    {
+      "race_id": "2026-11-21_SUNSHINE COAST_R01",
+      "meeting": "SUNSHINE COAST",
+      "race": 1,
+      "status": "NO_SELECTION",
+      "reasons": [
+        "GOING_CHANGES_RACE_LEADER"
+      ],
+      "good4": "STANDLEE",
+      "soft5": "LUDIK"
+    },
+    {
+      "runner_id": "2026-11-21_SUNSHINE COAST_R04_01",
+      "horse": "ICONIC SCENES (NZ)",
+      "race_id": "2026-11-21_SUNSHINE COAST_R04",
+      "meeting": "SUNSHINE COAST",
+      "race": 4,
+      "model_pct": 36.91,
+      "robust_floor": 31.76,
+      "robust_spread": 5.15,
+      "min_gap": 21.54,
+      "max_chaos": 64,
+      "completeness": 0.52,
+      "dated_starts": 1,
+      "grade_quality": 0.82,
+      "reasons": [
+        "LIMITED_RECENT_FORM",
+        "UNEXPOSED_OR_UNPARSED_OPPOSITION",
+        "INCOMPLETE_DOSSIER"
+      ],
+      "good4_pct": 36.91,
+      "soft5_pct": 35.77,
+      "status": "NO_SELECTION"
+    },
+    {
+      "runner_id": "2026-11-21_SUNSHINE COAST_R05_10",
+      "horse": "QUEEN OLYMPIAS",
+      "race_id": "2026-11-21_SUNSHINE COAST_R05",
+      "meeting": "SUNSHINE COAST",
+      "race": 5,
+      "model_pct": 20.83,
+      "robust_floor": 20.19,
+      "robust_spread": 1.14,
+      "min_gap": 3.86,
+      "max_chaos": 87,
+      "completeness": 0.79,
+      "dated_starts": 3,
+      "grade_quality": 0.823,
+      "reasons": [
+        "WEAK_FIELD_SEPARATION",
+        "FITNESS_AFTER_BREAK"
+      ],
+      "good4_pct": 20.83,
+      "soft5_pct": 21.33,
+      "status": "NO_SELECTION"
+    },
+    {
+      "race_id": "2026-11-21_SUNSHINE COAST_R08",
+      "meeting": "SUNSHINE COAST",
+      "race": 8,
+      "status": "NO_SELECTION",
+      "reasons": [
+        "GOING_CHANGES_RACE_LEADER"
+      ],
+      "good4": "MOULIN MISS",
+      "soft5": "BRING ME KASH"
+    },
+    {
+      "runner_id": "2026-11-21_SUNSHINE COAST_R09_03",
+      "horse": "THE BARBER",
+      "race_id": "2026-11-21_SUNSHINE COAST_R09",
+      "meeting": "SUNSHINE COAST",
+      "race": 9,
+      "model_pct": 22.53,
+      "robust_floor": 18.81,
+      "robust_spread": 7.43,
+      "min_gap": 11.16,
+      "max_chaos": 78,
+      "completeness": 0.73,
+      "dated_starts": 4,
+      "grade_quality": 1.048,
+      "reasons": [
+        "INCOMPLETE_DOSSIER"
+      ],
+      "good4_pct": 22.53,
+      "soft5_pct": 26.24,
+      "status": "NO_SELECTION"
+    }
+  ],
+  "raw_top15": [
+    {
+      "horse": "ICONIC SCENES (NZ)",
+      "meeting": "SUNSHINE COAST",
+      "race": 4,
+      "p": 36.91
+    },
+    {
+      "horse": "DOUBT TIME",
+      "meeting": "CRANBOURNE",
+      "race": 1,
+      "p": 34.76
+    },
+    {
+      "horse": "BEATTY",
+      "meeting": "ASCOT",
+      "race": 8,
+      "p": 34.19
+    },
+    {
+      "horse": "MADAM LASH",
+      "meeting": "ASCOT",
+      "race": 1,
+      "p": 32.02
+    },
+    {
+      "horse": "EARN TO BURN",
+      "meeting": "KEMBLA GRANGE",
+      "race": 7,
+      "p": 31.84
+    },
+    {
+      "horse": "WESTERN MISS",
+      "meeting": "ASCOT",
+      "race": 6,
+      "p": 28.2
+    },
+    {
+      "horse": "COSMIC CRUSADER (NZ)",
+      "meeting": "ASCOT",
+      "race": 9,
+      "p": 26.02
+    },
+    {
+      "horse": "PRINCE OF DALA",
+      "meeting": "ASCOT",
+      "race": 10,
+      "p": 24.91
+    },
+    {
+      "horse": "NOBLE DECREE (NZ)",
+      "meeting": "SUNSHINE COAST",
+      "race": 6,
+      "p": 24.53
+    },
+    {
+      "horse": "LIVALITTLE (NZ)",
+      "meeting": "SUNSHINE COAST",
+      "race": 7,
+      "p": 24.01
+    },
+    {
+      "horse": "SMOOTH CHINO",
+      "meeting": "CRANBOURNE",
+      "race": 9,
+      "p": 23.72
+    },
+    {
+      "horse": "SMOKE ON THE WATER",
+      "meeting": "SUNSHINE COAST",
+      "race": 10,
+      "p": 23.66
+    },
+    {
+      "horse": "ABERDEEN FLYER",
+      "meeting": "ASCOT",
+      "race": 7,
+      "p": 23.42
+    },
+    {
+      "horse": "ANABALLISTIC",
+      "meeting": "ASCOT",
+      "race": 5,
+      "p": 23.36
+    },
+    {
+      "horse": "MARSEPT",
+      "meeting": "CRANBOURNE",
+      "race": 3,
+      "p": 23.06
+    }
+  ],
+  "limitations": [
+    "Provisional fields, emergencies not activated",
+    "No empirical improvement claim",
+    "Actual trial evidence not numerically scored"
+  ]
+}
