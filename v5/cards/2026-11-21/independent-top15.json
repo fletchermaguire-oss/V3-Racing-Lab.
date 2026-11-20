@@ -4,7 +4,7 @@
   "as_of": "2026-11-20",
   "status": "FRIDAY_RESEARCH_NOT_FINAL",
   "publication_approved": false,
-  "model": "V5-L5-EVIDENCE-GATE-20261120",
+  "model": "V5-L5-CANDIDATE-20261030",
   "track_assumptions": {
     "CRANBOURNE": "Good 4",
     "KEMBLA GRANGE": "Good 4",
@@ -282,5 +282,6 @@
       "field_status": "FRIDAY_ACCEPTED_NOT_FINAL",
       "ranking_basis": "Independent subjective good-track estimate, not calibrated."
     }
-  ]
+  ],
+  "screen_version": "V5-EVIDENCE-GATE-20261120"
 }
