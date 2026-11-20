@@ -1,0 +1,286 @@
+{
+  "schema": "racing-lab-v5-independent-research-shortlist/v1",
+  "date": "2026-11-21",
+  "as_of": "2026-11-20",
+  "status": "FRIDAY_RESEARCH_NOT_FINAL",
+  "publication_approved": false,
+  "model": "V5-L5-EVIDENCE-GATE-20261120",
+  "track_assumptions": {
+    "CRANBOURNE": "Good 4",
+    "KEMBLA GRANGE": "Good 4",
+    "ASCOT": "Good 4",
+    "SUNSHINE COAST": "Good 4"
+  },
+  "entries": [
+    {
+      "rank": 1,
+      "meeting": "ASCOT",
+      "race": 8,
+      "horse": "BEATTY",
+      "tier": "A-",
+      "original_form_tier": "A-",
+      "research_status": "TOP10_RESEARCH",
+      "independent_pct": 48,
+      "model_pct": 34.19,
+      "reason": "Six wins from seven starts, Listed wins and genuine class edge.",
+      "risk": "Wide draw and first mile; Roger unbeaten.",
+      "sources": [
+        "https://www.racingaustralia.horse/FreeFields/Form.aspx?Key=2026Nov21,WA,Ascot"
+      ],
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL",
+      "ranking_basis": "Independent subjective good-track estimate, not calibrated."
+    },
+    {
+      "rank": 2,
+      "meeting": "ASCOT",
+      "race": 10,
+      "horse": "PRINCE OF DALA",
+      "tier": "A-",
+      "original_form_tier": "A-",
+      "research_status": "TOP10_RESEARCH",
+      "independent_pct": 48,
+      "model_pct": 24.91,
+      "reason": "Strong first-up win and favourable weight reduction.",
+      "risk": "Wet untested; model leadership changes on soft.",
+      "sources": [
+        "https://www.racingaustralia.horse/FreeFields/Form.aspx?Key=2026Nov21,WA,Ascot"
+      ],
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL",
+      "ranking_basis": "Independent subjective good-track estimate, not calibrated."
+    },
+    {
+      "rank": 3,
+      "meeting": "CRANBOURNE",
+      "race": 2,
+      "horse": "DIRTY LOOK (NZ)",
+      "tier": "B+",
+      "original_form_tier": "B+",
+      "research_status": "TOP10_RESEARCH",
+      "independent_pct": 39,
+      "model_pct": 21.8,
+      "reason": "Recent local BM70 win and second at Bendigo despite wide trip; drops in weight.",
+      "risk": "Wet-track rival You Sexy Thing and traffic.",
+      "sources": [
+        "https://www.racingaustralia.horse/FreeFields/Form.aspx?Key=2026Nov21,VIC,Southside+Cranbourne"
+      ],
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL",
+      "ranking_basis": "Independent subjective good-track estimate, not calibrated."
+    },
+    {
+      "rank": 4,
+      "meeting": "CRANBOURNE",
+      "race": 1,
+      "horse": "VALAROSO",
+      "tier": "B+",
+      "original_form_tier": "B+",
+      "research_status": "TOP10_RESEARCH",
+      "independent_pct": 37,
+      "model_pct": 23.06,
+      "reason": "Inside draw, forward map, soft-track maiden win and recent Group 3 third; Doubt Time blinkers and tongue tie first.",
+      "risk": "Doubt Time leads raw V5; track worsening may favour him.",
+      "sources": [
+        "https://www.racingaustralia.horse/FreeFields/Form.aspx?Key=2026Nov21,VIC,Southside+Cranbourne"
+      ],
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL",
+      "ranking_basis": "Independent subjective good-track estimate, not calibrated."
+    },
+    {
+      "rank": 5,
+      "meeting": "KEMBLA GRANGE",
+      "race": 7,
+      "horse": "EARN TO BURN",
+      "tier": "B+",
+      "original_form_tier": "B+",
+      "research_status": "TOP10_RESEARCH",
+      "independent_pct": 36,
+      "model_pct": 31.84,
+      "reason": "Consecutive Listed wins, two trial wins, favourable draw.",
+      "risk": "First-up fitness; wet ground narrows advantage.",
+      "sources": [
+        "https://www.racingaustralia.horse/FreeFields/Form.aspx?Key=2026Nov21,NSW,Kembla%20Grange"
+      ],
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL",
+      "ranking_basis": "Independent subjective good-track estimate, not calibrated."
+    },
+    {
+      "rank": 6,
+      "meeting": "KEMBLA GRANGE",
+      "race": 5,
+      "horse": "GRAFFITI TYCOON",
+      "tier": "B+",
+      "original_form_tier": "B+",
+      "research_status": "TOP10_RESEARCH",
+      "independent_pct": 36,
+      "model_pct": 21.11,
+      "reason": "Progressive, 5kg weight drop and wet trial win; prior form tied to subsequent Group 3 winner.",
+      "risk": "First mile and Satono Jasmine raw leader after withdrawal.",
+      "sources": [
+        "https://www.racingaustralia.horse/FreeFields/Form.aspx?Key=2026Nov21,NSW,Kembla%20Grange"
+      ],
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL",
+      "ranking_basis": "Independent subjective good-track estimate, not calibrated."
+    },
+    {
+      "rank": 7,
+      "meeting": "ASCOT",
+      "race": 1,
+      "horse": "MULTISTOREY",
+      "tier": "B+",
+      "original_form_tier": "B+",
+      "research_status": "TOP10_RESEARCH",
+      "independent_pct": 36,
+      "model_pct": 15.2,
+      "reason": "Trial win over 850m, inside draw and first blinkers.",
+      "risk": "Unraced juvenile; high uncertainty and no reliable numerical trial integration.",
+      "sources": [
+        "https://www.racingaustralia.horse/FreeFields/Form.aspx?Key=2026Nov21,WA,Ascot"
+      ],
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL",
+      "ranking_basis": "Independent subjective good-track estimate, not calibrated."
+    },
+    {
+      "rank": 8,
+      "meeting": "KEMBLA GRANGE",
+      "race": 4,
+      "horse": "HORSESHOE HILL",
+      "tier": "B+",
+      "original_form_tier": "B+",
+      "research_status": "TOP10_RESEARCH",
+      "independent_pct": 35,
+      "model_pct": 15.34,
+      "reason": "Last start beat Nitro, inside barrier and proven soft ability.",
+      "risk": "Weight rise and early speed pressure.",
+      "sources": [
+        "https://www.racingaustralia.horse/FreeFields/Form.aspx?Key=2026Nov21,NSW,Kembla%20Grange"
+      ],
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL",
+      "ranking_basis": "Independent subjective good-track estimate, not calibrated."
+    },
+    {
+      "rank": 9,
+      "meeting": "SUNSHINE COAST",
+      "race": 10,
+      "horse": "SMOKE ON THE WATER",
+      "tier": "B+",
+      "original_form_tier": "B+",
+      "research_status": "TOP10_RESEARCH",
+      "independent_pct": 35,
+      "model_pct": 23.66,
+      "reason": "Recent Doomben win, drops 4kg, inside gate and Ryan Maloney.",
+      "risk": "Seven-day backup and wet downturn; reserves pending.",
+      "sources": [
+        "https://www.racingaustralia.horse/FreeFields/Form.aspx?Key=2026Nov21,QLD,Sunshine+Coast"
+      ],
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL",
+      "ranking_basis": "Independent subjective good-track estimate, not calibrated."
+    },
+    {
+      "rank": 10,
+      "meeting": "SUNSHINE COAST",
+      "race": 5,
+      "horse": "ESPERANZA",
+      "tier": "B+",
+      "original_form_tier": "B+",
+      "research_status": "TOP10_RESEARCH",
+      "independent_pct": 35,
+      "model_pct": 15.08,
+      "reason": "Consecutive wins including 3.39L at 1000m, strong historical closing speed.",
+      "risk": "60kg and weight swing to Lucky Pat/Flaressence.",
+      "sources": [
+        "https://www.racingaustralia.horse/FreeFields/Form.aspx?Key=2026Nov21,QLD,Sunshine+Coast"
+      ],
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL",
+      "ranking_basis": "Independent subjective good-track estimate, not calibrated."
+    },
+    {
+      "rank": 11,
+      "meeting": "SUNSHINE COAST",
+      "race": 9,
+      "horse": "THE BARBER",
+      "tier": "B+",
+      "original_form_tier": "B+",
+      "research_status": "TOP10_RESEARCH",
+      "independent_pct": 35,
+      "model_pct": 22.53,
+      "reason": "Three wins from four, 3.76L latest win despite awkward start and keen running.",
+      "risk": "First 1400m, class rise and settling risk.",
+      "sources": [
+        "https://www.racingaustralia.horse/FreeFields/Form.aspx?Key=2026Nov21,QLD,Sunshine+Coast"
+      ],
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL",
+      "ranking_basis": "Independent subjective good-track estimate, not calibrated."
+    },
+    {
+      "rank": 12,
+      "meeting": "SUNSHINE COAST",
+      "race": 3,
+      "horse": "SCHEHERAZADE",
+      "tier": "B+",
+      "original_form_tier": "B+",
+      "research_status": "TOP10_RESEARCH",
+      "independent_pct": 34,
+      "model_pct": 20.68,
+      "reason": "Strong 1200m record, recent first-up second and favourable pace.",
+      "risk": "Dominant Darcy tactical advantage; Heart And Spirit local record.",
+      "sources": [
+        "https://www.racingaustralia.horse/FreeFields/Form.aspx?Key=2026Nov21,QLD,Sunshine+Coast"
+      ],
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL",
+      "ranking_basis": "Independent subjective good-track estimate, not calibrated."
+    },
+    {
+      "rank": 13,
+      "meeting": "KEMBLA GRANGE",
+      "race": 9,
+      "horse": "MAN OF WORTH (IRE)",
+      "tier": "B+",
+      "original_form_tier": "B+",
+      "research_status": "TOP10_RESEARCH",
+      "independent_pct": 34,
+      "model_pct": 18.84,
+      "reason": "Strong recent BM88 win and favourable gate.",
+      "risk": "You're Not The King leads raw model and improves on wet.",
+      "sources": [
+        "https://www.racingaustralia.horse/FreeFields/Form.aspx?Key=2026Nov21,NSW,Kembla%20Grange"
+      ],
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL",
+      "ranking_basis": "Independent subjective good-track estimate, not calibrated."
+    },
+    {
+      "rank": 14,
+      "meeting": "CRANBOURNE",
+      "race": 6,
+      "horse": "JENNI MULTABELLA (NZ)",
+      "tier": "B+",
+      "original_form_tier": "B+",
+      "research_status": "TOP10_RESEARCH",
+      "independent_pct": 33,
+      "model_pct": 10.64,
+      "reason": "Soft-track form and class relief, Zahra booked.",
+      "risk": "Mile record and pace pressure; raw model disagreement.",
+      "sources": [
+        "https://www.racingaustralia.horse/FreeFields/Form.aspx?Key=2026Nov21,VIC,Southside+Cranbourne"
+      ],
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL",
+      "ranking_basis": "Independent subjective good-track estimate, not calibrated."
+    },
+    {
+      "rank": 15,
+      "meeting": "KEMBLA GRANGE",
+      "race": 8,
+      "horse": "GRINGOTTS (NZ)",
+      "tier": "B+",
+      "original_form_tier": "B+",
+      "research_status": "TOP10_RESEARCH",
+      "independent_pct": 33,
+      "model_pct": 11.59,
+      "reason": "Two course-distance wins; Big Dance interference and proven soft form.",
+      "risk": "61kg and strong lower-weight rivals.",
+      "sources": [
+        "https://www.racingaustralia.horse/FreeFields/Form.aspx?Key=2026Nov21,NSW,Kembla%20Grange"
+      ],
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL",
+      "ranking_basis": "Independent subjective good-track estimate, not calibrated."
+    }
+  ]
+}
