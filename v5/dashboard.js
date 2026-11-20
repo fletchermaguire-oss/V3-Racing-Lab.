@@ -953,7 +953,7 @@ function render(){if(!C)return;D=C.data;if(!raceOf(S.race)){S.race=D.races[0].id
   return;
  }
  var views={overview:overview,oaks:oaksDayPage,top10:top10,races:racesPage,multi:function(){workshop('multiPage');},sim:function(){workshop('simPage');},compare:comparePage,qa:qaPage,cal:calPage,weather:weatherPage,sync:syncPage,results:resultsPage,tools:toolsPage,archive:overview};
- (views[S.page]||toolsPage)();app().append(e('div','footer',S.page==='oaks'?'Thursday 5 Nov · verified results':C.board.version+' · '+D.date+' research model · uncalibrated · all tools preserved''));
+ (views[S.page]||toolsPage)();app().append(e('div','footer',S.page==='oaks'?'Thursday 5 Nov · verified results':C.board.version+' · '+D.date+' research model · uncalibrated · all tools preserved'));
 }
 function officialPanel(){
  if(importedCard())return importedOfficialPanel();
