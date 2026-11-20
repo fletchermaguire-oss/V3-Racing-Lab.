@@ -1,19 +1,19 @@
 {
   "date": "2026-11-21",
+  "model": "V5-L5-EVIDENCE-GATE-20261120",
   "going": {
     "CRANBOURNE": "Good 4",
     "KEMBLA GRANGE": "Good 4",
     "ASCOT": "Good 4",
     "SUNSHINE COAST": "Good 4"
   },
-  "model": "V5-L5-EVIDENCE-GATE-20261120",
-  "raw_unchanged": true,
   "publication_approved": false,
   "inventory": {
     "races": 40,
     "runners": 533
   },
   "active": 463,
+  "excluded": 70,
   "priority": [
     {
       "runner_id": "2026-11-21_ASCOT_R08_01",
@@ -852,8 +852,8 @@
     }
   ],
   "limitations": [
-    "Provisional fields, emergencies not activated",
-    "No empirical improvement claim",
-    "Actual trial evidence not numerically scored"
+    "Friday published scratchings; remaining emergencies not activated",
+    "No final starter certification",
+    "Uncalibrated model; qualitative research kept separate"
   ]
 }
