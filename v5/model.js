@@ -5,7 +5,7 @@
  */
 (function(global){
 'use strict';
-const VERSION='V5-L5-CANDIDATE-20261030';
+const VERSION='V5-L6-EVIDENCE-INTEGRITY-SHADOW-20261120';
 const CONFIG=Object.freeze({
  temperature:0.78,uniformReserve:0.15,
  weights:Object.freeze({career:0.24,recency:0.76,distance:0.19,surface:0.22,course:0.12,class:0.55}),
@@ -256,6 +256,10 @@ function calculate(d,scenario,classWeight=CONFIG.weights.class,options={}){
   // Each contender is rated relative to the actual competitors in this race.
   // The three highest-rated rivals and the median rival determine an anchor.
   // This is current-field competition, not a historic-opponent database.
+  // Missing class evidence is unknown, not demonstrated inferior class.
+  const known=entries.filter(x=>x.classQuality>0).map(x=>x.classQuality);
+  const classPrior=median(known)||0;
+  entries.forEach(x=>{x.observedClassQuality=x.classQuality;if(x.classQuality===0)x.classQuality=classPrior;});
   entries.forEach(x=>{
    const others=entries.filter(y=>y.h.id!==x.h.id).map(y=>y.classQuality).sort((a,b)=>b-a);
    const top=others.slice(0,Math.min(3,others.length));
@@ -264,6 +268,10 @@ function calculate(d,scenario,classWeight=CONFIG.weights.class,options={}){
    x.parts.class=contribution;x.raw+=contribution;
    x.oppositionAnchor=anchor;x.oppositionEdge=edge;
   });
+  // Partially pool thin histories toward the race median; repeat evidence earns influence.
+  // Keep existing coefficients unchanged; 2 pseudo-starts is an explicit shadow assumption.
+  const center=median(entries.map(x=>x.raw));
+  entries.forEach(x=>{const n=x.starts.length;const shrink=n/(n+2);const delta=n>=3?0:(center-x.raw)*(1-shrink);x.parts.thin_evidence=delta;x.raw+=delta;});
   const p=normalize(entries),mid=median(entries.map(x=>x.raw));
   entries.forEach((x,i)=>{x.p=p.rounded[i];x.pExact=p.exact[i];});
   entries.sort((a,b)=>b.pExact-a.pExact||a.h.id.localeCompare(b.h.id));
@@ -275,7 +283,7 @@ function calculate(d,scenario,classWeight=CONFIG.weights.class,options={}){
    records.push({id:x.h.id,race_id:r.id,horse:x.h.horse,meeting:r.meeting,race:r.race,
     rank:i+1,p:x.p,p_exact:x.pExact,model_score:round(clamp(50+18*(x.raw-mid),1,99),1),
     fair_odds:round(100/x.pExact),field_size:entries.length,field_gap:gap,chaos:chaos,
-    completeness:x.completeness,days_since_last:x.daysSinceLast,features:x.parts,grade_quality:round(x.classQuality,3),
+    completeness:x.completeness,days_since_last:x.daysSinceLast,features:x.parts,grade_quality:round(x.observedClassQuality,3),class_quality_used:round(x.classQuality,3),
      opposition_class_anchor:round(x.oppositionAnchor,3),opposition_class_edge:round(x.oppositionEdge,3),
     settle_800:x.settle.position,settle_fraction:x.settle.fraction,status:statusOf(x.h),original_pick:!!x.h.original_pick,
     input_issues:x.issues,form_audit:{accepted:x.starts.length,ignored_future:x.formAudit.ignored_future,invalid:x.formAudit.invalid,duplicates:x.formAudit.duplicates},
