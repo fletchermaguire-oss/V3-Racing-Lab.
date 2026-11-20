@@ -62,9 +62,12 @@ test('prices, original picks, and horse names cannot change probabilities or sho
  const huge=clone(D);huge.market_audit=[{race_id:D.races[0].id,horse:D.runners[0].horse,decimal_odds:Infinity}];
  assert.equal(M.board(huge).marketAudit[0].severity,'INVALID_QUOTE');
 });
-test('Top 5/10/15 share a probability-first order without an elite override',()=>{
+test('Raw top 5/10/15 remain probability-first; default selections are screened and not padded',()=>{
  assert.equal(B.leaders.length,29);
- assert.equal(B.top15.length,15);
+ assert.equal(B.rawTop15.length,15);
+ assert.deepEqual(B.rawTop5.map(x=>x.id),B.rawTop15.slice(0,5).map(x=>x.id));
+ assert.deepEqual(B.rawTop10.map(x=>x.id),B.rawTop15.slice(0,10).map(x=>x.id));
+ assert.deepEqual(B.top15.map(x=>x.id),B.winFirst.priority.slice(0,15).map(x=>x.runner_id));
  assert.deepEqual(B.top5.map(x=>x.id),B.top15.slice(0,5).map(x=>x.id));
  assert.deepEqual(B.top10.map(x=>x.id),B.top15.slice(0,10).map(x=>x.id));
  for(let i=1;i<B.leaders.length;i++)assert.ok(B.leaders[i-1].p_exact>=B.leaders[i].p_exact);
@@ -369,4 +372,9 @@ test('missing historical class is treated as unknown and cannot earn strict prio
  assert.equal(b.winFirst.review.length,0);
  assert.equal(b.calibration_status,'NOT_ESTABLISHED');
  assert.ok(b.baseline.races.every(r=>r.sum===100));
+});
+
+
+test('unexposed opposition cannot enter a default priority list through a high raw probability',()=>{
+ const d=fixture();const h=d.runners[0];h.statistics='Career 3-0-3; course 3-0-3; distance 3-0-3; Good 3-0-3; Soft 1-0-1; Heavy 0-0-0';h.form=['30/1/2027','20/1/2027','10/1/2027'].map(t=>t+' TEST 1200m (G), OPEN Group G1: 1/10, PDF margin 3L').join('\n');d.runners[1].form='';d.runners[1].statistics='Career 0-0-0';const b=M.board(d);assert.equal(b.rawTop15.find(x=>x.race_id===h.race_id).id,h.id);assert.ok(b.winFirst.avoid.find(x=>x.race_id===h.race_id).reasons.includes('UNEXPOSED_OR_UNPARSED_OPPOSITION'));assert.ok(!b.top15.some(x=>x.race_id===h.race_id));assert.ok(b.baseline.races.every(x=>x.sum===100));
 });
