@@ -1,6 +1,6 @@
 {
   "date": "2026-11-21",
-  "model": "V5-L5-EVIDENCE-GATE-20261120",
+  "model": "V5-L5-CANDIDATE-20261030",
   "going": {
     "CRANBOURNE": "Good 4",
     "KEMBLA GRANGE": "Good 4",
@@ -855,5 +855,6 @@
     "Friday published scratchings; remaining emergencies not activated",
     "No final starter certification",
     "Uncalibrated model; qualitative research kept separate"
-  ]
+  ],
+  "screen_version": "V5-EVIDENCE-GATE-20261120"
 }
