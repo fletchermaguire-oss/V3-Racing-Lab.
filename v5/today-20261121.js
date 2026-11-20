@@ -57,13 +57,53 @@ function highlight(c,x){const b=E('article','v14-card');const row=E('div','v14-p
  if(x.notes?.length)txt(b,'Model checks: '+x.notes.slice(0,5).join(' · '),'v14-caption');
  b.append(btn('Full race form and rivals',()=>choose(x),false));return b;}
 function modelScreen(root,c){const box=E('section','v14-section');box.append(E('h2','','V5 evidence-screened priorities'),E('p','v14-muted','Raw probabilities are unchanged. Priority status requires evidence and scenario checks; no padding.'));for(const x of c.board.winFirst.priority){const n=E('article','v14-card');n.append(E('h3','',x.horse+' · '+x.meeting+' R'+x.race),E('p','v14-sep-info',x.model_pct.toFixed(2)+'% raw · '+x.robust_floor.toFixed(2)+'% scenario minimum'),btn('Race dossier',()=>choose({meeting:x.meeting,race:x.race,id:x.runner_id})));box.append(n);}box.append(E('h3','','Review only'));for(const x of c.board.winFirst.review)box.append(E('p','v14-muted',x.horse+' · '+x.model_pct.toFixed(2)+'% raw · '+x.reasons.join(', ')));box.append(E('h3','','Raw top 15 — diagnostic only'));for(const [i,x] of (c.board.rawTop15||c.board.leaders.slice(0,15)).entries())box.append(E('p','v14-caption',(i+1)+'. '+x.horse+' · '+x.meeting+' R'+x.race+' · '+x.p.toFixed(2)+'%'));root.append(box);}
-function renderHome(root,c){const h=base(root,'Saturday race centre','Cranbourne · Kembla Grange · Sunshine Coast · Ascot. Official Friday withdrawals applied to Friday source form for every accepted horse, with the independently reviewed research shortlist kept separate from raw V5 percentages.');
- warning(root);root.append(metrics(c));const actions=E('div','v14-actions');actions.append(btn('All 40 races',()=>go('races')),btn('Top 5 / 10 / 15',()=>go('daily')),btn('Multi Lab',()=>go('multi')),btn('Simulator',()=>go('sim')));h.append(actions);
- const tracks=A(E('div','v14-section'),A(E('div','v14-head'),E('h2','','Track reports and sources'),E('span','v14-caption','Friday latest official track and scratching report')));
- const grid=E('div','v14-grid');for(const m of displayOrder){const row=sourceMeeting(c,m),card=E('div','v14-card');card.append(E('div','v14-tag',m),E('h3','',c.going[m]+' · rail '+row.rail),E('p','v14-muted',row.source_last_published),E('p','v14-caption',row.saturday_scratched+' listed withdrawals · '+(row.deadline_passed_for_snapshot?'after scheduled closing':'deadline still pending')));card.append(link('Official scratching sheet',row.scratching_source));grid.append(card);}tracks.append(grid);root.append(tracks);
- const group=E('section','v14-section');group.append(A(E('div','v14-head'),E('h2','','Independently reviewed Top 5'),E('span','v14-caption','Not model-ranked or calibrated')));const picks=E('div','v14-grid');winners(c).slice(0,5).forEach(x=>picks.append(highlight(c,x)));group.append(picks);root.append(group);modelScreen(root,c);
- const all=E('section','v14-section');all.append(A(E('div','v14-head'),E('h2','','Every race · current research coverage'),E('span','v14-caption','No automatic pick where human review missing')));tabs(all,st.meeting,m=>{st.meeting=m;rerender()},false);
- const races=E('div','v14-grid');c.data.races.filter(r=>r.meeting===st.meeting).forEach(r=>{const p=research(c,r.id);const box=E('div','v14-card');box.append(E('div','v14-tag','R'+r.race+' · '+r.distance_m+'m'),E('h3','',r.title),E('p','v14-muted',p?'Reviewed: '+p.horse+' · form '+p.form_tier:'Independent review: '+(r.analyst_review?.working_leader||'Not available')+''));box.append(btn('View official field',()=>{st.race=r.race;st.horse=p?.id||null;go('races')}));races.append(box);});all.append(races);root.append(all);
+function renderHome(root,c){
+ const h=base(root,'Saturday race centre','Cranbourne · Kembla Grange · Sunshine Coast · Ascot. All 40 races and the complete model remain available in their own sections.');
+ const actions=E('div','v14-actions');
+ actions.append(btn('All 40 races',()=>go('races')),btn('Top 5 / 10 / 15',()=>go('daily')),btn('Multi Lab',()=>go('multi')),btn('Simulator',()=>go('sim')));
+ h.append(actions);
+ // Keep Overview lightweight: Race Centre owns the 40 detailed race cards,
+ // and Daily Top owns the full evidence-screen/model tables.
+ warning(root);
+ if(c.board)root.append(metrics(c));
+ const tracks=E('section','v14-section');
+ tracks.append(A(E('div','v14-head'),E('h2','','Track reports and sources'),E('span','v14-caption','Latest saved official report · final starters unverified')));
+ const grid=E('div','v14-grid');
+ for(const m of displayOrder){
+  const row=sourceMeeting(c,m),card=E('article','v14-card'),going=c.going&&c.going[m]||'Track unverified';
+  card.append(E('div','v14-tag',m),E('h3','',going+(row&&row.rail?' · rail '+row.rail:'')));
+  if(row){
+   txt(card,row.source_last_published||'Source timestamp unavailable','v14-muted');
+   txt(card,Number.isFinite(row.saturday_scratched)?row.saturday_scratched+' listed withdrawals':'Withdrawals not confirmed','v14-caption');
+   if(row.scratching_source)card.append(link('Official scratching sheet',row.scratching_source));
+  }else txt(card,'Saved meeting summary unavailable; check the Race Centre for runners.','v14-alert');
+  grid.append(card);
+ }
+ tracks.append(grid);root.append(tracks);
+ const group=E('section','v14-section');
+ group.append(A(E('div','v14-head'),E('h2','','Independent research Top 5'),E('span','v14-caption','Provisional · uncalibrated · not the model ranking')));
+ const picks=E('div','v14-grid');
+ for(const x of winners(c).slice(0,5)){
+  try{picks.append(highlight(c,x));}
+  catch(err){
+   console.error('V5 home individual selection failed:',x&&x.horse,err);
+   txt(picks,'Could not show '+(x&&x.horse||'a selection')+' here. Open Daily Top for the complete board.','v14-alert');
+  }
+ }
+ if(!picks.childNodes.length)txt(picks,'Current research shortlist is unavailable. Open the Daily Top section.','v14-muted');
+ group.append(picks,btn('Open all Top 15 and model screening',()=>go('daily')));
+ root.append(group);
+ const coverage=E('section','v14-section');
+ coverage.append(E('h2','','Race Centre · all four meetings'));
+ const perMeeting=E('div','v14-grid');
+ for(const m of displayOrder){
+  const count=(c.data&&c.data.races||[]).filter(r=>r.meeting===m).length;
+  const card=E('article','v14-card');
+  card.append(E('strong','',m),E('p','v14-caption',count+' races · full fields, pace and rival notes'));
+  card.append(btn('View races',()=>{st.meeting=m;st.race=1;st.horse=null;go('races');}));
+  perMeeting.append(card);
+ }
+ coverage.append(perMeeting);root.append(coverage);
  root.append(A(E('div','v14-actions'),link('Four-meeting research data','/v5/cards/2026-11-21/research.json'),link('Previous Saturday archive','/v5/?card=2026-11-14'),link('7 Nov results archive','/v5/saturday-2026-11-07.html')));
 }
 function renderDaily(root,c){base(root,'Reviewed Top '+st.top+' · 21 November','Qualitative, form-first order with independent reasons and major dangers. Percentages come unchanged from the V5-L5 model and are NOT calibrated probabilities.');warning(root);
@@ -82,7 +122,17 @@ function renderRaces(root,c){base(root,'Race-by-race form · 40 races','Choose t
  if(st.showOut){const x=E('div','v14-grid');out.forEach(h=>txt(x,'#'+h.tab+' '+h.horse+' — '+h.status,'v14-scratch'));root.append(x)}
  const nav=E('div','v14-actions');if(r.race>1)nav.append(btn('Previous R'+(r.race-1),()=>{st.race--;st.horse=null;rerender()}));if(r.race<10)nav.append(btn('Next R'+(r.race+1),()=>{st.race++;st.horse=null;rerender()}));root.append(nav);
 }
-function render(el,opts){last={el,opts};uiStyle();const c=opts&&opts.controller;if(!c){el.replaceChildren(E('p','v14-muted','Loading dated model source...'));return;}const page=opts.page||'home';if(page==='daily'||page==='top10')renderDaily(el,c);else if(page==='races')renderRaces(el,c);else renderHome(el,c);}
+function render(el,opts){last={el,opts};uiStyle();const c=opts&&opts.controller;if(!c){el.replaceChildren(E('p','v14-muted','Loading dated model source...'));return;}const page=opts.page||'home';if(page==='daily'||page==='top10')renderDaily(el,c);else if(page==='races')renderRaces(el,c);else{
+ try{renderHome(el,c);}
+ catch(err){
+  console.error('V5 Overview recovered after a rendering error:',err);
+  base(el,'Saturday race centre','Home summary could not be completed. All working race and analysis sections remain available.');
+  el.append(E('div','v14-alert','Home summary partially unavailable: '+String(err&&err.message||err)));
+  const actions=E('div','v14-actions');
+  actions.append(btn('Open all races',()=>go('races')),btn('Open Top 15',()=>go('daily')),btn('Open Simulator',()=>go('sim')));
+  el.append(actions);
+ }
+}}
 original.render=render;
 original.select=function(meeting,race){st.meeting=meeting;st.race=race;st.horse=null;rerender()};
 })(window);
