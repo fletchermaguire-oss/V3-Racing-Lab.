@@ -5,7 +5,8 @@
  */
 (function(global){
 'use strict';
-const VERSION='V5-L5-EVIDENCE-GATE-20261120';
+const VERSION='V5-L5-CANDIDATE-20261030';
+const SCREEN_VERSION='V5-EVIDENCE-GATE-20261120';
 const CONFIG=Object.freeze({
  temperature:0.78,uniformReserve:0.15,
  weights:Object.freeze({career:0.24,recency:0.76,distance:0.19,surface:0.22,course:0.12,class:0.55}),
@@ -435,7 +436,7 @@ function board(d,options={}){
   baseline:good,soft:scenarios[1],marketAudit:audit,publication_blocked:true,publication_reasons:['UNCALIBRATED_MODEL','OFFICIAL_FIELD_AND_TRACK_REVIEW_REQUIRED'],
   stress:{goodClassConservative:scenarios[2],softClassConservative:scenarios[3]},scenarios:scenarios,model_variants:variants.map(v=>v.label),
   leaders:leaders,robustLeaders:robustLeaders,qualifiedLeaders:qualified,eliteLeaders:leaders.filter(x=>x.elite_form),
-  winFirst:screened,
+  screen_version:SCREEN_VERSION,winFirst:screened,
   rawTop5:leaders.slice(0,5),rawTop10:leaders.slice(0,10),rawTop15:leaders.slice(0,15),
   top5:priorityRows.slice(0,5),top10:priorityRows.slice(0,10),top15:priorityRows.slice(0,15),
   screen:{description:'Evidence and sensitivity screen; no price or horse override; not a calibration or hit-rate claim.',
