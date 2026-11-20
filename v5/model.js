@@ -5,7 +5,7 @@
  */
 (function(global){
 'use strict';
-const VERSION='V5-L6-EVIDENCE-INTEGRITY-SHADOW-20261120';
+const VERSION='V5-L5-EVIDENCE-GATE-20261120';
 const CONFIG=Object.freeze({
  temperature:0.78,uniformReserve:0.15,
  weights:Object.freeze({career:0.24,recency:0.76,distance:0.19,surface:0.22,course:0.12,class:0.55}),
@@ -256,10 +256,6 @@ function calculate(d,scenario,classWeight=CONFIG.weights.class,options={}){
   // Each contender is rated relative to the actual competitors in this race.
   // The three highest-rated rivals and the median rival determine an anchor.
   // This is current-field competition, not a historic-opponent database.
-  // Missing class evidence is unknown, not demonstrated inferior class.
-  const known=entries.filter(x=>x.classQuality>0).map(x=>x.classQuality);
-  const classPrior=median(known)||0;
-  entries.forEach(x=>{x.observedClassQuality=x.classQuality;if(x.classQuality===0)x.classQuality=classPrior;});
   entries.forEach(x=>{
    const others=entries.filter(y=>y.h.id!==x.h.id).map(y=>y.classQuality).sort((a,b)=>b-a);
    const top=others.slice(0,Math.min(3,others.length));
@@ -268,10 +264,6 @@ function calculate(d,scenario,classWeight=CONFIG.weights.class,options={}){
    x.parts.class=contribution;x.raw+=contribution;
    x.oppositionAnchor=anchor;x.oppositionEdge=edge;
   });
-  // Partially pool thin histories toward the race median; repeat evidence earns influence.
-  // Keep existing coefficients unchanged; 2 pseudo-starts is an explicit shadow assumption.
-  const center=median(entries.map(x=>x.raw));
-  entries.forEach(x=>{const n=x.starts.length;const shrink=n/(n+2);const delta=n>=3?0:(center-x.raw)*(1-shrink);x.parts.thin_evidence=delta;x.raw+=delta;});
   const p=normalize(entries),mid=median(entries.map(x=>x.raw));
   entries.forEach((x,i)=>{x.p=p.rounded[i];x.pExact=p.exact[i];});
   entries.sort((a,b)=>b.pExact-a.pExact||a.h.id.localeCompare(b.h.id));
@@ -283,7 +275,7 @@ function calculate(d,scenario,classWeight=CONFIG.weights.class,options={}){
    records.push({id:x.h.id,race_id:r.id,horse:x.h.horse,meeting:r.meeting,race:r.race,
     rank:i+1,p:x.p,p_exact:x.pExact,model_score:round(clamp(50+18*(x.raw-mid),1,99),1),
     fair_odds:round(100/x.pExact),field_size:entries.length,field_gap:gap,chaos:chaos,
-    completeness:x.completeness,days_since_last:x.daysSinceLast,features:x.parts,grade_quality:round(x.observedClassQuality,3),class_quality_used:round(x.classQuality,3),
+    completeness:x.completeness,days_since_last:x.daysSinceLast,features:x.parts,grade_quality:round(x.classQuality,3),
      opposition_class_anchor:round(x.oppositionAnchor,3),opposition_class_edge:round(x.oppositionEdge,3),
     settle_800:x.settle.position,settle_fraction:x.settle.fraction,status:statusOf(x.h),original_pick:!!x.h.original_pick,
     input_issues:x.issues,form_audit:{accepted:x.starts.length,ignored_future:x.formAudit.ignored_future,invalid:x.formAudit.invalid,duplicates:x.formAudit.duplicates},
@@ -345,6 +337,9 @@ function winFirstBoard(baseline,scenarios){
   const reasons=[];
   if(!samples.every(x=>x.rank===1))reasons.push('CLASS_ASSUMPTION_CHANGES_RANK');
   if(current.form_audit.accepted<3)reasons.push('LIMITED_RECENT_FORM');
+  const opposition=baseline.records.filter(x=>x.race_id===r.id&&x.id!==current.id);
+  const unraced=opposition.filter(x=>x.form_audit.accepted===0);
+  if(unraced.length)reasons.push('UNEXPOSED_OR_UNPARSED_OPPOSITION');
   // Zero is missing recognised grade, not verified low racing class.
   // Do not alter scores or full-field probabilities based on missing evidence.
   if(current.grade_quality===0)reasons.push('UNKNOWN_GRADED_CLASS');
@@ -361,7 +356,7 @@ function winFirstBoard(baseline,scenarios){
    max_chaos:chaos,completeness:current.completeness,dated_starts:current.form_audit.accepted,
    grade_quality:current.grade_quality,reasons:reasons,good4_pct:g.p,soft5_pct:s.p};
   if(!reasons.length){item.status='PRIORITY_RESEARCH';priority.push(item);}
-  else if(floor>=13&&gap>=4&&chaos<=89&&current.form_audit.accepted>=3&&
+  else if(!unraced.length&&floor>=13&&gap>=4&&chaos<=89&&current.form_audit.accepted>=3&&
    current.completeness>=0.78&&current.grade_quality>0&&!current.input_issues.length){
    item.status='REVIEW_ONLY';review.push(item);
   }else{item.status='NO_SELECTION';avoid.push(item);}
@@ -432,17 +427,20 @@ function board(d,options={}){
  const robustLeaders=Array.from(byRace.values()).map(rows=>rows.slice().sort((a,b)=>b.robust_floor-a.robust_floor||sortProbability(a,b))[0])
   .sort((a,b)=>b.robust_floor-a.robust_floor||sortProbability(a,b));
  const qualified=leaders.filter(x=>x.quality_flags.length===0);
+ const screened=winFirstBoard(good,scenarios);
+ const priorityRows=screened.priority.map(x=>good.records.find(h=>h.id===x.runner_id));
  return {version:VERSION,date:d.date,status:good.status,calibration_status:'NOT_ESTABLISHED',market_blind:true,
   assumption:'Conditional listed fields; explicit baseline '+(typeof baselineGoing==='string'?baselineGoing:'per-race going scenarios')+'; unverified starters remain provisional.',
   sourceCount:d.runners.length,activeCount:good.records.length,excludedCount:good.excluded.length,raceCount:d.races.length,
   baseline:good,soft:scenarios[1],marketAudit:audit,publication_blocked:true,publication_reasons:['UNCALIBRATED_MODEL','OFFICIAL_FIELD_AND_TRACK_REVIEW_REQUIRED'],
   stress:{goodClassConservative:scenarios[2],softClassConservative:scenarios[3]},scenarios:scenarios,model_variants:variants.map(v=>v.label),
   leaders:leaders,robustLeaders:robustLeaders,qualifiedLeaders:qualified,eliteLeaders:leaders.filter(x=>x.elite_form),
-  winFirst:winFirstBoard(good,scenarios),
-  top5:leaders.slice(0,5),top10:leaders.slice(0,10),top15:leaders.slice(0,15),
+  winFirst:screened,
+  rawTop5:leaders.slice(0,5),rawTop10:leaders.slice(0,10),rawTop15:leaders.slice(0,15),
+  top5:priorityRows.slice(0,5),top10:priorityRows.slice(0,10),top15:priorityRows.slice(0,15),
   screen:{description:'Evidence and sensitivity screen; no price or horse override; not a calibration or hit-rate claim.',
    rules:{completeAtLeast:0.70,scenarioSwingBelow:6,top1InScenariosAtLeast:Math.ceil(variants.length*0.75),chaosBelow:90,goingIndependentLeader:true},
-   qualifiedRaceCount:qualified.length,totalRaceCount:leaders.length,shortlistCount:Math.min(10,leaders.length)}};
+   qualifiedRaceCount:qualified.length,totalRaceCount:leaders.length,shortlistCount:Math.min(10,priorityRows.length)}};
 }
 function validateRows(rows){
  if(!Array.isArray(rows)||rows.length<2)throw Error('A full race distribution is required');
