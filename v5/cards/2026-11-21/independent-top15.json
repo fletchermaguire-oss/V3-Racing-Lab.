@@ -1,15 +1,15 @@
 {
   "schema": "racing-lab-v5-independent-research-shortlist/v1",
   "date": "2026-11-21",
-  "as_of": "2026-11-20",
-  "status": "FRIDAY_RESEARCH_REVISED_NOT_FINAL",
+  "as_of": "2026-11-21T12:37:00+10:00",
+  "status": "SATURDAY_R3_REVIEWED_OTHER_RACES_NOT_FINAL",
   "publication_approved": false,
   "model": "V5-L5-CANDIDATE-20261030",
   "track_assumptions": {
     "CRANBOURNE": "Good 4",
     "KEMBLA GRANGE": "Good 4",
     "ASCOT": "Good 4",
-    "SUNSHINE COAST": "Good 4"
+    "SUNSHINE COAST": "Soft 5"
   },
   "entries": [
     {
@@ -130,20 +130,21 @@
       "rank": 7,
       "meeting": "SUNSHINE COAST",
       "race": 3,
-      "horse": "SCHEHERAZADE",
+      "horse": "DOMINANT DARCY",
       "tier": "B",
       "original_form_tier": "B",
       "research_status": "TOP10_RESEARCH",
       "independent_pct": 27,
-      "model_pct": 20.68,
-      "reason": "Three wins and three placings from seven at 1200m; second in open company first-up, barrier 4, wins on good and soft.",
-      "risk": "Dominant Darcy four from six at 1200m; Heart And Spirit has local form; Tequila Baby last-start BM78 winner.",
+      "model_pct": 11.07,
+      "reason": "Four wins from six at 1200m, two from two on soft, Angela Jones drawn 2. Last defeat on Heavy 10. Amuseantes beat her in the 17 Oct BM78; independent first choice is narrow and NOT a lock.",
+      "risk": "Amuseantes beat Darcy by 0.43L at equal carried weights on 17 Oct; Heart And Spirit is suited by Soft5 and local course; Tequila Baby won last start but wide. Speed pressure and model disagreement prevent high confidence.",
       "sources": [
         "https://www.racingaustralia.horse/FreeFields/Form.aspx?Key=2026Nov21,QLD,Sunshine+Coast"
       ],
-      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL",
-      "ranking_basis": "Subjective Friday research estimate, uncalibrated; order also considers exposed class, rival depth, race-fit evidence and going sensitivity. Not derived from odds or scenario floors.",
-      "previous_rank": 12
+      "field_status": "21_NOV_R3_SCRATCH_RECONCILED_ONLY",
+      "ranking_basis": "Human re-reviewed all 11 remaining starters at Soft5 after official scratch. 100% qualitative full-field estimate, uncalibrated; not an automatic model replacement.",
+      "previous_rank": 12,
+      "previous_scratched_runner": "SCHEHERAZADE"
     },
     {
       "rank": 8,
@@ -300,8 +301,8 @@
     }
   ],
   "screen_version": "V5-EVIDENCE-GATE-20261120",
-  "revision_id": "2026-11-20-v2-exposed-form-review",
-  "change_policy": "Original Friday list retained in immutable archive; no formula coefficient change, no guarantee of improved accuracy, no automatic model-based confidence upgrade. Full-field independent distributions are not available; these are provisional subjective leader estimates, not calibrated.",
+  "revision_id": "2026-11-21-R3-verified-scratch-soft5",
+  "change_policy": "Original Friday list retained in immutable archive; no formula coefficient change, no guarantee of improved accuracy, no automatic model-based confidence upgrade. Full-field independent distributions are not available; these are provisional subjective leader estimates, not calibrated. R3 independently re-reviewed and manual choice replaced a confirmed scratched runner; 11-runner distribution is in research.json.",
   "archived_original": "independent-top15-friday-original.json",
   "revision_notes": [
     "Unraced Multistorey and several inflated estimates removed from Top 10.",

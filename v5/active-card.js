@@ -18,7 +18,7 @@
    independent_shortlist_url:'/v5/cards/2026-11-14/independent-top15.json',
    official_research_only:true,live_refresh:false,
    source_label:'Saturday 14 November latest official scratching sheets · 121 listed · 410 modelled runners · 134 excluded including reserves · final Doomben and Ascot deadlines pending'
- }:{date:'2026-11-21',research_url:'/v5/cards/2026-11-21/research.json',going:{"CRANBOURNE":"Good 4","KEMBLA GRANGE":"Good 4","ASCOT":"Good 4","SUNSHINE COAST":"Good 4"},independent_shortlist_url:'/v5/cards/2026-11-21/independent-top15.json',official_research_only:true,live_refresh:false,source_label:'Friday 20 November official form and scratchings · provisional 21 November research · 40 races'};
+ }:{date:'2026-11-21',research_url:'/v5/cards/2026-11-21/research.json',going:{"CRANBOURNE":"Good 4","KEMBLA GRANGE":"Good 4","ASCOT":"Good 4","SUNSHINE COAST":"Soft 5"},independent_shortlist_url:'/v5/cards/2026-11-21/independent-top15.json',official_research_only:true,live_refresh:false,source_label:'21 November · official R3 scratching/Soft5 · remainder provisional'};
  if(typeof module==='object'&&module.exports)module.exports=card;
  else root.RacingLabV5Card=Object.freeze(card);
 })(typeof window!=='undefined'?window:globalThis);

@@ -1,0 +1,75 @@
+{
+  "date": "2026-11-21",
+  "race": "2026-11-21_SUNSHINE COAST_R03",
+  "going": "Soft 5",
+  "track_checked_at": "2026-11-21T12:37:00+10:00",
+  "scratched": [
+    "SCHEHERAZADE"
+  ],
+  "rank": "DOMINANT DARCY",
+  "independent_probabilities": [
+    {
+      "horse": "DOMINANT DARCY",
+      "independent_pct": 27,
+      "runner_id": "2026-11-21_SUNSHINE COAST_R03_05"
+    },
+    {
+      "horse": "AMUSEANTES",
+      "independent_pct": 21,
+      "runner_id": "2026-11-21_SUNSHINE COAST_R03_04"
+    },
+    {
+      "horse": "TEQUILA BABY",
+      "independent_pct": 15,
+      "runner_id": "2026-11-21_SUNSHINE COAST_R03_02"
+    },
+    {
+      "horse": "HEART AND SPIRIT",
+      "independent_pct": 13,
+      "runner_id": "2026-11-21_SUNSHINE COAST_R03_06"
+    },
+    {
+      "horse": "CHAMPAGNE LANE",
+      "independent_pct": 11,
+      "runner_id": "2026-11-21_SUNSHINE COAST_R03_08"
+    },
+    {
+      "horse": "BETTER NOT SLIP",
+      "independent_pct": 4,
+      "runner_id": "2026-11-21_SUNSHINE COAST_R03_12"
+    },
+    {
+      "horse": "LAYDOWNLILY",
+      "independent_pct": 3,
+      "runner_id": "2026-11-21_SUNSHINE COAST_R03_01"
+    },
+    {
+      "horse": "BLANTONS RUN",
+      "independent_pct": 2,
+      "runner_id": "2026-11-21_SUNSHINE COAST_R03_09"
+    },
+    {
+      "horse": "JOY A PLENTY",
+      "independent_pct": 2,
+      "runner_id": "2026-11-21_SUNSHINE COAST_R03_07"
+    },
+    {
+      "horse": "SUPER DAISY",
+      "independent_pct": 1,
+      "runner_id": "2026-11-21_SUNSHINE COAST_R03_11"
+    },
+    {
+      "horse": "BRIGHT BLONDE",
+      "independent_pct": 1,
+      "runner_id": "2026-11-21_SUNSHINE COAST_R03_10"
+    }
+  ],
+  "raw_model_note": "Unchanged V5 Soft 5 raw: Heart And Spirit 14.95, Tequila Baby 13.75, Laydownlily 11.12, Dominant Darcy 11.07; evidence screen = NO_SELECTION.",
+  "pace": "Heart And Spirit and Super Daisy can challenge for the lead, Dominant Darcy should stalk from gate two. Amuseantes can obtain cover. Tequila Baby has the outside stall and needs luck.",
+  "approval": false,
+  "sources": [
+    "https://www.racingaustralia.horse/FreeFields/Form.aspx?Key=2026Nov21,QLD,Sunshine+Coast",
+    "https://www.racingaustralia.horse/FreeFields/Scratchings.aspx?Key=2026Nov21,QLD,Sunshine+Coast",
+    "https://www.racingqueensland.com.au/racing/full-calendar/thoroughbred/meeting/scst/20261121/race/3"
+  ]
+}

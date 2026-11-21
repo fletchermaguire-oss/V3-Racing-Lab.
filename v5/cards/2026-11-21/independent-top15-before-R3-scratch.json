@@ -1,0 +1,312 @@
+{
+  "schema": "racing-lab-v5-independent-research-shortlist/v1",
+  "date": "2026-11-21",
+  "as_of": "2026-11-20",
+  "status": "FRIDAY_RESEARCH_REVISED_NOT_FINAL",
+  "publication_approved": false,
+  "model": "V5-L5-CANDIDATE-20261030",
+  "track_assumptions": {
+    "CRANBOURNE": "Good 4",
+    "KEMBLA GRANGE": "Good 4",
+    "ASCOT": "Good 4",
+    "SUNSHINE COAST": "Good 4"
+  },
+  "entries": [
+    {
+      "rank": 1,
+      "meeting": "ASCOT",
+      "race": 8,
+      "horse": "BEATTY",
+      "tier": "B+",
+      "original_form_tier": "B+",
+      "research_status": "TOP10_RESEARCH",
+      "independent_pct": 40,
+      "model_pct": 34.19,
+      "reason": "Six wins from seven, unbeaten in six Good starts; Group 3 and Listed wins at Ascot. Beat Consignment by 2L last start.",
+      "risk": "Barrier 14; first 1600m; Roger unbeaten in three and Dixie Doo already placed at the trip.",
+      "sources": [
+        "https://www.racingaustralia.horse/FreeFields/Form.aspx?Key=2026Nov21,WA,Ascot"
+      ],
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL",
+      "ranking_basis": "Subjective Friday research estimate, uncalibrated; order also considers exposed class, rival depth, race-fit evidence and going sensitivity. Not derived from odds or scenario floors.",
+      "previous_rank": 1
+    },
+    {
+      "rank": 2,
+      "meeting": "KEMBLA GRANGE",
+      "race": 7,
+      "horse": "EARN TO BURN",
+      "tier": "B+",
+      "original_form_tier": "B+",
+      "research_status": "TOP10_RESEARCH",
+      "independent_pct": 34,
+      "model_pct": 31.84,
+      "reason": "Two consecutive wins including Listed 1200m, 55kg and barrier 3; three wins in seven 1000m starts. Friday research reports two trial wins.",
+      "risk": "First race since 6 June; Catch The Glory has three wins from four at 1000m and Scampi is race-fit.",
+      "sources": [
+        "https://www.racingaustralia.horse/FreeFields/Form.aspx?Key=2026Nov21,NSW,Kembla%20Grange"
+      ],
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL",
+      "ranking_basis": "Subjective Friday research estimate, uncalibrated; order also considers exposed class, rival depth, race-fit evidence and going sensitivity. Not derived from odds or scenario floors.",
+      "previous_rank": 5
+    },
+    {
+      "rank": 3,
+      "meeting": "ASCOT",
+      "race": 10,
+      "horse": "PRINCE OF DALA",
+      "tier": "B+",
+      "original_form_tier": "B+",
+      "research_status": "TOP10_RESEARCH",
+      "independent_pct": 33,
+      "model_pct": 24.91,
+      "reason": "Four wins from six starts; three from four at 1400m; last-start Ascot 1400m win by 2.55L; previously Listed second.",
+      "risk": "Good-track estimate only: never raced on soft; Snow God and Truly Loyal have wet form and light weights.",
+      "sources": [
+        "https://www.racingaustralia.horse/FreeFields/Form.aspx?Key=2026Nov21,WA,Ascot"
+      ],
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL",
+      "ranking_basis": "Subjective Friday research estimate, uncalibrated; order also considers exposed class, rival depth, race-fit evidence and going sensitivity. Not derived from odds or scenario floors.",
+      "previous_rank": 2
+    },
+    {
+      "rank": 4,
+      "meeting": "ASCOT",
+      "race": 6,
+      "horse": "WESTERN MISS",
+      "tier": "B",
+      "original_form_tier": "B",
+      "research_status": "TOP10_RESEARCH",
+      "independent_pct": 30,
+      "model_pct": 28.2,
+      "reason": "Barrier 1 and 53kg; two wins and a place from three at 1400m; three wins from four on soft; drops from Group 3 company.",
+      "risk": "Seven-day backup after a 5.04L defeat; September Born won last start and Oly’s Choice has strong Listed form.",
+      "sources": [
+        "https://www.racingaustralia.horse/FreeFields/Form.aspx?Key=2026Nov21,WA,Ascot"
+      ],
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL",
+      "ranking_basis": "Subjective Friday research estimate, uncalibrated; order also considers exposed class, rival depth, race-fit evidence and going sensitivity. Not derived from odds or scenario floors.",
+      "previous_rank": null
+    },
+    {
+      "rank": 5,
+      "meeting": "CRANBOURNE",
+      "race": 9,
+      "horse": "SMOOTH CHINO",
+      "tier": "B",
+      "original_form_tier": "B",
+      "research_status": "TOP10_RESEARCH",
+      "independent_pct": 29,
+      "model_pct": 23.72,
+      "reason": "Eight wins from 13 and five from seven at 1200m; last-start Group 2 winner, previous narrow Group 2 second on heavy; barrier 5.",
+      "risk": "Mazu was beaten only 0.02L in that win; Ndola, Charm Stone and Zou Sensation make this a deep race.",
+      "sources": [
+        "https://www.racingaustralia.horse/FreeFields/Form.aspx?Key=2026Nov21,VIC,Southside+Cranbourne"
+      ],
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL",
+      "ranking_basis": "Subjective Friday research estimate, uncalibrated; order also considers exposed class, rival depth, race-fit evidence and going sensitivity. Not derived from odds or scenario floors.",
+      "previous_rank": null
+    },
+    {
+      "rank": 6,
+      "meeting": "CRANBOURNE",
+      "race": 1,
+      "horse": "VALAROSO",
+      "tier": "B",
+      "original_form_tier": "B",
+      "research_status": "TOP10_RESEARCH",
+      "independent_pct": 28,
+      "model_pct": 23.06,
+      "reason": "Barrier 1, 59kg, exposed Group 3 third and a 2.25L soft maiden win; small provisional field.",
+      "risk": "First 1400m; Doubt Time was a closer Group 3 third and has first-time blinkers and tongue tie; Mongolian Hero has a 1400m win.",
+      "sources": [
+        "https://www.racingaustralia.horse/FreeFields/Form.aspx?Key=2026Nov21,VIC,Southside+Cranbourne"
+      ],
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL",
+      "ranking_basis": "Subjective Friday research estimate, uncalibrated; order also considers exposed class, rival depth, race-fit evidence and going sensitivity. Not derived from odds or scenario floors.",
+      "previous_rank": 4
+    },
+    {
+      "rank": 7,
+      "meeting": "SUNSHINE COAST",
+      "race": 3,
+      "horse": "SCHEHERAZADE",
+      "tier": "B",
+      "original_form_tier": "B",
+      "research_status": "TOP10_RESEARCH",
+      "independent_pct": 27,
+      "model_pct": 20.68,
+      "reason": "Three wins and three placings from seven at 1200m; second in open company first-up, barrier 4, wins on good and soft.",
+      "risk": "Dominant Darcy four from six at 1200m; Heart And Spirit has local form; Tequila Baby last-start BM78 winner.",
+      "sources": [
+        "https://www.racingaustralia.horse/FreeFields/Form.aspx?Key=2026Nov21,QLD,Sunshine+Coast"
+      ],
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL",
+      "ranking_basis": "Subjective Friday research estimate, uncalibrated; order also considers exposed class, rival depth, race-fit evidence and going sensitivity. Not derived from odds or scenario floors.",
+      "previous_rank": 12
+    },
+    {
+      "rank": 8,
+      "meeting": "SUNSHINE COAST",
+      "race": 6,
+      "horse": "NOBLE DECREE (NZ)",
+      "tier": "B",
+      "original_form_tier": "B",
+      "research_status": "TOP10_RESEARCH",
+      "independent_pct": 26,
+      "model_pct": 24.53,
+      "reason": "Last-start BM85 winner at 1200m by 1.1L; drops in class; four wins and eight placings from 14.",
+      "risk": "60kg and barrier 12; six local starts without a win; Grammar Lad, Brereton and Shako are credible.",
+      "sources": [
+        "https://www.racingaustralia.horse/FreeFields/Form.aspx?Key=2026Nov21,QLD,Sunshine+Coast"
+      ],
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL",
+      "ranking_basis": "Subjective Friday research estimate, uncalibrated; order also considers exposed class, rival depth, race-fit evidence and going sensitivity. Not derived from odds or scenario floors.",
+      "previous_rank": null
+    },
+    {
+      "rank": 9,
+      "meeting": "SUNSHINE COAST",
+      "race": 7,
+      "horse": "BRINDAVAN (IRE)",
+      "tier": "B",
+      "original_form_tier": "B",
+      "research_status": "TOP10_RESEARCH",
+      "independent_pct": 25,
+      "model_pct": null,
+      "reason": "Barrier 2; recent Heavy 10 mile win by 2.51L and Group 3 fifth; proven distance and adaptable surface.",
+      "risk": "58kg; Livalittle has 54kg and two wins from three locally but returns from a break; Fukubana and Cunnamulla Fella competitive. Reserves unresolved.",
+      "sources": [
+        "https://www.racingaustralia.horse/FreeFields/Form.aspx?Key=2026Nov21,QLD,Sunshine+Coast"
+      ],
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL",
+      "ranking_basis": "Subjective Friday research estimate, uncalibrated; order also considers exposed class, rival depth, race-fit evidence and going sensitivity. Not derived from odds or scenario floors.",
+      "model_pct_note": "Live raw model computed by V5; this snapshot has no independently verified raw number.",
+      "previous_rank": null
+    },
+    {
+      "rank": 10,
+      "meeting": "SUNSHINE COAST",
+      "race": 10,
+      "horse": "SMOKE ON THE WATER",
+      "tier": "B-",
+      "original_form_tier": "B-",
+      "research_status": "TOP10_RESEARCH",
+      "independent_pct": 24,
+      "model_pct": 23.66,
+      "reason": "Last-start open win by 1.53L on soft; 56kg and barrier 3.",
+      "risk": "Seven-day backup, Space Tracker and Ten Deep have strong recent form; reserves unresolved.",
+      "sources": [
+        "https://www.racingaustralia.horse/FreeFields/Form.aspx?Key=2026Nov21,QLD,Sunshine+Coast"
+      ],
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL",
+      "ranking_basis": "Subjective Friday research estimate, uncalibrated; order also considers exposed class, rival depth, race-fit evidence and going sensitivity. Not derived from odds or scenario floors.",
+      "previous_rank": 9
+    },
+    {
+      "rank": 11,
+      "meeting": "ASCOT",
+      "race": 9,
+      "horse": "COSMIC CRUSADER (NZ)",
+      "tier": "B-",
+      "original_form_tier": "B-",
+      "research_status": "CONDITIONAL_REVIEW",
+      "independent_pct": 23,
+      "model_pct": 26.02,
+      "reason": "12 wins from 25, last-start Group 1 second over 2000m; class merits respect.",
+      "risk": "61kg at a shorter 1600m; King Of Light has eight wins from nine and receives 5.5kg; Western Empire receives 4kg.",
+      "sources": [
+        "https://www.racingaustralia.horse/FreeFields/Form.aspx?Key=2026Nov21,WA,Ascot"
+      ],
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL",
+      "ranking_basis": "Subjective Friday research estimate, uncalibrated; order also considers exposed class, rival depth, race-fit evidence and going sensitivity. Not derived from odds or scenario floors.",
+      "previous_rank": null
+    },
+    {
+      "rank": 12,
+      "meeting": "ASCOT",
+      "race": 7,
+      "horse": "ABERDEEN FLYER",
+      "tier": "B-",
+      "original_form_tier": "B-",
+      "research_status": "CONDITIONAL_REVIEW",
+      "independent_pct": 22,
+      "model_pct": 23.42,
+      "reason": "Last-start Listed 1800m win and seven placings from 12 career starts; consistent recent stakes form.",
+      "risk": "Barrier 11 and first 2100m; Ginger Baker, Forever Boy and All Grunt finished close enough last time.",
+      "sources": [
+        "https://www.racingaustralia.horse/FreeFields/Form.aspx?Key=2026Nov21,WA,Ascot"
+      ],
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL",
+      "ranking_basis": "Subjective Friday research estimate, uncalibrated; order also considers exposed class, rival depth, race-fit evidence and going sensitivity. Not derived from odds or scenario floors.",
+      "previous_rank": null
+    },
+    {
+      "rank": 13,
+      "meeting": "CRANBOURNE",
+      "race": 2,
+      "horse": "DIRTY LOOK (NZ)",
+      "tier": "B-",
+      "original_form_tier": "B-",
+      "research_status": "CONDITIONAL_REVIEW",
+      "independent_pct": 22,
+      "model_pct": 21.8,
+      "reason": "Three wins and three placings in seven; course-distance BM70 winner and last-start second.",
+      "risk": "You Sexy Thing has two wins in six at 1400m and barrier 1; Santa Ana Moon placed in BM90; Bajaria won locally.",
+      "sources": [
+        "https://www.racingaustralia.horse/FreeFields/Form.aspx?Key=2026Nov21,VIC,Southside+Cranbourne"
+      ],
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL",
+      "ranking_basis": "Subjective Friday research estimate, uncalibrated; order also considers exposed class, rival depth, race-fit evidence and going sensitivity. Not derived from odds or scenario floors.",
+      "previous_rank": 3
+    },
+    {
+      "rank": 14,
+      "meeting": "SUNSHINE COAST",
+      "race": 9,
+      "horse": "THE BARBER",
+      "tier": "B-",
+      "original_form_tier": "B-",
+      "research_status": "CONDITIONAL_REVIEW",
+      "independent_pct": 22,
+      "model_pct": 22.53,
+      "reason": "Three wins from four and latest 3.76L soft-track win; improving three-year-old.",
+      "risk": "First 1400m and higher class; Equinox King and Burnt Ends have limited but promising profiles.",
+      "sources": [
+        "https://www.racingaustralia.horse/FreeFields/Form.aspx?Key=2026Nov21,QLD,Sunshine+Coast"
+      ],
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL",
+      "ranking_basis": "Subjective Friday research estimate, uncalibrated; order also considers exposed class, rival depth, race-fit evidence and going sensitivity. Not derived from odds or scenario floors.",
+      "previous_rank": 11
+    },
+    {
+      "rank": 15,
+      "meeting": "KEMBLA GRANGE",
+      "race": 5,
+      "horse": "GRAFFITI TYCOON",
+      "tier": "B-",
+      "original_form_tier": "B-",
+      "research_status": "CONDITIONAL_REVIEW",
+      "independent_pct": 21,
+      "model_pct": 21.11,
+      "reason": "Two wins and three placings from five; 56kg and barrier 3; last-start Randwick BM64 winner.",
+      "risk": "Race is 1400m, not a mile; rises from 1300m and BM64; Hanau won a BM78 at this distance and Satono Jasmine resumes off three wins.",
+      "sources": [
+        "https://www.racingaustralia.horse/FreeFields/Form.aspx?Key=2026Nov21,NSW,Kembla%20Grange"
+      ],
+      "field_status": "FRIDAY_ACCEPTED_NOT_FINAL",
+      "ranking_basis": "Subjective Friday research estimate, uncalibrated; order also considers exposed class, rival depth, race-fit evidence and going sensitivity. Not derived from odds or scenario floors.",
+      "previous_rank": 6
+    }
+  ],
+  "screen_version": "V5-EVIDENCE-GATE-20261120",
+  "revision_id": "2026-11-20-v2-exposed-form-review",
+  "change_policy": "Original Friday list retained in immutable archive; no formula coefficient change, no guarantee of improved accuracy, no automatic model-based confidence upgrade. Full-field independent distributions are not available; these are provisional subjective leader estimates, not calibrated.",
+  "archived_original": "independent-top15-friday-original.json",
+  "revision_notes": [
+    "Unraced Multistorey and several inflated estimates removed from Top 10.",
+    "Prioritize exposed form, distance/going, weight, class and genuine rivals; model gap is diagnostic only.",
+    "Good 4 remains the latest saved official baseline, not a final track certification.",
+    "Corrected Kembla R5 to 1400m; independent race page estimates synchronized."
+  ]
+}

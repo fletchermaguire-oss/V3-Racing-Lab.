@@ -1,7 +1,7 @@
 'use strict';
 const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
 const state=require('./site-state.js'),source=require('./cards/2026-11-21/research.json'),checkpoint=require('./cards/2026-11-21/independent-top15.json');
-const going={CRANBOURNE:'Good 4','KEMBLA GRANGE':'Good 4',ASCOT:'Good 4','SUNSHINE COAST':'Good 4'};
+const going={CRANBOURNE:'Good 4','KEMBLA GRANGE':'Good 4',ASCOT:'Good 4','SUNSHINE COAST':'Soft 5'};
 class Element{
  constructor(tag){this.tag=tag;this.children=[];this.childNodes=this.children;this.className='';this.textContent='';this.events={};this.style={};this.classList={add:()=>{}};}
  append(...ns){this.children.push(...ns);this.childNodes=this.children;}
@@ -46,4 +46,14 @@ test('Home action buttons remain functional',()=>{
   const b=walk(a.root).find(n=>n.tag==='button'&&n.textContent===label);assert.ok(b,label);b.events.click();
  }
  assert.deepEqual(pages,['races','daily','sim']);
+});
+
+test('21 November R3 official scratching and Soft5 recalculation are isolated and full-field probabilities sum to 100',()=>{
+ const a=setup(),r=source.races.find(x=>x.meeting==='SUNSHINE COAST'&&x.race===3);
+ assert.equal(a.c.going['SUNSHINE COAST'],'Soft 5');
+ assert.match(source.runners.find(x=>x.race_id===r.id&&x.horse==='SCHEHERAZADE').status,/^SCRATCHED/);
+ assert.equal(a.c.board.baseline.records.filter(x=>x.race_id===r.id).length,11);
+ assert.equal(r.analyst_review.full_field_probabilities.reduce((s,x)=>s+x.independent_pct,0),100);
+ assert.equal(r.analyst_review.working_leader,'DOMINANT DARCY');
+ assert.equal(a.c.board.winFirst.byRace.find(x=>x.race_id===r.id).status,'NO_SELECTION');
 });

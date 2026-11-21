@@ -46,7 +46,7 @@
     },
     {
       "meeting": "SUNSHINE COAST",
-      "official_going": "Good 4",
+      "official_going": "Soft 5",
       "rail": "+3m Entire",
       "source": "https://www.racingaustralia.horse/FreeFields/Form.aspx?Key=2026Nov21,QLD,Sunshine+Coast",
       "source_last_published": "Fri 20-Nov-26 6:43PM AEDT",
@@ -54,7 +54,10 @@
       "saturday_scratched": 24,
       "deadline_passed_for_snapshot": false,
       "final_starters_verified": false,
-      "scratching_deadline": "Sat 21-Nov-26 8:30AM AEDT"
+      "scratching_deadline": "Sat 21-Nov-26 8:30AM AEDT",
+      "track_condition_checked_at": "2026-11-21T12:37:00+10:00",
+      "track_update_source": "https://www.racingqueensland.com.au/racing/full-calendar/thoroughbred/meeting/scst/20261121/race/3",
+      "saturday_scratched_snapshot_note": "24 scratches in saved Friday checkpoint, newer Saturday scratchings exist; Race 3 independently rechecked only."
     }
   ],
   "races": [
@@ -861,22 +864,86 @@
       "local_start": "1:28PM",
       "field_count": 12,
       "field_verified": false,
-      "going_verified": false,
-      "source_notes": "Official accepted field (Fri 20-Nov-26 6:44PM AEDT); not final starters. Good 4 and rail +3m Entire.",
+      "going_verified": true,
+      "source_notes": "Isolated R3 Saturday official update: Scheherazade scratched 07:49 AEST. Track Soft5 and rail +3m at 12:37pm. Eleven eligible runners. Full meeting starter verification remains pending.",
       "analyst_review": {
-        "working_leader": "SCHEHERAZADE",
+        "working_leader": "DOMINANT DARCY",
         "independent_pct": 27,
         "principal_challengers": [
-          "Dominant Darcy",
-          "Heart And Spirit",
-          "Tequila Baby"
+          "AMUSEANTES",
+          "TEQUILA BABY",
+          "HEART AND SPIRIT",
+          "CHAMPAGNE LANE"
         ],
-        "evidence": "Three wins and three placings from seven at 1200m; second in open company first-up, barrier 4, wins on good and soft.",
-        "pace_risk": "Dominant Darcy four from six at 1200m; Heart And Spirit has local form; Tequila Baby last-start BM78 winner.",
-        "source_approval": "PRE_RACE_RESEARCH_NOT_FINAL",
-        "revision": "FRIDAY_V2_EVIDENCE_REVIEW"
+        "evidence": "Four wins from six at 1200m, two from two on soft, Angela Jones drawn 2. Last defeat on Heavy 10. Amuseantes beat her in the 17 Oct BM78; independent first choice is narrow and NOT a lock.",
+        "pace_risk": "Amuseantes beat Darcy by 0.43L at equal carried weights on 17 Oct; Heart And Spirit is suited by Soft5 and local course; Tequila Baby won last start but wide. Speed pressure and model disagreement prevent high confidence. Heart And Spirit and Super Daisy can challenge for the lead, Dominant Darcy should stalk from gate two. Amuseantes can obtain cover. Tequila Baby has the outside stall and needs luck.",
+        "source_approval": "2026-11-21_R3_SATURDAY_RESEARCH_ONLY",
+        "revision": "R3_SOFT5_OFFICIAL_SCRATCH",
+        "full_field_probabilities": [
+          {
+            "horse": "DOMINANT DARCY",
+            "independent_pct": 27,
+            "runner_id": "2026-11-21_SUNSHINE COAST_R03_05"
+          },
+          {
+            "horse": "AMUSEANTES",
+            "independent_pct": 21,
+            "runner_id": "2026-11-21_SUNSHINE COAST_R03_04"
+          },
+          {
+            "horse": "TEQUILA BABY",
+            "independent_pct": 15,
+            "runner_id": "2026-11-21_SUNSHINE COAST_R03_02"
+          },
+          {
+            "horse": "HEART AND SPIRIT",
+            "independent_pct": 13,
+            "runner_id": "2026-11-21_SUNSHINE COAST_R03_06"
+          },
+          {
+            "horse": "CHAMPAGNE LANE",
+            "independent_pct": 11,
+            "runner_id": "2026-11-21_SUNSHINE COAST_R03_08"
+          },
+          {
+            "horse": "BETTER NOT SLIP",
+            "independent_pct": 4,
+            "runner_id": "2026-11-21_SUNSHINE COAST_R03_12"
+          },
+          {
+            "horse": "LAYDOWNLILY",
+            "independent_pct": 3,
+            "runner_id": "2026-11-21_SUNSHINE COAST_R03_01"
+          },
+          {
+            "horse": "BLANTONS RUN",
+            "independent_pct": 2,
+            "runner_id": "2026-11-21_SUNSHINE COAST_R03_09"
+          },
+          {
+            "horse": "JOY A PLENTY",
+            "independent_pct": 2,
+            "runner_id": "2026-11-21_SUNSHINE COAST_R03_07"
+          },
+          {
+            "horse": "SUPER DAISY",
+            "independent_pct": 1,
+            "runner_id": "2026-11-21_SUNSHINE COAST_R03_11"
+          },
+          {
+            "horse": "BRIGHT BLONDE",
+            "independent_pct": 1,
+            "runner_id": "2026-11-21_SUNSHINE COAST_R03_10"
+          }
+        ],
+        "previous_leader": "SCHEHERAZADE",
+        "previous_leader_scratch": true,
+        "model_note": "Unchanged V5 Soft 5 raw: Heart And Spirit 14.95, Tequila Baby 13.75, Laydownlily 11.12, Dominant Darcy 11.07; evidence screen = NO_SELECTION.",
+        "official_scratch_source": "https://www.racingaustralia.horse/FreeFields/Scratchings.aspx?Key=2026Nov21,QLD,Sunshine+Coast",
+        "track_source": "https://www.racingqueensland.com.au/racing/full-calendar/thoroughbred/meeting/scst/20261121/race/3",
+        "going_as_of": "2026-11-21T12:37:00+10:00"
       },
-      "saturday_going": "Good 4"
+      "saturday_going": "Soft 5"
     },
     {
       "id": "2026-11-21_SUNSHINE COAST_R04",
@@ -10702,7 +10769,7 @@
       "weight_kg": 59.5,
       "trainer": "Stephen McLean",
       "jockey": "Kyle Wilson-Taylor",
-      "status": "ACCEPTED_NOT_FINAL",
+      "status": "SCRATCHED - official 2026-11-21 07:49 AEST",
       "statistics": "Career 4-3-10; course 1-0-2; distance 3-3-7; Good 2-2-5; Soft 2-1-5; Heavy 0-0-0",
       "form": "18/4/2026 GCST 1200m (S), CL2: 1/10, PDF margin 0.82L\n10/5/2026 SCST 1200m (S), CL3: 1/10, PDF margin 0.45L\n3/6/2026 DOOM 1200m (G), CL4: 2/10, PDF margin 0.04L\n27/6/2026 E FM 1200m (S), BM85: 6/12, PDF margin 1.89L\n31/10/2026 DOOM 1200m (S), OPEN: 2/12, PDF margin 0.67L",
       "historical_map": "Settled 5th 800m (18/4/2026); Settled 6th 800m (10/5/2026); Settled 6th 800m (3/6/2026); Settled 9th 800m (27/6/2026); Settled 9th 800m (31/10/2026)",
@@ -10724,7 +10791,11 @@
             "https://www.racingaustralia.horse/FreeFields/Form.aspx?Key=2026Nov21,QLD,Sunshine+Coast"
           ]
         }
-      ]
+      ],
+      "official_scratching": {
+        "source": "https://www.racingaustralia.horse/FreeFields/Scratchings.aspx?Key=2026Nov21,QLD,Sunshine+Coast",
+        "at": "2026-11-21T07:49:00+10:00"
+      }
     },
     {
       "id": "2026-11-21_SUNSHINE COAST_R03_04",
@@ -10768,7 +10839,20 @@
         "cutoff": "2026-11-21"
       },
       "strengths": "Official past race statistics and dated finishes; 5 completed runs parsed.",
-      "risks": "Pre-final fields; unknown current bias, pace and trainer intent; V5 estimates uncalibrated."
+      "risks": "Pre-final fields; unknown current bias, pace and trainer intent; V5 estimates uncalibrated.",
+      "research_evidence": [
+        {
+          "kind": "R3 21 Nov full-field post-scratch review",
+          "verification_status": "TRACK_SCRATCH_VERIFIED_ESTIMATE_UNCALIBRATED",
+          "note": "Four wins from six at 1200m, two from two on soft, Angela Jones drawn 2. Last defeat on Heavy 10. Amuseantes beat her in the 17 Oct BM78; independent first choice is narrow and NOT a lock.",
+          "assessment": "Heart And Spirit and Super Daisy can challenge for the lead, Dominant Darcy should stalk from gate two. Amuseantes can obtain cover. Tequila Baby has the outside stall and needs luck.",
+          "sources": [
+            "https://www.racingaustralia.horse/FreeFields/Form.aspx?Key=2026Nov21,QLD,Sunshine+Coast",
+            "https://www.racingaustralia.horse/FreeFields/Scratchings.aspx?Key=2026Nov21,QLD,Sunshine+Coast",
+            "https://www.racingqueensland.com.au/racing/full-calendar/thoroughbred/meeting/scst/20261121/race/3"
+          ]
+        }
+      ]
     },
     {
       "id": "2026-11-21_SUNSHINE COAST_R03_06",
