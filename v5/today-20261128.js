@@ -54,7 +54,7 @@ function renderHome(root,c){
   grid.append(card);
  }
  root.append(grid);
- root.append(link('Open imported 28 November V5 research data','/v5/cards/2026-11-28/research.json'));
+ root.append(link('Open imported 28 November V5 research data','/v5/cards/2026-11-28/research-four-meetings.json'));
 }
 function renderDaily(root,c){
  base(root,'Field import status','No Top 5 / 10 / 15 has been generated or approved from this fields-only import.');
