@@ -61,7 +61,7 @@ function assemble(checkpoint,data,board,going,overrides){
  }).sort((a,b)=>a.rank-b.rank||a.original_rank-b.original_rank);
  return {version:VERSION,status:'ARCHIVED_HUMAN_RANKING_WITH_LIVE_FIELD_CHECKS_NOT_CALIBRATED',
   date:data.date,checkpoint_at:checkpoint.as_of||null,baseline_model:checkpoint.model||null,
-  count:result.length,active_count:result.filter(x=>x.eligible).length,
+  count:result.length,raceSelections:checkpoint.race_selections||[],active_count:result.filter(x=>x.eligible).length,
   priority_research_count:result.filter(x=>x.research_lane==='TOP10_RESEARCH').length,
   additional_review_count:result.filter(x=>x.research_lane==='CONDITIONAL_REVIEW').length,
   entries:result,top5:result.slice(0,5),top10:result.slice(0,10),top15:result.slice(0,15),
