@@ -25,7 +25,7 @@ function base(root,title,sub){
  root.append(h);return h;
 }
 function warning(root){
- root.append(E('div','v14-alert','FIELDS ONLY · Four priority meetings retained: Sandown-Hillside, Rosehill, Ascot and Doomben (40 races). All other meeting fields are excluded from this active card. No independent shortlist, approved V5 selections, calibrated win probabilities or final-starter attestations are included.'));
+ root.append(E('div','v14-alert','PROVISIONAL RESEARCH · Four retained meetings only: Sandown-Hillside, Rosehill, Ascot and Doomben (40 races). The Top 10 and race leaders are qualitative research selections, not calibrated win probabilities. Final starters and all scratchings are not fully certified.'));
 }
 function sourceMeeting(c,m){return (c.data.meetings||[]).find(x=>x.meeting===m)||null;}
 function sourceLabel(row){return row&&row.source_kind==='OFFICIAL_RACING_AUSTRALIA'?'Racing Australia official form':'Racing & Sports third-party fields';}
@@ -35,26 +35,31 @@ function tabs(root,selected,fn){
  root.append(row);
 }
 function renderHome(root,c){
- const h=base(root,'Saturday fields · 4 meetings','Official fields and sourced third-party field cards loaded into the V5 race centre. This is not a completed V5 prediction run.');
- h.append(A(E('div','v14-actions'),btn('Open Race Centre',()=>go('races')),btn('Field import status',()=>go('daily'))));
- warning(root);
+ renderDaily(root,c);
+ const picks=(c.curated&&c.curated.raceSelections||[]).slice();
+ const section=E('section','v14-review');
+ section.append(E('div','v14-tag','ALL 40 RACES · FOUR MEETINGS'),E('h2','','Best researched selection in each race'));
+ txt(section,'One provisional leader per race where evidence supports a selection. NO BET races remain blank; confidence labels are qualitative, not win percentages.','v14-muted');
  const grid=E('div','v14-grid');
- for(const m of displayOrder){
-  const src=sourceMeeting(c,m),rs=c.data.races.filter(r=>r.meeting===m),listed=c.data.runners.filter(x=>rs.some(r=>r.id===x.race_id));
-  const active=listed.filter(x=>c.model.isEligible(x)).length;
-  const card=E('article','v14-card');
-  card.append(E('div','v14-tag',m),E('h3','',rs.length+' races · '+listed.length+' listed rows'));
-  txt(card,active+' listed active · '+(listed.length-active)+' scratched / unactivated / excluded','v14-muted');
-  txt(card,(src&&src.official_going)||('Scenario going: '+(src&&src.scenario_going||'not set')),'v14-sep-info');
-  txt(card,sourceLabel(src)+' · '+(src&&src.source_last_published||'source timestamp unavailable'),'v14-caption');
-  if(src&&src.track_condition_reported)txt(card,'Track report: '+src.track_condition_reported+(src.going_verified?' · official grade':' · not independently verified'),'v14-caption');
-  if(src&&src.rail)txt(card,'Rail: '+src.rail,'v14-caption');
-  if(src&&src.source)card.append(link('Open field source',src.source));
-  card.append(btn('View '+m+' fields',()=>{st.meeting=m;st.race=1;st.horse=null;st.showOut=false;go('races');}));
-  grid.append(card);
- }
- root.append(grid);
- root.append(link('Open imported 28 November V5 research data','/v5/cards/2026-11-28/research-four-meetings.json'));
+ displayOrder.forEach(m=>{
+  const group=E('article','v14-card');
+  group.append(E('div','v14-tag',m));
+  picks.filter(x=>x.meeting===m).sort((a,b)=>a.race-b.race).forEach(x=>{
+   const r=c.data.races.find(y=>y.meeting===m&&y.race===x.race);
+   const item=E('div','v14-review');
+   item.append(E('strong','', 'R'+x.race+' · '+(x.status==='NO_BET'?'NO BET':x.horse)));
+   txt(item,(r?r.title+' · '+r.distance_m+'m':'')+' · '+(x.confidence||'REVIEW')+' confidence','v14-caption');
+   txt(item,x.reason||'No selection advised.','v14-muted');
+   item.append(btn('Open race',()=>{st.meeting=m;st.race=x.race;st.horse=null;st.showOut=false;go('races');}));
+   group.append(item);
+  });
+  grid.append(group);
+ });
+ section.append(grid);
+ root.append(section);
+ const actions=E('div','v14-actions');
+ actions.append(btn('Open full Race Centre',()=>go('races')));
+ root.append(actions);
 }
 function renderDaily(root,c){
  base(root,'Provisional research Top 10 · 28 November','Form-first shortlist assembled from dated analyst previews, R&S race-panel convergence and available runner records. Not calibrated win probabilities.');
