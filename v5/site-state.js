@@ -515,7 +515,7 @@ function load(fetcher){
       RANDWICK:official.meetings.RANDWICK.track_condition}};
     });
    }
-   if(data.date==='2026-11-14'||data.date==='2026-11-21'){
+   if(data.date==='2026-11-14'||data.date==='2026-11-21'||data.date==='2026-11-28'){
     return f('/v5/cards/'+data.date+'/independent-top15.json',{cache:'no-store'}).then(function(r){
       if(!r.ok)throw Error('Dated independent shortlist HTTP '+r.status);
       return r.json();
