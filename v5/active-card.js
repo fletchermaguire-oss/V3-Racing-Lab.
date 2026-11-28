@@ -25,7 +25,7 @@
    independent_shortlist_url:'/v5/cards/2026-11-21/independent-top15.json',
    official_research_only:true,live_refresh:false,source_label:'21 November · official R3 scratching/Soft5 · remainder provisional'
  }:{
-   date:'2026-11-28',research_url:'/v5/cards/2026-11-28/research-four-meetings.json',
+   date:'2026-11-28',research_url:'/v5/cards/2026-11-28/research.json',
    going:{
     "SANDOWN-HILLSIDE":"Soft 6","ROSEHILL":"Good 4","DOOMBEN":"Soft 6","ASCOT":"Good 4",
     
