@@ -17,7 +17,7 @@ function validate(checkpoint,data){
    !Array.isArray(checkpoint.entries)||!checkpoint.entries.length)throw Error('Missing or stale frozen research checkpoint');
  const ranks=new Set(),identity=new Set(),races=new Set(data.races.map(x=>x.id));
  checkpoint.entries.forEach(x=>{
-  const raceId=data.date+'_'+x.meeting+'_R'+String(x.race).padStart(2,'0');
+  const raceId=data.date+'_'+String(x.meeting).replace(/[^A-Z0-9]+/g,'_')+'_R'+String(x.race).padStart(2,'0');
   if(!races.has(raceId)||!Number.isSafeInteger(x.rank)||x.rank<1||ranks.has(x.rank)||
     !GRADES.includes(x.tier)||!String(x.horse||'').trim())throw Error('Invalid archived research entry');
   const id=raceId+'|'+clean(x.horse);
