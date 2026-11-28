@@ -35,7 +35,7 @@ function assemble(checkpoint,data,board,going,overrides){
  const listed=new Map(data.runners.map(h=>[h.race_id+'|'+clean(h.horse),h]));
  const included=new Map(board.baseline.records.map(r=>[r.id,r]));
  const result=checkpoint.entries.map(x=>{
-  const raceId=data.date+'_'+x.meeting+'_R'+String(x.race).padStart(2,'0');
+  const raceId=data.date+'_'+String(x.meeting).replace(/[^A-Z0-9]+/g,'_')+'_R'+String(x.race).padStart(2,'0');
   const h=listed.get(raceId+'|'+clean(x.horse));
   const current=included.get(h.id),change=edits[h.id]||{},notes=[];
   if(!current)notes.push('NOT_IN_CURRENT_FIELD');
