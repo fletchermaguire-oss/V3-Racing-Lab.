@@ -4,7 +4,7 @@
 if(!global.RacingLabV5Card||global.RacingLabV5Card.date!=='2026-11-28')return;
 const original=global.RacingLabToday;
 if(!original)return;
-const displayOrder=['SANDOWN-HILLSIDE','ROSEHILL','DOOMBEN','ASCOT','MORPHETTVILLE PARKS','KEMBLA GRANGE','GOLD COAST','TOOWOOMBA','CEDUNA','GOONDIWINDI','HOME HILL','KEMPSEY','MT ISA','THANGOOL','WAGGA RIVERSIDE','WOOLAMAI'];
+const displayOrder=['SANDOWN-HILLSIDE','ROSEHILL','ASCOT','DOOMBEN'];
 const st={meeting:'SANDOWN-HILLSIDE',race:1,horse:null,showOut:false};
 let last=null,styleAdded=false;
 function E(tag,cls,content){const n=document.createElement(tag);if(cls)n.className=cls;if(content!==undefined&&content!==null)n.textContent=String(content);return n;}
@@ -25,7 +25,7 @@ function base(root,title,sub){
  root.append(h);return h;
 }
 function warning(root){
- root.append(E('div','v14-alert','FIELDS ONLY · 16 of 21 meetings imported (116 races, 1,407 listed runner rows). Twelve meetings use Racing Australia final-fields sheets; four use Racing & Sports field sheets. Five meetings are absent because a complete reliable field source was not retrieved. No independent shortlist, approved V5 selections, calibrated win probabilities or final-starter attestations are included.'));
+ root.append(E('div','v14-alert','FIELDS ONLY · Four priority meetings retained: Sandown-Hillside, Rosehill, Ascot and Doomben (40 races). All other meeting fields are excluded from this active card. No independent shortlist, approved V5 selections, calibrated win probabilities or final-starter attestations are included.'));
 }
 function sourceMeeting(c,m){return (c.data.meetings||[]).find(x=>x.meeting===m)||null;}
 function sourceLabel(row){return row&&row.source_kind==='OFFICIAL_RACING_AUSTRALIA'?'Racing Australia official form':'Racing & Sports third-party fields';}
@@ -35,7 +35,7 @@ function tabs(root,selected,fn){
  root.append(row);
 }
 function renderHome(root,c){
- const h=base(root,'Saturday fields · 16 meetings','Official fields and sourced third-party field cards loaded into the V5 race centre. This is not a completed V5 prediction run.');
+ const h=base(root,'Saturday fields · 4 meetings','Official fields and sourced third-party field cards loaded into the V5 race centre. This is not a completed V5 prediction run.');
  h.append(A(E('div','v14-actions'),btn('Open Race Centre',()=>go('races')),btn('Field import status',()=>go('daily'))));
  warning(root);
  const grid=E('div','v14-grid');
