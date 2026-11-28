@@ -25,15 +25,13 @@
    independent_shortlist_url:'/v5/cards/2026-11-21/independent-top15.json',
    official_research_only:true,live_refresh:false,source_label:'21 November · official R3 scratching/Soft5 · remainder provisional'
  }:{
-   date:'2026-11-28',research_url:'/v5/cards/2026-11-28/research.json',
+   date:'2026-11-28',research_url:'/v5/cards/2026-11-28/research-four-meetings.json',
    going:{
     "SANDOWN-HILLSIDE":"Soft 6","ROSEHILL":"Good 4","DOOMBEN":"Soft 6","ASCOT":"Good 4",
-    "MORPHETTVILLE PARKS":"Good 4","KEMBLA GRANGE":"Good 4","GOLD COAST":"Soft 6",
-    "TOOWOOMBA":"Good 4","CEDUNA":"Good 4","GOONDIWINDI":"Good 4","HOME HILL":"Good 4",
-    "KEMPSEY":"Soft 6","MT ISA":"Good 4","THANGOOL":"Good 4","WAGGA RIVERSIDE":"Soft 5","WOOLAMAI":"Heavy 8"
+    
    },
    official_research_only:true,fields_only:true,live_refresh:false,
-   source_label:'28 November · 16-meeting fields-only import · 12 Racing Australia and 4 Racing & Sports sources · no approved predictions'
+   source_label:'28 November · four-meeting fields-only import · Sandown, Rosehill, Ascot and Doomben · no approved predictions'
  };
  if(typeof module==='object'&&module.exports)module.exports=card;
  else root.RacingLabV5Card=Object.freeze(card);
