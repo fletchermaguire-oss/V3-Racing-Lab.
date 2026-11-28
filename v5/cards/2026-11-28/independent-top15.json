@@ -1,0 +1,658 @@
+{
+  "schema": "racing-lab-v5-independent-research-shortlist/v1",
+  "date": "2026-11-28",
+  "as_of": "2026-11-28T11:13:26+10:00",
+  "status": "PROVISIONAL_RESEARCH_NOT_FULLY_VERIFIED",
+  "publication_approved": false,
+  "model": "V5-L5-CANDIDATE-20261030",
+  "track_assumptions": {
+    "SANDOWN-HILLSIDE": "Soft 6",
+    "ROSEHILL": "Good 4",
+    "ASCOT": "Good 4",
+    "DOOMBEN": "Soft 6"
+  },
+  "scope": "Four retained meetings, 40 races. Shortlist is evidence-led synthesis of R&S computer panels, dated independent previews and available runner form. Not a full independent runner-by-runner audit; not final-starter certified.",
+  "probability_status": "NO_INDEPENDENT_PERCENTAGES_ASSIGNED; raw model diagnostics must not be represented as calibrated probabilities.",
+  "entries": [
+    {
+      "rank": 1,
+      "horse": "CAVILL AVENUE",
+      "meeting": "SANDOWN-HILLSIDE",
+      "race": 6,
+      "tier": "B+",
+      "original_form_tier": "B+",
+      "research_status": "PROVISIONAL_RESEARCH",
+      "independent_pct": null,
+      "model_pct": null,
+      "reason": "R&S computer and rated-to-win leader. Last start second behind Natural Fling in a Group 3 at Sandown; ran the meeting's fastest last 200m in 11.69s. Extra 200m looks suitable and Jamie Melham retains the ride.",
+      "risk": "Only three career starts; still lightly exposed and must convert a strong sectional into a win.",
+      "sources": [
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/sandown-hillside/2026-11-28/race-tips",
+        "https://thegreattipoff.com/news/free-horse-racing-tips--best-bets-for-sandown-281126"
+      ],
+      "field_status": "LISTED_NOT_FINAL_STARTER_VERIFIED",
+      "ranking_basis": "Qualitative synthesis of tip-panel convergence, dated form evidence, track/distance suitability and race-specific risks; not derived from market odds."
+    },
+    {
+      "rank": 2,
+      "horse": "PALTROW MISS",
+      "meeting": "ROSEHILL",
+      "race": 9,
+      "tier": "B+",
+      "original_form_tier": "B+",
+      "research_status": "PROVISIONAL_RESEARCH",
+      "independent_pct": null,
+      "model_pct": null,
+      "reason": "R&S tip-panel, rated-to-win and points leader. David Gately's Bet of the Day. Career 6: 2-2-2 and a narrow second at Hawkesbury last start; 53kg.",
+      "risk": "Barrier 13 creates a positioning task; still needs to prove herself at Rosehill.",
+      "sources": [
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/rosehill/2026-11-28/race-tips",
+        "https://thegreattipoff.com/news/david-gately-horse-racing-tips-for-rosehill-281126",
+        "https://thegreattipoff.com/news/mick-gannon-horse-racing-tips-for-rosehill-281126"
+      ],
+      "field_status": "LISTED_NOT_FINAL_STARTER_VERIFIED",
+      "ranking_basis": "Qualitative synthesis of tip-panel convergence, dated form evidence, track/distance suitability and race-specific risks; not derived from market odds."
+    },
+    {
+      "rank": 3,
+      "horse": "JETT SMASH",
+      "meeting": "SANDOWN-HILLSIDE",
+      "race": 5,
+      "tier": "B+",
+      "original_form_tier": "B+",
+      "research_status": "PROVISIONAL_RESEARCH",
+      "independent_pct": null,
+      "model_pct": null,
+      "reason": "R&S computer leader (15 points) and Michael Manley's standout. Five wins from nine starts, proven at Sandown and on soft ground, minimum weight and Damian Lane.",
+      "risk": "Freshened since being run down late at Flemington; needs to reproduce best form after the break.",
+      "sources": [
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/sandown-hillside/2026-11-28/race-tips",
+        "https://thegreattipoff.com/news/free-horse-racing-tips--best-bets-for-sandown-281126"
+      ],
+      "field_status": "LISTED_NOT_FINAL_STARTER_VERIFIED",
+      "ranking_basis": "Qualitative synthesis of tip-panel convergence, dated form evidence, track/distance suitability and race-specific risks; not derived from market odds."
+    },
+    {
+      "rank": 4,
+      "horse": "WESTBOUND",
+      "meeting": "ASCOT",
+      "race": 3,
+      "tier": "B+",
+      "original_form_tier": "B+",
+      "research_status": "PROVISIONAL_RESEARCH",
+      "independent_pct": null,
+      "model_pct": null,
+      "reason": "R&S and rated-to-win leader (16 points), also Before You Bet's best bet. Career 12: 5-1-3; three wins from seven Ascot starts and a course-and-distance win.",
+      "risk": "Barrier 12; needs clear running after being held up badly last start.",
+      "sources": [
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/ascot/2026-11-28/race-tips",
+        "https://www.beforeyoubet.com.au/ascot-racing-tips-saturday-november-28th-2026"
+      ],
+      "field_status": "LISTED_NOT_FINAL_STARTER_VERIFIED",
+      "ranking_basis": "Qualitative synthesis of tip-panel convergence, dated form evidence, track/distance suitability and race-specific risks; not derived from market odds."
+    },
+    {
+      "rank": 5,
+      "horse": "OVERPASS",
+      "meeting": "ASCOT",
+      "race": 9,
+      "tier": "B+",
+      "original_form_tier": "B+",
+      "research_status": "PROVISIONAL_RESEARCH",
+      "independent_pct": null,
+      "model_pct": null,
+      "reason": "R&S tip-panel leader and Before You Bet's main pick. Four wins from seven Ascot starts and eight wins from 25 at 1200m; barrier one and Blake Shinn.",
+      "risk": "Rey Magnerio and Talkanco are serious threats; recent Sydney form below his peak WA performances.",
+      "sources": [
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/ascot/2026-11-28/race-tips",
+        "https://www.beforeyoubet.com.au/ascot-racing-tips-saturday-november-28th-2026"
+      ],
+      "field_status": "LISTED_NOT_FINAL_STARTER_VERIFIED",
+      "ranking_basis": "Qualitative synthesis of tip-panel convergence, dated form evidence, track/distance suitability and race-specific risks; not derived from market odds."
+    },
+    {
+      "rank": 6,
+      "horse": "LADIES PRO",
+      "meeting": "ASCOT",
+      "race": 8,
+      "tier": "B+",
+      "original_form_tier": "B+",
+      "research_status": "PROVISIONAL_RESEARCH",
+      "independent_pct": null,
+      "model_pct": null,
+      "reason": "R&S tip-panel and points leader. Career 10: 6-1-0; four wins from four Soft starts and won the Listed race at Ascot on 14 November.",
+      "risk": "Barrier 10 and 58.5kg; today's Good 4 is less proven than her soft-track record.",
+      "sources": [
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/ascot/2026-11-28/race-tips",
+        "https://www.beforeyoubet.com.au/ascot-racing-tips-saturday-november-28th-2026"
+      ],
+      "field_status": "LISTED_NOT_FINAL_STARTER_VERIFIED",
+      "ranking_basis": "Qualitative synthesis of tip-panel convergence, dated form evidence, track/distance suitability and race-specific risks; not derived from market odds."
+    },
+    {
+      "rank": 7,
+      "horse": "RIPPER FAROOQ",
+      "meeting": "ASCOT",
+      "race": 1,
+      "tier": "B",
+      "original_form_tier": "B",
+      "research_status": "PROVISIONAL_RESEARCH",
+      "independent_pct": null,
+      "model_pct": null,
+      "reason": "R&S and rated-to-win leader. Seven top-three finishes from eight Ascot visits, including a last-start win; proven track profile.",
+      "risk": "Only one win from eight Ascot starts; strong place profile but win conversion is the concern.",
+      "sources": [
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/ascot/2026-11-28/race-tips",
+        "https://www.beforeyoubet.com.au/ascot-racing-tips-saturday-november-28th-2026"
+      ],
+      "field_status": "LISTED_NOT_FINAL_STARTER_VERIFIED",
+      "ranking_basis": "Qualitative synthesis of tip-panel convergence, dated form evidence, track/distance suitability and race-specific risks; not derived from market odds."
+    },
+    {
+      "rank": 8,
+      "horse": "SOUTHERN HEIRESS",
+      "meeting": "DOOMBEN",
+      "race": 5,
+      "tier": "B",
+      "original_form_tier": "B",
+      "research_status": "PROVISIONAL_RESEARCH",
+      "independent_pct": null,
+      "model_pct": null,
+      "reason": "R&S and rated-to-win leader (12 points). Last-start winner at Eagle Farm on 7 November; 11: 3-2-1 career record and barrier five.",
+      "risk": "Has only one win from three Soft starts and has not yet won at Doomben.",
+      "sources": [
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/doomben/2026-11-28/race-tips",
+        "https://www.news.com.au/sport/superracing/tips/the-last-say-tips-quaddies-for-rosehill-sandown-doomben-and-more-on-saturday-november-28-2026/news-story/cd35eb48a83c96806b5cf83af6ec4e48"
+      ],
+      "field_status": "LISTED_NOT_FINAL_STARTER_VERIFIED",
+      "ranking_basis": "Qualitative synthesis of tip-panel convergence, dated form evidence, track/distance suitability and race-specific risks; not derived from market odds."
+    },
+    {
+      "rank": 9,
+      "horse": "RIVER OF ROME",
+      "meeting": "ROSEHILL",
+      "race": 1,
+      "tier": "B",
+      "original_form_tier": "B",
+      "research_status": "PROVISIONAL_RESEARCH",
+      "independent_pct": null,
+      "model_pct": null,
+      "reason": "Mick Gannon's top juvenile after two standout trials; R&S also includes him in its top three. James McDonald rides for Chris Waller.",
+      "risk": "Debutant in a two-year-old sprint with plenty of speed; trial form is not race form.",
+      "sources": [
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/rosehill/2026-11-28/race-tips",
+        "https://thegreattipoff.com/news/david-gately-horse-racing-tips-for-rosehill-281126",
+        "https://thegreattipoff.com/news/mick-gannon-horse-racing-tips-for-rosehill-281126"
+      ],
+      "field_status": "LISTED_NOT_FINAL_STARTER_VERIFIED",
+      "ranking_basis": "Qualitative synthesis of tip-panel convergence, dated form evidence, track/distance suitability and race-specific risks; not derived from market odds."
+    },
+    {
+      "rank": 10,
+      "horse": "SAVISANTA",
+      "meeting": "DOOMBEN",
+      "race": 3,
+      "tier": "B",
+      "original_form_tier": "B",
+      "research_status": "PROVISIONAL_RESEARCH",
+      "independent_pct": null,
+      "model_pct": null,
+      "reason": "R&S tip-panel leader and The Last Say's best Doomben selection. Strong convergence from two independent tip sources.",
+      "risk": "R&S Rated-to-Win prefers Hot Majesty; Easy Love also shares the points lead.",
+      "sources": [
+        "https://www.racingandsports.com.au/form-guide/thoroughbred/australia/doomben/2026-11-28/race-tips",
+        "https://www.news.com.au/sport/superracing/tips/the-last-say-tips-quaddies-for-rosehill-sandown-doomben-and-more-on-saturday-november-28-2026/news-story/cd35eb48a83c96806b5cf83af6ec4e48"
+      ],
+      "field_status": "LISTED_NOT_FINAL_STARTER_VERIFIED",
+      "ranking_basis": "Qualitative synthesis of tip-panel convergence, dated form evidence, track/distance suitability and race-specific risks; not derived from market odds."
+    }
+  ],
+  "race_selections": [
+    {
+      "meeting": "SANDOWN-HILLSIDE",
+      "race": 1,
+      "tab": 4,
+      "horse": "OAK BEACH",
+      "confidence": "LOW",
+      "reason": "R&S points leader, but tip-panel and ratings disagree; no standout edge.",
+      "source": "RACING_AND_SPORTS_COMPUTER_TIPS_PLUS_CROSS_SOURCE_CHECK",
+      "status": "PROVISIONAL",
+      "probability": null
+    },
+    {
+      "meeting": "SANDOWN-HILLSIDE",
+      "race": 2,
+      "tab": 2,
+      "horse": "ESMAHLI",
+      "confidence": "MEDIUM",
+      "reason": "R&S points leader (13) and rated-to-win second; Rosa Aotearoa is the main danger.",
+      "source": "RACING_AND_SPORTS_COMPUTER_TIPS_PLUS_CROSS_SOURCE_CHECK",
+      "status": "PROVISIONAL",
+      "probability": null
+    },
+    {
+      "meeting": "SANDOWN-HILLSIDE",
+      "race": 3,
+      "tab": 8,
+      "horse": "BILLYCART",
+      "confidence": "LOW",
+      "reason": "R&S computer panel clear leader (16 points), but a separate analyst flagged him as a lay at short odds; high caution.",
+      "source": "RACING_AND_SPORTS_COMPUTER_TIPS_PLUS_CROSS_SOURCE_CHECK",
+      "status": "PROVISIONAL",
+      "probability": null
+    },
+    {
+      "meeting": "SANDOWN-HILLSIDE",
+      "race": 4,
+      "tab": 1,
+      "horse": "ROYAL PRESS",
+      "confidence": "MEDIUM",
+      "reason": "R&S panel clear leader (18 points); Daniel Pryor also favours his race experience and positive map.",
+      "source": "RACING_AND_SPORTS_COMPUTER_TIPS_PLUS_CROSS_SOURCE_CHECK",
+      "status": "PROVISIONAL",
+      "probability": null
+    },
+    {
+      "meeting": "SANDOWN-HILLSIDE",
+      "race": 5,
+      "tab": 7,
+      "horse": "JETT SMASH",
+      "confidence": "HIGH",
+      "reason": "R&S leader (15 points); five wins from nine, handles soft ground, track winner, minimum weight and Damian Lane.",
+      "source": "RACING_AND_SPORTS_COMPUTER_TIPS_PLUS_CROSS_SOURCE_CHECK",
+      "status": "PROVISIONAL",
+      "probability": null
+    },
+    {
+      "meeting": "SANDOWN-HILLSIDE",
+      "race": 6,
+      "tab": 1,
+      "horse": "CAVILL AVENUE",
+      "confidence": "HIGH",
+      "reason": "R&S and rated-to-win leader; fastest last 200m (11.69s) behind Natural Fling last start and the 1400m rise suits.",
+      "source": "RACING_AND_SPORTS_COMPUTER_TIPS_PLUS_CROSS_SOURCE_CHECK",
+      "status": "PROVISIONAL",
+      "probability": null
+    },
+    {
+      "meeting": "SANDOWN-HILLSIDE",
+      "race": 7,
+      "tab": 4,
+      "horse": "MANZOR BLUE",
+      "confidence": "LOW",
+      "reason": "R&S tip leader; points tie with Vauban and staying-race volatility keeps confidence down.",
+      "source": "RACING_AND_SPORTS_COMPUTER_TIPS_PLUS_CROSS_SOURCE_CHECK",
+      "status": "PROVISIONAL",
+      "probability": null
+    },
+    {
+      "meeting": "SANDOWN-HILLSIDE",
+      "race": 8,
+      "tab": 3,
+      "horse": "RUN HARRY RUN",
+      "confidence": "MEDIUM",
+      "reason": "R&S computer and rated-to-win leader (12 points); King Zephyr and Recon are close alternatives.",
+      "source": "RACING_AND_SPORTS_COMPUTER_TIPS_PLUS_CROSS_SOURCE_CHECK",
+      "status": "PROVISIONAL",
+      "probability": null
+    },
+    {
+      "meeting": "SANDOWN-HILLSIDE",
+      "race": 9,
+      "tab": 8,
+      "horse": "NOBLER",
+      "confidence": "MEDIUM",
+      "reason": "R&S and rated-to-win leader (16 points); Roulette King is the main danger.",
+      "source": "RACING_AND_SPORTS_COMPUTER_TIPS_PLUS_CROSS_SOURCE_CHECK",
+      "status": "PROVISIONAL",
+      "probability": null
+    },
+    {
+      "meeting": "SANDOWN-HILLSIDE",
+      "race": 10,
+      "tab": 17,
+      "horse": "WETUMPKA",
+      "confidence": "MEDIUM",
+      "reason": "R&S computer and rated-to-win leader (14 points); wide/large-field uncertainty remains.",
+      "source": "RACING_AND_SPORTS_COMPUTER_TIPS_PLUS_CROSS_SOURCE_CHECK",
+      "status": "PROVISIONAL",
+      "probability": null
+    },
+    {
+      "meeting": "ROSEHILL",
+      "race": 1,
+      "tab": 7,
+      "horse": "RIVER OF ROME",
+      "confidence": "MEDIUM",
+      "reason": "Strong trial reports from Mick Gannon; R&S also places him in its top three. Acrozina and Infallible rate strongly on the computer panel.",
+      "source": "RACING_AND_SPORTS_COMPUTER_TIPS_PLUS_CROSS_SOURCE_CHECK",
+      "status": "PROVISIONAL",
+      "probability": null
+    },
+    {
+      "meeting": "ROSEHILL",
+      "race": 2,
+      "tab": 6,
+      "horse": "CABBUCCIO",
+      "confidence": "MEDIUM",
+      "reason": "R&S points leader (15) and rated-to-win leader; La Morra is the R&S tip-panel top pick.",
+      "source": "RACING_AND_SPORTS_COMPUTER_TIPS_PLUS_CROSS_SOURCE_CHECK",
+      "status": "PROVISIONAL",
+      "probability": null
+    },
+    {
+      "meeting": "ROSEHILL",
+      "race": 3,
+      "tab": 1,
+      "horse": "ANOTHER CASHIE",
+      "confidence": "MEDIUM",
+      "reason": "R&S tip-panel and rated-to-win leader; Yesspecially tops the points summary and is the key danger.",
+      "source": "RACING_AND_SPORTS_COMPUTER_TIPS_PLUS_CROSS_SOURCE_CHECK",
+      "status": "PROVISIONAL",
+      "probability": null
+    },
+    {
+      "meeting": "ROSEHILL",
+      "race": 4,
+      "tab": 2,
+      "horse": "AGENT ZERO",
+      "confidence": "MEDIUM",
+      "reason": "R&S tip-panel, rated-to-win and points leader; multiple sources converge.",
+      "source": "RACING_AND_SPORTS_COMPUTER_TIPS_PLUS_CROSS_SOURCE_CHECK",
+      "status": "PROVISIONAL",
+      "probability": null
+    },
+    {
+      "meeting": "ROSEHILL",
+      "race": 5,
+      "tab": 2,
+      "horse": "ENAMORADA",
+      "confidence": "LOW",
+      "reason": "R&S tip-panel leader, but points are shared with Alabama Fox and Beneath The Rock is rated to win.",
+      "source": "RACING_AND_SPORTS_COMPUTER_TIPS_PLUS_CROSS_SOURCE_CHECK",
+      "status": "PROVISIONAL",
+      "probability": null
+    },
+    {
+      "meeting": "ROSEHILL",
+      "race": 6,
+      "tab": 10,
+      "horse": "GIAPPONESE",
+      "confidence": "MEDIUM",
+      "reason": "R&S tip-panel and rated-to-win leader; Ocean Tsunami leads the points summary.",
+      "source": "RACING_AND_SPORTS_COMPUTER_TIPS_PLUS_CROSS_SOURCE_CHECK",
+      "status": "PROVISIONAL",
+      "probability": null
+    },
+    {
+      "meeting": "ROSEHILL",
+      "race": 7,
+      "tab": 2,
+      "horse": "ROSELYN'S STAR",
+      "confidence": "NO_BET",
+      "reason": "R&S tip-panel leader, but an independent analyst specifically opposes the short-priced first-up return; no bet advised.",
+      "source": "RACING_AND_SPORTS_COMPUTER_TIPS_PLUS_CROSS_SOURCE_CHECK",
+      "status": "NO_BET",
+      "probability": null
+    },
+    {
+      "meeting": "ROSEHILL",
+      "race": 8,
+      "tab": 7,
+      "horse": "GLORIOUS MOMENTS",
+      "confidence": "MEDIUM",
+      "reason": "R&S points and tip-panel leader; Surf's Up has strong Gately support and 53kg.",
+      "source": "RACING_AND_SPORTS_COMPUTER_TIPS_PLUS_CROSS_SOURCE_CHECK",
+      "status": "PROVISIONAL",
+      "probability": null
+    },
+    {
+      "meeting": "ROSEHILL",
+      "race": 9,
+      "tab": 10,
+      "horse": "PALTROW MISS",
+      "confidence": "HIGH",
+      "reason": "R&S tip-panel, rated-to-win and points leader; David Gately's Bet of the Day. Last-start second by 0.4L.",
+      "source": "RACING_AND_SPORTS_COMPUTER_TIPS_PLUS_CROSS_SOURCE_CHECK",
+      "status": "PROVISIONAL",
+      "probability": null
+    },
+    {
+      "meeting": "ROSEHILL",
+      "race": 10,
+      "tab": 16,
+      "horse": "SHOW BUSINESS",
+      "confidence": "MEDIUM",
+      "reason": "R&S tip-panel and rated-to-win top three; Gately's roughie pick after an unlucky recent effort.",
+      "source": "RACING_AND_SPORTS_COMPUTER_TIPS_PLUS_CROSS_SOURCE_CHECK",
+      "status": "PROVISIONAL",
+      "probability": null
+    },
+    {
+      "meeting": "ASCOT",
+      "race": 1,
+      "tab": 2,
+      "horse": "RIPPER FAROOQ",
+      "confidence": "HIGH",
+      "reason": "R&S and Rated-to-Win leader; seven top-three finishes from eight Ascot starts and a last-start win.",
+      "source": "RACING_AND_SPORTS_COMPUTER_TIPS_PLUS_CROSS_SOURCE_CHECK",
+      "status": "PROVISIONAL",
+      "probability": null
+    },
+    {
+      "meeting": "ASCOT",
+      "race": 2,
+      "tab": 11,
+      "horse": "RUTHLESS ANGEL",
+      "confidence": "MEDIUM",
+      "reason": "R&S and rated-to-win leader; recent Group 3 second is the strongest class reference.",
+      "source": "RACING_AND_SPORTS_COMPUTER_TIPS_PLUS_CROSS_SOURCE_CHECK",
+      "status": "PROVISIONAL",
+      "probability": null
+    },
+    {
+      "meeting": "ASCOT",
+      "race": 3,
+      "tab": 2,
+      "horse": "WESTBOUND",
+      "confidence": "HIGH",
+      "reason": "R&S and rated-to-win leader (16 points); Before You Bet's best bet after being held up badly last start.",
+      "source": "RACING_AND_SPORTS_COMPUTER_TIPS_PLUS_CROSS_SOURCE_CHECK",
+      "status": "PROVISIONAL",
+      "probability": null
+    },
+    {
+      "meeting": "ASCOT",
+      "race": 4,
+      "tab": 2,
+      "horse": "IN SITU",
+      "confidence": "MEDIUM",
+      "reason": "R&S computer and rated-to-win leader (12 points); Scurgeofthewest the main danger.",
+      "source": "RACING_AND_SPORTS_COMPUTER_TIPS_PLUS_CROSS_SOURCE_CHECK",
+      "status": "PROVISIONAL",
+      "probability": null
+    },
+    {
+      "meeting": "ASCOT",
+      "race": 5,
+      "tab": 3,
+      "horse": "BASSETT HOUND",
+      "confidence": "MEDIUM",
+      "reason": "R&S points leader (13) and rated-to-win top three; Twisted Steel is the tip-panel top pick.",
+      "source": "RACING_AND_SPORTS_COMPUTER_TIPS_PLUS_CROSS_SOURCE_CHECK",
+      "status": "PROVISIONAL",
+      "probability": null
+    },
+    {
+      "meeting": "ASCOT",
+      "race": 6,
+      "tab": 6,
+      "horse": "MARKET SNITZ",
+      "confidence": "MEDIUM",
+      "reason": "R&S tip-panel leader; three wins from three starts and an Ascot win, though the wide gate is a concern.",
+      "source": "RACING_AND_SPORTS_COMPUTER_TIPS_PLUS_CROSS_SOURCE_CHECK",
+      "status": "PROVISIONAL",
+      "probability": null
+    },
+    {
+      "meeting": "ASCOT",
+      "race": 7,
+      "tab": 8,
+      "horse": "GAINTREE",
+      "confidence": "MEDIUM",
+      "reason": "R&S points leader; placed in all three recent starts and both Ascot visits, but One Last Resort heads the tip panel.",
+      "source": "RACING_AND_SPORTS_COMPUTER_TIPS_PLUS_CROSS_SOURCE_CHECK",
+      "status": "PROVISIONAL",
+      "probability": null
+    },
+    {
+      "meeting": "ASCOT",
+      "race": 8,
+      "tab": 1,
+      "horse": "LADIES PRO",
+      "confidence": "HIGH",
+      "reason": "R&S tip-panel and points leader; six wins from ten starts, four wins from four Soft starts, and recent Ascot Listed win.",
+      "source": "RACING_AND_SPORTS_COMPUTER_TIPS_PLUS_CROSS_SOURCE_CHECK",
+      "status": "PROVISIONAL",
+      "probability": null
+    },
+    {
+      "meeting": "ASCOT",
+      "race": 9,
+      "tab": 1,
+      "horse": "OVERPASS",
+      "confidence": "HIGH",
+      "reason": "R&S tip-panel leader and Before You Bet's main pick; four wins from seven Ascot starts, barrier one. Rey Magnerio is the major threat.",
+      "source": "RACING_AND_SPORTS_COMPUTER_TIPS_PLUS_CROSS_SOURCE_CHECK",
+      "status": "PROVISIONAL",
+      "probability": null
+    },
+    {
+      "meeting": "ASCOT",
+      "race": 10,
+      "tab": 4,
+      "horse": "OURGIRLCANRUN",
+      "confidence": "MEDIUM",
+      "reason": "R&S computer and rated-to-win leader (14 points); Nicciana the main danger.",
+      "source": "RACING_AND_SPORTS_COMPUTER_TIPS_PLUS_CROSS_SOURCE_CHECK",
+      "status": "PROVISIONAL",
+      "probability": null
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 1,
+      "tab": 14,
+      "horse": "SAY YOU WILL",
+      "confidence": "LOW",
+      "reason": "R&S points and tip-panel leader; large field with 19 listed runners and several emergencies makes this provisional.",
+      "source": "RACING_AND_SPORTS_COMPUTER_TIPS_PLUS_CROSS_SOURCE_CHECK",
+      "status": "PROVISIONAL",
+      "probability": null
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 2,
+      "tab": 12,
+      "horse": "HIGHGROVE ROSE",
+      "confidence": "MEDIUM",
+      "reason": "R&S tip-panel and points leader; Twisted Queen and Mazis are the main dangers.",
+      "source": "RACING_AND_SPORTS_COMPUTER_TIPS_PLUS_CROSS_SOURCE_CHECK",
+      "status": "PROVISIONAL",
+      "probability": null
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 3,
+      "tab": 1,
+      "horse": "SAVISANTA",
+      "confidence": "MEDIUM",
+      "reason": "R&S tip-panel leader and identified as the best Doomben bet in The Last Say preview; Easy Love and Hot Majesty rate strongly.",
+      "source": "RACING_AND_SPORTS_COMPUTER_TIPS_PLUS_CROSS_SOURCE_CHECK",
+      "status": "PROVISIONAL",
+      "probability": null
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 4,
+      "tab": 14,
+      "horse": "VIVIKA",
+      "confidence": "LOW",
+      "reason": "R&S points and tip-panel leader, but Boss Mode also ranks highly and the race has many emergencies.",
+      "source": "RACING_AND_SPORTS_COMPUTER_TIPS_PLUS_CROSS_SOURCE_CHECK",
+      "status": "PROVISIONAL",
+      "probability": null
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 5,
+      "tab": 12,
+      "horse": "SOUTHERN HEIRESS",
+      "confidence": "HIGH",
+      "reason": "R&S and rated-to-win leader (12 points); last-start winner at Eagle Farm and drawn barrier five.",
+      "source": "RACING_AND_SPORTS_COMPUTER_TIPS_PLUS_CROSS_SOURCE_CHECK",
+      "status": "PROVISIONAL",
+      "probability": null
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 6,
+      "tab": 9,
+      "horse": "TORO STRIKE",
+      "confidence": "MEDIUM",
+      "reason": "R&S tip-panel and rated-to-win leader; Akkadian Emperor is the main danger.",
+      "source": "RACING_AND_SPORTS_COMPUTER_TIPS_PLUS_CROSS_SOURCE_CHECK",
+      "status": "PROVISIONAL",
+      "probability": null
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 7,
+      "tab": 6,
+      "horse": "BALANCE THE BOOKS",
+      "confidence": "MEDIUM",
+      "reason": "R&S points and tip-panel leader; Just Precious and Sylph are close rivals.",
+      "source": "RACING_AND_SPORTS_COMPUTER_TIPS_PLUS_CROSS_SOURCE_CHECK",
+      "status": "PROVISIONAL",
+      "probability": null
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 8,
+      "tab": 12,
+      "horse": "DAGGERS",
+      "confidence": "LOW",
+      "reason": "R&S tip-panel leader, but Rated-to-Win prefers Ser Joh and Biancelli; wide-open race.",
+      "source": "RACING_AND_SPORTS_COMPUTER_TIPS_PLUS_CROSS_SOURCE_CHECK",
+      "status": "PROVISIONAL",
+      "probability": null
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 9,
+      "tab": 7,
+      "horse": "STREET CHASE",
+      "confidence": "MEDIUM",
+      "reason": "R&S tip-panel leader; Noble Decree and Lord Of Biscay are close on the points panel.",
+      "source": "RACING_AND_SPORTS_COMPUTER_TIPS_PLUS_CROSS_SOURCE_CHECK",
+      "status": "PROVISIONAL",
+      "probability": null
+    },
+    {
+      "meeting": "DOOMBEN",
+      "race": 10,
+      "tab": 6,
+      "horse": "PROPAGANDA",
+      "confidence": "MEDIUM",
+      "reason": "R&S tip-panel leader; Cardonette and Ruination also feature prominently.",
+      "source": "RACING_AND_SPORTS_COMPUTER_TIPS_PLUS_CROSS_SOURCE_CHECK",
+      "status": "PROVISIONAL",
+      "probability": null
+    }
+  ],
+  "warnings": [
+    "All 40 race leaders are provisional. Final starters and late scratchings are not certified.",
+    "Sandown source is Racing & Sports third-party fields; other three meetings use Racing Australia fields, but the current card is not final-starter attested.",
+    "No independent whole-field win probabilities have been calculated; model probabilities remain raw diagnostics and uncalibrated.",
+    "Race selections reflect a synthesis of published tip panels and independent previews, not a completed V5 all-runner research audit."
+  ]
+}
