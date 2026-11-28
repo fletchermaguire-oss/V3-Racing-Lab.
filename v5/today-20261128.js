@@ -57,13 +57,32 @@ function renderHome(root,c){
  root.append(link('Open imported 28 November V5 research data','/v5/cards/2026-11-28/research-four-meetings.json'));
 }
 function renderDaily(root,c){
- base(root,'Field import status','No Top 5 / 10 / 15 has been generated or approved from this fields-only import.');
+ base(root,'Provisional research Top 10 · 28 November','Form-first shortlist assembled from dated analyst previews, R&S race-panel convergence and available runner records. Not calibrated win probabilities.');
  warning(root);
- const n=E('div','v14-card');
- n.append(E('h3','','No selections published'));
- txt(n,'The model can calculate diagnostic outputs from the imported card, but the field import does not contain a complete dated-form, sectionals, trials, pace-map or independent runner review pass. I have therefore not turned its raw outputs into betting picks.','v14-muted');
- n.append(btn('Open all imported fields',()=>go('races')));
- root.append(n);
+ const entries=(c.curated&&c.curated.entries||[]).slice(0,10);
+ const grid=E('div','v14-grid');
+ entries.forEach(x=>{
+  const card=E('article','v14-card');
+  const race=c.data.races.find(r=>r.meeting===x.meeting&&r.race===x.race);
+  const runner=c.data.runners.find(h=>h.race_id===x.race_id&&h.horse.toUpperCase()===x.horse.toUpperCase());
+  card.append(E('div','v14-tag','TOP '+x.rank+' · '+x.meeting+' R'+x.race),E('h3','',x.horse));
+  txt(card,race?race.title+' · '+race.distance_m+'m':'Race details unavailable','v14-muted');
+  txt(card,'Form grade: '+x.form_tier+' · Independent win %: not assigned · Raw model: '+(x.model_pct==null?'not available':Number(x.model_pct).toFixed(2)+'% (uncalibrated)'),'v14-caption');
+  txt(card,x.reason,'v14-muted');txt(card,'Main risk: '+x.risk,'v14-flag');
+  if(runner)txt(card,'#'+runner.tab+' · Barrier '+(runner.barrier||'—')+' · '+(runner.weight_kg||'—')+'kg · '+(runner.jockey||'Jockey —'),'v14-caption');
+  grid.append(card);
+ });
+ if(!entries.length)txt(root,'Shortlist has not loaded. Check the dated research file.','v14-alert');
+ root.append(grid);
+ const races=E('section','v14-section');races.append(E('h2','','Best provisional selection in each race'));
+ const byMeeting=E('div','v14-grid');
+ for(const meeting of displayOrder){
+  const card=E('article','v14-card');card.append(E('h3','',meeting));
+  (c.curated&&c.curated.raceSelections||[]).filter(x=>x.meeting===meeting).forEach(x=>card.append(E('p','v14-muted','R'+x.race+' · '+(x.status==='NO_BET'?'NO BET':x.horse)+' · '+x.confidence)));
+  byMeeting.append(card);
+ }
+ races.append(byMeeting);root.append(races);
+ txt(root,'No whole-field probabilities have been published. These are provisional research outputs, not a completed V5 calibration or full runner-by-runner audit.','v14-alert');
 }
 function formCard(c,h){
  const p=E('article','v14-review');
@@ -98,6 +117,8 @@ function renderRaces(root,c){
  if(src&&src.rail)txt(box,'Rail: '+src.rail,'v14-caption');
  if(src&&src.source)box.append(link('Open meeting field source',src.source));
  root.append(box);
+ const pick=(c.curated&&c.curated.raceSelections||[]).find(x=>x.meeting===st.meeting&&x.race===r.race);
+ if(pick){const p=E('article','v14-review');p.append(E('div','v14-tag',pick.status==='NO_BET'?'NO BET':'PROVISIONAL RACE LEADER'),E('h3','',pick.status==='NO_BET'?'No bet advised':pick.horse));txt(p,pick.reason,'v14-muted');txt(p,'Confidence: '+pick.confidence+' · Win probability not assigned','v14-caption');root.append(p);}
  const rows=E('div','v14-field');
  active.forEach(h=>{
   const n=btn('',()=>{st.horse=st.horse===h.id?null:h.id;rerender();},st.horse===h.id);
